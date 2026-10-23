@@ -1,0 +1,210 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/resoudre.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "RESOUDRE",
+ "kind": "OPER",
+ "fr": "Résolution par méthode directe un système d'équations linéaires préalablement factorisé par FACT_LDLTou Résolution d'un système linéaire par la méthode du gradient conjugué préconditionné",
+ "translation_upstream": null,
+ "op": 15,
+ "reentrant": "f:CHAM_NO",
+ "result_types": [
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/resoudre.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "MATR",
+   "kind": "simple",
+   "path": "MATR",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_depl_c",
+    "matr_asse_temp_r",
+    "matr_asse_temp_c",
+    "matr_asse_pres_r",
+    "matr_asse_pres_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "CHAM_NO",
+   "kind": "simple",
+   "path": "CHAM_NO",
+   "status": "o",
+   "type": [
+    "cham_no_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "CHAM_CINE",
+   "kind": "simple",
+   "path": "CHAM_CINE",
+   "status": "f",
+   "type": [
+    "cham_no_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "RESI_RELA",
+   "kind": "simple",
+   "path": "RESI_RELA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1e-06,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "POSTTRAITEMENTS",
+   "kind": "simple",
+   "path": "POSTTRAITEMENTS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "AUTO",
+   "into": [
+    "SANS",
+    "AUTO",
+    "FORCE",
+    "MINI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "NMAX_ITER",
+   "kind": "simple",
+   "path": "NMAX_ITER",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "MATR_PREC",
+   "kind": "simple",
+   "path": "MATR_PREC",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_temp_r",
+    "matr_asse_pres_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "ALGORITHME",
+   "kind": "simple",
+   "path": "ALGORITHME",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "FGMRES",
+   "into": [
+    "CG",
+    "CR",
+    "GMRES",
+    "GCR",
+    "FGMRES"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/resoudre.py",
+    "line": 63
+   }
+  }
+ ]
+}

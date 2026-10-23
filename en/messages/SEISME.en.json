@@ -1,0 +1,590 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/seisme.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "SEISME",
+ "source": {
+  "file": "code_aster/Messages/seisme.py"
+ },
+ "messages": {
+  "9": {
+   "id": "SEISME_9",
+   "fr": "\n -------Échantillonnage temporel et fréquentiel des signaux -------\n        fréquence de coupure     : %(r1).2f Hz\n        pas de fréquence         : %(r2)f Hz\n        intervalle de temps      : %(r4)f s\n        pas de temps    : PAS_INST = %(r3)f s\n        nombre de points: NB_POIN  = %(i1)d\n        fréquence du filtre temporel passe-haut: FREQ_FILTRE = %(k1)s\n\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%(r2)f",
+    "%(r4)f",
+    "%(r3)f",
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "10": {
+   "id": "SEISME_10",
+   "fr": "\n correction statique non prise en compte pour l'option: %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 35
+   },
+   "en": null
+  },
+  "17": {
+   "id": "SEISME_17",
+   "fr": "\n   la nature de l'excitation est             : %(k1)s ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "18": {
+   "id": "SEISME_18",
+   "fr": "\n   la règle de combinaison des réponses\n   directionnelles est                       : %(k1)s ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 44
+   },
+   "en": null
+  },
+  "19": {
+   "id": "SEISME_19",
+   "fr": "\n   la règle de combinaison des contributions\n   de chaque mouvement d'appui est           : %(k1)s ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "35": {
+   "id": "SEISME_35",
+   "fr": "\nAttention, FREQ_FOND < 0 à l'instant t= %(k1)s s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "36": {
+   "id": "SEISME_36",
+   "fr": "\nTolérance sur l'ajustement du spectre au tirage %(i1)d:\nL'erreur %(k1)s vaut %(r1).2f %% ce qui est supérieur à la borne de %(r2).2f %% demandée.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(r1).2f",
+    "%%",
+    "%(r2).2f"
+   ],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  },
+  "37": {
+   "id": "SEISME_37",
+   "fr": "\nLa fréquence maximale du spectre vaut %(k1)s Hz.\nIl faut des fréquences inférieures à 100 Hz pour la modélisation SPEC_FRACTILE.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 65
+   },
+   "en": null
+  },
+  "38": {
+   "id": "SEISME_38",
+   "fr": "\nIl faut faire plus d'un seul tirage avec l'option SPEC_MEDIANE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 71
+   },
+   "en": null
+  },
+  "39": {
+   "id": "SEISME_39",
+   "fr": "\nAttention:\n    La durée de la simulation vaut %(k1)s s. Elle est inférieure à 1.5 fois la phase forte.\n    Ceci peut conduire à des résultats moins bons.\nConseil:\n    Augmenter NB_POINT ou réduire la durée de la phase forte.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 76
+   },
+   "en": null
+  },
+  "41": {
+   "id": "SEISME_41",
+   "fr": "\n Erreur minimale optimisation multi-objectifs = %(r1).2f %% à l'itération %(i1)d\n Erreur absolue maximale = %(r2).2f  %% pour la fréquence %(r3)f Hz\n Erreur négative max     = %(r4).2f  %% pour la fréquence %(r5)f Hz\n Erreur ZPA max = %(r6).3f %%\n Erreur RMS max = %(r7).3f %%\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%%",
+    "%(i1)d",
+    "%(r2).2f",
+    "%(r3)f",
+    "%(r4).2f",
+    "%(r5)f",
+    "%(r6).3f",
+    "%(r7).3f"
+   ],
+   "source": {
+    "line": 85
+   },
+   "en": null
+  },
+  "42": {
+   "id": "SEISME_42",
+   "fr": "\n Itération %(i1)d sur %(i2)d : erreur multi-objectifs = %(r1).2f %%\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(r1).2f",
+    "%%"
+   ],
+   "source": {
+    "line": 94
+   },
+   "en": null
+  },
+  "43": {
+   "id": "SEISME_43",
+   "fr": "\n Erreurs initiales à l'itération 0:\n Erreur ZPA = %(r1).2f %%, erreur max = %(r2).2f %%, erreur RMS = %(r3).2f %%\n Erreur multi-objectifs = %(r4).2f %%\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%%",
+    "%(r2).2f",
+    "%(r3).2f",
+    "%(r4).2f"
+   ],
+   "source": {
+    "line": 99
+   },
+   "en": null
+  },
+  "44": {
+   "id": "SEISME_44",
+   "fr": "\n ------- Modulation temporelle         ----------------------------\n        paramètres de la fonction de modulation %(k1)s: %(k2)s\n        durée de phase forte: %(r1).2f s\n        instants de début et de fin phase forte: %(r2).2f s et %(r3).2f s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r1).2f",
+    "%(r2).2f",
+    "%(r3).2f"
+   ],
+   "source": {
+    "line": 106
+   },
+   "en": null
+  },
+  "45": {
+   "id": "SEISME_45",
+   "fr": "Il n'y a pas de fonctions d'excitation de type '%(k1)s'.\n\nConseil:\n    Vérifier le mot-clé NOM_CHAM et que vous souhaitez bien faire un\n    calcul de type multi-appui ou avec prise en compte de la correction statique.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 114
+   },
+   "en": null
+  },
+  "48": {
+   "id": "SEISME_48",
+   "fr": "\n --- GRANDEURS MODALES DES MODES PRIS EN COMPTE---\n --- (*) FACTEUR DE PARTICIPATION CALCULE AVEC MOUVEMENT CORPS RIGIDE---\n                              FACTEUR DE   MASSE MODALE\n MODE     FREQUENCE  DIR   PARTICIPATION(*)      EFFECTIVE\n",
+   "placeholders": [],
+   "source": {
+    "line": 122
+   },
+   "en": null
+  },
+  "53": {
+   "id": "SEISME_53",
+   "fr": "\n --- VALEURS DU SPECTRE ACCE (CORRECTION PAR CORR_FREQ et NATURE INCLUSES) ---\n MODE      FREQUENCE    AMORTISSEMENT    DIR         SPECTRE\n",
+   "placeholders": [],
+   "source": {
+    "line": 130
+   },
+   "en": null
+  },
+  "54": {
+   "id": "SEISME_54",
+   "fr": " %(i1)4d   %(r1)12.5e     %(r2)12.5e      %(k1)s    %(r3)12.5e\n",
+   "placeholders": [
+    "%(i1)4d",
+    "%(r1)12.5e",
+    "%(r2)12.5e",
+    "%(k1)s",
+    "%(r3)12.5e"
+   ],
+   "source": {
+    "line": 136
+   },
+   "en": null
+  },
+  "56": {
+   "id": "SEISME_56",
+   "fr": "\n --- VALEURS LUES SUR LE SPECTRE ACCE POUR LA CORRECTION STATIQUE ---\n DIRECTION      FREQUENCE        SPECTRE        APPUI\n",
+   "placeholders": [],
+   "source": {
+    "line": 140
+   },
+   "en": null
+  },
+  "57": {
+   "id": "SEISME_57",
+   "fr": "         %(k1)s    %(r1)12.5e    %(r2)12.5e    %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)12.5e",
+    "%(r2)12.5e",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 146
+   },
+   "en": null
+  },
+  "58": {
+   "id": "SEISME_58",
+   "fr": "\"Pour la combinaison modale COMB_MODE de TYPE = 'GUPTA', FREQ_1 doit être inférieure à FREQ_2.\n",
+   "placeholders": [],
+   "source": {
+    "line": 150
+   },
+   "en": null
+  },
+  "59": {
+   "id": "SEISME_59",
+   "fr": "La combinaison modale COMB_MODE de TYPE = 'GUPTA' est uniquement disponible en MONO_APPUI.\n",
+   "placeholders": [],
+   "source": {
+    "line": 154
+   },
+   "en": null
+  },
+  "60": {
+   "id": "SEISME_60",
+   "fr": "Il y a au moins un noeud qui appartenant à plusieurs appuis.\n",
+   "placeholders": [],
+   "source": {
+    "line": 158
+   },
+   "en": null
+  },
+  "61": {
+   "id": "SEISME_61",
+   "fr": "Avec TYPE_COMB = 'DSC', les amortissements doivent être non nuls et inférieurs à 1.\n",
+   "placeholders": [],
+   "source": {
+    "line": 162
+   },
+   "en": null
+  },
+  "62": {
+   "id": "SEISME_62",
+   "fr": "On ne trouve pas le champ '%(k1)s' dans la base modale fournie sous mot clé MODE_MECA.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 166
+   },
+   "en": null
+  },
+  "63": {
+   "id": "SEISME_63",
+   "fr": "On ne trouve pas la direction '%(k1)s' dans la base modale fournie sous mot clé PSEUDO_MODE.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 170
+   },
+   "en": null
+  },
+  "64": {
+   "id": "SEISME_64",
+   "fr": "Pour TYPE_ANALYSE = 'MONO_APPUI', il faut renseigner au maximum un spectre par axe global X, Y, Z.\n",
+   "placeholders": [],
+   "source": {
+    "line": 174
+   },
+   "en": null
+  },
+  "65": {
+   "id": "SEISME_65",
+   "fr": "Pour TYPE_ANALYSE = 'ENVELOPPE', les mots clés %(k1)s sous le mot clé facteur SPECTRE\n            doivent avoir la même valeur.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 178
+   },
+   "en": null
+  },
+  "66": {
+   "id": "SEISME_66",
+   "fr": "On ne trouve pas NOEUD_CMP='%(k1)s' dans la base modale fournie sous le mot clé %(k2)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "67": {
+   "id": "SEISME_67",
+   "fr": "Il est inutile de calculer la réponse d'entraînement pour l'option %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 187
+   },
+   "en": null
+  },
+  "68": {
+   "id": "SEISME_68",
+   "fr": "Il manque des modes pour effectuer la correction statique sur l'appui %(k1)s, direction %(k2)s.\n\nVérifiez que la base modale fournie sous le mot clé PSEUDO_MODES contient :\n    - soit un pseudo-mode pour chaque noeud de l'appui dans la direction %(k2)s (nommés ci-dessus)\n    - soit un unique pseudo-mode pour l'appui dans la direction X (nommé '%(k3)s')\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 191
+   },
+   "en": null
+  },
+  "77": {
+   "id": "SEISME_77",
+   "fr": "  Les coordonnées du noeud de référence COOR_REFE sont : ( %(r1).2f   %(r2).2f   %(r3).2f )\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%(r2).2f",
+    "%(r3).2f"
+   ],
+   "source": {
+    "line": 199
+   },
+   "en": null
+  },
+  "78": {
+   "id": "SEISME_78",
+   "fr": "  Le temps d'arrivée est négatif:\n                il faut changer les coordonnées du noeud de référence COOR_REFE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 203
+   },
+   "en": null
+  },
+  "79": {
+   "id": "SEISME_79",
+   "fr": " évaluation de la cohérence pour la phase forte du signal:\n        instants de début et de fin phase forte: %(r1).2f s et %(r2).2f s\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%(r2).2f"
+   ],
+   "source": {
+    "line": 208
+   },
+   "en": null
+  },
+  "80": {
+   "id": "SEISME_80",
+   "fr": "\nLes signaux renseignés dans les opérandes %(k1)s et %(k2)s de EXCIT_SOL n'ont pas\nle même nombres de valeurs.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 213
+   },
+   "en": null
+  },
+  "81": {
+   "id": "SEISME_81",
+   "fr": "\nLes valeurs numéro %(i1)d  des abscisses des signaux renseignés dans les opérandes\n%(k1)s et %(k2)s de EXCIT_SOL sont différentes.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 219
+   },
+   "en": null
+  },
+  "82": {
+   "id": "SEISME_82",
+   "fr": "\nIl faut renseigner le spectre à un sigma jusque 0.1 Hz pour SPEC_FRACTILE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 225
+   },
+   "en": null
+  },
+  "83": {
+   "id": "SEISME_83",
+   "fr": "\n        Le germe pour les tirages aléatoires vaut %(i1)d.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 230
+   },
+   "en": null
+  },
+  "84": {
+   "id": "SEISME_84",
+   "fr": "\nLa valeur du mot-clé FREQ_MIN est inférieure à la fréquence minimale de la moyenne des spectres calculés\nou du spectre cible fourni dans SPEC_OSCI.\n",
+   "placeholders": [],
+   "source": {
+    "line": 235
+   },
+   "en": null
+  },
+  "85": {
+   "id": "SEISME_85",
+   "fr": "\nLa valeur du mot-clé FREQ_MAX est supérieure à la fréquence maximale de la moyenne des spectres calculés\nou du spectre cible fourni dans SPEC_OSCI.\n",
+   "placeholders": [],
+   "source": {
+    "line": 241
+   },
+   "en": null
+  },
+  "86": {
+   "id": "SEISME_86",
+   "fr": "\nLa moyenne des spectres calculées est supérieure ou égale au spectre cible sur tout l'intervalle définit\npar FREQ_MIN et FREQ_MAX. Il n'y a pas de correction à apporter au spectre moyen.\n",
+   "placeholders": [],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "87": {
+   "id": "SEISME_87",
+   "fr": "\nFacteur de correction apporté au spectre moyen : %(r1).2f\n",
+   "placeholders": [
+    "%(r1).2f"
+   ],
+   "source": {
+    "line": 253
+   },
+   "en": null
+  },
+  "88": {
+   "id": "SEISME_88",
+   "fr": "\nLa table fournie n'est pas issue de GENE_ACCE_SEISME.\n",
+   "placeholders": [],
+   "source": {
+    "line": 258
+   },
+   "en": null
+  },
+  "89": {
+   "id": "SEISME_89",
+   "fr": "\nLa valeur du mot-clé DUREE est supérieure à la durée totale des accélérogrammes.\n\n   Valeur fournie        : %(r1).2f\n   Durée accélérogrammes : %(r2).2f\n",
+   "placeholders": [
+    "%(r1).2f",
+    "%(r2).2f"
+   ],
+   "source": {
+    "line": 263
+   },
+   "en": null
+  },
+  "90": {
+   "id": "SEISME_90",
+   "fr": "\nLes spectres fournis par les mots-clés SPEC_OSCI et SPEC_1_SIGMA n'ont pas\nles mêmes valeurs de fréquence.\n\nLe calcul du spectre cible \"moins un sigma\" n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 271
+   },
+   "en": null
+  },
+  "91": {
+   "id": "SEISME_91",
+   "fr": "\nVous avez renseigné le mot-clé RATIO_HV or il n'y a pas de spectre vertical\ndans les données fournies. Ce mot-clé n'a donc aucun impact.\n",
+   "placeholders": [],
+   "source": {
+    "line": 279
+   },
+   "en": null
+  },
+  "92": {
+   "id": "SEISME_92",
+   "fr": "\nIl y a un spectre vertical dans les données fournies, cependant vous n'avez pas renseigné\nle mot-clé RATIO_HV. Cette valeur est fixée à 1.\n",
+   "placeholders": [],
+   "source": {
+    "line": 285
+   },
+   "en": null
+  },
+  "95": {
+   "id": "SEISME_95",
+   "fr": "\n Le mot_clé FREQ_COUP n'est pas saisi, la fréquence de coupure est prise égale à\n celle du dernier mode dans la base modale: FREQ_COUP = %(r1).2f Hz\n",
+   "placeholders": [
+    "%(r1).2f"
+   ],
+   "source": {
+    "line": 291
+   },
+   "en": null
+  },
+  "96": {
+   "id": "SEISME_96",
+   "fr": "\n La fréquence de coupure saisi FREQ_COUP = %(r1).2f Hz est inférieure à celle du\n premier mode dans la base modale. Donc, zéro mode physique est pris en compte dans la\n réponse.\n",
+   "placeholders": [
+    "%(r1).2f"
+   ],
+   "source": {
+    "line": 297
+   },
+   "en": null
+  },
+  "97": {
+   "id": "SEISME_97",
+   "fr": "\n --- EN CAS DU MULT APPUI ---\n --- VALEURS DU SPECTRE ACCE (CORRECTION PAR CORR_FREQ et NATURE INCLUSES) ---\n MODE      FREQUENCE    AMORTISSEMENT    DIR         SPECTRE         APPUI         FACTEUR PARTICIPATION\n",
+   "placeholders": [],
+   "source": {
+    "line": 304
+   },
+   "en": null
+  },
+  "98": {
+   "id": "SEISME_98",
+   "fr": " %(i1)4d   %(r1)12.5e     %(r2)12.5e      %(k1)s    %(r3)12.5e    %(k2)s    %(r4)12.5e\n",
+   "placeholders": [
+    "%(i1)4d",
+    "%(r1)12.5e",
+    "%(r2)12.5e",
+    "%(k1)s",
+    "%(r3)12.5e",
+    "%(k2)s",
+    "%(r4)12.5e"
+   ],
+   "source": {
+    "line": 311
+   },
+   "en": null
+  }
+ }
+}

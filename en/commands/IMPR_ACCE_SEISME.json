@@ -1,0 +1,301 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_ACCE_SEISME",
+ "kind": "MACRO",
+ "fr": "Impression et visualisation, post-traitement de séisme",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.impr_acce_seisme_ops.impr_acce_seisme_ops",
+ "reentrant": "n",
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "FREQ_MIN",
+    "FREQ_MAX"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "NOCI_REFE",
+   "kind": "factor",
+   "path": "NOCI_REFE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "AMAX",
+      "VMAX",
+      "DMAX",
+      "INTE_ARIAS",
+      "DUREE_PHASE_FORTE",
+      "VITE_ABSO_CUMU",
+      "ACCE_SUR_VITE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "AMAX",
+     "kind": "simple",
+     "path": "NOCI_REFE/AMAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "VMAX",
+     "kind": "simple",
+     "path": "NOCI_REFE/VMAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "DMAX",
+     "kind": "simple",
+     "path": "NOCI_REFE/DMAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "INTE_ARIAS",
+     "kind": "simple",
+     "path": "NOCI_REFE/INTE_ARIAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "DUREE_PHASE_FORTE",
+     "kind": "simple",
+     "path": "NOCI_REFE/DUREE_PHASE_FORTE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "VITE_ABSO_CUMU",
+     "kind": "simple",
+     "path": "NOCI_REFE/VITE_ABSO_CUMU",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "ACCE_SUR_VITE",
+     "kind": "simple",
+     "path": "NOCI_REFE/ACCE_SUR_VITE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "Valeur moyenne et intervalle de confiance",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+      "line": 67
+     }
+    }
+   ]
+  },
+  {
+   "name": "DUREE",
+   "kind": "simple",
+   "path": "DUREE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "SPEC_OSCI",
+   "kind": "simple",
+   "path": "SPEC_OSCI",
+   "status": "o",
+   "type": [
+    "fonction_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "SPEC_1_SIGMA",
+   "kind": "simple",
+   "path": "SPEC_1_SIGMA",
+   "status": "f",
+   "type": [
+    "fonction_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "FREQ_MIN",
+   "kind": "simple",
+   "path": "FREQ_MIN",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "FREQ_MAX",
+   "kind": "simple",
+   "path": "FREQ_MAX",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "RATIO_HV",
+   "kind": "simple",
+   "path": "RATIO_HV",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "fr": "Ratio H/V pour le spectre vertical",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_acce_seisme.py",
+    "line": 77
+   }
+  }
+ ]
+}

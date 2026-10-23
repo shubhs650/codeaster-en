@@ -1,0 +1,350 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_ENDO_FISS",
+ "kind": "MACRO",
+ "fr": "Individuation du trace d'une fissure a partir d'un champ scalaire pertinant",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_endo_fiss_ops.post_endo_fiss_ops",
+ "reentrant": "n",
+ "result_types": [
+  "maillage_sdaster",
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "RESULTAT",
+    "CHAM_GD"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+  "line": 40
+ },
+ "keywords": [
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "OUVERTURE",
+   "kind": "simple",
+   "path": "OUVERTURE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "b_resultat",
+   "kind": "bloc",
+   "path": "[b_resultat]",
+   "condition": "exists(\"RESULTAT\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE",
+      "INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 53
+     }
+    }
+   ]
+  },
+  {
+   "name": "CHAM_GD",
+   "kind": "simple",
+   "path": "CHAM_GD",
+   "status": "f",
+   "type": [
+    "cham_gd_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "evol_noli"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "NOM_CMP",
+   "kind": "simple",
+   "path": "NOM_CMP",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "fr": "nom du champ a post-traiter",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "RECHERCHE",
+   "kind": "factor",
+   "path": "RECHERCHE",
+   "status": "o",
+   "min": 1,
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+    "line": 60
+   },
+   "keywords": [
+    {
+     "name": "LONG_ORTH",
+     "kind": "simple",
+     "path": "RECHERCHE/LONG_ORTH",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "NB_POINT",
+     "kind": "simple",
+     "path": "RECHERCHE/NB_POINT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 500,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "RECHERCHE/PAS",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "LONG_REG",
+     "kind": "simple",
+     "path": "RECHERCHE/LONG_REG",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "BORNE_MIN",
+     "kind": "simple",
+     "path": "RECHERCHE/BORNE_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.5,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "ANGL_MAX",
+     "kind": "simple",
+     "path": "RECHERCHE/ANGL_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 120.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "RECHERCHE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "RECHERCHE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "BORNE_MAX",
+     "kind": "simple",
+     "path": "RECHERCHE/BORNE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_endo_fiss.py",
+      "line": 73
+     }
+    }
+   ]
+  }
+ ]
+}

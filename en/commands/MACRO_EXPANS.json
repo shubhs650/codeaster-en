@@ -1,0 +1,436 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macro_expans.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACRO_EXPANS",
+ "kind": "MACRO",
+ "fr": "Outil d'expansion de resultats exprimentaux sur une base definie sur un modele numerique",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macro_expans_ops.macro_expans_ops",
+ "reentrant": "n",
+ "result_types": [
+  "mode_meca",
+  "dyna_harmo"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/macro_expans.py",
+  "line": 46
+ },
+ "keywords": [
+  {
+   "name": "MODELE_CALCUL",
+   "kind": "factor",
+   "path": "MODELE_CALCUL",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "BASE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/BASE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODELE_MESURE",
+   "kind": "factor",
+   "path": "MODELE_MESURE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "MESURE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/MESURE",
+     "status": "o",
+     "type": [
+      "dyna_trans",
+      "dyna_harmo",
+      "mode_meca",
+      "mode_meca_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "MODELE_MESURE/NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DEPL",
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE",
+      "SIEF_NOEU",
+      "EPSI_NOEU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "f",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "RESU_NX",
+   "kind": "simple",
+   "path": "RESU_NX",
+   "status": "f",
+   "type": [
+    "mode_meca",
+    "dyna_harmo",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "RESU_EX",
+   "kind": "simple",
+   "path": "RESU_EX",
+   "status": "f",
+   "type": [
+    "mode_meca",
+    "dyna_harmo",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "RESU_ET",
+   "kind": "simple",
+   "path": "RESU_ET",
+   "status": "f",
+   "type": [
+    "mode_meca",
+    "dyna_harmo",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "RESU_RD",
+   "kind": "simple",
+   "path": "RESU_RD",
+   "status": "f",
+   "type": [
+    "mode_meca",
+    "dyna_harmo",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "RESOLUTION",
+   "kind": "factor",
+   "path": "RESOLUTION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macro_expans.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "RESOLUTION/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LU",
+     "into": [
+      "LU",
+      "SVD"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "b_svd",
+     "kind": "bloc",
+     "path": "RESOLUTION/[b_svd]",
+     "condition": "equal_to(\"METHODE\", 'SVD')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 82
+     },
+     "keywords": [
+      {
+       "name": "EPS",
+       "kind": "simple",
+       "path": "RESOLUTION/EPS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macro_expans.py",
+        "line": 83
+       }
+      }
+     ]
+    },
+    {
+     "name": "REGUL",
+     "kind": "simple",
+     "path": "RESOLUTION/REGUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "NORM_MIN",
+      "TIK_RELA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "b_regul",
+     "kind": "bloc",
+     "path": "RESOLUTION/[b_regul]",
+     "condition": "not equal_to(\"REGUL\", 'NON')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "COEF_PONDER",
+        "COEF_PONDER_F"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macro_expans.py",
+      "line": 86
+     },
+     "keywords": [
+      {
+       "name": "COEF_PONDER",
+       "kind": "simple",
+       "path": "RESOLUTION/COEF_PONDER",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macro_expans.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "COEF_PONDER_F",
+       "kind": "simple",
+       "path": "RESOLUTION/COEF_PONDER_F",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macro_expans.py",
+        "line": 90
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

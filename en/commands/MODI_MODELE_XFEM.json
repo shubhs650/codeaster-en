@@ -1,0 +1,179 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MODI_MODELE_XFEM",
+ "kind": "OPER",
+ "fr": "Engendrer ou enrichir une structure de donnees en affectant les cham_gd associes",
+ "translation_upstream": null,
+ "op": 113,
+ "reentrant": "n",
+ "result_types": [
+  "modele_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "docu": "U4.44.12-e",
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FISSURE",
+    "MODELE_THER"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "MODELE_IN",
+   "kind": "simple",
+   "path": "MODELE_IN",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "min": 1,
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "FISSURE",
+   "kind": "simple",
+   "path": "FISSURE",
+   "status": "f",
+   "type": [
+    "fiss_xfem"
+   ],
+   "min": 1,
+   "max": 99,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "MODELE_THER",
+   "kind": "simple",
+   "path": "MODELE_THER",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "min": 1,
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "CONTACT",
+   "kind": "simple",
+   "path": "CONTACT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "min": 1,
+   "max": 1,
+   "default": "SANS",
+   "into": [
+    "SANS",
+    "STANDARD",
+    "MORTAR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "PRETRAITEMENTS",
+   "kind": "simple",
+   "path": "PRETRAITEMENTS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "AUTO",
+   "into": [
+    "AUTO",
+    "SANS",
+    "FORCE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "DECOUPE_FACETTE",
+   "kind": "simple",
+   "path": "DECOUPE_FACETTE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DEFAUT",
+   "into": [
+    "DEFAUT",
+    "SOUS_ELEMENTS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_modele_xfem.py",
+    "line": 43
+   }
+  }
+ ]
+}

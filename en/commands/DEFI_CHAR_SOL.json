@@ -1,0 +1,443 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_char_sol.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_CHAR_SOL",
+ "kind": "MACRO",
+ "fr": "Définition des données de sol pour Miss",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_char_sol_ops.defi_char_sol_ops",
+ "reentrant": "n",
+ "result_types": [
+  "char_meca"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "UNITE_TRAN_INIT",
+    "RESU_INIT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_char_sol.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "CHARGEMENT",
+   "kind": "simple",
+   "path": "CHARGEMENT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "FORCE",
+   "into": [
+    "FORCE",
+    "ONDE_PLANE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "UNITE_TRAN_INIT",
+   "kind": "simple",
+   "path": "UNITE_TRAN_INIT",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "inout": "in",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "RESU_INIT",
+   "kind": "simple",
+   "path": "RESU_INIT",
+   "status": "f",
+   "type": [
+    "dyna_trans",
+    "evol_char",
+    "evol_noli"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "b_unite_tran",
+   "kind": "bloc",
+   "path": "[b_unite_tran]",
+   "condition": "exists(\"UNITE_TRAN_INIT\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA_DROITE",
+      "GROUP_MA_GAUCHE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "LONG_CARA",
+     "kind": "simple",
+     "path": "LONG_CARA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "valeur de longueur caracteristique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "AXE",
+     "kind": "simple",
+     "path": "AXE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "X",
+      "Y",
+      "Z"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "Z",
+     "into": [
+      "Y",
+      "Z"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "Z0",
+     "kind": "simple",
+     "path": "Z0",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DX",
+     "into": [
+      "DX",
+      "DY"
+     ],
+     "fr": "sollicitation horizontale",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "GROUP_MA_DROITE",
+     "kind": "simple",
+     "path": "GROUP_MA_DROITE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "GROUP_MA_GAUCHE",
+     "kind": "simple",
+     "path": "GROUP_MA_GAUCHE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "TABLE_MATER_ELAS",
+     "kind": "simple",
+     "path": "TABLE_MATER_ELAS",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_resu",
+   "kind": "bloc",
+   "path": "[b_resu]",
+   "condition": "exists(\"RESU_INIT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "MATR_RIGI",
+     "kind": "simple",
+     "path": "MATR_RIGI",
+     "status": "f",
+     "type": [
+      "matr_asse_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "COEF",
+     "kind": "simple",
+     "path": "COEF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "NOM_CHAM_INIT",
+     "kind": "simple",
+     "path": "NOM_CHAM_INIT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "FORC_NODA",
+     "into": [
+      "ACCE",
+      "FORC_NODA",
+      "REAC_NODA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "DDL_EXCLUS",
+     "kind": "simple",
+     "path": "DDL_EXCLUS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "MATR_AMOR",
+     "kind": "simple",
+     "path": "MATR_AMOR",
+     "status": "f",
+     "type": [
+      "matr_asse_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "NUME_DDL",
+     "kind": "simple",
+     "path": "NUME_DDL",
+     "status": "f",
+     "type": [
+      "nume_ddl_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "o",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_char_sol.py",
+      "line": 65
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Titre de la charge produite",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_char_sol.py",
+    "line": 68
+   }
+  }
+ ]
+}

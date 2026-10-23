@@ -1,0 +1,157 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline3.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE3",
+ "source": {
+  "file": "code_aster/Messages/mecanonline3.py"
+ },
+ "messages": {
+  "2": {
+   "id": "MECANONLINE3_2",
+   "fr": "\n Votre modèle contient des variables de commandes (température, irradiation, etc.)\n or on utilise une matrice élastique constante au cours du temps pour l'amortissement de Rayleigh.\n Ce n'est pas possible.\n ",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MECANONLINE3_3",
+   "fr": "\n La matrice de prédiction élastique (MATRICE='ELASTIQUE') est incompatible\n avec les lois des joints JOINT_MECA_FROT, JOINT_MECA_RUPT et JOINT_MECA_ENDO.\n ",
+   "placeholders": [],
+   "source": {
+    "line": 30
+   },
+   "en": null
+  },
+  "87": {
+   "id": "MECANONLINE3_87",
+   "fr": "\nLe contact de type LAC n'est utilisable qu'avec le préconditionneur LDLT_SP pour les solveurs GCPC et PETSc.\n",
+   "placeholders": [],
+   "source": {
+    "line": 36
+   },
+   "en": null
+  },
+  "88": {
+   "id": "MECANONLINE3_88",
+   "fr": "\n  -> Vous utilisez l'algorithme de contact 'GCP' avec un préconditionneur qui n'est pas adapté.\n\n  -> Conseil :\n     Utilisez le préconditionneur 'LDLT_SP' en spécifiant PRE_COND='LDLT_SP' sous le mot-clé SOLVEUR.\n",
+   "placeholders": [],
+   "source": {
+    "line": 41
+   },
+   "en": null
+  },
+  "89": {
+   "id": "MECANONLINE3_89",
+   "fr": "\n contact et recherche linéaire peuvent poser des problèmes de convergence\n",
+   "placeholders": [],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "90": {
+   "id": "MECANONLINE3_90",
+   "fr": "\n  -> Vous utilisez une formulation 'DISCRETE' de contact conjointement avec le solveur linéaire '%(k1)s'.\n     Le solveur '%(k1)s' n'est actuellement autorisé qu'avec les algorithmes de contact 'GCP','VERIF' et 'PENALISATION'.\n\n  -> Conseil :\n     Changez d'algorithme de contact en utilisant le mot-clé ALGO_CONT de DEFI_CONTACT ou bien changez de solveur linéaire\n     en utilisant le mot-clé METHODE de SOLVEUR.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "91": {
+   "id": "MECANONLINE3_91",
+   "fr": "\nContact méthode continue et recherche linéaire sont incompatibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "92": {
+   "id": "MECANONLINE3_92",
+   "fr": "\nContact méthode continue et pilotage sont incompatibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 69
+   },
+   "en": null
+  },
+  "93": {
+   "id": "MECANONLINE3_93",
+   "fr": "\n Le contact de type CONTINUE et l'amortissement modal AMOR_MODAL sont des fonctionnalités incompatibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 74
+   },
+   "en": null
+  },
+  "94": {
+   "id": "MECANONLINE3_94",
+   "fr": "\n Le contact de type liaison unilatérale (sans appariement) et le pilotage sont des fonctionnalités incompatibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 79
+   },
+   "en": null
+  },
+  "95": {
+   "id": "MECANONLINE3_95",
+   "fr": "\n Le contact de type liaison unilatérale (sans appariement) et la recherche linéaire peuvent poser des problèmes de convergence\n",
+   "placeholders": [],
+   "source": {
+    "line": 84
+   },
+   "en": null
+  },
+  "96": {
+   "id": "MECANONLINE3_96",
+   "fr": "\n  -> Vous utilisez la formulation 'LIAISON_UNIL' conjointement avec le solveur linéaire '%(k1)s'.\n     Ce dernier n'est pas compatible avec le traitement de conditions unilatérales.\n\n  -> Conseil :\n     Changez de solveur linéaire en utilisant le mot-clé METHODE de SOLVEUR.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 89
+   },
+   "en": null
+  },
+  "97": {
+   "id": "MECANONLINE3_97",
+   "fr": "\n  -> Vous utilisez la formulation 'CONTINUE' de contact conjointement avec un solveur itératif et le préconditionneur '%(k1)s'.\n     Le préconditionneur '%(k1)s' ne supporte pas les matrices issues de cette formulation du contact.\n\n  -> Conseil :\n     Changez de préconditionneur.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 98
+   },
+   "en": null
+  },
+  "98": {
+   "id": "MECANONLINE3_98",
+   "fr": "\n  -> Vous utilisez la formulation 'CONTINUE' de contact avec le solveur linéaire 'PETSC' et vous demandez la distribution de la matrice (MATR_DISTRIBUEE='OUI').\n     La distribution de la matrice n'est pas possible dans ce cas d'utilisation.\n\n  -> Conseil :\n     Désactivez la distribution de la matrice en parallèle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 107
+   },
+   "en": null
+  },
+  "99": {
+   "id": "MECANONLINE3_99",
+   "fr": "\nLe contact de type LAC n'est pas utilisable avec le solveur MULT_FRONT, il faut utiliser MUMPS.\n",
+   "placeholders": [],
+   "source": {
+    "line": 116
+   },
+   "en": null
+  }
+ }
+}

@@ -1,0 +1,274 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_CHAM_ELEM",
+ "kind": "OPER",
+ "fr": "Calculer un champ élémentaire en thermique et en acoustique à partir de champs déjà calculés",
+ "translation_upstream": null,
+ "op": 38,
+ "reentrant": "n",
+ "result_types": [
+  "cham_elem"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT",
+    "GROUP_MA"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+  "line": 25
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "MODE_FOURIER",
+   "kind": "simple",
+   "path": "MODE_FOURIER",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "FLUX_ELGA",
+    "FLUX_ELNO",
+    "PRAC_ELNO",
+    "COOR_ELGA",
+    "ROCH_ELNO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "b_roch",
+   "kind": "bloc",
+   "path": "[b_roch]",
+   "condition": "equal_to(\"OPTION\", 'ROCH_ELNO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "o",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_not_cara",
+   "kind": "bloc",
+   "path": "[b_not_cara]",
+   "condition": "not equal_to(\"OPTION\", 'ROCH_ELNO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_thermique",
+   "kind": "bloc",
+   "path": "[b_thermique]",
+   "condition": "is_in(\"OPTION\", ('FLUX_ELNO','FLUX_ELGA',))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "TEMP",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 56
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_acoustique",
+   "kind": "bloc",
+   "path": "[b_acoustique]",
+   "condition": "is_in(\"OPTION\", ('PRAC_ELNO',))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+    "line": 58
+   },
+   "keywords": [
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "PRES",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_elem.py",
+      "line": 60
+     }
+    }
+   ]
+  }
+ ]
+}

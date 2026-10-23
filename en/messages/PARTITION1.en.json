@@ -1,0 +1,71 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/partition1.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "PARTITION1",
+ "source": {
+  "file": "code_aster/Messages/partition1.py"
+ },
+ "messages": {
+  "1": {
+   "id": "PARTITION1_1",
+   "fr": "\n Il y a moins de sous-domaines (%(i1)d) que de processeurs participant au calcul (%(i2)d).\n\n Conseils :\n   - augmentez le nombre de sous-domaines de la partition du mot-clé DISTRIBUTION\n   - diminuez le nombre de processeurs du calcul\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "PARTITION1_2",
+   "fr": "\n Le partitionnement des mailles du maillage conduit à un sous-domaine ayant 0 maille.\n Le code ne sait pas traiter ce cas de figure.\n Conseils :\n   - diminuez le nombre de processeurs du calcul.\n   - diminuez le nombre de sous-domaines de la partition du mot-clé DISTRIBUTION\n   - n'utilisez pas le parallélisme (trop peu d'éléments).\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 32
+   },
+   "en": null
+  },
+  "17": {
+   "id": "PARTITION1_17",
+   "fr": "\n  La partition %(k1)s que vous utilisez pour partitionner le modèle %(k2)s en sous-domaines a été construite sur un autre modèle (%(k3)s).\n\n  Conseil : vérifiez la cohérence des modèles.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 43
+   },
+   "en": null
+  },
+  "93": {
+   "id": "PARTITION1_93",
+   "fr": "\n Il y a moins de mailles (%(i1)d) dans le modèle que de processeurs participant au calcul (%(i2)d).\n\n Conseils :\n   - vérifiez qu'un calcul parallèle est approprié pour votre modèle\n   - diminuez le nombre de processeurs du calcul\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 50
+   },
+   "en": null
+  },
+  "99": {
+   "id": "PARTITION1_99",
+   "fr": "\n Il faut qu'il reste au moins un sous domaine par processeur une fois affectés tous les sous-domaines du processeur 0.\n\n Conseils :\n   - diminuez le nombre de processeurs du calcul ou bien augmentez le nombre de sous-domaines de la partition du mot-clé DISTRIBUTION\n",
+   "placeholders": [],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  }
+ }
+}

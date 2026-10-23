@@ -1,0 +1,406 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MODE_ITER_CYCL",
+ "kind": "OPER",
+ "fr": "Calcul des modes propres d'une structure à répétitivité cyclique à partir d'une base de modes propres réels",
+ "translation_upstream": null,
+ "op": 80,
+ "reentrant": "n",
+ "result_types": [
+  "mode_cycl"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "BASE_MODALE",
+   "kind": "simple",
+   "path": "BASE_MODALE",
+   "status": "o",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "NB_MODE",
+   "kind": "simple",
+   "path": "NB_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "NB_SECTEUR",
+   "kind": "simple",
+   "path": "NB_SECTEUR",
+   "status": "o",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "LIAISON",
+   "kind": "factor",
+   "path": "LIAISON",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "DROITE",
+     "kind": "simple",
+     "path": "LIAISON/DROITE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "GAUCHE",
+     "kind": "simple",
+     "path": "LIAISON/GAUCHE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "AXE",
+     "kind": "simple",
+     "path": "LIAISON/AXE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 42
+     }
+    }
+   ]
+  },
+  {
+   "name": "VERI_CYCL",
+   "kind": "factor",
+   "path": "VERI_CYCL",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "VERI_CYCL/PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "VERI_CYCL/CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "DIST_REFE",
+     "kind": "simple",
+     "path": "VERI_CYCL/DIST_REFE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 48
+     }
+    }
+   ]
+  },
+  {
+   "name": "CALCUL",
+   "kind": "factor",
+   "path": "CALCUL",
+   "status": "o",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT_DIAM",
+      "NB_DIAM"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 50
+   },
+   "keywords": [
+    {
+     "name": "TOUT_DIAM",
+     "kind": "simple",
+     "path": "CALCUL/TOUT_DIAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "NB_DIAM",
+     "kind": "simple",
+     "path": "CALCUL/NB_DIAM",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "CALCUL/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PLUS_PETITE",
+     "into": [
+      "PLUS_PETITE",
+      "CENTRE",
+      "BANDE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "b_centre",
+     "kind": "bloc",
+     "path": "CALCUL/[b_centre]",
+     "condition": "equal_to(\"OPTION\", 'CENTRE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 58
+     },
+     "keywords": [
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "CALCUL/FREQ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+        "line": 58
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_bande",
+     "kind": "bloc",
+     "path": "CALCUL/[b_bande]",
+     "condition": "equal_to(\"OPTION\", 'BANDE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 59
+     },
+     "keywords": [
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "CALCUL/FREQ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 2,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+        "line": 61
+       }
+      }
+     ]
+    },
+    {
+     "name": "NMAX_FREQ",
+     "kind": "simple",
+     "path": "CALCUL/NMAX_FREQ",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "PREC_SEPARE",
+     "kind": "simple",
+     "path": "CALCUL/PREC_SEPARE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 100.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "PREC_AJUSTE",
+     "kind": "simple",
+     "path": "CALCUL/PREC_AJUSTE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "NMAX_ITER",
+     "kind": "simple",
+     "path": "CALCUL/NMAX_ITER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 50,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+      "line": 67
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/mode_iter_cycl.py",
+    "line": 69
+   }
+  }
+ ]
+}

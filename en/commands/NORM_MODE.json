@@ -1,0 +1,338 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/norm_mode.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "NORM_MODE",
+ "kind": "OPER",
+ "fr": "Normer des modes propres en fonction d'un critère choisi par l'utilisateur",
+ "translation_upstream": null,
+ "op": 37,
+ "reentrant": "f:MODE",
+ "result_types": [
+  "mode_meca",
+  "mode_meca_c",
+  "mode_flamb"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "NORME",
+    "GROUP_NO",
+    "AVEC_CMP",
+    "SANS_CMP"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/norm_mode.py",
+  "line": 40
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "MODE",
+   "kind": "simple",
+   "path": "MODE",
+   "status": "o",
+   "type": [
+    "mode_meca",
+    "mode_flamb"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "NORME",
+   "kind": "simple",
+   "path": "NORME",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MASS_GENE",
+    "RIGI_GENE",
+    "EUCL",
+    "EUCL_TRAN",
+    "TRAN",
+    "TRAN_ROTA"
+   ],
+   "fr": "Norme prédéfinie : masse généralisée, euclidienne,...",
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "fr": "Composante donnée d'un groupe contenant un seul noeud spécifié égale à 1",
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "b_noeud",
+   "kind": "bloc",
+   "path": "[b_noeud]",
+   "condition": "exists(\"GROUP_NO\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 60
+   },
+   "keywords": [
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/norm_mode.py",
+      "line": 60
+     }
+    }
+   ]
+  },
+  {
+   "name": "AVEC_CMP",
+   "kind": "simple",
+   "path": "AVEC_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "SANS_CMP",
+   "kind": "simple",
+   "path": "SANS_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "MODE_SIGNE",
+   "kind": "factor",
+   "path": "MODE_SIGNE",
+   "status": "f",
+   "fr": "Imposer un signe sur une des composantes des modes",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "MODE_SIGNE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": "Noeud où sera imposé le signe",
+     "source": {
+      "file": "code_aster/Cata/Commands/norm_mode.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "MODE_SIGNE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": "Groupe d'un seul noeud où sera imposé le signe",
+     "source": {
+      "file": "code_aster/Cata/Commands/norm_mode.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "MODE_SIGNE/NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Composante du noeud où sera imposé le signe",
+     "source": {
+      "file": "code_aster/Cata/Commands/norm_mode.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "SIGNE",
+     "kind": "simple",
+     "path": "MODE_SIGNE/SIGNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "POSITIF",
+     "into": [
+      "NEGATIF",
+      "POSITIF"
+     ],
+     "fr": "Choix du signe",
+     "source": {
+      "file": "code_aster/Cata/Commands/norm_mode.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "MASSE",
+   "kind": "simple",
+   "path": "MASSE",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_gene_r",
+    "matr_asse_pres_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "RAIDE",
+   "kind": "simple",
+   "path": "RAIDE",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_depl_c",
+    "matr_asse_gene_r",
+    "matr_asse_pres_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 81
+   }
+  },
+  {
+   "name": "AMOR",
+   "kind": "simple",
+   "path": "AMOR",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_gene_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 84
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/norm_mode.py",
+    "line": 86
+   }
+  }
+ ]
+}

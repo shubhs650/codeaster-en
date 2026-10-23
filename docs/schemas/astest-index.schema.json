@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shubhs650/codeaster-en/docs/schemas/astest-index.schema.json",
+  "title": "codeaster-en astest index (en/astest-index.json)",
+  "description": "Which commands every upstream test case (astest/<name>.export) calls, written by `caen extract astest-index` (task 1.4). Generated: change the extractor (tools/codeaster_en/extract/astest.py), never the file.",
+  "type": "object",
+  "required": ["_generated_from", "schema_version", "summary", "commands", "testcases"],
+  "additionalProperties": false,
+  "$defs": {
+    "number_or_text": {"type": ["integer", "number", "string", "boolean"]}
+  },
+  "properties": {
+    "_generated_from": {
+      "type": "object",
+      "required": ["upstream", "upstream_commit", "dir", "extractor", "extractor_version"],
+      "additionalProperties": false,
+      "properties": {
+        "upstream": {"description": "Pinned upstream tag (UPSTREAM_VERSION).", "type": ["string", "null"]},
+        "upstream_commit": {"description": "Commit of the upstream/ submodule.", "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+        "dir": {"const": "astest"},
+        "extractor": {"const": "codeaster_en.extract.astest"},
+        "extractor_version": {"type": "string"}
+      }
+    },
+    "schema_version": {"const": 1},
+    "summary": {
+      "type": "object",
+      "required": ["testcases", "command_files", "parse", "known_commands", "commands_used", "parallel_testcases"],
+      "additionalProperties": false,
+      "properties": {
+        "testcases": {"description": "Number of .export files.", "type": "integer"},
+        "command_files": {"description": "Distinct files named by `F comm` lines.", "type": "integer"},
+        "parse": {"description": "Command files per parse method.", "type": "object", "additionalProperties": {"type": "integer"}},
+        "known_commands": {"type": "integer"},
+        "commands_used": {"description": "Known commands called by at least one test case.", "type": "integer"},
+        "parallel_testcases": {"type": "integer"}
+      }
+    },
+    "commands": {
+      "description": "Command name -> where it is defined and which test cases call it. Every known command is listed, used or not.",
+      "type": "object",
+      "propertyNames": {"pattern": "^[A-Z][A-Z0-9_]*$"},
+      "additionalProperties": {
+        "type": "object",
+        "required": ["source", "calls", "testcases"],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "description": "catalog: en/commands/<CMD>.json exists. code_commands: exported by code_aster/CodeCommands/__init__.py without a catalog entry (POURSUITE). user_macro: `NAME = UserMacro(\"NAME\", ...)` under code_aster/ without a catalog entry.",
+            "enum": ["catalog", "code_commands", "user_macro"]
+          },
+          "defined_in": {"description": "For non-catalog commands: file (and line for user_macro), relative to upstream/.", "type": "string"},
+          "calls": {"description": "Total calls over all command files of all test cases.", "type": "integer", "minimum": 0},
+          "testcases": {"description": "Test case names, sorted.", "type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "testcases": {
+      "description": "Test case name (export file stem) -> commands and export metadata.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["export", "commands", "command_files", "params", "parallel", "files"],
+        "additionalProperties": false,
+        "properties": {
+          "export": {"description": "Export file, relative to upstream/.", "type": "string"},
+          "commands": {"description": "Distinct known commands called, sorted.", "type": "array", "items": {"type": "string"}},
+          "command_files": {
+            "description": "The `F comm` files, in export order.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["path"],
+              "additionalProperties": false,
+              "properties": {
+                "path": {"description": "Relative to upstream/astest/.", "type": "string"},
+                "missing": {"const": true},
+                "parse": {"enum": ["ast", "regex"]},
+                "calls": {
+                  "description": "Command -> sorted 1-based line numbers of its calls.",
+                  "type": "object",
+                  "additionalProperties": {"type": "array", "items": {"type": "integer", "minimum": 1}}
+                }
+              }
+            }
+          },
+          "params": {
+            "description": "`P` lines: time_limit (s), memory_limit (MB), ncpus, mpi_nbcpu, mpi_nbnoeud, testlist, and any other key verbatim. A key with no value is true.",
+            "type": "object",
+            "properties": {
+              "testlist": {"type": "array", "items": {"type": "string"}}
+            },
+            "additionalProperties": {"$ref": "#/$defs/number_or_text"}
+          },
+          "parallel": {"description": "`parallel` is in testlist.", "type": "boolean"},
+          "args": {"description": "`A` lines, split on whitespace.", "type": "array", "items": {"type": "string"}},
+          "files": {
+            "description": "Every `F` and `R` line, fields verbatim: kind, type, path, mode, unit.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["kind", "type", "path", "mode"],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {"enum": ["F", "R"]},
+                "type": {"type": "string"},
+                "path": {"type": "string"},
+                "mode": {"description": "Verbatim (17.4.26 uses D and DC).", "type": "string"},
+                "unit": {"$ref": "#/$defs/number_or_text"}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

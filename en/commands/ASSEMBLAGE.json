@@ -1,0 +1,678 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/assemblage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "ASSEMBLAGE",
+ "kind": "MACRO",
+ "fr": "Calcul des matrices et vecteurs assemblés ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.assemblage_ops.assemblage_ops",
+ "reentrant": null,
+ "result_types": [
+  "nume_ddl_sdaster",
+  "matr_asse_depl_r",
+  "matr_asse_pres_c",
+  "matr_asse_temp_r",
+  "matr_asse_depl_c",
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "MATR_ASSE",
+    "VECT_ASSE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/assemblage.py",
+  "line": 80
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 86
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 87
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 88
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 89
+   }
+  },
+  {
+   "name": "CHARGE",
+   "kind": "simple",
+   "path": "CHARGE",
+   "status": "f",
+   "type": [
+    "char_meca",
+    "char_ther",
+    "char_acou"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 90
+   }
+  },
+  {
+   "name": "CHAR_CINE",
+   "kind": "simple",
+   "path": "CHAR_CINE",
+   "status": "f",
+   "type": [
+    "char_cine_meca",
+    "char_cine_ther",
+    "char_cine_acou"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 91
+   }
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "o",
+   "type": [
+    "nume_ddl_sdaster",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 92
+   }
+  },
+  {
+   "name": "MATR_ASSE",
+   "kind": "factor",
+   "path": "MATR_ASSE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 93
+   },
+   "keywords": [
+    {
+     "name": "MATRICE",
+     "kind": "simple",
+     "path": "MATR_ASSE/MATRICE",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "MATR_ASSE/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "RIGI_MECA",
+      "MASS_MECA",
+      "MASS_MECA_DIAG",
+      "AMOR_MECA",
+      "RIGI_MECA_HYST",
+      "IMPE_MECA",
+      "ONDE_FLUI",
+      "RIGI_FLUI_STRU",
+      "MASS_FLUI_STRU",
+      "RIGI_ROTA",
+      "RIGI_GEOM",
+      "MECA_GYRO",
+      "RIGI_GYRO",
+      "RIGI_THER",
+      "RIGI_ACOU",
+      "MASS_ACOU",
+      "AMOR_ACOU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "b_group_ma",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_group_ma]",
+     "condition": "is_in(\"OPTION\", ('RIGI_GYRO', 'MECA_GYRO', 'IMPE_MECA',\n                                          'AMOR_MECA', 'MASS_MECA', 'RIGI_MECA',\n                                          'MASS_MECA_DIAG','MASS_FLUI_STRU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 120
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "MATR_ASSE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 124
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rigi_meca",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_rigi_meca]",
+     "condition": "equal_to(\"OPTION\", 'RIGI_MECA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 126
+     },
+     "keywords": [
+      {
+       "name": "MODE_FOURIER",
+       "kind": "simple",
+       "path": "MATR_ASSE/MODE_FOURIER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 128
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rigi_geom",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_rigi_geom]",
+     "condition": "equal_to(\"OPTION\", 'RIGI_GEOM')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 130
+     },
+     "keywords": [
+      {
+       "name": "SIEF_ELGA",
+       "kind": "simple",
+       "path": "MATR_ASSE/SIEF_ELGA",
+       "status": "o",
+       "type": [
+        "cham_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "MODE_FOURIER",
+       "kind": "simple",
+       "path": "MATR_ASSE/MODE_FOURIER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 133
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rigi_ther",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_rigi_ther]",
+     "condition": "equal_to(\"OPTION\", 'RIGI_THER')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 135
+     },
+     "keywords": [
+      {
+       "name": "MODE_FOURIER",
+       "kind": "simple",
+       "path": "MATR_ASSE/MODE_FOURIER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 137
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_amor_meca",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_amor_meca]",
+     "condition": "equal_to(\"OPTION\", 'AMOR_MECA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 139
+     },
+     "keywords": [
+      {
+       "name": "AMOR_FLUI",
+       "kind": "simple",
+       "path": "MATR_ASSE/AMOR_FLUI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "VNOR",
+       "kind": "simple",
+       "path": "MATR_ASSE/VNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "into": [
+        1.0,
+        -1.0
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 142
+       }
+      },
+      {
+       "name": "TYPE_AMOR",
+       "kind": "simple",
+       "path": "MATR_ASSE/TYPE_AMOR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 1,
+       "default": "TOUT",
+       "into": [
+        "TOUT",
+        "ABSO"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 143
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_impe_meca",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_impe_meca]",
+     "condition": "equal_to(\"OPTION\", 'IMPE_MECA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 147
+     },
+     "keywords": [
+      {
+       "name": "VNOR",
+       "kind": "simple",
+       "path": "MATR_ASSE/VNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "into": [
+        1.0,
+        -1.0
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 149
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_amor_acou",
+     "kind": "bloc",
+     "path": "MATR_ASSE/[b_amor_acou]",
+     "condition": "equal_to(\"OPTION\", 'AMOR_ACOU')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 151
+     },
+     "keywords": [
+      {
+       "name": "VNOR",
+       "kind": "simple",
+       "path": "MATR_ASSE/VNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "into": [
+        1.0,
+        -1.0
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 153
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "VECT_ASSE",
+   "kind": "factor",
+   "path": "VECT_ASSE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 158
+   },
+   "keywords": [
+    {
+     "name": "VECTEUR",
+     "kind": "simple",
+     "path": "VECT_ASSE/VECTEUR",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 161
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "VECT_ASSE/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CHAR_MECA",
+      "CHAR_ACOU",
+      "CHAR_THER"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "b_char_meca",
+     "kind": "bloc",
+     "path": "VECT_ASSE/[b_char_meca]",
+     "condition": "equal_to(\"OPTION\", 'CHAR_MECA')",
+     "fr": "chargement mécanique",
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 163
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "VECT_ASSE/CHARGE",
+       "status": "f",
+       "type": [
+        "char_meca"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 166
+       }
+      },
+      {
+       "name": "MODE_FOURIER",
+       "kind": "simple",
+       "path": "VECT_ASSE/MODE_FOURIER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 167
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_char_ther",
+     "kind": "bloc",
+     "path": "VECT_ASSE/[b_char_ther]",
+     "condition": "equal_to(\"OPTION\", 'CHAR_THER')",
+     "fr": "chargement thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 169
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "VECT_ASSE/CHARGE",
+       "status": "f",
+       "type": [
+        "char_ther"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 172
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_char_acou",
+     "kind": "bloc",
+     "path": "VECT_ASSE/[b_char_acou]",
+     "condition": "equal_to(\"OPTION\", 'CHAR_ACOU')",
+     "fr": "chargement acoustique",
+     "source": {
+      "file": "code_aster/Cata/Commands/assemblage.py",
+      "line": 174
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "VECT_ASSE/CHARGE",
+       "status": "f",
+       "type": [
+        "char_acou"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/assemblage.py",
+        "line": 177
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 182
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/assemblage.py",
+    "line": 183
+   }
+  }
+ ]
+}

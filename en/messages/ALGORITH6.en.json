@@ -1,0 +1,437 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/algorith6.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "ALGORITH6",
+ "source": {
+  "file": "code_aster/Messages/algorith6.py"
+ },
+ "messages": {
+  "1": {
+   "id": "ALGORITH6_1",
+   "fr": "\n GAMMA_T et GAMMA_C ne doivent pas être égal à 1 en même temps.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "ALGORITH6_2",
+   "fr": "\n Pour la détermination des paramètres de la loi GLRC_DM, il faut que la valeur de la limite en compression FCJ soit supérieur à la limite en traction FTJ (en valeur absolue).\n -> Conseil : Modifier les valeurs des paramètres matériaux\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "ALGORITH6_3",
+   "fr": "\n -> Les valeurs des paramètres de la loi GLRC_DM entraîne un seuil d'endommagement nul.\n -> Conseil : Modifier les valeurs des paramètres matériaux\n",
+   "placeholders": [],
+   "source": {
+    "line": 34
+   },
+   "en": null
+  },
+  "4": {
+   "id": "ALGORITH6_4",
+   "fr": "\n  La valeur de %(k1)s est négative ou trop faible. La valeur est modifiée avec un seuil de 1e-3.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "5": {
+   "id": "ALGORITH6_5",
+   "fr": "\n -> La valeur de déformation maximale %(r1)f est inférieur au seuil d'endommagement %(r2)f.\n -> Le modèle GLRC_DM risque de donner des résultats inattendus.\n -> Conseil : Utilisez une loi élastique ou vérifiez les paramètres d'homogénéisation.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 45
+   },
+   "en": null
+  },
+  "6": {
+   "id": "ALGORITH6_6",
+   "fr": "\n -> Le pourcentage des aciers ou l'espace des armatures n'est pas identique dans les deux directions et ne respecte donc pas l'isotropie du modèle.\n -> Le modèle GLRC_DM peut donner des résultats inattendus.\n -> Conseil: Choisissez une autre loi de comportement ou couplez le modèle avec un modèle de grille d'acier.\n",
+   "placeholders": [],
+   "source": {
+    "line": 52
+   },
+   "en": null
+  },
+  "8": {
+   "id": "ALGORITH6_8",
+   "fr": "\n -> L'objet transmis au mot clé MATER de BETON ne contient pas de propriétés élastique.\n -> Risque & Conseil : Ajouter les propriétés élastique dans le DEFI_MATERIAU du béton.\n",
+   "placeholders": [],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  },
+  "10": {
+   "id": "ALGORITH6_10",
+   "fr": "\n -> L'objet transmis au mot clé MATER d'ACIER ne contient pas de propriétés élastique.\n -> Risque & Conseil : Ajouter les propriétés élastique dans le DEFI_MATERIAU de l'acier.\n",
+   "placeholders": [],
+   "source": {
+    "line": 65
+   },
+   "en": null
+  },
+  "11": {
+   "id": "ALGORITH6_11",
+   "fr": "\n -> Il est impossible d'utiliser PENTE = ACIER_PLAS si la limite élastique de l'acier SY n'est pas défini.\n -> Risque & Conseil : Ajouter le paramètre SY dans le DEFI_MATERIAU de l'acier\n                       ou n'utilisez pas PENTE = ACIER_PLAS\n",
+   "placeholders": [],
+   "source": {
+    "line": 71
+   },
+   "en": null
+  },
+  "16": {
+   "id": "ALGORITH6_16",
+   "fr": "\n le fond de fissure d'un maillage 2d ne peut être défini par des mailles\n",
+   "placeholders": [],
+   "source": {
+    "line": 78
+   },
+   "en": null
+  },
+  "17": {
+   "id": "ALGORITH6_17",
+   "fr": "\n les mailles à modifier doivent être de type \"SEG3\" ou \"POI1\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 83
+   },
+   "en": null
+  },
+  "18": {
+   "id": "ALGORITH6_18",
+   "fr": "\n le fond de fissure d'un maillage 2d est défini par un noeud unique\n",
+   "placeholders": [],
+   "source": {
+    "line": 88
+   },
+   "en": null
+  },
+  "19": {
+   "id": "ALGORITH6_19",
+   "fr": "\n  -> Code Aster a détecté des mailles de type différent lors de la\n     correspondance entre les maillages des deux modèles (mesuré/numérique).\n     Ce cas n'est pas prévu, Code Aster initialise la correspondance au noeud\n     le plus proche.\n  -> Conseil :\n     Vérifier la correspondance des noeuds et raffiner le maillage si besoin.\n",
+   "placeholders": [],
+   "source": {
+    "line": 93
+   },
+   "en": null
+  },
+  "20": {
+   "id": "ALGORITH6_20",
+   "fr": "\n nombre noeuds mesuré supérieur au nombre de noeuds calculé\n",
+   "placeholders": [],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "21": {
+   "id": "ALGORITH6_21",
+   "fr": "\n NOEU_CALCUL non trouvé\n",
+   "placeholders": [],
+   "source": {
+    "line": 108
+   },
+   "en": null
+  },
+  "22": {
+   "id": "ALGORITH6_22",
+   "fr": "\n NOEU_MESURE non trouvé\n",
+   "placeholders": [],
+   "source": {
+    "line": 113
+   },
+   "en": null
+  },
+  "23": {
+   "id": "ALGORITH6_23",
+   "fr": "\n nombre de noeuds différent\n",
+   "placeholders": [],
+   "source": {
+    "line": 118
+   },
+   "en": null
+  },
+  "24": {
+   "id": "ALGORITH6_24",
+   "fr": "\n traitement manuel correspondance : un couple à la fois\n",
+   "placeholders": [],
+   "source": {
+    "line": 123
+   },
+   "en": null
+  },
+  "25": {
+   "id": "ALGORITH6_25",
+   "fr": "\n échec projection\n",
+   "placeholders": [],
+   "source": {
+    "line": 128
+   },
+   "en": null
+  },
+  "26": {
+   "id": "ALGORITH6_26",
+   "fr": "\n norme vecteur direction nulle\n",
+   "placeholders": [],
+   "source": {
+    "line": 133
+   },
+   "en": null
+  },
+  "27": {
+   "id": "ALGORITH6_27",
+   "fr": "\n le nombre des coefficients de pondération est supérieur\n au nombre de vecteurs de base\n",
+   "placeholders": [],
+   "source": {
+    "line": 138
+   },
+   "en": null
+  },
+  "28": {
+   "id": "ALGORITH6_28",
+   "fr": "\n le nombre des coefficients de pondération est inférieur\n au nombre de vecteurs de base\n le dernier coefficient est affecté aux autres\n",
+   "placeholders": [],
+   "source": {
+    "line": 144
+   },
+   "en": null
+  },
+  "29": {
+   "id": "ALGORITH6_29",
+   "fr": "\n le nombre des fonctions de pondération est supérieur\n au nombre de vecteurs de base\n",
+   "placeholders": [],
+   "source": {
+    "line": 151
+   },
+   "en": null
+  },
+  "30": {
+   "id": "ALGORITH6_30",
+   "fr": "\n le nombre des fonctions de pondération est inférieur\n au nombre de vecteurs de base\n la dernière fonction est affectée aux autres\n",
+   "placeholders": [],
+   "source": {
+    "line": 157
+   },
+   "en": null
+  },
+  "31": {
+   "id": "ALGORITH6_31",
+   "fr": "\n le nombre d'abscisses d'une des fonctions d'interpolation\n n'est pas identique au nombre d'abscisses du premier point\n de mesure expérimental\n",
+   "placeholders": [],
+   "source": {
+    "line": 164
+   },
+   "en": null
+  },
+  "32": {
+   "id": "ALGORITH6_32",
+   "fr": "\n  le critère d'égalité de la liste d'abscisses du premier DATASET 58\n  et de la liste d'abscisses d une des fonctions de pondération\n  n'est pas vérifié\n",
+   "placeholders": [],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "33": {
+   "id": "ALGORITH6_33",
+   "fr": "\n incompatibilité NOM_PARA et données mesurées\n",
+   "placeholders": [],
+   "source": {
+    "line": 178
+   },
+   "en": null
+  },
+  "34": {
+   "id": "ALGORITH6_34",
+   "fr": "\n L'option RIGI_INIT pour le mot-clé FLEXION conduit à une valeur négative pour\n le paramètre gamma en flexion.\n On modifie donc le moment seuil et la pente de flexion.\n",
+   "placeholders": [],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "35": {
+   "id": "ALGORITH6_35",
+   "fr": "\n La courbure de calage KAPPA_FLEX est inférieure la limite de courbure de la section élastique,\n égale à %(k1)s. Dans ce cas, on considère le moment d'initiation de la première fissure\n et une pente d'endommagement nulle.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 190
+   },
+   "en": null
+  },
+  "36": {
+   "id": "ALGORITH6_36",
+   "fr": "\n Le choix de KAPPA_FLEX conduit à un coefficient GAMMA_F négatif.\n On impose donc GAMMA_F = 0.d0 et le moment limite est celui de l'initiation de la fissure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 197
+   },
+   "en": null
+  },
+  "37": {
+   "id": "ALGORITH6_37",
+   "fr": "\n Au moins un des paramètres SIGM_LIM et EPSI_LIM est absent du matériau renseigné pour\n le mot-clé NAPPE/MATER. Cela indique que ce matériau n'a pas été créé par DEFI_MATER_GC/ACIER.\n Veuillez utiliser cette procédure pour créer ce matériau.\n",
+   "placeholders": [],
+   "source": {
+    "line": 203
+   },
+   "en": null
+  },
+  "38": {
+   "id": "ALGORITH6_38",
+   "fr": "\n Au moins un des paramètres FCJ, EPSI_C et FTJ est absent du matériau renseigné pour\n le mot-clé BETON/MATER. Cela indique que ce matériau n'a pas été créé par DEFI_MATER_GC/BETON_GLRC.\n Veuillez utiliser cette procédure pour créer ce matériau.\n",
+   "placeholders": [],
+   "source": {
+    "line": 210
+   },
+   "en": null
+  },
+  "55": {
+   "id": "ALGORITH6_55",
+   "fr": "\n THETA = 1 ou 0.5\n",
+   "placeholders": [],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "57": {
+   "id": "ALGORITH6_57",
+   "fr": "\n fluence décroissante (PHI<0)\n",
+   "placeholders": [],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "58": {
+   "id": "ALGORITH6_58",
+   "fr": "\nRelation 1d sans loi de fluence appropriée\n",
+   "placeholders": [],
+   "source": {
+    "line": 227
+   },
+   "en": null
+  },
+  "59": {
+   "id": "ALGORITH6_59",
+   "fr": "\n erreur direction grandissement\n",
+   "placeholders": [],
+   "source": {
+    "line": 232
+   },
+   "en": null
+  },
+  "63": {
+   "id": "ALGORITH6_63",
+   "fr": "\n CAM_CLAY :\n le cas des contraintes planes n'est pas traité pour ce modèle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 242
+   },
+   "en": null
+  },
+  "64": {
+   "id": "ALGORITH6_64",
+   "fr": "\n CAM_CLAY :\n il faut que la contrainte hydrostatique soit supérieure\n a la pression initiale PA\n",
+   "placeholders": [],
+   "source": {
+    "line": 248
+   },
+   "en": null
+  },
+  "67": {
+   "id": "ALGORITH6_67",
+   "fr": "\n N doit être strictement positif.\n",
+   "placeholders": [],
+   "source": {
+    "line": 255
+   },
+   "en": null
+  },
+  "68": {
+   "id": "ALGORITH6_68",
+   "fr": "\n paramètre UN_SUR_K égal à zéro cas incompatible avec VISC_CINE_CHAB\n",
+   "placeholders": [],
+   "source": {
+    "line": 260
+   },
+   "en": null
+  },
+  "69": {
+   "id": "ALGORITH6_69",
+   "fr": "\n loi VISC_CINE_CHAB\n on doit obligatoirement avoir UN_SUR_M = zéro\n",
+   "placeholders": [],
+   "source": {
+    "line": 265
+   },
+   "en": null
+  },
+  "79": {
+   "id": "ALGORITH6_79",
+   "fr": "\n F reste toujours positive.\n",
+   "placeholders": [],
+   "source": {
+    "line": 271
+   },
+   "en": null
+  },
+  "80": {
+   "id": "ALGORITH6_80",
+   "fr": "\n Problème interprétation variable entière\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 276
+   },
+   "en": null
+  },
+  "86": {
+   "id": "ALGORITH6_86",
+   "fr": "\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 283
+   },
+   "en": null
+  },
+  "88": {
+   "id": "ALGORITH6_88",
+   "fr": "\n erreur dans le type de comportement\n",
+   "placeholders": [],
+   "source": {
+    "line": 289
+   },
+   "en": null
+  },
+  "92": {
+   "id": "ALGORITH6_92",
+   "fr": "\n pas de contraintes planes\n",
+   "placeholders": [],
+   "source": {
+    "line": 294
+   },
+   "en": null
+  }
+ }
+}

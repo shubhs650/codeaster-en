@@ -1,0 +1,515 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_ELEM_DYNA",
+ "kind": "OPER",
+ "fr": "Definition d'un macro element pour analyse modale ou harmonique par sous structuration dynamique",
+ "translation_upstream": null,
+ "op": 81,
+ "reentrant": "f:MACR_ELEM_DYNA",
+ "result_types": [
+  "macr_elem_dyna"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MATR_AMOR",
+    "AMOR_REDUIT"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_RIGI"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_MASS"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_AMOR"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "AMOR_REDUIT"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_IMPE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_IMPE_RIGI"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_IMPE_MASS"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MODELE_MESURE",
+    "MATR_IMPE_AMOR"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SANS_GROUP_NO",
+    "GROUP_NO"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE",
+    "MATR_IMPE_RIGI"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE",
+    "MATR_IMPE_MASS"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE",
+    "MATR_IMPE_AMOR"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE",
+    "MATR_RIGI",
+    "MATR_MASS"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE_MASS",
+    "MATR_RIGI",
+    "MATR_MASS"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE_RIGI",
+    "MATR_RIGI",
+    "MATR_MASS"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MATR_IMPE_AMOR",
+    "MATR_RIGI",
+    "MATR_MASS"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "MACR_ELEM_DYNA",
+   "kind": "simple",
+   "path": "MACR_ELEM_DYNA",
+   "status": "f",
+   "type": [
+    "macr_elem_dyna"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "BASE_MODALE",
+   "kind": "simple",
+   "path": "BASE_MODALE",
+   "status": "o",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "MATR_RIGI",
+   "kind": "simple",
+   "path": "MATR_RIGI",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_depl_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "MATR_MASS",
+   "kind": "simple",
+   "path": "MATR_MASS",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "MATR_AMOR",
+   "kind": "simple",
+   "path": "MATR_AMOR",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "AMOR_REDUIT",
+   "kind": "simple",
+   "path": "AMOR_REDUIT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "SANS_GROUP_NO",
+   "kind": "simple",
+   "path": "SANS_GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "MATR_IMPE",
+   "kind": "simple",
+   "path": "MATR_IMPE",
+   "status": "f",
+   "type": [
+    "matr_asse_gene_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "MATR_IMPE_RIGI",
+   "kind": "simple",
+   "path": "MATR_IMPE_RIGI",
+   "status": "f",
+   "type": [
+    "matr_asse_gene_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "MATR_IMPE_MASS",
+   "kind": "simple",
+   "path": "MATR_IMPE_MASS",
+   "status": "f",
+   "type": [
+    "matr_asse_gene_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "MATR_IMPE_AMOR",
+   "kind": "simple",
+   "path": "MATR_IMPE_AMOR",
+   "status": "f",
+   "type": [
+    "matr_asse_gene_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "MODELE_MESURE",
+   "kind": "factor",
+   "path": "MODELE_MESURE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 68
+   },
+   "keywords": [
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "MODELE_MESURE/FREQ",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "MASS_GENE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/MASS_GENE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "MODELE_MESURE/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_matr_impe",
+   "kind": "bloc",
+   "path": "[b_matr_impe]",
+   "condition": "exists(\"MATR_IMPE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "FREQ_EXTR",
+     "kind": "simple",
+     "path": "FREQ_EXTR",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "AMOR_SOL",
+     "kind": "simple",
+     "path": "AMOR_SOL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "MATR_IMPE_INIT",
+     "kind": "simple",
+     "path": "MATR_IMPE_INIT",
+     "status": "f",
+     "type": [
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "CAS_CHARGE",
+   "kind": "factor",
+   "path": "CAS_CHARGE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VECT_ASSE_GENE",
+      "RESU_GENE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "NOM_CAS",
+     "kind": "simple",
+     "path": "CAS_CHARGE/NOM_CAS",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "VECT_ASSE_GENE",
+     "kind": "simple",
+     "path": "CAS_CHARGE/VECT_ASSE_GENE",
+     "status": "f",
+     "type": [
+      "vect_asse_gene"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "RESU_GENE",
+     "kind": "simple",
+     "path": "CAS_CHARGE/RESU_GENE",
+     "status": "f",
+     "type": [
+      "tran_gene"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_dyna.py",
+      "line": 86
+     }
+    }
+   ]
+  }
+ ]
+}

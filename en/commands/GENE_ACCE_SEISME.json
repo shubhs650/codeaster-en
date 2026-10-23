@@ -1,0 +1,1343 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "GENE_ACCE_SEISME",
+ "kind": "MACRO",
+ "fr": "Generation d'accelerogrammes sismiques ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.gene_acce_seisme_ops.gene_acce_seisme_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_fonction"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "DSP",
+    "SPEC_MEDIANE",
+    "SPEC_MOYENNE",
+    "SPEC_UNIQUE",
+    "SPEC_FRACTILE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MATR_COHE",
+    "COEF_CORR",
+    "PHASE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "INIT_ALEA",
+   "kind": "simple",
+   "path": "INIT_ALEA",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "PAS_INST",
+   "kind": "simple",
+   "path": "PAS_INST",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "NB_POIN",
+   "kind": "simple",
+   "path": "NB_POIN",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": "nombre de points",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "PESANTEUR",
+   "kind": "simple",
+   "path": "PESANTEUR",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": "constante de normalisation de ACCE_MAX, ECART_TYPE et INTE_ARIAS (g) ou le spectre",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "DUREE_PHASE_FORTE",
+   "kind": "simple",
+   "path": "DUREE_PHASE_FORTE",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": "durée phase forte du signal",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "NB_TIRAGE",
+   "kind": "simple",
+   "path": "NB_TIRAGE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "val_min": 1,
+   "default": 1,
+   "fr": "nombre accelerogrammes",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "FREQ_CORNER",
+   "kind": "simple",
+   "path": "FREQ_CORNER",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "fr": "frequence du filtre frequentiel: corner frequency",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "FREQ_FILTRE",
+   "kind": "simple",
+   "path": "FREQ_FILTRE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "default": 0.0,
+   "fr": "frequence du filtre temporel passe-haut",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "FREQ_FILTRE_ZPA",
+   "kind": "simple",
+   "path": "FREQ_FILTRE_ZPA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "default": 0.0,
+   "fr": "frequence du filtre Butterworth passe-bas",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "FREQ_PENTE",
+   "kind": "simple",
+   "path": "FREQ_PENTE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "pente pour l'evolution de la frequence centrale",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "COEF_CORR",
+   "kind": "simple",
+   "path": "COEF_CORR",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": -1.0,
+   "val_max": 1.0,
+   "fr": "Correlation coefficient for horizontal motion",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "a_ratio",
+   "kind": "bloc",
+   "path": "[a_ratio]",
+   "condition": "exists('COEF_CORR') and exists('SPEC_FRACTILE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "RATIO_HV",
+     "kind": "simple",
+     "path": "RATIO_HV",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Ratio H/V pour le spectre vertical",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 76
+     }
+    }
+   ]
+  },
+  {
+   "name": "MATR_COHE",
+   "kind": "factor",
+   "path": "MATR_COHE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MATR_COHE/MAILLAGE",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "GROUP_NO_INTERF",
+     "kind": "simple",
+     "path": "MATR_COHE/GROUP_NO_INTERF",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "MATR_COHE/TYPE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "MITA_LUCO",
+      "ABRAHAMSON",
+      "ABRA_ROCHER",
+      "ABRA_SOLMOYEN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "b_type_coh",
+     "kind": "bloc",
+     "path": "MATR_COHE/[b_type_coh]",
+     "condition": "equal_to('TYPE', 'MITA_LUCO')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 87
+     },
+     "keywords": [
+      {
+       "name": "VITE_ONDE",
+       "kind": "simple",
+       "path": "MATR_COHE/VITE_ONDE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "PARA_ALPHA",
+       "kind": "simple",
+       "path": "MATR_COHE/PARA_ALPHA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 90
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PHASE",
+   "kind": "factor",
+   "path": "PHASE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 93
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "PHASE/MAILLAGE",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "GROUP_NO_INTERF",
+     "kind": "simple",
+     "path": "PHASE/GROUP_NO_INTERF",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": "groupe des noeud des appuis",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "DIRECTION",
+     "kind": "simple",
+     "path": "PHASE/DIRECTION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "direction de propagation",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "VITE_ONDE",
+     "kind": "simple",
+     "path": "PHASE/VITE_ONDE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "vitesse de propagation dans la direction",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "COOR_REFE",
+     "kind": "simple",
+     "path": "PHASE/COOR_REFE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "coord de reference pour les phases",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 102
+     }
+    }
+   ]
+  },
+  {
+   "name": "DSP",
+   "kind": "factor",
+   "path": "DSP",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "DSP/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "FREQ_FOND",
+     "kind": "simple",
+     "path": "DSP/FREQ_FOND",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "frequence centrale",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 110
+     }
+    }
+   ]
+  },
+  {
+   "name": "SPEC_MEDIANE",
+   "kind": "factor",
+   "path": "SPEC_MEDIANE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "FREQ_PAS",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 113
+   },
+   "keywords": [
+    {
+     "name": "SPEC_OSCI",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/SPEC_OSCI",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 117
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 1e-05,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "pas",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "NB_ITER",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/NB_ITER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "nombre d'iterations pour fitter le spectre",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "ERRE_ZPA",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/ERRE_ZPA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      1.0,
+      0.2
+     ],
+     "fr": "coef et erreur maxi ZPA",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "ERRE_MAX",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/ERRE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi global",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "ERRE_RMS",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/ERRE_RMS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi rms",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "SPEC_MEDIANE/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "HARMO",
+     "into": [
+      "NIGAM",
+      "HARMO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 138
+     }
+    }
+   ]
+  },
+  {
+   "name": "SPEC_MOYENNE",
+   "kind": "factor",
+   "path": "SPEC_MOYENNE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "FREQ_PAS",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 140
+   },
+   "keywords": [
+    {
+     "name": "SPEC_OSCI",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/SPEC_OSCI",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 1e-05,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 145
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "pas",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 146
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 147
+     }
+    },
+    {
+     "name": "NB_ITER",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/NB_ITER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "nombre d'iterations pour fitter le spectre",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 148
+     }
+    },
+    {
+     "name": "ERRE_ZPA",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/ERRE_ZPA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      1.0,
+      0.2
+     ],
+     "fr": "coef et erreur maxi ZPA",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "ERRE_MAX",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/ERRE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi global",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 154
+     }
+    },
+    {
+     "name": "ERRE_RMS",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/ERRE_RMS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi rms",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "SPEC_MOYENNE/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "HARMO",
+     "into": [
+      "NIGAM",
+      "HARMO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 165
+     }
+    }
+   ]
+  },
+  {
+   "name": "SPEC_UNIQUE",
+   "kind": "factor",
+   "path": "SPEC_UNIQUE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "FREQ_PAS",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 167
+   },
+   "keywords": [
+    {
+     "name": "ERRE_ZPA",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/ERRE_ZPA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      1.0,
+      0.2
+     ],
+     "fr": "coef et erreur maxi ZPA",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 171
+     }
+    },
+    {
+     "name": "ERRE_MAX",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/ERRE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi global",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 174
+     }
+    },
+    {
+     "name": "ERRE_RMS",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/ERRE_RMS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 2,
+     "default": [
+      0.5,
+      0.2
+     ],
+     "fr": "coef et erreur maxi rms",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "SPEC_OSCI",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/SPEC_OSCI",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "CORR_ZPA",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/CORR_ZPA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 186
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 1e-05,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 187
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "pas",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "NB_ITER",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/NB_ITER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "nombre d'iterations pour fitter le spectre",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 190
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "SPEC_UNIQUE/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "HARMO",
+     "into": [
+      "NIGAM",
+      "HARMO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 193
+     }
+    }
+   ]
+  },
+  {
+   "name": "SPEC_FRACTILE",
+   "kind": "factor",
+   "path": "SPEC_FRACTILE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "FREQ_PAS",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 196
+   },
+   "keywords": [
+    {
+     "name": "SPEC_OSCI",
+     "kind": "simple",
+     "path": "SPEC_FRACTILE/SPEC_OSCI",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "SPEC_1_SIGMA",
+     "kind": "simple",
+     "path": "SPEC_FRACTILE/SPEC_1_SIGMA",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 201
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "SPEC_FRACTILE/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 1e-05,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "SPEC_FRACTILE/FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "pas",
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 203
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "SPEC_FRACTILE/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 204
+     }
+    }
+   ]
+  },
+  {
+   "name": "a_type_dsp",
+   "kind": "bloc",
+   "path": "[a_type_dsp]",
+   "condition": "exists('DSP')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 206
+   },
+   "keywords": [
+    {
+     "name": "MODULATION",
+     "kind": "factor",
+     "path": "MODULATION",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "ACCE_MAX",
+        "INTE_ARIAS",
+        "ECART_TYPE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 208
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "MODULATION/TYPE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "GAMMA",
+        "JENNINGS_HOUSNER",
+        "CONSTANT"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 212
+       }
+      },
+      {
+       "name": "ACCE_MAX",
+       "kind": "simple",
+       "path": "MODULATION/ACCE_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "PGA: acceleration max au sol (g)",
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 213
+       }
+      },
+      {
+       "name": "ECART_TYPE",
+       "kind": "simple",
+       "path": "MODULATION/ECART_TYPE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "ecart-type",
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 214
+       }
+      },
+      {
+       "name": "INTE_ARIAS",
+       "kind": "simple",
+       "path": "MODULATION/INTE_ARIAS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "intensite d'Arias",
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 215
+       }
+      },
+      {
+       "name": "a_type_mod",
+       "kind": "bloc",
+       "path": "MODULATION/[a_type_mod]",
+       "condition": "equal_to('TYPE', 'GAMMA')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 216
+       },
+       "keywords": [
+        {
+         "name": "INST_INI",
+         "kind": "simple",
+         "path": "MODULATION/INST_INI",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "instant debut phase forte",
+         "source": {
+          "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+          "line": 218
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_type_spec",
+   "kind": "bloc",
+   "path": "[b_type_spec]",
+   "condition": "not exists('DSP')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+    "line": 222
+   },
+   "keywords": [
+    {
+     "name": "MODULATION",
+     "kind": "factor",
+     "path": "MODULATION",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+      "line": 224
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "MODULATION/TYPE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "GAMMA",
+        "JENNINGS_HOUSNER",
+        "CONSTANT"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 227
+       }
+      },
+      {
+       "name": "b_type_mod",
+       "kind": "bloc",
+       "path": "MODULATION/[b_type_mod]",
+       "condition": "equal_to('TYPE', 'GAMMA')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+        "line": 228
+       },
+       "keywords": [
+        {
+         "name": "INST_INI",
+         "kind": "simple",
+         "path": "MODULATION/INST_INI",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "instant debut phase forte",
+         "source": {
+          "file": "code_aster/Cata/Commands/gene_acce_seisme.py",
+          "line": 230
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,224 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/material1.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MATERIAL1",
+ "source": {
+  "file": "code_aster/Messages/material1.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MATERIAL1_1",
+   "fr": "\nErreur utilisateur :\n Pour définir le coefficient de dilatation thermique ALPHA, vous devez utiliser uniquement une fonction. Les formules et les nappes sont interdites\n Utilisez CALC_FONC_INTERP si nécessaire.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MATERIAL1_2",
+   "fr": "\nErreur utilisateur :\n  Dans le CHAM_MATER %(k1)s, vous avez affecté le matériau %(k2)s.\n  Dans ce matériau, il existe un coefficient de dilatation thermique ALPHA\n  qui est une fonction de la température.\n  Pour pouvoir utiliser cette fonction, il est nécessaire de transformer\n  cette fonction (changement de repère : \"TEMP_DEF_ALPHA\" -> \"TEMP_REF\").\n  Pour cela, l'utilisateur doit fournir une température de référence.\n\nSolution :\n  Vérifier que les mailles affectées par le matériau %(k2)s sont bien\n  toutes affectées par une température de référence\n  (mot clé AFFE_VARC/NOM_VARC='TEMP',VALE_REF=...).\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 30
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MATERIAL1_3",
+   "fr": "\nErreur utilisateur :\n Problème lors de l'interpolation de la fonction définissant le coefficient de dilatation thermique ALPHA.\n Il faut resserrer le mot clé PRECISION pour le matériau ELAS_FO.\n",
+   "placeholders": [],
+   "source": {
+    "line": 46
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MATERIAL1_4",
+   "fr": "\nErreur utilisateur :\n Le paramètre ALPHA ne peut pas être une fonction en THM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 53
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MATERIAL1_5",
+   "fr": "\nLe module de Young fourni par le paramètre E n'est pas cohérent avec la pente calculée\nà partir du premier point de la courbe de TRACTION.\nLa pente calculée est %(r1).3f\nLa différence entre les deux valeurs est supérieure à 1 %%.\n",
+   "placeholders": [
+    "%(r1).3f",
+    "%%"
+   ],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MATERIAL1_6",
+   "fr": "\nLe module de Young fourni par le paramètre E n'est pas cohérent avec la pente calculée\nà partir du premier point de la courbe de TRACTION.\nPour %(k1)s = %(r1)f :\n- E vaut %(r2).3f\n- La pente calculée vaut %(r3).3f\nLa différence entre les deux valeurs est supérieure à 1 %%.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)f",
+    "%(r2).3f",
+    "%(r3).3f",
+    "%%"
+   ],
+   "source": {
+    "line": 67
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MATERIAL1_7",
+   "fr": "\nLe module de Young, qui est une fonction, ne peut pas être évalué pour :\n    %(k1)s = %(r1)f\n\nOn ne peut vérifier la cohérence avec la courbe de traction.\n        ",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 77
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MATERIAL1_8",
+   "fr": "\nLe module de Young E étant une fonction de '%(k1)s', la courbe de TRACTION devrait être\nune nappe et non une fonction.\nOn ne peut vérifier la cohérence entre eux.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 85
+   },
+   "flags": "DECORATED",
+   "en": null
+  },
+  "9": {
+   "id": "MATERIAL1_9",
+   "fr": "\nLe module de Young E étant une fonction de '%(k1)s', la courbe de TRACTION devrait être\nune nappe de paramètre '%(k1)s' et non '%(k2)s'.\nOn ne peut vérifier la cohérence entre eux.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 95
+   },
+   "flags": "DECORATED",
+   "en": null
+  },
+  "10": {
+   "id": "MATERIAL1_10",
+   "fr": "\nOn ne peut pas vérifier la cohérence entre le module de Young E et la courbe de TRACTION\nquand celle-ci est une formule.\n",
+   "placeholders": [],
+   "source": {
+    "line": 105
+   },
+   "flags": "DECORATED",
+   "en": null
+  },
+  "11": {
+   "id": "MATERIAL1_11",
+   "fr": "\nLes paramètres des comportements (%(k1)s)\nsont extraits de la table %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 114
+   },
+   "flags": "DECORATED",
+   "en": null
+  },
+  "12": {
+   "id": "MATERIAL1_12",
+   "fr": "\nLes valeurs des paramètres E et NU calculées à partir de %(k1)s sont :\n    E = %(r1)g\n    NU = %(r2)g\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)g",
+    "%(r2)g"
+   ],
+   "source": {
+    "line": 123
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MATERIAL1_13",
+   "fr": "\nLes valeurs des paramètres %(k1)s et %(k2)s ne sont pas cohérents (à %(r3)g près) :\n    %(k1)s = %(r1)g\n    %(k2)s = %(r2)g\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r3)g",
+    "%(r1)g",
+    "%(r2)g"
+   ],
+   "source": {
+    "line": 130
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MATERIAL1_14",
+   "fr": "\nLa valeur du paramètre %(k1)s soit être strictement positive.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "15": {
+   "id": "MATERIAL1_15",
+   "fr": "\nLe rapport CELE_P / CELE_S doit être supérieur à 2*sqrt(3)/3 (= %(r2)f).\nOr il vaut : %(r1)f\n",
+   "placeholders": [
+    "%(r2)f",
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 142
+   },
+   "en": null
+  },
+  "42": {
+   "id": "MATERIAL1_42",
+   "fr": "\nErreur utilisateur :\n Le coefficient de dilatation thermique ALPHA du matériau est une fonction de la température.\n Cette fonction (%(k1)s) n'est définie que par un point.\n TEMP_DEF_ALPHA et TEMP_REF ne sont pas identiques.\n On ne peut pas faire le changement de variable TEMP_DEF_ALPHA -> TEMP_REF.\n On s'arrête donc.\n\nRisque & Conseil:\n Il faut définir la fonction ALPHA avec plus d'un point.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 148
+   },
+   "en": null
+  },
+  "43": {
+   "id": "MATERIAL1_43",
+   "fr": "\n Le coefficient de dilatation thermique ALPHA du matériau est une fonction de la température.\n Or vous ne fournissez pas de résultats thermiques dans AFFE_MATERIAU / AFFE_VARC.\n Dans ce cas, TEMP_DEF_ALPHA et TEMP_REF doivent être identiques.\n",
+   "placeholders": [],
+   "source": {
+    "line": 161
+   },
+   "en": null
+  },
+  "56": {
+   "id": "MATERIAL1_56",
+   "fr": "\nErreur utilisateur :\n Un des matériaux du CHAM_MATER %(k1)s contient un coefficient de dilatation ALPHA fonction de la température.\n Mais la température de référence n'est pas fournie sous AFFE_MATERIAU/AFFE_VARC/VALE_REF\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 168
+   },
+   "en": null
+  }
+ }
+}

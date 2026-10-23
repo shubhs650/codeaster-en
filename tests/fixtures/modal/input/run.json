@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "case": "modal",
+  "description": "Cantilever beam L 400 mm, section 20 mm (Y) x 10 mm (Z), clamped at X = 0, first six natural frequencies (five bending, one torsion). HEXA20 mesh, linear elastic steel.",
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Cantilever beam, natural frequencies",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-23"
+  },
+  "analysis": "modal",
+  "units": {
+    "system": "SI_mm"
+  },
+  "groups": {
+    "BEAM": {
+      "display_name": "Beam",
+      "role": "body",
+      "report": true
+    },
+    "CLAMP": {
+      "display_name": "Clamped end (X = 0)",
+      "role": "support"
+    },
+    "TIP": {
+      "display_name": "Free end (X = 400)",
+      "role": "free"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "loads_and_bcs",
+    "solution",
+    "modal",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "solver": {
+    "linear_solver": "MUMPS",
+    "ncpus": 1,
+    "time_limit_s": 600,
+    "memory_limit_mb": 2048
+  },
+  "checks": [
+    {
+      "legend": "F1_BENDING_Z1",
+      "quantity": "Natural frequency of mode 1 [Hz], bending in Z, n = 1",
+      "reference": 52.2198,
+      "precision": 0.02,
+      "basis": "f_n = lambda_n^2 / (2 pi L^2) sqrt(E I / (rho A)), I = b h^3 / 12",
+      "source": "Euler-Bernoulli clamped-free beam, lambda_n roots of cos(l) cosh(l) = -1; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "F2_BENDING_Y1",
+      "quantity": "Natural frequency of mode 2 [Hz], bending in Y, n = 1",
+      "reference": 104.44,
+      "precision": 0.02,
+      "basis": "f_n = lambda_n^2 / (2 pi L^2) sqrt(E I / (rho A)), I = h b^3 / 12",
+      "source": "Euler-Bernoulli clamped-free beam, lambda_n roots of cos(l) cosh(l) = -1; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "F3_BENDING_Z2",
+      "quantity": "Natural frequency of mode 3 [Hz], bending in Z, n = 2",
+      "reference": 327.256,
+      "precision": 0.02,
+      "basis": "f_n = lambda_n^2 / (2 pi L^2) sqrt(E I / (rho A)), I = b h^3 / 12",
+      "source": "Euler-Bernoulli clamped-free beam, lambda_n roots of cos(l) cosh(l) = -1; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "F4_BENDING_Y2",
+      "quantity": "Natural frequency of mode 4 [Hz], bending in Y, n = 2",
+      "reference": 654.512,
+      "precision": 0.02,
+      "basis": "f_n = lambda_n^2 / (2 pi L^2) sqrt(E I / (rho A)), I = h b^3 / 12",
+      "source": "Euler-Bernoulli clamped-free beam, lambda_n roots of cos(l) cosh(l) = -1; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "F5_BENDING_Z3",
+      "quantity": "Natural frequency of mode 5 [Hz], bending in Z, n = 3",
+      "reference": 916.326,
+      "precision": 0.03,
+      "basis": "f_n = lambda_n^2 / (2 pi L^2) sqrt(E I / (rho A)), I = b h^3 / 12",
+      "source": "Euler-Bernoulli clamped-free beam, lambda_n roots of cos(l) cosh(l) = -1; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "F6_TORSION_1",
+      "quantity": "Natural frequency of mode 6 [Hz], first torsion mode",
+      "reference": 1485.22,
+      "precision": 0.03,
+      "basis": "f = 1 / (4 L) sqrt(G J / (rho I_p)), G = E / (2 (1 + nu)), I_p = b h (b^2 + h^2) / 12, Saint-Venant J = 4574 mm^4 (series); warping restraint at the clamp ignored, so the solver should be slightly higher.",
+      "source": "Clamped-free torsion of a bar; J from Timoshenko & Goodier, Theory of Elasticity, sec. 109; computed in tests/fixtures/hand_values.py"
+    }
+  ],
+  "provenance": {
+    "upstream_version": "17.4.26",
+    "modelled_on": [
+      "sdlv100a",
+      "sdll05a"
+    ],
+    "author": "codeaster-en agent (task 4.1)",
+    "date": "2026-10-23",
+    "notes": "VALE_CALC in run.comm holds the hand value until task 4.2 records the solver's own value."
+  }
+}

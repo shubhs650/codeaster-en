@@ -1,0 +1,580 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FONC_ELEC",
+ "kind": "MACRO",
+ "fr": "Définir une fonction du temps intervenant dans le calcul des forces de LAPLACE",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_fonc_elec_ops.defi_fonc_elec_ops",
+ "reentrant": "n",
+ "result_types": [
+  "fonction_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "COUR_PRIN",
+    "COUR"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "COUR",
+    "COUR_SECO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 50.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "SIGNAL",
+   "kind": "simple",
+   "path": "SIGNAL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "COMPLET",
+   "into": [
+    "COMPLET",
+    "CONTINU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "COUR",
+   "kind": "factor",
+   "path": "COUR",
+   "status": "f",
+   "max": "**",
+   "fr": "Définition du courant de court-circuit",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "PHI_CC_1",
+      "INTC_CC_1"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "PHI_CC_2",
+      "INTC_CC_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "INTE_CC_1",
+     "kind": "simple",
+     "path": "COUR/INTE_CC_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "TAU_CC_1",
+     "kind": "simple",
+     "path": "COUR/TAU_CC_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "PHI_CC_1",
+     "kind": "simple",
+     "path": "COUR/PHI_CC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "INTC_CC_1",
+     "kind": "simple",
+     "path": "COUR/INTC_CC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "INTE_CC_2",
+     "kind": "simple",
+     "path": "COUR/INTE_CC_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "TAU_CC_2",
+     "kind": "simple",
+     "path": "COUR/TAU_CC_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "PHI_CC_2",
+     "kind": "simple",
+     "path": "COUR/PHI_CC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "INTC_CC_2",
+     "kind": "simple",
+     "path": "COUR/INTC_CC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "INST_CC_INIT",
+     "kind": "simple",
+     "path": "COUR/INST_CC_INIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "INST_CC_FIN",
+     "kind": "simple",
+     "path": "COUR/INST_CC_FIN",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "COUR_PRIN",
+   "kind": "factor",
+   "path": "COUR_PRIN",
+   "status": "f",
+   "fr": "Définition du courant de court-circuit avec réenclenchement",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "PHI_CC_1",
+      "INTC_CC_1"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "INTE_CC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/INTE_CC_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "TAU_CC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/TAU_CC_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "PHI_CC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/PHI_CC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "INTC_CC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/INTC_CC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "INTE_RENC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/INTE_RENC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "TAU_RENC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/TAU_RENC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "PHI_RENC_1",
+     "kind": "simple",
+     "path": "COUR_PRIN/PHI_RENC_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "INST_CC_INIT",
+     "kind": "simple",
+     "path": "COUR_PRIN/INST_CC_INIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "INST_CC_FIN",
+     "kind": "simple",
+     "path": "COUR_PRIN/INST_CC_FIN",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "INST_RENC_INIT",
+     "kind": "simple",
+     "path": "COUR_PRIN/INST_RENC_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "INST_RENC_FIN",
+     "kind": "simple",
+     "path": "COUR_PRIN/INST_RENC_FIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 66
+     }
+    }
+   ]
+  },
+  {
+   "name": "COUR_SECO",
+   "kind": "factor",
+   "path": "COUR_SECO",
+   "status": "f",
+   "max": "**",
+   "fr": "Définition du courant de court-circuit avec un intervalle de temps différent de celui de COUR_PRIN",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "PHI_CC_2",
+      "INTC_CC_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 68
+   },
+   "keywords": [
+    {
+     "name": "INTE_CC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/INTE_CC_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "TAU_CC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/TAU_CC_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "PHI_CC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/PHI_CC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "INTC_CC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/INTC_CC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 78
+     }
+    },
+    {
+     "name": "INTE_RENC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/INTE_RENC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "TAU_RENC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/TAU_RENC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "PHI_RENC_2",
+     "kind": "simple",
+     "path": "COUR_SECO/PHI_RENC_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "DIST",
+     "kind": "simple",
+     "path": "COUR_SECO/DIST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_elec.py",
+    "line": 84
+   }
+  }
+ ]
+}

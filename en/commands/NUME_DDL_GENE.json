@@ -1,0 +1,163 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "NUME_DDL_GENE",
+ "kind": "OPER",
+ "fr": "Etablissement de la numérotation des ddl d'un modèle etabli en coordonnées généralisees",
+ "translation_upstream": null,
+ "op": 127,
+ "reentrant": "n",
+ "result_types": [
+  "nume_ddl_gene"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MODELE_GENE",
+    "BASE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MODELE_GENE",
+   "kind": "simple",
+   "path": "MODELE_GENE",
+   "status": "f",
+   "type": [
+    "modele_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "b_modele_gene",
+   "kind": "bloc",
+   "path": "[b_modele_gene]",
+   "condition": "exists(\"MODELE_GENE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "STOCKAGE",
+     "kind": "simple",
+     "path": "STOCKAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LIGN_CIEL",
+     "into": [
+      "LIGN_CIEL",
+      "PLEIN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "CLASSIQUE",
+     "into": [
+      "INITIAL",
+      "CLASSIQUE",
+      "ELIMINE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+      "line": 39
+     }
+    }
+   ]
+  },
+  {
+   "name": "BASE",
+   "kind": "simple",
+   "path": "BASE",
+   "status": "f",
+   "type": [
+    "mode_meca",
+    "mode_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "b_base",
+   "kind": "bloc",
+   "path": "[b_base]",
+   "condition": "exists(\"BASE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "STOCKAGE",
+     "kind": "simple",
+     "path": "STOCKAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PLEIN",
+     "into": [
+      "DIAG",
+      "PLEIN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "NB_VECT",
+     "kind": "simple",
+     "path": "NB_VECT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/nume_ddl_gene.py",
+      "line": 47
+     }
+    }
+   ]
+  }
+ ]
+}

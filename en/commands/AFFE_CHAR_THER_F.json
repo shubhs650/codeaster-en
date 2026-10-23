@@ -1,0 +1,1812 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_CHAR_THER_F",
+ "kind": "OPER",
+ "fr": "Affectation de charges et conditions aux limites thermiques fonction d'un (ou plusieurs) paramètres (temps, ...)",
+ "translation_upstream": {
+  "AFFE_CHAR_THER_F": "Assign variable thermal load"
+ },
+ "op": 34,
+ "reentrant": "n",
+ "result_types": [
+  "char_ther"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "TEMP_IMPO",
+    "SOURCE",
+    "SOUR_NL",
+    "FLUX_REP",
+    "FLUX_NL",
+    "ECHANGE",
+    "ECHANGE_PAROI",
+    "LIAISON_DDL",
+    "LIAISON_GROUP",
+    "LIAISON_UNIF",
+    "PRE_GRAD_TEMP",
+    "RAYONNEMENT",
+    "CONVECTION"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "DOUBLE_LAGRANGE",
+   "kind": "simple",
+   "path": "DOUBLE_LAGRANGE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "TEMP_IMPO",
+   "kind": "factor",
+   "path": "TEMP_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_SUP",
+      "TEMP_INF"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "TEMP_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "TEMP_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "TEMP_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "TEMP_IMPO/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "TEMP_IMPO/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "TEMP_IMPO/TEMP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "TEMP_MIL",
+     "kind": "simple",
+     "path": "TEMP_IMPO/TEMP_MIL",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "TEMP_INF",
+     "kind": "simple",
+     "path": "TEMP_IMPO/TEMP_INF",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "TEMP_SUP",
+     "kind": "simple",
+     "path": "TEMP_IMPO/TEMP_SUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 69
+     }
+    }
+   ]
+  },
+  {
+   "name": "FLUX_REP",
+   "kind": "factor",
+   "path": "FLUX_REP",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FLUN",
+      "FLUN_INF",
+      "FLUN_SUP",
+      "FLUX_X",
+      "FLUX_Y",
+      "FLUX_Z"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 71
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FLUX_REP/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 78
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FLUX_REP/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "FLUN",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUN",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "FLUN_INF",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUN_INF",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "FLUN_SUP",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUN_SUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "FLUX_X",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUX_X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "FLUX_Y",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUX_Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "FLUX_Z",
+     "kind": "simple",
+     "path": "FLUX_REP/FLUX_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 85
+     }
+    }
+   ]
+  },
+  {
+   "name": "FLUX_NL",
+   "kind": "factor",
+   "path": "FLUX_NL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FLUX_NL/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FLUX_NL/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "FLUN",
+     "kind": "simple",
+     "path": "FLUX_NL/FLUN",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 93
+     }
+    }
+   ]
+  },
+  {
+   "name": "RAYONNEMENT",
+   "kind": "factor",
+   "path": "RAYONNEMENT",
+   "status": "f",
+   "max": "**",
+   "fr": "Attention, exprimer les températures en Celsius si rayonnement",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 95
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "RAYONNEMENT/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "RAYONNEMENT/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "SIGMA",
+     "kind": "simple",
+     "path": "RAYONNEMENT/SIGMA",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "EPSILON",
+     "kind": "simple",
+     "path": "RAYONNEMENT/EPSILON",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "TEMP_EXT",
+     "kind": "simple",
+     "path": "RAYONNEMENT/TEMP_EXT",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 104
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECHANGE",
+   "kind": "factor",
+   "path": "ECHANGE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "COEF_H",
+      "COEF_H_INF",
+      "COEF_H_SUP"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "COEF_H",
+      "TEMP_EXT"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "COEF_H_INF",
+      "TEMP_EXT_INF"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "COEF_H_SUP",
+      "TEMP_EXT_SUP"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ECHANGE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ECHANGE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 117
+     }
+    },
+    {
+     "name": "COEF_H",
+     "kind": "simple",
+     "path": "ECHANGE/COEF_H",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "TEMP_EXT",
+     "kind": "simple",
+     "path": "ECHANGE/TEMP_EXT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "COEF_H_INF",
+     "kind": "simple",
+     "path": "ECHANGE/COEF_H_INF",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "TEMP_EXT_INF",
+     "kind": "simple",
+     "path": "ECHANGE/TEMP_EXT_INF",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "COEF_H_SUP",
+     "kind": "simple",
+     "path": "ECHANGE/COEF_H_SUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "TEMP_EXT_SUP",
+     "kind": "simple",
+     "path": "ECHANGE/TEMP_EXT_SUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 123
+     }
+    }
+   ]
+  },
+  {
+   "name": "SOURCE",
+   "kind": "factor",
+   "path": "SOURCE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 125
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "SOURCE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "SOURCE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "SOUR",
+     "kind": "simple",
+     "path": "SOURCE/SOUR",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 131
+     }
+    }
+   ]
+  },
+  {
+   "name": "SOUR_NL",
+   "kind": "factor",
+   "path": "SOUR_NL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 133
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "SOUR_NL/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "SOUR_NL/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "SOUR",
+     "kind": "simple",
+     "path": "SOUR_NL/SOUR",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 139
+     }
+    }
+   ]
+  },
+  {
+   "name": "PRE_GRAD_TEMP",
+   "kind": "factor",
+   "path": "PRE_GRAD_TEMP",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FLUX_X",
+      "FLUX_Y",
+      "FLUX_Z"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 141
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "PRE_GRAD_TEMP/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 148
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "PRE_GRAD_TEMP/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "FLUX_X",
+     "kind": "simple",
+     "path": "PRE_GRAD_TEMP/FLUX_X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "FLUX_Y",
+     "kind": "simple",
+     "path": "PRE_GRAD_TEMP/FLUX_Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "FLUX_Z",
+     "kind": "simple",
+     "path": "PRE_GRAD_TEMP/FLUX_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 152
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECHANGE_PAROI",
+   "kind": "factor",
+   "path": "ECHANGE_PAROI",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_1",
+      "FISSURE"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_2",
+      "FISSURE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 154
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "ECHANGE_PAROI/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "GROUP_MA_2",
+     "kind": "simple",
+     "path": "ECHANGE_PAROI/GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "ECHANGE_PAROI/FISSURE",
+     "status": "f",
+     "type": [
+      "fiss_xfem"
+     ],
+     "min": 1,
+     "max": 100,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "b_paroi_maillee",
+     "kind": "bloc",
+     "path": "ECHANGE_PAROI/[b_paroi_maillee]",
+     "condition": "not exists(\"FISSURE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 162
+     },
+     "keywords": [
+      {
+       "name": "COEF_H",
+       "kind": "simple",
+       "path": "ECHANGE_PAROI/COEF_H",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+        "line": 164
+       }
+      },
+      {
+       "name": "TRAN",
+       "kind": "simple",
+       "path": "ECHANGE_PAROI/TRAN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+        "line": 165
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_xfem",
+     "kind": "bloc",
+     "path": "ECHANGE_PAROI/[b_xfem]",
+     "condition": "exists(\"FISSURE\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "COEF_H",
+        "TEMP_CONTINUE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 168
+     },
+     "keywords": [
+      {
+       "name": "COEF_H",
+       "kind": "simple",
+       "path": "ECHANGE_PAROI/COEF_H",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+        "line": 171
+       }
+      },
+      {
+       "name": "TEMP_CONTINUE",
+       "kind": "simple",
+       "path": "ECHANGE_PAROI/TEMP_CONTINUE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+        "line": 172
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_DDL",
+   "kind": "factor",
+   "path": "LIAISON_DDL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 175
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_DDL/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 178
+     }
+    },
+    {
+     "name": "DDL",
+     "kind": "simple",
+     "path": "LIAISON_DDL/DDL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_INF",
+      "TEMP_SUP",
+      "H1"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 179
+     }
+    },
+    {
+     "name": "COEF_MULT",
+     "kind": "simple",
+     "path": "LIAISON_DDL/COEF_MULT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "COEF_IMPO",
+     "kind": "simple",
+     "path": "LIAISON_DDL/COEF_IMPO",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 181
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_GROUP",
+   "kind": "factor",
+   "path": "LIAISON_GROUP",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_1",
+      "GROUP_NO_1"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_2",
+      "GROUP_NO_2"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_MA_1",
+      "GROUP_NO_2"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_NO_1",
+      "GROUP_MA_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 183
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "GROUP_NO_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_NO_1",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 193
+     }
+    },
+    {
+     "name": "GROUP_MA_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "GROUP_NO_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_NO_2",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 196
+     }
+    },
+    {
+     "name": "DDL_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/DDL_1",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": "TEMP",
+     "into": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_INF",
+      "TEMP_SUP",
+      "H1"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 197
+     }
+    },
+    {
+     "name": "COEF_MULT_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_MULT_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "DDL_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/DDL_2",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": "TEMP",
+     "into": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_INF",
+      "TEMP_SUP",
+      "H1"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 201
+     }
+    },
+    {
+     "name": "COEF_MULT_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_MULT_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 204
+     }
+    },
+    {
+     "name": "COEF_IMPO",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_IMPO",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 205
+     }
+    },
+    {
+     "name": "TRAN",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/TRAN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 206
+     }
+    },
+    {
+     "name": "ANGL_NAUT",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/ANGL_NAUT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 207
+     }
+    },
+    {
+     "name": "CENTRE",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/CENTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 208
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_UNIF",
+   "kind": "factor",
+   "path": "LIAISON_UNIF",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 210
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 214
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "DDL",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/DDL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": "TEMP",
+     "into": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_INF",
+      "TEMP_SUP",
+      "H1"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 216
+     }
+    }
+   ]
+  },
+  {
+   "name": "CONVECTION",
+   "kind": "factor",
+   "path": "CONVECTION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 225
+   },
+   "keywords": [
+    {
+     "name": "VITESSE",
+     "kind": "simple",
+     "path": "CONVECTION/VITESSE",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+      "line": 225
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_ther_f.py",
+    "line": 226
+   }
+  }
+ ]
+}

@@ -1,0 +1,553 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_list_freq.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_LIST_FREQ",
+ "kind": "MACRO",
+ "fr": "Définir une liste de fréquences strictement croissante",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_list_freq_ops.defi_list_freq_ops",
+ "reentrant": "n",
+ "result_types": [
+  "listr8_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "VALE",
+    "DEBUT",
+    "EQUI_MODES"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "VALE",
+    "INTERVALLE"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "DEBUT",
+    "INTERVALLE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "VALE",
+    "EQUI_MODES"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "DEBUT",
+    "EQUI_MODES"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_list_freq.py",
+  "line": 34
+ },
+ "keywords": [
+  {
+   "name": "VALE",
+   "kind": "simple",
+   "path": "VALE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "DEBUT",
+   "kind": "simple",
+   "path": "DEBUT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "INTERVALLE",
+   "kind": "factor",
+   "path": "INTERVALLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOMBRE",
+      "PAS"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "JUSQU_A",
+     "kind": "simple",
+     "path": "INTERVALLE/JUSQU_A",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "NOMBRE",
+     "kind": "simple",
+     "path": "INTERVALLE/NOMBRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "INTERVALLE/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "RAFFINEMENT",
+   "kind": "factor",
+   "path": "RAFFINEMENT",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 57
+   },
+   "keywords": [
+    {
+     "name": "LIST_RAFFINE",
+     "kind": "simple",
+     "path": "RAFFINEMENT/LIST_RAFFINE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "NB_POINTS",
+     "kind": "simple",
+     "path": "RAFFINEMENT/NB_POINTS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 5,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "PAS_MINI",
+     "kind": "simple",
+     "path": "RAFFINEMENT/PAS_MINI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "RAFFINEMENT/CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU",
+      "LARGEUR_3DB"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "b_crit_rela_abs",
+     "kind": "bloc",
+     "path": "RAFFINEMENT/[b_crit_rela_abs]",
+     "condition": "(equal_to(\"CRITERE\", 'RELATIF') or equal_to(\"CRITERE\", 'ABSOLU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 65
+     },
+     "keywords": [
+      {
+       "name": "DISPERSION",
+       "kind": "simple",
+       "path": "RAFFINEMENT/DISPERSION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.01,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 67
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_crit_larg",
+     "kind": "bloc",
+     "path": "RAFFINEMENT/[b_crit_larg]",
+     "condition": "(equal_to(\"CRITERE\", 'LARGEUR_3DB'))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "AMOR_REDUIT",
+        "LIST_AMOR"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 69
+     },
+     "keywords": [
+      {
+       "name": "AMOR_REDUIT",
+       "kind": "simple",
+       "path": "RAFFINEMENT/AMOR_REDUIT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "LIST_AMOR",
+       "kind": "simple",
+       "path": "RAFFINEMENT/LIST_AMOR",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 73
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "EQUI_MODES",
+   "kind": "factor",
+   "path": "EQUI_MODES",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "TYPE_SAISIE",
+     "kind": "simple",
+     "path": "EQUI_MODES/TYPE_SAISIE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LISTE",
+     "into": [
+      "LISTE",
+      "MATR_ASSE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 78
+     }
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "EQUI_MODES/FREQ_MIN",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "EQUI_MODES/FREQ_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "b_matr_asse",
+     "kind": "bloc",
+     "path": "EQUI_MODES/[b_matr_asse]",
+     "condition": "(equal_to(\"TYPE_SAISIE\", 'MATR_ASSE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 81
+     },
+     "keywords": [
+      {
+       "name": "MATR_RIGI",
+       "kind": "simple",
+       "path": "EQUI_MODES/MATR_RIGI",
+       "status": "o",
+       "type": [
+        "matr_asse_depl_r"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 83
+       }
+      },
+      {
+       "name": "MATR_MASS",
+       "kind": "simple",
+       "path": "EQUI_MODES/MATR_MASS",
+       "status": "o",
+       "type": [
+        "matr_asse_depl_r"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 84
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_listr",
+     "kind": "bloc",
+     "path": "EQUI_MODES/[b_listr]",
+     "condition": "(equal_to(\"TYPE_SAISIE\", 'LISTE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 86
+     },
+     "keywords": [
+      {
+       "name": "LIST_FREQ",
+       "kind": "simple",
+       "path": "EQUI_MODES/LIST_FREQ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_freq.py",
+        "line": 88
+       }
+      }
+     ]
+    },
+    {
+     "name": "TOLERANCE",
+     "kind": "simple",
+     "path": "EQUI_MODES/TOLERANCE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "NB_POINTS_INIT",
+     "kind": "simple",
+     "path": "EQUI_MODES/NB_POINTS_INIT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "NB_POINTS_SUPP",
+     "kind": "simple",
+     "path": "EQUI_MODES/NB_POINTS_SUPP",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "ITER_MAXI",
+     "kind": "simple",
+     "path": "EQUI_MODES/ITER_MAXI",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 20,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "NB_MODES",
+     "kind": "simple",
+     "path": "EQUI_MODES/NB_MODES",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 40,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_freq.py",
+      "line": 94
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 96
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_freq.py",
+    "line": 97
+   }
+  }
+ ]
+}

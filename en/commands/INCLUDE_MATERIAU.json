@@ -1,0 +1,301 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/include_materiau.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "INCLUDE_MATERIAU",
+ "kind": "MACRO",
+ "fr": "Récupérer les caractéristiques d'un matériau dans le Catalogue Materiaux d'Aster ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.include_materiau_ops.include_materiau_ops",
+ "reentrant": null,
+ "result_types": [
+  "mater_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "NOM_AFNOR",
+    "FICHIER"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "NOM_AFNOR",
+    "TYPE_MODELE",
+    "VARIANTE",
+    "TYPE_VALE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/include_materiau.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "NOM_AFNOR",
+   "kind": "simple",
+   "path": "NOM_AFNOR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "TYPE_MODELE",
+   "kind": "simple",
+   "path": "TYPE_MODELE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "REF",
+    "PAR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "VARIANTE",
+   "kind": "simple",
+   "path": "VARIANTE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "TYPE_VALE",
+   "kind": "simple",
+   "path": "TYPE_VALE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "NOMI",
+    "MINI",
+    "MAXI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "FICHIER",
+   "kind": "simple",
+   "path": "FICHIER",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Nom du fichier de données à inclure",
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "EXTRACTION",
+   "kind": "factor",
+   "path": "EXTRACTION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 72
+   },
+   "keywords": [
+    {
+     "name": "COMPOR",
+     "kind": "simple",
+     "path": "EXTRACTION/COMPOR",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/include_materiau.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "TEMP_EVAL",
+     "kind": "simple",
+     "path": "EXTRACTION/TEMP_EVAL",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/include_materiau.py",
+      "line": 75
+     }
+    }
+   ]
+  },
+  {
+   "name": "UNITE_LONGUEUR",
+   "kind": "simple",
+   "path": "UNITE_LONGUEUR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "M",
+   "into": [
+    "M",
+    "MM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "COEF_MULT",
+   "kind": "simple",
+   "path": "COEF_MULT",
+   "status": "c",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 79
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "c",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 81
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/include_materiau.py",
+    "line": 82
+   }
+  }
+ ]
+}

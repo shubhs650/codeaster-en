@@ -1,0 +1,971 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/dynamique.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "DYNAMIQUE",
+ "source": {
+  "file": "code_aster/Messages/dynamique.py"
+ },
+ "messages": {
+  "1": {
+   "id": "DYNAMIQUE_1",
+   "fr": "\n schéma inconnu\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "DYNAMIQUE_2",
+   "fr": "\n la liste d'instants fournie ne respecte pas la condition de stabilité.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "DYNAMIQUE_3",
+   "fr": "\n la condition de stabilité n'a pas pu être calculée pour tous les éléments. elle peut être trop grande.\n",
+   "placeholders": [],
+   "source": {
+    "line": 33
+   },
+   "en": null
+  },
+  "4": {
+   "id": "DYNAMIQUE_4",
+   "fr": "\n  -> La condition de stabilité n'a pu être calculée pour aucun élément.\n  -> Risque & Conseil :\n     Vous prenez le risque de sortir du cadre de la stabilité conditionnelle du schéma de temps explicite. Vérifiez bien\n     que vos éléments finis ont une taille et un matériau (module de Young) compatibles avec le respect de la condition\n     de Courant vis-à-vis du pas de temps que vous avez imposé (temps de propagation des ondes dans la maille, voir\n     documentation). Si c'est le cas, lever l'arrêt fatal en utilisant l'option \"STOP_CFL\", à vos risques et périls\n     (risques de résultats faux).\n",
+   "placeholders": [],
+   "source": {
+    "line": 38
+   },
+   "en": null
+  },
+  "5": {
+   "id": "DYNAMIQUE_5",
+   "fr": "\n Pas de temps maximal (condition CFL) pour le schéma des différences centrées : %(r1)g s, sur la maille : %(k1)s\n",
+   "placeholders": [
+    "%(r1)g",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "6": {
+   "id": "DYNAMIQUE_6",
+   "fr": "\n  Pas de temps maximal (condition CFL) pour le schéma de Tchamwa-Wilgosz : %(r1)g s, sur la maille : %(k1)s\n",
+   "placeholders": [
+    "%(r1)g",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "7": {
+   "id": "DYNAMIQUE_7",
+   "fr": "\n Pas de temps maximal (condition CFL) pour le schéma des différences centrées : %(r1)g s\n",
+   "placeholders": [
+    "%(r1)g"
+   ],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  },
+  "8": {
+   "id": "DYNAMIQUE_8",
+   "fr": "\n  Pas de temps maximal (condition CFL) pour le schéma de Tchamwa-Wilgosz : %(r1)g s\n",
+   "placeholders": [
+    "%(r1)g"
+   ],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "9": {
+   "id": "DYNAMIQUE_9",
+   "fr": "\n  On ne peut pas avoir plus d'une charge de type FORCE_SOL.\n",
+   "placeholders": [],
+   "source": {
+    "line": 69
+   },
+   "en": null
+  },
+  "10": {
+   "id": "DYNAMIQUE_10",
+   "fr": "\n   Arrêt par manque de temps CPU au groupe de pas de temps : %(i1)d\n                                 au \"petit\" pas de temps   : %(i2)d\n      - Temps moyen par \"petit\" pas : %(r1)f\n      - Temps restant               : %(r2)f\n\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 74
+   },
+   "en": null
+  },
+  "11": {
+   "id": "DYNAMIQUE_11",
+   "fr": "\n   Arrêt par manque de temps CPU après le calcul de %(i1)d pas.\n      - Dernier instant archivé : %(r1)f\n      - Numéro d'ordre correspondant : %(i2)d\n      - Temps moyen pour les %(i3)d pas de temps : %(r2)f\n      - Temps restant                : %(r3)f\n\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(i2)d",
+    "%(i3)d",
+    "%(r2)f",
+    "%(r3)f"
+   ],
+   "source": {
+    "line": 84
+   },
+   "en": null
+  },
+  "12": {
+   "id": "DYNAMIQUE_12",
+   "fr": "\n Dans l'intervalle : %(i2)d\n Le pas de temps est trop grand : %(r1)f\n le pas de temps maximal est    : %(r2)f\n\n Avec le pas de temps maximal, le nombre de pas de calcul est %(i1)d\n",
+   "placeholders": [
+    "%(i2)d",
+    "%(r1)f",
+    "%(r2)f",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "13": {
+   "id": "DYNAMIQUE_13",
+   "fr": "\n   Arrêt par manque de temps CPU à la fréquence : %(i1)d\n      - Temps moyen par pas fréquence : %(r1)f\n      - Temps restant                 : %(r2)f\n\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 104
+   },
+   "en": null
+  },
+  "14": {
+   "id": "DYNAMIQUE_14",
+   "fr": "\n   La matrice est presque singulière à la fréquence : %(r1)f\n   Cette fréquence est probablement une fréquence propre du système.\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 113
+   },
+   "en": null
+  },
+  "15": {
+   "id": "DYNAMIQUE_15",
+   "fr": "\n Pas de temps maximal (mot-clé PAS_MAXI) demandé : %(r1)f plus petit que\n le pas de temps initial demandé par l'utilisateur (mot-clé PAS) : %(r2)f\n Il faut s'assurer que PAS est bien inférieur ou égal à PAS_MAXI\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 119
+   },
+   "en": null
+  },
+  "16": {
+   "id": "DYNAMIQUE_16",
+   "fr": "\n Pas de temps maximal calculé pour le schéma ADAPT : %(r1)f\n\n Risque & Conseil : la méthode de calcul automatique de ce pas maximal semble être prise en défaut.\n On recommande donc de définir explicitement cette valeur avec le mot-clé PAS_MAXI (sous INCREMENT).\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 126
+   },
+   "en": null
+  },
+  "17": {
+   "id": "DYNAMIQUE_17",
+   "fr": "\n Pas de temps maximal (mot-clé PAS_MAXI) demandé trop grand :   %(r1)f\n Pas de temps nécessaire pour le calcul: %(r2)f\n Risques de problèmes de précision\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 134
+   },
+   "en": null
+  },
+  "18": {
+   "id": "DYNAMIQUE_18",
+   "fr": "\n Le nombre maximal de sous division du pas : %(i1)d est atteint à l'instant : %(r1)f\n Le pas de temps vaut alors : %(r2)f\n On continue cependant la résolution en passant au pas suivant.\n\n Risque & Conseil : la solution calculée risque d'être imprécise.\n Il faudrait relancer la calcul en autorisant le schéma ADAPT à utiliser un pas de temps plus petit.\n Pour cela on peut jouer sur au moins un des trois paramètres suivants :\n - diminuer le pas de temps initial (mot-clé PAS),\n - augmenter le nombre maximal de sous découpages du pas (mot-clé NMAX_ITER_PAS),\n - augmenter le facteur de division du pas (mot-clé COEF_DIVI_PAS)\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 141
+   },
+   "en": null
+  },
+  "19": {
+   "id": "DYNAMIQUE_19",
+   "fr": "\n Le chargement contient plus d'une charge répartie.\n Le calcul n'est pas possible pour les modèles de poutre.\n",
+   "placeholders": [],
+   "source": {
+    "line": 155
+   },
+   "en": null
+  },
+  "20": {
+   "id": "DYNAMIQUE_20",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL est prise dans le fichier des raideurs.\n",
+   "placeholders": [],
+   "source": {
+    "line": 161
+   },
+   "en": null
+  },
+  "21": {
+   "id": "DYNAMIQUE_21",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL est prise dans le fichier des masses.\n",
+   "placeholders": [],
+   "source": {
+    "line": 166
+   },
+   "en": null
+  },
+  "22": {
+   "id": "DYNAMIQUE_22",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL est prise dans le fichier des amortissements.\n",
+   "placeholders": [],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "23": {
+   "id": "DYNAMIQUE_23",
+   "fr": "\n    Nombre de fréquences: %(i1)d\n    Intervalle des fréquences: %(r1)f\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 176
+   },
+   "en": null
+  },
+  "25": {
+   "id": "DYNAMIQUE_25",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL n'est pas cohérente avec la fréquence d'archivage des résultats dans\n DYNA_NON_LINE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 182
+   },
+   "en": null
+  },
+  "26": {
+   "id": "DYNAMIQUE_26",
+   "fr": "\n Deux des fréquences %(r1)f Hz et %(r2)f HZ de la liste LIST_RAFFINE sont proches.\nLes intervalles de raffinement entourant ces deux valeurs se chevauchent.\nSi une valeur du premier intervalle est trop proche d'une valeur du deuxième\nintervalle (écart inférieur à PAS_MINI), l'une des deux sera supprimée de la liste.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 188
+   },
+   "en": null
+  },
+  "28": {
+   "id": "DYNAMIQUE_28",
+   "fr": "\n Le nombre d'obstacles de choc est limité à %(i1)d en cas de traitement implicite des non-linéarités dans\n DYNA_VIBRA.\n Conseil : si la modélisation ne permet pas de réduire le nombre de lieux de choc, il faudrait\n repasser le calcul mais avec un traitement explicite des chocs.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 196
+   },
+   "en": null
+  },
+  "29": {
+   "id": "DYNAMIQUE_29",
+   "fr": "\n La matrice d'amortissement n'est pas diagonale. Or, la méthode ITMI ne permet pas de modéliser\n de couplage dynamique par l'amortissement. Les termes diagonaux seront alors extraits pour la suite\n du calcul.\n",
+   "placeholders": [],
+   "source": {
+    "line": 204
+   },
+   "en": null
+  },
+  "30": {
+   "id": "DYNAMIQUE_30",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL dans le fichier des masses est incohérente avec\ncelle choisie précédemment.\n",
+   "placeholders": [],
+   "source": {
+    "line": 211
+   },
+   "en": null
+  },
+  "31": {
+   "id": "DYNAMIQUE_31",
+   "fr": "\n La fréquence d'actualisation de FORCE_SOL dans le fichier des amortissements est incohérente avec\ncelle choisie précédemment.\n",
+   "placeholders": [],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "32": {
+   "id": "DYNAMIQUE_32",
+   "fr": "\nLa condition de stabilité n'a pas pu être calculée car il s'agit d'élasticité non-isotrope.\n",
+   "placeholders": [],
+   "source": {
+    "line": 223
+   },
+   "en": null
+  },
+  "33": {
+   "id": "DYNAMIQUE_33",
+   "fr": "\nIl y a une incohérence dans les type de résultats, le résultat selon X n'est pas le même que celui selon Y.\n",
+   "placeholders": [],
+   "source": {
+    "line": 228
+   },
+   "en": null
+  },
+  "34": {
+   "id": "DYNAMIQUE_34",
+   "fr": "\nIl y a une incohérence dans les type de résultats, le résultat selon X et Y n'est pas le même que celui selon Z.\n",
+   "placeholders": [],
+   "source": {
+    "line": 233
+   },
+   "en": null
+  },
+  "35": {
+   "id": "DYNAMIQUE_35",
+   "fr": "\nIl semble que vos calculs dynamiques ont été réalisés sur des listes de fréquences ou d'instants différentes.\nL'utilisation de la macro-commande nécessite d'avoir réalisé les calculs dynamiques sur une unique liste de fréquences ou d'instants.\n",
+   "placeholders": [],
+   "source": {
+    "line": 238
+   },
+   "en": null
+  },
+  "36": {
+   "id": "DYNAMIQUE_36",
+   "fr": "\nLes signaux d'entraînements ont une fréquence finale inférieure à celle du calcul dynamique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 244
+   },
+   "en": null
+  },
+  "37": {
+   "id": "DYNAMIQUE_37",
+   "fr": "\nLes signaux d'entraînements ont un instant final inférieur à celui du calcul dynamique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 249
+   },
+   "en": null
+  },
+  "38": {
+   "id": "DYNAMIQUE_38",
+   "fr": "\nLes signaux servant de supports à la détermination des signaux d'entraînement ont une fréquence finale inférieure à celle du calcul dynamique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 254
+   },
+   "en": null
+  },
+  "39": {
+   "id": "DYNAMIQUE_39",
+   "fr": "\nLes signaux servant de supports à la détermination des signaux d'entraînement ont un instant final inférieur à  celui du calcul dynamique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 259
+   },
+   "en": null
+  },
+  "40": {
+   "id": "DYNAMIQUE_40",
+   "fr": "\nLes signaux d'entraînements ne sont pas discrétisés de la même manière. Vérifier le pas de chaque signaux ainsi que leur longueur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 264
+   },
+   "en": null
+  },
+  "41": {
+   "id": "DYNAMIQUE_41",
+   "fr": "\nLes signaux servant de supports à la détermination des signaux d'entraînement ne sont pas discrétisés de la même manière. Vérifier le pas de chaque signaux ainsi que leur longueur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 269
+   },
+   "en": null
+  },
+  "42": {
+   "id": "DYNAMIQUE_42",
+   "fr": "\n Le pas de temps est négatif ou nul : %(r1)f\n\n Vérifiez votre mise en données\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 274
+   },
+   "en": null
+  },
+  "43": {
+   "id": "DYNAMIQUE_43",
+   "fr": "\n L'instant de fin de calcul (t=%(r1)f) est inférieur à l'instant initial (t=%(r2)f)\n\n Vérifiez votre mise en données\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 281
+   },
+   "en": null
+  },
+  "50": {
+   "id": "DYNAMIQUE_50",
+   "fr": "\nSchéma multi-pas\nOn n'a pas trouvé l'instant précédent dans la structure de données résultat du mot-clef ETAT_INIT.\nC'est probablement parce qu'il n'y a pas assez d'instants archivés.\nOn ignore donc le calcul du second membre pour cet instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 288
+   },
+   "en": null
+  },
+  "51": {
+   "id": "DYNAMIQUE_51",
+   "fr": "\nSchéma multi-pas\nOn n'a pas trouvé l'instant précédent dans la structure de données résultat du mot-clef ETAT_INIT.\nC'est probablement parce que la structure de données vient d'un calcul statique (STAT_NON_LINE) ou d'une lecture directe (LIRE_RESU).\nOn ignore donc le calcul du second membre pour cet instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 296
+   },
+   "en": null
+  },
+  "52": {
+   "id": "DYNAMIQUE_52",
+   "fr": "\nSchéma multi-pas\nL'instant précédent et l'instant initial sont presque confondus.\nOn ignore donc le calcul du second membre pour cet instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 304
+   },
+   "en": null
+  },
+  "53": {
+   "id": "DYNAMIQUE_53",
+   "fr": "\nSchéma multi-pas\nOn n'a pas de structure de données résultat dans le mot-clef ETAT_INIT parce que l'état initial est entré champ par champ.\nOn ignore donc le calcul du second membre pour cet instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 311
+   },
+   "en": null
+  },
+  "54": {
+   "id": "DYNAMIQUE_54",
+   "fr": "\n  -> La numérotation des modes pour l'amortissement modal est incohérente avec la numérotation utilisée pour la dynamique transitoire\n  -> Risque & Conseil :\n     Soit le modèle n'est pas le même, soit, plus probablement, vous n'utilisez pas les mêmes conditions limites de Dirichlet dualisées (AFFE_CHAR_MECA) entre le calcul modal et la dynamique transitoire.\n",
+   "placeholders": [],
+   "source": {
+    "line": 318
+   },
+   "en": null
+  },
+  "55": {
+   "id": "DYNAMIQUE_55",
+   "fr": "\n--------------------------------------------------------------------------------------\n\n%(k1)s\n=====================================================================================\n                     Calcul %(k2)s sur base %(k3)s\n=====================================================================================\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 325
+   },
+   "en": null
+  },
+  "56": {
+   "id": "DYNAMIQUE_56",
+   "fr": "\nSuperposition modale classique\n--------------------------------------------------------------------------------------\n    >> base modale de projection : %(k1)s\n    >> nombre de DDL avant projection (physiques) : %(i1)d",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 335
+   },
+   "en": null
+  },
+  "57": {
+   "id": "DYNAMIQUE_57",
+   "fr": "\nModèle de sous-structuration dynamique\n--------------------------------------------------------------------------------------\n    >> modèle généralisé : %(k1)s\n    >> numérotation généralisée : %(k2)s",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "58": {
+   "id": "DYNAMIQUE_58",
+   "fr": "\nModèle sous interaction fluide-structure\n--------------------------------------------------------------------------------------\n    >> base de couplage fluide-élastique : %(k1)s\n    >> vitesse du fluide  :%(r1)12.5e",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)12.5e"
+   ],
+   "source": {
+    "line": 349
+   },
+   "en": null
+  },
+  "59": {
+   "id": "DYNAMIQUE_59",
+   "fr": "    >> nombre de modes    : %(i1)d\n    >> fréquence minimale :%(r1)12.5e\n    >> fréquence maximale :%(r2)12.5e\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)12.5e",
+    "%(r2)12.5e"
+   ],
+   "source": {
+    "line": 356
+   },
+   "en": null
+  },
+  "60": {
+   "id": "DYNAMIQUE_60",
+   "fr": "\nMatrices dynamiques pour la résolution\n--------------------------------------------------------------------------------------",
+   "placeholders": [],
+   "source": {
+    "line": 362
+   },
+   "en": null
+  },
+  "61": {
+   "id": "DYNAMIQUE_61",
+   "fr": "    >> matrice de masse        : %(k1)s\n    >> matrice de rigidité     : %(k2)s",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 367
+   },
+   "en": null
+  },
+  "62": {
+   "id": "DYNAMIQUE_62",
+   "fr": "    >> matrice d'amortissement : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 371
+   },
+   "en": null
+  },
+  "63": {
+   "id": "DYNAMIQUE_63",
+   "fr": "    >> amortissement modal diagonal\n",
+   "placeholders": [],
+   "source": {
+    "line": 375
+   },
+   "en": null
+  },
+  "64": {
+   "id": "DYNAMIQUE_64",
+   "fr": "    >> système conservatif, sans amortissement.\n",
+   "placeholders": [],
+   "source": {
+    "line": 379
+   },
+   "en": null
+  },
+  "65": {
+   "id": "DYNAMIQUE_65",
+   "fr": "    >> masse diagonale extraite de la base de couplage fluide-élastique\n    >> rigidité diagonale extraite de la base de couplage fluide-élastique\n    >> amortissement modal diagonal, extrait de la base de couplage fluide-élastique\n",
+   "placeholders": [],
+   "source": {
+    "line": 383
+   },
+   "en": null
+  },
+  "66": {
+   "id": "DYNAMIQUE_66",
+   "fr": "\nSchéma d'intégration %(k1)s à pas adaptatif\n--------------------------------------------------------------------------------------\n    >> type de schéma                 : explicite\n    >> pas d'intégration initial      :%(r1)12.5e\n    >> pas d'intégration minimal      :%(r2)12.5e  (arrêt du calcul si inférieur)\n    >> pas d'intégration maximal      :%(r3)12.5e  (plafond maximal du pas d'intégration)",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)12.5e",
+    "%(r2)12.5e",
+    "%(r3)12.5e"
+   ],
+   "source": {
+    "line": 389
+   },
+   "en": null
+  },
+  "67": {
+   "id": "DYNAMIQUE_67",
+   "fr": "    >> tolérance                      :%(r1)12.5e",
+   "placeholders": [
+    "%(r1)12.5e"
+   ],
+   "source": {
+    "line": 398
+   },
+   "en": null
+  },
+  "68": {
+   "id": "DYNAMIQUE_68",
+   "fr": "    >> coefficient de division du pas :%(r1)12.5e",
+   "placeholders": [
+    "%(r1)12.5e"
+   ],
+   "source": {
+    "line": 399
+   },
+   "en": null
+  },
+  "69": {
+   "id": "DYNAMIQUE_69",
+   "fr": "    >> nombre minimum de pas calculés : %(i1)d\n    >> nombre maximum de pas calculés : %(i2)d",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 400
+   },
+   "en": null
+  },
+  "70": {
+   "id": "DYNAMIQUE_70",
+   "fr": "\nSchéma d'intégration %(k1)s à pas constant\n--------------------------------------------------------------------------------------\n    >> type de schéma         : %(k2)s\n    >> pas d'intégration      :%(r1)12.5e\n    >> nombre de pas calculés : %(i1)d",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r1)12.5e",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 404
+   },
+   "en": null
+  },
+  "71": {
+   "id": "DYNAMIQUE_71",
+   "fr": "\nNon-linéarités localisées\n--------------------------------------------------------------------------------------",
+   "placeholders": [],
+   "source": {
+    "line": 412
+   },
+   "en": null
+  },
+  "72": {
+   "id": "DYNAMIQUE_72",
+   "fr": "    >> nombre de lieux de choc                  : %(i1)d\n    >> méthode de traitement de chocs           : %(k1)s",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 417
+   },
+   "en": null
+  },
+  "73": {
+   "id": "DYNAMIQUE_73",
+   "fr": "    >> nombre de dispositifs anti-sismique      : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 421
+   },
+   "en": null
+  },
+  "74": {
+   "id": "DYNAMIQUE_74",
+   "fr": "    >> nombre de lieux de choc avec flambement  : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 422
+   },
+   "en": null
+  },
+  "75": {
+   "id": "DYNAMIQUE_75",
+   "fr": "    >> nombre de relations effort-déplacement   : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 423
+   },
+   "en": null
+  },
+  "76": {
+   "id": "DYNAMIQUE_76",
+   "fr": "    >> nombre de relations effort-vitesse       : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 424
+   },
+   "en": null
+  },
+  "77": {
+   "id": "DYNAMIQUE_77",
+   "fr": "    >> nombre de couplages de type %(k1)s     : %(i1)d",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 425
+   },
+   "en": null
+  },
+  "78": {
+   "id": "DYNAMIQUE_78",
+   "fr": "\nÉtat initial\n--------------------------------------------------------------------------------------\n    >> extrait à partir du résultat : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 426
+   },
+   "en": null
+  },
+  "79": {
+   "id": "DYNAMIQUE_79",
+   "fr": "\nÉtat initial\n--------------------------------------------------------------------------------------\n    >> déplacement  : %(k1)s\n    >> vitesse      : %(k2)s",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 433
+   },
+   "en": null
+  },
+  "80": {
+   "id": "DYNAMIQUE_80",
+   "fr": "\nDurée de la simulation\n--------------------------------------------------------------------------------------\n    >> instant initial :%(r1)12.5e\n    >> instant final   :%(r2)12.5e",
+   "placeholders": [
+    "%(r1)12.5e",
+    "%(r2)12.5e"
+   ],
+   "source": {
+    "line": 440
+   },
+   "en": null
+  },
+  "81": {
+   "id": "DYNAMIQUE_81",
+   "fr": "\nArchivage\n--------------------------------------------------------------------------------------\n    >> fréquence d'archivage         : tous les %(i1)d pas calculés\n    >> instants d'archivage forcés   : instants initial et final, et %(i2)d autres instants\n    >> champs archivés (généralisés) : DEPL, VITE, ACCE\n\n======================================================================================\n\nAvancement du calcul\n--------------------------------------------------------------------------------------\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 447
+   },
+   "en": null
+  },
+  "82": {
+   "id": "DYNAMIQUE_82",
+   "fr": "\nModèle physique\n--------------------------------------------------------------------------------------\n    >> modèle mécanique : %(k1)s\n    >> nombre de DDL physiques : %(i1)d\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 461
+   },
+   "en": null
+  },
+  "83": {
+   "id": "DYNAMIQUE_83",
+   "fr": "\nLa méthode intégrale (ITMI) est uniquement disponible si les matrices dynamiques sont\ndiagonales. Vérifiez que le stockage diagonal a été choisi lors de la numérotation des\nDDL généralisés.\n",
+   "placeholders": [],
+   "source": {
+    "line": 469
+   },
+   "en": null
+  },
+  "84": {
+   "id": "DYNAMIQUE_84",
+   "fr": "    >> accélération : %(k1)s",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 476
+   },
+   "en": null
+  },
+  "85": {
+   "id": "DYNAMIQUE_85",
+   "fr": "\nArchivage\n--------------------------------------------------------------------------------------\n    >> fréquence d'archivage : tous les %(i1)d pas calculés",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 477
+   },
+   "en": null
+  },
+  "86": {
+   "id": "DYNAMIQUE_86",
+   "fr": "\nArchivage\n--------------------------------------------------------------------------------------\n    >> nombre d'instants d'archivage : %(i1)d instants",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 483
+   },
+   "en": null
+  },
+  "87": {
+   "id": "DYNAMIQUE_87",
+   "fr": "    >> matrice d'impédance     : %(k1)s",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 489
+   },
+   "en": null
+  },
+  "88": {
+   "id": "DYNAMIQUE_88",
+   "fr": "\nRésolution\n--------------------------------------------------------------------------------------\n    >> fréquence minimale :%(r1)12.5e\n    >> fréquence maximale :%(r2)12.5e\n    >> nombre de fréquences calculées : %(i1)d\n\nArchivage\n--------------------------------------------------------------------------------------\n    >> fréquences archivées : toutes (%(i1)d fréquences)\n    >> champs archivés      : %(k1)s\n\n======================================================================================\n\nAvancement du calcul\n--------------------------------------------------------------------------------------\n",
+   "placeholders": [
+    "%(r1)12.5e",
+    "%(r2)12.5e",
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 490
+   },
+   "en": null
+  },
+  "90": {
+   "id": "DYNAMIQUE_90",
+   "fr": "\nEntrée/Changement d'état de choc détecté à l'instant %(r1)12.5e\n---------------------------------------------------------------------------------------------\n    >> Descriptif de l'état :",
+   "placeholders": [
+    "%(r1)12.5e"
+   ],
+   "source": {
+    "line": 509
+   },
+   "en": null
+  },
+  "91": {
+   "id": "DYNAMIQUE_91",
+   "fr": "           %(k1)s\n          | Choc numéro | %(k2)s",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 515
+   },
+   "en": null
+  },
+  "92": {
+   "id": "DYNAMIQUE_92",
+   "fr": "          | État        %(k1)s\n           %(k2)s",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 519
+   },
+   "en": null
+  },
+  "93": {
+   "id": "DYNAMIQUE_93",
+   "fr": "    >> Repassage en état de vol libre détecté à l'instant %(r1)12.5e\n\n",
+   "placeholders": [
+    "%(r1)12.5e"
+   ],
+   "source": {
+    "line": 523
+   },
+   "en": null
+  },
+  "94": {
+   "id": "DYNAMIQUE_94",
+   "fr": "    >> Premier passage dans cet état, mise à jour des matrices dynamiques et calcul d'une\n       nouvelle base de modes propres :\n       ",
+   "placeholders": [],
+   "source": {
+    "line": 528
+   },
+   "en": null
+  },
+  "96": {
+   "id": "DYNAMIQUE_96",
+   "fr": "    >> champs archivés       : %(k1)s\n\n======================================================================================\n\nAvancement du calcul\n--------------------------------------------------------------------------------------\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 533
+   },
+   "en": null
+  },
+  "97": {
+   "id": "DYNAMIQUE_97",
+   "fr": "\n======================================================================================\n                                                                        Fin du calcul\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 542
+   },
+   "en": null
+  },
+  "98": {
+   "id": "DYNAMIQUE_98",
+   "fr": "    >> nombre de modélisations de rotor fissuré : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 549
+   },
+   "en": null
+  },
+  "99": {
+   "id": "DYNAMIQUE_99",
+   "fr": "    >> nombre de modélisations de palier : %(i1)d",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 550
+   },
+   "en": null
+  }
+ }
+}

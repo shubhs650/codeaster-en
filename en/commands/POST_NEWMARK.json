@@ -1,0 +1,514 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_newmark.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_NEWMARK",
+ "kind": "MACRO",
+ "fr": "Calcul des déplacements résiduels des ouvrages en remblai par méthode de Newmark",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_newmark_ops.post_newmark_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "RAYON",
+    "MAILLAGE_GLIS"
+   ]
+  },
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "RESULTAT",
+    "RESULTAT_PESANTEUR"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_newmark.py",
+  "line": 25
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE_GLIS",
+   "kind": "simple",
+   "path": "MAILLAGE_GLIS",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Maillage de la zone de glissement",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "RAYON",
+   "kind": "simple",
+   "path": "RAYON",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Rayon du cercle de glissement",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_RAYON",
+   "kind": "bloc",
+   "path": "[b_RAYON]",
+   "condition": "exists(\"RAYON\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "CENTRE_X",
+     "kind": "simple",
+     "path": "CENTRE_X",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Position de la coordonée X du cercle de glissement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "CENTRE_Y",
+     "kind": "simple",
+     "path": "CENTRE_Y",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Position de la coordonée Y du cercle de glissement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "RAFF_CERCLE",
+     "kind": "simple",
+     "path": "RAFF_CERCLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": "Raffinement du maillage de cercle",
+     "other": {
+      "default": 7
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 38
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_MAIL_GLIS",
+   "kind": "bloc",
+   "path": "[b_MAIL_GLIS]",
+   "condition": "exists(\"MAILLAGE_GLIS\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_GLIS",
+     "kind": "simple",
+     "path": "GROUP_MA_GLIS",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "GROUP_MA associé à la zone de glissement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "GROUP_MA_LIGNE",
+     "kind": "simple",
+     "path": "GROUP_MA_LIGNE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "GROUP_MA associé à la ligne de glissement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "POSITION",
+   "kind": "simple",
+   "path": "POSITION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "AVAL",
+   "into": [
+    "AMONT",
+    "AVAL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "dyna_trans",
+    "evol_noli"
+   ],
+   "fr": "Concept résultat du calcul dynamique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "b_RESULTAT",
+   "kind": "bloc",
+   "path": "[b_RESULTAT]",
+   "condition": "exists(\"RESULTAT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "VERI_MASSE",
+     "kind": "simple",
+     "path": "VERI_MASSE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "b_VERI_MASS",
+     "kind": "bloc",
+     "path": "[b_VERI_MASS]",
+     "condition": "equal_to(\"VERI_MASSE\", 'OUI')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 56
+     },
+     "keywords": [
+      {
+       "name": "RESI_RELA",
+       "kind": "simple",
+       "path": "RESI_RELA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Tolérance d'arrêt des itérations",
+       "other": {
+        "default": 0.05
+       },
+       "source": {
+        "file": "code_aster/Cata/Commands/post_newmark.py",
+        "line": 58
+       }
+      },
+      {
+       "name": "ITER_MAXI",
+       "kind": "simple",
+       "path": "ITER_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": "Nombre maximal d'itérations",
+       "other": {
+        "default": 2
+       },
+       "source": {
+        "file": "code_aster/Cata/Commands/post_newmark.py",
+        "line": 65
+       }
+      },
+      {
+       "name": "CHAM_MATER",
+       "kind": "simple",
+       "path": "CHAM_MATER",
+       "status": "f",
+       "type": [
+        "cham_mater"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_newmark.py",
+        "line": 68
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "RESULTAT_PESANTEUR",
+   "kind": "simple",
+   "path": "RESULTAT_PESANTEUR",
+   "status": "f",
+   "type": [
+    "evol_noli",
+    "evol_elas"
+   ],
+   "fr": "Champ des contraintes issu du résultat du calcul à la pesanteur",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "b_RESULTAT_PESANTEUR",
+   "kind": "bloc",
+   "path": "[b_RESULTAT_PESANTEUR]",
+   "condition": "exists(\"RESULTAT_PESANTEUR\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "CHAM_PHI",
+     "kind": "simple",
+     "path": "CHAM_PHI",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": "Champ de phi en dégrées",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "CHAM_COHESION",
+     "kind": "simple",
+     "path": "CHAM_COHESION",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": "Champ de cohesion",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "CHAM_FS",
+     "kind": "simple",
+     "path": "CHAM_FS",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": "Champ du facteur de sécurité local",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "NB_ECART_TYPE",
+     "kind": "simple",
+     "path": "NB_ECART_TYPE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 6.0,
+     "fr": "Nombre d'écarts-type pour prise en compte de la dispersion dans la régression linéaire",
+     "other": {
+      "default": 3.0
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ECLA_PG",
+     "into": [
+      "ECLA_PG",
+      "COLLOCATION"
+     ],
+     "fr": "Choix de la méthode de projection des contraintes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 92
+     }
+    }
+   ]
+  },
+  {
+   "name": "KY",
+   "kind": "simple",
+   "path": "KY",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Valeur de ky pour le calcul de l'accélération critique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 100
+   }
+  },
+  {
+   "name": "GROUP_MA_CALC",
+   "kind": "simple",
+   "path": "GROUP_MA_CALC",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "fr": "GROUP_MA associé au modèle utilisé",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 101
+   }
+  },
+  {
+   "name": "MAILLAGE_RESU",
+   "kind": "factor",
+   "path": "MAILLAGE_RESU",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 102
+   },
+   "keywords": [
+    {
+     "name": "NOM_GROUP",
+     "kind": "simple",
+     "path": "MAILLAGE_RESU/NOM_GROUP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "GROUP_MA construit pour calcul de Newmark",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 105
+     }
+    },
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE_RESU/MAILLAGE",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": "Maillage en sortie de la commande avec groupe de mailles NOM_GROUP",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "MAILLAGE_MASSE",
+     "kind": "simple",
+     "path": "MAILLAGE_RESU/MAILLAGE_MASSE",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": "Maillage utilisé pour vérification de la masse",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_newmark.py",
+      "line": 113
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_newmark.py",
+    "line": 118
+   }
+  }
+ ]
+}

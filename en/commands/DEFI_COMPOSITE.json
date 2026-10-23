@@ -1,0 +1,117 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_composite.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_COMPOSITE",
+ "kind": "OPER",
+ "fr": "Déterminer les caractéristiques matériaux homogénéisées d'une coque multicouche à partir des caractéristiques de chaque couche",
+ "translation_upstream": null,
+ "op": 56,
+ "reentrant": "n",
+ "result_types": [
+  "mater_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_composite.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "COUCHE",
+   "kind": "factor",
+   "path": "COUCHE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_composite.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "EPAIS",
+     "kind": "simple",
+     "path": "COUCHE/EPAIS",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_composite.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "COUCHE/MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_composite.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "ORIENTATION",
+     "kind": "simple",
+     "path": "COUCHE/ORIENTATION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": -90.0,
+     "val_max": 90.0,
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_composite.py",
+      "line": 40
+     }
+    }
+   ]
+  },
+  {
+   "name": "IMPRESSION",
+   "kind": "factor",
+   "path": "IMPRESSION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_composite.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "IMPRESSION/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 8,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_composite.py",
+      "line": 42
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2517 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_BASE_REDUITE",
+ "kind": "OPER",
+ "fr": null,
+ "translation_upstream": null,
+ "op": 53,
+ "reentrant": "f:BASE",
+ "result_types": [
+  "mode_empi"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "BASE",
+   "kind": "simple",
+   "path": "BASE",
+   "status": "f",
+   "type": [
+    "mode_empi"
+   ],
+   "fr": "Objet qui sera enrichi des nouveaux instants calculés",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "POD",
+   "into": [
+    "POD",
+    "POD_INCR",
+    "GLOUTON",
+    "TRONCATURE",
+    "ORTHO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "b_pod",
+   "kind": "bloc",
+   "path": "[b_pod]",
+   "condition": "(equal_to(\"OPERATION\", 'POD'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "o",
+     "type": [
+      "evol_ther",
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "b_thermique",
+     "kind": "bloc",
+     "path": "[b_thermique]",
+     "condition": "is_type(\"RESULTAT\") == evol_ther",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 45
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TEMP",
+        "FLUX_NOEU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 47
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_mecanique",
+     "kind": "bloc",
+     "path": "[b_mecanique]",
+     "condition": "is_type(\"RESULTAT\") == evol_noli",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 49
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "DEPL",
+        "SIEF_NOEU",
+        "SIEF_ELGA",
+        "VARI_ELGA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 51
+       }
+      }
+     ]
+    },
+    {
+     "name": "TYPE_BASE",
+     "kind": "simple",
+     "path": "TYPE_BASE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "3D",
+     "into": [
+      "3D",
+      "LINEIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "b_lineique",
+     "kind": "bloc",
+     "path": "[b_lineique]",
+     "condition": "(equal_to(\"TYPE_BASE\", 'LINEIQUE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 56
+     },
+     "keywords": [
+      {
+       "name": "AXE",
+       "kind": "simple",
+       "path": "AXE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "OX",
+        "OY",
+        "OZ"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 58
+       }
+      },
+      {
+       "name": "SECTION",
+       "kind": "simple",
+       "path": "SECTION",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 59
+       }
+      }
+     ]
+    },
+    {
+     "name": "TOLE_SVD",
+     "kind": "simple",
+     "path": "TOLE_SVD",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "NB_MODE",
+     "kind": "simple",
+     "path": "NB_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "SNAPSHOT",
+     "kind": "simple",
+     "path": "SNAPSHOT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "min": 1,
+     "max": "**",
+     "fr": "Numéros d'ordre dans RESULTAT à converser comme snapshot",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "b_vari",
+     "kind": "bloc",
+     "path": "[b_vari]",
+     "condition": "(equal_to(\"NOM_CHAM\", 'VARI_ELGA'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 71
+     },
+     "keywords": [
+      {
+       "name": "NOM_VARI",
+       "kind": "simple",
+       "path": "NOM_VARI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 73
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_incr",
+   "kind": "bloc",
+   "path": "[b_incr]",
+   "condition": "(equal_to(\"OPERATION\", 'POD_INCR'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "o",
+     "type": [
+      "evol_ther",
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 78
+     }
+    },
+    {
+     "name": "b_thermique",
+     "kind": "bloc",
+     "path": "[b_thermique]",
+     "condition": "is_type(\"RESULTAT\") == evol_ther",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 79
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TEMP",
+        "FLUX_NOEU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 81
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_mecanique",
+     "kind": "bloc",
+     "path": "[b_mecanique]",
+     "condition": "is_type(\"RESULTAT\") == evol_noli",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 83
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "DEPL",
+        "SIEF_NOEU",
+        "SIEF_ELGA",
+        "VARI_ELGA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 85
+       }
+      }
+     ]
+    },
+    {
+     "name": "TYPE_BASE",
+     "kind": "simple",
+     "path": "TYPE_BASE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "3D",
+     "into": [
+      "3D",
+      "LINEIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "b_lineique",
+     "kind": "bloc",
+     "path": "[b_lineique]",
+     "condition": "(equal_to(\"TYPE_BASE\", 'LINEIQUE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 90
+     },
+     "keywords": [
+      {
+       "name": "AXE",
+       "kind": "simple",
+       "path": "AXE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "OX",
+        "OY",
+        "OZ"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "SECTION",
+       "kind": "simple",
+       "path": "SECTION",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 93
+       }
+      }
+     ]
+    },
+    {
+     "name": "TOLE",
+     "kind": "simple",
+     "path": "TOLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "TOLE_SVD",
+     "kind": "simple",
+     "path": "TOLE_SVD",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "NB_MODE",
+     "kind": "simple",
+     "path": "NB_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "TABL_COOR_REDUIT",
+     "kind": "simple",
+     "path": "TABL_COOR_REDUIT",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "SNAPSHOT",
+     "kind": "simple",
+     "path": "SNAPSHOT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "min": 1,
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Numéros d'ordre dans RESULTAT à converser comme snapshot",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "b_vari",
+     "kind": "bloc",
+     "path": "[b_vari]",
+     "condition": "(equal_to(\"NOM_CHAM\", 'VARI_ELGA'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 108
+     },
+     "keywords": [
+      {
+       "name": "NOM_VARI",
+       "kind": "simple",
+       "path": "NOM_VARI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 110
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_type_rb",
+   "kind": "bloc",
+   "path": "[b_type_rb]",
+   "condition": "(equal_to(\"OPERATION\", 'GLOUTON'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 113
+   },
+   "keywords": [
+    {
+     "name": "NB_VARI_COEF",
+     "kind": "simple",
+     "path": "NB_VARI_COEF",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "TYPE_VARI_COEF",
+     "kind": "simple",
+     "path": "TYPE_VARI_COEF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DIRECT",
+     "into": [
+      "DIRECT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "ORTHO_BASE",
+     "kind": "simple",
+     "path": "ORTHO_BASE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 117
+     }
+    },
+    {
+     "name": "TYPE_BASE",
+     "kind": "simple",
+     "path": "TYPE_BASE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "STANDARD",
+     "into": [
+      "IFS_STAB",
+      "STANDARD"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "b_direct",
+     "kind": "bloc",
+     "path": "[b_direct]",
+     "condition": "(equal_to(\"TYPE_VARI_COEF\", 'DIRECT'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 119
+     },
+     "keywords": [
+      {
+       "name": "VARI_PARA",
+       "kind": "factor",
+       "path": "VARI_PARA",
+       "status": "f",
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 121
+       },
+       "keywords": [
+        {
+         "name": "NOM_PARA",
+         "kind": "simple",
+         "path": "VARI_PARA/NOM_PARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "DX",
+          "DY",
+          "DZ",
+          "DRX",
+          "DRY",
+          "DRZ",
+          "DTAN",
+          "TEMP",
+          "TSEC",
+          "INST",
+          "X",
+          "Y",
+          "Z",
+          "EPSI",
+          "META",
+          "FREQ",
+          "PULS",
+          "DSP",
+          "AMOR",
+          "ABSC",
+          "SIGM",
+          "HYDR",
+          "SECH",
+          "PORO",
+          "SAT",
+          "IRRA",
+          "PGAZ",
+          "PCAP",
+          "PLIQ",
+          "PVAP",
+          "PAD",
+          "VITE",
+          "ENDO",
+          "NORM",
+          "EPAIS",
+          "EXCENT",
+          "NEUT1",
+          "NEUT2",
+          "NEUT3",
+          "NEUT4",
+          "XF",
+          "YF",
+          "ZF",
+          "NUME_ORDRE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+          "line": 125
+         }
+        },
+        {
+         "name": "VALE_PARA",
+         "kind": "simple",
+         "path": "VARI_PARA/VALE_PARA",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+          "line": 126
+         }
+        },
+        {
+         "name": "VALE_INIT",
+         "kind": "simple",
+         "path": "VARI_PARA/VALE_INIT",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+          "line": 127
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "MATR_ASSE",
+     "kind": "factor",
+     "path": "MATR_ASSE",
+     "status": "f",
+     "min": 1,
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "COEF_R",
+        "COEF_C",
+        "FONC_R",
+        "FONC_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 130
+     },
+     "keywords": [
+      {
+       "name": "MATRICE",
+       "kind": "simple",
+       "path": "MATR_ASSE/MATRICE",
+       "status": "o",
+       "type": [
+        "matr_asse_depl_r",
+        "matr_asse_depl_c",
+        "matr_asse_temp_r",
+        "matr_asse_temp_c",
+        "matr_asse_pres_r",
+        "matr_asse_pres_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 135
+       }
+      },
+      {
+       "name": "COEF_R",
+       "kind": "simple",
+       "path": "MATR_ASSE/COEF_R",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 146
+       }
+      },
+      {
+       "name": "COEF_C",
+       "kind": "simple",
+       "path": "MATR_ASSE/COEF_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 147
+       }
+      },
+      {
+       "name": "FONC_R",
+       "kind": "simple",
+       "path": "MATR_ASSE/FONC_R",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "FONC_C",
+       "kind": "simple",
+       "path": "MATR_ASSE/FONC_C",
+       "status": "f",
+       "type": [
+        "fonction_c",
+        "formule_c"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 149
+       }
+      }
+     ]
+    },
+    {
+     "name": "VECT_ASSE",
+     "kind": "factor",
+     "path": "VECT_ASSE",
+     "status": "f",
+     "min": 1,
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "COEF_R",
+        "COEF_C",
+        "FONC_R",
+        "FONC_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 151
+     },
+     "keywords": [
+      {
+       "name": "VECTEUR",
+       "kind": "simple",
+       "path": "VECT_ASSE/VECTEUR",
+       "status": "f",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 156
+       }
+      },
+      {
+       "name": "COEF_C",
+       "kind": "simple",
+       "path": "VECT_ASSE/COEF_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 157
+       }
+      },
+      {
+       "name": "COEF_R",
+       "kind": "simple",
+       "path": "VECT_ASSE/COEF_R",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 158
+       }
+      },
+      {
+       "name": "FONC_R",
+       "kind": "simple",
+       "path": "VECT_ASSE/FONC_R",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 159
+       }
+      },
+      {
+       "name": "FONC_C",
+       "kind": "simple",
+       "path": "VECT_ASSE/FONC_C",
+       "status": "f",
+       "type": [
+        "fonction_c",
+        "formule_c"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+        "line": 160
+       }
+      }
+     ]
+    },
+    {
+     "name": "SOLVEUR",
+     "kind": "factor",
+     "path": "SOLVEUR",
+     "status": "d",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_solveur.py",
+      "line": 468
+     },
+     "keywords": [
+      {
+       "name": "b_mult_front",
+       "kind": "bloc",
+       "path": "SOLVEUR/[b_mult_front]",
+       "condition": "equal_to(\"METHODE\", 'MULT_FRONT') ",
+       "fr": "Paramètres de la méthode multi frontale",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 470
+       },
+       "keywords": [
+        {
+         "name": "RENUM",
+         "kind": "simple",
+         "path": "SOLVEUR/RENUM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MDA",
+         "into": [
+          "MD",
+          "MDA"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 211
+         }
+        },
+        {
+         "name": "NPREC",
+         "kind": "simple",
+         "path": "SOLVEUR/NPREC",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 8,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 224
+         }
+        },
+        {
+         "name": "ELIM_LAGR",
+         "kind": "simple",
+         "path": "SOLVEUR/ELIM_LAGR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 233
+         }
+        },
+        {
+         "name": "STOP_SINGULIER",
+         "kind": "simple",
+         "path": "SOLVEUR/STOP_SINGULIER",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 251
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_ldlt",
+       "kind": "bloc",
+       "path": "SOLVEUR/[b_ldlt]",
+       "condition": "equal_to(\"METHODE\", 'LDLT') ",
+       "fr": "Paramètres de la méthode LDLT",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 475
+       },
+       "keywords": [
+        {
+         "name": "RENUM",
+         "kind": "simple",
+         "path": "SOLVEUR/RENUM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RCMK",
+         "into": [
+          "RCMK"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 213
+         }
+        },
+        {
+         "name": "NPREC",
+         "kind": "simple",
+         "path": "SOLVEUR/NPREC",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 8,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 225
+         }
+        },
+        {
+         "name": "ELIM_LAGR",
+         "kind": "simple",
+         "path": "SOLVEUR/ELIM_LAGR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 234
+         }
+        },
+        {
+         "name": "STOP_SINGULIER",
+         "kind": "simple",
+         "path": "SOLVEUR/STOP_SINGULIER",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 252
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_mumps",
+       "kind": "bloc",
+       "path": "SOLVEUR/[b_mumps]",
+       "condition": "equal_to(\"METHODE\", 'MUMPS') ",
+       "fr": "Paramètres de la méthode MUMPS",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 480
+       },
+       "keywords": [
+        {
+         "name": "RENUM",
+         "kind": "simple",
+         "path": "SOLVEUR/RENUM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AMD",
+          "AMF",
+          "PORD",
+          "METIS",
+          "QAMD",
+          "SCOTCH",
+          "AUTO",
+          "PARMETIS",
+          "PTSCOTCH"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 215
+         }
+        },
+        {
+         "name": "NPREC",
+         "kind": "simple",
+         "path": "SOLVEUR/NPREC",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 8,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 226
+         }
+        },
+        {
+         "name": "ELIM_LAGR",
+         "kind": "simple",
+         "path": "SOLVEUR/ELIM_LAGR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "LAGR2",
+         "into": [
+          "OUI",
+          "NON",
+          "LAGR2"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 236
+         }
+        },
+        {
+         "name": "STOP_SINGULIER",
+         "kind": "simple",
+         "path": "SOLVEUR/STOP_SINGULIER",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 253
+         }
+        },
+        {
+         "name": "TYPE_RESOL",
+         "kind": "simple",
+         "path": "SOLVEUR/TYPE_RESOL",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "NONSYM",
+          "SYMGEN",
+          "SYMDEF",
+          "AUTO"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 261
+         }
+        },
+        {
+         "name": "ACCELERATION",
+         "kind": "simple",
+         "path": "SOLVEUR/ACCELERATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "FR",
+         "into": [
+          "AUTO",
+          "FR",
+          "FR+",
+          "FR++",
+          "LR",
+          "LR+",
+          "LR++"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 267
+         }
+        },
+        {
+         "name": "LOW_RANK_SEUIL",
+         "kind": "simple",
+         "path": "SOLVEUR/LOW_RANK_SEUIL",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 280
+         }
+        },
+        {
+         "name": "PRETRAITEMENTS",
+         "kind": "simple",
+         "path": "SOLVEUR/PRETRAITEMENTS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "SANS",
+          "AUTO"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 284
+         }
+        },
+        {
+         "name": "POSTTRAITEMENTS",
+         "kind": "simple",
+         "path": "SOLVEUR/POSTTRAITEMENTS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "SANS",
+          "AUTO",
+          "FORCE",
+          "MINI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 289
+         }
+        },
+        {
+         "name": "PCENT_PIVOT",
+         "kind": "simple",
+         "path": "SOLVEUR/PCENT_PIVOT",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "val_min": 1,
+         "default": 35,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 295
+         }
+        },
+        {
+         "name": "NB_RHS",
+         "kind": "simple",
+         "path": "SOLVEUR/NB_RHS",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "val_min": 1,
+         "val_max": 32,
+         "default": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 306
+         }
+        },
+        {
+         "name": "RESI_RELA",
+         "kind": "simple",
+         "path": "SOLVEUR/RESI_RELA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": -1.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 314
+         }
+        },
+        {
+         "name": "GESTION_MEMOIRE",
+         "kind": "simple",
+         "path": "SOLVEUR/GESTION_MEMOIRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "IN_CORE",
+          "OUT_OF_CORE",
+          "AUTO",
+          "EVAL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 318
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_gcpc",
+       "kind": "bloc",
+       "path": "SOLVEUR/[b_gcpc]",
+       "condition": "equal_to(\"METHODE\", 'GCPC') ",
+       "fr": "Paramètres de la méthode du gradient conjugué",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 485
+       },
+       "keywords": [
+        {
+         "name": "b_ldltinc",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_ldltinc]",
+         "condition": "equal_to(\"PRE_COND\", 'LDLT_INC') ",
+         "fr": "Paramètres de la factorisation incomplète",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 488
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RCMK",
+           "into": [
+            "RCMK"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 398
+           }
+          },
+          {
+           "name": "NIVE_REMPLISSAGE",
+           "kind": "simple",
+           "path": "SOLVEUR/NIVE_REMPLISSAGE",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "default": 0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 403
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_simple",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_simple]",
+         "condition": "is_in(\"PRE_COND\", ('LDLT_SP', 'LDLT_DP')) ",
+         "fr": "Paramètres de la factorisation simple précision ou low-rank",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 493
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "PARMETIS",
+           "into": [
+            "SANS",
+            "METIS",
+            "PARMETIS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 412
+           }
+          },
+          {
+           "name": "REAC_PRECOND",
+           "kind": "simple",
+           "path": "SOLVEUR/REAC_PRECOND",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "default": 30,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 415
+           }
+          },
+          {
+           "name": "PCENT_PIVOT",
+           "kind": "simple",
+           "path": "SOLVEUR/PCENT_PIVOT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "default": 20,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 416
+           }
+          },
+          {
+           "name": "GESTION_MEMOIRE",
+           "kind": "simple",
+           "path": "SOLVEUR/GESTION_MEMOIRE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "AUTO",
+           "into": [
+            "IN_CORE",
+            "AUTO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 417
+           }
+          },
+          {
+           "name": "LOW_RANK_SEUIL",
+           "kind": "simple",
+           "path": "SOLVEUR/LOW_RANK_SEUIL",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 420
+           }
+          }
+         ]
+        },
+        {
+         "name": "ELIM_LAGR",
+         "kind": "simple",
+         "path": "SOLVEUR/ELIM_LAGR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 235
+         }
+        },
+        {
+         "name": "PRE_COND",
+         "kind": "simple",
+         "path": "SOLVEUR/PRE_COND",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "LDLT_INC",
+         "into": [
+          "LDLT_INC",
+          "LDLT_SP",
+          "LDLT_DP"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 353
+         }
+        },
+        {
+         "name": "RESI_RELA",
+         "kind": "simple",
+         "path": "SOLVEUR/RESI_RELA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 379
+         }
+        },
+        {
+         "name": "NMAX_ITER",
+         "kind": "simple",
+         "path": "SOLVEUR/NMAX_ITER",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 384
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_petsc",
+       "kind": "bloc",
+       "path": "SOLVEUR/[b_petsc]",
+       "condition": "equal_to(\"METHODE\", 'PETSC') ",
+       "fr": "Parametres de la methode PETSC",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 500
+       },
+       "keywords": [
+        {
+         "name": "b_ldltinc",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_ldltinc]",
+         "condition": "equal_to(\"PRE_COND\", 'LDLT_INC') ",
+         "fr": "Paramètres de la factorisation incomplète",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 503
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RCMK",
+           "into": [
+            "RCMK"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 399
+           }
+          },
+          {
+           "name": "NIVE_REMPLISSAGE",
+           "kind": "simple",
+           "path": "SOLVEUR/NIVE_REMPLISSAGE",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "default": 0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 404
+           }
+          },
+          {
+           "name": "REMPLISSAGE",
+           "kind": "simple",
+           "path": "SOLVEUR/REMPLISSAGE",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 1.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 408
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_simple",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_simple]",
+         "condition": "is_in(\"PRE_COND\", ('LDLT_SP', 'LDLT_DP')) ",
+         "fr": "Paramètres de la factorisation simple précision ou low rank",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 508
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "PARMETIS",
+           "into": [
+            "SANS",
+            "METIS",
+            "PARMETIS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 412
+           }
+          },
+          {
+           "name": "REAC_PRECOND",
+           "kind": "simple",
+           "path": "SOLVEUR/REAC_PRECOND",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "default": 30,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 415
+           }
+          },
+          {
+           "name": "PCENT_PIVOT",
+           "kind": "simple",
+           "path": "SOLVEUR/PCENT_PIVOT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "default": 20,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 416
+           }
+          },
+          {
+           "name": "GESTION_MEMOIRE",
+           "kind": "simple",
+           "path": "SOLVEUR/GESTION_MEMOIRE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "AUTO",
+           "into": [
+            "IN_CORE",
+            "AUTO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 417
+           }
+          },
+          {
+           "name": "LOW_RANK_SEUIL",
+           "kind": "simple",
+           "path": "SOLVEUR/LOW_RANK_SEUIL",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 420
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_ml",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_ml]",
+         "condition": "equal_to(\"PRE_COND\", 'ML') ",
+         "fr": "Paramètres du multigrille algébrique ML",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 513
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 423
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_boomer",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_boomer]",
+         "condition": "equal_to(\"PRE_COND\", 'BOOMER') ",
+         "fr": "Paramètres du multigrille algébrique HYPRE",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 518
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 427
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_gamg",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_gamg]",
+         "condition": "equal_to(\"PRE_COND\", 'GAMG') ",
+         "fr": "Paramètres du multigrille algébrique GAMG",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 523
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 430
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_hpddm",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_hpddm]",
+         "condition": "equal_to(\"PRE_COND\", 'HPDDM') ",
+         "fr": "Paramètres du Schwarz HPDDM",
+         "rules": [
+          {
+           "rule": "UN_PARMI",
+           "keywords": [
+            "SEUIL",
+            "NB_MODE"
+           ],
+           "defaults": {
+            "NB_MODE": 30
+           }
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 528
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 433
+           }
+          },
+          {
+           "name": "TYPE_RESOL",
+           "kind": "simple",
+           "path": "SOLVEUR/TYPE_RESOL",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "AUTO",
+           "into": [
+            "AUTO",
+            "GENEO",
+            "HARMO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 434
+           }
+          },
+          {
+           "name": "NB_MODE",
+           "kind": "simple",
+           "path": "SOLVEUR/NB_MODE",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 437
+           }
+          },
+          {
+           "name": "SEUIL",
+           "kind": "simple",
+           "path": "SOLVEUR/SEUIL",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "val_min": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 438
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_lagaug",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_lagaug]",
+         "condition": "equal_to(\"PRE_COND\", 'BLOC_LAGR') ",
+         "fr": "Paramètres du préconditionneur Lagrangien Augmenté BLOC_LAGR",
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 533
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 442
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_fieldsplit",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_fieldsplit]",
+         "condition": "is_in(\"PRE_COND\", ('FIELDSPLIT'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 538
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 450
+           }
+          },
+          {
+           "name": "PARTITION_CMP",
+           "kind": "simple",
+           "path": "SOLVEUR/PARTITION_CMP",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 454
+           }
+          },
+          {
+           "name": "NOM_CMP",
+           "kind": "simple",
+           "path": "SOLVEUR/NOM_CMP",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 458
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_util",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_util]",
+         "condition": "is_in(\"PRE_COND\", ('UTILISATEUR'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 539
+         },
+         "keywords": [
+          {
+           "name": "KSP_UTIL",
+           "kind": "simple",
+           "path": "SOLVEUR/KSP_UTIL",
+           "status": "f",
+           "type": [
+            "not_checked"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 460
+           }
+          },
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 461
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_autres",
+         "kind": "bloc",
+         "path": "SOLVEUR/[b_autres]",
+         "condition": "is_in(\"PRE_COND\", ('JACOBI','SOR','SANS'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 540
+         },
+         "keywords": [
+          {
+           "name": "RENUM",
+           "kind": "simple",
+           "path": "SOLVEUR/RENUM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "SANS",
+           "into": [
+            "SANS",
+            "RCMK"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commons/c_solveur.py",
+            "line": 446
+           }
+          }
+         ]
+        },
+        {
+         "name": "ELIM_LAGR",
+         "kind": "simple",
+         "path": "SOLVEUR/ELIM_LAGR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 232
+         }
+        },
+        {
+         "name": "ALGORITHME",
+         "kind": "simple",
+         "path": "SOLVEUR/ALGORITHME",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "FGMRES",
+         "into": [
+          "CG",
+          "CR",
+          "GMRES",
+          "GCR",
+          "FGMRES",
+          "GMRES_LMP"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 340
+         }
+        },
+        {
+         "name": "OPTION_PETSC",
+         "kind": "simple",
+         "path": "SOLVEUR/OPTION_PETSC",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 349
+         }
+        },
+        {
+         "name": "PRE_COND",
+         "kind": "simple",
+         "path": "SOLVEUR/PRE_COND",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "LDLT_SP",
+         "into": [
+          "LDLT_INC",
+          "LDLT_SP",
+          "LDLT_DP",
+          "JACOBI",
+          "SOR",
+          "ML",
+          "BOOMER",
+          "GAMG",
+          "BLOC_LAGR",
+          "FIELDSPLIT",
+          "UTILISATEUR",
+          "HPDDM",
+          "SANS"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 356
+         }
+        },
+        {
+         "name": "RESI_RELA",
+         "kind": "simple",
+         "path": "SOLVEUR/RESI_RELA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 380
+         }
+        },
+        {
+         "name": "NMAX_ITER",
+         "kind": "simple",
+         "path": "SOLVEUR/NMAX_ITER",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 385
+         }
+        },
+        {
+         "name": "RESI_RELA_PC",
+         "kind": "simple",
+         "path": "SOLVEUR/RESI_RELA_PC",
+         "status": "c",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_solveur.py",
+          "line": 394
+         }
+        }
+       ]
+      },
+      {
+       "name": "METHODE",
+       "kind": "simple",
+       "path": "SOLVEUR/METHODE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MUMPS",
+       "into": [
+        "MULT_FRONT",
+        "LDLT",
+        "MUMPS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_solveur.py",
+        "line": 202
+       }
+      }
+     ]
+    },
+    {
+     "name": "NB_MODE",
+     "kind": "simple",
+     "path": "NB_MODE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 163
+     }
+    },
+    {
+     "name": "TOLE_GLOUTON",
+     "kind": "simple",
+     "path": "TOLE_GLOUTON",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 164
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_tronca",
+   "kind": "bloc",
+   "path": "[b_tronca]",
+   "condition": "(equal_to(\"OPERATION\", 'TRONCATURE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 166
+   },
+   "keywords": [
+    {
+     "name": "MODELE_REDUIT",
+     "kind": "simple",
+     "path": "MODELE_REDUIT",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 168
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_ortho",
+   "kind": "bloc",
+   "path": "[b_ortho]",
+   "condition": "(equal_to(\"OPERATION\", 'ORTHO'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 170
+   },
+   "keywords": [
+    {
+     "name": "ALPHA",
+     "kind": "simple",
+     "path": "ALPHA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.717,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+      "line": 172
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 174
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_base_reduite.py",
+    "line": 175
+   }
+  }
+ ]
+}

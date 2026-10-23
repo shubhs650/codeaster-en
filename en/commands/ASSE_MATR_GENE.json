@@ -1,0 +1,95 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "ASSE_MATR_GENE",
+ "kind": "OPER",
+ "fr": "Assemblage des matrices généralisées de macro éléments pour construction de la matrice globale généralisée",
+ "translation_upstream": null,
+ "op": 128,
+ "reentrant": "n",
+ "result_types": [
+  "matr_asse_gene_r",
+  "matr_asse_gene_c"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+  "line": 39
+ },
+ "keywords": [
+  {
+   "name": "NUME_DDL_GENE",
+   "kind": "simple",
+   "path": "NUME_DDL_GENE",
+   "status": "o",
+   "type": [
+    "nume_ddl_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "CLASSIQUE",
+   "into": [
+    "CLASSIQUE",
+    "INITIAL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "b_option",
+   "kind": "bloc",
+   "path": "[b_option]",
+   "condition": "equal_to(\"METHODE\", 'CLASSIQUE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "RIGI_GENE",
+      "RIGI_GENE_C",
+      "MASS_GENE",
+      "AMOR_GENE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/asse_matr_gene.py",
+      "line": 51
+     }
+    }
+   ]
+  }
+ ]
+}

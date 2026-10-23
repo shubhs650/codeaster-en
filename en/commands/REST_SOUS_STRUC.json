@@ -1,0 +1,616 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_SOUS_STRUC",
+ "kind": "OPER",
+ "fr": "Restituer dans la base physique des résultats obtenus par sous-structuration",
+ "translation_upstream": null,
+ "op": 77,
+ "reentrant": "n",
+ "result_types": [
+  "dyna_trans",
+  "mode_meca",
+  "dyna_harmo",
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "RESU_GENE",
+    "RESULTAT"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "INST",
+    "LIST_INST",
+    "TOUT_INST",
+    "NUME_MODE",
+    "FREQ",
+    "LIST_FREQ"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "NOEUD",
+    "GROUP_NO"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "RESULTAT",
+    "SQUELETTE"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "SQUELETTE",
+    "SOUS_STRUC",
+    "SECTEUR"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+  "line": 47
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "evol_noli",
+    "dyna_trans",
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "f",
+   "type": [
+    "tran_gene",
+    "mode_gene",
+    "mode_cycl",
+    "harm_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "f",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 79
+   }
+  },
+  {
+   "name": "TOUT_INST",
+   "kind": "simple",
+   "path": "TOUT_INST",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 81
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 82
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 83
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 84
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "ABSOLU",
+    "RELATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "b_prec_rela",
+   "kind": "bloc",
+   "path": "[b_prec_rela]",
+   "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 88
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_prec_abso",
+   "kind": "bloc",
+   "path": "[b_prec_abso]",
+   "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 90
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 91
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "LIN"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 93
+   }
+  },
+  {
+   "name": "TOUT_CHAM",
+   "kind": "simple",
+   "path": "TOUT_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 94
+   }
+  },
+  {
+   "name": "b_nom_cham",
+   "kind": "bloc",
+   "path": "[b_nom_cham]",
+   "condition": "not exists(\"TOUT_CHAM\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 95
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 8,
+     "default": "ACCE",
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE",
+      "ACCE_ABSOLU",
+      "EFGE_ELNO",
+      "SIPO_ELNO",
+      "SIGM_ELNO",
+      "FORC_NODA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 97
+     }
+    }
+   ]
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 115
+   }
+  },
+  {
+   "name": "NOEUD",
+   "kind": "simple",
+   "path": "NOEUD",
+   "status": "c",
+   "type": [
+    "no"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 116
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 117
+   }
+  },
+  {
+   "name": "CYCLIQUE",
+   "kind": "factor",
+   "path": "CYCLIQUE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 118
+   },
+   "keywords": [
+    {
+     "name": "NB_SECTEUR",
+     "kind": "simple",
+     "path": "CYCLIQUE/NB_SECTEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "NUME_DIAMETRE",
+     "kind": "simple",
+     "path": "CYCLIQUE/NUME_DIAMETRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "RESULTAT2",
+     "kind": "simple",
+     "path": "CYCLIQUE/RESULTAT2",
+     "status": "f",
+     "type": [
+      "evol_elas",
+      "evol_noli",
+      "dyna_trans",
+      "evol_char",
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+      "line": 122
+     }
+    }
+   ]
+  },
+  {
+   "name": "SQUELETTE",
+   "kind": "simple",
+   "path": "SQUELETTE",
+   "status": "f",
+   "type": [
+    "squelette"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 124
+   }
+  },
+  {
+   "name": "SOUS_STRUC",
+   "kind": "simple",
+   "path": "SOUS_STRUC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 125
+   }
+  },
+  {
+   "name": "SECTEUR",
+   "kind": "simple",
+   "path": "SECTEUR",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 126
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_sous_struc.py",
+    "line": 127
+   }
+  }
+ ]
+}

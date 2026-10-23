@@ -1,0 +1,447 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_VECT_ELEM",
+ "kind": "MACRO",
+ "fr": "Calcul des seconds membres élémentaires",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_vect_elem_ops.calc_vect_elem_ops",
+ "reentrant": "n",
+ "result_types": [
+  "vect_elem_depl_r",
+  "vect_elem_temp_r",
+  "vect_elem_pres_c"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+  "line": 40
+ },
+ "keywords": [
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CHAR_MECA",
+    "CHAR_THER",
+    "CHAR_ACOU",
+    "FORC_VARC"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "b_char_meca",
+   "kind": "bloc",
+   "path": "[b_char_meca]",
+   "condition": "equal_to(\"OPTION\", 'CHAR_MECA')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "CHARGE",
+      "MODELE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "b_charge",
+     "kind": "bloc",
+     "path": "[b_charge]",
+     "condition": "exists(\"CHARGE\")",
+     "fr": "modèle ne contenant pas de sous-structure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 52
+     },
+     "keywords": [
+      {
+       "name": "CHAM_MATER",
+       "kind": "simple",
+       "path": "CHAM_MATER",
+       "status": "f",
+       "type": [
+        "cham_mater"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+        "line": 55
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "MODE_FOURIER",
+       "kind": "simple",
+       "path": "MODE_FOURIER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+        "line": 58
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_modele",
+     "kind": "bloc",
+     "path": "[b_modele]",
+     "condition": "(exists(\"MODELE\"))",
+     "fr": "modèle contenant une sous-structure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 60
+     },
+     "keywords": [
+      {
+       "name": "SOUS_STRUC",
+       "kind": "factor",
+       "path": "SOUS_STRUC",
+       "status": "o",
+       "min": 1,
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT",
+          "SUPER_MAILLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+        "line": 63
+       },
+       "keywords": [
+        {
+         "name": "CAS_CHARGE",
+         "kind": "simple",
+         "path": "SOUS_STRUC/CAS_CHARGE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+          "line": 67
+         }
+        },
+        {
+         "name": "TOUT",
+         "kind": "simple",
+         "path": "SOUS_STRUC/TOUT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+          "line": 68
+         }
+        },
+        {
+         "name": "SUPER_MAILLE",
+         "kind": "simple",
+         "path": "SOUS_STRUC/SUPER_MAILLE",
+         "status": "f",
+         "type": [
+          "ma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+          "line": 69
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_char_varc",
+   "kind": "bloc",
+   "path": "[b_char_varc]",
+   "condition": "equal_to(\"OPTION\", 'FORC_VARC')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+    "line": 73
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_char_ther",
+   "kind": "bloc",
+   "path": "[b_char_ther]",
+   "condition": "equal_to(\"OPTION\", 'CHAR_THER')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "o",
+     "type": [
+      "char_ther"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 84
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_char_acou",
+   "kind": "bloc",
+   "path": "[b_char_acou]",
+   "condition": "equal_to(\"OPTION\", 'CHAR_ACOU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "o",
+     "type": [
+      "char_acou"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_vect_elem.py",
+      "line": 89
+     }
+    }
+   ]
+  }
+ ]
+}

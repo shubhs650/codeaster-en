@@ -1,0 +1,359 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/crea_coupe.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CREA_COUPE",
+ "kind": "MACRO",
+ "fr": "Création d'une table de coupes avec\n                          des noeuds projetés sur la peau du maillage",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.crea_coupe_ops.crea_coupe_ops",
+ "reentrant": null,
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/crea_coupe.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "COUPE",
+   "kind": "simple",
+   "path": "COUPE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_coupe.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster",
+    "maillage_p"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_coupe.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "NOM_AUTO",
+   "kind": "simple",
+   "path": "NOM_AUTO",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_coupe.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "b_nom_auto",
+   "kind": "bloc",
+   "path": "[b_nom_auto]",
+   "condition": "(equal_to(\"NOM_AUTO\", 'OUI'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_coupe.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "PREFIXE",
+     "kind": "simple",
+     "path": "PREFIXE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "fr": "préfixe à ajouter au début du nom des coupes",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NUME_INIT",
+     "kind": "simple",
+     "path": "NUME_INIT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": "numéro à partir duquel la numérotation commence",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "PAS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": "incrément de numérotation entre deux coupes successives",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 44
+     }
+    }
+   ]
+  },
+  {
+   "name": "REVOLUTION",
+   "kind": "factor",
+   "path": "REVOLUTION",
+   "status": "f",
+   "max": "**",
+   "fr": "Création d'une table de coupes par revolution des coupes\n                                    définies dans le tableau d'entrée autour d'un axe et un \n                                    centre de rotation",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NOM_COUPE",
+      "GROUP_COUPE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_coupe.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "AXE",
+     "kind": "simple",
+     "path": "REVOLUTION/AXE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "CENTRE",
+     "kind": "simple",
+     "path": "REVOLUTION/CENTRE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "ANGLE_AUTO",
+     "kind": "simple",
+     "path": "REVOLUTION/ANGLE_AUTO",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "b_angle_auto_oui",
+     "kind": "bloc",
+     "path": "REVOLUTION/[b_angle_auto_oui]",
+     "condition": "(equal_to(\"ANGLE_AUTO\", 'OUI'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 62
+     },
+     "keywords": [
+      {
+       "name": "NOMBRE",
+       "kind": "simple",
+       "path": "REVOLUTION/NOMBRE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "val_min": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_coupe.py",
+        "line": 64
+       }
+      },
+      {
+       "name": "ANGLE_MAX",
+       "kind": "simple",
+       "path": "REVOLUTION/ANGLE_MAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": -360,
+       "val_max": 360,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_coupe.py",
+        "line": 65
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_angle_auto_non",
+     "kind": "bloc",
+     "path": "REVOLUTION/[b_angle_auto_non]",
+     "condition": "(equal_to(\"ANGLE_AUTO\", 'NON'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 67
+     },
+     "keywords": [
+      {
+       "name": "ANGLE",
+       "kind": "simple",
+       "path": "REVOLUTION/ANGLE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "val_min": -360,
+       "val_max": 360,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_coupe.py",
+        "line": 69
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_MA_ORIG",
+     "kind": "simple",
+     "path": "REVOLUTION/GROUP_MA_ORIG",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "GROUP_MA_EXTR",
+     "kind": "simple",
+     "path": "REVOLUTION/GROUP_MA_EXTR",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "NOM_COUPE",
+     "kind": "simple",
+     "path": "REVOLUTION/NOM_COUPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": "liste contentant les noms des coupes à traiter",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "GROUP_COUPE",
+     "kind": "simple",
+     "path": "REVOLUTION/GROUP_COUPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": "liste contentant les groupes des coupes à traiter",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "PREFIXE",
+     "kind": "simple",
+     "path": "REVOLUTION/PREFIXE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "fr": "préfixe à ajouter au début du nom des coupes en revolution",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_coupe.py",
+      "line": 83
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_list_reel.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_LIST_REEL",
+ "kind": "OPER",
+ "fr": "Définir une liste de réels strictement croissante",
+ "translation_upstream": null,
+ "op": 24,
+ "reentrant": "n",
+ "result_types": [
+  "listr8_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "VALE",
+    "DEBUT"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "VALE",
+    "INTERVALLE"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "DEBUT",
+    "INTERVALLE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_list_reel.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "VALE",
+   "kind": "simple",
+   "path": "VALE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_reel.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "DEBUT",
+   "kind": "simple",
+   "path": "DEBUT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_reel.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "INTERVALLE",
+   "kind": "factor",
+   "path": "INTERVALLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOMBRE",
+      "PAS"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_reel.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "JUSQU_A",
+     "kind": "simple",
+     "path": "INTERVALLE/JUSQU_A",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_reel.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "NOMBRE",
+     "kind": "simple",
+     "path": "INTERVALLE/NOMBRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_reel.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "INTERVALLE/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_reel.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_reel.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_reel.py",
+    "line": 48
+   }
+  }
+ ]
+}

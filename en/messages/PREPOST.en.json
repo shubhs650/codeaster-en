@@ -1,0 +1,499 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/prepost.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "PREPOST",
+ "source": {
+  "file": "code_aster/Messages/prepost.py"
+ },
+ "messages": {
+  "1": {
+   "id": "PREPOST_1",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps.\nLe modèle du calcul semble changer au cours du transitoire. Dans ce cas de\nfigure le parallélisme en temps n'est pas encore disponible.\n\nConseil\n=======\nRelancer le calcul en désactivant ce type de parallélisme avec\nPARALLELISME_TEMPS='NON'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "PREPOST_3",
+   "fr": "\n    Les tailles de tableau du module de Young du revêtement et du métal de base doivent être égales.\n",
+   "placeholders": [],
+   "source": {
+    "line": 35
+   },
+   "en": null
+  },
+  "4": {
+   "id": "PREPOST_4",
+   "fr": "\n La méthode %(k1)s est illicite\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "5": {
+   "id": "PREPOST_5",
+   "fr": "\n Le rapport entre le module de Young du revêtement et celui du métal de base doit être compris entre 0,7 et 1.\n En dehors de ces bornes, l'interpolation  barycentrique n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 45
+   },
+   "en": null
+  },
+  "6": {
+   "id": "PREPOST_6",
+   "fr": "\n Attention: le nombre de points de la table TABL_MECA_MDB est de %(i1)d. Il doit\n être égale a 5.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 51
+   },
+   "en": null
+  },
+  "10": {
+   "id": "PREPOST_10",
+   "fr": "\n Phénomène non valide. Utiliser TRACTION ou ECRO_LINE pour récupérer les limites élastiques.\n",
+   "placeholders": [],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "11": {
+   "id": "PREPOST_11",
+   "fr": "\n la macro-commande POST_ERREUR prend en charge seulement le phénomène MECANIQUE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 62
+   },
+   "en": null
+  },
+  "12": {
+   "id": "PREPOST_12",
+   "fr": "\n une et une seule fonction doit être associée à chaque GROUP_MA, pour la composante %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 67
+   },
+   "en": null
+  },
+  "13": {
+   "id": "PREPOST_13",
+   "fr": "\n Les valeurs non existantes du champ %(k1)s lues sur le maillage donné\n sont considérées nulles.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 72
+   },
+   "en": null
+  },
+  "15": {
+   "id": "PREPOST_15",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps:\nLe calcul n'a pas pu bénéficier de ce type de parallélisme. Sans doute n'a-t-il\nété lancé que sur 1 processus MPI ou avec un nombre d'instants inférieur à\ncelui des processus MPI.\n\nLe calcul continue en ne bénéficiant, éventuellement, que du parallélisme en\nespace (comme si le mot-clé PARALLELISME_TEMPS était renseigné à 'NON'). Cela\npourrait le ralentir sur ce calcul d'option.\n\nConseil\n=======\nVérifier votre nombre de processus MPI ou votre liste d'instants. Sinon\nrelancer en posant PARALLELISME_TEMPS='NON' afin d'éteindre cette alarme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 78
+   },
+   "en": null
+  },
+  "16": {
+   "id": "PREPOST_16",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps.\nLe NUME_DDL du calcul semble changer au cours du transitoire. Dans ce cas\nde figure le parallélisme en temps n'est pas encore disponible.\n\nConseil\n=======\nRelancer le calcul en désactivant ce parallélisme (PARALLELISME_TEMPS='NON').\n",
+   "placeholders": [],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "17": {
+   "id": "PREPOST_17",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps.\nLe champ calculé semble changer de taille au cours du transitoire. Dans ce cas\nde figure le parallélisme en temps n'est pas encore disponible.\n\nConseil\n=======\nRelancer le calcul en désactivant ce parallélisme (PARALLELISME_TEMPS='NON').\n",
+   "placeholders": [],
+   "source": {
+    "line": 106
+   },
+   "en": null
+  },
+  "18": {
+   "id": "PREPOST_18",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps.\nLa configuration du calcul a conduit à une alarme non encore gérée avec ce\ntype de parallélisme. Le comportement du calcul risque d'être différent du\nmode séquentiel. On arrête donc le calcul au cas où.\n\nConseil\n=======\nRelancer le calcul en désactivant ce parallélisme (PARALLELISME_TEMPS='NON')\nou en remédiant à cette alarme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 117
+   },
+   "en": null
+  },
+  "19": {
+   "id": "PREPOST_19",
+   "fr": "\nOpérateur CALC_CHAMP et parallélisme en temps:\nLe calcul n'a pas pu bénéficier de ce type de parallélisme car il n'est pas\nencore disponible pour les options de calcul du mot-clé facteur CHAMP_UTIL.\n\nLe calcul continue en ne bénéficiant, éventuellement, que du parallélisme en\nespace (comme si le mot-clé PARALLELISME_TEMPS était renseigné à 'NON').\n\nConseil\n=======\nRelancer en posant PARALLELISME_TEMPS='NON' afin d'éteindre cette alarme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 130
+   },
+   "en": null
+  },
+  "21": {
+   "id": "PREPOST_21",
+   "fr": "\n Intersection Droite / Cercle\n pas d'intersection trouvée\n",
+   "placeholders": [],
+   "source": {
+    "line": 144
+   },
+   "en": null
+  },
+  "28": {
+   "id": "PREPOST_28",
+   "fr": "\n volume supérieur à 1.d6\n",
+   "placeholders": [],
+   "source": {
+    "line": 150
+   },
+   "en": null
+  },
+  "31": {
+   "id": "PREPOST_31",
+   "fr": "\n structure de données RESULTAT inconnue  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 155
+   },
+   "en": null
+  },
+  "36": {
+   "id": "PREPOST_36",
+   "fr": "\n Le champ de:  %(k1)s  a des éléments ayant des sous-points.\n Ces éléments ne seront pas traités.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 160
+   },
+   "en": null
+  },
+  "38": {
+   "id": "PREPOST_38",
+   "fr": "\n le vecteur défini sous le mot clé ACTION/AXE_Z a une norme nulle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 166
+   },
+   "en": null
+  },
+  "39": {
+   "id": "PREPOST_39",
+   "fr": "\n Le résultat généralisé en entrée (%(k1)s) est issu d'un calcul en sous-structuration,\n et non pas d'un calcul standard avec une simple projection sur base modale.\n\n Les opérations de restitution par POST_GENE_PHYS sont actuellement limitées aux calculs\n du dernier type (projections simples).\n\n Conseil :\n Utilisez l'un des deux opérateurs REST_GENE_PHYS ou REST_SOUS_STRUC pour restituer sur\n base physique vos résultats en coordonnées généralisées.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "40": {
+   "id": "PREPOST_40",
+   "fr": "\n La base modale de projection %(k1)s, référencée dans le résultat généralisé, est\n différente de celle donnée en entrée sous le mot-clé MODE_MECA (%(k2)s).\n\n Vérifiez que les coordonnées généralisées peuvent être restituées sur cette dernière\n base.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 184
+   },
+   "en": null
+  },
+  "41": {
+   "id": "PREPOST_41",
+   "fr": "\n Pour l'observation %(i1)d :\n\n La restitution du champ %(k1)s n'est possible que si il a préalablement été calculé sur\n la base de projection. Or, dans la base %(k3)s, le champ %(k2)s n'a pas été trouvé.\n\n Conseil :\n Essayez d'enrichir la base %(k3)s avec un appel préalable à CREA_CHAMP, option %(k2)s.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(k3)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 193
+   },
+   "en": null
+  },
+  "42": {
+   "id": "PREPOST_42",
+   "fr": "\n Pour l'observation %(i1)d :\n\n Il n'a pas été possible de trouver le composant %(k1)s dans le champ demandé %(k2)s.\n\n Conseil :\n Si vous ignorez les noms des composants de votre champ, il est possible d'appeler\n l'opérateur sans spécifier le mot-clé NOM_CMP. Cela permet d'en restituer la totalité.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 204
+   },
+   "en": null
+  },
+  "43": {
+   "id": "PREPOST_43",
+   "fr": "\n Pour l'observation no. %(i1)d :\n\n Vous avez demandé le champ : %(k2)s. Néanmoins, il n'existe aucune information\n dans le résultat généralisé %(k1)s quant à la présence d'un chargement\n dynamique en multi-appuis.\n\n Si la structure est entraînée par une accélération en mono-appui, il faudra\n renseigner le mot-clé ACCE_MONO_APPUI afin de prendre en compte cette accélération\n dans le champ ACCE_ABSOLU.\n\n Le résultat obtenu correspond donc au champ %(k3)s, en relatif.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k2)s",
+    "%(k1)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 215
+   },
+   "en": null
+  },
+  "44": {
+   "id": "PREPOST_44",
+   "fr": "\n Pour l'observation no. %(i1)d :\n\n Vous avez demandé le champ : %(k2)s. Néanmoins, il n'existe aucune information\n dans le résultat généralisé %(k1)s quant à la présence d'un chargement\n dynamique en multi-appuis.\n\n Il n'est actuellement pas possible de récupérer déplacements et vitesses absolues\n en mono-appui. Pour l'accélération absolue, ceci est possible mais il est impératif\n de compléter avec le mot-clé ACCE_MONO_APPUI pour restituer le champ ACCE_ABSOLU.\n\n Le résultat obtenu correspond donc au champ %(k3)s, en relatif.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k2)s",
+    "%(k1)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 230
+   },
+   "en": null
+  },
+  "45": {
+   "id": "PREPOST_45",
+   "fr": "\n Pour l'observation no. %(i1)d :\n\n Vous avez demandé de restituer l'accélération absolue (ACCE_ABSOLU) en précisant la\n fonction de l'accélération en mono-appui ainsi que sa direction.\n\n Le résultat généralisé %(k1)s a été calculé en présence des chargements en\n multi-appuis. L'accélération restituée est le cumul de l'accélération relative\n et les différentes accélérations d'entraînement en mono ainsi qu'en multi-appuis.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 245
+   },
+   "en": null
+  },
+  "46": {
+   "id": "PREPOST_46",
+   "fr": "\n erreur dans la création du fichier de maillage au format GIBI.\n Celui-ci ne contient pas d'objet de type maillage.\n\n Risque & Conseil:\n Assurez vous que votre procédure GIBI sauvegarde bien les objets du maillage (pile 32 dans le formalisme GIBI)\n",
+   "placeholders": [],
+   "source": {
+    "line": 257
+   },
+   "en": null
+  },
+  "51": {
+   "id": "PREPOST_51",
+   "fr": "\n l'option de calcul \" %(k1)s \" n'existe pas dans la structure de données %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 266
+   },
+   "en": null
+  },
+  "52": {
+   "id": "PREPOST_52",
+   "fr": "\n le champ \" %(k1)s \" pour l'option de calcul \" %(k2)s \", n'a pas été notée\n dans la structure de données %(k3)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 271
+   },
+   "en": null
+  },
+  "53": {
+   "id": "PREPOST_53",
+   "fr": "\n la dimension du problème est invalide : il faut : 1d, 2d ou 3d.\n",
+   "placeholders": [],
+   "source": {
+    "line": 277
+   },
+   "en": null
+  },
+  "54": {
+   "id": "PREPOST_54",
+   "fr": "\n nombre de noeuds supérieur au maximum autorisé : 27.\n",
+   "placeholders": [],
+   "source": {
+    "line": 282
+   },
+   "en": null
+  },
+  "55": {
+   "id": "PREPOST_55",
+   "fr": "\nProblème à la lecture des points\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 287
+   },
+   "en": null
+  },
+  "56": {
+   "id": "PREPOST_56",
+   "fr": "\n type de maille :  %(k1)s  inconnu de la commande PRE_GIBI.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 294
+   },
+   "en": null
+  },
+  "57": {
+   "id": "PREPOST_57",
+   "fr": "\n nombre d'objets supérieur au maximum autorisé : 99999.\n",
+   "placeholders": [],
+   "source": {
+    "line": 299
+   },
+   "en": null
+  },
+  "59": {
+   "id": "PREPOST_59",
+   "fr": "\n le maillage GIBI est peut être erroné :\n on continue quand même, mais si vous avez des problèmes plus loin ...\n",
+   "placeholders": [],
+   "source": {
+    "line": 304
+   },
+   "en": null
+  },
+  "60": {
+   "id": "PREPOST_60",
+   "fr": "\n arrêt sur erreur(s)\n",
+   "placeholders": [],
+   "source": {
+    "line": 310
+   },
+   "en": null
+  },
+  "74": {
+   "id": "PREPOST_74",
+   "fr": "\n la variable  %(k1)s  n'existe pas\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 315
+   },
+   "en": null
+  },
+  "75": {
+   "id": "PREPOST_75",
+   "fr": "\n pas d'impression du champ\n",
+   "placeholders": [],
+   "source": {
+    "line": 320
+   },
+   "en": null
+  },
+  "80": {
+   "id": "PREPOST_80",
+   "fr": "\n on traite les TRIA7 QUAD9 en oubliant le noeud centre\n",
+   "placeholders": [],
+   "source": {
+    "line": 325
+   },
+   "en": null
+  },
+  "83": {
+   "id": "PREPOST_83",
+   "fr": "\n Certaines composantes sélectionnées ne font pas partie du LIGREL\n",
+   "placeholders": [],
+   "source": {
+    "line": 330
+   },
+   "en": null
+  },
+  "84": {
+   "id": "PREPOST_84",
+   "fr": "\n Élément PYRAM5 non disponible dans IDEAS\n",
+   "placeholders": [],
+   "source": {
+    "line": 335
+   },
+   "en": null
+  },
+  "85": {
+   "id": "PREPOST_85",
+   "fr": "\n Élément PYRAM13 non disponible dans IDEAS\n",
+   "placeholders": [],
+   "source": {
+    "line": 340
+   },
+   "en": null
+  },
+  "86": {
+   "id": "PREPOST_86",
+   "fr": "\nCas particulier pour l'impression des mailles suivantes, on traite :\n     - les PENTA21 en oubliant les noeuds au centre des faces\n     - les TETRA15 en oubliant les quatre noeuds au centre des faces et le noeud central\n     - les PYRAM19 en oubliant les cinq noeuds au centre des faces et le noeud central\n     - les HEXA9 en oubliant le noeud central\n     - les PENTA7 en oubliant le noeud central\n",
+   "placeholders": [],
+   "source": {
+    "line": 345
+   },
+   "en": null
+  },
+  "87": {
+   "id": "PREPOST_87",
+   "fr": "\n On ne sait pas imprimer le champ de type:  %(k1)s\n champ :  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 355
+   },
+   "en": null
+  },
+  "90": {
+   "id": "PREPOST_90",
+   "fr": "\n On ne sait pas imprimer le champ  %(k1)s  au format  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 361
+   },
+   "en": null
+  },
+  "91": {
+   "id": "PREPOST_91",
+   "fr": "\n On ne sait pas imprimer au format 'MED' les cartes de type %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 366
+   },
+   "en": null
+  },
+  "97": {
+   "id": "PREPOST_97",
+   "fr": "\n On ne sait pas imprimer les champs de type \" %(k1)s \"\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 371
+   },
+   "en": null
+  }
+ }
+}

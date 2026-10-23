@@ -1,0 +1,196 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_MAC3COEUR",
+ "kind": "MACRO",
+ "fr": null,
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.Mac3Coeur.post_mac3coeur_ops.post_mac3coeur_ops",
+ "reentrant": null,
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "TYPE_COEUR",
+   "kind": "simple",
+   "path": "TYPE_COEUR",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MONO",
+    "MONO_FROID",
+    "TEST",
+    "900",
+    "1300",
+    "N4",
+    "EPR",
+    "LIGNE900",
+    "LIGNE1300",
+    "LIGNEN4",
+    "LIGNEEPR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "b_type_ligne",
+   "kind": "bloc",
+   "path": "[b_type_ligne]",
+   "condition": "is_in(\"TYPE_COEUR\", (\"LIGNE900\",\"LIGNE1300\",\"LIGNEN4\",\"LIGNEEPR\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "NB_ASSEMBLAGE",
+     "kind": "simple",
+     "path": "NB_ASSEMBLAGE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+      "line": 49
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_noli"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "TYPE_CALCUL",
+   "kind": "simple",
+   "path": "TYPE_CALCUL",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "LAME",
+    "DEFORMATION",
+    "FORCE_CONTACT"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXTRACTION",
+   "into": [
+    "EXTRACTION",
+    "ANALYSE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "b_lame",
+   "kind": "bloc",
+   "path": "[b_lame]",
+   "condition": "equal_to(\"TYPE_CALCUL\", \"LAME\") and equal_to(\"OPERATION\", \"EXTRACTION\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "FORMAT",
+     "kind": "simple",
+     "path": "FORMAT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DAMAC",
+     "into": [
+      "DAMAC",
+      "ASTER"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_mac3coeur.py",
+      "line": 58
+     }
+    }
+   ]
+  }
+ ]
+}

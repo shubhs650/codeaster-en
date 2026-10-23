@@ -1,0 +1,129 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/nume_ddl.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "NUME_DDL",
+ "kind": "MACRO",
+ "fr": "Etablissement de la numérotation des ddl avec ou sans renumérotation et du stockage de la matrice",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.nume_ddl_ops.nume_ddl_ops",
+ "reentrant": "n",
+ "result_types": [
+  "nume_ddl_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MATR_RIGI",
+    "MODELE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/nume_ddl.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "MATR_RIGI",
+   "kind": "simple",
+   "path": "MATR_RIGI",
+   "status": "f",
+   "type": [
+    "matr_elem_depl_r",
+    "matr_elem_depl_c",
+    "matr_elem_temp_r",
+    "matr_elem_pres_c"
+   ],
+   "max": 100,
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "b_modele",
+   "kind": "bloc",
+   "path": "[b_modele]",
+   "condition": "exists(\"MODELE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca",
+      "char_ther",
+      "char_acou"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/nume_ddl.py",
+      "line": 42
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/nume_ddl.py",
+    "line": 46
+   }
+  }
+ ]
+}

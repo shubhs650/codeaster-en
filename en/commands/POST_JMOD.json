@@ -1,0 +1,250 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_jmod.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_JMOD",
+ "kind": "MACRO",
+ "fr": "calcul de J-integrale",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_jmod_ops.post_jmod_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "INST",
+    "NUME_ORDRE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_jmod.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "FOND_FISS",
+   "kind": "simple",
+   "path": "FOND_FISS",
+   "status": "f",
+   "type": [
+    "fond_fissure"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli"
+   ],
+   "fr": "Displacement results",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "NB_COUCHES",
+   "kind": "simple",
+   "path": "NB_COUCHES",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 4,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "into": [
+    "J",
+    "JMOD"
+   ],
+   "fr": null,
+   "other": {
+    "default": "JMOD"
+   },
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "ETAT_INIT",
+   "kind": "factor",
+   "path": "ETAT_INIT",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "EPSI",
+     "kind": "simple",
+     "path": "ETAT_INIT/EPSI",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_jmod.py",
+      "line": 34
+     }
+    }
+   ]
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "NB_POINT_FOND",
+   "kind": "simple",
+   "path": "NB_POINT_FOND",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "b_acce_reel",
+   "kind": "bloc",
+   "path": "[b_acce_reel]",
+   "condition": "(exists(\"INST\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_jmod.py",
+      "line": 39
+     }
+    }
+   ]
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "POST_JMOD",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_jmod.py",
+    "line": 43
+   }
+  }
+ ]
+}

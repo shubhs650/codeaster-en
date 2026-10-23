@@ -1,0 +1,2783 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_champ.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_CHAMP",
+ "kind": "OPER",
+ "fr": "Completer ou creer un resultat en calculant des champs par elements ou aux noeuds",
+ "translation_upstream": null,
+ "op": 52,
+ "reentrant": "f:RESULTAT",
+ "result_types": [
+  "resultat_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "INST",
+    "FREQ",
+    "NUME_MODE",
+    "NOEUD_CMP",
+    "LIST_INST",
+    "LIST_FREQ",
+    "LIST_ORDRE",
+    "NOM_CAS"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "TOUT",
+    "GROUP_MA"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_champ.py",
+  "line": 38
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": "Resultat d'une commande globale",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "NOEUD_CMP",
+   "kind": "simple",
+   "path": "NOEUD_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "NOM_CAS",
+   "kind": "simple",
+   "path": "NOM_CAS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "b_prec_rela",
+   "kind": "bloc",
+   "path": "[b_prec_rela]",
+   "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 76
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_prec_abso",
+   "kind": "bloc",
+   "path": "[b_prec_abso]",
+   "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 78
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 79
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIST_ORDRE",
+   "kind": "simple",
+   "path": "LIST_ORDRE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 81
+   }
+  },
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": "le calcul sera effectue sur toutes les mailles",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 82
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": "le calcul ne sera effectue que sur ces groupes de mailles",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 88
+   }
+  },
+  {
+   "name": "b_lineaire",
+   "kind": "bloc",
+   "path": "[b_lineaire]",
+   "condition": "is_type(\"RESULTAT\") in (evol_elas,mode_meca,mode_meca_c,comb_fourier,mult_elas,fourier_elas,mode_flamb)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "CONTRAINTE",
+      "DEFORMATION",
+      "ENERGIE",
+      "CRITERES",
+      "VARI_INTERNE",
+      "PROPRIETES",
+      "FORCE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 96
+   },
+   "keywords": [
+    {
+     "name": "CONTRAINTE",
+     "kind": "simple",
+     "path": "CONTRAINTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "STRX_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de contraintes et efforts generalises",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "DEFORMATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de deformations",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "ENERGIE",
+     "kind": "simple",
+     "path": "ENERGIE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "ECIN_ELEM",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPOT_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul d'energies",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "CRITERES",
+     "kind": "simple",
+     "path": "CRITERES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de criteres",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 134
+     }
+    },
+    {
+     "name": "VARI_INTERNE",
+     "kind": "simple",
+     "path": "VARI_INTERNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de variables internes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "PROPRIETES",
+     "kind": "simple",
+     "path": "PROPRIETES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "MATE_ELEM",
+      "MATE_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de propriétés",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "FORCE",
+     "kind": "simple",
+     "path": "FORCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "FORC_NODA",
+      "REAC_NODA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour des forces nodales et des reactions nodales",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 166
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 171
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 172
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 173
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 174
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 176
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 180
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 181
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 184
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 191
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 198
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_dyna",
+   "kind": "bloc",
+   "path": "[b_dyna]",
+   "condition": "is_type(\"RESULTAT\") in (dyna_harmo,dyna_trans)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "CONTRAINTE",
+      "DEFORMATION",
+      "ENERGIE",
+      "CRITERES",
+      "VARI_INTERNE",
+      "PROPRIETES",
+      "ACOUSTIQUE",
+      "FORCE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 208
+   },
+   "keywords": [
+    {
+     "name": "CONTRAINTE",
+     "kind": "simple",
+     "path": "CONTRAINTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "STRX_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de contraintes et efforts generalises",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 223
+     }
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "DEFORMATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de deformations",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 231
+     }
+    },
+    {
+     "name": "ENERGIE",
+     "kind": "simple",
+     "path": "ENERGIE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "ECIN_ELEM",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPOT_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul d'energies",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 239
+     }
+    },
+    {
+     "name": "CRITERES",
+     "kind": "simple",
+     "path": "CRITERES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de criteres",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 247
+     }
+    },
+    {
+     "name": "VARI_INTERNE",
+     "kind": "simple",
+     "path": "VARI_INTERNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de variables internes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 255
+     }
+    },
+    {
+     "name": "PROPRIETES",
+     "kind": "simple",
+     "path": "PROPRIETES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "MATE_ELEM",
+      "MATE_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de propriétés",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 263
+     }
+    },
+    {
+     "name": "ACOUSTIQUE",
+     "kind": "simple",
+     "path": "ACOUSTIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRME_ELNO"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de champs en acoustique",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 271
+     }
+    },
+    {
+     "name": "FORCE",
+     "kind": "simple",
+     "path": "FORCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "FORC_NODA",
+      "REAC_NODA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour des forces nodales et des reactions nodales",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 279
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 287
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 292
+       }
+      },
+      {
+       "name": "PHAS_DEG",
+       "kind": "simple",
+       "path": "EXCIT/PHAS_DEG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 294
+       }
+      },
+      {
+       "name": "PUIS_PULS",
+       "kind": "simple",
+       "path": "EXCIT/PUIS_PULS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 295
+       }
+      },
+      {
+       "name": "FONC_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT_C",
+       "status": "f",
+       "type": [
+        "fonction_c",
+        "formule_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 296
+       }
+      },
+      {
+       "name": "COEF_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 297
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 298
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 299
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 300
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 302
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 306
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 307
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 310
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 317
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 324
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_non_lin",
+   "kind": "bloc",
+   "path": "[b_non_lin]",
+   "condition": "is_type(\"RESULTAT\") in (evol_noli,)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "SOUS_POINT",
+      "CONTRAINTE",
+      "DEFORMATION",
+      "ENERGIE",
+      "CRITERES",
+      "VARI_INTERNE",
+      "PROPRIETES",
+      "HYDRAULIQUE",
+      "FORCE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 334
+   },
+   "keywords": [
+    {
+     "name": "SOUS_POINT",
+     "kind": "simple",
+     "path": "SOUS_POINT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DEPL_ELGA",
+      "TEMP_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de champs aux sous-points",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 350
+     }
+    },
+    {
+     "name": "CONTRAINTE",
+     "kind": "simple",
+     "path": "CONTRAINTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de contraintes et efforts generalises",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 358
+     }
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "DEFORMATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de deformations",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 366
+     }
+    },
+    {
+     "name": "ENERGIE",
+     "kind": "simple",
+     "path": "ENERGIE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul d'energies",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 374
+     }
+    },
+    {
+     "name": "CRITERES",
+     "kind": "simple",
+     "path": "CRITERES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "INDL_ELGA",
+      "PDIL_ELGA",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de criteres",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 382
+     }
+    },
+    {
+     "name": "VARI_INTERNE",
+     "kind": "simple",
+     "path": "VARI_INTERNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELNO",
+      "VARI_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de variables internes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 390
+     }
+    },
+    {
+     "name": "PROPRIETES",
+     "kind": "simple",
+     "path": "PROPRIETES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "MATE_ELEM",
+      "MATE_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de propriétés",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 398
+     }
+    },
+    {
+     "name": "HYDRAULIQUE",
+     "kind": "simple",
+     "path": "HYDRAULIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "FLHN_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de flux hydraulique",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 406
+     }
+    },
+    {
+     "name": "FORCE",
+     "kind": "simple",
+     "path": "FORCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "FORC_NODA",
+      "REAC_NODA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour des forces nodales et des reactions nodales",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 414
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 422
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 427
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 428
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 429
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE",
+        "FIXE_PILO",
+        "SUIV",
+        "DIDI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 430
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 437
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 441
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 442
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 445
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 452
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 459
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_ther",
+   "kind": "bloc",
+   "path": "[b_ther]",
+   "condition": "is_type(\"RESULTAT\") in (evol_ther,fourier_ther,)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "THERMIQUE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 469
+   },
+   "keywords": [
+    {
+     "name": "THERMIQUE",
+     "kind": "simple",
+     "path": "THERMIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "ETHE_ELEM",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "HHO_TEMP",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "SOUR_ELGA",
+      "TEMP_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de champs en thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 472
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 480
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_ther",
+        "char_cine_ther"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 485
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 486
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 487
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 488
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 490
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 494
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 495
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 498
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 505
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 512
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_sech",
+   "kind": "bloc",
+   "path": "[b_sech]",
+   "condition": "is_type(\"RESULTAT\") in (evol_sech,)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "SECHAGE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 522
+   },
+   "keywords": [
+    {
+     "name": "SECHAGE",
+     "kind": "simple",
+     "path": "SECHAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de champs en calcul de séchage",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 525
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 533
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_ther",
+        "char_cine_ther"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 538
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 539
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 540
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 541
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 543
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 547
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 548
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 551
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 558
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 565
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_acou",
+   "kind": "bloc",
+   "path": "[b_acou]",
+   "condition": "is_type(\"RESULTAT\") in (acou_harmo,mode_acou,tran_gene,harm_gene)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "ACOUSTIQUE",
+      "CHAM_UTIL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 575
+   },
+   "keywords": [
+    {
+     "name": "ACOUSTIQUE",
+     "kind": "simple",
+     "path": "ACOUSTIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRME_ELNO"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Options pour le calcul de champs en acoustique",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 578
+     }
+    },
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": "Charges contenant les temperatures, les efforts repartis pour les poutres...",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "FONC_MULT",
+        "COEF_MULT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 586
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 591
+       }
+      },
+      {
+       "name": "PHAS_DEG",
+       "kind": "simple",
+       "path": "EXCIT/PHAS_DEG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 593
+       }
+      },
+      {
+       "name": "PUIS_PULS",
+       "kind": "simple",
+       "path": "EXCIT/PUIS_PULS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 594
+       }
+      },
+      {
+       "name": "FONC_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT_C",
+       "status": "f",
+       "type": [
+        "fonction_c",
+        "formule_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 595
+       }
+      },
+      {
+       "name": "COEF_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 596
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 597
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 598
+       }
+      },
+      {
+       "name": "TYPE_CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/TYPE_CHARGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "FIXE_CSTE",
+       "into": [
+        "FIXE_CSTE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 599
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAM_UTIL",
+     "kind": "factor",
+     "path": "CHAM_UTIL",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FORMULE",
+        "CRITERE",
+        "NORME"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_champ.py",
+      "line": 601
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom du champ utilisé en donnée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 605
+       }
+      },
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/FORMULE",
+       "status": "f",
+       "type": [
+        "formule"
+       ],
+       "max": "**",
+       "fr": "Formule permet d'obtenir le critère",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 606
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CHAM_UTIL/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "TRACE",
+        "VMIS",
+        "INVA_2"
+       ],
+       "fr": "Calcul d'un critère pré-défini",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 609
+       }
+      },
+      {
+       "name": "NORME",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NORME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "L2",
+        "FROBENIUS"
+       ],
+       "fr": "Calcul d'une norme pré-définie",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 616
+       }
+      },
+      {
+       "name": "NUME_CHAM_RESU",
+       "kind": "simple",
+       "path": "CHAM_UTIL/NUME_CHAM_RESU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 20,
+       "fr": "Numéro du champ produit. Exemple: 6 produit le champ UT06",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_champ.py",
+        "line": 623
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2,
+    3
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 632
+   }
+  },
+  {
+   "name": "PARALLELISME_TEMPS",
+   "kind": "simple",
+   "path": "PARALLELISME_TEMPS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 633
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_champ.py",
+    "line": 634
+   }
+  }
+ ]
+}

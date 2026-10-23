@@ -9,7 +9,7 @@ CASE="$(cd "$CASE" && pwd)"
 TAG="latest"; [ -f CONTAINER_TAG ] && TAG="$(tr -d '[:space:]' < CONTAINER_TAG)"
 IMG="codeastersolver/codeaster-seq:${TAG}"
 
-mkdir -p "$CASE/output"
+mkdir -p "$CASE/output/tables"
 docker image inspect "$IMG" >/dev/null 2>&1 || docker pull -q "$IMG"
 
 set +e

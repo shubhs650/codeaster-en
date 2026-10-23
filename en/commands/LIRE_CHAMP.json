@@ -1,0 +1,964 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/lire_champ.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "LIRE_CHAMP",
+ "kind": "OPER",
+ "fr": "Lire un champ dans un fichier au format MED et le stocker dans un concept.",
+ "translation_upstream": null,
+ "op": 192,
+ "reentrant": "n",
+ "result_types": [
+  "cham_no_sdaster",
+  "carte_sdaster",
+  "cham_elem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/lire_champ.py",
+  "line": 42
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "f",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MED",
+   "into": [
+    "MED"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "UNITE",
+   "kind": "simple",
+   "path": "UNITE",
+   "status": "f",
+   "type": [
+    "UnitMed"
+   ],
+   "default": 81,
+   "inout": "in",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "b_format",
+   "kind": "bloc",
+   "path": "[b_format]",
+   "condition": "equal_to(\"FORMAT\", 'MED')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOM_CMP_IDEM",
+      "NOM_CMP"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "NOM_CMP",
+      "NOM_CMP_MED"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NUME_ORDRE",
+      "INST"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NUME_PT",
+      "INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "NOM_MED",
+     "kind": "simple",
+     "path": "NOM_MED",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "NOM_CMP_IDEM",
+     "kind": "simple",
+     "path": "NOM_CMP_IDEM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "NOM_CMP_MED",
+     "kind": "simple",
+     "path": "NOM_CMP_MED",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "PROL_ZERO",
+     "kind": "simple",
+     "path": "PROL_ZERO",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Affecte des valeurs nulles la ou le champ n'est pas defini (sinon il y a NaN)",
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "NUME_PT",
+     "kind": "simple",
+     "path": "NUME_PT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Numero d ordre du champ à lire",
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Instant associé",
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "b_precision",
+     "kind": "bloc",
+     "path": "[b_precision]",
+     "condition": "(exists(\"INST\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 81
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": "Critère de précision sur le choix de l'instant associé",
+       "source": {
+        "file": "code_aster/Cata/Commands/lire_champ.py",
+        "line": 83
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/lire_champ.py",
+        "line": 90
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": "Précision sur le choix de l'instant associé",
+         "source": {
+          "file": "code_aster/Cata/Commands/lire_champ.py",
+          "line": 92
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/lire_champ.py",
+        "line": 99
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Précision sur le choix de l'instant associé",
+         "source": {
+          "file": "code_aster/Cata/Commands/lire_champ.py",
+          "line": 101
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "NOM_MAIL_MED",
+     "kind": "simple",
+     "path": "NOM_MAIL_MED",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 107
+     }
+    }
+   ]
+  },
+  {
+   "name": "TYPE_CHAM",
+   "kind": "simple",
+   "path": "TYPE_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ELEM_ABSC_R",
+    "ELNO_ABSC_R",
+    "ELGA_ABSC_R",
+    "CART_ABSC_R",
+    "NOEU_ABSC_R",
+    "ELEM_CACOQU_R",
+    "ELNO_CACOQU_R",
+    "ELGA_CACOQU_R",
+    "CART_CACOQU_R",
+    "NOEU_CACOQU_R",
+    "ELEM_CADISK_R",
+    "ELNO_CADISK_R",
+    "ELGA_CADISK_R",
+    "CART_CADISK_R",
+    "NOEU_CADISK_R",
+    "ELEM_CAORIE_R",
+    "ELNO_CAORIE_R",
+    "ELGA_CAORIE_R",
+    "CART_CAORIE_R",
+    "NOEU_CAORIE_R",
+    "ELEM_CAMA_R",
+    "ELNO_CAMA_R",
+    "ELGA_CAMA_R",
+    "CART_CAMA_R",
+    "NOEU_CAMA_R",
+    "ELEM_CHLI_R",
+    "ELNO_CHLI_R",
+    "ELGA_CHLI_R",
+    "CART_CHLI_R",
+    "NOEU_CHLI_R",
+    "ELEM_CODE_I",
+    "ELNO_CODE_I",
+    "ELGA_CODE_I",
+    "CART_CODE_I",
+    "NOEU_CODE_I",
+    "ELEM_COEH_F",
+    "ELNO_COEH_F",
+    "ELGA_COEH_F",
+    "CART_COEH_F",
+    "NOEU_COEH_F",
+    "ELEM_COEH_R",
+    "ELNO_COEH_R",
+    "ELGA_COEH_R",
+    "CART_COEH_R",
+    "NOEU_COEH_R",
+    "ELEM_CORR_R",
+    "ELNO_CORR_R",
+    "ELGA_CORR_R",
+    "CART_CORR_R",
+    "NOEU_CORR_R",
+    "ELEM_CRRU_R",
+    "ELNO_CRRU_R",
+    "ELGA_CRRU_R",
+    "CART_CRRU_R",
+    "NOEU_CRRU_R",
+    "ELEM_DBEL_R",
+    "ELNO_DBEL_R",
+    "ELGA_DBEL_R",
+    "CART_DBEL_R",
+    "NOEU_DBEL_R",
+    "ELEM_DCEL_I",
+    "ELNO_DCEL_I",
+    "ELGA_DCEL_I",
+    "CART_DCEL_I",
+    "NOEU_DCEL_I",
+    "ELEM_DDLI_C",
+    "ELNO_DDLI_C",
+    "ELGA_DDLI_C",
+    "CART_DDLI_C",
+    "NOEU_DDLI_C",
+    "ELEM_DDLI_F",
+    "ELNO_DDLI_F",
+    "ELGA_DDLI_F",
+    "CART_DDLI_F",
+    "NOEU_DDLI_F",
+    "ELEM_DDLI_R",
+    "ELNO_DDLI_R",
+    "ELGA_DDLI_R",
+    "CART_DDLI_R",
+    "NOEU_DDLI_R",
+    "ELEM_DDLM_C",
+    "ELNO_DDLM_C",
+    "ELGA_DDLM_C",
+    "CART_DDLM_C",
+    "NOEU_DDLM_C",
+    "ELEM_DDLM_R",
+    "ELNO_DDLM_R",
+    "ELGA_DDLM_R",
+    "CART_DDLM_R",
+    "NOEU_DDLM_R",
+    "ELEM_DEPL_C",
+    "ELNO_DEPL_C",
+    "ELGA_DEPL_C",
+    "CART_DEPL_C",
+    "NOEU_DEPL_C",
+    "ELEM_DEPL_F",
+    "ELNO_DEPL_F",
+    "ELGA_DEPL_F",
+    "CART_DEPL_F",
+    "NOEU_DEPL_F",
+    "ELEM_DEPL_R",
+    "ELNO_DEPL_R",
+    "ELGA_DEPL_R",
+    "CART_DEPL_R",
+    "NOEU_DEPL_R",
+    "ELEM_DISS_R",
+    "ELNO_DISS_R",
+    "ELGA_DISS_R",
+    "CART_DISS_R",
+    "NOEU_DISS_R",
+    "ELEM_DOMA_R",
+    "ELNO_DOMA_R",
+    "ELGA_DOMA_R",
+    "CART_DOMA_R",
+    "NOEU_DOMA_R",
+    "ELEM_DURT_R",
+    "ELNO_DURT_R",
+    "ELGA_DURT_R",
+    "CART_DURT_R",
+    "NOEU_DURT_R",
+    "ELEM_ENDO_R",
+    "ELNO_ENDO_R",
+    "ELGA_ENDO_R",
+    "CART_ENDO_R",
+    "NOEU_ENDO_R",
+    "ELEM_ENER_R",
+    "ELNO_ENER_R",
+    "ELGA_ENER_R",
+    "CART_ENER_R",
+    "NOEU_ENER_R",
+    "ELEM_EPSI_C",
+    "ELNO_EPSI_C",
+    "ELGA_EPSI_C",
+    "CART_EPSI_C",
+    "NOEU_EPSI_C",
+    "ELEM_EPSI_F",
+    "ELNO_EPSI_F",
+    "ELGA_EPSI_F",
+    "CART_EPSI_F",
+    "NOEU_EPSI_F",
+    "ELEM_EPSI_R",
+    "ELNO_EPSI_R",
+    "ELGA_EPSI_R",
+    "CART_EPSI_R",
+    "NOEU_EPSI_R",
+    "ELEM_ERRE_R",
+    "ELNO_ERRE_R",
+    "ELGA_ERRE_R",
+    "CART_ERRE_R",
+    "NOEU_ERRE_R",
+    "ELEM_FACY_R",
+    "ELNO_FACY_R",
+    "ELGA_FACY_R",
+    "CART_FACY_R",
+    "NOEU_FACY_R",
+    "ELEM_FLAP_R",
+    "ELNO_FLAP_R",
+    "ELGA_FLAP_R",
+    "CART_FLAP_R",
+    "NOEU_FLAP_R",
+    "ELEM_FER2_R",
+    "ELNO_FER2_R",
+    "ELGA_FER2_R",
+    "CART_FER2_R",
+    "NOEU_FER2_R",
+    "ELEM_VFER2_R",
+    "ELNO_VFER2_R",
+    "ELGA_VFER2_R",
+    "CART_VFER2_R",
+    "NOEU_VFER2_R",
+    "ELEM_FISS_R",
+    "ELNO_FISS_R",
+    "ELGA_FISS_R",
+    "CART_FISS_R",
+    "NOEU_FISS_R",
+    "ELEM_FLUN_F",
+    "ELNO_FLUN_F",
+    "ELGA_FLUN_F",
+    "CART_FLUN_F",
+    "NOEU_FLUN_F",
+    "ELEM_FLUN_R",
+    "ELNO_FLUN_R",
+    "ELGA_FLUN_R",
+    "CART_FLUN_R",
+    "NOEU_FLUN_R",
+    "ELEM_FLUX_F",
+    "ELNO_FLUX_F",
+    "ELGA_FLUX_F",
+    "CART_FLUX_F",
+    "NOEU_FLUX_F",
+    "ELEM_FLUX_R",
+    "ELNO_FLUX_R",
+    "ELGA_FLUX_R",
+    "CART_FLUX_R",
+    "NOEU_FLUX_R",
+    "ELEM_FORC_C",
+    "ELNO_FORC_C",
+    "ELGA_FORC_C",
+    "CART_FORC_C",
+    "NOEU_FORC_C",
+    "ELEM_FORC_F",
+    "ELNO_FORC_F",
+    "ELGA_FORC_F",
+    "CART_FORC_F",
+    "NOEU_FORC_F",
+    "ELEM_FORC_R",
+    "ELNO_FORC_R",
+    "ELGA_FORC_R",
+    "CART_FORC_R",
+    "NOEU_FORC_R",
+    "ELEM_FREQ_R",
+    "ELNO_FREQ_R",
+    "ELGA_FREQ_R",
+    "CART_FREQ_R",
+    "NOEU_FREQ_R",
+    "ELEM_FTHM_F",
+    "ELNO_FTHM_F",
+    "ELGA_FTHM_F",
+    "CART_FTHM_F",
+    "NOEU_FTHM_F",
+    "ELEM_FTHM_R",
+    "ELNO_FTHM_R",
+    "ELGA_FTHM_R",
+    "CART_FTHM_R",
+    "NOEU_FTHM_R",
+    "ELEM_ETHM_R",
+    "ELNO_ETHM_R",
+    "ELGA_ETHM_R",
+    "CART_ETHM_R",
+    "NOEU_ETHM_R",
+    "ELEM_ETHM_F",
+    "ELNO_ETHM_F",
+    "ELGA_ETHM_F",
+    "CART_ETHM_F",
+    "NOEU_ETHM_F",
+    "ELEM_ETHMH_R",
+    "ELNO_ETHMH_R",
+    "ELGA_ETHMH_R",
+    "CART_ETHMH_R",
+    "NOEU_ETHMH_R",
+    "ELEM_ETHMH_F",
+    "ELNO_ETHMH_F",
+    "ELGA_ETHMH_F",
+    "CART_ETHMH_F",
+    "NOEU_ETHMH_F",
+    "ELEM_GEOM_R",
+    "ELNO_GEOM_R",
+    "ELGA_GEOM_R",
+    "CART_GEOM_R",
+    "NOEU_GEOM_R",
+    "ELEM_G_DEPL_R",
+    "ELNO_G_DEPL_R",
+    "ELGA_G_DEPL_R",
+    "CART_G_DEPL_R",
+    "NOEU_G_DEPL_R",
+    "ELEM_HYDR_R",
+    "ELNO_HYDR_R",
+    "ELGA_HYDR_R",
+    "CART_HYDR_R",
+    "NOEU_HYDR_R",
+    "ELEM_IMPE_C",
+    "ELNO_IMPE_C",
+    "ELGA_IMPE_C",
+    "CART_IMPE_C",
+    "NOEU_IMPE_C",
+    "ELEM_IMPE_F",
+    "ELNO_IMPE_F",
+    "ELGA_IMPE_F",
+    "CART_IMPE_F",
+    "NOEU_IMPE_F",
+    "ELEM_IMPE_R",
+    "ELNO_IMPE_R",
+    "ELGA_IMPE_R",
+    "CART_IMPE_R",
+    "NOEU_IMPE_R",
+    "ELEM_INDL_R",
+    "ELNO_INDL_R",
+    "ELGA_INDL_R",
+    "CART_INDL_R",
+    "NOEU_INDL_R",
+    "ELEM_INFC_R",
+    "ELNO_INFC_R",
+    "ELGA_INFC_R",
+    "CART_INFC_R",
+    "NOEU_INFC_R",
+    "ELEM_INST_R",
+    "ELNO_INST_R",
+    "ELGA_INST_R",
+    "CART_INST_R",
+    "NOEU_INST_R",
+    "ELEM_INTE_R",
+    "ELNO_INTE_R",
+    "ELGA_INTE_R",
+    "CART_INTE_R",
+    "NOEU_INTE_R",
+    "ELEM_IRRA_R",
+    "ELNO_IRRA_R",
+    "ELGA_IRRA_R",
+    "CART_IRRA_R",
+    "NOEU_IRRA_R",
+    "ELEM_MASS_R",
+    "ELNO_MASS_R",
+    "ELGA_MASS_R",
+    "CART_MASS_R",
+    "NOEU_MASS_R",
+    "ELEM_MATE_R",
+    "ELNO_MATE_R",
+    "ELGA_MATE_R",
+    "CART_MATE_R",
+    "NOEU_MATE_R",
+    "ELEM_MATE_F",
+    "ELNO_MATE_F",
+    "ELGA_MATE_F",
+    "CART_MATE_F",
+    "NOEU_MATE_F",
+    "ELEM_NBSP_I",
+    "ELNO_NBSP_I",
+    "ELGA_NBSP_I",
+    "CART_NBSP_I",
+    "NOEU_NBSP_I",
+    "ELEM_NEUT_F",
+    "ELNO_NEUT_F",
+    "ELGA_NEUT_F",
+    "CART_NEUT_F",
+    "NOEU_NEUT_F",
+    "ELEM_NEUT_I",
+    "ELNO_NEUT_I",
+    "ELGA_NEUT_I",
+    "CART_NEUT_I",
+    "NOEU_NEUT_I",
+    "ELEM_NEUT_R",
+    "ELNO_NEUT_R",
+    "ELGA_NEUT_R",
+    "CART_NEUT_R",
+    "NOEU_NEUT_R",
+    "ELEM_N480_R",
+    "ELNO_N480_R",
+    "ELGA_N480_R",
+    "CART_N480_R",
+    "NOEU_N480_R",
+    "ELEM_NUMC_I",
+    "ELNO_NUMC_I",
+    "ELGA_NUMC_I",
+    "CART_NUMC_I",
+    "NOEU_NUMC_I",
+    "ELEM_ONDE_F",
+    "ELNO_ONDE_F",
+    "ELGA_ONDE_F",
+    "CART_ONDE_F",
+    "NOEU_ONDE_F",
+    "ELEM_ONDE_R",
+    "ELNO_ONDE_R",
+    "ELGA_ONDE_R",
+    "CART_ONDE_R",
+    "NOEU_ONDE_R",
+    "ELEM_PESA_R",
+    "ELNO_PESA_R",
+    "ELGA_PESA_R",
+    "CART_PESA_R",
+    "NOEU_PESA_R",
+    "ELEM_PDIL_R",
+    "ELNO_PDIL_R",
+    "ELGA_PDIL_R",
+    "CART_PDIL_R",
+    "NOEU_PDIL_R",
+    "ELEM_PILO_R",
+    "ELNO_PILO_R",
+    "ELGA_PILO_R",
+    "CART_PILO_R",
+    "NOEU_PILO_R",
+    "ELEM_PRES_C",
+    "ELNO_PRES_C",
+    "ELGA_PRES_C",
+    "CART_PRES_C",
+    "NOEU_PRES_C",
+    "ELEM_PRES_F",
+    "ELNO_PRES_F",
+    "ELGA_PRES_F",
+    "CART_PRES_F",
+    "NOEU_PRES_F",
+    "ELEM_PRES_R",
+    "ELNO_PRES_R",
+    "ELGA_PRES_R",
+    "CART_PRES_R",
+    "NOEU_PRES_R",
+    "ELEM_RAYO_F",
+    "ELNO_RAYO_F",
+    "ELGA_RAYO_F",
+    "CART_RAYO_F",
+    "NOEU_RAYO_F",
+    "ELEM_RAYO_R",
+    "ELNO_RAYO_R",
+    "ELGA_RAYO_R",
+    "CART_RAYO_R",
+    "NOEU_RAYO_R",
+    "ELEM_RCCM_R",
+    "ELNO_RCCM_R",
+    "ELGA_RCCM_R",
+    "CART_RCCM_R",
+    "NOEU_RCCM_R",
+    "ELEM_ROTA_R",
+    "ELNO_ROTA_R",
+    "ELGA_ROTA_R",
+    "CART_ROTA_R",
+    "NOEU_ROTA_R",
+    "ELEM_SIEF_C",
+    "ELNO_SIEF_C",
+    "ELGA_SIEF_C",
+    "CART_SIEF_C",
+    "NOEU_SIEF_C",
+    "ELEM_SIEF_R",
+    "ELNO_SIEF_R",
+    "ELGA_SIEF_R",
+    "CART_SIEF_R",
+    "NOEU_SIEF_R",
+    "ELEM_SIEFMX_R",
+    "ELNO_SIEFMX_R",
+    "ELGA_SIEFMX_R",
+    "CART_SIEFMX_R",
+    "NOEU_SIEFMX_R",
+    "ELEM_SIZZ_R",
+    "ELNO_SIZZ_R",
+    "ELGA_SIZZ_R",
+    "CART_SIZZ_R",
+    "NOEU_SIZZ_R",
+    "ELEM_SOUR_F",
+    "ELNO_SOUR_F",
+    "ELGA_SOUR_F",
+    "CART_SOUR_F",
+    "NOEU_SOUR_F",
+    "ELEM_SOUR_R",
+    "ELNO_SOUR_R",
+    "ELGA_SOUR_R",
+    "CART_SOUR_R",
+    "NOEU_SOUR_R",
+    "ELEM_SPMX_R",
+    "ELNO_SPMX_R",
+    "ELGA_SPMX_R",
+    "CART_SPMX_R",
+    "NOEU_SPMX_R",
+    "ELEM_STRX_R",
+    "ELNO_STRX_R",
+    "ELGA_STRX_R",
+    "CART_STRX_R",
+    "NOEU_STRX_R",
+    "ELEM_TEMP_C",
+    "ELNO_TEMP_C",
+    "ELGA_TEMP_C",
+    "CART_TEMP_C",
+    "NOEU_TEMP_C",
+    "ELEM_TEMP_F",
+    "ELNO_TEMP_F",
+    "ELGA_TEMP_F",
+    "CART_TEMP_F",
+    "NOEU_TEMP_F",
+    "ELEM_TEMP_R",
+    "ELNO_TEMP_R",
+    "ELGA_TEMP_R",
+    "CART_TEMP_R",
+    "NOEU_TEMP_R",
+    "ELEM_VALO_R",
+    "ELNO_VALO_R",
+    "ELGA_VALO_R",
+    "CART_VALO_R",
+    "NOEU_VALO_R",
+    "ELEM_VANL_R",
+    "ELNO_VANL_R",
+    "ELGA_VANL_R",
+    "CART_VANL_R",
+    "NOEU_VANL_R",
+    "ELEM_VAR2_R",
+    "ELNO_VAR2_R",
+    "ELGA_VAR2_R",
+    "CART_VAR2_R",
+    "NOEU_VAR2_R",
+    "ELEM_VARC_R",
+    "ELNO_VARC_R",
+    "ELGA_VARC_R",
+    "CART_VARC_R",
+    "NOEU_VARC_R",
+    "ELEM_VARI_R",
+    "ELNO_VARI_R",
+    "ELGA_VARI_R",
+    "ELEM_VENTCX_F",
+    "ELNO_VENTCX_F",
+    "ELGA_VENTCX_F",
+    "CART_VENTCX_F",
+    "NOEU_VENTCX_F",
+    "ELEM_VFAC_C",
+    "ELNO_VFAC_C",
+    "ELGA_VFAC_C",
+    "CART_VFAC_C",
+    "NOEU_VFAC_C",
+    "ELEM_VFAC_F",
+    "ELNO_VFAC_F",
+    "ELGA_VFAC_F",
+    "CART_VFAC_F",
+    "NOEU_VFAC_F",
+    "ELEM_VFAC_R",
+    "ELNO_VFAC_R",
+    "ELGA_VFAC_R",
+    "CART_VFAC_R",
+    "NOEU_VFAC_R",
+    "ELEM_CLAC_R",
+    "ELNO_CLAC_R",
+    "ELGA_CLAC_R",
+    "CART_CLAC_R",
+    "NOEU_CLAC_R",
+    "ELEM_THET_R",
+    "ELNO_THET_R",
+    "ELGA_THET_R",
+    "CART_THET_R",
+    "NOEU_THET_R",
+    "ELEM_GRAT_R",
+    "ELNO_GRAT_R",
+    "ELGA_GRAT_R",
+    "CART_GRAT_R",
+    "NOEU_GRAT_R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 111
+   }
+  },
+  {
+   "name": "b_modele",
+   "kind": "bloc",
+   "path": "[b_modele]",
+   "condition": "exists(\"TYPE_CHAM\") and (TYPE_CHAM[0:2] == 'EL')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 112
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_champ.py",
+      "line": 114
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_champ.py",
+    "line": 116
+   }
+  }
+ ]
+}

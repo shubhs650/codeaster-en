@@ -1,0 +1,1658 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_char_cine.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_CHAR_CINE",
+ "kind": "OPER",
+ "fr": "Affectation de conditions aux limites cinématiques (U=U0) pour un traitement sans dualisation",
+ "translation_upstream": null,
+ "op": 101,
+ "reentrant": "n",
+ "result_types": [
+  "char_cine_meca",
+  "char_cine_ther",
+  "char_cine_acou"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MECA_IMPO",
+    "THER_IMPO",
+    "ACOU_IMPO",
+    "EVOL_IMPO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_char_cine.py",
+  "line": 48
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "SYNTAXE",
+   "kind": "simple",
+   "path": "SYNTAXE",
+   "status": "c",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "MECA_IMPO",
+   "kind": "factor",
+   "path": "MECA_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "GRX",
+      "PRES",
+      "PHI",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "UI2",
+      "UI3",
+      "VI2",
+      "VI3",
+      "WI2",
+      "WI3",
+      "UO2",
+      "UO3",
+      "VO2",
+      "VO3",
+      "WO2",
+      "WO3",
+      "UI4",
+      "UI5",
+      "VI4",
+      "VI5",
+      "WI4",
+      "WI5",
+      "UO4",
+      "UO5",
+      "VO4",
+      "VO5",
+      "WO4",
+      "WO5",
+      "UI6",
+      "UO6",
+      "VI6",
+      "VO6",
+      "WI6",
+      "WO6",
+      "WO",
+      "WI1",
+      "WO1",
+      "GONF",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "V11",
+      "V12",
+      "V13",
+      "V21",
+      "V22",
+      "V23",
+      "V31",
+      "V32",
+      "V33",
+      "PRES11",
+      "PRES12",
+      "PRES13",
+      "PRES21",
+      "PRES22",
+      "PRES23",
+      "PRES31",
+      "PRES32",
+      "PRES33",
+      "LH1",
+      "GLIS",
+      "PSI",
+      "LAG_GV"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 59
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "MECA_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MECA_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "MECA_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "MECA_IMPO/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 145
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "MECA_IMPO/DX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 146
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "MECA_IMPO/DY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 147
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "MECA_IMPO/DZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 148
+     }
+    },
+    {
+     "name": "DRX",
+     "kind": "simple",
+     "path": "MECA_IMPO/DRX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "DRY",
+     "kind": "simple",
+     "path": "MECA_IMPO/DRY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "DRZ",
+     "kind": "simple",
+     "path": "MECA_IMPO/DRZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "GRX",
+     "kind": "simple",
+     "path": "MECA_IMPO/GRX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 152
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 153
+     }
+    },
+    {
+     "name": "PHI",
+     "kind": "simple",
+     "path": "MECA_IMPO/PHI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 154
+     }
+    },
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "MECA_IMPO/TEMP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 155
+     }
+    },
+    {
+     "name": "PRE1",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRE1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "PRE2",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRE2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 157
+     }
+    },
+    {
+     "name": "UI2",
+     "kind": "simple",
+     "path": "MECA_IMPO/UI2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "UI3",
+     "kind": "simple",
+     "path": "MECA_IMPO/UI3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "UI4",
+     "kind": "simple",
+     "path": "MECA_IMPO/UI4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "UI5",
+     "kind": "simple",
+     "path": "MECA_IMPO/UI5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 161
+     }
+    },
+    {
+     "name": "UI6",
+     "kind": "simple",
+     "path": "MECA_IMPO/UI6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "UO2",
+     "kind": "simple",
+     "path": "MECA_IMPO/UO2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 163
+     }
+    },
+    {
+     "name": "UO3",
+     "kind": "simple",
+     "path": "MECA_IMPO/UO3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 164
+     }
+    },
+    {
+     "name": "UO4",
+     "kind": "simple",
+     "path": "MECA_IMPO/UO4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 165
+     }
+    },
+    {
+     "name": "UO5",
+     "kind": "simple",
+     "path": "MECA_IMPO/UO5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 166
+     }
+    },
+    {
+     "name": "UO6",
+     "kind": "simple",
+     "path": "MECA_IMPO/UO6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 167
+     }
+    },
+    {
+     "name": "VI2",
+     "kind": "simple",
+     "path": "MECA_IMPO/VI2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 168
+     }
+    },
+    {
+     "name": "VI3",
+     "kind": "simple",
+     "path": "MECA_IMPO/VI3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 169
+     }
+    },
+    {
+     "name": "VI4",
+     "kind": "simple",
+     "path": "MECA_IMPO/VI4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 170
+     }
+    },
+    {
+     "name": "VI5",
+     "kind": "simple",
+     "path": "MECA_IMPO/VI5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 171
+     }
+    },
+    {
+     "name": "VI6",
+     "kind": "simple",
+     "path": "MECA_IMPO/VI6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 172
+     }
+    },
+    {
+     "name": "VO2",
+     "kind": "simple",
+     "path": "MECA_IMPO/VO2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 173
+     }
+    },
+    {
+     "name": "VO3",
+     "kind": "simple",
+     "path": "MECA_IMPO/VO3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 174
+     }
+    },
+    {
+     "name": "VO4",
+     "kind": "simple",
+     "path": "MECA_IMPO/VO4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 175
+     }
+    },
+    {
+     "name": "VO5",
+     "kind": "simple",
+     "path": "MECA_IMPO/VO5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "VO6",
+     "kind": "simple",
+     "path": "MECA_IMPO/VO6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "WI2",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 178
+     }
+    },
+    {
+     "name": "WI3",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 179
+     }
+    },
+    {
+     "name": "WI4",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "WI5",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 181
+     }
+    },
+    {
+     "name": "WI6",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "WO2",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 183
+     }
+    },
+    {
+     "name": "WO3",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "WO4",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO4",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "WO5",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO5",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 186
+     }
+    },
+    {
+     "name": "WO6",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO6",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 187
+     }
+    },
+    {
+     "name": "WO",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "WI1",
+     "kind": "simple",
+     "path": "MECA_IMPO/WI1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "WO1",
+     "kind": "simple",
+     "path": "MECA_IMPO/WO1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 190
+     }
+    },
+    {
+     "name": "GONF",
+     "kind": "simple",
+     "path": "MECA_IMPO/GONF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 191
+     }
+    },
+    {
+     "name": "H1X",
+     "kind": "simple",
+     "path": "MECA_IMPO/H1X",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "H1Y",
+     "kind": "simple",
+     "path": "MECA_IMPO/H1Y",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 193
+     }
+    },
+    {
+     "name": "H1Z",
+     "kind": "simple",
+     "path": "MECA_IMPO/H1Z",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "H1PRE1",
+     "kind": "simple",
+     "path": "MECA_IMPO/H1PRE1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "K1",
+     "kind": "simple",
+     "path": "MECA_IMPO/K1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 196
+     }
+    },
+    {
+     "name": "K2",
+     "kind": "simple",
+     "path": "MECA_IMPO/K2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 197
+     }
+    },
+    {
+     "name": "K3",
+     "kind": "simple",
+     "path": "MECA_IMPO/K3",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 198
+     }
+    },
+    {
+     "name": "V11",
+     "kind": "simple",
+     "path": "MECA_IMPO/V11",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 199
+     }
+    },
+    {
+     "name": "V12",
+     "kind": "simple",
+     "path": "MECA_IMPO/V12",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "V13",
+     "kind": "simple",
+     "path": "MECA_IMPO/V13",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 201
+     }
+    },
+    {
+     "name": "V21",
+     "kind": "simple",
+     "path": "MECA_IMPO/V21",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "V22",
+     "kind": "simple",
+     "path": "MECA_IMPO/V22",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 203
+     }
+    },
+    {
+     "name": "V23",
+     "kind": "simple",
+     "path": "MECA_IMPO/V23",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 204
+     }
+    },
+    {
+     "name": "V31",
+     "kind": "simple",
+     "path": "MECA_IMPO/V31",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 205
+     }
+    },
+    {
+     "name": "V32",
+     "kind": "simple",
+     "path": "MECA_IMPO/V32",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 206
+     }
+    },
+    {
+     "name": "V33",
+     "kind": "simple",
+     "path": "MECA_IMPO/V33",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 207
+     }
+    },
+    {
+     "name": "PRES11",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES11",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 208
+     }
+    },
+    {
+     "name": "PRES12",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES12",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "PRES13",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES13",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "PRES21",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES21",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 211
+     }
+    },
+    {
+     "name": "PRES22",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES22",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 212
+     }
+    },
+    {
+     "name": "PRES23",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES23",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 213
+     }
+    },
+    {
+     "name": "PRES31",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES31",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 214
+     }
+    },
+    {
+     "name": "PRES32",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES32",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "PRES33",
+     "kind": "simple",
+     "path": "MECA_IMPO/PRES33",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 216
+     }
+    },
+    {
+     "name": "LH1",
+     "kind": "simple",
+     "path": "MECA_IMPO/LH1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 217
+     }
+    },
+    {
+     "name": "GLIS",
+     "kind": "simple",
+     "path": "MECA_IMPO/GLIS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 218
+     }
+    },
+    {
+     "name": "PSI",
+     "kind": "simple",
+     "path": "MECA_IMPO/PSI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 219
+     }
+    },
+    {
+     "name": "LAG_GV",
+     "kind": "simple",
+     "path": "MECA_IMPO/LAG_GV",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 220
+     }
+    }
+   ]
+  },
+  {
+   "name": "THER_IMPO",
+   "kind": "factor",
+   "path": "THER_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TEMP",
+      "TEMP_MIL",
+      "TEMP_INF",
+      "TEMP_SUP"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 222
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "THER_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 229
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "THER_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 230
+     }
+    },
+    {
+     "name": "MAILLE",
+     "kind": "simple",
+     "path": "THER_IMPO/MAILLE",
+     "status": "c",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 231
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "THER_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 232
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "THER_IMPO/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 233
+     }
+    },
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "THER_IMPO/TEMP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 234
+     }
+    },
+    {
+     "name": "TEMP_MIL",
+     "kind": "simple",
+     "path": "THER_IMPO/TEMP_MIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 235
+     }
+    },
+    {
+     "name": "TEMP_SUP",
+     "kind": "simple",
+     "path": "THER_IMPO/TEMP_SUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "TEMP_INF",
+     "kind": "simple",
+     "path": "THER_IMPO/TEMP_INF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 237
+     }
+    }
+   ]
+  },
+  {
+   "name": "ACOU_IMPO",
+   "kind": "factor",
+   "path": "ACOU_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 239
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ACOU_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 243
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ACOU_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 244
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "ACOU_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 245
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "ACOU_IMPO/PRES",
+     "status": "o",
+     "type": [
+      "C"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 246
+     }
+    }
+   ]
+  },
+  {
+   "name": "EVOL_IMPO",
+   "kind": "simple",
+   "path": "EVOL_IMPO",
+   "status": "f",
+   "type": [
+    "evol_noli",
+    "evol_elas",
+    "evol_ther"
+   ],
+   "fr": "Pour imposer les ddls d'un evol_xxx",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 248
+   }
+  },
+  {
+   "name": "b_evol_impo",
+   "kind": "bloc",
+   "path": "[b_evol_impo]",
+   "condition": "exists(\"EVOL_IMPO\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 253
+   },
+   "keywords": [
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_cine.py",
+      "line": 255
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_cine.py",
+    "line": 259
+   }
+  }
+ ]
+}
