@@ -1,0 +1,151 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline2.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE2",
+ "source": {
+  "file": "code_aster/Messages/mecanonline2.py"
+ },
+ "messages": {
+  "3": {
+   "id": "MECANONLINE2_3",
+   "fr": "\n\n Le résidu global converge plus vite que la condition des contraintes planes.\n La convergence de la condition des contraintes planes peut être améliorée en\n augmentant ITER_CPLAN_MAXI, sous le mot-clé facteur COMPORTEMENT.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "27": {
+   "id": "MECANONLINE2_27",
+   "fr": "\n La prédiction par DEPL_CALCULE à l'instant de calcul %(r1)f à partir du concept %(k1)s n'a pas pu être construite.\n Explications possibles :\n  - le concept ne contient pas de champs de déplacement\n  - l'instant de calcul demandé est en dehors de l'intervalle des instants calculés dans le concept fourni (il n'y a pas de prolongement à gauche ni à droite)\n\n Conseil :\n - vérifiez que le concept fourni sous le mot-clé EVOL_NOLI contient suffisamment d'instants pour interpoler le champ souhaité\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 32
+   },
+   "en": null
+  },
+  "28": {
+   "id": "MECANONLINE2_28",
+   "fr": "\n La prédiction par DEPL_CALCULE à l'instant de calcul %(r1)f à partir du résultat fourni n'a pas pu être construite car les maillages sont différents et vous utilisez des conditions limites de type Lagrange (AFFE_CHAR_MECA).\n Conseil : essayez avec des conditions limites de type AFFE_CHAR_CINE si c'est possible. Mais dans ce cas, le champ de déplacements n'étant plus cinématiquement admissible au premier pas de temps, vous risquez d'avoir des problèmes de convergence.\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 43
+   },
+   "en": null
+  },
+  "29": {
+   "id": "MECANONLINE2_29",
+   "fr": "\n La prédiction par DEPL_CALCULE ou EXTRAPOLE ne peut pas se faire car la numérotation du champ de déplacement est incohérente avec le modèle du calcul.\n",
+   "placeholders": [],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "37": {
+   "id": "MECANONLINE2_37",
+   "fr": "\n    ARRET=NON donc poursuite du calcul sans avoir eu convergence.\n",
+   "placeholders": [],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "39": {
+   "id": "MECANONLINE2_39",
+   "fr": "\n    DEFI_CONTACT/ALGO_CONT=PENALISATION/ADAPTATION=ADAPT_COEF ou TOUT. Il est possible que vous demandez un critère trop sévère pour la pénétration. La valeur de coefficient de pénalisation adaptée prend des valeurs inattendues.\n\n    Conseils :\n    - Soit changer de mode adaptatif de pénalisation : DEFI_CONTACT/ALGO_CONT=PENALISATION/ADAPTATION=NON avec COEF_PENA_CONT <= %(r3).2e\n    - Soit relancer votre calcul avec PENE_MAXI en fonction du maillage dans la zone de contact.  Pour information :\n        - La plus petite arête de toutes les zones maîtres est  %(r2).2e.\n        - La plus grande arête de toutes les zones maîtres  %(r4).2e.\n\n",
+   "placeholders": [
+    "%(r3).2e",
+    "%(r2).2e",
+    "%(r4).2e"
+   ],
+   "source": {
+    "line": 59
+   },
+   "en": null
+  },
+  "93": {
+   "id": "MECANONLINE2_93",
+   "fr": "\n  -> Risque et conseils : dans le cas d'une résolution incrémentale, on ne prend pas en compte\n     les éventuelles contraintes incompatibles dues à ces variables de commande initiales.\n     Pour tenir compte de ces contraintes vous pouvez :\n     - partir d'un instant fictif antérieur où toutes les variables de commande sont nulles\n       (ou égales aux valeurs de référence)\n     - choisir des valeurs de référence adaptées\n\n     Pour plus d'informations, consultez la documentation de AFFE_MATERIAU\n     (mot-clé AFFE_VARC).\n",
+   "placeholders": [],
+   "source": {
+    "line": 71
+   },
+   "en": null
+  },
+  "94": {
+   "id": "MECANONLINE2_94",
+   "fr": "\n  -> Indications supplémentaires : pour la variable de commande :  %(k1)s\n     et la composante :  %(k2)s\n     Valeur maximum : %(r1)f sur la maille : %(k3)s\n     Valeur minimum : %(r2)f sur la maille : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r1)f",
+    "%(k3)s",
+    "%(r2)f",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 84
+   },
+   "en": null
+  },
+  "95": {
+   "id": "MECANONLINE2_95",
+   "fr": "\n  -> Indications supplémentaires : pour la variable de commande :  %(k1)s\n     et la composante :  %(k2)s\n     Valeur maximum de la valeur absolue de ( %(k2)s - %(k5)s_REF) : %(r1)f sur la maille : %(k3)s\n     Valeur minimum de la valeur absolue de ( %(k2)s - %(k5)s_REF) : %(r2)f sur la maille : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k5)s",
+    "%(r1)f",
+    "%(k3)s",
+    "%(r2)f",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 92
+   },
+   "en": null
+  },
+  "96": {
+   "id": "MECANONLINE2_96",
+   "fr": "\n Le résidu RESI_COMP_RELA est inutilisable au premier instant de calcul (pas de référence)\n On bascule automatiquement en RESI_GLOB_RELA.\n",
+   "placeholders": [],
+   "source": {
+    "line": 100
+   },
+   "en": null
+  },
+  "97": {
+   "id": "MECANONLINE2_97",
+   "fr": "\n  -> A l'état initial (avant le premier instant de calcul) les variables\n     de commande (température, hydratation, séchage...) entraînent une\n     déformation anélastique non nulle.\n     Cette déformation non nulle est incohérente avec l'état initial \"vierge\" qui est\n     utilisé.\n",
+   "placeholders": [],
+   "source": {
+    "line": 106
+   },
+   "en": null
+  },
+  "98": {
+   "id": "MECANONLINE2_98",
+   "fr": "\n  -> Les forces extérieures (chargement imposé et réactions d'appui) sont détectées comme quasiment nulles (%(r1)g).\n     Or vous avez demandé une convergence avec le critère relatif (RESI_GLOB_RELA).\n     Pour éviter une division par zéro, le code est passé automatiquement en mode de convergence\n     de type absolu (RESI_GLOB_MAXI).\n     On a choisi un RESI_GLOB_MAXI de manière automatique et de valeur %(r2)g.\n  -> Risque & Conseil : Vérifier bien que votre chargement doit être nul (ainsi que les réactions d'appui) à cet instant\n     Dans le cas des problèmes de type THM, penser à utiliser éventuellement un\n     critère de type référence (RESI_REFE_RELA).\n",
+   "placeholders": [
+    "%(r1)g",
+    "%(r2)g"
+   ],
+   "source": {
+    "line": 115
+   },
+   "en": null
+  }
+ }
+}

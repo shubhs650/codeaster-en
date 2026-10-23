@@ -1,0 +1,160 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/contact2.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "CONTACT2",
+ "source": {
+  "file": "code_aster/Messages/contact2.py"
+ },
+ "messages": {
+  "3": {
+   "id": "CONTACT2_3",
+   "fr": "\n  Toutes vos zones de contact sont en mode RESOLUTION='NON'.\n  Le mode REAC_GEOM = 'SANS' est forcé.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "4": {
+   "id": "CONTACT2_4",
+   "fr": "\n  Toutes vos zones de contact sont en mode RESOLUTION='NON'.\n  Le mode ALGO_RESO_GEOM = 'POINT_FIXE' est forcé.\n",
+   "placeholders": [],
+   "source": {
+    "line": 29
+   },
+   "en": null
+  },
+  "10": {
+   "id": "CONTACT2_10",
+   "fr": "\nAu moins une des mailles de contact que vous avez définies est de type < %(k1)s > , or les types attendus sont POI1,\nSEG2, SEG3, TRIA3, TRIA6, TRIA7, QUAD4, QUAD8, QUAD9\nConseil :\nVérifiez votre AFFE_MODELE et le type de vos mailles dans la définition des surfaces de contact.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 35
+   },
+   "en": null
+  },
+  "11": {
+   "id": "CONTACT2_11",
+   "fr": "\nAu moins une des mailles de contact que vous avez définies est de dimension %(i1)i, or la dimension de votre problème est : %(i2)i.\nCette maille n'est donc pas une maille de bord. Il doit y avoir une erreur dans votre mise en données.\n\nConseil :\nVérifiez votre AFFE_MODELE et le type de vos mailles dans la définition des surfaces de contact.\n",
+   "placeholders": [
+    "%(i1)i",
+    "%(i2)i"
+   ],
+   "source": {
+    "line": 43
+   },
+   "en": null
+  },
+  "12": {
+   "id": "CONTACT2_12",
+   "fr": "\nContact avec formulation continue.\nVotre modèle contient des surfaces de contact qui s'appuient sur un mélange d'éléments axisymétriques et non axisymétriques.\nCela n'a pas de sens. Toute la modélisation doit être axisymétrique.\n\nConseil :\nVérifiez votre AFFE_MODELE et le type de vos mailles dans la définition des surfaces de contact.\n",
+   "placeholders": [],
+   "source": {
+    "line": 52
+   },
+   "en": null
+  },
+  "13": {
+   "id": "CONTACT2_13",
+   "fr": "\nContact méthodes maillées.\nLa zone de contact numéro %(i1)i contient %(i2)i noeuds communs aux surfaces maîtres et esclaves.\nVérifiez la définition de vos surfaces de contact ou bien renseignez un des mots-clés SANS_NOEUD/SANS_GROUP_NO/SANS_GROUP_MA.\n",
+   "placeholders": [
+    "%(i1)i",
+    "%(i2)i"
+   ],
+   "source": {
+    "line": 62
+   },
+   "en": null
+  },
+  "14": {
+   "id": "CONTACT2_14",
+   "fr": "\nContact méthode continue.\n  -> Une zone de contact est définie sur une modélisation axisymétrique. Le Jacobien\n     est nul car un noeud de la surface de contact esclave appartient à l'axe.\n     La pression de contact (degré de liberté LAGS_C) risque d'être erronée.\n  -> Conseil :\n     Il faut changer de schéma d'intégration et utiliser 'GAUSS'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 69
+   },
+   "en": null
+  },
+  "15": {
+   "id": "CONTACT2_15",
+   "fr": "\nContact formulation discrète.\nLes zones de contact numéro %(i1)i et numéro %(i2)i ont %(i3)i noeuds communs à leurs surfaces esclaves. Cela peut parfois conduire à une matrice de contact singulière.\n\nSi le calcul venait à échouer, vérifiez la définition de vos surfaces de contact ou bien renseignez un des mots-clés SANS_NOEUD/SANS_GROUP_NO/SANS_GROUP_MA.\n",
+   "placeholders": [
+    "%(i1)i",
+    "%(i2)i",
+    "%(i3)i"
+   ],
+   "source": {
+    "line": 79
+   },
+   "en": null
+  },
+  "16": {
+   "id": "CONTACT2_16",
+   "fr": "\nLes zones de contact numéro %(i1)i et numéro %(i2)i ont %(i3)i noeuds communs à leurs surfaces esclaves : c'est interdit.\nConseil :\n - changez vos surfaces de contact,\n - définissez alternativement les zones possédant un noeud commun comme maître et esclave,\n - pour la méthode LAC, il faut désactiver le lissage.\n",
+   "placeholders": [
+    "%(i1)i",
+    "%(i2)i",
+    "%(i3)i"
+   ],
+   "source": {
+    "line": 87
+   },
+   "en": null
+  },
+  "17": {
+   "id": "CONTACT2_17",
+   "fr": "\nL'option DECOUPE_LAC de CREA_MAILLAGE n'a pas traité le même nombre de zones que celles définies dans DEFI_CONTACT\nConseil :\n - Assurez vous d'avoir renseigné le bon nombre de zones esclaves dans CREA_MAILLAGE/DECOUPE_LAC et DEFI_CONTACT\n",
+   "placeholders": [],
+   "source": {
+    "line": 96
+   },
+   "en": null
+  },
+  "18": {
+   "id": "CONTACT2_18",
+   "fr": "\nL'option DECOUPE_LAC de CREA_MAILLAGE n'a pas traité la zone %(k1)s définie dans DEFI_CONTACT.\nConseil :\n - Assurez vous d'avoir renseigné cette zone dans dans CREA_MAILLAGE/DECOUPE_LAC.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "19": {
+   "id": "CONTACT2_19",
+   "fr": "\nLa méthode de gestion du contact LAC n'est pas compatible avec l'option MATR_DISTRIBUEE='OUI'\nConseil :\n - Assurez vous de ne pas utiliser MATR_DISTRIBUEE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 110
+   },
+   "en": null
+  },
+  "20": {
+   "id": "CONTACT2_20",
+   "fr": "\nAu moins une maille de peau sans volume a été détecté. L'orientation ne peut pas être vérifiée.\nSi l'orientation est incorrecte vous pouvez avoir des problèmes de détection de contact avec la méthode de gestion du contact LAC.\n\nPour désactiver cette alarme, utilisez VERI_NORM='NON' dans DEFI_CONTACT.\n",
+   "placeholders": [],
+   "source": {
+    "line": 117
+   },
+   "en": null
+  },
+  "21": {
+   "id": "CONTACT2_21",
+   "fr": "La méthode de gestion du contact LAC n'est pas compatible avec le critère de convergence RESI_REFE_RELA.",
+   "placeholders": [],
+   "source": {
+    "line": 125
+   },
+   "en": null
+  }
+ }
+}

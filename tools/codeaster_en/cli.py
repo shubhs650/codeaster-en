@@ -1,7 +1,8 @@
 """``caen`` command-line interface.
 
-Implemented so far: ``caen validate glossary`` and ``caen extract catalog``. The other groups
-are stubs that name the PLAN.md task which will fill them in.
+Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands) and
+``caen extract catalog|messages``. The other groups are stubs that name the PLAN.md task which
+will fill them in.
 """
 
 from __future__ import annotations
@@ -13,7 +14,11 @@ import typer
 
 from codeaster_en import __version__
 from codeaster_en.extract import catalog as catalog_extractor
+from codeaster_en.extract import messages as messages_extractor
+from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
+from codeaster_en.validate import messages as messages_validator
+from codeaster_en.validate import synonyms as synonyms_validator
 
 app = typer.Typer(
     help="English overlay tooling for code_aster.",
@@ -23,6 +28,7 @@ app = typer.Typer(
 
 GLOSSARY_RELPATH = Path("en/glossary.yaml")
 COMMANDS_RELPATH = Path("en/commands")
+MESSAGES_RELPATH = Path("en/messages")
 
 
 def _repo_root(start: Path | None = None) -> Path:
@@ -75,10 +81,24 @@ def extract_catalog(
 
 
 @extract_app.command("messages")
-def extract_messages() -> None:
-    """[not implemented yet: task 1.3]"""
-    typer.echo("caen extract messages: not implemented yet (PLAN.md task 1.3).", err=True)
-    raise typer.Exit(code=2)
+def extract_messages(
+    family: Annotated[
+        list[str] | None,
+        typer.Argument(help="Only these families, e.g. MECANONLINE (default: all)."),
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Output directory (default: en/messages in the repo root)."),
+    ] = None,
+) -> None:
+    """Write en/messages/<FAMILY>.en.json for every upstream message family."""
+    root = _repo_root()
+    try:
+        written = messages_extractor.write(root, out or root / MESSAGES_RELPATH, family)
+    except (FileNotFoundError, KeyError, messages_extractor.MessageFileError) as exc:
+        typer.echo(f"extract messages: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"extract messages: wrote {len(written)} family file(s)")
 
 
 @extract_app.command("astest-index")
@@ -107,26 +127,58 @@ validate_app = typer.Typer(help="Validate overlay artefacts (glossary, placehold
 app.add_typer(validate_app, name="validate")
 
 
+def _report(name: str, issues: list[str], ok_detail: str) -> bool:
+    for issue in issues:
+        typer.echo(issue, err=True)
+    if issues:
+        typer.echo(f"{name}: {len(issues)} problem(s)", err=True)
+        return False
+    typer.echo(f"{name}: OK ({ok_detail})")
+    return True
+
+
 def _validate_glossary(path: Path) -> bool:
     issues = glossary_validator.validate(path)
-    for issue in issues:
-        typer.echo(f"{path}: {issue}", err=True)
     if issues:
-        typer.echo(f"glossary: {len(issues)} problem(s) in {path}", err=True)
-        return False
+        return _report("glossary", [f"{path}: {issue}" for issue in issues], "")
     entries = glossary_validator.load(path)
-    typer.echo(f"glossary: OK ({len(entries)} entries)")
-    return True
+    return _report("glossary", [], f"{len(entries)} entries")
+
+
+def _validate_messages(root: Path) -> bool:
+    issues, families, translated = messages_validator.validate_dir(root / MESSAGES_RELPATH)
+    return _report("messages", issues, f"{families} families, {translated} translated")
+
+
+def _validate_synonyms(root: Path) -> bool:
+    glossary = root / GLOSSARY_RELPATH
+    try:
+        entries = glossary_validator.load(glossary)
+    except (OSError, ValueError) as exc:
+        return _report("synonyms", [f"{glossary}: cannot read: {exc}"], "")
+    forbidden = synonyms_validator.aliases(entries)
+    issues, files = synonyms_validator.scan_tree(root / "en", forbidden)
+    return _report("synonyms", issues, f"{files} Markdown file(s), {len(forbidden)} aliases")
+
+
+def _validate_commands(root: Path) -> bool:
+    issues, files = commands_validator.validate_dir(root / COMMANDS_RELPATH)
+    return _report("commands", issues, f"{files} reference(s)")
 
 
 @validate_app.callback(invoke_without_command=True)
 def validate_all(ctx: typer.Context) -> None:
-    """Run every available validator when no sub-command is given."""
+    """Run every validator when no sub-command is given."""
     if ctx.invoked_subcommand is not None:
         return
     root = _repo_root()
-    ok = _validate_glossary(root / GLOSSARY_RELPATH)
-    raise typer.Exit(code=0 if ok else 1)
+    results = [
+        _validate_glossary(root / GLOSSARY_RELPATH),
+        _validate_messages(root),
+        _validate_synonyms(root),
+        _validate_commands(root),
+    ]
+    raise typer.Exit(code=0 if all(results) else 1)
 
 
 @validate_app.command("glossary")
@@ -139,6 +191,27 @@ def validate_glossary(
     """Check en/glossary.yaml: unique fr, non-empty en, valid kind, unique command en."""
     target = path or _repo_root() / GLOSSARY_RELPATH
     if not _validate_glossary(target):
+        raise typer.Exit(code=1)
+
+
+@validate_app.command("messages")
+def validate_messages() -> None:
+    """Check en/messages: ids, placeholder lists, and fr/en placeholder equality."""
+    if not _validate_messages(_repo_root()):
+        raise typer.Exit(code=1)
+
+
+@validate_app.command("synonyms")
+def validate_synonyms() -> None:
+    """Scan en/**/*.md for the glossary's forbidden synonyms (aliases_en)."""
+    if not _validate_synonyms(_repo_root()):
+        raise typer.Exit(code=1)
+
+
+@validate_app.command("commands")
+def validate_commands() -> None:
+    """Check that keyword tables in en/commands/*.md only name keywords in the .json."""
+    if not _validate_commands(_repo_root()):
         raise typer.Exit(code=1)
 
 

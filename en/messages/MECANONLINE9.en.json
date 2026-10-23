@@ -1,0 +1,269 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline9.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE9",
+ "source": {
+  "file": "code_aster/Messages/mecanonline9.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MECANONLINE9_1",
+   "fr": "\n   Arrêt par manque de temps CPU pendant les itérations de Newton, au numéro d'instant < %(i1)d >\n      - Temps moyen par itération de Newton : %(r1)f\n      - Temps restant                       : %(r2)f\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseil :\n      - Augmentez le temps CPU.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MECANONLINE9_2",
+   "fr": "\n   Arrêt par manque de temps CPU au numéro d'instant < %(i1)d >\n      - Temps moyen par pas de temps        : %(r1)f\n      - Temps restant                       : %(r2)f\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseil :\n      - Augmentez le temps CPU.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 34
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MECANONLINE9_3",
+   "fr": "\n   Arrêt suite à l'échec de l'intégration de la loi de comportement.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseils :\n      - Vérifiez vos paramètres, la cohérence des unités.\n      - Essayez d'augmenter ITER_INTE_MAXI, ou de subdiviser le pas de temps localement via ITER_INTE_PAS.\n",
+   "placeholders": [],
+   "source": {
+    "line": 45
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MECANONLINE9_4",
+   "fr": "\n   Arrêt pour cause de matrice non inversible.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseils :\n      - Vérifiez vos conditions aux limites.\n      - Vérifiez votre modèle, la cohérence des unités.\n      - Si vous faites du contact, il ne faut pas que la structure ne \"tienne\" que par le contact.\n\n      - Parfois, en parallèle, le critère de détection de singularité de MUMPS est trop pessimiste ! Il reste néanmoins souvent\n        possible de faire passer le calcul complet en relaxant ce critère (augmenter de 1 ou 2 la valeur du mot-clé NPREC) ou\n        en le débranchant (valeur du mot-clé NPREC=-1) ou en relançant le calcul sur moins de processeurs.\n",
+   "placeholders": [],
+   "source": {
+    "line": 55
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MECANONLINE9_5",
+   "fr": "\n   Arrêt pour cause d'échec lors du traitement du contact discret.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 70
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MECANONLINE9_6",
+   "fr": "\n   Arrêt pour cause de matrice de contact singulière.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 76
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MECANONLINE9_7",
+   "fr": "\n   Arrêt pour cause d'absence de convergence avec le nombre d'itérations requis dans l'algorithme non-linéaire de Newton.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseils :\n   - Augmentez ITER_GLOB_MAXI.\n   - Réactualisez plus souvent la matrice tangente.\n   - Raffinez votre discrétisation temporelle.\n   - Essayez d'activer la gestion des événements (découpe du pas de temps par exemple) dans la commande DEFI_LIST_INST.\n   - Vérifier la cohérence des paramètres entre code_aster et MFRONT si vous utilisez une loi MFRONT.\n",
+   "placeholders": [],
+   "source": {
+    "line": 82
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MECANONLINE9_8",
+   "fr": "\n   Arrêt par échec dans le pilotage.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MECANONLINE9_9",
+   "fr": "\n   Arrêt par échec dans la boucle de point fixe sur la géométrie.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 101
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MECANONLINE9_10",
+   "fr": "\n   Arrêt par échec dans la boucle de point fixe sur le seuil de frottement.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 107
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MECANONLINE9_11",
+   "fr": "\n   Arrêt par échec dans la boucle de point fixe sur le statut de contact.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n",
+   "placeholders": [],
+   "source": {
+    "line": 113
+   },
+   "en": null
+  },
+  "12": {
+   "id": "MECANONLINE9_12",
+   "fr": "\n   Arrêt pour cause d'absence de convergence avec le nombre d'itérations requis dans le solveur linéaire itératif.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseils :\n   - Augmentez le nombre maximum d'itérations (NMAX_ITER).\n   - Utilisez un préconditionneur plus précis ou changez d'algorithme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 119
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MECANONLINE9_13",
+   "fr": "\n   Arrêt suite à l'échec de l'appariement de contact lors de l'actualisation géométrique.\n   La base globale est sauvegardée. Elle contient les pas archivés avant l'arrêt.\n\n   Conseils :\n      - Vérifiez vos conditions aux limites.\n      - Essayez de subdiviser le pas de temps.\n",
+   "placeholders": [],
+   "source": {
+    "line": 129
+   },
+   "en": null
+  },
+  "50": {
+   "id": "MECANONLINE9_50",
+   "fr": "Arrêt par échec de l'action <%(k1)s>  pour le traitement de l'évènement <%(k2)s>. ",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 139
+   },
+   "en": null
+  },
+  "51": {
+   "id": "MECANONLINE9_51",
+   "fr": "Arrêt demandé pour le déclenchement de l'évènement <%(k1)s>. ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 140
+   },
+   "en": null
+  },
+  "52": {
+   "id": "MECANONLINE9_52",
+   "fr": "Arrêt demandé pour le déclenchement de l'évènement <DELTA_GRANDEUR>.",
+   "placeholders": [],
+   "source": {
+    "line": 141
+   },
+   "en": null
+  },
+  "53": {
+   "id": "MECANONLINE9_53",
+   "fr": "Arrêt demandé pour le déclenchement de l'évènement <NB_PAS_MAXI>.",
+   "placeholders": [],
+   "source": {
+    "line": 142
+   },
+   "en": null
+  },
+  "60": {
+   "id": "MECANONLINE9_60",
+   "fr": "\n   Les forces de contact sont mal définies dans le domaine de Fourier.\n\n   Conseil :\n   - Augmenter le nombre d'harmoniques des forces de contact (NB_HARM_NONL).\n",
+   "placeholders": [],
+   "source": {
+    "line": 143
+   },
+   "en": null
+  },
+  "61": {
+   "id": "MECANONLINE9_61",
+   "fr": "\n   Le dernier terme de la série entière est nul. On force le rayon de convergence à 1.\n",
+   "placeholders": [],
+   "source": {
+    "line": 151
+   },
+   "en": null
+  },
+  "62": {
+   "id": "MECANONLINE9_62",
+   "fr": "\n   Correction échouée !!!\n",
+   "placeholders": [],
+   "source": {
+    "line": 156
+   },
+   "en": null
+  },
+  "63": {
+   "id": "MECANONLINE9_63",
+   "fr": "\n   Le nombre d'harmoniques des forces de contact doit être supérieur ou égale au nombre d'harmoniques des autres variables.\n   NB_HARM_NONL >= NB_HARM_LINE\n",
+   "placeholders": [],
+   "source": {
+    "line": 161
+   },
+   "en": null
+  },
+  "64": {
+   "id": "MECANONLINE9_64",
+   "fr": "\n   -----------------------------------------------------------------------\n   ||    Erreur absolue   ||    Erreur relative  || Max. coefficient   ||\n   -----------------------------------------------------------------------\n   || %(r1)19.8e || %(r2)19.8e || %(r3)19.8e ||\n   -----------------------------------------------------------------------\n",
+   "placeholders": [
+    "%(r1)19.8e",
+    "%(r2)19.8e",
+    "%(r3)19.8e"
+   ],
+   "source": {
+    "line": 167
+   },
+   "en": null
+  },
+  "65": {
+   "id": "MECANONLINE9_65",
+   "fr": "\n   La solution périodique est stable\n",
+   "placeholders": [],
+   "source": {
+    "line": 176
+   },
+   "en": null
+  },
+  "66": {
+   "id": "MECANONLINE9_66",
+   "fr": "\n   La solution périodique est instable\n",
+   "placeholders": [],
+   "source": {
+    "line": 181
+   },
+   "en": null
+  },
+  "67": {
+   "id": "MECANONLINE9_67",
+   "fr": "\n                         Numéro ordre : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 186
+   },
+   "en": null
+  },
+  "68": {
+   "id": "MECANONLINE9_68",
+   "fr": "Le mot-clé GROUP_NO du mot-clé facteur CHOC ne doit contenir qu'un noeud.",
+   "placeholders": [],
+   "source": {
+    "line": 191
+   },
+   "en": null
+  }
+ }
+}

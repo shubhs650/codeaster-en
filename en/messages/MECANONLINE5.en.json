@@ -1,0 +1,626 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline5.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE5",
+ "source": {
+  "file": "code_aster/Messages/mecanonline5.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MECANONLINE5_1",
+   "fr": "\nAvec un schéma de type explicite, seule la prédiction TANGENTE est possible\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MECANONLINE5_2",
+   "fr": "\nA cause des erreurs précédentes, le code s'arrête.\n  Vous voulez \"poursuivre\" un calcul non-linéaire.\n  Pour cela, vous précisez un état initial (mot clé ETAT_INIT).\n  Pour le calcul du premier pas de temps, le champ des variables internes du début du pas est pris\n  dans le concept EVOL_NOLI fourni ou par le champ VARI_ELGA.\n  On l'a comparé avec le champ des variables internes créé par le mot-clef COMPORTEMENT, il y a incohérence.\n  Vérifiez la cohérence entre le comportement et le champ des variables internes donné dans l'état initial.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MECANONLINE5_3",
+   "fr": "\n Il n'est pas possible actuellement de calculer des modes de flambement\n (CRIT_FLAMB) ou des modes vibratoires (MODE_VIBR) si on utilise la\n méthode continue du contact ou XFEM avec du contact.\n",
+   "placeholders": [],
+   "source": {
+    "line": 39
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MECANONLINE5_4",
+   "fr": "\n Vous utilisez une méthode de contact (continue ou XFEM) qui nécessite de réactualiser la matrice tangente\n à chaque itération. La réactualisation est donc forcée (REAC_ITER = 1).\n\n  -> Risque & Conseil :\n   - Vous pouvez supprimer cette alarme si vous\n     renseignez REAC_ITER=1 sous le mot-clé facteur NEWTON.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 46
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MECANONLINE5_5",
+   "fr": "\n Vous utilisez une méthode de contact (contact discret ou unilatéral avec pénalisation ou élément DIS_CHOC)\n  qui apporte une contribution à la matrice tangente à chaque itération. La réactualisation est donc forcée (REAC_ITER=1) et ce même si vous utilisez la matrice\n 'ELASTIQUE'.\n\n  -> Risque & Conseil :\n   - Vous pouvez supprimer cette alarme dans le cas où vous utilisez une matrice 'TANGENTE', pour cela\n     renseignez REAC_ITER=1 sous le mot-clé facteur NEWTON.\n",
+   "placeholders": [],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MECANONLINE5_6",
+   "fr": "\n Le calcul des énergies n'est pas disponible avec le mot-clé PROJ_MODAL.\n",
+   "placeholders": [],
+   "source": {
+    "line": 68
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MECANONLINE5_7",
+   "fr": "\n Étant donné la présence du mot clé AMOR_ALPHA et / ou AMOR_BETA,\n on va assembler la matrice d'amortissement globale de Rayleigh,\n même si ces coefficients sont tous les deux nuls.\n Cette opération engendre un surcoût de calcul.\n",
+   "placeholders": [],
+   "source": {
+    "line": 73
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MECANONLINE5_8",
+   "fr": "\n Le calcul des énergies n'est pas disponible lorsque MATR_DISTRIBUEE='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 81
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MECANONLINE5_9",
+   "fr": "\n Pour avoir BETA nul (schéma purement explicite) avec un schéma de Newmark (standard ou HHT),\nutilisez DIFF_CENT ou TCHAMWA.\n",
+   "placeholders": [],
+   "source": {
+    "line": 86
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MECANONLINE5_10",
+   "fr": "\n Pour un schéma purement explicite (DIFF_CENT ou TCHAMWA), seule la formulation\nen accélération est possible\n",
+   "placeholders": [],
+   "source": {
+    "line": 92
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MECANONLINE5_11",
+   "fr": "\n Pour un schéma de type NEWMARK, seules les formulations en accélération et en déplacement sont possibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 98
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MECANONLINE5_13",
+   "fr": "\n La matrice de masse diagonale (option MASS_DIAG) n'est pas utilisable avec un schéma implicite.\n",
+   "placeholders": [],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MECANONLINE5_14",
+   "fr": "\n Il n'est pas possible actuellement de calculer des modes de flambement\n (CRIT_FLAMB) ou des modes vibratoires (MODE_VIBR) si on utilise la\n méthode discrète du contact avec frottement ou la méthode pénalisée.\n",
+   "placeholders": [],
+   "source": {
+    "line": 108
+   },
+   "en": null
+  },
+  "15": {
+   "id": "MECANONLINE5_15",
+   "fr": "\n Le calcul des énergies n'est pas disponible avec le contact en formulation continue ou XFEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 115
+   },
+   "en": null
+  },
+  "16": {
+   "id": "MECANONLINE5_16",
+   "fr": "\n Les modélisations de type THMS sont interdites en dynamique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 120
+   },
+   "en": null
+  },
+  "17": {
+   "id": "MECANONLINE5_17",
+   "fr": "\n Pour le schéma HHT complet, la valeur de ALPHA ne peut pas être -1.\n",
+   "placeholders": [],
+   "source": {
+    "line": 125
+   },
+   "en": null
+  },
+  "20": {
+   "id": "MECANONLINE5_20",
+   "fr": "\nOn ne trouve pas le champ de déplacement pour Dirichlet différentiel dans le concept <%(k1)s>.\nVotre valeur de NUME_DIDI doit être incorrecte ou le concept n'est pas le bon.\n\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 130
+   },
+   "en": null
+  },
+  "21": {
+   "id": "MECANONLINE5_21",
+   "fr": "\n  -> Critère de convergence est lâche !\n  -> Risque & Conseil : La valeur de RESI_GLOB_RELA est supérieure à 10-4.\n     Cela peut nuire à la qualité de la solution. Vous ne vérifiez pas l'équilibre de\n     manière rigoureuse.\n",
+   "placeholders": [],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "22": {
+   "id": "MECANONLINE5_22",
+   "fr": "\nSchéma en dynamique explicite.\nLe contact n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 145
+   },
+   "en": null
+  },
+  "23": {
+   "id": "MECANONLINE5_23",
+   "fr": "\nSchéma en dynamique explicite.\nLes liaisons unilatérales ne sont pas possibles.\n",
+   "placeholders": [],
+   "source": {
+    "line": 151
+   },
+   "en": null
+  },
+  "24": {
+   "id": "MECANONLINE5_24",
+   "fr": "\nSchéma en dynamique explicite.\nLes poutres en grandes rotations POU_D_T_GD et POU_D_TGM ne sont utilisables\nqu'en faibles rotations.\n",
+   "placeholders": [],
+   "source": {
+    "line": 157
+   },
+   "en": null
+  },
+  "25": {
+   "id": "MECANONLINE5_25",
+   "fr": "\nDynamique non-linéaire\nLe pilotage n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 164
+   },
+   "en": null
+  },
+  "26": {
+   "id": "MECANONLINE5_26",
+   "fr": "Vous avez exclu l'archivage des champs d'accélération tout en conservant celui des contraintes. Le calcul des réactions nodales (REAC_NODA) dans CALC_CHAMP sera faux.",
+   "placeholders": [],
+   "source": {
+    "line": 170
+   },
+   "en": null
+  },
+  "28": {
+   "id": "MECANONLINE5_28",
+   "fr": "\nDynamique non-linéaire\nLa méthode XFEM n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 173
+   },
+   "en": null
+  },
+  "29": {
+   "id": "MECANONLINE5_29",
+   "fr": "\nVous faites de la projection modale PROJ_MODAL en explicite.\nIl y a %(i1)d  modes dans la structure MODE_MECA.\nLe nombre de modes (mot-clef NB_MODE dans PROJ_MODAL) vaut %(i2)d.\nOn prend donc %(i3)d modes.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 179
+   },
+   "en": null
+  },
+  "31": {
+   "id": "MECANONLINE5_31",
+   "fr": "\nVous faites de la projection modale PROJ_MODAL en explicite en reprise.\nIl n'y a pas de modes stockés lors du calcul précédent.\nOn part donc de DEPL/VITE/ACCE généralisés nuls.\n",
+   "placeholders": [],
+   "source": {
+    "line": 187
+   },
+   "en": null
+  },
+  "32": {
+   "id": "MECANONLINE5_32",
+   "fr": "\nVous utilisez l'option RESI_REFE_RELA avec la présence simultanée d'éléments\nde poutre et de coque. Cela est déconseillé car les dimensions des valeurs à fournir aux mots-clés\nFORCE_REFE et MOMENT_REFE sont différentes pour ces deux types d'éléments.\n",
+   "placeholders": [],
+   "source": {
+    "line": 194
+   },
+   "en": null
+  },
+  "33": {
+   "id": "MECANONLINE5_33",
+   "fr": "\nDynamique non-linéaire\nLa méthode IMPLEX n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 201
+   },
+   "en": null
+  },
+  "34": {
+   "id": "MECANONLINE5_34",
+   "fr": "\nLa recherche linéaire est incompatible avec le pilotage de type DDL_IMPO.\n",
+   "placeholders": [],
+   "source": {
+    "line": 207
+   },
+   "en": null
+  },
+  "35": {
+   "id": "MECANONLINE5_35",
+   "fr": "\nLa recherche linéaire de type PILOTAGE nécessite de faire du pilotage (présence du mot-clef facteur PILOTAGE).\n",
+   "placeholders": [],
+   "source": {
+    "line": 212
+   },
+   "en": null
+  },
+  "36": {
+   "id": "MECANONLINE5_36",
+   "fr": "\nLa prédiction de type EXTRAPOL ou DEPL_CALCULE est incompatible avec le pilotage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "37": {
+   "id": "MECANONLINE5_37",
+   "fr": "\nL'usage de ARRET='NON' dans CONVERGENCE est dangereux et doit être utilisé avec précaution car il permet à un calcul de converger\nmême lorsque l'équilibre n'est pas vérifié.\n",
+   "placeholders": [],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "39": {
+   "id": "MECANONLINE5_39",
+   "fr": "\nLa recherche linéaire est incompatible avec des chargements de Dirichlet de type suiveur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 228
+   },
+   "en": null
+  },
+  "40": {
+   "id": "MECANONLINE5_40",
+   "fr": "\nLa dynamique avec des chargements de Dirichlet de type suiveur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 233
+   },
+   "en": null
+  },
+  "41": {
+   "id": "MECANONLINE5_41",
+   "fr": "\nLes chargements de Dirichlet de type suiveur impliquent la réactualisation de la matrice REAC_ITER=1.\n",
+   "placeholders": [],
+   "source": {
+    "line": 238
+   },
+   "en": null
+  },
+  "42": {
+   "id": "MECANONLINE5_42",
+   "fr": "\nLe pilotage est incompatible avec des chargements de Dirichlet de type suiveur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 243
+   },
+   "en": null
+  },
+  "43": {
+   "id": "MECANONLINE5_43",
+   "fr": "\n  -> Les paramètres RHO_MIN et RHO_MAX sont identiques.\n",
+   "placeholders": [],
+   "source": {
+    "line": 248
+   },
+   "en": null
+  },
+  "44": {
+   "id": "MECANONLINE5_44",
+   "fr": "\n  -> La définition des paramètres RHO_MIN et RHO_MAX est contradictoire.\n     On choisit de prendre RHO_MIN plus petit que RHO_MAX.\n",
+   "placeholders": [],
+   "source": {
+    "line": 253
+   },
+   "en": null
+  },
+  "45": {
+   "id": "MECANONLINE5_45",
+   "fr": "\nIl faut préciser un concept EVOL_NOLI en prédiction de type 'DEPL_CALCULE'\n",
+   "placeholders": [],
+   "source": {
+    "line": 259
+   },
+   "en": null
+  },
+  "46": {
+   "id": "MECANONLINE5_46",
+   "fr": "\n  -> La définition des paramètres RHO_MIN et RHO_EXCL est contradictoire.\n     On choisit de prendre RHO_MIN à RHO_EXCL.\n  -> Risque & Conseil :\n     RHO_MIN ne doit pas être compris entre -RHO_EXCL et RHO_EXCL\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 264
+   },
+   "en": null
+  },
+  "47": {
+   "id": "MECANONLINE5_47",
+   "fr": "\n  -> La définition des paramètres RHO_MAX et RHO_EXCL est contradictoire.\n     On choisit de prendre RHO_MAX à -RHO_EXCL.\n  -> Risque & Conseil :\n     RHO_MAX ne doit pas être compris entre -RHO_EXCL et RHO_EXCL\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 273
+   },
+   "en": null
+  },
+  "48": {
+   "id": "MECANONLINE5_48",
+   "fr": "\n  Le pilotage est incompatible avec la méthode NEWTON_KRYLOV.\n",
+   "placeholders": [],
+   "source": {
+    "line": 282
+   },
+   "en": null
+  },
+  "49": {
+   "id": "MECANONLINE5_49",
+   "fr": "\nLa recherche linéaire est ignorée pour cette itération : le résidu est orthogonal\nà la direction de descente. On conserve le pas de Newton.\n",
+   "placeholders": [],
+   "source": {
+    "line": 287
+   },
+   "en": null
+  },
+  "50": {
+   "id": "MECANONLINE5_50",
+   "fr": "\n Pilotage.\n La composante <%(k1)s> n'a pas été trouvée dans la numérotation.\n Vérifier NOM_CMP dans le mot-clef PILOTAGE.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 293
+   },
+   "en": null
+  },
+  "51": {
+   "id": "MECANONLINE5_51",
+   "fr": "\n Pour utiliser METHODE='NEWTON_KRYLOV', il faut utiliser une méthode itérative (GCPC, PETSC) sous le mot-clé SOLVEUR.\n",
+   "placeholders": [],
+   "source": {
+    "line": 300
+   },
+   "en": null
+  },
+  "52": {
+   "id": "MECANONLINE5_52",
+   "fr": "\nIl n'y a aucun degré de liberté de déplacement sur le modèle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 305
+   },
+   "en": null
+  },
+  "53": {
+   "id": "MECANONLINE5_53",
+   "fr": "\n   Le critère RESI_COMP_RELA est interdit en dynamique. Utilisez un autre critère de convergence\n",
+   "placeholders": [],
+   "source": {
+    "line": 310
+   },
+   "en": null
+  },
+  "54": {
+   "id": "MECANONLINE5_54",
+   "fr": "L'usage de ARRET='NON' avec le contact implique d'utiliser REAC_GEOM = 'SANS'",
+   "placeholders": [],
+   "source": {
+    "line": 315
+   },
+   "en": null
+  },
+  "55": {
+   "id": "MECANONLINE5_55",
+   "fr": "\n  Vous utilisez l'indicateur de convergence RESI_REFE_RELA et une modélisation %(k1)s.\n  Vous devez renseigner la valeur de référence %(k2)s dans CONVERGENCE.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 316
+   },
+   "en": null
+  },
+  "56": {
+   "id": "MECANONLINE5_56",
+   "fr": "\n  Il n'est pas possible actuellement de calculer des modes vibratoires (MODE_VIBR)\n  sur un modèle dont au moins une matrice assemblée (masse ou raideur) est non-symétrique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 322
+   },
+   "en": null
+  },
+  "59": {
+   "id": "MECANONLINE5_59",
+   "fr": "\n  Vous utilisez le critère de convergence RESI_REFE_RELA et une modélisation %(k1)s.\n  Le résidu calculé à partir de %(k2)s dans CONVERGENCE, conduit à des valeurs nulles\n  ce qui peut se produire si des éléments de ce type sont plans.\n\n  Conseil :\n  Utiliser un autre critère de convergence.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 328
+   },
+   "en": null
+  },
+  "60": {
+   "id": "MECANONLINE5_60",
+   "fr": "La formulation HHO est incompatible avec le contact.",
+   "placeholders": [],
+   "source": {
+    "line": 338
+   },
+   "en": null
+  },
+  "61": {
+   "id": "MECANONLINE5_61",
+   "fr": "La formulation HHO est incompatible avec les liaisons unilatérales.",
+   "placeholders": [],
+   "source": {
+    "line": 339
+   },
+   "en": null
+  },
+  "62": {
+   "id": "MECANONLINE5_62",
+   "fr": "La formulation HHO est incompatible avec le pilotage.",
+   "placeholders": [],
+   "source": {
+    "line": 340
+   },
+   "en": null
+  },
+  "63": {
+   "id": "MECANONLINE5_63",
+   "fr": "La formulation HHO est incompatible avec la recherche linéaire.",
+   "placeholders": [],
+   "source": {
+    "line": 341
+   },
+   "en": null
+  },
+  "65": {
+   "id": "MECANONLINE5_65",
+   "fr": "La formulation HHO est incompatible avec la réduction de modèle.",
+   "placeholders": [],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "66": {
+   "id": "MECANONLINE5_66",
+   "fr": "La formulation HHO est incompatible avec XFEM.",
+   "placeholders": [],
+   "source": {
+    "line": 343
+   },
+   "en": null
+  },
+  "67": {
+   "id": "MECANONLINE5_67",
+   "fr": "La formulation HHO est incompatible avec les macro-éléments.",
+   "placeholders": [],
+   "source": {
+    "line": 344
+   },
+   "en": null
+  },
+  "68": {
+   "id": "MECANONLINE5_68",
+   "fr": " Il n'est pas possible actuellement de calculer des modes de flambement (CRIT_FLAMB) ou des modes vibratoires (MODE_VIBR) si on utilise la formulation HHO.",
+   "placeholders": [],
+   "source": {
+    "line": 345
+   },
+   "en": null
+  },
+  "69": {
+   "id": "MECANONLINE5_69",
+   "fr": "La formulation HHO est incompatible avec les chargements suiveurs.",
+   "placeholders": [],
+   "source": {
+    "line": 348
+   },
+   "en": null
+  },
+  "73": {
+   "id": "MECANONLINE5_73",
+   "fr": "L'option RESI_COMP_RELA n'est pas disponible pour les méthodes HHO. Il faut utiliser un autre critère de convergence.",
+   "placeholders": [],
+   "source": {
+    "line": 349
+   },
+   "en": null
+  },
+  "74": {
+   "id": "MECANONLINE5_74",
+   "fr": "\n  Vous voulez \"poursuivre\" un calcul non-linéaire. Le modèle sous-jacent à CARA_ELEM est différent du modèle pour le calcul.\nLe calcul peut s'arrêter plus tard si certaines informations ne sont pas cohérentes.\n",
+   "placeholders": [],
+   "source": {
+    "line": 352
+   },
+   "en": null
+  },
+  "75": {
+   "id": "MECANONLINE5_75",
+   "fr": "\n  Vous voulez \"poursuivre\" un calcul non-linéaire. Le maillage sous-jacent à CARA_ELEM est différent du maillage pour le calcul.\nLe calcul peut s'arrêter plus tard si certaines informations ne sont pas cohérentes.\n",
+   "placeholders": [],
+   "source": {
+    "line": 358
+   },
+   "en": null
+  },
+  "80": {
+   "id": "MECANONLINE5_80",
+   "fr": "\nVous voulez poursuivre un calcul non-linéaire et vous précisez un état initial (mot clé ETAT_INIT).\nLe champ %(k1)s donné comme état initial a un modèle sous-jacent qui est différent du modèle pour le calcul.\nOn a complété par des zéros.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 364
+   },
+   "en": null
+  },
+  "81": {
+   "id": "MECANONLINE5_81",
+   "fr": "\nVous voulez poursuivre un calcul non-linéaire et vous précisez un état initial (mot clé ETAT_INIT).\nLe champ des contraintes fourni comme état initial a un modèle sous-jacent qui est différent du modèle pour le calcul.\nOn a complété par des zéros.\n",
+   "placeholders": [],
+   "source": {
+    "line": 371
+   },
+   "en": null
+  },
+  "82": {
+   "id": "MECANONLINE5_82",
+   "fr": "\nVous voulez poursuivre un calcul non-linéaire et vous précisez un état initial (mot clé ETAT_INIT).\nLe champ des variables internes fourni comme état initial  est incohérent avec le champ des variables internes créé par le mot-clef COMPORTEMENT.\nVérifiez la cohérence entre le comportement et le champ des variables internes donné dans l'état initial.\n",
+   "placeholders": [],
+   "source": {
+    "line": 378
+   },
+   "en": null
+  }
+ }
+}
