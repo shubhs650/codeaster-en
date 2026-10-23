@@ -14,6 +14,28 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 4.1 fixture cases — agent
+Done: `tests/fixtures/{solid_static,shell_static,modal}/input/` with `mesh.geo` (Gmsh 4.15.2),
+`mesh.med`, `run.comm`, `run.export` (1 cpu, 600 s, 2048 MB; outputs to `../output/`),
+`run.json`. New `docs/schemas/run.schema.json` (title block, units, groups, sections, solver,
+checks, provenance). `tests/fixtures/hand_values.py` computes every `TEST_RESU` reference:
+Navier plate series, Euler-Bernoulli and Saint-Venant torsion frequencies, and the pressure
+resultant integrated on the faceted `solid_static` mesh. `tests/test_fixtures.py` (24 tests)
+checks schema, export file list, mesh groups, comm ↔ run.json ↔ hand values, and runs every
+`run.comm` through the pinned catalog's syntax checker (`code_aster.Cata`, no solver).
+`run-fixture.sh` now creates `output/tables/`. `numpy` and `h5py` are added to the `dev` extra.
+Open: task 4.2. The fixtures were **not** run (no 17.4.26 image). `VALE_CALC` = hand value with
+`TOLE_MACHINE` = `PRECISION` until 4.2 records the solver's values. TODO(verify) in 4.2:
+`REAC_NODA` and `EFGE_NOEU` signs (checks use `VALE_ABS`), and that `run_aster` resolves
+`../output/` paths relative to the export.
+Decisions: none (no ADR). Choices: modal mode 6 is the first torsion mode (about 1485 Hz), not
+bending, so it is checked against Saint-Venant torsion. The reaction sum uses `TEST_RESU`
+`TYPE_TEST="SOMM"` over the whole `REAC_NODA` field, because `trresu.F90` ignores `GROUP_NO`
+with `TYPE_TEST`. Matrices are built with `CALC_MATR_ELEM`/`NUME_DDL`/`ASSE_MATRICE`
+(COMMAND-SET Tier 2 alternative to `ASSEMBLAGE`). Branch is `claude/project-thread-26k744`
+(session-assigned).
+Needs owner: nothing blocking.
+
 ## 2026-10-23 — 0.3 + 0.5 upstream pin and tooling skeleton — agent
 Done: `upstream/` submodule → github.com/shubhs650/code_aster (shallow), pinned to **17.4.26**
 (commit 5d2a06d, 2026-07-06; same commit as tags `17.5.0` and `stable`). `UPSTREAM_VERSION` =
