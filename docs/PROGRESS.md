@@ -14,6 +14,25 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 1.5 inventory report — agent
+Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) writes §7 of
+`docs/INVENTORY.md` between marker comments from `en/commands/`, `en/messages/`,
+`en/astest-index.json` and `docs/COMMAND-SET.md` (no upstream access): totals; every Tier
+1/2/3 command with catalog kind, keyword/`fr=`/bloc counts, astest cases, calls and rank; each
+"key keyword" in COMMAND-SET checked against the row's catalog (187 of 190 found); the Tier 1
+"Likely" message families; messages that reference Tier 1/2 commands (family-name and
+mention heuristics); top 50 commands across astest. §8 (hand-written) lists 8 proposals for the
+COMMAND-SET revision. `tests/test_inventory.py` (9 tests) fails when §7 is stale.
+Open: owner to decide the §8 proposals (COMMAND-SET.md not edited). This branch contains PR #2
+(0.4), because 1.5 extends the `docs/INVENTORY.md` that #2 creates; merge #2 first.
+Decisions: none (no ADR). Choices: commands ranked by number of test cases, then calls.
+COMMAND-SET rows are parsed by backtick spans; a key keyword is "found" if it is a keyword
+name, an `into=` value, or a command of the row.
+Needs owner: §8 — `CALC_MODES` has no `MODELE` form in 17.4.26; `FONC_MULT` belongs to
+`MECA_STATIQUE/EXCIT`, not the hydrostatic load; `CALC_EUROPLEXUS` and family `MECASTATIQUE`
+do not exist; candidates to add: `FORMULE`, `TEST_TABLE`, `DEFI_LIST_REEL` (Tier 1),
+`CALC_TABLE`, `CREA_TABLE` (Tier 2). With 1.5, every Phase 1 task is done once #2 merges.
+
 ## 2026-10-23 — 1.4 astest index — agent
 Done: `caen extract astest-index` (`tools/codeaster_en/extract/astest.py`) writes
 `en/astest-index.json` (schema `docs/schemas/astest-index.schema.json`). A test case is one
@@ -124,6 +143,30 @@ with `TYPE_TEST`. Matrices are built with `CALC_MATR_ELEM`/`NUME_DDL`/`ASSE_MATR
 (COMMAND-SET Tier 2 alternative to `ASSEMBLAGE`). Branch is `claude/project-thread-26k744`
 (session-assigned).
 Needs owner: nothing blocking.
+
+## 2026-10-23 — 0.4 verify upstream anatomy (S1) — agent
+Done: verified CLAUDE.md §6 and ARCHITECTURE.md §3 against 17.4.26 and corrected both in place;
+`docs/INVENTORY.md` with counts. **268 commands** (135 OPER, 116 MACRO, 16 PROC, 1 FORM; + `VARIABLE`)
+in 269 modules; **18,917 keyword occurrences** (17,595 simple, 1,322 factor; 2,847 blocs), 4,227
+distinct names; `fr=` on only 13 % of keywords. **277 message families, 6,890 messages**, 51
+placeholder formats (all named, + `%%`). **4,496 test cases** (`.export`), no expected `.mess` in
+astest. `code_aster.Cata.Commands` imports in a plain venv (numpy only) → task 1.2 extracts by
+import. `code_aster.Messages` does **not** import without the solver (`Utmess` → `aster_core`) →
+task 1.3 must use `ast`. Upstream gettext: `_()` → domain `aster_messages`, switched on only by
+`DEBUT(LANG=...)`, `.mo` built only with `--enable-i18n`. Upstream `en-US/aster_messages.po` covers
+3,308/6,890 current messages (48 %) verbatim, literal 2016 quality.
+Open: Task 4.2 must check whether the official
+image ships an English `.mo` and whether `ASTER_LOCALEDIR` can be overridden.
+Decisions: ADR-004 accepted by the owner (2026-10-23): `en/messages` is the source of truth, a
+generated `.mo` is loaded via `DEBUT(LANG='EN')`, and the runtime renderer is the fallback. This
+settles task 1.1.
+Findings for later tasks: `POURSUITE` has no catalog (runs on `DEBUT`'s) — its Tier 1 reference
+should say so; 4 messages numbered ≥ 100 are unreachable (`Utmess` asserts N < 100); `POST0_55/56`
+are f-strings interpolating a module constant; 15 messages are not wrapped in `_()`; plain `I`
+messages print without their ID in `.mess`. Licence headers GPL-3.0-or-later as ADR-007 assumes;
+`.po`/`.ts` have no own licence header; the owner confirmed their reuse under GPL with attribution.
+Needs owner: none.
+Branch is `claude/project-thread-ux6ket` (session-assigned) rather than `task/0-4-…`.
 
 ## 2026-10-23 — 0.3 + 0.5 upstream pin and tooling skeleton — agent
 Done: `upstream/` submodule → github.com/shubhs650/code_aster (shallow), pinned to **17.4.26**
