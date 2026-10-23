@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/scripts/session-start.sh",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(gh api:*)",
+      "Bash(pytest:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip install:*)",
+      "Bash(ruff:*)",
+      "Bash(caen:*)",
+      "Bash(docker run:*)",
+      "Bash(docker pull:*)",
+      "Bash(docker image:*)",
+      "Bash(gmsh:*)",
+      "Bash(msgfmt:*)"
+    ],
+    "deny": [
+      "Edit(upstream/**)",
+      "Write(upstream/**)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git -C upstream commit:*)",
+      "Bash(git -C upstream push:*)"
+    ]
+  }
+}
