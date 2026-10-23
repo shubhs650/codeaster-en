@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shubhs650/codeaster-en/docs/schemas/run.schema.json",
+  "title": "codeaster-en job metadata (input/run.json)",
+  "description": "Job metadata that sits next to run.comm and run.export. Read by the report generator (docs/REPORT-SPEC.md) and written by ClearFEA (docs/CLEARFEA-INTEGRATION.md section 3). Nothing here is read by code_aster itself.",
+  "type": "object",
+  "required": ["schema_version", "case", "title_block", "analysis", "units", "groups"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "case": {
+      "description": "Short identifier of the job or fixture; matches the directory name for fixtures.",
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "description": {"type": "string"},
+    "title_block": {
+      "description": "Report title block (REPORT-SPEC section 3.1).",
+      "type": "object",
+      "required": ["title"],
+      "additionalProperties": false,
+      "properties": {
+        "project": {"type": "string"},
+        "title": {"type": "string", "minLength": 1},
+        "revision": {"type": "string"},
+        "author": {"type": "string"},
+        "date": {
+          "description": "ISO date; the report uses this, never the wall clock.",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "analysis": {
+      "description": "Analysis type, English label for the report summary.",
+      "enum": ["linear_static", "modal"]
+    },
+    "units": {
+      "description": "Consistent unit system declared by the model author (code_aster is unit-agnostic).",
+      "type": "object",
+      "required": ["system"],
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "description": "SI = m, N, Pa, kg, s. SI_mm = mm, N, MPa, tonne, s.",
+          "enum": ["SI", "SI_mm"]
+        },
+        "temperature": {"enum": ["K", "degC"]}
+      }
+    },
+    "groups": {
+      "description": "Mesh groups (MED group names, French or not, exactly as in the mesh) with English display names.",
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^[A-Za-z0-9_]{1,24}$"},
+      "additionalProperties": {
+        "type": "object",
+        "required": ["display_name"],
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {"type": "string", "minLength": 1},
+          "role": {"enum": ["body", "support", "load", "free", "output"]},
+          "report": {
+            "description": "Include per-group extrema tables for this group (REPORT-SPEC section 3.8).",
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "sections": {
+      "description": "Report sections to include, in REPORT-SPEC order. Omitted means the spec defaults.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "title_block",
+          "summary",
+          "model",
+          "materials",
+          "element_properties",
+          "loads_and_bcs",
+          "solution",
+          "displacements",
+          "stresses",
+          "reactions",
+          "modal",
+          "cut_lines",
+          "diagnostics",
+          "verification",
+          "appendix_command_file",
+          "appendix_run_parameters",
+          "appendix_log"
+        ]
+      }
+    },
+    "solver": {
+      "description": "Solver settings requested; must agree with run.export and run.comm.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "linear_solver": {"enum": ["MUMPS", "MULT_FRONT", "LDLT", "PETSC", "GCPC"]},
+        "ncpus": {"type": "integer", "minimum": 1},
+        "time_limit_s": {"type": "integer", "minimum": 1},
+        "memory_limit_mb": {"type": "integer", "minimum": 1}
+      }
+    },
+    "checks": {
+      "description": "Hand-calculated reference values. For fixtures each entry mirrors one TEST_RESU occurrence (matched by legend).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["legend", "quantity", "reference", "precision", "basis"],
+        "additionalProperties": false,
+        "properties": {
+          "legend": {
+            "description": "LEGENDE of the matching TEST_RESU occurrence.",
+            "type": "string",
+            "pattern": "^[A-Z0-9_]+$"
+          },
+          "quantity": {"description": "English description, with units.", "type": "string"},
+          "field": {"type": "string"},
+          "component": {"type": "string"},
+          "group": {"type": "string"},
+          "reference": {"type": "number"},
+          "precision": {"description": "Relative tolerance.", "type": "number", "exclusiveMinimum": 0},
+          "absolute_value": {
+            "description": "True when only the magnitude is checked (TEST_RESU VALE_ABS='OUI').",
+            "type": "boolean",
+            "default": false
+          },
+          "basis": {"description": "Formula or method used for the hand value.", "type": "string"},
+          "source": {"description": "Literature or code reference for the formula.", "type": "string"}
+        }
+      }
+    },
+    "provenance": {
+      "description": "Where the job came from (CLAUDE.md rule 5).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "upstream_version": {"type": "string"},
+        "modelled_on": {
+          "description": "upstream astest cases the command file follows.",
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9]+[a-z]$"}
+        },
+        "author": {"type": "string"},
+        "date": {"type": "string", "format": "date"},
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
