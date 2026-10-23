@@ -38,11 +38,27 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 ---
 
 ## ADR-004 — Message strategy: gettext catalog vs runtime mapping
-**Date:** — · **Status:** proposed (resolved in Phase 1, task 1.1)
+**Date:** 2026-10-23 (draft, task 0.4) · **Status:** proposed (owner decides; task 1.1)
 
 **Options.** (a) Runtime only: parse `.mess`, map `FAMILY_N` → English. Works with any image, no solver change. (b) If upstream wraps messages in gettext and honours a locale, ship an English `.po/.mo`; solver prints English natively; runtime renderer remains for IDs/classification and as fallback.
 
-**Leaning.** (b) if feasible because it also fixes messages that escape to stdout/exception text; (a) always exists regardless.
+**Evidence (upstream 17.4.26; counts in `docs/INVENTORY.md`).**
+1. *gettext is wired in.* Every message is `_("""…""")` with `_` = `code_aster.Utilities.i18n.translate` → `gettext.translation("aster_messages", localedir, languages=[...], fallback=True)`. `localedir` = `$ASTER_LOCALEDIR` (exported by `data/profile.sh.tmpl`) or `$ASTER_ROOT/share/locale`. Fortran `utmess` → `utprin` (`bibc/supervis/aster_core_module.c`) → the same Python `MessageLog`, so one path covers all 6,890 messages.
+2. *The switch is a `.comm` keyword, not the environment.* Only `DEBUT(LANG='EN')` calls `localization.translation()` (`code_aster/CodeCommands/debut.py:229`). `LANG` is an existing catalog keyword (`TXM`); using it renames nothing (CLAUDE.md rule 2). Our builder emits the `.comm` (ADR-008), so it can always add it.
+3. *Translation happens at module import.* `_()` is evaluated when a family module is first imported (`Utmess.load_cata_msg` → `__import__`, cached). Families used before `LANG` is processed stay French: at least `SUPERVIS` (`SUPERVIS_12`/`_22` are emitted in `DEBUT` before line 229) and `Utmess.contacter_assistance`. The box footers ("Ceci est une alarme…") are translated at call time and do switch.
+4. *Gaps gettext cannot close:* 15 messages are not wrapped in `_()`; `POST0_55`/`POST0_56` are f-strings (xgettext cannot extract them); messages printed before `DEBUT`.
+5. *No `.mo` by default.* `i18n/wscript` compiles `.po` → `.mo` only when configured with `--enable-i18n` (default off). `astest/supv003a.comm` runs `DEBUT(LANG="EN")` and passes whether or not `$ASTER_LOCALEDIR/en-US/LC_MESSAGES/aster_messages.mo` exists. Whether `codeastersolver/codeaster-seq` ships it: TODO(verify) in task 4.2. If not, we mount our own `.mo` and point `ASTER_LOCALEDIR` at it (needs checking that `run_aster`'s profile does not override it after we set it).
+6. *Upstream English exists but is weak.* `i18n/en-US/aster_messages.po`: 2016, v13, one Crowdin translator; 3,308 of 6,890 current messages (48 %) reusable verbatim, 1 with a placeholder mismatch; literal quality and glossary conflicts (*maille* → "mesh"). `catapy_en_US.ts`: 1,033 finished translations matching current `fr=` strings.
+7. *Runtime mapping has a blind spot.* Plain informational messages (type `I` without `DECORATED`) are printed with no `<FAMILY_N>` ID (`Utmess.format_message`), so option (a) alone must reverse-match their text against French templates.
+
+**Draft recommendation (for the owner to accept or change).** Both, with one source of truth:
+- `en/messages/<FAMILY>.en.json` stays the only place English message text is edited. Seed it from the upstream `.po` where the French matches exactly, as `method: machine` with provenance `upstream:i18n/en-US/aster_messages.po`; never `reviewed` until the owner says so.
+- Generate `aster_messages.po` → `.mo` from it as a build artefact (task 3.4), install it at `<localedir>/en/LC_MESSAGES/` in the run image or via `ASTER_LOCALEDIR`, and have the `.comm` builder emit `DEBUT(LANG='EN')`. The solver then prints English for everything gettext reaches.
+- Keep the runtime `.mess` renderer (tasks 4.3–4.4) for IDs, classification, and the French that leaks through (point 3, 4, and runs made without our `.mo`). It must handle both French and already-English bodies.
+- Gate on task 4.2: one fixture run with `LANG='EN'` + our `.mo` must show English diagnostics before we rely on (b).
+- Offer upstream (via `docs/DECISIONS.md`, not by editing `upstream/`): wrap the 15 bare strings, replace the two f-strings, and apply `LANG` before the first `UTMESS` in `DEBUT`.
+
+**Consequences if accepted.** Task 1.3 adds a `.po` import step and records `source: upstream-po`; task 1.6 validates generated `.po` placeholders; task 3.4 emits the `.po` and checks it with `msgfmt`; task 4.2 adds a `LANG='EN'` fixture variant. If rejected (runtime only), the `.po` is still worth importing as a machine seed.
 
 ---
 
