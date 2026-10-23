@@ -1,0 +1,271 @@
+# Seed glossary — codeaster-en
+# Controlled French → English vocabulary. One entry per French identifier/term.
+# `en` is the ONLY permitted translation; `aliases_en` are forbidden synonyms the validator rejects.
+# kind: command | keyword | value | concept | term | abbrev
+# status: proposed | machine | reviewed
+#
+# Seeded 2026-10-22 from engineering usage. To be merged with AsterStudy's GLOBAL_DICT
+# (Copyright 2016 EDF R&D, GPL-3; gitlab.com/salomemeca/modules/salome-asterstudy) in task 0.6.
+# Everything here is `proposed` until an engineer reviews it.
+
+# ---------- abbreviations that appear inside keyword names ----------
+- {fr: MA,    en: element,            kind: abbrev, note: "maille. GROUP_MA = element group. Never 'cell'.", aliases_en: [cell, mesh element], status: proposed}
+- {fr: NO,    en: node,               kind: abbrev, note: "noeud. GROUP_NO = node group.", aliases_en: [vertex], status: proposed}
+- {fr: CARA,  en: properties,         kind: abbrev, note: "caractéristiques. AFFE_CARA_ELEM = element properties (thickness, section, spring).", aliases_en: [characteristics], status: proposed}
+- {fr: CHAM,  en: field,              kind: abbrev, note: "champ. CHAM_MATER = material field; CREA_CHAMP = create field.", status: proposed}
+- {fr: CHAR,  en: load,               kind: abbrev, note: "charge/chargement. AFFE_CHAR_MECA = assign mechanical loads and BCs.", aliases_en: [charge], status: proposed}
+- {fr: CINE,  en: kinematic,          kind: abbrev, note: "cinématique. AFFE_CHAR_CINE = kinematic (eliminated, non-Lagrange) BCs.", status: proposed}
+- {fr: SIGM,  en: stress,             kind: abbrev, note: "contrainte (sigma). SIGM_ELNO, SIGM_NOEU.", status: proposed}
+- {fr: SIEF,  en: stress (integration-point field), kind: abbrev, note: "contraintes/efforts: the raw stress field computed at Gauss points (SIEF_ELGA).", status: proposed}
+- {fr: SIEQ,  en: equivalent stress,  kind: abbrev, note: "contraintes équivalentes: von Mises, Tresca, principals. SIEQ_ELNO, SIEQ_NOEU.", status: proposed}
+- {fr: EPSI,  en: strain,             kind: abbrev, note: "déformation. EPSI_ELNO, EPSI_NOEU.", status: proposed}
+- {fr: EFGE,  en: generalized forces, kind: abbrev, note: "efforts généralisés: shell/beam stress resultants (N, M, Q). EFGE_ELNO.", status: proposed}
+- {fr: REAC,  en: reaction,           kind: abbrev, note: "réaction. REAC_NODA = nodal reactions.", status: proposed}
+- {fr: FORC,  en: force,              kind: abbrev, note: "FORC_NODA = nodal forces (internal, = assembled element forces).", status: proposed}
+- {fr: ELGA,  en: at Gauss points,    kind: abbrev, note: "élément, points de Gauss. Field location.", aliases_en: [at integration points], status: proposed}
+- {fr: ELNO,  en: at element nodes,   kind: abbrev, note: "élément, noeuds: extrapolated to nodes, not averaged between elements.", status: proposed}
+- {fr: NOEU,  en: at nodes (averaged), kind: abbrev, note: "noeuds: nodal field averaged across adjoining elements.", status: proposed}
+- {fr: MECA,  en: mechanical,         kind: abbrev, note: "mécanique.", status: proposed}
+- {fr: THER,  en: thermal,            kind: abbrev, note: "thermique.", status: proposed}
+- {fr: RESU,  en: result,             kind: abbrev, note: "résultat. IMPR_RESU, TEST_RESU, RESULTAT keyword.", status: proposed}
+- {fr: IMPR,  en: write (print),      kind: abbrev, note: "imprimer: write to file. IMPR_RESU, IMPR_TABLE.", aliases_en: [impress], status: proposed}
+- {fr: LIRE,  en: read,               kind: abbrev, note: "lire. LIRE_MAILLAGE.", status: proposed}
+- {fr: DEFI,  en: define,             kind: abbrev, note: "définir. DEFI_MATERIAU, DEFI_FONCTION, DEFI_GROUP.", status: proposed}
+- {fr: AFFE,  en: assign,             kind: abbrev, note: "affecter. AFFE_MODELE, AFFE_MATERIAU, AFFE keyword block.", aliases_en: [affect, affectation], status: proposed}
+- {fr: CALC,  en: compute,            kind: abbrev, note: "calculer. CALC_CHAMP, CALC_MODES.", status: proposed}
+- {fr: POST,  en: post-process,       kind: abbrev, note: "POST_RELEVE_T, POST_ELEM.", status: proposed}
+- {fr: CREA,  en: create,             kind: abbrev, note: "créer. CREA_CHAMP, CREA_MAILLAGE.", status: proposed}
+- {fr: MODI,  en: modify,             kind: abbrev, note: "modifier. MODI_MAILLAGE.", status: proposed}
+- {fr: ASSE,  en: assemble,           kind: abbrev, note: "assembler. ASSE_MATRICE, ASSEMBLAGE.", status: proposed}
+- {fr: NUME,  en: numbering,          kind: abbrev, note: "numérotation. NUME_DDL = DOF numbering; NUME_ORDRE = result step index.", status: proposed}
+- {fr: MACR,  en: macro,              kind: abbrev, note: "MACR_LIGN_COUPE etc.: macro-commands built from others.", status: proposed}
+
+# ---------- core concepts ----------
+- {fr: maillage,        en: mesh,                 kind: term, status: proposed}
+- {fr: maille,          en: element,              kind: term, aliases_en: [cell], status: proposed}
+- {fr: noeud,           en: node,                 kind: term, aliases_en: [vertex], status: proposed}
+- {fr: modèle,          en: model,                kind: term, note: "The mesh + element formulation assignment (result of AFFE_MODELE).", status: proposed}
+- {fr: modélisation,    en: modeling type,        kind: term, note: "Element formulation family: 3D, DKT, AXIS… Not 'modelization'.", aliases_en: [modelization, modelisation], status: proposed}
+- {fr: phénomène,       en: physics,              kind: term, note: "PHENOMENE = 'MECANIQUE' | 'THERMIQUE' | 'ACOUSTIQUE'.", aliases_en: [phenomenon], status: proposed}
+- {fr: concept,         en: result object,        kind: term, note: "A named object produced by a command (mesh, model, field, result). Keep '(concept)' once at first use in docs.", status: proposed}
+- {fr: structure de données (SD), en: data structure, kind: term, note: "Internal storage of a concept. Rarely user-facing.", status: proposed}
+- {fr: matériau,        en: material,             kind: term, status: proposed}
+- {fr: champ de matériau, en: material field,     kind: term, note: "CHAM_MATER: which material applies where (result of AFFE_MATERIAU).", status: proposed}
+- {fr: chargement,      en: load,                 kind: term, aliases_en: [charge, loading], status: proposed}
+- {fr: cas de charge,   en: load case,            kind: term, status: proposed}
+- {fr: conditions aux limites, en: boundary conditions, kind: term, status: proposed}
+- {fr: dualisation,     en: Lagrange-multiplier enforcement, kind: term, note: "BCs applied via Lagrange multipliers (AFFE_CHAR_MECA) vs eliminated (AFFE_CHAR_CINE).", aliases_en: [dualization], status: proposed}
+- {fr: degré de liberté (DDL), en: degree of freedom (DOF), kind: term, status: proposed}
+- {fr: unité logique,   en: logical unit,         kind: term, note: "Numbered file slot (UNITE=20) mapped to a file in the .export.", status: proposed}
+- {fr: fichier de commandes, en: command file,    kind: term, note: ".comm file.", status: proposed}
+- {fr: fichier .mess,   en: log file,             kind: term, note: "Solver message log.", status: proposed}
+- {fr: alarme,          en: warning,              kind: term, note: "<A> in the log. Never 'alarm'.", aliases_en: [alarm], status: proposed}
+- {fr: erreur fatale,   en: fatal error,          kind: term, note: "<F>.", status: proposed}
+- {fr: erreur,          en: error,                kind: term, note: "<E>.", status: proposed}
+- {fr: instant,         en: time step,            kind: term, note: "INST: pseudo-time / load-step parameter of a result.", aliases_en: [instant], status: proposed}
+- {fr: numéro d'ordre,  en: step index,           kind: term, note: "NUME_ORDRE.", status: proposed}
+- {fr: groupe de mailles, en: element group,      kind: term, aliases_en: [cell group, mesh group], status: proposed}
+- {fr: groupe de noeuds, en: node group,          kind: term, status: proposed}
+- {fr: peau,            en: boundary (skin) elements, kind: term, note: "ORIE_PEAU: orient 2D boundary elements of a 3D mesh outward.", status: proposed}
+- {fr: coque,           en: shell,                kind: term, status: proposed}
+- {fr: plaque,          en: plate,                kind: term, status: proposed}
+- {fr: poutre,          en: beam,                 kind: term, status: proposed}
+- {fr: épaisseur,       en: thickness,            kind: term, status: proposed}
+- {fr: couche,          en: layer,                kind: term, note: "COQUE_NCOU: number of through-thickness layers for stress recovery.", status: proposed}
+- {fr: raideur,         en: stiffness,            kind: term, status: proposed}
+- {fr: rigidité,        en: stiffness,            kind: term, note: "RIGI_MECA = stiffness matrix.", status: proposed}
+- {fr: masse,           en: mass,                 kind: term, note: "MASS_MECA = mass matrix; MASS_INER = mass/inertia properties.", status: proposed}
+- {fr: fréquence propre, en: natural frequency,   kind: term, status: proposed}
+- {fr: mode propre,     en: mode shape,           kind: term, status: proposed}
+- {fr: masse effective, en: effective mass,       kind: term, note: "MASS_EFFE: modal effective mass; MASS_EFFE_UN = unit-normalised fraction.", status: proposed}
+- {fr: résultante,      en: resultant,            kind: term, status: proposed}
+- {fr: contrainte équivalente de von Mises, en: von Mises stress, kind: term, status: proposed}
+- {fr: contrainte principale, en: principal stress, kind: term, status: proposed}
+- {fr: solveur,         en: solver,               kind: term, note: "SOLVEUR = linear solver settings (MUMPS, MULT_FRONT, PETSC).", status: proposed}
+- {fr: factorisation,   en: factorization,        kind: term, status: proposed}
+- {fr: pivot nul,       en: zero pivot,           kind: term, note: "Singular matrix: usually missing BCs or unconnected parts.", status: proposed}
+- {fr: convergence,     en: convergence,          kind: term, status: proposed}
+- {fr: pas de temps,    en: time step,            kind: term, status: proposed}
+- {fr: liaison,         en: constraint (coupling), kind: term, note: "LIAISON_* keywords: linear relations between DOFs (tie, rigid, RBE3).", aliases_en: [link, connection], status: proposed}
+- {fr: maître / esclave, en: main / secondary,     kind: term, note: "MAIT/ESCL in LIAISON_MAIL, contact. Use main/secondary consistently.", aliases_en: [master/slave], status: proposed}
+- {fr: repère,          en: coordinate system,    kind: term, note: "REPERE='GLOBAL'|'LOCAL'|'UTILISATEUR'.", aliases_en: [frame, reference], status: proposed}
+- {fr: fonction,        en: function,             kind: term, note: "DEFI_FONCTION: tabulated function of a parameter (INST, X, Y, Z, TEMP).", status: proposed}
+- {fr: prolongement,    en: extrapolation (outside table range), kind: term, note: "PROL_DROITE/PROL_GAUCHE = right/left extension: 'CONSTANT', 'LINEAIRE', 'EXCLU'.", status: proposed}
+
+# ---------- commands (Tier 1/2) ----------
+- {fr: DEBUT,            en: begin study,                      kind: command, status: proposed}
+- {fr: FIN,              en: end study,                        kind: command, status: proposed}
+- {fr: POURSUITE,        en: continue study (restart),         kind: command, status: proposed}
+- {fr: LIRE_MAILLAGE,    en: read mesh,                        kind: command, status: proposed}
+- {fr: MODI_MAILLAGE,    en: modify mesh,                      kind: command, status: proposed}
+- {fr: DEFI_GROUP,       en: define groups,                    kind: command, status: proposed}
+- {fr: CREA_MAILLAGE,    en: create derived mesh,              kind: command, status: proposed}
+- {fr: AFFE_MODELE,      en: assign model,                     kind: command, status: proposed}
+- {fr: DEFI_MATERIAU,    en: define material,                  kind: command, status: proposed}
+- {fr: AFFE_MATERIAU,    en: assign material,                  kind: command, status: proposed}
+- {fr: AFFE_CARA_ELEM,   en: assign element properties,        kind: command, status: proposed}
+- {fr: AFFE_CHAR_MECA,   en: assign mechanical loads and BCs,  kind: command, status: proposed}
+- {fr: AFFE_CHAR_MECA_F, en: assign mechanical loads and BCs (function-valued), kind: command, status: proposed}
+- {fr: AFFE_CHAR_CINE,   en: assign kinematic BCs,             kind: command, status: proposed}
+- {fr: AFFE_CHAR_THER,   en: assign thermal loads and BCs,     kind: command, status: proposed}
+- {fr: DEFI_FONCTION,    en: define function,                  kind: command, status: proposed}
+- {fr: DEFI_CONSTANTE,   en: define constant function,         kind: command, status: proposed}
+- {fr: DEFI_LIST_REEL,   en: define real list,                 kind: command, status: proposed}
+- {fr: DEFI_LIST_INST,   en: define time-step list,            kind: command, status: proposed}
+- {fr: MECA_STATIQUE,    en: linear static analysis,           kind: command, status: proposed}
+- {fr: STAT_NON_LINE,    en: nonlinear static analysis,        kind: command, status: proposed}
+- {fr: THER_LINEAIRE,    en: linear thermal analysis,          kind: command, status: proposed}
+- {fr: CALC_CHAMP,       en: compute derived fields,           kind: command, status: proposed}
+- {fr: CALC_MODES,       en: compute natural modes,            kind: command, status: proposed}
+- {fr: NORM_MODE,        en: normalize modes,                  kind: command, status: proposed}
+- {fr: EXTR_MODE,        en: extract/filter modes,             kind: command, status: proposed}
+- {fr: ASSEMBLAGE,       en: assemble matrices and vectors,    kind: command, status: proposed}
+- {fr: POST_RELEVE_T,    en: extract values to table,          kind: command, status: proposed}
+- {fr: POST_ELEM,        en: element-based post-processing,    kind: command, status: proposed}
+- {fr: POST_RCCM,        en: stress linearization (RCC-M),     kind: command, status: proposed}
+- {fr: MACR_LIGN_COUPE,  en: extract along cut line,           kind: command, status: proposed}
+- {fr: CREA_CHAMP,       en: create field,                     kind: command, status: proposed}
+- {fr: IMPR_RESU,        en: write results,                    kind: command, status: proposed}
+- {fr: IMPR_TABLE,       en: write table,                      kind: command, status: proposed}
+- {fr: TEST_RESU,        en: test result value,                kind: command, status: proposed}
+- {fr: DEFI_CONTACT,     en: define contact,                   kind: command, status: proposed}
+
+# ---------- keywords (most frequent) ----------
+- {fr: MAILLAGE,      en: mesh,                      kind: keyword, status: proposed}
+- {fr: MODELE,        en: model,                     kind: keyword, status: proposed}
+- {fr: MATER,         en: material,                  kind: keyword, status: proposed}
+- {fr: CHAM_MATER,    en: material field,            kind: keyword, status: proposed}
+- {fr: CARA_ELEM,     en: element properties,        kind: keyword, status: proposed}
+- {fr: CHARGE,        en: load,                      kind: keyword, status: proposed}
+- {fr: EXCIT,         en: applied loads,             kind: keyword, note: "List of (CHARGE, FONC_MULT) pairs in a solve command.", aliases_en: [excitation], status: proposed}
+- {fr: FONC_MULT,     en: load multiplier function,  kind: keyword, status: proposed}
+- {fr: RESULTAT,      en: result,                    kind: keyword, status: proposed}
+- {fr: NOM_CHAM,      en: field name,                kind: keyword, status: proposed}
+- {fr: NOM_CMP,       en: component name,            kind: keyword, status: proposed}
+- {fr: TOUT,          en: all (entire mesh),         kind: keyword, status: proposed}
+- {fr: GROUP_MA,      en: element group,             kind: keyword, aliases_en: [cell group], status: proposed}
+- {fr: GROUP_NO,      en: node group,                kind: keyword, status: proposed}
+- {fr: PHENOMENE,     en: physics,                   kind: keyword, status: proposed}
+- {fr: MODELISATION,  en: modeling type,             kind: keyword, status: proposed}
+- {fr: EPAIS,         en: thickness,                 kind: keyword, status: proposed}
+- {fr: COQUE_NCOU,    en: number of shell layers,    kind: keyword, status: proposed}
+- {fr: ANGL_REP,      en: local-axis angles,         kind: keyword, status: proposed}
+- {fr: VECTEUR,       en: reference vector (local x), kind: keyword, status: proposed}
+- {fr: DDL_IMPO,      en: imposed DOF,               kind: keyword, status: proposed}
+- {fr: MECA_IMPO,     en: imposed DOF (kinematic),   kind: keyword, status: proposed}
+- {fr: FACE_IMPO,     en: imposed DOF on faces,      kind: keyword, status: proposed}
+- {fr: PRES_REP,      en: distributed pressure,      kind: keyword, note: "Pression répartie. Positive = pushing on the face (requires outward normals).", status: proposed}
+- {fr: FORCE_FACE,    en: force per unit area on faces, kind: keyword, status: proposed}
+- {fr: FORCE_ARETE,   en: force per unit length on edges, kind: keyword, status: proposed}
+- {fr: FORCE_NODALE,  en: nodal force,               kind: keyword, status: proposed}
+- {fr: PESANTEUR,     en: gravity,                   kind: keyword, status: proposed}
+- {fr: ROTATION,      en: rotation (centrifugal load), kind: keyword, status: proposed}
+- {fr: LIAISON_DDL,   en: linear DOF relation,       kind: keyword, status: proposed}
+- {fr: LIAISON_UNIF,  en: uniform DOF coupling,      kind: keyword, status: proposed}
+- {fr: LIAISON_SOLIDE, en: rigid-body coupling,      kind: keyword, status: proposed}
+- {fr: LIAISON_MAIL,  en: mesh tie (bonded),         kind: keyword, status: proposed}
+- {fr: LIAISON_RBE3,  en: RBE3 distributed coupling, kind: keyword, status: proposed}
+- {fr: ORIE_PEAU,     en: orient boundary elements outward, kind: keyword, status: proposed}
+- {fr: ORIE_NORM_COQUE, en: orient shell normals,    kind: keyword, status: proposed}
+- {fr: SOLVEUR,       en: linear solver,             kind: keyword, status: proposed}
+- {fr: METHODE,       en: method,                    kind: keyword, status: proposed}
+- {fr: OPTION,        en: option,                    kind: keyword, status: proposed}
+- {fr: CONTRAINTE,    en: stress fields,             kind: keyword, note: "In CALC_CHAMP: which stress fields to derive.", status: proposed}
+- {fr: CRITERES,      en: equivalent-stress fields,  kind: keyword, note: "In CALC_CHAMP: SIEQ_* (von Mises, Tresca, principals).", aliases_en: [criteria], status: proposed}
+- {fr: DEFORMATION,   en: strain fields,             kind: keyword, status: proposed}
+- {fr: FORCE,         en: force fields,              kind: keyword, note: "In CALC_CHAMP: REAC_NODA, FORC_NODA.", status: proposed}
+- {fr: ENERGIE,       en: energy fields,             kind: keyword, status: proposed}
+- {fr: INTITULE,      en: label,                     kind: keyword, status: proposed}
+- {fr: OPERATION,     en: operation,                 kind: keyword, status: proposed}
+- {fr: RESULTANTE,    en: resultant components,      kind: keyword, status: proposed}
+- {fr: MOMENT,        en: moment components,         kind: keyword, status: proposed}
+- {fr: POINT,         en: reference point,           kind: keyword, status: proposed}
+- {fr: UNITE,         en: logical unit,              kind: keyword, aliases_en: [unit number, filename], status: proposed}
+- {fr: FORMAT,        en: file format,               kind: keyword, status: proposed}
+- {fr: INFO,          en: verbosity,                 kind: keyword, status: proposed}
+- {fr: TITRE,         en: title,                     kind: keyword, status: proposed}
+- {fr: VALE,          en: value(s),                  kind: keyword, status: proposed}
+- {fr: VALE_CALC,     en: computed value (regression), kind: keyword, status: proposed}
+- {fr: VALE_REFE,     en: reference value,           kind: keyword, status: proposed}
+- {fr: PRECISION,     en: tolerance,                 kind: keyword, status: proposed}
+- {fr: REFERENCE,     en: reference type,            kind: keyword, note: "'ANALYTIQUE' | 'SOURCE_EXTERNE' | 'NON_DEFINI' | 'AUTRE_ASTER'.", status: proposed}
+- {fr: NOM_PARA,      en: parameter name,            kind: keyword, status: proposed}
+- {fr: PROL_DROITE,   en: right extrapolation,       kind: keyword, status: proposed}
+- {fr: PROL_GAUCHE,   en: left extrapolation,        kind: keyword, status: proposed}
+- {fr: INTERPOL,      en: interpolation,             kind: keyword, status: proposed}
+- {fr: CALC_FREQ,     en: frequency search settings, kind: keyword, status: proposed}
+- {fr: NMAX_FREQ,     en: number of frequencies,     kind: keyword, status: proposed}
+- {fr: FREQ,          en: frequency,                 kind: keyword, status: proposed}
+- {fr: MATR_RIGI,     en: stiffness matrix,          kind: keyword, status: proposed}
+- {fr: MATR_MASS,     en: mass matrix,               kind: keyword, status: proposed}
+- {fr: NUME_DDL,      en: DOF numbering,             kind: keyword, status: proposed}
+- {fr: INST,          en: time step (pseudo-time),   kind: keyword, status: proposed}
+- {fr: NUME_ORDRE,    en: step index,                kind: keyword, status: proposed}
+- {fr: TYPE_CHAM,     en: field type,                kind: keyword, status: proposed}
+- {fr: TYPE_RESU,     en: result type,               kind: keyword, status: proposed}
+- {fr: VERI_MAIL,     en: mesh checks,               kind: keyword, status: proposed}
+
+# ---------- values ----------
+- {fr: OUI,         en: yes,                     kind: value, status: proposed}
+- {fr: NON,         en: no,                      kind: value, status: proposed}
+- {fr: MECANIQUE,   en: mechanical,              kind: value, status: proposed}
+- {fr: THERMIQUE,   en: thermal,                 kind: value, status: proposed}
+- {fr: ELAS,        en: linear elastic,          kind: value, note: "Material law keyword in DEFI_MATERIAU.", status: proposed}
+- {fr: ELAS_FO,     en: linear elastic (temperature-dependent), kind: value, status: proposed}
+- {fr: 3D,          en: 3D solid,                kind: value, status: proposed}
+- {fr: 3D_SI,       en: 3D solid (selective integration), kind: value, note: "Under-integrated hexahedra to limit locking.", status: proposed}
+- {fr: DKT,         en: thin shell (DKT),        kind: value, note: "Discrete Kirchhoff Triangle; no transverse shear.", status: proposed}
+- {fr: DST,         en: thick shell (DST),       kind: value, note: "Discrete Shear Triangle; includes transverse shear.", status: proposed}
+- {fr: COQUE_3D,    en: 3D shell (quadratic),    kind: value, status: proposed}
+- {fr: AXIS,        en: axisymmetric,            kind: value, status: proposed}
+- {fr: C_PLAN,      en: plane stress,            kind: value, status: proposed}
+- {fr: D_PLAN,      en: plane strain,            kind: value, status: proposed}
+- {fr: POU_D_T,     en: Timoshenko beam,         kind: value, status: proposed}
+- {fr: POU_D_E,     en: Euler-Bernoulli beam,    kind: value, status: proposed}
+- {fr: DIS_T,       en: translational discrete element (spring/mass), kind: value, status: proposed}
+- {fr: DIS_TR,      en: translational+rotational discrete element, kind: value, status: proposed}
+- {fr: MUMPS,       en: MUMPS direct solver,     kind: value, status: proposed}
+- {fr: MULT_FRONT,  en: multifrontal direct solver, kind: value, status: proposed}
+- {fr: MED,         en: MED file format,         kind: value, status: proposed}
+- {fr: ASTER,       en: Aster native format,     kind: value, status: proposed}
+- {fr: TABLEAU,     en: tabular (CSV-like),      kind: value, status: proposed}
+- {fr: EXTRACTION,  en: extraction,              kind: value, status: proposed}
+- {fr: GLOBAL,      en: global axes,             kind: value, status: proposed}
+- {fr: LOCAL,       en: local axes,              kind: value, status: proposed}
+- {fr: PLUS_PETITE, en: smallest (frequencies),  kind: value, status: proposed}
+- {fr: BANDE,       en: frequency band,          kind: value, status: proposed}
+- {fr: CENTRE,      en: around a center frequency, kind: value, status: proposed}
+- {fr: CONSTANT,    en: constant,                kind: value, status: proposed}
+- {fr: LINEAIRE,    en: linear,                  kind: value, status: proposed}
+- {fr: EXCLU,       en: not allowed (error outside range), kind: value, status: proposed}
+- {fr: ANALYTIQUE,  en: analytical,              kind: value, status: proposed}
+- {fr: SUP,         en: top surface,             kind: value, note: "Shell layer position: SUP/MOY/INF = top/mid/bottom.", status: proposed}
+- {fr: MOY,         en: mid surface,             kind: value, status: proposed}
+- {fr: INF,         en: bottom surface,          kind: value, status: proposed}
+
+# ---------- result objects and field/component names (never renamed; labelled) ----------
+- {fr: EVOL_ELAS,   en: linear static result,     kind: concept, status: proposed}
+- {fr: EVOL_NOLI,   en: nonlinear result,         kind: concept, status: proposed}
+- {fr: EVOL_THER,   en: thermal result,           kind: concept, status: proposed}
+- {fr: MODE_MECA,   en: modal result,             kind: concept, status: proposed}
+- {fr: DEPL,        en: displacement,             kind: concept, note: "Components DX DY DZ DRX DRY DRZ.", status: proposed}
+- {fr: SIGM_ELNO,   en: stress at element nodes,  kind: concept, status: proposed}
+- {fr: SIGM_NOEU,   en: stress (nodal average),   kind: concept, status: proposed}
+- {fr: SIEF_ELGA,   en: stress at Gauss points,   kind: concept, status: proposed}
+- {fr: SIEQ_ELNO,   en: equivalent stress at element nodes, kind: concept, status: proposed}
+- {fr: SIEQ_NOEU,   en: equivalent stress (nodal average), kind: concept, status: proposed}
+- {fr: EPSI_ELNO,   en: strain at element nodes,  kind: concept, status: proposed}
+- {fr: EPSI_NOEU,   en: strain (nodal average),   kind: concept, status: proposed}
+- {fr: REAC_NODA,   en: nodal reactions,          kind: concept, status: proposed}
+- {fr: FORC_NODA,   en: nodal forces,             kind: concept, status: proposed}
+- {fr: EFGE_ELNO,   en: shell/beam resultants at element nodes, kind: concept, status: proposed}
+- {fr: VMIS,        en: von Mises,                kind: concept, status: proposed}
+- {fr: TRESCA,      en: Tresca,                   kind: concept, status: proposed}
+- {fr: PRIN_1,      en: 1st principal,            kind: concept, status: proposed}
+- {fr: PRIN_2,      en: 2nd principal,            kind: concept, status: proposed}
+- {fr: PRIN_3,      en: 3rd principal,            kind: concept, status: proposed}
+- {fr: VMIS_SG,     en: signed von Mises,         kind: concept, status: proposed}
+- {fr: SIXX,        en: normal stress XX,         kind: concept, status: proposed}
+- {fr: SIXY,        en: shear stress XY,          kind: concept, status: proposed}
+- {fr: MASS_INER,   en: mass and inertia properties, kind: concept, status: proposed}
+- {fr: MASS_EFFE_UN, en: effective mass fraction, kind: concept, status: proposed}
