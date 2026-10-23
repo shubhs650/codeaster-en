@@ -1,0 +1,145 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/med2.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MED2",
+ "source": {
+  "file": "code_aster/Messages/med2.py"
+ },
+ "messages": {
+  "2": {
+   "id": "MED2_2",
+   "fr": "\n     '%(k1)s'\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MED2_3",
+   "fr": "\n     Fichier MED introuvable.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MED2_4",
+   "fr": "\nLe champ '%(k1)s' est déjà présent\ndans le fichier MED pour l'instant %(r1)G.\n  -> Conseil :\n     Vous pouvez soit imprimer le champ dans un autre fichier, soit\n     nommer le champ différemment.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)G"
+   ],
+   "source": {
+    "line": 33
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MED2_5",
+   "fr": "\nLe champ '%(k1)s' dont vous avez demandé l'impression au format MED\nest défini sur des éléments utilisant la famille de points de Gauss\n'%(k2)s'. Or l'impression de cette famille n'est pas possible au\nformat MED.\n  -> Conseil :\n     Restreignez l'impression demandée aux éléments ne contenant pas\n     la famille de point de Gauss incriminée.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 42
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MED2_7",
+   "fr": "\n  Il n'a pas été possible d'imprimer le champ des variables internes en utilisant IMPR_NOM_VARI='OUI'.\n  Cela est dû au fait que certains comportements  dans votre modèle ne sont pas imprimables avec cette option:\n  - Le comportement a été défini avec MFRONT ou UMAT en mode prototype\n  - Le comportement a été défini sur une poutre multifibres\n\n  -> Conseils :\n     - N'utilisez pas IMPR_NOM_VARI='OUI' pour imprimer ce champ\n",
+   "placeholders": [],
+   "source": {
+    "line": 53
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MED2_9",
+   "fr": "\n  Vous demandez l'impression du champ %(k1)s issu de la commande\n  PROJ_CHAMP utilisant la méthode 'SOUS_POINT'.\n\n  Cette impression n'est pas possible au format MED.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MED2_10",
+   "fr": "\nIl n'a pas été possible d'imprimer le champ des variables internes pour la métallurgie\nen utilisant IMPR_NOM_VARI='OUI'.\nCela est dû au fait la structure de données résultat ne contient pas les informations\nnécessaire.\nN'utilisez pas IMPR_NOM_VARI='OUI' pour imprimer ce champ\n",
+   "placeholders": [],
+   "source": {
+    "line": 72
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MED2_11",
+   "fr": "\nVotre champ repose sur un modèle comportant des éléments joints\nou interfaces non encore imprimables au format MED.\n\n    Conseil : Pour que cette impression soit possible, il vous faut\n              faire une demande d'évolution.\n",
+   "placeholders": [],
+   "source": {
+    "line": 81
+   },
+   "en": null
+  },
+  "12": {
+   "id": "MED2_12",
+   "fr": "\nLe modèle contient des éléments de structure. Or le champ  %(k1)s n'a pas la bonne\nstructure pour être imprimé sur ce format.\nIl ne faut pas imprimer ce champ ou faire deux IMPR_RESU différents.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 90
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MED2_13",
+   "fr": "\nAucun élément de structure de type COQUE, GRILLE, TUYAU ou PMF contenant des sous-points\npour le champ %(k1)s. Le CARA_ELEM est ignoré.\n\n    Conseil : Supprimer le mot-clé CARA_ELEM sous le mot clé facteur RESU.\n    ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 97
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MED2_14",
+   "fr": "\nOn essaie d'imprimer le champ %(k1)s au format MED mais pour l'élément de type %(k2)s ce champ contient des sous-points.\nOn a besoin du CARA_ELEM pour imprimer des champs à sous-points pour les éléments de structure de type COQUE, GRILLE, TUYAU ou PMF\n\n    Conseils : \n        - Préciser le mot-clé CARA_ELEM sous le mot clé facteur RESU.\n        - Autoriser l'impression sans CARA_ELEM en précisant le mot-clé VISU_SP='NON' sous le\n          mot clé facteur RESU ; le résultat n'est exploitable que pour la commande LIRE_RESU\n          et il ne faut surtout pas chercher à le visualiser.\n    ",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 105
+   },
+   "en": null
+  },
+  "20": {
+   "id": "MED2_20",
+   "fr": "\nImpression au format MED d'éléments à sous-points.\n    L'impression pour des éléments %(k1)s avec l'élément support %(k2)s n'est pas géré.\n    Élément MED : %(k3)s\n\n    Conseils :\n        - Restreignez l'impression aux éléments ne contenant pas l'élément support %(k2)s.\n        - Pour que cette impression soit possible sans restriction, il vous faut faire\n          une demande d'évolution.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 117
+   },
+   "en": null
+  }
+ }
+}

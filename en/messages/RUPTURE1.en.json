@@ -1,0 +1,642 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/rupture1.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "RUPTURE1",
+ "source": {
+  "file": "code_aster/Messages/rupture1.py"
+ },
+ "messages": {
+  "2": {
+   "id": "RUPTURE1_2",
+   "fr": "\nFormalisme de déformation différents au moins pour la maille %(k3)s :\n - type de déformation extrait de la structure de données Résultat   : %(k1)s\n - type de déformation fourni à l'opérateur CALC_G : %(k2)s\n\n--> Risques & conseils :\nVous effectuez un post-traitement de mécanique de la rupture à partir d'un formalisme\nde déformation autre que PETIT et différent de celui utilisé pour le calcul mécanique.\nCeci est hors du champ de validation des opérateurs.\nLa démarche la plus fiable de calcul de G est de réaliser un second calcul en petites\ndéformations, de calculer G et de faire une équivalence en ouverture : le G en grandes\ndéformations sera égal au G en petites déformations lorsque les ouvertures de défaut\nsont identiques.\n",
+   "placeholders": [
+    "%(k3)s",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "RUPTURE1_3",
+   "fr": "\nFormalisme de déformation non valide au moins pour la maille %(k2)s :\n - type de déformation extrait de la structure de données Résultat   : %(k1)s\n\n\n--> Risques & conseils :\nVous effectuez un post-traitement de mécanique de la rupture à partir d'un formalisme\nde déformation autre que PETIT ou PETIT_REAC.\nCeci est hors du champ de validation des opérateurs.\nLa démarche la plus fiable de calcul de G est de réaliser un second calcul en petites\ndéformations, de calculer G et de faire une équivalence en ouverture : le G en grandes\ndéformations sera égal au G en petites déformations lorsque les ouvertures de défaut\nsont identiques.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 39
+   },
+   "en": null
+  },
+  "4": {
+   "id": "RUPTURE1_4",
+   "fr": "\nLa commande CALC_G ne traite pas le cas des fonds doubles.\n",
+   "placeholders": [],
+   "source": {
+    "line": 55
+   },
+   "en": null
+  },
+  "5": {
+   "id": "RUPTURE1_5",
+   "fr": "\nLe paramètre R_INF automatiquement choisi vaut %(r1)f.\nLe paramètre R_SUP automatiquement choisi vaut %(r2)f.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 60
+   },
+   "en": null
+  },
+  "6": {
+   "id": "RUPTURE1_6",
+   "fr": "\nLe rayon R_SUP (ou R_SUP_FO) doit obligatoirement être supérieur au rayon\nR_INF (respectivement R_INF_FO).\n-> Risque et Conseil :\nVeuillez revoir votre mise en données.\n",
+   "placeholders": [],
+   "source": {
+    "line": 66
+   },
+   "en": null
+  },
+  "7": {
+   "id": "RUPTURE1_7",
+   "fr": "\nIl n'est pas possible de calculer automatiquement R_INF et R_SUP en cas\nde modélisation FEM avec une fissure en configuration décollée.\n-> Risque et Conseil :\nVeuillez indiquer les mots-clés R_INF et R_SUP (ou R_INF_FO et R_SUP_FO).\n",
+   "placeholders": [],
+   "source": {
+    "line": 74
+   },
+   "en": null
+  },
+  "8": {
+   "id": "RUPTURE1_8",
+   "fr": "\nPour une modélisation 2D, le front de fissure doit être défini par un\ngroupe contenant un noeud (mot-clé GROUP_NO). Le mot clé GROUP_MA\nest réservé aux modélisations 3D.\n",
+   "placeholders": [],
+   "source": {
+    "line": 82
+   },
+   "en": null
+  },
+  "9": {
+   "id": "RUPTURE1_9",
+   "fr": "\nPour une modélisation 3D, le front de fissure doit être défini par un\ngroupe de mailles (mot-clé GROUP_MA). Le mot clé GROUP_NO est réservé\naux modélisations 2D.\n",
+   "placeholders": [],
+   "source": {
+    "line": 89
+   },
+   "en": null
+  },
+  "10": {
+   "id": "RUPTURE1_10",
+   "fr": "\nLe fond de fissure ne doit être défini que par un noeud.\n-> Risque et Conseil :\nVeuillez revoir le contenu du mot-clé GROUP_NO ou NOEUD ou FOND_FISS.\n",
+   "placeholders": [],
+   "source": {
+    "line": 96
+   },
+   "en": null
+  },
+  "11": {
+   "id": "RUPTURE1_11",
+   "fr": "\nIl faut un mot clé parmi FOND_FISS ou FISSURE.\nVeuillez le renseigner.\n",
+   "placeholders": [],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "12": {
+   "id": "RUPTURE1_12",
+   "fr": "\nLe champ de contrainte initiale n'est pas du bon type.\nEn FEM (fissure représentée dans le maillage), il doit être de type ELNO, NOEU, ou ELGA.\nEn X-FEM (fissure non représentée dans le maillage), il doit être de type ELGA.\n",
+   "placeholders": [],
+   "source": {
+    "line": 109
+   },
+   "en": null
+  },
+  "13": {
+   "id": "RUPTURE1_13",
+   "fr": "\nLa recherche du matériau associé au front de fissure a échouée. Cela arrive notamment quand\ndes noeuds du front du fissure sont situés à la frontière entre plusieurs matériaux.\n\nSolution : Renseigner le mot-clé MATER de POST_K1_K2_K3 avec le matériau souhaité.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 116
+   },
+   "en": null
+  },
+  "15": {
+   "id": "RUPTURE1_15",
+   "fr": "\nLe résultat n'est pas un EVOL_NOLI.\n",
+   "placeholders": [],
+   "source": {
+    "line": 125
+   },
+   "en": null
+  },
+  "16": {
+   "id": "RUPTURE1_16",
+   "fr": "\nLa différence entre la taille maximale et la taille minimale des mailles connectées aux\nnoeuds du fond de fissure est importante.\nLa taille minimale vaut : %(r1)f\nLa taille maximale vaut : %(r2)f\n-> Risque et Conseil :\nIl a été choisi de multiplier par quatre la taille maximale des mailles connectées aux\nnoeuds du fond de fissure pour calculer le paramètre R_SUP et par deux, pour calculer\nle paramètre R_INF. Or, si ces tailles sont importantes, vous risquez de post-traiter\nvos résultats sur une zone trop grande autour du fond de fissure et d'obtenir des\nvaleurs de taux de restitution d'énergie et de facteurs d'intensité moins précises.\nVérifiez que les valeurs de R_INF et de R_SUP calculées sont licites.\nSinon, veuillez spécifier directement les valeurs de R_INF et de R_SUP ou bien revoir\nle maillage de manière à rendre les mailles proches du fond de fissure de taille homogène.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 130
+   },
+   "en": null
+  },
+  "17": {
+   "id": "RUPTURE1_17",
+   "fr": "\nL'association: lissage du champ THETA par les polynômes de Lagrange\n               lissage de G autre que par des polynômes de Lagrange\nn'est pas possible.\n-> Risque et Conseil :\nVeuillez consulter la documentation U4.82.03 pour déterminer une\nassociation satisfaisante.\n",
+   "placeholders": [],
+   "source": {
+    "line": 147
+   },
+   "en": null
+  },
+  "18": {
+   "id": "RUPTURE1_18",
+   "fr": "\nLes mots-clés R_INF_FO et R_SUP_FO ne peuvent être employés dans le cas 2D.\n-> Risque et Conseil :\nVeuillez les remplacer par R_INF ou R_SUP, ou bien ne rien indiquer afin que les rayons\nde la couronne soient calculés avec les données du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 157
+   },
+   "en": null
+  },
+  "19": {
+   "id": "RUPTURE1_19",
+   "fr": "\nL'utilisation du mot-clé facteur %(k1)s n'est compatible qu'avec une modélisation %(k2)s.\nVeuillez vérifiez vos données.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 165
+   },
+   "en": null
+  },
+  "20": {
+   "id": "RUPTURE1_20",
+   "fr": "\nVotre étude comporte une charge de type PRE_EPSI ou une variable de commande EPSA.\nCeci est incompatible avec la présence d'une contrainte initiale dans le calcul de G\n(mot clé SIGM_INIT de l'opérateur CALC_G).\n-> Risque et Conseil :\nOn ne peut pas faire de calcul de G en introduisant simultanément une contrainte\ninitiale ET une déformation initiale. Veuillez revoir les données.\n",
+   "placeholders": [],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "21": {
+   "id": "RUPTURE1_21",
+   "fr": "\nLa liste de taille n'a pas la taille de la liste des groupes mailles.\nVérifiez vos données.\n",
+   "placeholders": [],
+   "source": {
+    "line": 181
+   },
+   "en": null
+  },
+  "22": {
+   "id": "RUPTURE1_22",
+   "fr": "\nLes mailles volumiques caractérisant les zones de calcul doivent absolument être des\nhexaèdres.\nVérifiez votre maillage ou vos données.\n",
+   "placeholders": [],
+   "source": {
+    "line": 187
+   },
+   "en": null
+  },
+  "23": {
+   "id": "RUPTURE1_23",
+   "fr": "\nCALC_G - option CALC_G : détection de chargements non nuls sur l'axe,\nle calcul est impossible.\n-> Risque et Conseil :\nEn 2D axisymétrique, le calcul de G n'est pas possible pour les éléments de l'axe de\nsymétrie si un chargement est imposé sur ceux-ci.\nModifier les couronnes R_INF et R_SUP pour qu'elles soient toutes les deux\nplus petites que le rayon du fond de fissure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 194
+   },
+   "en": null
+  },
+  "24": {
+   "id": "RUPTURE1_24",
+   "fr": "\nL'option CALC_K_G est incompatible avec les comportements incrémentaux,\navec les comportements non linéaires et avec la déformation GREEN_LAGRANGE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 205
+   },
+   "en": null
+  },
+  "25": {
+   "id": "RUPTURE1_25",
+   "fr": "\nIl faut affecter les éléments de bord (E et NU) pour le calcul des fic.\n-> Risque et Conseil :\nVeuillez revoir la mise en données des opérateurs DEFI_MATERIAU\net AFFE_MATERIAU.\n",
+   "placeholders": [],
+   "source": {
+    "line": 211
+   },
+   "en": null
+  },
+  "26": {
+   "id": "RUPTURE1_26",
+   "fr": "\nLa masse volumique RHO n'a pas été définie.\n\n-> Risque et Conseil :\nEn présence de forces de pesanteur ou de rotation, ou pour le calcul de\nl'option CALC_K_G avec un résultat de type MODE_MECA, il est indispensable\nde fournir la masse volumique du matériau considéré.\nRHO doit être défini dans l'opérateur DEFI_MATERIAU.\n",
+   "placeholders": [],
+   "source": {
+    "line": 219
+   },
+   "en": null
+  },
+  "29": {
+   "id": "RUPTURE1_29",
+   "fr": "\nAu moins une des mailles caractérisant les zones de calcul a une forme trop\ntrapézoïdale.\n-> Risque et Conseil :\nLe calcul de la surface de sa face appartenant au plan de symétrie de\nl'entaille risque d'être altéré et par conséquent celui de GP également.\nVeuillez vérifier votre maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 230
+   },
+   "en": null
+  },
+  "30": {
+   "id": "RUPTURE1_30",
+   "fr": "\nVotre étude comporte une charge de type PRE_EPSI et une variable de commande EPSA.\nLe calcul de G ne peut être réalisé.\n-> Risque et Conseil :\nOn ne peut pas faire de calcul de G en introduisant simultanément une pré-déformation\nET une déformation initiale. Veuillez revoir les données.\n",
+   "placeholders": [],
+   "source": {
+    "line": 240
+   },
+   "en": null
+  },
+  "31": {
+   "id": "RUPTURE1_31",
+   "fr": "\nDELTA_K_EQ contient une ou plusieurs valeurs négatives.\nCela peut provenir d'un calcul erroné de DELTA_K_EQ par l'utilisateur ou bien de l'utilisation\nde l'opérande CUMUL='MODE_I' dans POST_RUPTURE dans le cas où K_I aurait des valeurs négatives.\n-> Risque et Conseils\nVérifiez le calcul de DELTA_K_EQ.\n",
+   "placeholders": [],
+   "source": {
+    "line": 249
+   },
+   "en": null
+  },
+  "35": {
+   "id": "RUPTURE1_35",
+   "fr": "\nLes directions normales au plan de la fissure entre les points %(i1)d et %(i2)d successifs du fond forment un angle\nsupérieur à 10 degrés.\n-> Risque et Conseils\nL'interpolation des sauts de déplacements est basée sur les champs singuliers\ncorrespondants à une fissure plane. La fissure utilisée ici est trop irrégulière et\nil y a donc un risque d'obtenir des résultats imprécis.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 258
+   },
+   "en": null
+  },
+  "38": {
+   "id": "RUPTURE1_38",
+   "fr": "\nLa fissure contient %(i1)d fond(s) et le calcul est demandé pour le fond numéro %(i2)d.\n-> Risque et Conseil :\nVérifier le paramètre défini sous le mot clé NUME_FOND de POST_K1_K2_K3.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 268
+   },
+   "en": null
+  },
+  "39": {
+   "id": "RUPTURE1_39",
+   "fr": "\nLa récupération des contraintes à partir de la structure de données Résultat n'est permise que si les fissures sont maillées.\n-> Risque et Conseil :\nVeillez à ne pas vous servir de FISSURE avec le mot-clé CALCUL_CONTRAINTE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 275
+   },
+   "en": null
+  },
+  "41": {
+   "id": "RUPTURE1_41",
+   "fr": "\nAttention, dans CALC_G vous utilisez le mot clef RELATION.\nLa relation est normalement récupéré a partir du calcul mécanique dans\nMECA_STATIQUE ou STAT_NON_LINE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 282
+   },
+   "en": null
+  },
+  "42": {
+   "id": "RUPTURE1_42",
+   "fr": "\n Lois de comportement différentes au moins pour la maille %(k3)s :\n - loi de comportement extraite de la structure de données Résultat   : %(k1)s\n - loi de comportement fournie à l'opérateur CALC_G : %(k2)s\n\n--> Risques & conseils :\nOn doit généralement utiliser la même loi de comportement entre le calcul et le\npost-traitement. On peut utiliser deux comportements différents, mais alors\nl'utilisateur doit être vigilant sur l'interprétation des résultats(cf.U2.05.01).\nSi plusieurs comportements sont définis sur la structure, le comportement à\nindiquer dans CALC_G est celui du matériau dans lequel la fissure se développe.\nDans ce cas, ce message d'alarme est quand même émis mais le résultat est bien cohérent.\nUn post-traitement élastique non-linéaire d'un calcul élastoplastique est\nadmissible, si le chargement est radial et monotone. La comparaison du G calculé\nà partir des contraintes issues de STAT_NON_LINE (option CALC_CONTRAINTE='NON')\nou à partir des contraintes recalculées avec la loi de comportement\n(CALC_CONTRAINTES='OUI') peut fournir une indication sur le respect de ces\nhypothèses.\n",
+   "placeholders": [
+    "%(k3)s",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 289
+   },
+   "en": null
+  },
+  "44": {
+   "id": "RUPTURE1_44",
+   "fr": "\nLes paramètres K1 et/ou K2 et/ou G sont absents du tableau des facteurs d'intensité des\ncontraintes fourni.\n-> Risque et Conseil :\nLe tableau des facteurs d'intensité des contraintes doit absolument contenir ces trois\nparamètres ainsi que K3 en 3D. Veuillez vérifier le contenu de votre tableau.\n",
+   "placeholders": [],
+   "source": {
+    "line": 310
+   },
+   "en": null
+  },
+  "45": {
+   "id": "RUPTURE1_45",
+   "fr": "\n Formalismes de déformations différents au moins pour la maille %(k3)s :\n - type de déformation extrait de la structure de données Résultat   : %(k1)s\n - type de déformation fourni à l'opérateur CALC_G : %(k2)s\n\n--> Risques & conseils :\nVous avez choisi d'effectuer un post-traitement de mécanique de la rupture en petites déformations (seules\nvalables) alors que le calcul mécanique ne l'était pas. Cela demande d'être vigilant sur les résultats (cf.U2.05.01).\nSi plusieurs types de déformation sont définis sur la structure et que la fissure se développe dans une partie en\npetites déformations, ce message d'alarme est quand même émis mais le résultat est bien cohérent.\n",
+   "placeholders": [
+    "%(k3)s",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 319
+   },
+   "en": null
+  },
+  "46": {
+   "id": "RUPTURE1_46",
+   "fr": "\nLe taux de restitution d'énergie G est négatif ou nul sur certains des noeuds du fond de fissure :\nle calcul de propagation est impossible.\n-> Risque et Conseil :\nVérifier les paramètres du calcul de G (rayons des couronnes ou abscisse curviligne\nmaximale, type de lissage, ...).\n",
+   "placeholders": [],
+   "source": {
+    "line": 332
+   },
+   "en": null
+  },
+  "47": {
+   "id": "RUPTURE1_47",
+   "fr": "\nVous demandez un calcul de G en post-traitement d'un calcul élastoplastique. Ceci n'est valable que\nsi votre CHARGEMENT est MONOTONE PROPORTIONNEL.\nSi tel est le cas, renseignez, dans CALC_G, l'option RELATION = ELAS_VMIS_XXX pour un calcul de G.\n",
+   "placeholders": [],
+   "source": {
+    "line": 341
+   },
+   "en": null
+  },
+  "49": {
+   "id": "RUPTURE1_49",
+   "fr": "\nVous ne pouvez pas utiliser CALC_G avec comme relation de comportement: %(k2)s ,alors que lors\nde la résolution du Problème mécanique vous utilisez une relation de comportement de type: %(k1)s\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 348
+   },
+   "en": null
+  },
+  "51": {
+   "id": "RUPTURE1_51",
+   "fr": "\nPROPA_FISS / METHODE = 'MAILLAGE' : les noeuds définissant la fissure initiale ne sont\npas ordonnés. Vérifiez le maillage donné en entrée (MAIL_ACTUEL).\n",
+   "placeholders": [],
+   "source": {
+    "line": 354
+   },
+   "en": null
+  },
+  "52": {
+   "id": "RUPTURE1_52",
+   "fr": "\nPROPA_FISS / METHODE = 'INITIALISATION' : les deux vecteurs VECT_X et VECT_Y\ndéfinissant la fissure initiale, de forme elliptique, ne sont pas orthogonaux. Vérifiez\nles données d'entrée.\n",
+   "placeholders": [],
+   "source": {
+    "line": 360
+   },
+   "en": null
+  },
+  "53": {
+   "id": "RUPTURE1_53",
+   "fr": "\nL'instant %(r1)f n'appartient pas au résultat %(k1)s.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 367
+   },
+   "en": null
+  },
+  "54": {
+   "id": "RUPTURE1_54",
+   "fr": "\nLes champs de contraintes et de déformations ne sont pas de même taille. Vérifiez que votre\ncalcul mécanique s'est bien passé.\n",
+   "placeholders": [],
+   "source": {
+    "line": 372
+   },
+   "en": null
+  },
+  "55": {
+   "id": "RUPTURE1_55",
+   "fr": "\nProblème dans la liste d'instants du résultats: 2 instants consécutifs sont égaux.\n",
+   "placeholders": [],
+   "source": {
+    "line": 378
+   },
+   "en": null
+  },
+  "56": {
+   "id": "RUPTURE1_56",
+   "fr": "\nLa contrainte de référence est nulle à l'instant %(r1)f.\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 383
+   },
+   "en": null
+  },
+  "57": {
+   "id": "RUPTURE1_57",
+   "fr": "\nProblème dans la dimension du modèle. POST_BORDET ne supporte pas les raccords 2D-3D\n",
+   "placeholders": [],
+   "source": {
+    "line": 388
+   },
+   "en": null
+  },
+  "58": {
+   "id": "RUPTURE1_58",
+   "fr": "\nL'utilisation de POST_BORDET n'est possible qu'avec 1 seul MODELE et 1 seul\nCHAM_MATERIAU\n",
+   "placeholders": [],
+   "source": {
+    "line": 393
+   },
+   "en": null
+  },
+  "59": {
+   "id": "RUPTURE1_59",
+   "fr": "\nLa table %(k1)s ne contient pas le paramètre %(k2)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 399
+   },
+   "en": null
+  },
+  "60": {
+   "id": "RUPTURE1_60",
+   "fr": "\nLe critère 'K2_NUL' donne des mauvais résultats pour des angles supérieurs à 60 degrés.\nIl se peut que le signe de l'angle soit faux.\nConseil : utiliser le critère par défaut.\n",
+   "placeholders": [],
+   "source": {
+    "line": 404
+   },
+   "en": null
+  },
+  "61": {
+   "id": "RUPTURE1_61",
+   "fr": "\nImpossible de réaliser le comptage sur les quantités demandées car\nle nombre de cycles pour chacune d'elles est différent.\nConseil : limiter le comptage des cycles à une seule quantité (K_EQ par exemple).\n",
+   "placeholders": [],
+   "source": {
+    "line": 411
+   },
+   "en": null
+  },
+  "62": {
+   "id": "RUPTURE1_62",
+   "fr": "\nPour l'opération %(k1)s, la table doit être réentrante (reuse obligatoire).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 418
+   },
+   "en": null
+  },
+  "63": {
+   "id": "RUPTURE1_63",
+   "fr": "La récupération des contraintes à partir de la structure de données Résultat\nen présence d'un état initial n'est pas permise.\nPour l'opération %(k1)s, la table ne doit pas être réentrante (reuse interdit).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 423
+   },
+   "en": null
+  },
+  "64": {
+   "id": "RUPTURE1_64",
+   "fr": "\nPour le comptage %(k1)s, la table doit comporter uniquement 1 instant/NUME_ORDRE (ou aucun).\nOr la table %(k2)s contient %(i1)d instants/NUME_ORDRE.\nConseil : Vérifier la table en entrée ou utiliser un autre type de comptage des cycles.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 429
+   },
+   "en": null
+  },
+  "65": {
+   "id": "RUPTURE1_65",
+   "fr": "\nLa table %(k1)s ne doit pas contenir le paramètre %(k2)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 436
+   },
+   "en": null
+  },
+  "66": {
+   "id": "RUPTURE1_66",
+   "fr": "\nL'opération %(k1)s nécessite une seule table sous le mot-clé TABLE, or il y en a %(i1)d.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 441
+   },
+   "en": null
+  },
+  "67": {
+   "id": "RUPTURE1_67",
+   "fr": "\nLes caractéristiques du matériau ne peuvent dépendre que des variables de commande TEMP et NEUT1.\n-> Conseil :\nVeuillez revoir les données du matériau.\n",
+   "placeholders": [],
+   "source": {
+    "line": 446
+   },
+   "en": null
+  },
+  "68": {
+   "id": "RUPTURE1_68",
+   "fr": "\nLa macro-commande POST_RUPTURE ne fonctionne pas quand les paramètres matériau ne sont pas constants.\n",
+   "placeholders": [],
+   "source": {
+    "line": 453
+   },
+   "en": null
+  },
+  "69": {
+   "id": "RUPTURE1_69",
+   "fr": "\nComportement incrémental :\nLa relation de comportement %(k1)s n'est pas prévue dans CALC_G\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 458
+   },
+   "en": null
+  },
+  "71": {
+   "id": "RUPTURE1_71",
+   "fr": "\nLa différence relative moyenne entre G et G_IRWIN est: %(r1)f\n\n--> Risques & conseils :\nPour un problème thermo-mécanique, on a pris la solution singulière d'un problème\npurement mécanique. Le calcul des facteurs d'intensité des contraintes est approché.\nSi la différence relative entre G et G_IRWIN est importante, le calcul des facteurs\nd'intensité des contraintes K par CALC_K_G n'est plus valable.\n\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 464
+   },
+   "en": null
+  },
+  "73": {
+   "id": "RUPTURE1_73",
+   "fr": "\nCALC_G :\nIl est interdit d'utiliser NB_POINT_FOND avec les lissages LEGENDRE, LAGRANGE_NO_NO\net MIXTE\n-> Conseil :\nVeuillez revoir le type de lissage utilisé\n",
+   "placeholders": [],
+   "source": {
+    "line": 476
+   },
+   "en": null
+  },
+  "74": {
+   "id": "RUPTURE1_74",
+   "fr": "\nPOST_K1_K2_K3 : Cet opérateur est incompatible avec les modélisations incompressibles. En effet, il n'est valide qu'en élasticité linéaire, où les modélisations incompressibles ne sont pas nécessaires.\n",
+   "placeholders": [],
+   "source": {
+    "line": 485
+   },
+   "en": null
+  },
+  "75": {
+   "id": "RUPTURE1_75",
+   "fr": "\nCALC_G : On ne peut pas calculer les dérivées des fonctions singulières car on se trouve sur le fond de fissure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 490
+   },
+   "en": null
+  },
+  "76": {
+   "id": "RUPTURE1_76",
+   "fr": "\nCALC_G : Le champ fourni par CHAM_THETA_IN n'est pas correct. Les composants DIR_Z, ABSC_CURV et LONG doivent être nuls en 2D.\n",
+   "placeholders": [],
+   "source": {
+    "line": 495
+   },
+   "en": null
+  },
+  "89": {
+   "id": "RUPTURE1_89",
+   "fr": "\nL'OPTION NB_COUCHE n'est pas compatible avec des éléments HEXA27 ou PENTA18'\n",
+   "placeholders": [],
+   "source": {
+    "line": 500
+   },
+   "en": null
+  },
+  "90": {
+   "id": "RUPTURE1_90",
+   "fr": "\nCALC_G fonctionne uniquement avec des éléments incompressibles de type INCO_UPG. L'utilisation d'autres types d'éléments pourrait entraîner des résultats incorrects (INCO_UP, INCO_UPO, GRAD_INCO).\n",
+   "placeholders": [],
+   "source": {
+    "line": 505
+   },
+   "en": null
+  }
+ }
+}

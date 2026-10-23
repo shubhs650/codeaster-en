@@ -1,0 +1,78 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/xfemprecond.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "XFEMPRECOND",
+ "source": {
+  "file": "code_aster/Messages/xfemprecond.py"
+ },
+ "messages": {
+  "1": {
+   "id": "XFEMPRECOND_1",
+   "fr": "\n  Alarme émise par le pré-conditionneur XFEM:\n  La structure de la matrice n'est reconnue par le pré-conditionneur\n  XFEM.\n  Par précaution, on ne modifie pas le problème de départ.\n  La résolution se poursuit sans pré-conditionneur XFEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "XFEMPRECOND_3",
+   "fr": "\n  Erreur calcul matriciel:\n  La matrice %(i1)d est pré-conditionnée sur les noeuds\n  XFEM.\n  Vous pourriez obtenir des résultats inattendus.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 32
+   },
+   "en": null
+  },
+  "4": {
+   "id": "XFEMPRECOND_4",
+   "fr": "\n  Erreur lors d'un produit matrice-vecteur:\n  La matrice %(i1)d est pré-conditionnée sur les noeuds\n  XFEM.\n  Vous pourriez obtenir des résultats inattendus.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "6": {
+   "id": "XFEMPRECOND_6",
+   "fr": "\n  La mise à l'échelle des ddls X-FEM sera activée pour la suite de la résolution.\n",
+   "placeholders": [],
+   "source": {
+    "line": 48
+   },
+   "en": null
+  },
+  "7": {
+   "id": "XFEMPRECOND_7",
+   "fr": "\n  Le pré-conditionneur XFEM a détecté une ligne pratiquement nulle à l'équation %(i1)d\n  correspondante au noeud N%(i2)d et au degré de liberté %(k1)s.\n  Conseils:\n    - S'il s'agit d'un degré de liberté de type contact : vérifier que le chargement contact est\n      bien appliqué à la résolution et que toutes les sous-facettes de contact sont présentes en\n      activant MODI_MODELE_XFEM/DECOUPE_FACETTE='SOUS_ELEMENTS'\n    - Sinon, désactiver le pré-conditionneur X-FEM dans le MODI_MODELE_XFEM/PRETRAITEMENTS='SANS'\n      pour tenter de poursuivre le calcul. Cette opération est très risquée.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 53
+   },
+   "en": null
+  },
+  "8": {
+   "id": "XFEMPRECOND_8",
+   "fr": "\n  -> La connectivité stockée lors de la découpe XFEM ne situe pas\n     dans les bornes autorisées.\n     Cela risque de produire des sous-éléments distordus à cause de la\n     mauvaise localisation des points de découpe.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 65
+   },
+   "en": null
+  }
+ }
+}

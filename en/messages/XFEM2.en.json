@@ -1,0 +1,459 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/xfem2.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "XFEM2",
+ "source": {
+  "file": "code_aster/Messages/xfem2.py"
+ },
+ "messages": {
+  "1": {
+   "id": "XFEM2_1",
+   "fr": "On ne peut pas faire propager une interface. Seules les fissures (possédant un fond de fissure) peuvent être propagées.",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "XFEM2_3",
+   "fr": "On ne peut pas définir du contact X-FEM sur un maillage contenant à la fois des mailles linéaires et quadratiques.",
+   "placeholders": [],
+   "source": {
+    "line": 26
+   },
+   "en": null
+  },
+  "6": {
+   "id": "XFEM2_6",
+   "fr": "Le nombre de fissures est limité à %(i1)d, or vous en avez définies %(i2)d.",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 29
+   },
+   "en": null
+  },
+  "7": {
+   "id": "XFEM2_7",
+   "fr": "La fissure %(k1)s est de type CZM. On ne peut pas appliquer de chargement de pression ou de condition d'échange thermique sur ses lèvres.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 30
+   },
+   "en": null
+  },
+  "10": {
+   "id": "XFEM2_10",
+   "fr": "\n  -> Toutes les fissures ne sont pas rattachées au même maillage.\n     La fissure %(k1)s est rattachée au maillage %(k2)s alors que\n     la fissure %(k3)s est rattachée au maillage %(k4)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 33
+   },
+   "en": null
+  },
+  "15": {
+   "id": "XFEM2_15",
+   "fr": "\n  -> Point de FOND_FISS sans maille de surface rattachée.\n  -> Risque & Conseil:\n     Veuillez revoir la définition des level-sets.\n",
+   "placeholders": [],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "17": {
+   "id": "XFEM2_17",
+   "fr": "\n  -> Segment de FOND_FISS sans maille de surface rattachée\n  -> Risque & Conseil:\n     Veuillez revoir la définition des level-sets.\n",
+   "placeholders": [],
+   "source": {
+    "line": 47
+   },
+   "en": null
+  },
+  "18": {
+   "id": "XFEM2_18",
+   "fr": "\n  -> Le mot-clé CRITERE de PROPA_FISS est différent de 'ANGLE_IMPO' ou 'ANGLE_IMPO_BETA_GAMMA' et le tableau\n     des facteurs d'intensité de contraintes de la fissure %(k1)s contient\n     une colonne 'BETA' ou une colonne 'GAMMA'.\n  -> Risque & Conseil:\n     Les valeurs de l'angle de bifurcation notées dans ce tableau ne sont\n     pas prises en compte. Si vous souhaitez imposer les valeurs de l'angle\n     de bifurcation aux points du fonds de fissure, veuillez indiquer\n     CRITERE='ANGLE_IMPO' ou 'ANGLE_IMPO_BETA_GAMMA'.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "19": {
+   "id": "XFEM2_19",
+   "fr": "\n  -> Le mot-clé CRITERE de PROPA_FISS vaut 'ANGLE_IMPO' et le tableau\n     des facteurs d'intensité de contraintes de la fissure %(k1)s ne contient\n     pas de colonne 'BETA'.\n  -> Risque & Conseil:\n     Si vous souhaitez imposer les valeurs de l'angle de bifurcation aux points\n     du fonds de fissure, veuillez indiquer CRITERE='ANGLE_IMPO' et ajouter\n     une colonne 'BETA' au tableau manuellement ou si le modèle est en 3D,\n     en utilisant l'option 'CALC_K_G' de la commande CALC_G_XFEM.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 66
+   },
+   "en": null
+  },
+  "20": {
+   "id": "XFEM2_20",
+   "fr": "\n  -> En 3D, si METHODE_PROPA='MAILLAGE' dans PROPA_FISS il faut absolument une\n     colonne 'ABSC_CURV' contenant les abscisses curvilignes des points du fond\n     dans le tableau des facteurs d'intensité de contraintes.\n  -> Risque & Conseil:\n     Veuillez vérifier la présence de cette colonne.\n",
+   "placeholders": [],
+   "source": {
+    "line": 78
+   },
+   "en": null
+  },
+  "30": {
+   "id": "XFEM2_30",
+   "fr": "\n     Le modèle de visualisation (mot-clé MODELE_VISU) utilisé est un\n     modèle X-FEM.\n\n     Risque & Conseil:\n     Veuillez créer un modèle FEM sur un maillage de visualisation fissuré\n     par l'utilisation des commandes POST_MAIL_XFEM puis AFFE_MODELE\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 87
+   },
+   "en": null
+  },
+  "50": {
+   "id": "XFEM2_50",
+   "fr": "\n  -> Le maillage utilisé pour la représentation des level-sets est 2D\n     mais il contient des éléments 1D aussi.\n  -> La méthode UPWIND sélectionnée dans PROPA_FISS peut gérer des\n     grilles 2D définies seulement par des éléments QUAD4.\n  -> Risque & Conseil:\n     Veuillez donner un maillage défini seulement par des éléments\n     QUAD4.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 98
+   },
+   "en": null
+  },
+  "51": {
+   "id": "XFEM2_51",
+   "fr": "\n  -> Il n'y a aucune maille enrichie.\n  -> Risque & Conseil:\n     Veuillez vérifier les définitions des level-sets.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 109
+   },
+   "en": null
+  },
+  "52": {
+   "id": "XFEM2_52",
+   "fr": "\n  -> Le maillage utilisé pour la représentation des level-sets est 3D\n     mais il contient des éléments 2D et/ou 1D aussi.\n  -> La méthode UPWIND sélectionnée dans PROPA_FISS peut gérer des\n     grilles 3D définies seulement par des éléments HEXA8.\n  -> Risque & Conseil:\n     Veuillez donner un maillage défini seulement par des éléments\n     HEXA8.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 116
+   },
+   "en": null
+  },
+  "53": {
+   "id": "XFEM2_53",
+   "fr": "\n  -> Dans le maillage utilisé pour la représentation des level-sets,\n     il y a des éléments qui ne sont pas disponibles pour la méthode\n     UPWIND (PROPA_FISS).\n  -> Risque & Conseil:\n     Veuillez vérifier le maillage et utiliser uniquement des éléments\n     QUAD4 en 2D et HEXA8 en 3D.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 127
+   },
+   "en": null
+  },
+  "54": {
+   "id": "XFEM2_54",
+   "fr": "\n  -> Il n'y a pas d'éléments disponibles pour la méthode UPWIND\n     (PROPA_FISS) dans le maillage utilisé pour la représentation\n     des level-sets.\n  -> Risque & Conseil:\n     Veuillez vérifier le maillage et utiliser uniquement des éléments\n     QUAD4 en 2D et HEXA8 en 3D.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "55": {
+   "id": "XFEM2_55",
+   "fr": "\n  -> Dans le maillage utilisé pour la représentation des level-sets\n     (PROPA_FISS), il y a des arêtes qui ne sont pas orthogonales aux\n     autres arêtes.\n  -> Risque & Conseil:\n     Risques de résultats faux.\n     Veuillez vérifier que toutes les arêtes des éléments du maillage\n     soient orthogonales entre elles.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 147
+   },
+   "en": null
+  },
+  "57": {
+   "id": "XFEM2_57",
+   "fr": "\n  -> La définition de un ou plusieurs éléments du maillage utilisé pour\n     la représentation des level-sets (PROPA_FISS) n'est pas correcte.\n  -> Risque & Conseil:\n     Il y a une arête avec une longueur nulle dans le maillage.\n     Veuillez vérifier la définition des éléments du maillage (par\n     exemple: un noeud est utilisé seulement une fois dans la définition\n     d'un élément; il n'y a pas de noeuds doubles...)\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 158
+   },
+   "en": null
+  },
+  "58": {
+   "id": "XFEM2_58",
+   "fr": "\n  -> La dimension (2D ou 3D) du modèle physique et la dimension (2D ou\n     3D) du modèle utilisé pour la grille auxiliaire ne sont pas égales.\n  -> Risque & Conseil:\n     Veuillez utiliser deux modèles avec la même dimension (les deux 2D\n     ou les deux 3D).\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 169
+   },
+   "en": null
+  },
+  "59": {
+   "id": "XFEM2_59",
+   "fr": "\nIl y a au moins une maille qui porte des sous-éléments de peau et qui\nne borde pourtant aucune maille principale.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 178
+   },
+   "en": null
+  },
+  "60": {
+   "id": "XFEM2_60",
+   "fr": "\n  -> L'opérande TEST_MAIL a été utilisée dans l'opérateur PROPA_FISS.\n     La même vitesse d'avancée est utilisée pour tous les points du\n     fond de fissure et l'angle de propagation est fixé égal à zéro.\n  -> Risque & Conseil:\n     L'avancée de la fissure n'est pas liée aux contraintes affectant\n     la structure et donc les résultats de la propagation n'ont pas\n     une signification physique.\n     L'opérande TEST_MAIL doit être utilisé uniquement pour vérifier\n     si le maillage est suffisamment raffiné pour la représentation\n     des level-sets.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 184
+   },
+   "en": null
+  },
+  "63": {
+   "id": "XFEM2_63",
+   "fr": "\n  -> La valeur de l'avancée DA_MAX utilisée est petite par rapport à la\n     longueur de la plus petite arrête du maillage utilisé pour\n     la représentation des level-sets:\n     DA_MAX = %(r1)f\n     Longueur minimale arrêt = %(r2)f\n  -> Risque & Conseil:\n     Risques de résultats faux. Veuillez vérifier les résultats en\n     utilisant un maillage plus raffiné pour la représentation des\n     level-sets.\n  ",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 198
+   },
+   "en": null
+  },
+  "64": {
+   "id": "XFEM2_64",
+   "fr": "\n  -> La valeur du RAYON est plus petite que la longueur de la plus petite\n     arrête du maillage utilisé pour la représentation des level-sets:\n     RAYON = %(r1)f\n     LONGUEUR minimale arrêt = %(r2)f\n  -> Le calcul du résidu local n'est pas possible.\n  -> Risque & Conseil:\n     Veuillez utiliser une valeur du RAYON plus grande.\n  ",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 211
+   },
+   "en": null
+  },
+  "70": {
+   "id": "XFEM2_70",
+   "fr": "\n  -> La macro-commande PROPA_FISS ne peut traiter qu'un seul instant de calcul.\n  -> Risque & Conseil:\n     Veuillez vérifier que les tableaux des facteurs d'intensité de contraintes\n     donnés dans l'opérateur PROPA_FISS ne contiennent qu'un seul instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "73": {
+   "id": "XFEM2_73",
+   "fr": "\n  -> L'option NB_POINT_FOND a été utilisé dans PROPA_FISS mais le\n     modèle est 2D.\n  -> Risque & Conseil:\n     Cette option n'est utile qu'avec un modèle 3D.\n     Ce mot-clé n'est pas pris en compte.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 230
+   },
+   "en": null
+  },
+  "74": {
+   "id": "XFEM2_74",
+   "fr": "\n  -> Aucune fissure du modèle ne se propage.\n  -> Risque & Conseil:\n     Veuillez vérifier les conditions du chargement du modèle et les\n     constantes de la loi de propagation données à PROPA_FISS.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 239
+   },
+   "en": null
+  },
+  "75": {
+   "id": "XFEM2_75",
+   "fr": "\n  -> Une valeur de la liste de NB_POINT_FOND ne correspond pas au nombre de\n     lignes du tableau des facteurs d'intensité de contraintes pour\n     le fond %(i1)d de la fissure %(k1)s.\n  -> Risque & Conseil:\n     Veuillez vérifier que la liste NB_POINT_FOND donnée dans PROPA_FISS\n     soit identique à celle utilisée pour construire le tableau.\n  ",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "78": {
+   "id": "XFEM2_78",
+   "fr": "\n  -> L'option NB_POINT_FOND a été utilisée dans PROPA_FISS\n     mais le nombre de valeurs données n'est pas égale au nombre total\n     des morceaux des fissures dans le modèle.\n\n  -> Conseil:\n     Veuillez vérifier que l'option NB_POINT_FOND a été utilisée\n     correctement dans PROPA_FISS et que les valeurs données pour\n     chaque fissure sont correctes.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 257
+   },
+   "en": null
+  },
+  "80": {
+   "id": "XFEM2_80",
+   "fr": "\n  -> Le nombre des valeurs dans un des tableaux des facteurs\n     d'intensité de contraintes est supérieur au nombre des\n     points du fond de la fissure correspondante.\n  -> Risque & Conseil:\n     Veuillez vérifier que les tableaux donnés par l'opérateur\n     PROPA_FISS sont corrects. Si NB_POINT_FOND a été utilisé, veuillez\n     vérifier aussi que la liste donnée pour chaque fissure est correcte.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 269
+   },
+   "en": null
+  },
+  "81": {
+   "id": "XFEM2_81",
+   "fr": "\n  -> Les valeurs de COEF_MULT_MAXI et COEF_MULT_MINI de COMP_LINE sont\n     égales à zéro.\n  -> Risque & Conseil:\n     Au moins une des deux valeurs doit être différente de zéro pour\n     avoir un cycle de fatigue. Veuillez vérifier les valeurs données.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 280
+   },
+   "en": null
+  },
+  "85": {
+   "id": "XFEM2_85",
+   "fr": "\n   Les propriétés matériaux dépendent de la température. La température en fond\n   de fissure n'étant pas connue, le calcul se poursuit en prenant la température\n   de référence du matériau (TEMP = %(r1)f).\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 289
+   },
+   "en": null
+  },
+  "86": {
+   "id": "XFEM2_86",
+   "fr": "\n -> Le maillage/la grille sur lequel/laquelle vous voulez créer le groupe\n    n'est pas associé/associée à la fissure donnée.\n\n -> Risque & Conseil:\n    Veuillez vérifier d'avoir spécifié le bon maillage/grille et/ou\n    la bonne fissure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 296
+   },
+   "en": null
+  },
+  "87": {
+   "id": "XFEM2_87",
+   "fr": "\n  -> L'opérande TEST_MAIL a été utilisé dans l'opérateur PROPA_FISS.\n  -> Cet opérande n'a de sens que pour un modèle 3D.\n  -> Risque & Conseil:\n     Ne pas utiliser TEST_MAIL pour un modèle 2D.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 306
+   },
+   "en": null
+  },
+  "88": {
+   "id": "XFEM2_88",
+   "fr": "\n  -> La valeur du rayon du tore de localisation de la zone de mise à\n     jour est supérieure à la valeur limite. Cette dernière est\n     déterminée par la valeur du rayon du tore utilisée à la propagation\n     précédente et la valeur de l'avancée de la fissure (DA_MAX) imposée\n     à la propagation courante.\n\n     Rayon actuel = %(r1)f\n     Rayon limite = %(r2)f\n\n  -> Risque & Conseil:\n     Risques de résultats faux si la fissure ne propage pas en mode I.\n\n     Pour éviter ce risque, vous pouvez utiliser la même avancée de la\n     fissure (DA_MAX) et le même rayon (RAYON) que ceux qui ont été\n     utilisés à la propagation précédente.\n\n     Si vous ne pouvez pas utiliser les même valeurs, vous pouvez\n     choisir une des solutions suivantes:\n     - donner une valeur de RAYON_TORE inférieure à la valeur limite\n       pour la propagation courante\n     - utiliser une valeur de RAYON_TORE plus grande pour les\n       propagations précédentes\n     - augmenter l'avancée de la fissure (DA_MAX) à la propagation\n       courante\n\n     Sinon, même si fortement déconseillé, vous pouvez choisir de ne pas\n     utiliser la localisation de la zone de mise à jour\n     (ZONE_MAJ='TOUT').\n  ",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 314
+   },
+   "en": null
+  },
+  "89": {
+   "id": "XFEM2_89",
+   "fr": "\n  -> La fissure à propager n'existe pas dans le modèle:\n     FISS_ACTUELLE = %(k1)s\n     MODELE        = %(k2)s\n  -> Conseil:\n     Veuillez vérifier que la fissure et le modèle sont correctement\n     définis.\n  ",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 346
+   },
+   "en": null
+  },
+  "91": {
+   "id": "XFEM2_91",
+   "fr": "\n  -> Le nouveau fond de fissure n'est pas très régulier. Cela signifie\n     que le maillage ou la grille auxiliaire utilisés pour la\n     représentation de la fissure par level-sets ne sont pas\n     suffisamment raffinés pour bien décrire la forme du fond de la\n     fissure utilisée.\n  -> Risque & Conseil:\n     Risques de résultats faux en utilisant le maillage ou la grille\n     auxiliaire testés. Veuillez utiliser un maillage ou une grille\n     auxiliaire plus raffinés.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 356
+   },
+   "en": null
+  },
+  "92": {
+   "id": "XFEM2_92",
+   "fr": "\nVous avez demandé la création d'un groupe de noeuds dans un tore construit autour du fond de la fissure suivante:\nFISSURE = %(k1)s\n\nToutefois cette fissure a été calculée par PROPA_FISS en utilisant la localisation du domaine.\nDans ce cas le groupe de noeuds doit être forcement défini en utilisant le tore déjà utilisé par PROPA_FISS.\n\nLe groupe de noeuds sera créé en utilisant le domaine de localisation de la fissure (option TYPE_GROUP='ZONE_MAJ').",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 369
+   },
+   "en": null
+  },
+  "93": {
+   "id": "XFEM2_93",
+   "fr": "\n  -> Aucune fissure n'est définie sur le modèle spécifié:\n     MODELE = %(k1)s\n  -> Risque & Conseil:\n     Veuillez définir une fissure sur le modèle ci-dessus en utilisant\n     les opérateurs DEFI_FISS_XFEM et MODI_MODELE_XFEM avant\n     l'utilisation de PROPA_FISS.\n  ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 379
+   },
+   "en": null
+  },
+  "94": {
+   "id": "XFEM2_94",
+   "fr": "\n  -> L'avancée donnée (DA_MAX) pour la propagation courante est\n     inférieure à la valeur minimale conseillée.\n\n     DA_MAX donnée                     = %(r1)f\n     Avancée maximale fissure courante = %(r2)f\n     DA_MAX minimal conseillé          = %(r3)f\n\n  -> Risque & Conseil:\n     Risque de résultats faux. Dans le cas de propagation 3D en mode\n     mixte, on conseille en général d'utiliser une avancée de fissure\n     supérieure à celle minimale écrite ci-dessus, même si des bonnes\n     résultats peuvent être obtenus en utilisant une avancée inférieure.\n\n     La valeur minimale de DA_MAX dépende de la valeur de l'opérande\n     RAYON et de l'angle de propagation de la fissure. Dans le cas où la\n     valeur DA_MAX donnée ne peut pas être changée, sa valeur minimale\n     conseillée peut être diminuée en agissant sur la valeur de RAYON,\n     c'est-à-dire en utilisant une valeur de RAYON plus petite. Cela\n     influence l'opérateur CALC_G_XFEM aussi et normalement est faisable en\n     utilisant un maillage plus raffiné.\n  ",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f",
+    "%(r3)f"
+   ],
+   "source": {
+    "line": 389
+   },
+   "en": null
+  },
+  "95": {
+   "id": "XFEM2_95",
+   "fr": "\n  -> Le modèle grille donné est défini sur un maillage (%(k1)s)\n     et pas sur une grille.\n\n  -> Risque & Conseil:\n     Veuillez donner un modèle grille défini sur une grille. Cette\n     grille doit être définie par DEFI_GRILLE à partir d'un maillage.\n  ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 413
+   },
+   "en": null
+  },
+  "96": {
+   "id": "XFEM2_96",
+   "fr": "\n -> Le maillage sur lequel vous voulez créer le groupe n'est pas associé à\n    la fissure donnée.\n\n -> Les maillages suivants sont associés à cette fissure:\n      maillage physique = %(k1)s\n      maillage grille   = %(k2)s\n\n -> Risque & Conseil:\n    Veuillez vérifier d'avoir spécifié le bon maillage et/ou la bonne fissure.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 423
+   },
+   "en": null
+  },
+  "97": {
+   "id": "XFEM2_97",
+   "fr": "\n  -> La localisation de la zone de mise à jour a été utilisé pour la\n     détermination de la configuration actuelle des fissures du modèle.\n     Par contre, pour la propagation courante, la localisation n'a pas\n     été activée.\n  -> Risque & Conseil:\n     Veuillez utiliser la localisation de la zone de mise à jour\n     (ZONE_MAJ='TORE') pour la propagation courante aussi.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 436
+   },
+   "en": null
+  },
+  "98": {
+   "id": "XFEM2_98",
+   "fr": "\n  -> Aucune grille auxiliaire n'est utilisée pour la représentation de\n     la fissure donnée.\n  -> Risque & Conseil:\n     Veuillez vérifier que vous avez demandé les level-sets de la bonne\n     fissure.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 447
+   },
+   "en": null
+  },
+  "99": {
+   "id": "XFEM2_99",
+   "fr": "\n  -> La valeur du rayon du tore de localisation de la zone de mise à\n     jour est plus petite que celle qui est nécessaire pour la bonne\n     mise à jour des level-sets.\n     Rayon à utiliser = %(r1)f\n     Rayon minimal    = %(r2)f\n  -> Risque & Conseil:\n\n  -> Si vous avez utilisé l'opérande RAYON_TORE, veuillez augmenter la\n     valeur donné ou diminuer la valeur de DA_MAX ou RAYON.\n\n  -> Si vous n'avez pas utilisé l'opérande RAYON_TORE, cette erreur\n     signifie que l'estimation automatique faite par l'opérateur\n     PROPA_FISS ne marche pas bien pour la propagation courante. Elle\n     peut être utilisée dans les cas où les valeurs de RAYON et DA_MAX\n     ne changent pas entre deux propagations successives et la taille\n     des éléments dans la zone de propagation est presque constante.\n     Veuillez donc donner explicitement une valeur du rayon en utilisant\n     l'opérande RAYON_TORE.\n     Vous pouvez calculer une estimation de cette valeur en utilisant la\n     formule suivante:\n\n     RAYON_TORE=RAYON_max+DA_MAX_max+2*h_max\n\n     où RAYON_max et DA_MAX_max sont les valeurs maximales des opérandes\n     RAYON et DA_MAX qu'on va utiliser et h_max est la valeur de la plus\n     grande arête des éléments du maillage ou de la grille auxiliaire\n     dans la zone de propagation.\n  ",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 456
+   },
+   "en": null
+  }
+ }
+}

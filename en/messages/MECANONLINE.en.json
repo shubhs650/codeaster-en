@@ -1,0 +1,184 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE",
+ "source": {
+  "file": "code_aster/Messages/mecanonline.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MECANONLINE_1",
+   "fr": "\n Le CARA_ELEM de l'évolution sous ETAT_INIT/EVOL_NOLI est différent du CARA_ELEM courant.\n ",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MECANONLINE_3",
+   "fr": "\nErreur utilisateur :\n  Vous essayez de faire un calcul non-linéaire mécanique ou un post-traitement sur un modèle dont les éléments\n  ne sont pas programmés pour cela.\n  On arrête le calcul.\nRisques & conseils :\n  Vous devriez changer de modélisation.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MECANONLINE_4",
+   "fr": "\nErreur utilisateur :\n  Vous essayez de faire un calcul non-linéaire mécanique en utilisant un concept résultat sans préciser l'état\n  initial (mot clé ETAT_INIT).\n  On arrête le calcul.\n",
+   "placeholders": [],
+   "source": {
+    "line": 38
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MECANONLINE_5",
+   "fr": "\nErreur utilisateur :\n  L'utilisation de simple Lagrange est interdite dans STAT_NON_LINE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 46
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MECANONLINE_6",
+   "fr": "\nL'option MATR_DISTRIBUEE='OUI' est interdite avec le contact continu.\n",
+   "placeholders": [],
+   "source": {
+    "line": 52
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MECANONLINE_7",
+   "fr": "\nLe MODELE fourni par l'utilisateur sous le mot-clé MODELE est différent de celui présent dans la structure\nde données renseignée sous le mot-clé INCREMENT/LIST_INST et construite par l'opérateur DEFI_LIST_INST.\n",
+   "placeholders": [],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MECANONLINE_8",
+   "fr": "\nErreur utilisateur :\n  L'élimination des doubles Lagrange (SOLVEUR/ELIM_LAGR='LAGR2') dans STAT_NON_LINE n'est pas\n  compatible avec les simples Lagrange (AFFE_CHAR_MECA / DOUBLE_LAGRANGE='NON'):\n  il faut passer à ELIM_LAGR='NON' sous le mot-clé facteur SOLVEUR.\n",
+   "placeholders": [],
+   "source": {
+    "line": 63
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MECANONLINE_9",
+   "fr": "\nVous voulez poursuivre un calcul non-linéaire et vous précisez un état initial (mot clé ETAT_INIT).\nLe champ %(k1)s fourni comme état initial a un modèle sous-jacent qui est différent du modèle pour le calcul sur les mailles communes.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 71
+   },
+   "en": null
+  },
+  "23": {
+   "id": "MECANONLINE_23",
+   "fr": "\n Le calcul de l'accélération initiale a ignoré les chargements de type:\n - ONDE_PLANE\n - GRAPPE_FLUIDE\n",
+   "placeholders": [],
+   "source": {
+    "line": 77
+   },
+   "en": null
+  },
+  "24": {
+   "id": "MECANONLINE_24",
+   "fr": "\n L'état initial n'a pas d'accélération donnée.\n On la calcule.\n ",
+   "placeholders": [],
+   "source": {
+    "line": 84
+   },
+   "en": null
+  },
+  "43": {
+   "id": "MECANONLINE_43",
+   "fr": "\n Contact et pilotage sont des fonctionnalités incompatibles\n",
+   "placeholders": [],
+   "source": {
+    "line": 90
+   },
+   "en": null
+  },
+  "59": {
+   "id": "MECANONLINE_59",
+   "fr": "\n Cette loi de comportement n'est pas disponible pour le pilotage de type PRED_ELAS\n",
+   "placeholders": [],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "60": {
+   "id": "MECANONLINE_60",
+   "fr": "\n Le pilotage de type PRED_ELAS nécessite ETA_PILO_R_MIN et ETA_PILO_R_MAX pour la loi %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 100
+   },
+   "en": null
+  },
+  "61": {
+   "id": "MECANONLINE_61",
+   "fr": "\n Le pilotage de type DEFORMATION n'est pas disponible pour la modélisation %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 105
+   },
+   "en": null
+  },
+  "69": {
+   "id": "MECANONLINE_69",
+   "fr": "\n Problème rencontré :\n   la matrice de masse est non inversible.\n   On ne peut donc pas s'en servir pour calculer l'accélération initiale.\n   => on initialise l'accélération à zéro.\n\n Conseils :\n   Avez-vous bien affecté une masse sur tous les éléments ?\n\n Certains éléments ne peuvent évaluer de matrice masse.\n Dans ce cas, vous pouvez donner un champ d'accélération explicitement nul dans ETAT_INIT pour supprimer l'alarme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 110
+   },
+   "en": null
+  },
+  "70": {
+   "id": "MECANONLINE_70",
+   "fr": "\n Problème rencontré :\n   Le calcul de l'accélération initiale a échoué lors de la phase de résolution.\n   => on initialise l'accélération à zéro.\n\n Conseils :\n   Avez-vous bien affecté une masse sur tous les éléments ?\n\n Certains éléments ne peuvent évaluer de matrice masse.\n Dans ce cas, vous pouvez donner un champ d'accélération explicitement nul dans ETAT_INIT pour supprimer l'alarme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 124
+   },
+   "en": null
+  },
+  "78": {
+   "id": "MECANONLINE_78",
+   "fr": "\n Problème rencontré :\n   la matrice de masse est quasi singulière.\n   On se sert de cette matrice pour calculer l'accélération initiale.\n   => l'accélération initiale calculée est peut être excessive en quelques noeuds.\n\n Conseils :\n   Ces éventuelles perturbations initiales sont en général sans influence sur\n   la suite du calcul car elles sont localisées.\n   Néanmoins, il peut être bénéfique de laisser ces perturbations s'amortir au\n   début du calcul en faisant plusieurs pas avec chargement transitoire nul,\n   avec, éventuellement, un schéma d'intégration choisi volontairement très\n   dissipatif (par exemple HHT avec alpha=-0.3).\n   On peut ensuite reprendre en poursuite avec un schéma moins dissipatif si besoin est.\n",
+   "placeholders": [],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "80": {
+   "id": "MECANONLINE_80",
+   "fr": "\n Les matrices d'amortissement élémentaires sont spécifiées par l'utilisateur. Il\n n'est actuellement pas possible de calculer les forces d'amortissement dans le\n cadre du calcul de l'accélération initiale.\n",
+   "placeholders": [],
+   "source": {
+    "line": 154
+   },
+   "en": null
+  }
+ }
+}
