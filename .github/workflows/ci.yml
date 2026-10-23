@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true # upstream/ (shallow per .gitmodules)
+          fetch-depth: 1
+
+      - name: Check upstream pin matches UPSTREAM_VERSION
+        run: |
+          want="$(grep -v '^#' UPSTREAM_VERSION | head -1 | tr -d '[:space:]')"
+          have="$(git -C upstream rev-parse HEAD)"
+          git -C upstream fetch --depth 1 origin "refs/tags/${want}:refs/tags/${want}"
+          tag="$(git -C upstream rev-parse "${want}^{commit}")"
+          echo "UPSTREAM_VERSION=${want} -> ${tag}; submodule at ${have}"
+          test "${have}" = "${tag}"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: tools/pyproject.toml
+
+      - name: Install tools
+        run: pip install -e "tools[dev]"
+
+      - name: ruff check
+        run: ruff check .
+
+      - name: ruff format
+        run: ruff format --check .
+
+      - name: pytest
+        run: pytest -q
+
+      - name: caen validate
+        run: caen validate
