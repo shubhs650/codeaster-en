@@ -14,6 +14,33 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 1.4 astest index — agent
+Done: `caen extract astest-index` (`tools/codeaster_en/extract/astest.py`) writes
+`en/astest-index.json` (schema `docs/schemas/astest-index.schema.json`). A test case is one
+`astest/<name>.export` (4,496); its `F comm` lines name 4,708 distinct command files (`.comm`,
+`.com0`–`.com3`, 259 `.py` scripts, 2 `.2`). Every file parses with `ast` (a regex fallback,
+marked `parse: "regex"`, exists but is unused in 17.4.26). Each `NAME(...)` call to a known command
+is recorded with its line numbers, per file, so 2.x references can cite `ssls101a.comm:47`.
+Index has both directions: `commands` (name → source, total calls, test cases; every known
+command listed, used or not) and `testcases` (commands, command files, `P` params with
+time/memory/ncpus/mpi_nbcpu/testlist, `parallel`, `A` args, every `F`/`R` file line). Known
+commands = the 268 catalog commands + `POURSUITE` (exported by `CodeCommands/__init__.py`, runs
+DEBUT's catalog) + 11 `UserMacro` definitions not in `Cata/Commands` (e.g. `DEFI_CONT`,
+57 cases). 279 of 280 are used; only `MACRO_AC_PERMUTE` has no test case, so every catalog
+command has at least one example. 320 cases are `parallel`. Spot-checked by hand with `grep`
+against the upstream files: `ssls101a` (DKT shell), `sdll100a` (dynamics), `adlv101a`
+(`.comm` + `.com1` with POURSUITE), `cont001b` (`.py` script, DEFI_CONT), `zzzz100g`
+(calls inside a comment/string and a test-local `UserMacro` correctly not counted). All
+five are pinned in `tests/test_astest_index.py`, plus a byte-for-byte snapshot and schema test.
+Open: Python modules imported by a command file (`F nom`/`F libr`) are not followed, so
+commands called only inside them are missed. `CO(...)` is not a command and is not counted.
+Decisions: none (no ADR). Choices: the catalog offers no `.comm` parser that runs without the
+solver, so `ast` is the primary method. Calls through an attribute (`table.EXTR_TABLE()`) are
+methods and are skipped. `commands` and `testcases` entries are written one per line (6.2 MB
+instead of 9.7 MB with full indentation), so an upstream bump diffs per test case. Re-run this
+extractor after `caen extract catalog`, since known commands come from `en/commands/*.json`.
+Needs owner: nothing.
+
 ## 2026-10-23 — 1.3 + 1.6 messages extractor and validator — agent
 Done: `caen extract messages` (`tools/codeaster_en/extract/messages.py`) parses every
 `upstream/code_aster/Messages/<family>.py` with `ast` and writes `en/messages/<FAMILY>.en.json`

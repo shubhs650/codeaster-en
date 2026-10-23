@@ -1,8 +1,8 @@
 """``caen`` command-line interface.
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands) and
-``caen extract catalog|messages``. The other groups are stubs that name the PLAN.md task which
-will fill them in.
+``caen extract catalog|messages|astest-index``. The other groups are stubs that name the PLAN.md
+task which will fill them in.
 """
 
 from __future__ import annotations
@@ -13,6 +13,7 @@ from typing import Annotated
 import typer
 
 from codeaster_en import __version__
+from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import messages as messages_extractor
 from codeaster_en.validate import commands as commands_validator
@@ -102,10 +103,25 @@ def extract_messages(
 
 
 @extract_app.command("astest-index")
-def extract_astest_index() -> None:
-    """[not implemented yet: task 1.4]"""
-    typer.echo("caen extract astest-index: not implemented yet (PLAN.md task 1.4).", err=True)
-    raise typer.Exit(code=2)
+def extract_astest_index(
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Output file (default: en/astest-index.json in the repo root)."),
+    ] = None,
+) -> None:
+    """Write en/astest-index.json: commands used by every upstream test case."""
+    root = _repo_root()
+    try:
+        doc = astest_extractor.write(root, out or root / astest_extractor.INDEX_RELPATH)
+    except FileNotFoundError as exc:
+        typer.echo(f"extract astest-index: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    summary = doc["summary"]
+    typer.echo(
+        f"extract astest-index: {summary['testcases']} test case(s), "
+        f"{summary['command_files']} command file(s), "
+        f"{summary['commands_used']}/{summary['known_commands']} command(s) used"
+    )
 
 
 app.add_typer(
