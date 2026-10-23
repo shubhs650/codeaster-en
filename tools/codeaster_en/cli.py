@@ -1,7 +1,7 @@
 """``caen`` command-line interface.
 
-Only ``caen validate glossary`` is implemented so far; the other groups are stubs that name
-the PLAN.md task which will fill them in.
+Implemented so far: ``caen validate glossary`` and ``caen extract catalog``. The other groups
+are stubs that name the PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
@@ -12,6 +12,7 @@ from typing import Annotated
 import typer
 
 from codeaster_en import __version__
+from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.validate import glossary as glossary_validator
 
 app = typer.Typer(
@@ -21,6 +22,7 @@ app = typer.Typer(
 )
 
 GLOSSARY_RELPATH = Path("en/glossary.yaml")
+COMMANDS_RELPATH = Path("en/commands")
 
 
 def _repo_root(start: Path | None = None) -> Path:
@@ -44,10 +46,48 @@ def _stub(name: str, task: str, help_text: str) -> typer.Typer:
     return group
 
 
-app.add_typer(
-    _stub("extract", "1.2-1.4", "Extract catalogs, messages and the astest index from upstream/."),
-    name="extract",
+extract_app = typer.Typer(
+    help="Extract catalogs, messages and the astest index from upstream/.",
+    no_args_is_help=True,
 )
+app.add_typer(extract_app, name="extract")
+
+
+@extract_app.command("catalog")
+def extract_catalog(
+    command: Annotated[
+        list[str] | None,
+        typer.Argument(help="Only these commands (default: all)."),
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Output directory (default: en/commands in the repo root)."),
+    ] = None,
+) -> None:
+    """Write en/commands/<CMD>.json for every command in upstream's catalog."""
+    root = _repo_root()
+    try:
+        written = catalog_extractor.write(root, out or root / COMMANDS_RELPATH, command)
+    except (FileNotFoundError, KeyError, RuntimeError) as exc:
+        typer.echo(f"extract catalog: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"extract catalog: wrote {len(written)} command file(s)")
+
+
+@extract_app.command("messages")
+def extract_messages() -> None:
+    """[not implemented yet: task 1.3]"""
+    typer.echo("caen extract messages: not implemented yet (PLAN.md task 1.3).", err=True)
+    raise typer.Exit(code=2)
+
+
+@extract_app.command("astest-index")
+def extract_astest_index() -> None:
+    """[not implemented yet: task 1.4]"""
+    typer.echo("caen extract astest-index: not implemented yet (PLAN.md task 1.4).", err=True)
+    raise typer.Exit(code=2)
+
+
 app.add_typer(
     _stub("translate", "2.2/3.1/5.2", "Glossary-locked LLM translation of commands and messages."),
     name="translate",
