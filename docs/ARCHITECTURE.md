@@ -72,6 +72,8 @@ The controlled vocabulary. One entry per French identifier or term:
   aliases_en: [cell group]  # strings we must NOT use; listed so the validator can flag them
 ```
 
+Optional `source` records provenance as `<path under upstream/>:<line>` where the identifier is defined in the pinned catalog (added from task 0.6 on; `tests/test_glossary_coverage.py` checks it resolves).
+
 Rules: a `fr` key appears once; `en` is the only permitted translation; `aliases_en` are forbidden synonyms. Seeded from AsterStudy's dictionary plus the terms in `docs/COMMAND-SET.md`; grows by PR. The validator greps every English artefact for forbidden synonyms and for French terms that have no entry.
 
 ### 4.2 Command references — `en/commands/<COMMAND>.{json,md}`

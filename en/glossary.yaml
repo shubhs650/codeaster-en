@@ -233,7 +233,7 @@
 - {fr: GLOBAL,      en: global axes,             kind: value, status: proposed}
 - {fr: LOCAL,       en: local axes,              kind: value, status: proposed}
 - {fr: PLUS_PETITE, en: smallest (frequencies),  kind: value, status: proposed}
-- {fr: BANDE,       en: frequency band,          kind: value, status: proposed}
+- {fr: BANDE,       en: band,                    kind: value, note: "Context-dependent. CALC_MODES OPTION: frequency band(s) bounded by the increasing list CALC_FREQ FREQ. DEFI_GROUP CREA_GROUP_MA/NO OPTION: slab of given DIST around a plane (POINT + VECT_NORMALE/ANGL_NAUT).", source: "code_aster/Cata/Commands/defi_group.py:107", status: proposed}
 - {fr: CENTRE,      en: around a center frequency, kind: value, status: proposed}
 - {fr: CONSTANT,    en: constant,                kind: value, status: proposed}
 - {fr: LINEAIRE,    en: linear,                  kind: value, status: proposed}
@@ -269,3 +269,85 @@
 - {fr: SIXY,        en: shear stress XY,          kind: concept, status: proposed}
 - {fr: MASS_INER,   en: mass and inertia properties, kind: concept, status: proposed}
 - {fr: MASS_EFFE_UN, en: effective mass fraction, kind: concept, status: proposed}
+
+# ---------- added in task 0.6: identifiers from docs/COMMAND-SET.md ----------
+# Provenance: upstream 17.4.26 (commit 5d2a06d). `source` = catalog file:line under upstream/
+# where the identifier is defined; English drafted from the catalog (fr= strings, allowed values)
+# — method: assisted, unreviewed. TODO(verify) marks wording that needs the U4 doc.
+# Not added: message-family names (SUPERVIS, JEVEUX, ...; handled by task 1.3) and the
+# commands/features COMMAND-SET marks out of scope (CALC_G, CALC_EUROPLEXUS, MODE_NON_LINE,
+# MISS3D, HHO, IFS, *_ENDO_*).
+# commands
+- {fr: ASSE_MATRICE, en: assemble matrix, kind: command, note: "fr: 'Construction d'une matrice assemblée'.", source: "code_aster/Cata/Commands/asse_matrice.py:43", status: proposed}
+- {fr: CALC_MATR_ELEM, en: compute element matrices, kind: command, note: "fr: 'Calcul des matrices élémentaires'. Used with NUME_DDL + ASSE_MATRICE as the long form of ASSEMBLAGE.", source: "code_aster/Cata/Commands/calc_matr_elem.py:69", status: proposed}
+- {fr: POST_CHAMP, en: extract sub-point fields, kind: command, note: "fr: 'extraction de champs sur un sous-point' (e.g. a shell layer). Tier 3.", source: "code_aster/Cata/Commands/post_champ.py:61", status: proposed}
+- {fr: DYNA_VIBRA, en: dynamic response analysis, kind: command, note: "fr: transient or harmonic dynamics, on a physical or generalized (modal) basis. Tier 3.", source: "code_aster/Cata/Commands/dyna_vibra.py:47", status: proposed}
+- {fr: CALC_FATIGUE, en: compute fatigue damage, kind: command, note: "fr: fatigue damage field and critical plane of maximum shear. Tier 3.", source: "code_aster/Cata/Commands/calc_fatigue.py:43", status: proposed}
+# keywords
+- {fr: CODE, en: test-case mode, kind: keyword, note: "DEBUT/POURSUITE. fr: 'paramètre réservé aux cas-tests (erreurs, fichier de couverture...)'.", source: "code_aster/Cata/Commands/debut.py:78", status: proposed}
+- {fr: ERREUR, en: error handling, kind: keyword, note: "DEBUT/POURSUITE. fr: 'comportement en cas d'erreur'. Sub-keywords ERREUR_F ('ABORT'|'EXCEPTION'), ALARME.", source: "code_aster/Cata/Commands/debut.py:84", status: proposed}
+- {fr: DEBUG, en: debug settings, kind: keyword, note: "DEBUT/POURSUITE. fr: 'option de déboggage reservée aux développeurs'.", source: "code_aster/Cata/Commands/debut.py:92", status: proposed}
+- {fr: IGNORE_ALARM, en: warnings to ignore, kind: keyword, note: "DEBUT/POURSUITE. fr: 'Alarmes que l'utilisateur souhaite délibérément ignorer'. Alarme = warning.", aliases_en: [alarms to ignore], source: "code_aster/Cata/Commands/debut.py:183", status: proposed}
+- {fr: CREA_GROUP_MA, en: create element groups, kind: keyword, note: "DEFI_GROUP factor keyword.", source: "code_aster/Cata/Commands/defi_group.py:61", status: proposed}
+- {fr: CREA_GROUP_NO, en: create node groups, kind: keyword, note: "DEFI_GROUP factor keyword.", source: "code_aster/Cata/Commands/defi_group.py:199", status: proposed}
+- {fr: UNION, en: union of groups, kind: keyword, note: "DEFI_GROUP: new group = union of the listed groups.", source: "code_aster/Cata/Commands/defi_group.py:70", status: proposed}
+- {fr: INTERSEC, en: intersection of groups, kind: keyword, note: "DEFI_GROUP: new group = intersection of the listed groups.", source: "code_aster/Cata/Commands/defi_group.py:69", status: proposed}
+- {fr: DIFFE, en: difference of groups, kind: keyword, note: "DEFI_GROUP: new group = first listed group minus the others. TODO(verify) order semantics against U4.22.01.", source: "code_aster/Cata/Commands/defi_group.py:71", status: proposed}
+- {fr: COQU_VOLU, en: solid elements from shell surfaces, kind: keyword, note: "CREA_MAILLAGE. fr: 'Creation de mailles volumiques à partir de mailles surfaciques'.", source: "code_aster/Cata/Commands/crea_maillage.py:97", status: proposed}
+- {fr: LINE_QUAD, en: linear to quadratic, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage linéaire -> quadratique'.", source: "code_aster/Cata/Commands/crea_maillage.py:139", status: proposed}
+- {fr: QUAD_LINE, en: quadratic to linear, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage quadratique -> linéaire'.", source: "code_aster/Cata/Commands/crea_maillage.py:172", status: proposed}
+- {fr: E, en: "Young's modulus", kind: keyword, note: "ELAS. fr: 'Module d'Young'.", source: "code_aster/Cata/Commands/defi_materiau.py:410", status: proposed}
+- {fr: NU, en: "Poisson's ratio", kind: keyword, note: "ELAS. fr: 'Coefficient de Poisson'.", source: "code_aster/Cata/Commands/defi_materiau.py:411", status: proposed}
+- {fr: RHO, en: density, kind: keyword, note: "ELAS. fr: 'Masse volumique' (mass density).", source: "code_aster/Cata/Commands/defi_materiau.py:416", status: proposed}
+- {fr: ALPHA, en: thermal expansion coefficient, kind: keyword, note: "In ELAS: fr 'Coefficient de dilatation'. Other material laws reuse the name ALPHA for unrelated parameters (e.g. hardening); check the enclosing block.", source: "code_aster/Cata/Commands/defi_materiau.py:417", status: proposed}
+- {fr: AFFE_VARC, en: external state variable assignment, kind: keyword, note: "AFFE_MATERIAU. VARC = variable de commande ('command variable' in upstream English docs): temperature, irradiation, etc., imposed on the material.", aliases_en: [command variable assignment], source: "code_aster/Cata/Commands/affe_materiau.py:58", status: proposed}
+- {fr: NOM_VARC, en: external state variable name, kind: keyword, note: "In AFFE_VARC: 'TEMP', 'HYDR', 'SECH', ...", source: "code_aster/Cata/Commons/c_affe_varc.py:32", status: proposed}
+- {fr: CHAM_GD, en: field (physical quantity), kind: keyword, note: "champ de grandeur: a field of one physical quantity. In AFFE_VARC, the field that supplies the state variable.", source: "code_aster/Cata/Commons/c_affe_varc.py:51", status: proposed}
+- {fr: VALE_REF, en: reference state value, kind: keyword, note: "In AFFE_VARC, required when NOM_VARC is 'TEMP' or 'SECH'; for TEMP, the reference temperature. TODO(verify) wording against U4.43.03. Distinct from VALE_REFE (TEST_RESU).", source: "code_aster/Cata/Commons/c_affe_varc.py:85", status: proposed}
+- {fr: COQUE, en: shell properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword (EPAIS, VECTEUR, ANGL_REP, COQUE_NCOU). 'COQUE' is also a value of TYPE_RACCORD (shell side).", source: "code_aster/Cata/Commands/affe_cara_elem.py:768", status: proposed}
+- {fr: DISCRET, en: discrete element properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword: stiffness/mass/damping of DIS_T / DIS_TR elements (springs).", source: "code_aster/Cata/Commands/affe_cara_elem.py:812", status: proposed}
+- {fr: REPERE, en: coordinate system, kind: keyword, note: "e.g. DISCRET: 'LOCAL' | 'GLOBAL'.", aliases_en: [frame], source: "code_aster/Cata/Commands/affe_cara_elem.py:815", status: proposed}
+- {fr: GROUP_MA_MAIT, en: main element group, kind: keyword, note: "LIAISON_MAIL, contact. MAIT = maître (main).", aliases_en: [master element group], source: "code_aster/Cata/Commands/affe_char_meca.py:564", status: proposed}
+- {fr: GROUP_MA_ESCL, en: secondary element group, kind: keyword, note: "LIAISON_MAIL, contact. ESCL = esclave (secondary).", aliases_en: [slave element group], source: "code_aster/Cata/Commands/affe_char_meca.py:565", status: proposed}
+- {fr: GROUP_NO_MAIT, en: main node group, kind: keyword, note: "LIAISON_RBE3: the single node carrying the load.", aliases_en: [master node group], source: "code_aster/Cata/Commands/affe_char_meca.py:783", status: proposed}
+- {fr: GROUP_NO_ESCL, en: secondary node group, kind: keyword, note: "LIAISON_RBE3, LIAISON_MAIL: nodes the main node is coupled to.", aliases_en: [slave node group], source: "code_aster/Cata/Commands/affe_char_meca.py:566", status: proposed}
+- {fr: DDL_MAIT, en: main-node DOFs, kind: keyword, note: "LIAISON_RBE3: DOFs of the main node (DX..DRZ).", aliases_en: [master DOFs], source: "code_aster/Cata/Commands/affe_char_meca.py:665", status: proposed}
+- {fr: COEF_ESCL, en: secondary-node weights, kind: keyword, note: "LIAISON_RBE3: weighting coefficients of the secondary nodes (default 1.0).", aliases_en: [slave coefficients], source: "code_aster/Cata/Commands/affe_char_meca.py:664", status: proposed}
+- {fr: TYPE_RACCORD, en: tie type, kind: keyword, note: "LIAISON_MAIL: 'MASSIF' | 'COQUE' | 'COQUE_MASSIF' | 'MASSIF_COQUE'.", source: "code_aster/Cata/Commands/affe_char_meca.py:569", status: proposed}
+- {fr: TEMP_IMPO, en: imposed temperature, kind: keyword, note: "AFFE_CHAR_THER factor keyword.", source: "code_aster/Cata/Commands/affe_char_ther.py:59", status: proposed}
+- {fr: FLUX_REP, en: distributed heat flux, kind: keyword, note: "AFFE_CHAR_THER factor keyword (flux réparti).", source: "code_aster/Cata/Commands/affe_char_ther.py:76", status: proposed}
+- {fr: ECHANGE, en: convective heat exchange, kind: keyword, note: "AFFE_CHAR_THER: film coefficient COEF_H and external temperature TEMP_EXT.", source: "code_aster/Cata/Commands/affe_char_ther.py:102", status: proposed}
+- {fr: SOURCE, en: heat source, kind: keyword, note: "AFFE_CHAR_THER: volumetric source SOUR. Other commands (DEFI_SOL_MISS) use SOURCE differently.", source: "code_aster/Cata/Commands/affe_char_ther.py:121", status: proposed}
+- {fr: RESI_RELA, en: relative residual tolerance, kind: keyword, note: "SOLVEUR. Defaults differ by method and context (1e-6 or -1.0 in the MUMPS block). TODO(verify) meaning of each against U4.50.01.", source: "code_aster/Cata/Commons/c_solveur.py:312", status: proposed}
+- {fr: SOLVEUR_MODAL, en: eigensolver settings, kind: keyword, note: "CALC_MODES: METHODE 'SORENSEN' (default) | 'TRI_DIAG' | 'JACOBI' | 'QZ'.", source: "code_aster/Cata/Commands/calc_modes.py:263", status: proposed}
+- {fr: MATR_ASSE, en: assembled matrices, kind: keyword, note: "ASSEMBLAGE factor keyword: which matrices to assemble (RIGI_MECA, MASS_MECA, ...).", source: "code_aster/Cata/Commands/assemblage.py:93", status: proposed}
+- {fr: NORME, en: norm, kind: keyword, note: "NORM_MODE: predefined normalization (generalized mass, Euclidean, ...). Also used in CALC_CHAMP for field norms.", source: "code_aster/Cata/Commands/norm_mode.py:49", status: proposed}
+- {fr: FILTRE_MODE, en: mode filter, kind: keyword, note: "EXTR_MODE / CALC_MODES.", source: "code_aster/Cata/Commands/extr_mode.py:47", status: proposed}
+- {fr: CRIT_EXTR, en: mode selection criterion, kind: keyword, note: "FILTRE_MODE: 'MASS_EFFE_UN' | 'MASS_GENE' | 'MASS_EFFE' | ...", source: "code_aster/Cata/Commands/extr_mode.py:61", status: proposed}
+- {fr: SEUIL, en: threshold, kind: keyword, note: "Meaning set by the enclosing block (e.g. effective-mass fraction in FILTRE_MODE, error limit in CALC_MODES).", source: "code_aster/Cata/Commands/extr_mode.py:74", status: proposed}
+- {fr: ACTION, en: extraction action, kind: keyword, note: "POST_RELEVE_T: one block per extraction; OPERATION 'EXTRACTION' | 'MOYENNE' | 'MOYENNE_ARITH' | 'EXTREMA'.", source: "code_aster/Cata/Commands/post_releve_t.py:36", status: proposed}
+- {fr: VOLUMOGRAMME, en: volume distribution of a component, kind: keyword, note: "POST_ELEM: fraction of volume per interval of values of NOM_CMP. TODO(verify) against U4.81.22.", source: "code_aster/Cata/Commands/post_elem.py:415", status: proposed}
+- {fr: LIGN_COUPE, en: cut line, kind: keyword, note: "MACR_LIGN_COUPE factor keyword.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:137", status: proposed}
+- {fr: TYPE, en: type, kind: keyword, note: "Generic; e.g. LIGN_COUPE TYPE 'SEGMENT' | 'ARC' | 'GROUP_NO' | 'GROUP_MA'.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:149", status: proposed}
+- {fr: COOR_ORIG, en: start point coordinates, kind: keyword, note: "LIGN_COUPE.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:207", status: proposed}
+- {fr: COOR_EXTR, en: end point coordinates, kind: keyword, note: "LIGN_COUPE.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:208", status: proposed}
+- {fr: NB_POINTS, en: number of points, kind: keyword, note: "LIGN_COUPE.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:206", status: proposed}
+- {fr: TYPE_RESU_MECA, en: mechanical result type (RCC-M), kind: keyword, note: "POST_RCCM: 'EVOLUTION' | 'ZE200a' | 'ZE200b' | 'B3200' | 'B3600'.", source: "code_aster/Cata/Commands/post_rccm.py:37", status: proposed}
+- {fr: TABLE, en: table, kind: keyword, source: "code_aster/Cata/Commands/impr_table.py:31", status: proposed}
+- {fr: SEPARATEUR, en: column separator, kind: keyword, note: "IMPR_TABLE. fr: 'Séparateur des colonnes du tableau'.", source: "code_aster/Cata/Commands/impr_table.py:141", status: proposed}
+# values
+- {fr: SPHERE, en: sphere, kind: value, note: "CREA_GROUP_MA/NO OPTION: elements/nodes inside a sphere (POINT, RAYON).", source: "code_aster/Cata/Commands/defi_group.py:107", status: proposed}
+- {fr: NOEUD_ORDO, en: ordered node path, kind: value, note: "CREA_GROUP_NO OPTION: ordered node group along a line of elements.", source: "code_aster/Cata/Commands/defi_group.py:210", status: proposed}
+- {fr: EXTR, en: extract, kind: value, note: "CREA_CHAMP OPERATION: extract a field from a result.", source: "code_aster/Cata/Commands/crea_champ.py:83", status: proposed}
+- {fr: SEGMENT, en: straight segment, kind: value, note: "LIGN_COUPE TYPE.", source: "code_aster/Cata/Commands/macr_lign_coupe.py:153", status: proposed}
+- {fr: PM_PB, en: "membrane and bending stresses (Pm, Pb)", kind: value, note: "POST_RCCM OPTION: primary membrane and bending stress categories. TODO(verify) against U4.83.11.", source: "code_aster/Cata/Commands/post_rccm.py:55", status: proposed}
+- {fr: RIGI_MECA, en: mechanical stiffness matrix, kind: value, source: "code_aster/Cata/Commands/assemblage.py:47", status: proposed}
+- {fr: MASS_MECA, en: mechanical mass matrix, kind: value, source: "code_aster/Cata/Commands/assemblage.py:49", status: proposed}
+- {fr: K_T_D_N, en: nodal translational stiffness (diagonal), kind: value, note: "DISCRET CARA: K = stiffness, T = translation, D = diagonal, N = node.", source: "code_aster/Cata/Commands/affe_cara_elem.py:829", status: proposed}
+- {fr: K_TR_D_N, en: nodal translational+rotational stiffness (diagonal), kind: value, note: "DISCRET CARA: TR = translation + rotation.", source: "code_aster/Cata/Commands/affe_cara_elem.py:831", status: proposed}
+- {fr: X, en: X coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:36", status: proposed}
+- {fr: Y, en: Y coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:37", status: proposed}
+- {fr: Z, en: Z coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:38", status: proposed}
+- {fr: TEMP, en: temperature, kind: value, note: "NOM_VARC value and thermal DOF / field name.", source: "code_aster/Cata/Commons/c_affe_varc.py:36", status: proposed}
+# concepts
+- {fr: SIEF_ELNO, en: stress at element nodes (from SIEF), kind: concept, note: "SIEF_ELGA extrapolated to element nodes; for shells/beams holds generalized forces.", source: "code_aster/Cata/Commons/c_nom_cham_into.py:87", status: proposed}
