@@ -104,8 +104,9 @@ fixed base, internal pressure; include MODI_MAILLAGE/ORIE_PEAU, MECA_STATIQUE, C
 TEST_RESU on reaction sum = applied pressure resultant.
 shell_static: simply supported square plate, DKT, uniform pressure, TEST_RESU vs Timoshenko.
 modal: cantilever beam (3D), CALC_MODES first 6, POST_ELEM MASS_INER, TEST_RESU vs Euler-Bernoulli f1.
-Use only Tier 1/2 keywords. Cite the astest cases you modelled on. I will run them via the
-Action; do not try to run the solver here.
+Use only Tier 1/2 keywords. Cite the astest cases you modelled on. Run each case with
+scripts/run-fixture.sh, iterate until every TEST_RESU is OK, and commit output/ alongside input/.
+Keep meshes small (each run < 10 min on 4 vCPU).
 ```
 
 ## S6 — Solver fixtures Action (task 4.2)
