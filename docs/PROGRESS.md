@@ -14,6 +14,41 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 1.3 + 1.6 messages extractor and validator — agent
+Done: `caen extract messages` (`tools/codeaster_en/extract/messages.py`) parses every
+`upstream/code_aster/Messages/<family>.py` with `ast` and writes `en/messages/<FAMILY>.en.json`
+(277 families, 6,890 messages, all `en: null`; schema `docs/schemas/messages.schema.json`).
+Each message keeps `fr` verbatim, its distinct `placeholders`, source line, and when they
+apply: `flags` (41 dict-form messages), `gettext: false` (15 unwrapped + the 2 f-strings
+`POST0_55/56`, whose module constant is substituted and named in `fstring_names`) and
+`reachable: false` (the 4 numbered ≥ 100). Re-extraction keeps translation fields
+(`en`, `method`, `severity_hint`, `translation_source`, `reviewed_by`, `reviewed_on`, `note`)
+and marks a translated message `stale: true` when its French changed. Placeholder parser
+`codeaster_en/placeholders.py` follows Python's printf grammar, so it accepts all 51 INVENTORY
+formats and `%%`, and reports stray `%`, unnamed conversions and `*`. `caen validate` now runs
+four rules: glossary (unchanged), messages (ids, placeholder list matches `fr`, fr↔en
+placeholder set equality, `method` set and reviewer/date when `reviewed`), synonyms
+(`aliases_en` scan over `en/**/*.md`), commands (`.md` keyword-table rows ⊆ `.json` keyword
+paths; `.json` sibling and front-matter `command:` checked). CI already ran `caen validate`, so
+the rules are wired in with no `ci.yml` change. Tests: `test_placeholders.py`,
+`test_messages_extract.py` (counts, hand checks, byte-for-byte snapshots, schema, merge),
+`test_validate.py` with `tests/validate_fixtures/{good,broken}` (broken trips every rule).
+Open: none for 1.3/1.6. ARCHITECTURE.md §4.3's example predates the schema; the schema wins
+(not edited here to avoid conflicting with PR #2).
+Decisions: none (no ADR). Choices: fr↔en equality is on the **set** of specifiers, each
+character for character; order and repeat count may change (TRANSLATION-GUIDE §3.1 "reorder…
+never rename, drop, or add"). The synonym scan skips code spans/fences and all-caps matches
+(French identifiers), counts plurals, and honours a per-line `<!-- caen-allow: word -->`.
+Bloc paths (`AFFE/[b_x]`) are not accepted as keywords. Count differences from INVENTORY §2 are
+explained, not errors: its regex needed a digit in the key, so it missed 5 `%(ktout)s`
+(`Utmess.py:229`, all strings joined), and it skipped the f-strings (3 more `%(kN)s`).
+Needs owner: several glossary `aliases_en` are ordinary English words (`reference`, `link`,
+`connection`, `frame`, `filename`, `instant`, `criteria`); scanned over the current `docs/` they
+give 42 hits, mostly "reference(s)". Once `en/commands/*.md` exist they will fail the build
+unless the aliases are narrowed (e.g. `reference frame`) or lines use `caen-allow`. Branch is
+`claude/project-thread-noz4t1` (session-assigned); a stray `task/1-3-messages-extract` branch
+could not be deleted from the sandbox.
+
 ## 2026-10-23 — 1.2 catalog extractor — agent
 Done: `caen extract catalog` (`tools/codeaster_en/extract/catalog.py`) writes
 `en/commands/<CMD>.json` for all 268 commands (135 OPER, 116 MACRO, 16 PROC, 1 FORM; `VARIABLE`
