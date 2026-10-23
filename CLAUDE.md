@@ -87,13 +87,16 @@ codeaster-en/
 
 | Layer in upstream | Language | Our action |
 |---|---|---|
-| `code_aster/Cata/Commands/*.py` — command catalogs (one file per command; keyword names, types, defaults, `fr=` help strings) | French identifiers + French help | Extract → annotate in English (`en/commands/`) |
-| `code_aster/Messages/*.py` — `cata_msg` dicts, one file per message family | French text | Translate (`en/messages/`) |
-| `astest/*.comm` + `*.export` — ~3800 test cases | French keywords, French comments | Index only; use as examples |
+| `code_aster/Cata/Commands/*.py` — command catalogs (269 modules, 268 commands; `SIMP`/`FACT`/`BLOC` DSL from `code_aster/Cata/Language/`; keyword names, types, defaults, sparse `fr=` help strings). Shared keyword groups in `code_aster/Cata/Commons/`. Importable without the solver (numpy only). `POURSUITE` has no catalog: it reuses `DEBUT`'s | French identifiers + French help | Extract → annotate in English (`en/commands/`) |
+| `code_aster/Messages/*.py` — `cata_msg` dicts, one file per message family (277 families, 6,890 messages). Not importable without the solver: parse with `ast` | French text | Translate (`en/messages/`) |
+| `i18n/en-US/aster_messages.po` (2016 Crowdin, ~48 % of current messages reusable) and `i18n/catapy_en_US.ts` (catalog help) — upstream's own English | English (dated, literal) | Seed only, as `method: machine`; see ADR-004 |
+| `code_aster/Utilities/i18n.py` + `DEBUT(LANG=...)` — gettext switch, domain `aster_messages` | — | Read; ADR-004 decides whether we ship a `.mo` |
+| `astest/*.comm` (+ `*.py`, `*.com0`…) + `*.export` — 4,496 test cases; no expected `.mess` outputs | French keywords, French comments | Index only; use as examples |
 | `bibfor/`, `bibc/`, `bibcxx/` — Fortran/C/C++ solver | French comments and names | **Ignore.** Out of scope forever. |
 | `catalo/` — element/option catalogs | French | Ignore unless a command reference needs an element name explained |
+| `doc/` — Sphinx developer guide only | English | Ignore |
 | Official docs (PDF, not in repo) — U1 usage, U4 command reference, R theory, V validation | French (+ machine English) | Translate U4 for in-scope commands; curate a short engineers' guide |
-| Solver output `.mess` (log), `.resu`, tables | French | Parse and render in English at runtime |
+| Solver output `.mess` (log), `.resu`, tables | French | Parse and render in English at runtime. Diagnostics carry `<TYPE> <FAMILY_N>`; plain info messages carry no ID |
 | Results `.rmed` / `.med` | Binary (MED/HDF5), field names French (`DEPL`, `SIEQ_NOEU`) | Read; label in English via glossary |
 
-Verify the paths above against the pinned `upstream/` in your first session (Phase 0, task 0.4) and correct this table if they differ.
+Counts and evidence: `docs/INVENTORY.md`. Paths verified against `upstream/` 17.4.26 in task 0.4. Re-check them on every upstream bump.
