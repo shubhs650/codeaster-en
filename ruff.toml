@@ -1,0 +1,12 @@
+# Lint/format config for the whole overlay (tools/ and tests/). upstream/ is never linted.
+target-version = "py311"
+line-length = 100
+extend-exclude = ["upstream"]
+# Python only: newer ruff also formats code blocks in Markdown, and docs/ is hand-written.
+include = ["*.py", "*.pyi", "**/pyproject.toml"]
+
+[lint]
+select = ["E", "F", "W", "I", "UP", "B"]
+
+[lint.isort]
+known-first-party = ["codeaster_en"]
