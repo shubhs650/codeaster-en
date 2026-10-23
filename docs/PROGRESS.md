@@ -21,7 +21,10 @@ a `source` (upstream catalog file:line at 17.4.26) and English drafted from the 
 strings and allowed values; uncertain wording marked TODO(verify). `BANDE` broadened from
 "frequency band" to "band" (it is also a DEFI_GROUP geometric option). New
 `tests/test_glossary_coverage.py`: Tier 1/2 identifiers all have entries; `source` lines resolve.
-Optional `source` field documented in ARCHITECTURE §4.1.
+Optional `source` field documented in ARCHITECTURE §4.1. Narrowed aliases_en that are everyday
+English words (reference, frame, link, connection, filename, affect, loading, criteria,
+excitation, characteristics, instant) to phrases, so the forbidden-synonym scan (PR #6) does
+not flag correct prose.
 Open: AsterStudy `GLOBAL_DICT` merge — file not attached, gitlab.com unreachable. Acceptance
 count (≥ 150) already met without it.
 Decisions: none. Message-family names and the out-of-scope items in COMMAND-SET (CALC_G,

@@ -11,7 +11,7 @@
 # ---------- abbreviations that appear inside keyword names ----------
 - {fr: MA,    en: element,            kind: abbrev, note: "maille. GROUP_MA = element group. Never 'cell'.", aliases_en: [cell, mesh element], status: proposed}
 - {fr: NO,    en: node,               kind: abbrev, note: "noeud. GROUP_NO = node group.", aliases_en: [vertex], status: proposed}
-- {fr: CARA,  en: properties,         kind: abbrev, note: "caractéristiques. AFFE_CARA_ELEM = element properties (thickness, section, spring).", aliases_en: [characteristics], status: proposed}
+- {fr: CARA,  en: properties,         kind: abbrev, note: "caractéristiques. AFFE_CARA_ELEM = element properties (thickness, section, spring).", aliases_en: [element characteristics], status: proposed}
 - {fr: CHAM,  en: field,              kind: abbrev, note: "champ. CHAM_MATER = material field; CREA_CHAMP = create field.", status: proposed}
 - {fr: CHAR,  en: load,               kind: abbrev, note: "charge/chargement. AFFE_CHAR_MECA = assign mechanical loads and BCs.", aliases_en: [charge], status: proposed}
 - {fr: CINE,  en: kinematic,          kind: abbrev, note: "cinématique. AFFE_CHAR_CINE = kinematic (eliminated, non-Lagrange) BCs.", status: proposed}
@@ -31,7 +31,7 @@
 - {fr: IMPR,  en: write (print),      kind: abbrev, note: "imprimer: write to file. IMPR_RESU, IMPR_TABLE.", aliases_en: [impress], status: proposed}
 - {fr: LIRE,  en: read,               kind: abbrev, note: "lire. LIRE_MAILLAGE.", status: proposed}
 - {fr: DEFI,  en: define,             kind: abbrev, note: "définir. DEFI_MATERIAU, DEFI_FONCTION, DEFI_GROUP.", status: proposed}
-- {fr: AFFE,  en: assign,             kind: abbrev, note: "affecter. AFFE_MODELE, AFFE_MATERIAU, AFFE keyword block.", aliases_en: [affect, affectation], status: proposed}
+- {fr: AFFE,  en: assign,             kind: abbrev, note: "affecter. AFFE_MODELE, AFFE_MATERIAU, AFFE keyword block.", aliases_en: [affectation], status: proposed}
 - {fr: CALC,  en: compute,            kind: abbrev, note: "calculer. CALC_CHAMP, CALC_MODES.", status: proposed}
 - {fr: POST,  en: post-process,       kind: abbrev, note: "POST_RELEVE_T, POST_ELEM.", status: proposed}
 - {fr: CREA,  en: create,             kind: abbrev, note: "créer. CREA_CHAMP, CREA_MAILLAGE.", status: proposed}
@@ -51,7 +51,7 @@
 - {fr: structure de données (SD), en: data structure, kind: term, note: "Internal storage of a concept. Rarely user-facing.", status: proposed}
 - {fr: matériau,        en: material,             kind: term, status: proposed}
 - {fr: champ de matériau, en: material field,     kind: term, note: "CHAM_MATER: which material applies where (result of AFFE_MATERIAU).", status: proposed}
-- {fr: chargement,      en: load,                 kind: term, aliases_en: [charge, loading], status: proposed}
+- {fr: chargement,      en: load,                 kind: term, aliases_en: [charge], status: proposed}
 - {fr: cas de charge,   en: load case,            kind: term, status: proposed}
 - {fr: conditions aux limites, en: boundary conditions, kind: term, status: proposed}
 - {fr: dualisation,     en: Lagrange-multiplier enforcement, kind: term, note: "BCs applied via Lagrange multipliers (AFFE_CHAR_MECA) vs eliminated (AFFE_CHAR_CINE).", aliases_en: [dualization], status: proposed}
@@ -62,7 +62,7 @@
 - {fr: alarme,          en: warning,              kind: term, note: "<A> in the log. Never 'alarm'.", aliases_en: [alarm], status: proposed}
 - {fr: erreur fatale,   en: fatal error,          kind: term, note: "<F>.", status: proposed}
 - {fr: erreur,          en: error,                kind: term, note: "<E>.", status: proposed}
-- {fr: instant,         en: time step,            kind: term, note: "INST: pseudo-time / load-step parameter of a result.", aliases_en: [instant], status: proposed}
+- {fr: instant,         en: time step,            kind: term, note: "INST: pseudo-time / load-step parameter of a result.", aliases_en: [time instant], status: proposed}
 - {fr: numéro d'ordre,  en: step index,           kind: term, note: "NUME_ORDRE.", status: proposed}
 - {fr: groupe de mailles, en: element group,      kind: term, aliases_en: [cell group, mesh group], status: proposed}
 - {fr: groupe de noeuds, en: node group,          kind: term, status: proposed}
@@ -86,9 +86,9 @@
 - {fr: pivot nul,       en: zero pivot,           kind: term, note: "Singular matrix: usually missing BCs or unconnected parts.", status: proposed}
 - {fr: convergence,     en: convergence,          kind: term, status: proposed}
 - {fr: pas de temps,    en: time step,            kind: term, status: proposed}
-- {fr: liaison,         en: constraint (coupling), kind: term, note: "LIAISON_* keywords: linear relations between DOFs (tie, rigid, RBE3).", aliases_en: [link, connection], status: proposed}
+- {fr: liaison,         en: constraint (coupling), kind: term, note: "LIAISON_* keywords: linear relations between DOFs (tie, rigid, RBE3).", aliases_en: [linkage, DOF link], status: proposed}
 - {fr: maître / esclave, en: main / secondary,     kind: term, note: "MAIT/ESCL in LIAISON_MAIL, contact. Use main/secondary consistently.", aliases_en: [master/slave], status: proposed}
-- {fr: repère,          en: coordinate system,    kind: term, note: "REPERE='GLOBAL'|'LOCAL'|'UTILISATEUR'.", aliases_en: [frame, reference], status: proposed}
+- {fr: repère,          en: coordinate system,    kind: term, note: "REPERE='GLOBAL'|'LOCAL'|'UTILISATEUR'.", aliases_en: [reference frame, frame of reference], status: proposed}
 - {fr: fonction,        en: function,             kind: term, note: "DEFI_FONCTION: tabulated function of a parameter (INST, X, Y, Z, TEMP).", status: proposed}
 - {fr: prolongement,    en: extrapolation (outside table range), kind: term, note: "PROL_DROITE/PROL_GAUCHE = right/left extension: 'CONSTANT', 'LINEAIRE', 'EXCLU'.", status: proposed}
 
@@ -137,7 +137,7 @@
 - {fr: CHAM_MATER,    en: material field,            kind: keyword, status: proposed}
 - {fr: CARA_ELEM,     en: element properties,        kind: keyword, status: proposed}
 - {fr: CHARGE,        en: load,                      kind: keyword, status: proposed}
-- {fr: EXCIT,         en: applied loads,             kind: keyword, note: "List of (CHARGE, FONC_MULT) pairs in a solve command.", aliases_en: [excitation], status: proposed}
+- {fr: EXCIT,         en: applied loads,             kind: keyword, note: "List of (CHARGE, FONC_MULT) pairs in a solve command.", aliases_en: [excitation list], status: proposed}
 - {fr: FONC_MULT,     en: load multiplier function,  kind: keyword, status: proposed}
 - {fr: RESULTAT,      en: result,                    kind: keyword, status: proposed}
 - {fr: NOM_CHAM,      en: field name,                kind: keyword, status: proposed}
@@ -171,7 +171,7 @@
 - {fr: METHODE,       en: method,                    kind: keyword, status: proposed}
 - {fr: OPTION,        en: option,                    kind: keyword, status: proposed}
 - {fr: CONTRAINTE,    en: stress fields,             kind: keyword, note: "In CALC_CHAMP: which stress fields to derive.", status: proposed}
-- {fr: CRITERES,      en: equivalent-stress fields,  kind: keyword, note: "In CALC_CHAMP: SIEQ_* (von Mises, Tresca, principals).", aliases_en: [criteria], status: proposed}
+- {fr: CRITERES,      en: equivalent-stress fields,  kind: keyword, note: "In CALC_CHAMP: SIEQ_* (von Mises, Tresca, principals).", aliases_en: [criteria fields], status: proposed}
 - {fr: DEFORMATION,   en: strain fields,             kind: keyword, status: proposed}
 - {fr: FORCE,         en: force fields,              kind: keyword, note: "In CALC_CHAMP: REAC_NODA, FORC_NODA.", status: proposed}
 - {fr: ENERGIE,       en: energy fields,             kind: keyword, status: proposed}
@@ -180,7 +180,7 @@
 - {fr: RESULTANTE,    en: resultant components,      kind: keyword, status: proposed}
 - {fr: MOMENT,        en: moment components,         kind: keyword, status: proposed}
 - {fr: POINT,         en: reference point,           kind: keyword, status: proposed}
-- {fr: UNITE,         en: logical unit,              kind: keyword, aliases_en: [unit number, filename], status: proposed}
+- {fr: UNITE,         en: logical unit,              kind: keyword, aliases_en: [unit number], status: proposed}
 - {fr: FORMAT,        en: file format,               kind: keyword, status: proposed}
 - {fr: INFO,          en: verbosity,                 kind: keyword, status: proposed}
 - {fr: TITRE,         en: title,                     kind: keyword, status: proposed}
@@ -306,7 +306,7 @@
 - {fr: VALE_REF, en: reference state value, kind: keyword, note: "In AFFE_VARC, required when NOM_VARC is 'TEMP' or 'SECH'; for TEMP, the reference temperature. TODO(verify) wording against U4.43.03. Distinct from VALE_REFE (TEST_RESU).", source: "code_aster/Cata/Commons/c_affe_varc.py:85", status: proposed}
 - {fr: COQUE, en: shell properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword (EPAIS, VECTEUR, ANGL_REP, COQUE_NCOU). 'COQUE' is also a value of TYPE_RACCORD (shell side).", source: "code_aster/Cata/Commands/affe_cara_elem.py:768", status: proposed}
 - {fr: DISCRET, en: discrete element properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword: stiffness/mass/damping of DIS_T / DIS_TR elements (springs).", source: "code_aster/Cata/Commands/affe_cara_elem.py:812", status: proposed}
-- {fr: REPERE, en: coordinate system, kind: keyword, note: "e.g. DISCRET: 'LOCAL' | 'GLOBAL'.", aliases_en: [frame], source: "code_aster/Cata/Commands/affe_cara_elem.py:815", status: proposed}
+- {fr: REPERE, en: coordinate system, kind: keyword, note: "e.g. DISCRET: 'LOCAL' | 'GLOBAL'.", aliases_en: [reference frame], source: "code_aster/Cata/Commands/affe_cara_elem.py:815", status: proposed}
 - {fr: GROUP_MA_MAIT, en: main element group, kind: keyword, note: "LIAISON_MAIL, contact. MAIT = maître (main).", aliases_en: [master element group], source: "code_aster/Cata/Commands/affe_char_meca.py:564", status: proposed}
 - {fr: GROUP_MA_ESCL, en: secondary element group, kind: keyword, note: "LIAISON_MAIL, contact. ESCL = esclave (secondary).", aliases_en: [slave element group], source: "code_aster/Cata/Commands/affe_char_meca.py:565", status: proposed}
 - {fr: GROUP_NO_MAIT, en: main node group, kind: keyword, note: "LIAISON_RBE3: the single node carrying the load.", aliases_en: [master node group], source: "code_aster/Cata/Commands/affe_char_meca.py:783", status: proposed}
