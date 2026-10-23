@@ -34,8 +34,8 @@ Findings for later tasks: `POURSUITE` has no catalog (runs on `DEBUT`'s) — its
 should say so; 4 messages numbered ≥ 100 are unreachable (`Utmess` asserts N < 100); `POST0_55/56`
 are f-strings interpolating a module constant; 15 messages are not wrapped in `_()`; plain `I`
 messages print without their ID in `.mess`. Licence headers GPL-3.0-or-later as ADR-007 assumes;
-`.po`/`.ts` have no own licence header (owner to confirm reuse under GPL with attribution).
-Needs owner: confirm reuse of the Crowdin `.po`/`.ts` translations.
+`.po`/`.ts` have no own licence header; the owner confirmed their reuse under GPL with attribution.
+Needs owner: none.
 Branch is `claude/project-thread-ux6ket` (session-assigned) rather than `task/0-4-…`.
 
 ## 2026-10-23 — 0.3 + 0.5 upstream pin and tooling skeleton — agent

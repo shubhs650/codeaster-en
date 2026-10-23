@@ -156,8 +156,8 @@ translation. Useful as a seed for keyword help in task 2.2, same caveats.
 `Copyright (C) 1991 - 20xx - EDF R&D - www.code-aster.org` and "either version 3 of the
 License, or (at your option) any later version" (279 of 279 files in `Messages/`). This matches
 ADR-007. The `.po`/`.ts` files carry no licence header of their own; they ship inside the GPL
-repository. TODO(verify): owner to confirm that is enough to reuse the Crowdin translations under
-GPL-3.0-or-later with attribution.
+repository. The owner confirmed on 2026-10-23 that the Crowdin translations may be reused under
+GPL-3.0-or-later with attribution (provenance `upstream:i18n/...`).
 
 ## 6. Other layout facts
 
