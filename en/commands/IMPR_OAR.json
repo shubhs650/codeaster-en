@@ -1,0 +1,205 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_oar.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_OAR",
+ "kind": "MACRO",
+ "fr": "Impression au format OAR",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.impr_oar_ops.impr_oar_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TABL_MECA",
+    "TABL_THER"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "TABL_THER",
+    "MODELE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_oar.py",
+  "line": 31
+ },
+ "keywords": [
+  {
+   "name": "TABL_MECA",
+   "kind": "factor",
+   "path": "TABL_MECA",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_oar.py",
+    "line": 37
+   },
+   "keywords": [
+    {
+     "name": "PRESSION",
+     "kind": "simple",
+     "path": "TABL_MECA/PRESSION",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "FLEXION_P",
+     "kind": "simple",
+     "path": "TABL_MECA/FLEXION_P",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "FLEXION_HP",
+     "kind": "simple",
+     "path": "TABL_MECA/FLEXION_HP",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "TORSION",
+     "kind": "simple",
+     "path": "TABL_MECA/TORSION",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 43
+     }
+    }
+   ]
+  },
+  {
+   "name": "TABL_THER",
+   "kind": "factor",
+   "path": "TABL_THER",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TEMP",
+      "CONTRAINTE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_oar.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "TABL_THER/TEMP",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "CONTRAINTE",
+     "kind": "simple",
+     "path": "TABL_THER/CONTRAINTE",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_oar.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "UNITE",
+   "kind": "simple",
+   "path": "UNITE",
+   "status": "o",
+   "type": [
+    "UnitDefault"
+   ],
+   "inout": "out",
+   "fr": "Unité logique définissant le fichier (fort.N) dans lequel on écrit",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_oar.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_oar.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_oar.py",
+    "line": 59
+   }
+  }
+ ]
+}

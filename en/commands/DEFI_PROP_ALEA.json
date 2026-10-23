@@ -1,0 +1,323 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_PROP_ALEA",
+ "kind": "MACRO",
+ "fr": "Construit un champ aleatoire par son expression analytique",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_prop_alea_ops.defi_prop_alea_ops",
+ "reentrant": "n",
+ "result_types": [
+  "formule"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "LONG_CORR_X",
+    "LONG_CORR_Y",
+    "LONG_CORR_Z"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "PRECISION",
+    "NB_TERM"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "INIT_ALEA",
+   "kind": "simple",
+   "path": "INIT_ALEA",
+   "status": "o",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "MEDIANE",
+   "kind": "simple",
+   "path": "MEDIANE",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": "Valeur médiane de la propriété",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "COEF_VARI",
+   "kind": "simple",
+   "path": "COEF_VARI",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": "Coefficient de variation",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "LONG_CORR_X",
+   "kind": "simple",
+   "path": "LONG_CORR_X",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Longueur de corrélation en X",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "LONG_CORR_Y",
+   "kind": "simple",
+   "path": "LONG_CORR_Y",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Longueur de corrélation en Y",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "LONG_CORR_Z",
+   "kind": "simple",
+   "path": "LONG_CORR_Z",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Longueur de corrélation en Z",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 1e-05,
+   "val_max": 1.0,
+   "fr": "Pourcentage de l'energie à retenir",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "NB_TERM",
+   "kind": "simple",
+   "path": "NB_TERM",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": "Nombre total de termes de KL",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "a_data_x",
+   "kind": "bloc",
+   "path": "[a_data_x]",
+   "condition": "exists('LONG_CORR_X')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "X_MINI",
+     "kind": "simple",
+     "path": "X_MINI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: X_MINI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "X_MAXI",
+     "kind": "simple",
+     "path": "X_MAXI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: X_MAXI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "NB_TERM_X",
+     "kind": "simple",
+     "path": "NB_TERM_X",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": "Nombre de termes de KL en X",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "a_data_y",
+   "kind": "bloc",
+   "path": "[a_data_y]",
+   "condition": "exists('LONG_CORR_Y')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 57
+   },
+   "keywords": [
+    {
+     "name": "Y_MINI",
+     "kind": "simple",
+     "path": "Y_MINI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: Y_MINI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "Y_MAXI",
+     "kind": "simple",
+     "path": "Y_MAXI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: Y_MAXI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "NB_TERM_Y",
+     "kind": "simple",
+     "path": "NB_TERM_Y",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": "Nombre de termes de KL en Y",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 61
+     }
+    }
+   ]
+  },
+  {
+   "name": "a_data_z",
+   "kind": "bloc",
+   "path": "[a_data_z]",
+   "condition": "exists('LONG_CORR_Z')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "Z_MINI",
+     "kind": "simple",
+     "path": "Z_MINI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: Z_MINI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "Z_MAXI",
+     "kind": "simple",
+     "path": "Z_MAXI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Dimension du domaine: Z_MAXI",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "NB_TERM_Z",
+     "kind": "simple",
+     "path": "NB_TERM_Z",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": "Nombre de termes de KL en Z",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_prop_alea.py",
+      "line": 67
+     }
+    }
+   ]
+  }
+ ]
+}

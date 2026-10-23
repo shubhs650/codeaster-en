@@ -1,0 +1,829 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_table.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_TABLE",
+ "kind": "MACRO",
+ "fr": "Impression du contenu d'une table dans un fichier",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.impr_table_ops.impr_table_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_table.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TABLEAU",
+   "into": [
+    "TABLEAU",
+    "ASTER",
+    "TABLEAU_CROISE",
+    "AGRAF",
+    "XMGRACE",
+    "NUMPY"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "b_pilote",
+   "kind": "bloc",
+   "path": "[b_pilote]",
+   "condition": "equal_to(\"FORMAT\", 'XMGRACE')",
+   "fr": "Mots-clés propres à XMGRACE",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "PILOTE",
+     "kind": "simple",
+     "path": "PILOTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "into": [
+      "",
+      "POSTSCRIPT",
+      "EPS",
+      "MIF",
+      "SVG",
+      "PNM",
+      "PNG",
+      "JPEG",
+      "PDF",
+      "INTERACTIF",
+      "INTERACTIF_BG"
+     ],
+     "fr": "Pilote de sortie, PNG/JPEG/PDF ne sont pas disponibles sur toutes les installations de xmgrace",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 29,
+     "inout": "out",
+     "fr": "Unité logique définissant le fichier (fort.N) dans lequel on écrit",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 62
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_unite",
+   "kind": "bloc",
+   "path": "[b_unite]",
+   "condition": "not equal_to(\"FORMAT\", 'XMGRACE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 70
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 8,
+     "inout": "out",
+     "fr": "Unité logique définissant le fichier (fort.N) dans lequel on écrit",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "FILTRE",
+   "kind": "factor",
+   "path": "FILTRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "FILTRE/NOM_PARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "CRIT_COMP",
+     "kind": "simple",
+     "path": "FILTRE/CRIT_COMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EQ",
+     "into": [
+      "EQ",
+      "LT",
+      "GT",
+      "NE",
+      "LE",
+      "GE",
+      "VIDE",
+      "NON_VIDE",
+      "MAXI",
+      "MAXI_ABS",
+      "MINI",
+      "MINI_ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "b_vale",
+     "kind": "bloc",
+     "path": "FILTRE/[b_vale]",
+     "condition": "(is_in(\"CRIT_COMP\", ('EQ','NE','GT','LT','GE','LE')))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VALE",
+        "VALE_I",
+        "VALE_K",
+        "VALE_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 103
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "FILTRE/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "VALE_I",
+       "kind": "simple",
+       "path": "FILTRE/VALE_I",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "VALE_C",
+       "kind": "simple",
+       "path": "FILTRE/VALE_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "VALE_K",
+       "kind": "simple",
+       "path": "FILTRE/VALE_K",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 109
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_crit",
+     "kind": "bloc",
+     "path": "FILTRE/[b_crit]",
+     "condition": "is_in(\"CRIT_COMP\", ('EQ','NE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 111
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "FILTRE/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "FILTRE/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_table.py",
+        "line": 114
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TRI",
+   "kind": "factor",
+   "path": "TRI",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 117
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "TRI/NOM_PARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "ORDRE",
+     "kind": "simple",
+     "path": "TRI/ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "CROISSANT",
+     "into": [
+      "CROISSANT",
+      "DECROISSANT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 120
+     }
+    }
+   ]
+  },
+  {
+   "name": "PAGINATION",
+   "kind": "simple",
+   "path": "PAGINATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 127
+   }
+  },
+  {
+   "name": "FORMAT_R",
+   "kind": "simple",
+   "path": "FORMAT_R",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "E12.5",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 128
+   }
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 129
+   }
+  },
+  {
+   "name": "IMPR_FONCTION",
+   "kind": "simple",
+   "path": "IMPR_FONCTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 130
+   }
+  },
+  {
+   "name": "b_tableau",
+   "kind": "bloc",
+   "path": "[b_tableau]",
+   "condition": "equal_to(\"FORMAT\", 'TABLEAU')",
+   "fr": "Mots-clés propres au format Tableau",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 132
+   },
+   "keywords": [
+    {
+     "name": "DEBUT_TABLE",
+     "kind": "simple",
+     "path": "DEBUT_TABLE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Entête avant la table (par défaut, une ligne de tirets)",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "FIN_TABLE",
+     "kind": "simple",
+     "path": "FIN_TABLE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "fr": "Texte après la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 140
+     }
+    },
+    {
+     "name": "SEPARATEUR",
+     "kind": "simple",
+     "path": "SEPARATEUR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": " ",
+     "fr": "Séparateur des colonnes du tableau (ex : ' ', ';'...)",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "COMMENTAIRE",
+     "kind": "simple",
+     "path": "COMMENTAIRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "#",
+     "fr": "Caractère indiquant au traceur de fonction que la ligne peut etre ignorée",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 147
+     }
+    },
+    {
+     "name": "COMM_PARA",
+     "kind": "simple",
+     "path": "COMM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "fr": "Caractère utilisé pour commentariser la ligne des labels de colonnes",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 153
+     }
+    },
+    {
+     "name": "DEBUT_LIGNE",
+     "kind": "simple",
+     "path": "DEBUT_LIGNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "",
+     "fr": "Caractère de debut de ligne",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "FIN_LIGNE",
+     "kind": "simple",
+     "path": "FIN_LIGNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "\n",
+     "fr": "Caractère de fin de ligne",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 160
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_forme",
+   "kind": "bloc",
+   "path": "[b_forme]",
+   "condition": "equal_to(\"FORMAT\", 'XMGRACE')",
+   "fr": "Données de mise en forme du graphique",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 163
+   },
+   "keywords": [
+    {
+     "name": "LEGENDE",
+     "kind": "simple",
+     "path": "LEGENDE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Légende associée à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 167
+     }
+    },
+    {
+     "name": "STYLE",
+     "kind": "simple",
+     "path": "STYLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "Style de la ligne représentant la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 168
+     }
+    },
+    {
+     "name": "COULEUR",
+     "kind": "simple",
+     "path": "COULEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "Couleur associée à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 171
+     }
+    },
+    {
+     "name": "MARQUEUR",
+     "kind": "simple",
+     "path": "MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": "Type du marqueur associé à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 172
+     }
+    },
+    {
+     "name": "FREQ_MARQUEUR",
+     "kind": "simple",
+     "path": "FREQ_MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": "Fréquence d impression du marqueur associé à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 175
+     }
+    },
+    {
+     "name": "BORNE_X",
+     "kind": "simple",
+     "path": "BORNE_X",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Intervalles de variation des abscisses",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "BORNE_Y",
+     "kind": "simple",
+     "path": "BORNE_Y",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Intervalles de variation des ordonnées",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "ECHELLE_X",
+     "kind": "simple",
+     "path": "ECHELLE_X",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LIN",
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": "Type d'échelle pour les abscisses",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "ECHELLE_Y",
+     "kind": "simple",
+     "path": "ECHELLE_Y",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LIN",
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": "Type d'échelle pour les ordonnées",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "GRILLE_X",
+     "kind": "simple",
+     "path": "GRILLE_X",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 0.0,
+     "val_min_included": false,
+     "fr": "Pas du quadrillage vertical",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "GRILLE_Y",
+     "kind": "simple",
+     "path": "GRILLE_Y",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 0.0,
+     "val_min_included": false,
+     "fr": "Pas du quadrillage horizontal",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "LEGENDE_X",
+     "kind": "simple",
+     "path": "LEGENDE_X",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Légende associée à l'axe des abscisses",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 218
+     }
+    },
+    {
+     "name": "LEGENDE_Y",
+     "kind": "simple",
+     "path": "LEGENDE_Y",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Légende associée à l'axe des ordonnées",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_table.py",
+      "line": 219
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 221
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_table.py",
+    "line": 222
+   }
+  }
+ ]
+}

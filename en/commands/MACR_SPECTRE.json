@@ -1,0 +1,1057 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_spectre.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_SPECTRE",
+ "kind": "MACRO",
+ "fr": "Calcul de spectre, post-traitement de séisme",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macr_spectre_ops.macr_spectre_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_spectre.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_maillage",
+   "kind": "bloc",
+   "path": "[b_maillage]",
+   "condition": "exists(\"MAILLAGE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "PLANCHER",
+     "kind": "factor",
+     "path": "PLANCHER",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 36
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "PLANCHER/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 39
+       }
+      },
+      {
+       "name": "BATIMENT",
+       "kind": "simple",
+       "path": "PLANCHER/BATIMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 40
+       }
+      },
+      {
+       "name": "COMMENTAIRE",
+       "kind": "simple",
+       "path": "PLANCHER/COMMENTAIRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 41
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "PLANCHER/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 43
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "PLANCHER/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 44
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_not_maillage",
+   "kind": "bloc",
+   "path": "[b_not_maillage]",
+   "condition": "not exists(\"MAILLAGE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "PLANCHER",
+     "kind": "factor",
+     "path": "PLANCHER",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 49
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "PLANCHER/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 52
+       }
+      },
+      {
+       "name": "BATIMENT",
+       "kind": "simple",
+       "path": "PLANCHER/BATIMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 53
+       }
+      },
+      {
+       "name": "COMMENTAIRE",
+       "kind": "simple",
+       "path": "PLANCHER/COMMENTAIRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 54
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "PLANCHER/NOEUD",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 55
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ACCE",
+    "DEPL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "CALCUL",
+   "kind": "simple",
+   "path": "CALCUL",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ABSOLU",
+    "RELATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "ENVELOPPE",
+   "kind": "simple",
+   "path": "ENVELOPPE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "b_acce_rela",
+   "kind": "bloc",
+   "path": "[b_acce_rela]",
+   "condition": "equal_to(\"NOM_CHAM\", 'ACCE') and equal_to(\"CALCUL\", 'RELATIF')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "LIST_FREQ",
+      "FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "AMOR_SPEC",
+     "kind": "simple",
+     "path": "AMOR_SPEC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "NORME",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "RESU_GENE",
+        "RESULTAT",
+        "TABLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 69
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "RESU_GENE",
+       "kind": "simple",
+       "path": "RESU/RESU_GENE",
+       "status": "f",
+       "type": [
+        "tran_gene"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "dyna_trans",
+        "evol_noli"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "ACCE_X",
+       "kind": "simple",
+       "path": "RESU/ACCE_X",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 76
+       }
+      },
+      {
+       "name": "ACCE_Y",
+       "kind": "simple",
+       "path": "RESU/ACCE_Y",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 77
+       }
+      },
+      {
+       "name": "ACCE_Z",
+       "kind": "simple",
+       "path": "RESU/ACCE_Z",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 78
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_acce_abso",
+   "kind": "bloc",
+   "path": "[b_acce_abso]",
+   "condition": "equal_to(\"NOM_CHAM\", 'ACCE') and equal_to(\"CALCUL\", 'ABSOLU')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "LIST_FREQ",
+      "FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "AMOR_SPEC",
+     "kind": "simple",
+     "path": "AMOR_SPEC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "NORME",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "RESU_GENE",
+        "RESULTAT",
+        "TABLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 89
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "RESU_GENE",
+       "kind": "simple",
+       "path": "RESU/RESU_GENE",
+       "status": "f",
+       "type": [
+        "tran_gene"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "dyna_trans",
+        "evol_noli"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 95
+       }
+      }
+     ]
+    },
+    {
+     "name": "MULT_APPUI",
+     "kind": "simple",
+     "path": "MULT_APPUI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 97
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_impr",
+   "kind": "bloc",
+   "path": "[b_impr]",
+   "condition": "equal_to(\"NOM_CHAM\", 'ACCE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 99
+   },
+   "keywords": [
+    {
+     "name": "IMPRESSION",
+     "kind": "factor",
+     "path": "IMPRESSION",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "TRI",
+       "kind": "simple",
+       "path": "IMPRESSION/TRI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AMOR_SPEC",
+       "into": [
+        "AMOR_SPEC",
+        "DIRECTION"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 103
+       }
+      },
+      {
+       "name": "FORMAT",
+       "kind": "simple",
+       "path": "IMPRESSION/FORMAT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "TABLEAU",
+       "into": [
+        "TABLEAU",
+        "XMGRACE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "UNITE",
+       "kind": "simple",
+       "path": "IMPRESSION/UNITE",
+       "status": "f",
+       "type": [
+        "UnitDefault"
+       ],
+       "default": 29,
+       "inout": "out",
+       "fr": "Unité logique définissant le fichier (fort.N) dans lequel on écrit",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "b_pilote",
+       "kind": "bloc",
+       "path": "IMPRESSION/[b_pilote]",
+       "condition": "equal_to(\"FORMAT\", 'XMGRACE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 112
+       },
+       "keywords": [
+        {
+         "name": "PILOTE",
+         "kind": "simple",
+         "path": "IMPRESSION/PILOTE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "",
+         "into": [
+          "",
+          "POSTSCRIPT",
+          "EPS",
+          "MIF",
+          "SVG",
+          "PNM",
+          "PNG",
+          "JPEG",
+          "PDF",
+          "INTERACTIF"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/macr_spectre.py",
+          "line": 114
+         }
+        }
+       ]
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "IMPRESSION/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 132
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_depl_rela",
+   "kind": "bloc",
+   "path": "[b_depl_rela]",
+   "condition": "equal_to(\"NOM_CHAM\", 'DEPL') and equal_to(\"CALCUL\", 'RELATIF')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 135
+   },
+   "keywords": [
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "RESU_GENE",
+        "RESULTAT",
+        "TABLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 138
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 142
+       }
+      },
+      {
+       "name": "RESU_GENE",
+       "kind": "simple",
+       "path": "RESU/RESU_GENE",
+       "status": "f",
+       "type": [
+        "tran_gene"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 143
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "dyna_trans",
+        "evol_noli"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 144
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_depl_abso",
+   "kind": "bloc",
+   "path": "[b_depl_abso]",
+   "condition": "equal_to(\"NOM_CHAM\", 'DEPL') and equal_to(\"CALCUL\", 'ABSOLU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_spectre.py",
+    "line": 147
+   },
+   "keywords": [
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "RESU_GENE",
+        "RESULTAT",
+        "TABLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_spectre.py",
+      "line": 150
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 154
+       }
+      },
+      {
+       "name": "RESU_GENE",
+       "kind": "simple",
+       "path": "RESU/RESU_GENE",
+       "status": "f",
+       "type": [
+        "tran_gene"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 155
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "dyna_trans",
+        "evol_noli"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 156
+       }
+      },
+      {
+       "name": "DEPL_X",
+       "kind": "simple",
+       "path": "RESU/DEPL_X",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 157
+       }
+      },
+      {
+       "name": "DEPL_Y",
+       "kind": "simple",
+       "path": "RESU/DEPL_Y",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 158
+       }
+      },
+      {
+       "name": "DEPL_Z",
+       "kind": "simple",
+       "path": "RESU/DEPL_Z",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_spectre.py",
+        "line": 159
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

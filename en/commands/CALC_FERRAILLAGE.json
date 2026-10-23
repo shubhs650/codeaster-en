@@ -1,0 +1,2325 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_FERRAILLAGE",
+ "kind": "OPER",
+ "fr": "calcul de cartes de densité de ferraillage ",
+ "translation_upstream": null,
+ "op": 175,
+ "reentrant": "o:RESULTAT",
+ "result_types": [
+  "evol_elas",
+  "evol_noli",
+  "dyna_trans",
+  "mult_elas"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+  "line": 31
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "dyna_trans",
+    "mult_elas"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "o",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "LIST_ORDRE",
+   "kind": "simple",
+   "path": "LIST_ORDRE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "b_acce_reel",
+   "kind": "bloc",
+   "path": "[b_acce_reel]",
+   "condition": "(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "b_prec_rela",
+     "kind": "bloc",
+     "path": "[b_prec_rela]",
+     "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+      "line": 55
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 57
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_prec_abso",
+     "kind": "bloc",
+     "path": "[b_prec_abso]",
+     "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+      "line": 59
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 60
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TYPE_COMB",
+   "kind": "simple",
+   "path": "TYPE_COMB",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ELU",
+    "ELS",
+    "ELS_QP"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "CODIFICATION",
+   "kind": "simple",
+   "path": "CODIFICATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EC2",
+   "into": [
+    "BAEL91",
+    "EC2"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "METHODE_2D",
+   "kind": "simple",
+   "path": "METHODE_2D",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "CAPRA-MAURY",
+   "into": [
+    "CAPRA-MAURY",
+    "SANDWICH"
+   ],
+   "fr": "Choix de l'algorithme de calcul 2D",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "PAS_THETA",
+   "kind": "simple",
+   "path": "PAS_THETA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 5,
+   "fr": "Angle d'itération en degrés pour la recherche de la configuration d'équilibre pour le calcul 2D - Pour CapraMaury, il s'agit de l'orientation des facettes ; pour Sandwich, il s'agit de l'inclinaison des bielles de compression",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "PAS_EPAI",
+   "kind": "simple",
+   "path": "PAS_EPAI",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.01,
+   "fr": "Pas d'itération en pourcentage de la hauteur de la section, pour la recherche de la configuration optimale",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "PAS_SIGM",
+   "kind": "simple",
+   "path": "PAS_SIGM",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.1,
+   "fr": "SANDWICH : Pas d'itération pour la recherche du ratio optimal des contraintes principales de compression dans le béton",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 93
+   }
+  },
+  {
+   "name": "COND_109",
+   "kind": "simple",
+   "path": "COND_109",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "SANDWICH : Prise en compte de la clause §6.109-Éléments de membrane de l’EN-1992-2 pour le calcul de la résistance des bielles de compression du béton",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 101
+   }
+  },
+  {
+   "name": "UNITE_CONTRAINTE",
+   "kind": "simple",
+   "path": "UNITE_CONTRAINTE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MPa",
+    "Pa"
+   ],
+   "fr": "Unité des contraintes du problème",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 110
+   }
+  },
+  {
+   "name": "b_BAEL91",
+   "kind": "bloc",
+   "path": "[b_BAEL91]",
+   "condition": " equal_to(\"CODIFICATION\", 'BAEL91')",
+   "fr": "utilisation du BAEL91",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 113
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+      "line": 117
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 121
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 122
+       }
+      },
+      {
+       "name": "TYPE_STRUCTURE",
+       "kind": "simple",
+       "path": "AFFE/TYPE_STRUCTURE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "1D",
+        "2D"
+       ],
+       "fr": "Type de Structure 1D ou 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "FERR_SYME",
+       "kind": "simple",
+       "path": "AFFE/FERR_SYME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Ferraillage symétrique?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "SEUIL_SYME",
+       "kind": "simple",
+       "path": "AFFE/SEUIL_SYME",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Seuil de tolérance pour le calcul d'un ferraillage symétrique",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "FERR_COMP",
+       "kind": "simple",
+       "path": "AFFE/FERR_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Ferraillage de compression possible?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 138
+       }
+      },
+      {
+       "name": "EPURE_CISA",
+       "kind": "simple",
+       "path": "AFFE/EPURE_CISA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Prise en compte de l'effort de traction supplémentaire du à l'effort tranchant et à la torsion?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 145
+       }
+      },
+      {
+       "name": "FERR_MIN",
+       "kind": "simple",
+       "path": "AFFE/FERR_MIN",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "VALE_MIN",
+        "BAEL91"
+       ],
+       "fr": "Prise en compte d'un ferraillage minimal?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 154
+       }
+      },
+      {
+       "name": "ferrmin_",
+       "kind": "bloc",
+       "path": "AFFE/[ferrmin_]",
+       "condition": " equal_to(\"FERR_MIN\", \"VALE_MIN\")",
+       "fr": "Ratio de ferraillage utilisateur",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 160
+       },
+       "keywords": [
+        {
+         "name": "RHO_LONGI_MIN",
+         "kind": "simple",
+         "path": "AFFE/RHO_LONGI_MIN",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ratio de ferraillage longitudinal minimal en %",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 163
+         }
+        },
+        {
+         "name": "RHO_TRNSV_MIN",
+         "kind": "simple",
+         "path": "AFFE/RHO_TRNSV_MIN",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ratio de ferraillage transversal minimal en %",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 166
+         }
+        }
+       ]
+      },
+      {
+       "name": "c_2D",
+       "kind": "bloc",
+       "path": "AFFE/[c_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des enrobages de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 170
+       },
+       "keywords": [
+        {
+         "name": "C_INF",
+         "kind": "simple",
+         "path": "AFFE/C_INF",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures pour la section 2D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 173
+         }
+        },
+        {
+         "name": "C_SUP",
+         "kind": "simple",
+         "path": "AFFE/C_SUP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures pour la section 2D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 178
+         }
+        }
+       ]
+      },
+      {
+       "name": "c_1D",
+       "kind": "bloc",
+       "path": "AFFE/[c_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des enrobages de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 184
+       },
+       "keywords": [
+        {
+         "name": "C_INF_Y",
+         "kind": "simple",
+         "path": "AFFE/C_INF_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures suivant l'axe Y de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 187
+         }
+        },
+        {
+         "name": "C_SUP_Y",
+         "kind": "simple",
+         "path": "AFFE/C_SUP_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures suivant l'axe Y de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 192
+         }
+        },
+        {
+         "name": "C_INF_Z",
+         "kind": "simple",
+         "path": "AFFE/C_INF_Z",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures suivant l'axe Z de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 197
+         }
+        },
+        {
+         "name": "C_SUP_Z",
+         "kind": "simple",
+         "path": "AFFE/C_SUP_Z",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures suivant l'axe Z de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 202
+         }
+        }
+       ]
+      },
+      {
+       "name": "N",
+       "kind": "simple",
+       "path": "AFFE/N",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient d'équivalence acier/béton (ELS,ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 208
+       }
+      },
+      {
+       "name": "FE",
+       "kind": "simple",
+       "path": "AFFE/FE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible dans l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 211
+       }
+      },
+      {
+       "name": "FCJ",
+       "kind": "simple",
+       "path": "AFFE/FCJ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible dans le béton",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 212
+       }
+      },
+      {
+       "name": "SIGS_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGS_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte ultime de dimensionnement des aciers à l'ELS",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 213
+       }
+      },
+      {
+       "name": "sigc_2D",
+       "kind": "bloc",
+       "path": "AFFE/[sigc_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des contraintes ultimes de dimensionnement du béton de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 218
+       },
+       "keywords": [
+        {
+         "name": "SIGC_INF_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure pour la section 2D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 223
+         }
+        },
+        {
+         "name": "SIGC_SUP_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure pour la section 2D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 230
+         }
+        }
+       ]
+      },
+      {
+       "name": "sigc_1D",
+       "kind": "bloc",
+       "path": "AFFE/[sigc_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des contraintes ultimes de dimensionnement du béton de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 238
+       },
+       "keywords": [
+        {
+         "name": "SIGC_INF_Y_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_Y_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure suivant l'axe Y de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 243
+         }
+        },
+        {
+         "name": "SIGC_SUP_Y_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_Y_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure suivant l'axe Y de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 250
+         }
+        },
+        {
+         "name": "SIGC_INF_Z_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_Z_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure suivant l'axe Z de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 257
+         }
+        },
+        {
+         "name": "SIGC_SUP_Z_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_Z_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure suivant l'axe Z de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 264
+         }
+        }
+       ]
+      },
+      {
+       "name": "wmax_2D",
+       "kind": "bloc",
+       "path": "AFFE/[wmax_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des ouvertures des fissures maximales de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 272
+       },
+       "keywords": [
+        {
+         "name": "WMAX_INF",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure de la section 2D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 275
+         }
+        },
+        {
+         "name": "WMAX_SUP",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure de la section 2D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 282
+         }
+        }
+       ]
+      },
+      {
+       "name": "wmax_1D",
+       "kind": "bloc",
+       "path": "AFFE/[wmax_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des ouvertures des fissures maximales de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 290
+       },
+       "keywords": [
+        {
+         "name": "WMAX_INF_Y",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF_Y",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure suivant l'axe Y de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 293
+         }
+        },
+        {
+         "name": "WMAX_SUP_Y",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP_Y",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure suivant l'axe Y de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 300
+         }
+        },
+        {
+         "name": "WMAX_INF_Z",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF_Z",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure suivant l'axe Z de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 307
+         }
+        },
+        {
+         "name": "WMAX_SUP_Z",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP_Z",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure suivant l'axe Z de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 314
+         }
+        }
+       ]
+      },
+      {
+       "name": "SIGC_ELS_QP",
+       "kind": "simple",
+       "path": "AFFE/SIGC_ELS_QP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte ultime de dimensionnement du béton (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 322
+       }
+      },
+      {
+       "name": "KT",
+       "kind": "simple",
+       "path": "AFFE/KT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de durée de chargement (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 325
+       }
+      },
+      {
+       "name": "PHI_INF_X",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe X (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 326
+       }
+      },
+      {
+       "name": "PHI_SUP_X",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe X (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 331
+       }
+      },
+      {
+       "name": "PHI_INF_Y",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe Y (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 336
+       }
+      },
+      {
+       "name": "PHI_SUP_Y",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe Y (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 341
+       }
+      },
+      {
+       "name": "PHI_INF_Z",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe Z (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 346
+       }
+      },
+      {
+       "name": "PHI_SUP_Z",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe Z (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 351
+       }
+      },
+      {
+       "name": "EYS",
+       "kind": "simple",
+       "path": "AFFE/EYS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Module d'Young de l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 356
+       }
+      },
+      {
+       "name": "TYPE_DIAGRAMME",
+       "kind": "simple",
+       "path": "AFFE/TYPE_DIAGRAMME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B2",
+       "into": [
+        "B1",
+        "B2"
+       ],
+       "fr": "Type du diagramme Contrainte-Deformation à utiliser: B1 (Incliné) ou B2 (Horizontal)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 357
+       }
+      },
+      {
+       "name": "RHO_ACIER",
+       "kind": "simple",
+       "path": "AFFE/RHO_ACIER",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": -1,
+       "fr": "Densité volumique des aciers",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 366
+       }
+      },
+      {
+       "name": "b_iconst",
+       "kind": "bloc",
+       "path": "AFFE/[b_iconst]",
+       "condition": " greater_than(\"RHO_ACIER\", 0)",
+       "fr": "Calcul du critère de difficulté de bétonnage si RHO_ACIER > 0",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 367
+       },
+       "keywords": [
+        {
+         "name": "ALPHA_REINF",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_REINF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de densité d'acier par mètre cube de béton",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 370
+         }
+        },
+        {
+         "name": "ALPHA_SHEAR",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_SHEAR",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de densité d'acier d'effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 378
+         }
+        },
+        {
+         "name": "ALPHA_STIRRUPS",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_STIRRUPS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de longueur des épingles d'acier effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 386
+         }
+        },
+        {
+         "name": "RHO_CRIT",
+         "kind": "simple",
+         "path": "AFFE/RHO_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 150,
+         "fr": "Densité volumique d'armature critique",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 394
+         }
+        },
+        {
+         "name": "DNSTRA_CRIT",
+         "kind": "simple",
+         "path": "AFFE/DNSTRA_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.006,
+         "fr": "Ferraillage d'effort tranchant critique",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 397
+         }
+        },
+        {
+         "name": "L_CRIT",
+         "kind": "simple",
+         "path": "AFFE/L_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Longueur critique des epingle d'aciers d'effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 403
+         }
+        }
+       ]
+      },
+      {
+       "name": "GAMMA_S",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul des aciers à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 410
+       }
+      },
+      {
+       "name": "GAMMA_C",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 415
+       }
+      },
+      {
+       "name": "ALPHA_CC",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_CC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.85,
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton en compression (ELU)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 420
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_EC2",
+   "kind": "bloc",
+   "path": "[b_EC2]",
+   "condition": " equal_to(\"CODIFICATION\", 'EC2')",
+   "fr": "utilisation de l'eurocode 2",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 430
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+      "line": 434
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 438
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 439
+       }
+      },
+      {
+       "name": "TYPE_STRUCTURE",
+       "kind": "simple",
+       "path": "AFFE/TYPE_STRUCTURE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "1D",
+        "2D"
+       ],
+       "fr": "Type de Structure 1D ou 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 440
+       }
+      },
+      {
+       "name": "FERR_SYME",
+       "kind": "simple",
+       "path": "AFFE/FERR_SYME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Ferraillage symétrique?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 443
+       }
+      },
+      {
+       "name": "SEUIL_SYME",
+       "kind": "simple",
+       "path": "AFFE/SEUIL_SYME",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Seuil de tolérance pour le calcul d'un ferraillage symétrique",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 450
+       }
+      },
+      {
+       "name": "FERR_COMP",
+       "kind": "simple",
+       "path": "AFFE/FERR_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Ferraillage de compression possible?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 455
+       }
+      },
+      {
+       "name": "EPURE_CISA",
+       "kind": "simple",
+       "path": "AFFE/EPURE_CISA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Prise en compte de l'effort de traction supplémentaire du à l'effort tranchant et à la torsion?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 462
+       }
+      },
+      {
+       "name": "FERR_MIN",
+       "kind": "simple",
+       "path": "AFFE/FERR_MIN",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "VALE_MIN",
+        "EC2"
+       ],
+       "fr": "Prise en compte d'un ferraillage minimal?",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 471
+       }
+      },
+      {
+       "name": "ferrmin_",
+       "kind": "bloc",
+       "path": "AFFE/[ferrmin_]",
+       "condition": " equal_to(\"FERR_MIN\", \"VALE_MIN\")",
+       "fr": "Ratio de ferraillage utilisateur",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 477
+       },
+       "keywords": [
+        {
+         "name": "RHO_LONGI_MIN",
+         "kind": "simple",
+         "path": "AFFE/RHO_LONGI_MIN",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ratio de ferraillage longitudinal minimal en %",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 480
+         }
+        },
+        {
+         "name": "RHO_TRNSV_MIN",
+         "kind": "simple",
+         "path": "AFFE/RHO_TRNSV_MIN",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ratio de ferraillage transversal minimal en %",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 483
+         }
+        }
+       ]
+      },
+      {
+       "name": "FERR_MIN_FISS",
+       "kind": "simple",
+       "path": "AFFE/FERR_MIN_FISS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "EC2",
+        "RCC-CW"
+       ],
+       "fr": "Prise en compte d'un ferraillage minimal pour la maîtrise de la fissuration",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 487
+       }
+      },
+      {
+       "name": "e_2D",
+       "kind": "bloc",
+       "path": "AFFE/[e_2D]",
+       "condition": " equal_to(\"FERR_MIN_FISS\", 'RCC-CW')",
+       "fr": "Application de l'effet d'échelle",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 495
+       },
+       "keywords": [
+        {
+         "name": "EFFET_ECHELLE",
+         "kind": "simple",
+         "path": "AFFE/EFFET_ECHELLE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "NON",
+          "OUI"
+         ],
+         "fr": "Prise en compte de l'effet d'échelle pour les structures épaisses",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 498
+         }
+        }
+       ]
+      },
+      {
+       "name": "c_2D",
+       "kind": "bloc",
+       "path": "AFFE/[c_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des enrobages de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 506
+       },
+       "keywords": [
+        {
+         "name": "C_INF",
+         "kind": "simple",
+         "path": "AFFE/C_INF",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures pour la section 2D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 509
+         }
+        },
+        {
+         "name": "C_SUP",
+         "kind": "simple",
+         "path": "AFFE/C_SUP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures pour la section 2D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 514
+         }
+        }
+       ]
+      },
+      {
+       "name": "c_1D",
+       "kind": "bloc",
+       "path": "AFFE/[c_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des enrobages de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 520
+       },
+       "keywords": [
+        {
+         "name": "C_INF_Y",
+         "kind": "simple",
+         "path": "AFFE/C_INF_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures suivant l'axe Y de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 523
+         }
+        },
+        {
+         "name": "C_SUP_Y",
+         "kind": "simple",
+         "path": "AFFE/C_SUP_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures suivant l'axe Y de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 528
+         }
+        },
+        {
+         "name": "C_INF_Z",
+         "kind": "simple",
+         "path": "AFFE/C_INF_Z",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures inférieures suivant l'axe Z de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 533
+         }
+        },
+        {
+         "name": "C_SUP_Z",
+         "kind": "simple",
+         "path": "AFFE/C_SUP_Z",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "Enrobage des armatures supérieures suivant l'axe Z de la section 1D",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 538
+         }
+        }
+       ]
+      },
+      {
+       "name": "ALPHA_E",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_E",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient d'équivalence acier/béton (ELS, ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 544
+       }
+      },
+      {
+       "name": "FYK",
+       "kind": "simple",
+       "path": "AFFE/FYK",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Limite d'élasticité caractéristique dans l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 547
+       }
+      },
+      {
+       "name": "FCK",
+       "kind": "simple",
+       "path": "AFFE/FCK",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Résistance caractéristique du béton en compression à 28 jours",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 550
+       }
+      },
+      {
+       "name": "SIGS_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGS_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte ultime de dimensionnement des aciers (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 555
+       }
+      },
+      {
+       "name": "sigc_2D",
+       "kind": "bloc",
+       "path": "AFFE/[sigc_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des contraintes ultimes de dimensionnement du béton de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 558
+       },
+       "keywords": [
+        {
+         "name": "SIGC_INF_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure pour la section 2D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 563
+         }
+        },
+        {
+         "name": "SIGC_SUP_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure pour la section 2D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 570
+         }
+        }
+       ]
+      },
+      {
+       "name": "sigc_1D",
+       "kind": "bloc",
+       "path": "AFFE/[sigc_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des contraintes ultimes de dimensionnement du béton de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 578
+       },
+       "keywords": [
+        {
+         "name": "SIGC_INF_Y_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_Y_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure suivant l'axe Y de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 583
+         }
+        },
+        {
+         "name": "SIGC_SUP_Y_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_Y_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure suivant l'axe Y de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 590
+         }
+        },
+        {
+         "name": "SIGC_INF_Z_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_INF_Z_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre inférieure suivant l'axe Z de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 597
+         }
+        },
+        {
+         "name": "SIGC_SUP_Z_ELS",
+         "kind": "simple",
+         "path": "AFFE/SIGC_SUP_Z_ELS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Contrainte ultime de dimensionnement du béton en fibre supérieure suivant l'axe Z de la section 1D (ELS)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 604
+         }
+        }
+       ]
+      },
+      {
+       "name": "wmax_2D",
+       "kind": "bloc",
+       "path": "AFFE/[wmax_2D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '2D')",
+       "fr": "définition des ouvertures des fissures maximales de la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 612
+       },
+       "keywords": [
+        {
+         "name": "WMAX_INF",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure de la section 2D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 615
+         }
+        },
+        {
+         "name": "WMAX_SUP",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure de la section 2D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 622
+         }
+        }
+       ]
+      },
+      {
+       "name": "wmax_1D",
+       "kind": "bloc",
+       "path": "AFFE/[wmax_1D]",
+       "condition": " equal_to(\"TYPE_STRUCTURE\", '1D')",
+       "fr": "définition des ouvertures des fissures maximales de la section 1D",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 630
+       },
+       "keywords": [
+        {
+         "name": "WMAX_INF_Y",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF_Y",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure suivant l'axe Y de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 633
+         }
+        },
+        {
+         "name": "WMAX_SUP_Y",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP_Y",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure suivant l'axe Y de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 640
+         }
+        },
+        {
+         "name": "WMAX_INF_Z",
+         "kind": "simple",
+         "path": "AFFE/WMAX_INF_Z",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face inférieure suivant l'axe Z de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 647
+         }
+        },
+        {
+         "name": "WMAX_SUP_Z",
+         "kind": "simple",
+         "path": "AFFE/WMAX_SUP_Z",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Ouverture maximale des fissures en face supérieure suivant l'axe Z de la section 1D (ELS_QP)",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 654
+         }
+        }
+       ]
+      },
+      {
+       "name": "SIGC_ELS_QP",
+       "kind": "simple",
+       "path": "AFFE/SIGC_ELS_QP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte ultime de dimensionnement du béton (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 662
+       }
+      },
+      {
+       "name": "KT",
+       "kind": "simple",
+       "path": "AFFE/KT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de durée de chargement (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 665
+       }
+      },
+      {
+       "name": "PHI_INF_X",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe X (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 666
+       }
+      },
+      {
+       "name": "PHI_SUP_X",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe X (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 671
+       }
+      },
+      {
+       "name": "PHI_INF_Y",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe Y (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 676
+       }
+      },
+      {
+       "name": "PHI_SUP_Y",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe Y (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 681
+       }
+      },
+      {
+       "name": "PHI_INF_Z",
+       "kind": "simple",
+       "path": "AFFE/PHI_INF_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures inférieures suivant l'axe Z (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 686
+       }
+      },
+      {
+       "name": "PHI_SUP_Z",
+       "kind": "simple",
+       "path": "AFFE/PHI_SUP_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Diamètre approximatif des armatures supérieures suivant l'axe Z (ELS_QP)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 691
+       }
+      },
+      {
+       "name": "UTIL_COMPR",
+       "kind": "simple",
+       "path": "AFFE/UTIL_COMPR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Prise en compte de la compression pour les aciers transversaux",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 696
+       }
+      },
+      {
+       "name": "CLASSE_ACIER",
+       "kind": "simple",
+       "path": "AFFE/CLASSE_ACIER",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B",
+       "into": [
+        "A",
+        "B",
+        "C"
+       ],
+       "fr": "Classe de ductilité des aciers",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 703
+       }
+      },
+      {
+       "name": "EYS",
+       "kind": "simple",
+       "path": "AFFE/EYS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Module d'Young de l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 710
+       }
+      },
+      {
+       "name": "TYPE_DIAGRAMME",
+       "kind": "simple",
+       "path": "AFFE/TYPE_DIAGRAMME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B2",
+       "into": [
+        "B1",
+        "B2"
+       ],
+       "fr": "Type du diagramme Contrainte-Deformation à utiliser: B1 (Incliné) ou B2 (Horizontal)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 711
+       }
+      },
+      {
+       "name": "RHO_ACIER",
+       "kind": "simple",
+       "path": "AFFE/RHO_ACIER",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": -1,
+       "fr": "Densité volumique des aciers",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 720
+       }
+      },
+      {
+       "name": "b_iconst",
+       "kind": "bloc",
+       "path": "AFFE/[b_iconst]",
+       "condition": " greater_than(\"RHO_ACIER\", 0)",
+       "fr": "Calcul du critère de difficulté de bétonnage si RHO_ACIER > 0",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 721
+       },
+       "keywords": [
+        {
+         "name": "ALPHA_REINF",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_REINF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de densité d'acier par mètre cube de béton",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 724
+         }
+        },
+        {
+         "name": "ALPHA_SHEAR",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_SHEAR",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de densité d'acier d'effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 732
+         }
+        },
+        {
+         "name": "ALPHA_STIRRUPS",
+         "kind": "simple",
+         "path": "AFFE/ALPHA_STIRRUPS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Coefficient de pondération du ratio de longueur des épingles d'acier effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 740
+         }
+        },
+        {
+         "name": "RHO_CRIT",
+         "kind": "simple",
+         "path": "AFFE/RHO_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 150,
+         "fr": "Densité volumique d'armature critique",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 748
+         }
+        },
+        {
+         "name": "DNSTRA_CRIT",
+         "kind": "simple",
+         "path": "AFFE/DNSTRA_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.006,
+         "fr": "Ferraillage d'effort tranchant critique",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 751
+         }
+        },
+        {
+         "name": "L_CRIT",
+         "kind": "simple",
+         "path": "AFFE/L_CRIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1,
+         "fr": "Longueur critique des epingle d'aciers d'effort tranchant",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+          "line": 757
+         }
+        }
+       ]
+      },
+      {
+       "name": "GAMMA_S",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul des aciers à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 764
+       }
+      },
+      {
+       "name": "GAMMA_C",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 769
+       }
+      },
+      {
+       "name": "ALPHA_CC",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_CC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.85,
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton en compression (ELU)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+        "line": 774
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_ferraillage.py",
+    "line": 784
+   }
+  }
+ ]
+}

@@ -1,0 +1,410 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_ELEM_STAT",
+ "kind": "OPER",
+ "fr": "Définition d'un macro-élément pour l'analyse statique par sous-structuration",
+ "translation_upstream": null,
+ "op": 86,
+ "reentrant": "f:MACR_ELEM",
+ "result_types": [
+  "macr_elem_stat"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "DEFINITION",
+    "RIGI_MECA",
+    "MASS_MECA",
+    "CAS_CHARGE"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "DEFINITION",
+    "EXTERIEUR"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "MACR_ELEM",
+   "kind": "simple",
+   "path": "MACR_ELEM",
+   "status": "f",
+   "type": [
+    "macr_elem_stat"
+   ],
+   "fr": "Résultat utilisé en cas de réécriture",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "DEFINITION",
+   "kind": "factor",
+   "path": "DEFINITION",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "PROJ_MESU",
+      "MODE_MESURE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "DEFINITION/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "DEFINITION/CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "DEFINITION/CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "CHAR_MACR_ELEM",
+     "kind": "simple",
+     "path": "DEFINITION/CHAR_MACR_ELEM",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "DEFINITION/INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "NMAX_CAS",
+     "kind": "simple",
+     "path": "DEFINITION/NMAX_CAS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "NMAX_CHAR",
+     "kind": "simple",
+     "path": "DEFINITION/NMAX_CHAR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "PROJ_MESU",
+     "kind": "simple",
+     "path": "DEFINITION/PROJ_MESU",
+     "status": "f",
+     "type": [
+      "mode_gene",
+      "tran_gene",
+      "harm_gene"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "MODE_MESURE",
+     "kind": "simple",
+     "path": "DEFINITION/MODE_MESURE",
+     "status": "f",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "EXTERIEUR",
+   "kind": "factor",
+   "path": "EXTERIEUR",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "EXTERIEUR/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "EXTERIEUR/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 56
+     }
+    }
+   ]
+  },
+  {
+   "name": "RIGI_MECA",
+   "kind": "factor",
+   "path": "RIGI_MECA",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 58
+   },
+   "keywords": []
+  },
+  {
+   "name": "MASS_MECA",
+   "kind": "factor",
+   "path": "MASS_MECA",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 59
+   },
+   "keywords": []
+  },
+  {
+   "name": "AMOR_MECA",
+   "kind": "factor",
+   "path": "AMOR_MECA",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 60
+   },
+   "keywords": []
+  },
+  {
+   "name": "CAS_CHARGE",
+   "kind": "factor",
+   "path": "CAS_CHARGE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "NOM_CAS",
+     "kind": "simple",
+     "path": "CAS_CHARGE/NOM_CAS",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "SUIV",
+     "kind": "simple",
+     "path": "CAS_CHARGE/SUIV",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CAS_CHARGE/CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "CAS_CHARGE/INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_elem_stat.py",
+      "line": 67
+     }
+    }
+   ]
+  }
+ ]
+}

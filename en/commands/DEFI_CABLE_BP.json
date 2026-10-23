@@ -1,0 +1,688 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_CABLE_BP",
+ "kind": "MACRO",
+ "fr": "Calculer les profils initiaux de tension le long des cables de précontrainte d'une structure en béton",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_cable_bp_ops.defi_cable_bp_ops",
+ "reentrant": "n",
+ "result_types": [
+  "cabl_precont"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "o",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "o",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "GROUP_MA_BETON",
+   "kind": "simple",
+   "path": "GROUP_MA_BETON",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "TYPE_ANCRAGE",
+   "kind": "simple",
+   "path": "TYPE_ANCRAGE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "min": 2,
+   "max": 2,
+   "into": [
+    "ACTIF",
+    "PASSIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "ADHERENT",
+   "kind": "simple",
+   "path": "ADHERENT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "b_donnees_tension",
+   "kind": "bloc",
+   "path": "[b_donnees_tension]",
+   "condition": "not exists(\"MODI_CABLE_RUPT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "TENSION_INIT",
+     "kind": "simple",
+     "path": "TENSION_INIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "RECUL_ANCRAGE",
+     "kind": "simple",
+     "path": "RECUL_ANCRAGE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_adherent",
+   "kind": "bloc",
+   "path": "[b_adherent]",
+   "condition": "(equal_to(\"ADHERENT\", 'OUI'))",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "DEFI_CABLE",
+      "MODI_CABLE_ETCC",
+      "MODI_CABLE_RUPT"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "R_J",
+      "NBH_RELAX"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "DEFI_CABLE",
+     "kind": "factor",
+     "path": "DEFI_CABLE",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "TABL_CABLE",
+        "GROUP_MA",
+        "GROUP_NO_ANCRAGE"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "GROUP_NO_ANCRAGE",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 53
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "DEFI_CABLE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 60
+       }
+      },
+      {
+       "name": "GROUP_NO_ANCRAGE",
+       "kind": "simple",
+       "path": "DEFI_CABLE/GROUP_NO_ANCRAGE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "min": 2,
+       "max": 2,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 61
+       }
+      },
+      {
+       "name": "TABL_CABLE",
+       "kind": "simple",
+       "path": "DEFI_CABLE/TABL_CABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 62
+       }
+      }
+     ]
+    },
+    {
+     "name": "MODI_CABLE_RUPT",
+     "kind": "factor",
+     "path": "MODI_CABLE_RUPT",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 64
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "MODI_CABLE_RUPT/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 67
+       }
+      },
+      {
+       "name": "GROUP_NO_ANCRAGE",
+       "kind": "simple",
+       "path": "MODI_CABLE_RUPT/GROUP_NO_ANCRAGE",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "min": 2,
+       "max": 2,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 68
+       }
+      },
+      {
+       "name": "TENSION",
+       "kind": "simple",
+       "path": "MODI_CABLE_RUPT/TENSION",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 69
+       }
+      }
+     ]
+    },
+    {
+     "name": "TYPE_RELAX",
+     "kind": "simple",
+     "path": "TYPE_RELAX",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SANS",
+     "into": [
+      "SANS",
+      "BPEL",
+      "ETCC_DIRECT",
+      "ETCC_REPRISE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "b_relax_bpel",
+     "kind": "bloc",
+     "path": "[b_relax_bpel]",
+     "condition": "equal_to(\"TYPE_RELAX\", 'BPEL')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 77
+     },
+     "keywords": [
+      {
+       "name": "R_J",
+       "kind": "simple",
+       "path": "R_J",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 79
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_relax_etcc1",
+     "kind": "bloc",
+     "path": "[b_relax_etcc1]",
+     "condition": "equal_to(\"TYPE_RELAX\", 'ETCC_DIRECT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 81
+     },
+     "keywords": [
+      {
+       "name": "NBH_RELAX",
+       "kind": "simple",
+       "path": "NBH_RELAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 83
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_relax_etcc2",
+     "kind": "bloc",
+     "path": "[b_relax_etcc2]",
+     "condition": "equal_to(\"TYPE_RELAX\", 'ETCC_REPRISE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 85
+     },
+     "keywords": [
+      {
+       "name": "MODI_CABLE_ETCC",
+       "kind": "factor",
+       "path": "MODI_CABLE_ETCC",
+       "status": "f",
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 87
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "MODI_CABLE_ETCC/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+          "line": 90
+         }
+        },
+        {
+         "name": "GROUP_NO_ANCRAGE",
+         "kind": "simple",
+         "path": "MODI_CABLE_ETCC/GROUP_NO_ANCRAGE",
+         "status": "o",
+         "type": [
+          "grno"
+         ],
+         "min": 2,
+         "max": 2,
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+          "line": 91
+         }
+        },
+        {
+         "name": "TENSION",
+         "kind": "simple",
+         "path": "MODI_CABLE_ETCC/TENSION",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+          "line": 92
+         }
+        }
+       ]
+      },
+      {
+       "name": "NBH_RELAX",
+       "kind": "simple",
+       "path": "NBH_RELAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 94
+       }
+      }
+     ]
+    },
+    {
+     "name": "CONE",
+     "kind": "factor",
+     "path": "CONE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CONE/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 103
+       }
+      },
+      {
+       "name": "LONGUEUR",
+       "kind": "simple",
+       "path": "CONE/LONGUEUR",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "PRESENT",
+       "kind": "simple",
+       "path": "CONE/PRESENT",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 2,
+       "max": 2,
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 105
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_non_adherent",
+   "kind": "bloc",
+   "path": "[b_non_adherent]",
+   "condition": "(equal_to(\"ADHERENT\", 'NON'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 108
+   },
+   "keywords": [
+    {
+     "name": "DEFI_CABLE",
+     "kind": "factor",
+     "path": "DEFI_CABLE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 110
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "DEFI_CABLE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "GROUP_NO_ANCRAGE",
+       "kind": "simple",
+       "path": "DEFI_CABLE/GROUP_NO_ANCRAGE",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "min": 2,
+       "max": 2,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+        "line": 114
+       }
+      }
+     ]
+    },
+    {
+     "name": "TYPE_RELAX",
+     "kind": "simple",
+     "path": "TYPE_RELAX",
+     "status": "c",
+     "type": [
+      "TXM"
+     ],
+     "default": "SANS",
+     "into": [
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+      "line": 116
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 118
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_cable_bp.py",
+    "line": 119
+   }
+  }
+ ]
+}

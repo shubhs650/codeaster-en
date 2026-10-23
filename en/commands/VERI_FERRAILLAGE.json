@@ -1,0 +1,966 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "VERI_FERRAILLAGE",
+ "kind": "OPER",
+ "fr": "vérification d'un ferraillage existant",
+ "translation_upstream": null,
+ "op": 190,
+ "reentrant": "o:RESULTAT",
+ "result_types": [
+  "evol_elas",
+  "evol_noli",
+  "dyna_trans",
+  "mult_elas"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+  "line": 34
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "dyna_trans",
+    "mult_elas"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "o",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "b_resultat",
+   "kind": "bloc",
+   "path": "[b_resultat]",
+   "condition": "exists('RESULTAT')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TOUT_ORDRE",
+      "NUME_ORDRE",
+      "LIST_ORDRE",
+      "INST",
+      "LIST_INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 72
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 75
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+          "line": 77
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 79
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+          "line": 80
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CHAM_FERR",
+   "kind": "simple",
+   "path": "CHAM_FERR",
+   "status": "o",
+   "type": [
+    "cham_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 90
+   }
+  },
+  {
+   "name": "CHAM_REFE",
+   "kind": "simple",
+   "path": "CHAM_REFE",
+   "status": "f",
+   "type": [
+    "cham_elem",
+    "carte_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 91
+   }
+  },
+  {
+   "name": "TYPE_COMB",
+   "kind": "simple",
+   "path": "TYPE_COMB",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ELU",
+    "ELS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 92
+   }
+  },
+  {
+   "name": "CODIFICATION",
+   "kind": "simple",
+   "path": "CODIFICATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EC2",
+   "into": [
+    "BAEL91",
+    "EC2"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 93
+   }
+  },
+  {
+   "name": "PAS_THETA",
+   "kind": "simple",
+   "path": "PAS_THETA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "val_max": 10.0,
+   "default": 5.0,
+   "fr": "Angle d'itération en degrés pour l'orientation des facettes de la méthode Capra-Maury",
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 94
+   }
+  },
+  {
+   "name": "UNITE_CONTRAINTE",
+   "kind": "simple",
+   "path": "UNITE_CONTRAINTE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MPa",
+    "Pa"
+   ],
+   "fr": "Unité des contraintes du problème",
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 104
+   }
+  },
+  {
+   "name": "b_BAEL91",
+   "kind": "bloc",
+   "path": "[b_BAEL91]",
+   "condition": " equal_to(\"CODIFICATION\", 'BAEL91')",
+   "fr": "utilisation du BAEL91",
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 107
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ],
+       "defaults": {
+        "TOUT": "OUI"
+       }
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 111
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 115
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 116
+       }
+      },
+      {
+       "name": "TYPE_STRUCTURE",
+       "kind": "simple",
+       "path": "AFFE/TYPE_STRUCTURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "2D",
+       "into": [
+        "2D"
+       ],
+       "fr": "Type de Structure 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "C_INF",
+       "kind": "simple",
+       "path": "AFFE/C_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Enrobage des armatures inférieures pour la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 120
+       }
+      },
+      {
+       "name": "C_SUP",
+       "kind": "simple",
+       "path": "AFFE/C_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Enrobage des armatures supérieures pour la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "N",
+       "kind": "simple",
+       "path": "AFFE/N",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient d'équivalence acier/béton (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "FE",
+       "kind": "simple",
+       "path": "AFFE/FE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "La limite d'élasticité de l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 127
+       }
+      },
+      {
+       "name": "FCJ",
+       "kind": "simple",
+       "path": "AFFE/FCJ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "La résistance caractéristique du béton à la compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 128
+       }
+      },
+      {
+       "name": "SIGS_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGS_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible dans l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "SIGC_INF_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGC_INF_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible du béton en fibre inférieure pour la section 2D (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 134
+       }
+      },
+      {
+       "name": "SIGC_SUP_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGC_SUP_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible du béton en fibre supérieure pour la section 2D (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "EYS",
+       "kind": "simple",
+       "path": "AFFE/EYS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Module d'Young de l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "TYPE_DIAGRAMME",
+       "kind": "simple",
+       "path": "AFFE/TYPE_DIAGRAMME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B2",
+       "into": [
+        "B1",
+        "B2"
+       ],
+       "fr": "Type du diagramme Contrainte-Deformation à utiliser: B1 (Incliné) ou B2 (Horizontal)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 149
+       }
+      },
+      {
+       "name": "GAMMA_S",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul des aciers à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 158
+       }
+      },
+      {
+       "name": "GAMMA_C",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 163
+       }
+      },
+      {
+       "name": "ALPHA_CC",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_CC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.85,
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton en compression (ELU)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 168
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_EC2",
+   "kind": "bloc",
+   "path": "[b_EC2]",
+   "condition": " equal_to(\"CODIFICATION\", 'EC2')",
+   "fr": "utilisation de l'eurocode 2",
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 178
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+      "line": 182
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 186
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 187
+       }
+      },
+      {
+       "name": "TYPE_STRUCTURE",
+       "kind": "simple",
+       "path": "AFFE/TYPE_STRUCTURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "2D",
+       "into": [
+        "2D"
+       ],
+       "fr": "Type de Structure 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 188
+       }
+      },
+      {
+       "name": "C_INF",
+       "kind": "simple",
+       "path": "AFFE/C_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Enrobage des armatures inférieures pour la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 191
+       }
+      },
+      {
+       "name": "C_SUP",
+       "kind": "simple",
+       "path": "AFFE/C_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Enrobage des armatures supérieures pour la section 2D",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 194
+       }
+      },
+      {
+       "name": "ALPHA_E",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_E",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient d'équivalence acier/béton (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 197
+       }
+      },
+      {
+       "name": "FYK",
+       "kind": "simple",
+       "path": "AFFE/FYK",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Limite d'élasticité caractéristique dans l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 198
+       }
+      },
+      {
+       "name": "FCK",
+       "kind": "simple",
+       "path": "AFFE/FCK",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Résistance caractéristique du béton en compression à 28 jours",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 201
+       }
+      },
+      {
+       "name": "SIGS_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGS_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible de l'acier (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 206
+       }
+      },
+      {
+       "name": "SIGC_INF_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGC_INF_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible du béton en fibre inférieure pour la section 2D (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "SIGC_SUP_ELS",
+       "kind": "simple",
+       "path": "AFFE/SIGC_SUP_ELS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Contrainte admissible du béton en fibre supérieure pour la section 2D (ELS)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 214
+       }
+      },
+      {
+       "name": "CLASSE_ACIER",
+       "kind": "simple",
+       "path": "AFFE/CLASSE_ACIER",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B",
+       "into": [
+        "A",
+        "B",
+        "C"
+       ],
+       "fr": "Classe de ductilité des aciers",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 221
+       }
+      },
+      {
+       "name": "EYS",
+       "kind": "simple",
+       "path": "AFFE/EYS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Module d'Young de l'acier",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 228
+       }
+      },
+      {
+       "name": "TYPE_DIAGRAMME",
+       "kind": "simple",
+       "path": "AFFE/TYPE_DIAGRAMME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "B2",
+       "into": [
+        "B1",
+        "B2"
+       ],
+       "fr": "Type du diagramme Contrainte-Deformation à utiliser: B1 (Incliné) ou B2 (Horizontal)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 229
+       }
+      },
+      {
+       "name": "GAMMA_S",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul des aciers à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 238
+       }
+      },
+      {
+       "name": "GAMMA_C",
+       "kind": "simple",
+       "path": "AFFE/GAMMA_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton à l'ELU",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 243
+       }
+      },
+      {
+       "name": "ALPHA_CC",
+       "kind": "simple",
+       "path": "AFFE/ALPHA_CC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.85,
+       "fr": "Coefficient de sécurité sur la résistance de calcul du béton en compression (ELU)",
+       "source": {
+        "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+        "line": 248
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/veri_ferraillage.py",
+    "line": 258
+   }
+  }
+ ]
+}

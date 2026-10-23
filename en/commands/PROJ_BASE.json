@@ -1,0 +1,337 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/proj_base.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "PROJ_BASE",
+ "kind": "MACRO",
+ "fr": "Projection des matrices et/ou vecteurs assembles sur une base (modale ou de RITZ)",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.proj_base_ops.proj_base_ops",
+ "reentrant": null,
+ "result_types": [
+  "nume_ddl_gene",
+  "matr_asse_gene_r",
+  "matr_asse_gene_c",
+  "vect_asse_gene",
+  "tran_gene"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "MATR_ASSE_GENE",
+    "VECT_ASSE_GENE",
+    "RESU_GENE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/proj_base.py",
+  "line": 62
+ },
+ "keywords": [
+  {
+   "name": "BASE",
+   "kind": "simple",
+   "path": "BASE",
+   "status": "o",
+   "type": [
+    "mode_meca",
+    "mode_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "NB_VECT",
+   "kind": "simple",
+   "path": "NB_VECT",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "STOCKAGE",
+   "kind": "simple",
+   "path": "STOCKAGE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "PLEIN",
+   "into": [
+    "PLEIN",
+    "DIAG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "NUME_DDL_GENE",
+   "kind": "simple",
+   "path": "NUME_DDL_GENE",
+   "status": "f",
+   "type": [
+    "nume_ddl_gene",
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "MATR_ASSE_GENE",
+   "kind": "factor",
+   "path": "MATR_ASSE_GENE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MATR_ASSE",
+      "MATR_ASSE_GENE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 72
+   },
+   "keywords": [
+    {
+     "name": "MATRICE",
+     "kind": "simple",
+     "path": "MATR_ASSE_GENE/MATRICE",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "MATR_ASSE",
+     "kind": "simple",
+     "path": "MATR_ASSE_GENE/MATR_ASSE",
+     "status": "f",
+     "type": [
+      "matr_asse_depl_r",
+      "matr_asse_depl_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "MATR_ASSE_GENE",
+     "kind": "simple",
+     "path": "MATR_ASSE_GENE/MATR_ASSE_GENE",
+     "status": "f",
+     "type": [
+      "matr_asse_gene_r",
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "VECT_ASSE_GENE",
+   "kind": "factor",
+   "path": "VECT_ASSE_GENE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VECT_ASSE",
+      "VECT_ASSE_GENE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "VECTEUR",
+     "kind": "simple",
+     "path": "VECT_ASSE_GENE/VECTEUR",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "TYPE_VECT",
+     "kind": "simple",
+     "path": "VECT_ASSE_GENE/TYPE_VECT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FORC",
+      "DEPL",
+      "VITE",
+      "ACCE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "VECT_ASSE",
+     "kind": "simple",
+     "path": "VECT_ASSE_GENE/VECT_ASSE",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "VECT_ASSE_GENE",
+     "kind": "simple",
+     "path": "VECT_ASSE_GENE/VECT_ASSE_GENE",
+     "status": "f",
+     "type": [
+      "vect_asse_gene"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 87
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESU_GENE",
+   "kind": "factor",
+   "path": "RESU_GENE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 89
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESU_GENE/RESULTAT",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "TYPE_VECT",
+     "kind": "simple",
+     "path": "RESU_GENE/TYPE_VECT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FORC",
+      "DEPL",
+      "VITE",
+      "ACCE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "RESU",
+     "kind": "simple",
+     "path": "RESU_GENE/RESU",
+     "status": "o",
+     "type": [
+      "dyna_trans"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_base.py",
+      "line": 94
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_base.py",
+    "line": 96
+   }
+  }
+ ]
+}

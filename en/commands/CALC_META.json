@@ -1,0 +1,610 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_meta.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_META",
+ "kind": "OPER",
+ "fr": "Calcule l'évolution métallurgique à partir du résultat d'un calcul thermique",
+ "translation_upstream": null,
+ "op": 194,
+ "reentrant": "o:RESULTAT",
+ "result_types": [
+  "evol_ther"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "TOUT",
+    "GROUP_MA"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_meta.py",
+  "line": 25
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_ther"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "into": [
+    "DURT_ELNO",
+    "DURT_NOEU",
+    "META_ELNO",
+    "META_NOEU"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": "le calcul ne sera effectué que sur ces mailles là",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "b_meta",
+   "kind": "bloc",
+   "path": "[b_meta]",
+   "condition": "is_in('OPTION', ('META_ELNO','META_NOEU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_meta.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "ETAT_INIT",
+     "kind": "factor",
+     "path": "ETAT_INIT",
+     "status": "o",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "EVOL_THER",
+        "META_INIT_ELNO"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_meta.py",
+      "line": 53
+     },
+     "keywords": [
+      {
+       "name": "EVOL_THER",
+       "kind": "simple",
+       "path": "ETAT_INIT/EVOL_THER",
+       "status": "f",
+       "type": [
+        "evol_ther"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "META_INIT_ELNO",
+       "kind": "simple",
+       "path": "ETAT_INIT/META_INIT_ELNO",
+       "status": "f",
+       "type": [
+        "carte_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "b_etat",
+       "kind": "bloc",
+       "path": "ETAT_INIT/[b_etat]",
+       "condition": "exists(\"EVOL_THER\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "NUME_INIT",
+          "INST_INIT"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 58
+       },
+       "keywords": [
+        {
+         "name": "NUME_INIT",
+         "kind": "simple",
+         "path": "ETAT_INIT/NUME_INIT",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 61
+         }
+        },
+        {
+         "name": "INST_INIT",
+         "kind": "simple",
+         "path": "ETAT_INIT/INST_INIT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 62
+         }
+        },
+        {
+         "name": "b_inst",
+         "kind": "bloc",
+         "path": "ETAT_INIT/[b_inst]",
+         "condition": "exists(\"INST_INIT\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 63
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "ETAT_INIT/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_meta.py",
+            "line": 65
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "ETAT_INIT/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_meta.py",
+            "line": 68
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "ETAT_INIT/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/calc_meta.py",
+              "line": 70
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "ETAT_INIT/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_meta.py",
+            "line": 72
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "ETAT_INIT/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/calc_meta.py",
+              "line": 74
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "COMPORTEMENT",
+     "kind": "factor",
+     "path": "COMPORTEMENT",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_meta.py",
+      "line": 79
+     },
+     "keywords": [
+      {
+       "name": "RELATION",
+       "kind": "simple",
+       "path": "COMPORTEMENT/RELATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ACIER",
+        "ZIRC",
+        "ACIER_REVENU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 82
+       }
+      },
+      {
+       "name": "b_acier",
+       "kind": "bloc",
+       "path": "COMPORTEMENT/[b_acier]",
+       "condition": "equal_to(\"RELATION\", 'ACIER')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 83
+       },
+       "keywords": [
+        {
+         "name": "LOI_META",
+         "kind": "simple",
+         "path": "COMPORTEMENT/LOI_META",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "WAECKEL",
+         "into": [
+          "WAECKEL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 85
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_zirc",
+       "kind": "bloc",
+       "path": "COMPORTEMENT/[b_zirc]",
+       "condition": "equal_to(\"RELATION\", 'ZIRC')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 87
+       },
+       "keywords": [
+        {
+         "name": "LOI_META",
+         "kind": "simple",
+         "path": "COMPORTEMENT/LOI_META",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "EDGAR",
+         "into": [
+          "EDGAR"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 89
+         }
+        }
+       ]
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "COMPORTEMENT/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "COMPORTEMENT/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 93
+       }
+      }
+     ]
+    },
+    {
+     "name": "REVENU",
+     "kind": "factor",
+     "path": "REVENU",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_meta.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "RELATION",
+       "kind": "simple",
+       "path": "REVENU/RELATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ACIER_REVENU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 98
+       }
+      },
+      {
+       "name": "b_acier_revenu",
+       "kind": "bloc",
+       "path": "REVENU/[b_acier_revenu]",
+       "condition": "equal_to(\"RELATION\", 'ACIER_REVENU')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 99
+       },
+       "keywords": [
+        {
+         "name": "LOI_META",
+         "kind": "simple",
+         "path": "REVENU/LOI_META",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "JMA",
+         "into": [
+          "JMA"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_meta.py",
+          "line": 101
+         }
+        }
+       ]
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "REVENU/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "REVENU/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_meta.py",
+        "line": 105
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

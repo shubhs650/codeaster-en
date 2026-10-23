@@ -1,0 +1,206 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "GENE_FONC_ALEA",
+ "kind": "OPER",
+ "fr": "Génération de la fonction temporelle à partir d une matrice interspectrale",
+ "translation_upstream": null,
+ "op": 118,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "INTE_SPEC",
+   "kind": "simple",
+   "path": "INTE_SPEC",
+   "status": "o",
+   "type": [
+    "interspectre"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "NUME_VITE_FLUI",
+   "kind": "simple",
+   "path": "NUME_VITE_FLUI",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "NON",
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "b_interpol_oui",
+   "kind": "bloc",
+   "path": "[b_interpol_oui]",
+   "condition": "equal_to(\"INTERPOL\", 'OUI') ",
+   "fr": "Parametres cas interpolation autorisee",
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "DUREE_TIRAGE",
+     "kind": "simple",
+     "path": "DUREE_TIRAGE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "FREQ_INIT",
+     "kind": "simple",
+     "path": "FREQ_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "FREQ_FIN",
+     "kind": "simple",
+     "path": "FREQ_FIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+      "line": 40
+     }
+    }
+   ]
+  },
+  {
+   "name": "NB_POIN",
+   "kind": "simple",
+   "path": "NB_POIN",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "NB_TIRAGE",
+   "kind": "simple",
+   "path": "NB_TIRAGE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "INIT_ALEA",
+   "kind": "simple",
+   "path": "INIT_ALEA",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/gene_fonc_alea.py",
+    "line": 46
+   }
+  }
+ ]
+}

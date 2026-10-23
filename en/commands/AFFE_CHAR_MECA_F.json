@@ -1,0 +1,5606 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_CHAR_MECA_F",
+ "kind": "OPER",
+ "fr": "Affectation de charges et conditions aux limites mécaniques fonction d'un (ou plusieurs) paramètres",
+ "translation_upstream": null,
+ "op": 7,
+ "reentrant": "n",
+ "result_types": [
+  "char_meca"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": true,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "DDL_IMPO",
+    "FACE_IMPO",
+    "LIAISON_DDL",
+    "FORCE_NODALE",
+    "FORCE_FACE",
+    "FORCE_ARETE",
+    "FORCE_CONTOUR",
+    "FORCE_INTERNE",
+    "PRES_REP",
+    "FORCE_POUTRE",
+    "VITE_FACE",
+    "ONDE_PLANE",
+    "LIAISON_OBLIQUE",
+    "PRE_EPSI",
+    "LIAISON_GROUP",
+    "LIAISON_UNIF",
+    "FORCE_COQUE",
+    "LIAISON_COQUE",
+    "FORCE_TUYAU",
+    "EFFE_FOND",
+    "FLUX_THM_REP",
+    "ECHANGE_THM",
+    "ECHANGE_THM_HR"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+  "line": 28
+ },
+ "keywords": [
+  {
+   "name": "VERI_NORM",
+   "kind": "simple",
+   "path": "VERI_NORM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "DOUBLE_LAGRANGE",
+   "kind": "simple",
+   "path": "DOUBLE_LAGRANGE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "DDL_IMPO",
+   "kind": "factor",
+   "path": "DDL_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": "Impose à des noeuds une ou plusieurs valeurs de déplacement (ou de certaines grandeurs asscociées) fournies par l'intermédiaire d'un concept fonction ",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "DRGX",
+      "DRGY",
+      "DRGZ",
+      "GRX",
+      "PRES",
+      "PHI",
+      "PSI",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "GONF",
+      "BLOCAGE",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "LAGS_C",
+      "GLIS"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "DDL_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "DDL_IMPO/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "DDL_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "DDL_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "DDL_IMPO/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "DDL_IMPO/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "BLOCAGE",
+     "kind": "simple",
+     "path": "DDL_IMPO/BLOCAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": 2,
+     "into": [
+      "DEPLACEMENT",
+      "ROTATION"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "DDL_IMPO/DX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "DDL_IMPO/DY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "DDL_IMPO/DZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "DRX",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 123
+     }
+    },
+    {
+     "name": "DRY",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "DRZ",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 125
+     }
+    },
+    {
+     "name": "DRGX",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRGX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "DRGY",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRGY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "DRGZ",
+     "kind": "simple",
+     "path": "DDL_IMPO/DRGZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "GRX",
+     "kind": "simple",
+     "path": "DDL_IMPO/GRX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "DDL_IMPO/PRES",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "PHI",
+     "kind": "simple",
+     "path": "DDL_IMPO/PHI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 131
+     }
+    },
+    {
+     "name": "PSI",
+     "kind": "simple",
+     "path": "DDL_IMPO/PSI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 132
+     }
+    },
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "DDL_IMPO/TEMP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 133
+     }
+    },
+    {
+     "name": "PRE1",
+     "kind": "simple",
+     "path": "DDL_IMPO/PRE1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 134
+     }
+    },
+    {
+     "name": "PRE2",
+     "kind": "simple",
+     "path": "DDL_IMPO/PRE2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "GONF",
+     "kind": "simple",
+     "path": "DDL_IMPO/GONF",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "H1X",
+     "kind": "simple",
+     "path": "DDL_IMPO/H1X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "H1Y",
+     "kind": "simple",
+     "path": "DDL_IMPO/H1Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "H1Z",
+     "kind": "simple",
+     "path": "DDL_IMPO/H1Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 139
+     }
+    },
+    {
+     "name": "H1PRE1",
+     "kind": "simple",
+     "path": "DDL_IMPO/H1PRE1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 140
+     }
+    },
+    {
+     "name": "K1",
+     "kind": "simple",
+     "path": "DDL_IMPO/K1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "K2",
+     "kind": "simple",
+     "path": "DDL_IMPO/K2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "K3",
+     "kind": "simple",
+     "path": "DDL_IMPO/K3",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "LAGS_C",
+     "kind": "simple",
+     "path": "DDL_IMPO/LAGS_C",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "GLIS",
+     "kind": "simple",
+     "path": "DDL_IMPO/GLIS",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 145
+     }
+    }
+   ]
+  },
+  {
+   "name": "FACE_IMPO",
+   "kind": "factor",
+   "path": "FACE_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": "Impose à tous les noeuds d'une face une ou plusieurs valeurs de déplacement (ou de certaines grandeurs associées) fournies par l'intérmédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "GRX",
+      "PRES",
+      "PHI",
+      "PSI",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "DNOR",
+      "DRNOR",
+      "DTAN"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DX"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DY"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DZ"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DRX"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DRY"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DNOR",
+      "DRZ"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DX"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DY"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DZ"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DRX"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DRY"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DTAN",
+      "DRZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 147
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FACE_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 187
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "FACE_IMPO/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "FACE_IMPO/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "FACE_IMPO/DX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 190
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "FACE_IMPO/DY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 191
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "FACE_IMPO/DZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "DRX",
+     "kind": "simple",
+     "path": "FACE_IMPO/DRX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 193
+     }
+    },
+    {
+     "name": "DRY",
+     "kind": "simple",
+     "path": "FACE_IMPO/DRY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "DRZ",
+     "kind": "simple",
+     "path": "FACE_IMPO/DRZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "GRX",
+     "kind": "simple",
+     "path": "FACE_IMPO/GRX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 196
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "FACE_IMPO/PRES",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 197
+     }
+    },
+    {
+     "name": "PHI",
+     "kind": "simple",
+     "path": "FACE_IMPO/PHI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 198
+     }
+    },
+    {
+     "name": "PSI",
+     "kind": "simple",
+     "path": "FACE_IMPO/PSI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 199
+     }
+    },
+    {
+     "name": "TEMP",
+     "kind": "simple",
+     "path": "FACE_IMPO/TEMP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "PRE1",
+     "kind": "simple",
+     "path": "FACE_IMPO/PRE1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 201
+     }
+    },
+    {
+     "name": "PRE2",
+     "kind": "simple",
+     "path": "FACE_IMPO/PRE2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "DNOR",
+     "kind": "simple",
+     "path": "FACE_IMPO/DNOR",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 203
+     }
+    },
+    {
+     "name": "DRNOR",
+     "kind": "simple",
+     "path": "FACE_IMPO/DRNOR",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 204
+     }
+    },
+    {
+     "name": "DTAN",
+     "kind": "simple",
+     "path": "FACE_IMPO/DTAN",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 205
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_DDL",
+   "kind": "factor",
+   "path": "LIAISON_DDL",
+   "status": "f",
+   "max": "**",
+   "fr": "Définit une relation linéaire entre des DDLs de deux ou plusieurs noeuds, les valeurs sont fournies par l'intermediaire d'un concept de type fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COEF_MULT",
+      "COEF_MULT_FONC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 207
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_DDL/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "LIAISON_DDL/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 216
+     }
+    },
+    {
+     "name": "DDL",
+     "kind": "simple",
+     "path": "LIAISON_DDL/DDL",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "PRES",
+      "PHI",
+      "GONF",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "GRX",
+      "DRGX",
+      "DRGY",
+      "DRGZ",
+      "PSI",
+      "UI2",
+      "UI3",
+      "VI2",
+      "VI3",
+      "WI2",
+      "WI3",
+      "UO2",
+      "UO3",
+      "VO2",
+      "VO3",
+      "WO2",
+      "WO3",
+      "UI4",
+      "UI5",
+      "VI4",
+      "VI5",
+      "WI4",
+      "WI5",
+      "UO4",
+      "UO5",
+      "VO4",
+      "VO5",
+      "WO4",
+      "WO5",
+      "UI6",
+      "UO6",
+      "VI6",
+      "VO6",
+      "WI6",
+      "WO6",
+      "WO",
+      "WI1",
+      "WO1",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "V11",
+      "V12",
+      "V13",
+      "V21",
+      "V22",
+      "V23",
+      "V31",
+      "V32",
+      "V33",
+      "PRES11",
+      "PRES12",
+      "PRES13",
+      "PRES21",
+      "PRES22",
+      "PRES23",
+      "PRES31",
+      "PRES32",
+      "PRES33",
+      "LH1",
+      "GLIS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 217
+     }
+    },
+    {
+     "name": "COEF_MULT",
+     "kind": "simple",
+     "path": "LIAISON_DDL/COEF_MULT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 218
+     }
+    },
+    {
+     "name": "COEF_MULT_FONC",
+     "kind": "simple",
+     "path": "LIAISON_DDL/COEF_MULT_FONC",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 219
+     }
+    },
+    {
+     "name": "COEF_IMPO",
+     "kind": "simple",
+     "path": "LIAISON_DDL/COEF_IMPO",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 220
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_OBLIQUE",
+   "kind": "factor",
+   "path": "LIAISON_OBLIQUE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique à des noeuds la meme valeur de déplacement définie composante par composante dans un repère oblique quelconque, les valeurs sont fournis par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 222
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 233
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 234
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 235
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "ANGL_NAUT",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/ANGL_NAUT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 237
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 238
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 239
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 240
+     }
+    },
+    {
+     "name": "DRX",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DRX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 241
+     }
+    },
+    {
+     "name": "DRY",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DRY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 242
+     }
+    },
+    {
+     "name": "DRZ",
+     "kind": "simple",
+     "path": "LIAISON_OBLIQUE/DRZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 243
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_GROUP",
+   "kind": "factor",
+   "path": "LIAISON_GROUP",
+   "status": "f",
+   "max": "**",
+   "fr": "Définit la meme relation linéaire entre certains DDLs de couples de noeuds, les valeurs sont fournies par l'intermédiaire de concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_1",
+      "GROUP_NO_1"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_2",
+      "GROUP_NO_2"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_MA_1",
+      "GROUP_NO_2"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_NO_1",
+      "GROUP_MA_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 245
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 258
+     }
+    },
+    {
+     "name": "GROUP_NO_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_NO_1",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 259
+     }
+    },
+    {
+     "name": "GROUP_MA_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 260
+     }
+    },
+    {
+     "name": "GROUP_NO_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/GROUP_NO_2",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 261
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 262
+     }
+    },
+    {
+     "name": "DDL_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/DDL_1",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "PRES",
+      "PHI",
+      "GONF",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "GRX",
+      "DRGX",
+      "DRGY",
+      "DRGZ",
+      "PSI",
+      "UI2",
+      "UI3",
+      "VI2",
+      "VI3",
+      "WI2",
+      "WI3",
+      "UO2",
+      "UO3",
+      "VO2",
+      "VO3",
+      "WO2",
+      "WO3",
+      "UI4",
+      "UI5",
+      "VI4",
+      "VI5",
+      "WI4",
+      "WI5",
+      "UO4",
+      "UO5",
+      "VO4",
+      "VO5",
+      "WO4",
+      "WO5",
+      "UI6",
+      "UO6",
+      "VI6",
+      "VO6",
+      "WI6",
+      "WO6",
+      "WO",
+      "WI1",
+      "WO1",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "V11",
+      "V12",
+      "V13",
+      "V21",
+      "V22",
+      "V23",
+      "V31",
+      "V32",
+      "V33",
+      "PRES11",
+      "PRES12",
+      "PRES13",
+      "PRES21",
+      "PRES22",
+      "PRES23",
+      "PRES31",
+      "PRES32",
+      "PRES33",
+      "LH1",
+      "GLIS",
+      "DNOR"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 263
+     }
+    },
+    {
+     "name": "COEF_MULT_1",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_MULT_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 266
+     }
+    },
+    {
+     "name": "DDL_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/DDL_2",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "PRES",
+      "PHI",
+      "GONF",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "GRX",
+      "DRGX",
+      "DRGY",
+      "DRGZ",
+      "PSI",
+      "UI2",
+      "UI3",
+      "VI2",
+      "VI3",
+      "WI2",
+      "WI3",
+      "UO2",
+      "UO3",
+      "VO2",
+      "VO3",
+      "WO2",
+      "WO3",
+      "UI4",
+      "UI5",
+      "VI4",
+      "VI5",
+      "WI4",
+      "WI5",
+      "UO4",
+      "UO5",
+      "VO4",
+      "VO5",
+      "WO4",
+      "WO5",
+      "UI6",
+      "UO6",
+      "VI6",
+      "VO6",
+      "WI6",
+      "WO6",
+      "WO",
+      "WI1",
+      "WO1",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "V11",
+      "V12",
+      "V13",
+      "V21",
+      "V22",
+      "V23",
+      "V31",
+      "V32",
+      "V33",
+      "PRES11",
+      "PRES12",
+      "PRES13",
+      "PRES21",
+      "PRES22",
+      "PRES23",
+      "PRES31",
+      "PRES32",
+      "PRES33",
+      "LH1",
+      "GLIS",
+      "DNOR"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 267
+     }
+    },
+    {
+     "name": "COEF_MULT_2",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_MULT_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 270
+     }
+    },
+    {
+     "name": "COEF_IMPO",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/COEF_IMPO",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 271
+     }
+    },
+    {
+     "name": "TRAN",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/TRAN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 272
+     }
+    },
+    {
+     "name": "ANGL_NAUT",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/ANGL_NAUT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 273
+     }
+    },
+    {
+     "name": "CENTRE",
+     "kind": "simple",
+     "path": "LIAISON_GROUP/CENTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 274
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_UNIF",
+   "kind": "factor",
+   "path": "LIAISON_UNIF",
+   "status": "f",
+   "max": "**",
+   "fr": "Impose une meme valeur (inconnue) à des DDLs d'un ensemble de noeuds",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 276
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 281
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 282
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 283
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 284
+     }
+    },
+    {
+     "name": "DDL",
+     "kind": "simple",
+     "path": "LIAISON_UNIF/DDL",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DX",
+      "DY",
+      "DZ",
+      "DRX",
+      "DRY",
+      "DRZ",
+      "PRES",
+      "PHI",
+      "GONF",
+      "TEMP",
+      "PRE1",
+      "PRE2",
+      "GRX",
+      "DRGX",
+      "DRGY",
+      "DRGZ",
+      "PSI",
+      "UI2",
+      "UI3",
+      "VI2",
+      "VI3",
+      "WI2",
+      "WI3",
+      "UO2",
+      "UO3",
+      "VO2",
+      "VO3",
+      "WO2",
+      "WO3",
+      "UI4",
+      "UI5",
+      "VI4",
+      "VI5",
+      "WI4",
+      "WI5",
+      "UO4",
+      "UO5",
+      "VO4",
+      "VO5",
+      "WO4",
+      "WO5",
+      "UI6",
+      "UO6",
+      "VI6",
+      "VO6",
+      "WI6",
+      "WO6",
+      "WO",
+      "WI1",
+      "WO1",
+      "H1X",
+      "H1Y",
+      "H1Z",
+      "H1PRE1",
+      "K1",
+      "K2",
+      "K3",
+      "V11",
+      "V12",
+      "V13",
+      "V21",
+      "V22",
+      "V23",
+      "V31",
+      "V32",
+      "V33",
+      "PRES11",
+      "PRES12",
+      "PRES13",
+      "PRES21",
+      "PRES22",
+      "PRES23",
+      "PRES31",
+      "PRES32",
+      "PRES33",
+      "LH1",
+      "GLIS"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 285
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_NODALE",
+   "kind": "factor",
+   "path": "FORCE_NODALE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique à des noeuds des forces nodales dont les valeurs des composantes sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 289
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "FORCE_NODALE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 297
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "FORCE_NODALE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 298
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_NODALE/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 299
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_NODALE/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 300
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_NODALE/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 301
+     }
+    },
+    {
+     "name": "MX",
+     "kind": "simple",
+     "path": "FORCE_NODALE/MX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 302
+     }
+    },
+    {
+     "name": "MY",
+     "kind": "simple",
+     "path": "FORCE_NODALE/MY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 303
+     }
+    },
+    {
+     "name": "MZ",
+     "kind": "simple",
+     "path": "FORCE_NODALE/MZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 304
+     }
+    },
+    {
+     "name": "ANGL_NAUT",
+     "kind": "simple",
+     "path": "FORCE_NODALE/ANGL_NAUT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 305
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_FACE",
+   "kind": "factor",
+   "path": "FORCE_FACE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces surfaciques sur une face d'élément volumique dont les valeurs des composantes sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 307
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_FACE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 315
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_FACE/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 316
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_FACE/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 317
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_FACE/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 318
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_ARETE",
+   "kind": "factor",
+   "path": "FORCE_ARETE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces linéiques à une arete d'élément volumique ou de coque dont les valeurs des composantes sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 320
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_ARETE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 328
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_ARETE/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 329
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_ARETE/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 330
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_ARETE/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 331
+     }
+    },
+    {
+     "name": "MX",
+     "kind": "simple",
+     "path": "FORCE_ARETE/MX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 332
+     }
+    },
+    {
+     "name": "MY",
+     "kind": "simple",
+     "path": "FORCE_ARETE/MY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 333
+     }
+    },
+    {
+     "name": "MZ",
+     "kind": "simple",
+     "path": "FORCE_ARETE/MZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 334
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_CONTOUR",
+   "kind": "factor",
+   "path": "FORCE_CONTOUR",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces linéiques au bord d'un domaine 2D ou AXIS ou AXIS_FOURIER, dont les valeurs des composantes sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 336
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_CONTOUR/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 344
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_CONTOUR/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 345
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_CONTOUR/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 346
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_CONTOUR/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 347
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_INTERNE",
+   "kind": "factor",
+   "path": "FORCE_INTERNE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces volumiques (2D ou 3D) à un domaine volumique, dont les valeurs des composantes sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 349
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FORCE_INTERNE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 357
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_INTERNE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 358
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_INTERNE/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 359
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_INTERNE/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 360
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_INTERNE/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 361
+     }
+    }
+   ]
+  },
+  {
+   "name": "PRES_REP",
+   "kind": "factor",
+   "path": "PRES_REP",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique une pression à un domaine de milieu continu 2D ou 3D ou à un domaine de coques et tuyaux, dont les valeurs imposées (pression et/ou cisaillement) sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "FISSURE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "FISSURE"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "PRES",
+      "CISA_2D"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 363
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "PRES_REP/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 375
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "PRES_REP/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 376
+     }
+    },
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "PRES_REP/FISSURE",
+     "status": "f",
+     "type": [
+      "fiss_xfem"
+     ],
+     "min": 1,
+     "max": 100,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 377
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "PRES_REP/PRES",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 378
+     }
+    },
+    {
+     "name": "CISA_2D",
+     "kind": "simple",
+     "path": "PRES_REP/CISA_2D",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 379
+     }
+    }
+   ]
+  },
+  {
+   "name": "EFFE_FOND",
+   "kind": "factor",
+   "path": "EFFE_FOND",
+   "status": "f",
+   "max": "**",
+   "fr": "Calcul l'effet de fond sur une branche de tuyauterie (modélisation 3D) soumise à une pression dont la valeur est fournie par l'intermédiaire d'un concept fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 381
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_INT",
+     "kind": "simple",
+     "path": "EFFE_FOND/GROUP_MA_INT",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 388
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "EFFE_FOND/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 389
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "EFFE_FOND/PRES",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 390
+     }
+    }
+   ]
+  },
+  {
+   "name": "PRE_EPSI",
+   "kind": "factor",
+   "path": "PRE_EPSI",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique un chargement de déformation initiale à un élément 2D, 3D ou de structure dont les composantes du tenseur de déformation sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "EPXX",
+      "EPYY",
+      "EPZZ",
+      "EPXY",
+      "EPXZ",
+      "EPYZ",
+      "EPX",
+      "KY",
+      "KZ",
+      "EXX",
+      "EYY",
+      "EXY",
+      "KXX",
+      "KYY",
+      "KXY",
+      "VECT_N"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "VECT_N",
+      "KY",
+      "KZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 392
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "PRE_EPSI/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 421
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "PRE_EPSI/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 422
+     }
+    },
+    {
+     "name": "EPXX",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPXX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 423
+     }
+    },
+    {
+     "name": "EPYY",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPYY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 424
+     }
+    },
+    {
+     "name": "EPZZ",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPZZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 425
+     }
+    },
+    {
+     "name": "EPXY",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPXY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 426
+     }
+    },
+    {
+     "name": "EPXZ",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPXZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 427
+     }
+    },
+    {
+     "name": "EPYZ",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPYZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 428
+     }
+    },
+    {
+     "name": "EPX",
+     "kind": "simple",
+     "path": "PRE_EPSI/EPX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 429
+     }
+    },
+    {
+     "name": "KY",
+     "kind": "simple",
+     "path": "PRE_EPSI/KY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 430
+     }
+    },
+    {
+     "name": "KZ",
+     "kind": "simple",
+     "path": "PRE_EPSI/KZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 431
+     }
+    },
+    {
+     "name": "EXX",
+     "kind": "simple",
+     "path": "PRE_EPSI/EXX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 432
+     }
+    },
+    {
+     "name": "EYY",
+     "kind": "simple",
+     "path": "PRE_EPSI/EYY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 433
+     }
+    },
+    {
+     "name": "EXY",
+     "kind": "simple",
+     "path": "PRE_EPSI/EXY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 434
+     }
+    },
+    {
+     "name": "KXX",
+     "kind": "simple",
+     "path": "PRE_EPSI/KXX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 435
+     }
+    },
+    {
+     "name": "KYY",
+     "kind": "simple",
+     "path": "PRE_EPSI/KYY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 436
+     }
+    },
+    {
+     "name": "KXY",
+     "kind": "simple",
+     "path": "PRE_EPSI/KXY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 437
+     }
+    },
+    {
+     "name": "VECT_N",
+     "kind": "simple",
+     "path": "PRE_EPSI/VECT_N",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 439
+     }
+    },
+    {
+     "name": "VECT_N1",
+     "kind": "simple",
+     "path": "PRE_EPSI/VECT_N1",
+     "status": "c",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 441
+     }
+    },
+    {
+     "name": "VECT_N2",
+     "kind": "simple",
+     "path": "PRE_EPSI/VECT_N2",
+     "status": "c",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 442
+     }
+    },
+    {
+     "name": "VECT_N3",
+     "kind": "simple",
+     "path": "PRE_EPSI/VECT_N3",
+     "status": "c",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 443
+     }
+    },
+    {
+     "name": "b_n",
+     "kind": "bloc",
+     "path": "PRE_EPSI/[b_n]",
+     "condition": "exists(\"VECT_N\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "KN1",
+        "KN2"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 444
+     },
+     "keywords": [
+      {
+       "name": "KN1",
+       "kind": "simple",
+       "path": "PRE_EPSI/KN1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 447
+       }
+      },
+      {
+       "name": "KN2",
+       "kind": "simple",
+       "path": "PRE_EPSI/KN2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 448
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "FORCE_POUTRE",
+   "kind": "factor",
+   "path": "FORCE_POUTRE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces linéiques sur des éléments de type poutre dont les valeurs sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 451
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FORCE_POUTRE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 460
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_POUTRE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 461
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "FORCE_POUTRE/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "FORCE",
+     "into": [
+      "VENT",
+      "FORCE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 462
+     }
+    },
+    {
+     "name": "b_force",
+     "kind": "bloc",
+     "path": "FORCE_POUTRE/[b_force]",
+     "condition": "equal_to(\"TYPE_CHARGE\", 'FORCE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ",
+        "MGX",
+        "MGY",
+        "MGZ",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FX",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FY",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FZ",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MX",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MY",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MZ",
+        "N",
+        "VY",
+        "VZ",
+        "MT",
+        "MFY",
+        "MFZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "N",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "VY",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "VZ",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MT",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MFY",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MFZ",
+        "FX",
+        "FY",
+        "FZ",
+        "MX",
+        "MY",
+        "MZ"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 464
+     },
+     "keywords": [
+      {
+       "name": "FX",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FX",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 497
+       }
+      },
+      {
+       "name": "FY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 498
+       }
+      },
+      {
+       "name": "FZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 499
+       }
+      },
+      {
+       "name": "MX",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MX",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 500
+       }
+      },
+      {
+       "name": "MY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 501
+       }
+      },
+      {
+       "name": "MZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 502
+       }
+      },
+      {
+       "name": "N",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/N",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 503
+       }
+      },
+      {
+       "name": "VY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/VY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 504
+       }
+      },
+      {
+       "name": "VZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/VZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 505
+       }
+      },
+      {
+       "name": "MT",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 506
+       }
+      },
+      {
+       "name": "MFY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MFY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 507
+       }
+      },
+      {
+       "name": "MFZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MFZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 508
+       }
+      },
+      {
+       "name": "MGX",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MGX",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 509
+       }
+      },
+      {
+       "name": "MGY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MGY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 510
+       }
+      },
+      {
+       "name": "MGZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/MGZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 511
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_vent",
+     "kind": "bloc",
+     "path": "FORCE_POUTRE/[b_vent]",
+     "condition": "equal_to(\"TYPE_CHARGE\", 'VENT')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "FX",
+        "FY",
+        "FZ",
+        "N",
+        "VY",
+        "VZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FX",
+        "N",
+        "VY",
+        "VZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FY",
+        "N",
+        "VY",
+        "VZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "FZ",
+        "N",
+        "VY",
+        "VZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "N",
+        "FX",
+        "FY",
+        "FZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "VY",
+        "FX",
+        "FY",
+        "FZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "VZ",
+        "FX",
+        "FY",
+        "FZ"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 513
+     },
+     "keywords": [
+      {
+       "name": "FX",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FX",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 524
+       }
+      },
+      {
+       "name": "FY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 525
+       }
+      },
+      {
+       "name": "FZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/FZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 526
+       }
+      },
+      {
+       "name": "N",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/N",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 527
+       }
+      },
+      {
+       "name": "VY",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/VY",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 528
+       }
+      },
+      {
+       "name": "VZ",
+       "kind": "simple",
+       "path": "FORCE_POUTRE/VZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 529
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "FORCE_TUYAU",
+   "kind": "factor",
+   "path": "FORCE_TUYAU",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique une pression sur des éléments TUYAU, la valeur est fournie par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 532
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FORCE_TUYAU/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 539
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_TUYAU/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 540
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "FORCE_TUYAU/PRES",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 541
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_COQUE",
+   "kind": "factor",
+   "path": "FORCE_COQUE",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique des forces surfaciques sur des éléments de types coques dont les valeurs sont fournies par l'intermédiaires d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "FX",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "FY",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "FZ",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MX",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MY",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MZ",
+      "PRES",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "F1",
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "F2",
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "F3",
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MF1",
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MF2",
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "PRES",
+      "FX",
+      "FY",
+      "FZ",
+      "MX",
+      "MY",
+      "MZ",
+      "F1",
+      "F2",
+      "F3",
+      "MF1",
+      "MF2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 543
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FORCE_COQUE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 569
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FORCE_COQUE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 570
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_COQUE/FX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 571
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_COQUE/FY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 572
+     }
+    },
+    {
+     "name": "FZ",
+     "kind": "simple",
+     "path": "FORCE_COQUE/FZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 573
+     }
+    },
+    {
+     "name": "MX",
+     "kind": "simple",
+     "path": "FORCE_COQUE/MX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 574
+     }
+    },
+    {
+     "name": "MY",
+     "kind": "simple",
+     "path": "FORCE_COQUE/MY",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 575
+     }
+    },
+    {
+     "name": "MZ",
+     "kind": "simple",
+     "path": "FORCE_COQUE/MZ",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 576
+     }
+    },
+    {
+     "name": "F1",
+     "kind": "simple",
+     "path": "FORCE_COQUE/F1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 577
+     }
+    },
+    {
+     "name": "F2",
+     "kind": "simple",
+     "path": "FORCE_COQUE/F2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 578
+     }
+    },
+    {
+     "name": "F3",
+     "kind": "simple",
+     "path": "FORCE_COQUE/F3",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 579
+     }
+    },
+    {
+     "name": "MF1",
+     "kind": "simple",
+     "path": "FORCE_COQUE/MF1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 580
+     }
+    },
+    {
+     "name": "MF2",
+     "kind": "simple",
+     "path": "FORCE_COQUE/MF2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 581
+     }
+    },
+    {
+     "name": "PRES",
+     "kind": "simple",
+     "path": "FORCE_COQUE/PRES",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 582
+     }
+    },
+    {
+     "name": "PLAN",
+     "kind": "simple",
+     "path": "FORCE_COQUE/PLAN",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MAIL",
+     "into": [
+      "SUP",
+      "INF",
+      "MOY",
+      "MAIL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 583
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIAISON_COQUE",
+   "kind": "factor",
+   "path": "LIAISON_COQUE",
+   "status": "f",
+   "max": "**",
+   "fr": "Permet de représenter le raccord entre des éléments de coques au moyen des relations linéaires",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA_1",
+      "GROUP_MA_2",
+      "GROUP_NO_1",
+      "GROUP_NO_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 585
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 592
+     }
+    },
+    {
+     "name": "GROUP_NO_1",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/GROUP_NO_1",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 593
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA_1",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/SANS_GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 594
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO_1",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/SANS_GROUP_NO_1",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 595
+     }
+    },
+    {
+     "name": "GROUP_MA_2",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 596
+     }
+    },
+    {
+     "name": "GROUP_NO_2",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/GROUP_NO_2",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 597
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA_2",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/SANS_GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 598
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO_2",
+     "kind": "simple",
+     "path": "LIAISON_COQUE/SANS_GROUP_NO_2",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 599
+     }
+    }
+   ]
+  },
+  {
+   "name": "VITE_FACE",
+   "kind": "factor",
+   "path": "VITE_FACE",
+   "status": "f",
+   "max": "**",
+   "fr": "Impose des vitesses à une face dont les valeurs sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VNOR",
+      "DIRECTION"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 601
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "VITE_FACE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 608
+     }
+    },
+    {
+     "name": "VNOR",
+     "kind": "simple",
+     "path": "VITE_FACE/VNOR",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 609
+     }
+    },
+    {
+     "name": "DIRECTION",
+     "kind": "simple",
+     "path": "VITE_FACE/DIRECTION",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 610
+     }
+    },
+    {
+     "name": "b_nonNormal",
+     "kind": "bloc",
+     "path": "VITE_FACE/[b_nonNormal]",
+     "condition": "exists(\"DIRECTION\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 611
+     },
+     "keywords": [
+      {
+       "name": "VITE",
+       "kind": "simple",
+       "path": "VITE_FACE/VITE",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 613
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ONDE_PLANE",
+   "kind": "factor",
+   "path": "ONDE_PLANE",
+   "status": "f",
+   "max": 1,
+   "fr": "Impose un chargement sismique par onde plane dont la valeur est fournie par l'intermédiaire d'un concept fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 616
+   },
+   "keywords": [
+    {
+     "name": "DIRECTION",
+     "kind": "simple",
+     "path": "ONDE_PLANE/DIRECTION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 623
+     }
+    },
+    {
+     "name": "COOR_SOURCE",
+     "kind": "simple",
+     "path": "ONDE_PLANE/COOR_SOURCE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 624
+     }
+    },
+    {
+     "name": "c_reflection",
+     "kind": "bloc",
+     "path": "ONDE_PLANE/[c_reflection]",
+     "condition": "exists(\"COOR_SOURCE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 625
+     },
+     "keywords": [
+      {
+       "name": "COOR_REFLECHI",
+       "kind": "simple",
+       "path": "ONDE_PLANE/COOR_REFLECHI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+        "line": 627
+       }
+      }
+     ]
+    },
+    {
+     "name": "TYPE_ONDE",
+     "kind": "simple",
+     "path": "ONDE_PLANE/TYPE_ONDE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "S",
+      "P",
+      "SV",
+      "SH"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 629
+     }
+    },
+    {
+     "name": "FONC_SIGNAL",
+     "kind": "simple",
+     "path": "ONDE_PLANE/FONC_SIGNAL",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 630
+     }
+    },
+    {
+     "name": "DEPL_IMPO",
+     "kind": "simple",
+     "path": "ONDE_PLANE/DEPL_IMPO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 631
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ONDE_PLANE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 632
+     }
+    }
+   ]
+  },
+  {
+   "name": "FLUX_THM_REP",
+   "kind": "factor",
+   "path": "FLUX_THM_REP",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique à un domaine continue 2D ou 3D un flux de chaleur et/ou un apport de masse fluide (flux hydraulique) dont les valeurs des flux sont fournies par l'intermédiaire d'un concept fonction",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FLUN",
+      "FLUN_HYDR1",
+      "FLUN_HYDR2",
+      "FLUN_FRAC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 634
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 645
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 646
+     }
+    },
+    {
+     "name": "FLUN",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/FLUN",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 647
+     }
+    },
+    {
+     "name": "FLUN_FRAC",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/FLUN_FRAC",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 648
+     }
+    },
+    {
+     "name": "FLUN_HYDR1",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/FLUN_HYDR1",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 649
+     }
+    },
+    {
+     "name": "FLUN_HYDR2",
+     "kind": "simple",
+     "path": "FLUX_THM_REP/FLUN_HYDR2",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 650
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECHANGE_THM",
+   "kind": "factor",
+   "path": "ECHANGE_THM",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique à un domaine de milieu continu 2D ou 3D une condition echange dont les valeurs des coef sont des fonctions(flux hydraulique)",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "COEF_11",
+      "COEF_12",
+      "COEF_21",
+      "COEF_22"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 652
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ECHANGE_THM/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 663
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ECHANGE_THM/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 664
+     }
+    },
+    {
+     "name": "COEF_11",
+     "kind": "simple",
+     "path": "ECHANGE_THM/COEF_11",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 665
+     }
+    },
+    {
+     "name": "COEF_12",
+     "kind": "simple",
+     "path": "ECHANGE_THM/COEF_12",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 666
+     }
+    },
+    {
+     "name": "COEF_21",
+     "kind": "simple",
+     "path": "ECHANGE_THM/COEF_21",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 667
+     }
+    },
+    {
+     "name": "COEF_22",
+     "kind": "simple",
+     "path": "ECHANGE_THM/COEF_22",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 668
+     }
+    },
+    {
+     "name": "PRE1_EXT",
+     "kind": "simple",
+     "path": "ECHANGE_THM/PRE1_EXT",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 669
+     }
+    },
+    {
+     "name": "PRE2_EXT",
+     "kind": "simple",
+     "path": "ECHANGE_THM/PRE2_EXT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 670
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECHANGE_THM_HR",
+   "kind": "factor",
+   "path": "ECHANGE_THM_HR",
+   "status": "f",
+   "max": "**",
+   "fr": "Applique à un domaine de milieu continu 2D ou 3D une condition echange en HR dont les valeurs des coef sont des fonctions(flux hydraulique)",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "HR_EXT",
+      "ALPHA",
+      "PVAP_SAT"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 672
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ECHANGE_THM_HR/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 684
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ECHANGE_THM_HR/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 685
+     }
+    },
+    {
+     "name": "HR_EXT",
+     "kind": "simple",
+     "path": "ECHANGE_THM_HR/HR_EXT",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 686
+     }
+    },
+    {
+     "name": "ALPHA",
+     "kind": "simple",
+     "path": "ECHANGE_THM_HR/ALPHA",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 687
+     }
+    },
+    {
+     "name": "PVAP_SAT",
+     "kind": "simple",
+     "path": "ECHANGE_THM_HR/PVAP_SAT",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+      "line": 688
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_meca_f.py",
+    "line": 690
+   }
+  }
+ ]
+}

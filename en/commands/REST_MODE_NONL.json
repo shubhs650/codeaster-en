@@ -1,0 +1,127 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_MODE_NONL",
+ "kind": "OPER",
+ "fr": "Post traitement de mode_non_line : récuperation résultats",
+ "translation_upstream": null,
+ "op": 63,
+ "reentrant": "n",
+ "result_types": [
+  "dyna_trans",
+  "mode_meca"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "MODE_NON_LINE",
+   "kind": "simple",
+   "path": "MODE_NON_LINE",
+   "status": "o",
+   "type": [
+    "table_container"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TYPE_RESU",
+   "kind": "simple",
+   "path": "TYPE_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "DYNA_TRANS",
+   "into": [
+    "MODE_MECA",
+    "DYNA_TRANS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "o",
+   "type": [
+    "I"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "b_dyna_trans",
+   "kind": "bloc",
+   "path": "[b_dyna_trans]",
+   "condition": "equal_to(\"TYPE_RESU\", 'DYNA_TRANS')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+    "line": 46
+   },
+   "keywords": [
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "default": 512,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+      "line": 48
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_mode_nonl.py",
+    "line": 50
+   }
+  }
+ ]
+}

@@ -1,0 +1,4712 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_miss.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_MISS",
+ "kind": "MACRO",
+ "fr": "Préparation des données, exécution du logiciel Miss3D, et post-traitement",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_miss_ops.calc_miss_ops",
+ "reentrant": null,
+ "result_types": [
+  "table_sdaster",
+  "harm_gene",
+  "tran_gene",
+  "char_meca"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_miss.py",
+  "line": 44
+ },
+ "keywords": [
+  {
+   "name": "TYPE_RESU",
+   "kind": "simple",
+   "path": "TYPE_RESU",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "HARM_GENE",
+    "TRAN_GENE",
+    "TABLE",
+    "TABLE_CONTROL",
+    "FICHIER",
+    "FICHIER_TEMPS",
+    "CHARGE"
+   ],
+   "fr": "Type de résultat produit en post-traitement. FICHIER : pas de post-traitement",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "PROJET",
+   "kind": "simple",
+   "path": "PROJET",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MODELE",
+   "fr": "Nom de l'étude Miss",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "REPERTOIRE",
+   "kind": "simple",
+   "path": "REPERTOIRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Répertoire de travail de Miss",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "b_carac_sol",
+   "kind": "bloc",
+   "path": "[b_carac_sol]",
+   "condition": "not is_in(\"TYPE_RESU\", ('HARM_GENE','TRAN_GENE'))",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TABLE_SOL",
+      "MATER_SOL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 65
+   },
+   "keywords": [
+    {
+     "name": "TABLE_SOL",
+     "kind": "simple",
+     "path": "TABLE_SOL",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": "Table des propriétés du sol stratifié",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "MATER_SOL",
+     "kind": "factor",
+     "path": "MATER_SOL",
+     "status": "f",
+     "fr": "Propriétés du sol homogène",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 71
+     },
+     "keywords": [
+      {
+       "name": "E",
+       "kind": "simple",
+       "path": "MATER_SOL/E",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "MATER_SOL/NU",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 0.5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "RHO",
+       "kind": "simple",
+       "path": "MATER_SOL/RHO",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 76
+       }
+      },
+      {
+       "name": "AMOR_HYST",
+       "kind": "simple",
+       "path": "MATER_SOL/AMOR_HYST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 77
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MATER_FLUIDE",
+   "kind": "factor",
+   "path": "MATER_FLUIDE",
+   "status": "f",
+   "fr": "Propriétés du fluide (requis si ISSF='OUI')",
+   "other": {
+    "condition": "is_in(\"ISSF\", ('OUI'))"
+   },
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "RHO",
+     "kind": "simple",
+     "path": "MATER_FLUIDE/RHO",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "CELE",
+     "kind": "simple",
+     "path": "MATER_FLUIDE/CELE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "AMOR_BETA",
+     "kind": "simple",
+     "path": "MATER_FLUIDE/AMOR_BETA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "DEMI_ESPACE",
+     "kind": "simple",
+     "path": "MATER_FLUIDE/DEMI_ESPACE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Demi-espace de fluide avec surface libre ou non",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 87
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_basic",
+   "kind": "bloc",
+   "path": "[b_basic]",
+   "condition": "is_in(\"TYPE_RESU\", ('FICHIER', 'TABLE_CONTROL'))",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MACR_ELEM_DYNA",
+      "BASE_MODALE"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "GROUP_MA_FLU_STR",
+      "GROUP_MA_FLU_SOL"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "SOURCE_SOL",
+      "SOURCE_FLUIDE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 96
+   },
+   "keywords": [
+    {
+     "name": "MACR_ELEM_DYNA",
+     "kind": "simple",
+     "path": "MACR_ELEM_DYNA",
+     "status": "f",
+     "type": [
+      "macr_elem_dyna"
+     ],
+     "fr": "Macro élément produit en amont",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "BASE_MODALE",
+     "kind": "simple",
+     "path": "BASE_MODALE",
+     "status": "f",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": "Base de modes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "b_base_modale",
+     "kind": "bloc",
+     "path": "[b_base_modale]",
+     "condition": "exists(\"BASE_MODALE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 107
+     },
+     "keywords": [
+      {
+       "name": "MATR_RIGI",
+       "kind": "simple",
+       "path": "MATR_RIGI",
+       "status": "f",
+       "type": [
+        "matr_asse_depl_r",
+        "matr_asse_depl_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "MATR_MASS",
+       "kind": "simple",
+       "path": "MATR_MASS",
+       "status": "f",
+       "type": [
+        "matr_asse_depl_r"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 110
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_MA_INTERF",
+     "kind": "simple",
+     "path": "GROUP_MA_INTERF",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles de l'interface",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_STR",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_STR",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles fluide-structure",
+     "other": {
+      "condition": "is_in(\"ISSF\", ('OUI'))"
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles fluide-sol",
+     "other": {
+      "condition": "is_in(\"ISSF\", ('OUI'))"
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "GROUP_MA_SOL_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_SOL_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles sol-sol",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "UNITE_IMPR_ASTER",
+     "kind": "simple",
+     "path": "UNITE_IMPR_ASTER",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": "Unité des résultats transmis par code_aster à Miss",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "UNITE_RESU_IMPE",
+     "kind": "simple",
+     "path": "UNITE_RESU_IMPE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": "Unité logique des impédances écrites par Miss",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "SOURCE_SOL",
+     "kind": "factor",
+     "path": "SOURCE_SOL",
+     "status": "f",
+     "max": "**",
+     "fr": "Source ponctuelle dans le sol",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 142
+     },
+     "keywords": [
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "SOURCE_SOL/POINT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Position de la source",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 146
+       }
+      },
+      {
+       "name": "DIRECTION",
+       "kind": "simple",
+       "path": "SOURCE_SOL/DIRECTION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Direction de la source",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 147
+       }
+      }
+     ]
+    },
+    {
+     "name": "SOURCE_FLUIDE",
+     "kind": "factor",
+     "path": "SOURCE_FLUIDE",
+     "status": "f",
+     "max": "**",
+     "fr": "Source ponctuelle dans le fluide",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 149
+     },
+     "keywords": [
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "SOURCE_FLUIDE/POINT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Position de la source",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 153
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_unite_resu",
+   "kind": "bloc",
+   "path": "[b_unite_resu]",
+   "condition": "is_in(\"TYPE_RESU\", ('FICHIER'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 156
+   },
+   "keywords": [
+    {
+     "name": "UNITE_RESU_FORC",
+     "kind": "simple",
+     "path": "UNITE_RESU_FORC",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": "Unité logique des forces sismiques écrites par Miss",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 158
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_fichier_temps",
+   "kind": "bloc",
+   "path": "[b_fichier_temps]",
+   "condition": "equal_to(\"TYPE_RESU\", 'FICHIER_TEMPS')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MACR_ELEM_DYNA",
+      "BASE_MODALE"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "GROUP_MA_FLU_STR",
+      "GROUP_MA_FLU_SOL"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "UNITE_RESU_RIGI",
+      "UNITE_RESU_AMOR",
+      "UNITE_RESU_MASS"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "UNITE_RESU_AMOR",
+      "MATR_GENE"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "UNITE_RESU_MASS",
+      "MATR_GENE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 166
+   },
+   "keywords": [
+    {
+     "name": "MACR_ELEM_DYNA",
+     "kind": "simple",
+     "path": "MACR_ELEM_DYNA",
+     "status": "f",
+     "type": [
+      "macr_elem_dyna"
+     ],
+     "fr": "Macro élément produit en amont",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 175
+     }
+    },
+    {
+     "name": "BASE_MODALE",
+     "kind": "simple",
+     "path": "BASE_MODALE",
+     "status": "f",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": "Base de modes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 178
+     }
+    },
+    {
+     "name": "b_base_modale",
+     "kind": "bloc",
+     "path": "[b_base_modale]",
+     "condition": "exists(\"BASE_MODALE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 179
+     },
+     "keywords": [
+      {
+       "name": "MATR_RIGI",
+       "kind": "simple",
+       "path": "MATR_RIGI",
+       "status": "f",
+       "type": [
+        "matr_asse_depl_r",
+        "matr_asse_depl_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 181
+       }
+      },
+      {
+       "name": "MATR_MASS",
+       "kind": "simple",
+       "path": "MATR_MASS",
+       "status": "f",
+       "type": [
+        "matr_asse_depl_r"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 182
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_MA_INTERF",
+     "kind": "simple",
+     "path": "GROUP_MA_INTERF",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles de l'interface",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "ISSF",
+     "kind": "simple",
+     "path": "ISSF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 187
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_STR",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_STR",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles fluide-structure",
+     "other": {
+      "condition": "is_in(\"ISSF\", ('OUI'))"
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles fluide-sol",
+     "other": {
+      "condition": "is_in(\"ISSF\", ('OUI'))"
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "GROUP_MA_SOL_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_SOL_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles sol-sol",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "UNITE_IMPR_ASTER",
+     "kind": "simple",
+     "path": "UNITE_IMPR_ASTER",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": "Unité des résultats transmis par code_aster à Miss",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 203
+     }
+    },
+    {
+     "name": "UNITE_RESU_RIGI",
+     "kind": "simple",
+     "path": "UNITE_RESU_RIGI",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "UNITE_RESU_AMOR",
+     "kind": "simple",
+     "path": "UNITE_RESU_AMOR",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "UNITE_RESU_MASS",
+     "kind": "simple",
+     "path": "UNITE_RESU_MASS",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 211
+     }
+    },
+    {
+     "name": "INST_FIN",
+     "kind": "simple",
+     "path": "INST_FIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Instant final du calcul",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 212
+     }
+    },
+    {
+     "name": "PAS_INST",
+     "kind": "simple",
+     "path": "PAS_INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Pas de temps du calcul",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 213
+     }
+    },
+    {
+     "name": "INST_ECRI_FIN",
+     "kind": "simple",
+     "path": "INST_ECRI_FIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Instant final d'écriture des impédances",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 214
+     }
+    },
+    {
+     "name": "FACTEUR_INTERPOL",
+     "kind": "simple",
+     "path": "FACTEUR_INTERPOL",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "default": 1,
+     "fr": "Valeur du pas d'échantillonnage et                                 du facteur de réduction du temps de calcul",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "PCENT_FREQ_CALCUL",
+     "kind": "simple",
+     "path": "PCENT_FREQ_CALCUL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0,
+     "val_max": 100,
+     "default": 0,
+     "fr": "Valeur correspondante au ratio 100*Ns/Nt, où                  Ns est le nombre d'échantillons sans interpoler et Nt le nombre total d'échantillons",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 225
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "COEF_SURECH",
+     "kind": "simple",
+     "path": "COEF_SURECH",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.35,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 237
+     }
+    },
+    {
+     "name": "COEF_MULT",
+     "kind": "simple",
+     "path": "COEF_MULT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 238
+     }
+    },
+    {
+     "name": "TYPE_FICHIER_TEMPS",
+     "kind": "simple",
+     "path": "TYPE_FICHIER_TEMPS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ASCII",
+     "into": [
+      "BINAIRE",
+      "ASCII"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 239
+     }
+    },
+    {
+     "name": "MATR_GENE",
+     "kind": "factor",
+     "path": "MATR_GENE",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 240
+     },
+     "keywords": [
+      {
+       "name": "DECOMP_IMPE",
+       "kind": "simple",
+       "path": "MATR_GENE/DECOMP_IMPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "PRODUIT",
+       "into": [
+        "PRODUIT",
+        "SANS_PRODUIT"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 243
+       }
+      },
+      {
+       "name": "AMOR_HYST",
+       "kind": "simple",
+       "path": "MATR_GENE/AMOR_HYST",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "DANS_IMPEDANCE",
+        "DANS_MATR_AMOR"
+       ],
+       "fr": "Indique comment l'amortissement hysteretique est pris en compte",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 246
+       }
+      },
+      {
+       "name": "b_amor_nohyst",
+       "kind": "bloc",
+       "path": "MATR_GENE/[b_amor_nohyst]",
+       "condition": "equal_to(\"AMOR_HYST\", 'DANS_MATR_AMOR')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 252
+       },
+       "keywords": [
+        {
+         "name": "MATR_MASS",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_MASS",
+         "status": "f",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 254
+         }
+        },
+        {
+         "name": "MATR_RIGI",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_RIGI",
+         "status": "f",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_gene_c",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 255
+         }
+        },
+        {
+         "name": "MATR_AMOR",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_AMOR",
+         "status": "o",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_gene_c",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 258
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_amor_hyst",
+       "kind": "bloc",
+       "path": "MATR_GENE/[b_amor_hyst]",
+       "condition": "equal_to(\"AMOR_HYST\", 'DANS_IMPEDANCE')",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "MATR_MASS",
+          "MATR_RIGI",
+          "MATR_AMOR"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 262
+       },
+       "keywords": [
+        {
+         "name": "MATR_MASS",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_MASS",
+         "status": "f",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 265
+         }
+        },
+        {
+         "name": "MATR_RIGI",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_RIGI",
+         "status": "f",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_gene_c",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 266
+         }
+        },
+        {
+         "name": "MATR_AMOR",
+         "kind": "simple",
+         "path": "MATR_GENE/MATR_AMOR",
+         "status": "f",
+         "type": [
+          "matr_asse_gene_r",
+          "matr_asse_gene_c",
+          "matr_asse_depl_r"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 269
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "EXCIT_SOL",
+     "kind": "factor",
+     "path": "EXCIT_SOL",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_X",
+        "CHAM_Y",
+        "CHAM_Z"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 274
+     },
+     "keywords": [
+      {
+       "name": "UNITE_RESU_FORC",
+       "kind": "simple",
+       "path": "EXCIT_SOL/UNITE_RESU_FORC",
+       "status": "o",
+       "type": [
+        "UnitDefault"
+       ],
+       "inout": "out",
+       "fr": "Unité logique des forces sismiques écrites par Miss",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 278
+       }
+      },
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "EXCIT_SOL/NOM_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "DEPL",
+       "into": [
+        "ACCE",
+        "VITE",
+        "DEPL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 284
+       }
+      },
+      {
+       "name": "CHAM_X",
+       "kind": "simple",
+       "path": "EXCIT_SOL/CHAM_X",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 285
+       }
+      },
+      {
+       "name": "CHAM_Y",
+       "kind": "simple",
+       "path": "EXCIT_SOL/CHAM_Y",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 286
+       }
+      },
+      {
+       "name": "CHAM_Z",
+       "kind": "simple",
+       "path": "EXCIT_SOL/CHAM_Z",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 287
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_donnees",
+   "kind": "bloc",
+   "path": "[b_donnees]",
+   "condition": "is_in(\"TYPE_RESU\", ('TRAN_GENE', 'HARM_GENE', 'TABLE'))",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MATR_AMOR",
+      "AMOR_REDUIT"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 291
+   },
+   "keywords": [
+    {
+     "name": "MACR_ELEM_DYNA",
+     "kind": "simple",
+     "path": "MACR_ELEM_DYNA",
+     "status": "f",
+     "type": [
+      "macr_elem_dyna"
+     ],
+     "fr": "Macro élément produit en amont",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 294
+     }
+    },
+    {
+     "name": "BASE_MODALE",
+     "kind": "simple",
+     "path": "BASE_MODALE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": "Base de modes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 297
+     }
+    },
+    {
+     "name": "MATR_RIGI",
+     "kind": "simple",
+     "path": "MATR_RIGI",
+     "status": "o",
+     "type": [
+      "matr_asse_depl_r",
+      "matr_asse_depl_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 298
+     }
+    },
+    {
+     "name": "MATR_MASS",
+     "kind": "simple",
+     "path": "MATR_MASS",
+     "status": "o",
+     "type": [
+      "matr_asse_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 299
+     }
+    },
+    {
+     "name": "MATR_AMOR",
+     "kind": "simple",
+     "path": "MATR_AMOR",
+     "status": "f",
+     "type": [
+      "matr_asse_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 300
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 301
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ASCII",
+     "into": [
+      "BINAIRE",
+      "ASCII"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 302
+     }
+    },
+    {
+     "name": "UNITE_IMPR_ASTER",
+     "kind": "simple",
+     "path": "UNITE_IMPR_ASTER",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": "Unité des résultats transmis par code_aster à Miss",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 303
+     }
+    },
+    {
+     "name": "UNITE_RESU_IMPE",
+     "kind": "simple",
+     "path": "UNITE_RESU_IMPE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": "Unité logique des impédances à relire.",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 309
+     }
+    },
+    {
+     "name": "b_unite_resu_forc",
+     "kind": "bloc",
+     "path": "[b_unite_resu_forc]",
+     "condition": "(exists(\"EXCIT_FORC\")) and (exists(\"UNITE_RESU_IMPE\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 312
+     },
+     "keywords": [
+      {
+       "name": "UNITE_RESU_FORC",
+       "kind": "simple",
+       "path": "UNITE_RESU_FORC",
+       "status": "f",
+       "type": [
+        "UnitDefault"
+       ],
+       "inout": "in",
+       "fr": "Unité logique des forces sismiques à relire",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 314
+       }
+      }
+     ]
+    },
+    {
+     "name": "param_impe",
+     "kind": "bloc",
+     "path": "[param_impe]",
+     "condition": "not exists(\"UNITE_RESU_IMPE\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TABLE_SOL",
+        "MATER_SOL"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TABLE_SOL",
+        "MATER_SOL"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 321
+     },
+     "keywords": [
+      {
+       "name": "TABLE_SOL",
+       "kind": "simple",
+       "path": "TABLE_SOL",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "Table des propriétés du sol stratifié",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 324
+       }
+      },
+      {
+       "name": "MATER_SOL",
+       "kind": "factor",
+       "path": "MATER_SOL",
+       "status": "f",
+       "fr": "Propriétés du sol homogène",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 327
+       },
+       "keywords": [
+        {
+         "name": "E",
+         "kind": "simple",
+         "path": "MATER_SOL/E",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 330
+         }
+        },
+        {
+         "name": "NU",
+         "kind": "simple",
+         "path": "MATER_SOL/NU",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": -1.0,
+         "val_max": 0.5,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 331
+         }
+        },
+        {
+         "name": "RHO",
+         "kind": "simple",
+         "path": "MATER_SOL/RHO",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 332
+         }
+        },
+        {
+         "name": "AMOR_HYST",
+         "kind": "simple",
+         "path": "MATER_SOL/AMOR_HYST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "val_max": 1.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 333
+         }
+        }
+       ]
+      },
+      {
+       "name": "MATER_FLUIDE",
+       "kind": "factor",
+       "path": "MATER_FLUIDE",
+       "status": "f",
+       "fr": "Propriétés du fluide (requis si ISSF='OUI')",
+       "other": {
+        "condition": "is_in(\"ISSF\", ('OUI'))"
+       },
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 335
+       },
+       "keywords": [
+        {
+         "name": "RHO",
+         "kind": "simple",
+         "path": "MATER_FLUIDE/RHO",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 339
+         }
+        },
+        {
+         "name": "CELE",
+         "kind": "simple",
+         "path": "MATER_FLUIDE/CELE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 340
+         }
+        },
+        {
+         "name": "AMOR_BETA",
+         "kind": "simple",
+         "path": "MATER_FLUIDE/AMOR_BETA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "val_max": 1.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 341
+         }
+        },
+        {
+         "name": "DEMI_ESPACE",
+         "kind": "simple",
+         "path": "MATER_FLUIDE/DEMI_ESPACE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": "Demi-espace de fluide avec surface libre ou non",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 342
+         }
+        }
+       ]
+      },
+      {
+       "name": "GROUP_MA_INTERF",
+       "kind": "simple",
+       "path": "GROUP_MA_INTERF",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "fr": "Groupe de mailles de l'interface",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 350
+       }
+      },
+      {
+       "name": "GROUP_MA_SOL_SOL",
+       "kind": "simple",
+       "path": "GROUP_MA_SOL_SOL",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "fr": "Groupe de mailles sol-sol",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 353
+       }
+      },
+      {
+       "name": "GROUP_MA_FLU_STR",
+       "kind": "simple",
+       "path": "GROUP_MA_FLU_STR",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "fr": "Groupe de mailles fluide-structure",
+       "other": {
+        "condition": "is_in(\"ISSF\", ('OUI'))"
+       },
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 356
+       }
+      },
+      {
+       "name": "GROUP_MA_FLU_SOL",
+       "kind": "simple",
+       "path": "GROUP_MA_FLU_SOL",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "fr": "Groupe de mailles fluide-sol",
+       "other": {
+        "condition": "is_in(\"ISSF\", ('OUI'))"
+       },
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 363
+       }
+      },
+      {
+       "name": "SOURCE_SOL",
+       "kind": "factor",
+       "path": "SOURCE_SOL",
+       "status": "f",
+       "max": "**",
+       "fr": "Source ponctuelle dans le sol",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 370
+       },
+       "keywords": [
+        {
+         "name": "POINT",
+         "kind": "simple",
+         "path": "SOURCE_SOL/POINT",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": "Position de la source",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 374
+         }
+        },
+        {
+         "name": "DIRECTION",
+         "kind": "simple",
+         "path": "SOURCE_SOL/DIRECTION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": "Direction de la source",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 375
+         }
+        }
+       ]
+      },
+      {
+       "name": "SOURCE_FLUIDE",
+       "kind": "factor",
+       "path": "SOURCE_FLUIDE",
+       "status": "f",
+       "max": "**",
+       "fr": "Source ponctuelle dans le fluide",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 377
+       },
+       "keywords": [
+        {
+         "name": "POINT",
+         "kind": "simple",
+         "path": "SOURCE_FLUIDE/POINT",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": "Position de la source",
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 381
+         }
+        }
+       ]
+      },
+      {
+       "name": "PARAMETRE",
+       "kind": "factor",
+       "path": "PARAMETRE",
+       "status": "f",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "PRESENT_PRESENT",
+         "keywords": [
+          "OFFSET_MAX",
+          "OFFSET_NB"
+         ]
+        },
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "FREQ_MIN",
+          "LIST_FREQ",
+          "FREQ_IMAG",
+          "FREQ"
+         ]
+        },
+        {
+         "rule": "PRESENT_PRESENT",
+         "keywords": [
+          "FREQ_MIN",
+          "FREQ_MAX",
+          "FREQ_PAS"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 383
+       },
+       "keywords": [
+        {
+         "name": "FREQ_MIN",
+         "kind": "simple",
+         "path": "PARAMETRE/FREQ_MIN",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 390
+         }
+        },
+        {
+         "name": "FREQ_MAX",
+         "kind": "simple",
+         "path": "PARAMETRE/FREQ_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 391
+         }
+        },
+        {
+         "name": "FREQ_PAS",
+         "kind": "simple",
+         "path": "PARAMETRE/FREQ_PAS",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 392
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "PARAMETRE/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 393
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "PARAMETRE/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 394
+         }
+        },
+        {
+         "name": "FREQ_IMAG",
+         "kind": "simple",
+         "path": "PARAMETRE/FREQ_IMAG",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 395
+         }
+        },
+        {
+         "name": "Z0",
+         "kind": "simple",
+         "path": "PARAMETRE/Z0",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 396
+         }
+        },
+        {
+         "name": "TYPE",
+         "kind": "simple",
+         "path": "PARAMETRE/TYPE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "ASCII",
+         "into": [
+          "BINAIRE",
+          "ASCII"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 397
+         }
+        },
+        {
+         "name": "ALLU",
+         "kind": "simple",
+         "path": "PARAMETRE/ALLU",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 398
+         }
+        },
+        {
+         "name": "SURF",
+         "kind": "simple",
+         "path": "PARAMETRE/SURF",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 399
+         }
+        },
+        {
+         "name": "DREF",
+         "kind": "simple",
+         "path": "PARAMETRE/DREF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 400
+         }
+        },
+        {
+         "name": "OFFSET_MAX",
+         "kind": "simple",
+         "path": "PARAMETRE/OFFSET_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 401
+         }
+        },
+        {
+         "name": "OFFSET_NB",
+         "kind": "simple",
+         "path": "PARAMETRE/OFFSET_NB",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 402
+         }
+        },
+        {
+         "name": "AUTO",
+         "kind": "simple",
+         "path": "PARAMETRE/AUTO",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 403
+         }
+        },
+        {
+         "name": "b_auto",
+         "kind": "bloc",
+         "path": "PARAMETRE/[b_auto]",
+         "condition": "equal_to(\"AUTO\", 'OUI')",
+         "fr": null,
+         "rules": [
+          {
+           "rule": "ENSEMBLE",
+           "keywords": [
+            "SPEC_MAX",
+            "SPEC_NB"
+           ]
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 404
+         },
+         "keywords": [
+          {
+           "name": "OPTION_DREF",
+           "kind": "simple",
+           "path": "PARAMETRE/OPTION_DREF",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "NON",
+           "into": [
+            "OUI",
+            "NON"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 407
+           }
+          },
+          {
+           "name": "OPTION_RFIC",
+           "kind": "simple",
+           "path": "PARAMETRE/OPTION_RFIC",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "NON",
+           "into": [
+            "OUI",
+            "NON"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 408
+           }
+          },
+          {
+           "name": "RFIC",
+           "kind": "simple",
+           "path": "PARAMETRE/RFIC",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 409
+           }
+          },
+          {
+           "name": "SPEC_MAX",
+           "kind": "simple",
+           "path": "PARAMETRE/SPEC_MAX",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 410
+           }
+          },
+          {
+           "name": "SPEC_NB",
+           "kind": "simple",
+           "path": "PARAMETRE/SPEC_NB",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 411
+           }
+          },
+          {
+           "name": "COEF_OFFSET",
+           "kind": "simple",
+           "path": "PARAMETRE/COEF_OFFSET",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "default": 12,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 412
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_noauto",
+         "kind": "bloc",
+         "path": "PARAMETRE/[b_noauto]",
+         "condition": "equal_to(\"AUTO\", 'NON')",
+         "fr": null,
+         "rules": [
+          {
+           "rule": "ENSEMBLE",
+           "keywords": [
+            "SPEC_MAX",
+            "SPEC_NB"
+           ]
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 414
+         },
+         "keywords": [
+          {
+           "name": "ALGO",
+           "kind": "simple",
+           "path": "PARAMETRE/ALGO",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "into": [
+            "DEPL",
+            "REGU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 417
+           }
+          },
+          {
+           "name": "RFIC",
+           "kind": "simple",
+           "path": "PARAMETRE/RFIC",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 418
+           }
+          },
+          {
+           "name": "SPEC_MAX",
+           "kind": "simple",
+           "path": "PARAMETRE/SPEC_MAX",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 419
+           }
+          },
+          {
+           "name": "SPEC_NB",
+           "kind": "simple",
+           "path": "PARAMETRE/SPEC_NB",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 420
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_issf",
+   "kind": "bloc",
+   "path": "[b_issf]",
+   "condition": "not is_in(\"TYPE_RESU\", ('CHARGE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 426
+   },
+   "keywords": [
+    {
+     "name": "ISSF",
+     "kind": "simple",
+     "path": "ISSF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 428
+     }
+    }
+   ]
+  },
+  {
+   "name": "param_impe",
+   "kind": "bloc",
+   "path": "[param_impe]",
+   "condition": "equal_to(\"TYPE_RESU\", ('FICHIER','TABLE_CONTROL','FICHIER_TEMPS','TABLE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 431
+   },
+   "keywords": [
+    {
+     "name": "PARAMETRE",
+     "kind": "factor",
+     "path": "PARAMETRE",
+     "status": "f",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "OFFSET_MAX",
+        "OFFSET_NB"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FREQ_MIN",
+        "LIST_FREQ",
+        "FREQ_IMAG",
+        "FREQ"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "FREQ_MIN",
+        "FREQ_MAX",
+        "FREQ_PAS"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 433
+     },
+     "keywords": [
+      {
+       "name": "FREQ_MIN",
+       "kind": "simple",
+       "path": "PARAMETRE/FREQ_MIN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 440
+       }
+      },
+      {
+       "name": "FREQ_MAX",
+       "kind": "simple",
+       "path": "PARAMETRE/FREQ_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 441
+       }
+      },
+      {
+       "name": "FREQ_PAS",
+       "kind": "simple",
+       "path": "PARAMETRE/FREQ_PAS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 442
+       }
+      },
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "PARAMETRE/FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 443
+       }
+      },
+      {
+       "name": "LIST_FREQ",
+       "kind": "simple",
+       "path": "PARAMETRE/LIST_FREQ",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 444
+       }
+      },
+      {
+       "name": "FREQ_IMAG",
+       "kind": "simple",
+       "path": "PARAMETRE/FREQ_IMAG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 445
+       }
+      },
+      {
+       "name": "Z0",
+       "kind": "simple",
+       "path": "PARAMETRE/Z0",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 446
+       }
+      },
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "PARAMETRE/TYPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ASCII",
+       "into": [
+        "BINAIRE",
+        "ASCII"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 447
+       }
+      },
+      {
+       "name": "ALLU",
+       "kind": "simple",
+       "path": "PARAMETRE/ALLU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 448
+       }
+      },
+      {
+       "name": "SURF",
+       "kind": "simple",
+       "path": "PARAMETRE/SURF",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 449
+       }
+      },
+      {
+       "name": "DREF",
+       "kind": "simple",
+       "path": "PARAMETRE/DREF",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 450
+       }
+      },
+      {
+       "name": "OFFSET_MAX",
+       "kind": "simple",
+       "path": "PARAMETRE/OFFSET_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 451
+       }
+      },
+      {
+       "name": "OFFSET_NB",
+       "kind": "simple",
+       "path": "PARAMETRE/OFFSET_NB",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 452
+       }
+      },
+      {
+       "name": "AUTO",
+       "kind": "simple",
+       "path": "PARAMETRE/AUTO",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 453
+       }
+      },
+      {
+       "name": "b_auto",
+       "kind": "bloc",
+       "path": "PARAMETRE/[b_auto]",
+       "condition": "equal_to(\"AUTO\", 'OUI')",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "ENSEMBLE",
+         "keywords": [
+          "SPEC_MAX",
+          "SPEC_NB"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 454
+       },
+       "keywords": [
+        {
+         "name": "OPTION_DREF",
+         "kind": "simple",
+         "path": "PARAMETRE/OPTION_DREF",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 457
+         }
+        },
+        {
+         "name": "OPTION_RFIC",
+         "kind": "simple",
+         "path": "PARAMETRE/OPTION_RFIC",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 458
+         }
+        },
+        {
+         "name": "RFIC",
+         "kind": "simple",
+         "path": "PARAMETRE/RFIC",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 459
+         }
+        },
+        {
+         "name": "SPEC_MAX",
+         "kind": "simple",
+         "path": "PARAMETRE/SPEC_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 460
+         }
+        },
+        {
+         "name": "SPEC_NB",
+         "kind": "simple",
+         "path": "PARAMETRE/SPEC_NB",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 461
+         }
+        },
+        {
+         "name": "COEF_OFFSET",
+         "kind": "simple",
+         "path": "PARAMETRE/COEF_OFFSET",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 12,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 462
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_noauto",
+       "kind": "bloc",
+       "path": "PARAMETRE/[b_noauto]",
+       "condition": "equal_to(\"AUTO\", 'NON')",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "ENSEMBLE",
+         "keywords": [
+          "SPEC_MAX",
+          "SPEC_NB"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 464
+       },
+       "keywords": [
+        {
+         "name": "ALGO",
+         "kind": "simple",
+         "path": "PARAMETRE/ALGO",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "DEPL",
+          "REGU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 467
+         }
+        },
+        {
+         "name": "RFIC",
+         "kind": "simple",
+         "path": "PARAMETRE/RFIC",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 468
+         }
+        },
+        {
+         "name": "SPEC_MAX",
+         "kind": "simple",
+         "path": "PARAMETRE/SPEC_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 469
+         }
+        },
+        {
+         "name": "SPEC_NB",
+         "kind": "simple",
+         "path": "PARAMETRE/SPEC_NB",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 470
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_post_harm_gene",
+   "kind": "bloc",
+   "path": "[b_post_harm_gene]",
+   "condition": "is_in(\"TYPE_RESU\", ('HARM_GENE', 'TRAN_GENE'))",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "EXCIT_GENE",
+      "EXCIT_FORC",
+      "EXCIT_MONO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 474
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 480
+     }
+    },
+    {
+     "name": "TYPE_EXCIT",
+     "kind": "simple",
+     "path": "TYPE_EXCIT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "INST",
+      "FREQ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 481
+     }
+    },
+    {
+     "name": "bloc_interpol",
+     "kind": "bloc",
+     "path": "[bloc_interpol]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 482
+     },
+     "keywords": [
+      {
+       "name": "INTERPOL",
+       "kind": "simple",
+       "path": "INTERPOL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 484
+       }
+      }
+     ]
+    },
+    {
+     "name": "bloc_para_interpol",
+     "kind": "bloc",
+     "path": "[bloc_para_interpol]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST')) and (equal_to(\"INTERPOL\", 'OUI'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 486
+     },
+     "keywords": [
+      {
+       "name": "PAS_INST",
+       "kind": "simple",
+       "path": "PAS_INST",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 488
+       }
+      },
+      {
+       "name": "INST_FIN",
+       "kind": "simple",
+       "path": "INST_FIN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 489
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_excitm_inst",
+     "kind": "bloc",
+     "path": "[b_excitm_inst]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 491
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_MONO",
+       "kind": "factor",
+       "path": "EXCIT_MONO",
+       "status": "f",
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 493
+       },
+       "keywords": [
+        {
+         "name": "DIRECTION",
+         "kind": "simple",
+         "path": "EXCIT_MONO/DIRECTION",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 496
+         }
+        },
+        {
+         "name": "ACCE",
+         "kind": "simple",
+         "path": "EXCIT_MONO/ACCE",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 497
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_excitm_freq",
+     "kind": "bloc",
+     "path": "[b_excitm_freq]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'FREQ'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 500
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_MONO",
+       "kind": "factor",
+       "path": "EXCIT_MONO",
+       "status": "f",
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 502
+       },
+       "keywords": [
+        {
+         "name": "DIRECTION",
+         "kind": "simple",
+         "path": "EXCIT_MONO/DIRECTION",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 505
+         }
+        },
+        {
+         "name": "ACCE",
+         "kind": "simple",
+         "path": "EXCIT_MONO/ACCE",
+         "status": "f",
+         "type": [
+          "fonction_c",
+          "formule_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 506
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "EXCIT_GENE",
+     "kind": "factor",
+     "path": "EXCIT_GENE",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VECT_ASSE",
+        "CHARGE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "FONC_MULT",
+        "FONC_MULT_C",
+        "COEF_MULT",
+        "COEF_MULT_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 509
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT_GENE/CHARGE",
+       "status": "f",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 516
+       }
+      },
+      {
+       "name": "VECT_ASSE",
+       "kind": "simple",
+       "path": "EXCIT_GENE/VECT_ASSE",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 517
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT_GENE/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 518
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "EXCIT_GENE/COEF_MULT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 519
+       }
+      },
+      {
+       "name": "FONC_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT_GENE/FONC_MULT_C",
+       "status": "f",
+       "type": [
+        "fonction_c",
+        "formule_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 520
+       }
+      },
+      {
+       "name": "COEF_MULT_C",
+       "kind": "simple",
+       "path": "EXCIT_GENE/COEF_MULT_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 521
+       }
+      },
+      {
+       "name": "PHAS_DEG",
+       "kind": "simple",
+       "path": "EXCIT_GENE/PHAS_DEG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 522
+       }
+      },
+      {
+       "name": "PUIS_PULS",
+       "kind": "simple",
+       "path": "EXCIT_GENE/PUIS_PULS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 523
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_inst",
+     "kind": "bloc",
+     "path": "[b_excitf_inst]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 525
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "rules": [
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "ACCE_X",
+          "ACCE_Y",
+          "ACCE_Z",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_X",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_Y",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_Z",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 527
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 536
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 537
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 538
+         }
+        },
+        {
+         "name": "DEPL_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_X",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 539
+         }
+        },
+        {
+         "name": "DEPL_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_Y",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 540
+         }
+        },
+        {
+         "name": "DEPL_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_Z",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 541
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "EXCIT_FORC/GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 542
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_freq",
+     "kind": "bloc",
+     "path": "[b_excitf_freq]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'FREQ'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 545
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "rules": [
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "ACCE_X",
+          "ACCE_Y",
+          "ACCE_Z",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_X",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_Y",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        },
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "ACCE_Z",
+          "DEPL_X",
+          "DEPL_Y",
+          "DEPL_Z"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 547
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 556
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 557
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 558
+         }
+        },
+        {
+         "name": "DEPL_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_X",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 559
+         }
+        },
+        {
+         "name": "DEPL_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_Y",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 560
+         }
+        },
+        {
+         "name": "DEPL_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/DEPL_Z",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 561
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "EXCIT_FORC/GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 562
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "bloc_list_freq_calc",
+     "kind": "bloc",
+     "path": "[bloc_list_freq_calc]",
+     "condition": "equal_to(\"TYPE_RESU\", 'HARM_GENE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 565
+     },
+     "keywords": [
+      {
+       "name": "LIST_FREQ_CALC",
+       "kind": "factor",
+       "path": "LIST_FREQ_CALC",
+       "status": "o",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 567
+       },
+       "keywords": [
+        {
+         "name": "AUTO",
+         "kind": "simple",
+         "path": "LIST_FREQ_CALC/AUTO",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 570
+         }
+        },
+        {
+         "name": "bloc_nonauto_freq",
+         "kind": "bloc",
+         "path": "LIST_FREQ_CALC/[bloc_nonauto_freq]",
+         "condition": "(equal_to(\"AUTO\", 'NON'))",
+         "fr": null,
+         "rules": [
+          {
+           "rule": "UN_PARMI",
+           "keywords": [
+            "FREQ_MIN",
+            "LIST_FREQ",
+            "FREQ"
+           ]
+          },
+          {
+           "rule": "PRESENT_PRESENT",
+           "keywords": [
+            "FREQ_MIN",
+            "FREQ_MAX",
+            "FREQ_PAS"
+           ]
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 571
+         },
+         "keywords": [
+          {
+           "name": "FREQ_MIN",
+           "kind": "simple",
+           "path": "LIST_FREQ_CALC/FREQ_MIN",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 577
+           }
+          },
+          {
+           "name": "FREQ_MAX",
+           "kind": "simple",
+           "path": "LIST_FREQ_CALC/FREQ_MAX",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 578
+           }
+          },
+          {
+           "name": "FREQ_PAS",
+           "kind": "simple",
+           "path": "LIST_FREQ_CALC/FREQ_PAS",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 579
+           }
+          },
+          {
+           "name": "FREQ",
+           "kind": "simple",
+           "path": "LIST_FREQ_CALC/FREQ",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 580
+           }
+          },
+          {
+           "name": "LIST_FREQ",
+           "kind": "simple",
+           "path": "LIST_FREQ_CALC/LIST_FREQ",
+           "status": "f",
+           "type": [
+            "listr8_sdaster"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_miss.py",
+            "line": 581
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_post_table",
+   "kind": "bloc",
+   "path": "[b_post_table]",
+   "condition": "equal_to(\"TYPE_RESU\", 'TABLE')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "INST_FIN",
+      "PAS_INST"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "NORME",
+      "AMOR_SPEC_OSCI"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 586
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": "Liste des groupes de noeud de post-traitement",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 589
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 592
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "NORME",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Valeur de la norme du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 593
+     }
+    },
+    {
+     "name": "AMOR_SPEC_OSCI",
+     "kind": "simple",
+     "path": "AMOR_SPEC_OSCI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": "Amortissement du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 594
+     }
+    },
+    {
+     "name": "LIST_FREQ_SPEC_OSCI",
+     "kind": "simple",
+     "path": "LIST_FREQ_SPEC_OSCI",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": "Fréquences utilisées pour le calcul du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 597
+     }
+    },
+    {
+     "name": "TOUT_CHAM",
+     "kind": "simple",
+     "path": "TOUT_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 602
+     }
+    },
+    {
+     "name": "TYPE_EXCIT",
+     "kind": "simple",
+     "path": "TYPE_EXCIT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "INST",
+      "FREQ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 603
+     }
+    },
+    {
+     "name": "bloc_interpoltc",
+     "kind": "bloc",
+     "path": "[bloc_interpoltc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 604
+     },
+     "keywords": [
+      {
+       "name": "INTERPOL",
+       "kind": "simple",
+       "path": "INTERPOL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 606
+       }
+      }
+     ]
+    },
+    {
+     "name": "bloc_para_interpoltc",
+     "kind": "bloc",
+     "path": "[bloc_para_interpoltc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST')) and (equal_to(\"INTERPOL\", 'OUI'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 608
+     },
+     "keywords": [
+      {
+       "name": "PAS_INST",
+       "kind": "simple",
+       "path": "PAS_INST",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 610
+       }
+      },
+      {
+       "name": "INST_FIN",
+       "kind": "simple",
+       "path": "INST_FIN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 611
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_insttc",
+     "kind": "bloc",
+     "path": "[b_excitf_insttc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 613
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 615
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 618
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 619
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 620
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_freqtc",
+     "kind": "bloc",
+     "path": "[b_excitf_freqtc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'FREQ'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 623
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 625
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 628
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 629
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 630
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_post_control",
+   "kind": "bloc",
+   "path": "[b_post_control]",
+   "condition": "equal_to(\"TYPE_RESU\", 'TABLE_CONTROL')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "INST_FIN",
+      "PAS_INST"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "NORME",
+      "AMOR_SPEC_OSCI"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 635
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_CONTROL",
+     "kind": "simple",
+     "path": "GROUP_MA_CONTROL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": "Groupe de mailles des points de contrôle",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 638
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "NORME",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Valeur de la norme du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 641
+     }
+    },
+    {
+     "name": "AMOR_SPEC_OSCI",
+     "kind": "simple",
+     "path": "AMOR_SPEC_OSCI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": "Amortissement du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 642
+     }
+    },
+    {
+     "name": "LIST_FREQ_SPEC_OSCI",
+     "kind": "simple",
+     "path": "LIST_FREQ_SPEC_OSCI",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": "Fréquences utilisées pour le calcul du spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 645
+     }
+    },
+    {
+     "name": "TOUT_CHAM",
+     "kind": "simple",
+     "path": "TOUT_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 650
+     }
+    },
+    {
+     "name": "TYPE_EXCIT",
+     "kind": "simple",
+     "path": "TYPE_EXCIT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "INST",
+      "FREQ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 651
+     }
+    },
+    {
+     "name": "bloc_interpoltc",
+     "kind": "bloc",
+     "path": "[bloc_interpoltc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 652
+     },
+     "keywords": [
+      {
+       "name": "INTERPOL",
+       "kind": "simple",
+       "path": "INTERPOL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 654
+       }
+      }
+     ]
+    },
+    {
+     "name": "bloc_para_interpoltc",
+     "kind": "bloc",
+     "path": "[bloc_para_interpoltc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST')) and (equal_to(\"INTERPOL\", 'OUI'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 656
+     },
+     "keywords": [
+      {
+       "name": "PAS_INST",
+       "kind": "simple",
+       "path": "PAS_INST",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 658
+       }
+      },
+      {
+       "name": "INST_FIN",
+       "kind": "simple",
+       "path": "INST_FIN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 659
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_insttc",
+     "kind": "bloc",
+     "path": "[b_excitf_insttc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'INST'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 661
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 663
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 666
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 667
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 668
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_excitf_freqtc",
+     "kind": "bloc",
+     "path": "[b_excitf_freqtc]",
+     "condition": "(equal_to(\"TYPE_EXCIT\", 'FREQ'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 671
+     },
+     "keywords": [
+      {
+       "name": "EXCIT_FORC",
+       "kind": "factor",
+       "path": "EXCIT_FORC",
+       "status": "f",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 673
+       },
+       "keywords": [
+        {
+         "name": "ACCE_X",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_X",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 676
+         }
+        },
+        {
+         "name": "ACCE_Y",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Y",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 677
+         }
+        },
+        {
+         "name": "ACCE_Z",
+         "kind": "simple",
+         "path": "EXCIT_FORC/ACCE_Z",
+         "status": "f",
+         "type": [
+          "fonction_c"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 678
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_charge",
+   "kind": "bloc",
+   "path": "[b_charge]",
+   "condition": "equal_to(\"TYPE_RESU\", 'CHARGE')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NOEUD_AFFE",
+      "GROUP_NO_AFFE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 683
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 686
+     }
+    },
+    {
+     "name": "FONC_SIGNAL",
+     "kind": "simple",
+     "path": "FONC_SIGNAL",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 687
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DX",
+      "DY",
+      "DZ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 688
+     }
+    },
+    {
+     "name": "ISSF",
+     "kind": "simple",
+     "path": "ISSF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 689
+     }
+    },
+    {
+     "name": "NOEUD_AFFE",
+     "kind": "simple",
+     "path": "NOEUD_AFFE",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 690
+     }
+    },
+    {
+     "name": "GROUP_NO_AFFE",
+     "kind": "simple",
+     "path": "GROUP_NO_AFFE",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 691
+     }
+    },
+    {
+     "name": "UNITE_RESU_FORC",
+     "kind": "simple",
+     "path": "UNITE_RESU_FORC",
+     "status": "o",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 692
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 693
+     }
+    },
+    {
+     "name": "VARI",
+     "kind": "simple",
+     "path": "VARI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 694
+     }
+    },
+    {
+     "name": "MATR_GENE",
+     "kind": "factor",
+     "path": "MATR_GENE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 695
+     },
+     "keywords": [
+      {
+       "name": "BASE",
+       "kind": "simple",
+       "path": "MATR_GENE/BASE",
+       "status": "o",
+       "type": [
+        "mode_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 697
+       }
+      },
+      {
+       "name": "NUME_DDL_GENE",
+       "kind": "simple",
+       "path": "MATR_GENE/NUME_DDL_GENE",
+       "status": "o",
+       "type": [
+        "nume_ddl_gene"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 698
+       }
+      }
+     ]
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.999,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 700
+     }
+    },
+    {
+     "name": "INTERF",
+     "kind": "factor",
+     "path": "INTERF",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 701
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO_INTERF",
+       "kind": "simple",
+       "path": "INTERF/GROUP_NO_INTERF",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 703
+       }
+      },
+      {
+       "name": "MODE_INTERF",
+       "kind": "simple",
+       "path": "INTERF/MODE_INTERF",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "CORP_RIGI",
+        "TOUT",
+        "QUELCONQUE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 704
+       }
+      }
+     ]
+    },
+    {
+     "name": "MATR_COHE",
+     "kind": "factor",
+     "path": "MATR_COHE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 706
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "MATR_COHE/TYPE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MITA_LUCO",
+        "ABRAHAMSON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 708
+       }
+      },
+      {
+       "name": "b_type_coh",
+       "kind": "bloc",
+       "path": "MATR_COHE/[b_type_coh]",
+       "condition": "equal_to(\"TYPE\", 'MITA_LUCO') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_miss.py",
+        "line": 709
+       },
+       "keywords": [
+        {
+         "name": "VITE_ONDE",
+         "kind": "simple",
+         "path": "MATR_COHE/VITE_ONDE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 600.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 711
+         }
+        },
+        {
+         "name": "PARA_ALPHA",
+         "kind": "simple",
+         "path": "MATR_COHE/PARA_ALPHA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.5,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_miss.py",
+          "line": 712
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "UNITE_RESU_IMPE",
+     "kind": "simple",
+     "path": "UNITE_RESU_IMPE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 715
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ASCII",
+     "into": [
+      "BINAIRE",
+      "ASCII"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_miss.py",
+      "line": 716
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_miss.py",
+    "line": 718
+   }
+  }
+ ]
+}

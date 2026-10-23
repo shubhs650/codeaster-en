@@ -1,0 +1,529 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DYNA_ISS_VARI",
+ "kind": "MACRO",
+ "fr": "Calcul du spectre de réponse ou de la reponse temporelle sismique incoherente par decomposition spectrale",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.dyna_iss_vari_ops.dyna_iss_vari_ops",
+ "reentrant": "n",
+ "result_types": [
+  "tran_gene",
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "EXCIT_SOL",
+    "NB_FREQ"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "EXCIT_SOL",
+   "kind": "factor",
+   "path": "EXCIT_SOL",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "ACCE_X",
+      "ACCE_Y",
+      "ACCE_Z"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "ACCE_X",
+     "kind": "simple",
+     "path": "EXCIT_SOL/ACCE_X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "ACCE_Y",
+     "kind": "simple",
+     "path": "EXCIT_SOL/ACCE_Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "ACCE_Z",
+     "kind": "simple",
+     "path": "EXCIT_SOL/ACCE_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "NB_FREQ",
+   "kind": "simple",
+   "path": "NB_FREQ",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.999,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "ISSF",
+   "kind": "simple",
+   "path": "ISSF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "INTERF",
+   "kind": "factor",
+   "path": "INTERF",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO_INTERF",
+     "kind": "simple",
+     "path": "INTERF/GROUP_NO_INTERF",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "MODE_INTERF",
+     "kind": "simple",
+     "path": "INTERF/MODE_INTERF",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CORP_RIGI",
+      "TOUT",
+      "QUELCONQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "MATR_COHE",
+   "kind": "factor",
+   "path": "MATR_COHE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "MATR_COHE/TYPE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "MITA_LUCO",
+      "ABRAHAMSON",
+      "ABRA_ROCHER",
+      "ABRA_SOLMOYEN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "b_type_coh",
+     "kind": "bloc",
+     "path": "MATR_COHE/[b_type_coh]",
+     "condition": "equal_to(\"TYPE\", 'MITA_LUCO') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 66
+     },
+     "keywords": [
+      {
+       "name": "VITE_ONDE",
+       "kind": "simple",
+       "path": "MATR_COHE/VITE_ONDE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+        "line": 68
+       }
+      },
+      {
+       "name": "PARA_ALPHA",
+       "kind": "simple",
+       "path": "MATR_COHE/PARA_ALPHA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+        "line": 69
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "UNITE_RESU_FORC",
+   "kind": "simple",
+   "path": "UNITE_RESU_FORC",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 33,
+   "inout": "in",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "UNITE_RESU_IMPE",
+   "kind": "simple",
+   "path": "UNITE_RESU_IMPE",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 32,
+   "inout": "in",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "TYPE",
+   "kind": "simple",
+   "path": "TYPE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ASCII",
+   "into": [
+    "BINAIRE",
+    "ASCII"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "MATR_GENE",
+   "kind": "factor",
+   "path": "MATR_GENE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 78
+   },
+   "keywords": [
+    {
+     "name": "MATR_MASS",
+     "kind": "simple",
+     "path": "MATR_GENE/MATR_MASS",
+     "status": "o",
+     "type": [
+      "matr_asse_gene_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "MATR_RIGI",
+     "kind": "simple",
+     "path": "MATR_GENE/MATR_RIGI",
+     "status": "o",
+     "type": [
+      "matr_asse_gene_r",
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "MATR_AMOR",
+     "kind": "simple",
+     "path": "MATR_GENE/MATR_AMOR",
+     "status": "f",
+     "type": [
+      "matr_asse_gene_r",
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "b_type_trans",
+   "kind": "bloc",
+   "path": "[b_type_trans]",
+   "condition": "exists(\"EXCIT_SOL\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "FREQ_MAX",
+      "FREQ_PAS"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 90
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_type_spec",
+   "kind": "bloc",
+   "path": "[b_type_spec]",
+   "condition": "exists(\"NB_FREQ\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+    "line": 93
+   },
+   "keywords": [
+    {
+     "name": "FREQ_INIT",
+     "kind": "simple",
+     "path": "FREQ_INIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "FREQ_PAS",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TOUT",
+     "into": [
+      "TOUT",
+      "DIAG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DX",
+      "DY",
+      "DZ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_iss_vari.py",
+      "line": 98
+     }
+    }
+   ]
+  }
+ ]
+}

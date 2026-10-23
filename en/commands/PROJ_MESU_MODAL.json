@@ -1,0 +1,338 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "PROJ_MESU_MODAL",
+ "kind": "OPER",
+ "fr": "Calcul des coordonnees généralisees de mesure experimentale relatives a une base de projection",
+ "translation_upstream": null,
+ "op": 193,
+ "reentrant": "n",
+ "result_types": [
+  "tran_gene",
+  "harm_gene",
+  "mode_gene"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+  "line": 44
+ },
+ "keywords": [
+  {
+   "name": "MODELE_CALCUL",
+   "kind": "factor",
+   "path": "MODELE_CALCUL",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "BASE",
+     "kind": "simple",
+     "path": "MODELE_CALCUL/BASE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 56
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODELE_MESURE",
+   "kind": "factor",
+   "path": "MODELE_MESURE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+    "line": 58
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "MESURE",
+     "kind": "simple",
+     "path": "MODELE_MESURE/MESURE",
+     "status": "o",
+     "type": [
+      "dyna_trans",
+      "dyna_harmo",
+      "mode_meca",
+      "mode_meca_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "MODELE_MESURE/NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": "DEPL",
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE",
+      "SIEF_NOEU",
+      "EPSI_NOEU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 63
+     }
+    }
+   ]
+  },
+  {
+   "name": "CORR_MANU",
+   "kind": "factor",
+   "path": "CORR_MANU",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "NOEU_CALCUL",
+      "NOEU_MESURE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+    "line": 71
+   },
+   "keywords": [
+    {
+     "name": "NOEU_CALCUL",
+     "kind": "simple",
+     "path": "CORR_MANU/NOEU_CALCUL",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "NOEU_MESURE",
+     "kind": "simple",
+     "path": "CORR_MANU/NOEU_MESURE",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 76
+     }
+    }
+   ]
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "RESOLUTION",
+   "kind": "factor",
+   "path": "RESOLUTION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "RESOLUTION/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LU",
+     "into": [
+      "LU",
+      "SVD"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "b_svd",
+     "kind": "bloc",
+     "path": "RESOLUTION/[b_svd]",
+     "condition": "equal_to(\"METHODE\", 'SVD')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 82
+     },
+     "keywords": [
+      {
+       "name": "EPS",
+       "kind": "simple",
+       "path": "RESOLUTION/EPS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+        "line": 83
+       }
+      }
+     ]
+    },
+    {
+     "name": "REGUL",
+     "kind": "simple",
+     "path": "RESOLUTION/REGUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "NORM_MIN",
+      "TIK_RELA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "b_regul",
+     "kind": "bloc",
+     "path": "RESOLUTION/[b_regul]",
+     "condition": "not equal_to(\"REGUL\", 'NON')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "COEF_PONDER",
+        "COEF_PONDER_F"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+      "line": 86
+     },
+     "keywords": [
+      {
+       "name": "COEF_PONDER",
+       "kind": "simple",
+       "path": "RESOLUTION/COEF_PONDER",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "COEF_PONDER_F",
+       "kind": "simple",
+       "path": "RESOLUTION/COEF_PONDER_F",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_mesu_modal.py",
+        "line": 90
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

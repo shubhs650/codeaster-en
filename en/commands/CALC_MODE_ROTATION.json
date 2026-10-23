@@ -1,0 +1,375 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_MODE_ROTATION",
+ "kind": "MACRO",
+ "fr": "calculer les fréquences et modes d'un système en fonction des vitesses de rotation",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_mode_rotation_ops.calc_mode_rotation_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_container"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "MATR_RIGI",
+   "kind": "simple",
+   "path": "MATR_RIGI",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "MATR_MASS",
+   "kind": "simple",
+   "path": "MATR_MASS",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "MATR_AMOR",
+   "kind": "simple",
+   "path": "MATR_AMOR",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "MATR_GYRO",
+   "kind": "simple",
+   "path": "MATR_GYRO",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "VITE_ROTA",
+   "kind": "simple",
+   "path": "VITE_ROTA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "QZ",
+   "into": [
+    "QZ",
+    "SORENSEN"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "CALC_FREQ",
+   "kind": "factor",
+   "path": "CALC_FREQ",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 41
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "CALC_FREQ/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PLUS_PETITE",
+     "into": [
+      "PLUS_PETITE",
+      "CENTRE"
+     ],
+     "fr": "Choix de l option et par conséquent du shift du problème modal",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "b_plus_petite",
+     "kind": "bloc",
+     "path": "CALC_FREQ/[b_plus_petite]",
+     "condition": "equal_to(\"OPTION\", 'PLUS_PETITE')",
+     "fr": "Recherche des plus petites valeurs propres",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 50
+     },
+     "keywords": [
+      {
+       "name": "NMAX_FREQ",
+       "kind": "simple",
+       "path": "CALC_FREQ/NMAX_FREQ",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 0,
+       "default": 10,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 53
+       }
+      },
+      {
+       "name": "SEUIL_FREQ",
+       "kind": "simple",
+       "path": "CALC_FREQ/SEUIL_FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.01,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 54
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_centre",
+     "kind": "bloc",
+     "path": "CALC_FREQ/[b_centre]",
+     "condition": "equal_to(\"OPTION\", 'CENTRE')",
+     "fr": "Recherche des valeurs propres les plus proches d une valeur donnée",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 56
+     },
+     "keywords": [
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "CALC_FREQ/FREQ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Fréquence autour de laquelle on cherche les fréquences propres",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 59
+       }
+      },
+      {
+       "name": "AMOR_REDUIT",
+       "kind": "simple",
+       "path": "CALC_FREQ/AMOR_REDUIT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 64
+       }
+      },
+      {
+       "name": "NMAX_FREQ",
+       "kind": "simple",
+       "path": "CALC_FREQ/NMAX_FREQ",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 0,
+       "default": 10,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 65
+       }
+      },
+      {
+       "name": "SEUIL_FREQ",
+       "kind": "simple",
+       "path": "CALC_FREQ/SEUIL_FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.01,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+        "line": 66
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "VERI_MODE",
+   "kind": "factor",
+   "path": "VERI_MODE",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+    "line": 69
+   },
+   "keywords": [
+    {
+     "name": "STOP_ERREUR",
+     "kind": "simple",
+     "path": "VERI_MODE/STOP_ERREUR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "SEUIL",
+     "kind": "simple",
+     "path": "VERI_MODE/SEUIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "PREC_SHIFT",
+     "kind": "simple",
+     "path": "VERI_MODE/PREC_SHIFT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.005,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "STURM",
+     "kind": "simple",
+     "path": "VERI_MODE/STURM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mode_rotation.py",
+      "line": 74
+     }
+    }
+   ]
+  }
+ ]
+}

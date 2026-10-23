@@ -1,0 +1,265 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_FLUI_STRU",
+ "kind": "OPER",
+ "fr": "Calculer les paramètres modaux d'une structure soumise à un écoulement",
+ "translation_upstream": null,
+ "op": 144,
+ "reentrant": "n",
+ "result_types": [
+  "melasflu_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "VITE_FLUI",
+   "kind": "factor",
+   "path": "VITE_FLUI",
+   "status": "f",
+   "fr": "Définir la plage de vitesse fluide étudiée",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "VITE_MIN",
+     "kind": "simple",
+     "path": "VITE_FLUI/VITE_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 35
+     }
+    },
+    {
+     "name": "VITE_MAX",
+     "kind": "simple",
+     "path": "VITE_FLUI/VITE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "NB_POIN",
+     "kind": "simple",
+     "path": "VITE_FLUI/NB_POIN",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 37
+     }
+    }
+   ]
+  },
+  {
+   "name": "BASE_MODALE",
+   "kind": "factor",
+   "path": "BASE_MODALE",
+   "status": "o",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "AMOR_REDUIT",
+      "AMOR_UNIF",
+      "AMOR_REDUIT_CONN"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "MODE_MECA",
+     "kind": "simple",
+     "path": "BASE_MODALE/MODE_MECA",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "BASE_MODALE/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "BASE_MODALE/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "AMOR_UNIF",
+     "kind": "simple",
+     "path": "BASE_MODALE/AMOR_UNIF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "AMOR_REDUIT_CONN",
+     "kind": "simple",
+     "path": "BASE_MODALE/AMOR_REDUIT_CONN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 46
+     }
+    }
+   ]
+  },
+  {
+   "name": "TYPE_FLUI_STRU",
+   "kind": "simple",
+   "path": "TYPE_FLUI_STRU",
+   "status": "o",
+   "type": [
+    "type_flui_stru"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "IMPRESSION",
+   "kind": "factor",
+   "path": "IMPRESSION",
+   "status": "f",
+   "fr": "Choix des informations à imprimer dans le fichier RESULTAT",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "PARA_COUPLAGE",
+     "kind": "simple",
+     "path": "IMPRESSION/PARA_COUPLAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "DEFORMEE",
+     "kind": "simple",
+     "path": "IMPRESSION/DEFORMEE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+      "line": 53
+     }
+    }
+   ]
+  },
+  {
+   "name": "STOP_ERREUR",
+   "kind": "simple",
+   "path": "STOP_ERREUR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_flui_stru.py",
+    "line": 55
+   }
+  }
+ ]
+}

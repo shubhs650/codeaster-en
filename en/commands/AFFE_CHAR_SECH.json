@@ -1,0 +1,231 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_char_sech.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_CHAR_SECH",
+ "kind": "OPER",
+ "fr": "Affectation de charges et conditions aux limites constantes pour le séchage",
+ "translation_upstream": {
+  "AFFE_CHAR_SECH": "Assign drying load"
+ },
+ "op": 34,
+ "reentrant": "n",
+ "result_types": [
+  "char_ther"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "SECH_IMPO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_char_sech.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_sech.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "DOUBLE_LAGRANGE",
+   "kind": "simple",
+   "path": "DOUBLE_LAGRANGE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_sech.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "SECH_IMPO",
+   "kind": "factor",
+   "path": "SECH_IMPO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_sech.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "SECH_IMPO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "SECH_IMPO/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "SECH_IMPO/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "SANS_GROUP_MA",
+     "kind": "simple",
+     "path": "SECH_IMPO/SANS_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "SECH_IMPO/SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "SECH",
+     "kind": "simple",
+     "path": "SECH_IMPO/SECH",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_char_sech.py",
+      "line": 44
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_char_sech.py",
+    "line": 46
+   }
+  }
+ ]
+}

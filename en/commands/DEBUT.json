@@ -1,0 +1,674 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/debut.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEBUT",
+ "kind": "MACRO",
+ "fr": "Initialisation des ressources, démarrage ou reprise d'un calcul.",
+ "translation_upstream": null,
+ "op": 0,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": true,
+ "repetable": "n",
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/debut.py",
+  "line": 45
+ },
+ "keywords": [
+  {
+   "name": "IMPR_MACRO",
+   "kind": "simple",
+   "path": "IMPR_MACRO",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "affichage des sous-commandes produites par les macros dans le fichier mess",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "BASE",
+   "kind": "factor",
+   "path": "BASE",
+   "status": "f",
+   "min": 1,
+   "max": 2,
+   "fr": "définition des paramètres associés aux bases JEVEUX",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 58
+   },
+   "keywords": [
+    {
+     "name": "FICHIER",
+     "kind": "simple",
+     "path": "BASE/FICHIER",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GLOBALE",
+      "VOLATILE"
+     ],
+     "fr": "nom de la base",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "TITRE",
+     "kind": "simple",
+     "path": "BASE/TITRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "CAS",
+     "kind": "simple",
+     "path": "BASE/CAS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "NMAX_ENRE",
+     "kind": "simple",
+     "path": "BASE/NMAX_ENRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": "nombre maximum d enregistrements",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "LONG_ENRE",
+     "kind": "simple",
+     "path": "BASE/LONG_ENRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": "longueur des enregistrements",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "LONG_REPE",
+     "kind": "simple",
+     "path": "BASE/LONG_REPE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": "longueur du répertoire",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "TAILLE",
+     "kind": "simple",
+     "path": "BASE/TAILLE",
+     "status": "c",
+     "type": [
+      "I"
+     ],
+     "fr": "ne pas utiliser",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 69
+     }
+    }
+   ]
+  },
+  {
+   "name": "CATALOGUE",
+   "kind": "factor",
+   "path": "CATALOGUE",
+   "status": "f",
+   "min": 1,
+   "max": 10,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 71
+   },
+   "keywords": [
+    {
+     "name": "FICHIER",
+     "kind": "simple",
+     "path": "CATALOGUE/FICHIER",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "CATALOGUE/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 76
+     }
+    }
+   ]
+  },
+  {
+   "name": "CODE",
+   "kind": "simple",
+   "path": "CODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "paramètre réservé aux cas-tests (erreurs, fichier de couverture...)",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "ERREUR",
+   "kind": "factor",
+   "path": "ERREUR",
+   "status": "f",
+   "min": 1,
+   "max": 1,
+   "fr": "comportement en cas d'erreur",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 84
+   },
+   "keywords": [
+    {
+     "name": "ERREUR_F",
+     "kind": "simple",
+     "path": "ERREUR/ERREUR_F",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ABORT",
+      "EXCEPTION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "ALARME",
+     "kind": "simple",
+     "path": "ERREUR/ALARME",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ALARME",
+      "EXCEPTION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 90
+     }
+    }
+   ]
+  },
+  {
+   "name": "DEBUG",
+   "kind": "factor",
+   "path": "DEBUG",
+   "status": "d",
+   "min": 1,
+   "max": 1,
+   "fr": "option de déboggage reservée aux développeurs",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "JXVERI",
+     "kind": "simple",
+     "path": "DEBUG/JXVERI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "vérifie l intégrité de la segmentation mémoire",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "SDVERI",
+     "kind": "simple",
+     "path": "DEBUG/SDVERI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "vérifie la conformité des SD produites par les commandes",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 104
+     }
+    },
+    {
+     "name": "JEVEUX",
+     "kind": "simple",
+     "path": "DEBUG/JEVEUX",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "force les déchargement sur disque",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "ENVIMA",
+     "kind": "simple",
+     "path": "DEBUG/ENVIMA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "TEST"
+     ],
+     "fr": "imprime les valeurs définies dans ENVIMA",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "VERI_BASE",
+     "kind": "simple",
+     "path": "DEBUG/VERI_BASE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GLOBALE",
+      "VOLATILE"
+     ],
+     "fr": "exécute un test de vérification sur les bases",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "VERI_BASE_NB",
+     "kind": "simple",
+     "path": "DEBUG/VERI_BASE_NB",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 125,
+     "fr": "pourcentage de la taille de base à écrire",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 127
+     }
+    }
+   ]
+  },
+  {
+   "name": "MESURE_TEMPS",
+   "kind": "factor",
+   "path": "MESURE_TEMPS",
+   "status": "d",
+   "min": 1,
+   "max": 1,
+   "fr": "Pour afficher le temps des principales étapes de calcul",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 131
+   },
+   "keywords": [
+    {
+     "name": "NIVE_DETAIL",
+     "kind": "simple",
+     "path": "MESURE_TEMPS/NIVE_DETAIL",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "into": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "fr": "niveau de détail des impressions",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "MOYENNE",
+     "kind": "simple",
+     "path": "MESURE_TEMPS/MOYENNE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "affichage des moyennes et écart-types en parallèle",
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 147
+     }
+    }
+   ]
+  },
+  {
+   "name": "MEMOIRE",
+   "kind": "factor",
+   "path": "MEMOIRE",
+   "status": "d",
+   "min": 1,
+   "max": 1,
+   "fr": "mode de gestion mémoire utilisé",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 155
+   },
+   "keywords": [
+    {
+     "name": "TAILLE_BLOC",
+     "kind": "simple",
+     "path": "MEMOIRE/TAILLE_BLOC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 800.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "TAILLE_GROUP_ELEM",
+     "kind": "simple",
+     "path": "MEMOIRE/TAILLE_GROUP_ELEM",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1000,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 161
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESERVE_CPU",
+   "kind": "factor",
+   "path": "RESERVE_CPU",
+   "status": "d",
+   "max": 1,
+   "fr": "reserve de temps pour terminer une execution",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "VALE",
+      "POURCENTAGE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 163
+   },
+   "keywords": [
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "RESERVE_CPU/VALE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 169
+     }
+    },
+    {
+     "name": "POURCENTAGE",
+     "kind": "simple",
+     "path": "RESERVE_CPU/POURCENTAGE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 171
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESERVE_MEMOIRE",
+   "kind": "factor",
+   "path": "RESERVE_MEMOIRE",
+   "status": "d",
+   "max": 1,
+   "fr": "réserve de mémoire pour les bibliothèques externes",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "VALE",
+      "POURCENTAGE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 173
+   },
+   "keywords": [
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "RESERVE_MEMOIRE/VALE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "POURCENTAGE",
+     "kind": "simple",
+     "path": "RESERVE_MEMOIRE/POURCENTAGE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/debut.py",
+      "line": 181
+     }
+    }
+   ]
+  },
+  {
+   "name": "IGNORE_ALARM",
+   "kind": "simple",
+   "path": "IGNORE_ALARM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": "Alarmes que l'utilisateur souhaite délibérément ignorer",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 183
+   }
+  },
+  {
+   "name": "LANG",
+   "kind": "simple",
+   "path": "LANG",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Permet de choisir la langue utilisée pour les messages (si disponible)",
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 189
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 194
+   }
+  },
+  {
+   "name": "MODE",
+   "kind": "simple",
+   "path": "MODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "AUTO",
+   "into": [
+    "AUTO",
+    "DEBUT",
+    "POURSUITE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/debut.py",
+    "line": 195
+   }
+  }
+ ]
+}

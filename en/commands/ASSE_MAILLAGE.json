@@ -1,0 +1,130 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/asse_maillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "ASSE_MAILLAGE",
+ "kind": "OPER",
+ "fr": "Assembler deux maillages pour en former un nouveau",
+ "translation_upstream": null,
+ "op": 105,
+ "reentrant": "n",
+ "result_types": [
+  "super_mesh",
+  "maillage_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/asse_maillage.py",
+  "line": 36
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE_1",
+   "kind": "simple",
+   "path": "MAILLAGE_1",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_maillage.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "MAILLAGE_2",
+   "kind": "simple",
+   "path": "MAILLAGE_2",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_maillage.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "SOUS_STR",
+    "SUPERPOSE",
+    "COLLAGE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_maillage.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "b_collage",
+   "kind": "bloc",
+   "path": "[b_collage]",
+   "condition": "equal_to(\"OPERATION\", 'COLLAGE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_maillage.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "COLLAGE",
+     "kind": "factor",
+     "path": "COLLAGE",
+     "status": "o",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/asse_maillage.py",
+      "line": 47
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA_1",
+       "kind": "simple",
+       "path": "COLLAGE/GROUP_MA_1",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/asse_maillage.py",
+        "line": 48
+       }
+      },
+      {
+       "name": "GROUP_MA_2",
+       "kind": "simple",
+       "path": "COLLAGE/GROUP_MA_2",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/asse_maillage.py",
+        "line": 48
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

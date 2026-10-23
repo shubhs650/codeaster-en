@@ -1,0 +1,267 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_kcp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_KCP",
+ "kind": "MACRO",
+ "fr": "Calcul des facteurs d'intensité de contrainte par la méthode KCP correction BETA",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.Kcp.post_kcp_ops.post_kcp_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_kcp.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "MATER_MDB",
+   "kind": "simple",
+   "path": "MATER_MDB",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "EPAIS_MDB",
+   "kind": "simple",
+   "path": "EPAIS_MDB",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "MATER_REV",
+   "kind": "simple",
+   "path": "MATER_REV",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "EPAIS_REV",
+   "kind": "simple",
+   "path": "EPAIS_REV",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "UNITE_LONGUEUR",
+   "kind": "simple",
+   "path": "UNITE_LONGUEUR",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "M",
+    "MM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "FISSURE",
+   "kind": "factor",
+   "path": "FISSURE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "FORM_FISS",
+     "kind": "simple",
+     "path": "FISSURE/FORM_FISS",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "SEMI_ELLIPTIQUE",
+      "BANDE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "b_defaut_eli",
+     "kind": "bloc",
+     "path": "FISSURE/[b_defaut_eli]",
+     "condition": "(equal_to(\"FORM_FISS\", 'SEMI_ELLIPTIQUE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 39
+     },
+     "keywords": [
+      {
+       "name": "LONGUEUR",
+       "kind": "simple",
+       "path": "FISSURE/LONGUEUR",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_kcp.py",
+        "line": 41
+       }
+      },
+      {
+       "name": "CORRECTION",
+       "kind": "simple",
+       "path": "FISSURE/CORRECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "BETA_3D",
+       "into": [
+        "BETA_2D",
+        "BETA_3D"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_kcp.py",
+        "line": 42
+       }
+      }
+     ]
+    },
+    {
+     "name": "PROFONDEUR",
+     "kind": "simple",
+     "path": "FISSURE/PROFONDEUR",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "ORIENTATION",
+     "kind": "simple",
+     "path": "FISSURE/ORIENTATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CIRC",
+      "LONGI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "K1D",
+   "kind": "factor",
+   "path": "K1D",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_kcp.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "TABL_MECA",
+     "kind": "simple",
+     "path": "K1D/TABL_MECA",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "TABL_THER",
+     "kind": "simple",
+     "path": "K1D/TABL_THER",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_kcp.py",
+      "line": 51
+     }
+    }
+   ]
+  }
+ ]
+}

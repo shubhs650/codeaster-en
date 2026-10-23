@@ -1,0 +1,1235 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_usure.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_USURE",
+ "kind": "OPER",
+ "fr": "Calcul des volumes d'usure et des profondeurs d'usure d'après la puissance d'usure",
+ "translation_upstream": null,
+ "op": 153,
+ "reentrant": "f:TABL_USURE",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TUBE_NEUF",
+    "RESU_GENE",
+    "PUIS_USURE"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TUBE_NEUF",
+    "LOI_USURE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "TUBE_NEUF",
+    "ETAT_INIT",
+    "INST_FIN"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "TUBE_NEUF",
+    "RAYON_MOBILE",
+    "RAYON_OBST",
+    "LARGEUR_OBST",
+    "CONTACT"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "TUBE_NEUF",
+    "ANGL_INCLI",
+    "ANGL_ISTHME",
+    "ANGL_IMPACT"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ANGL_INCLI",
+    "CONTACT"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ANGL_ISTHME",
+    "CONTACT"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ANGL_IMPACT",
+    "CONTACT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_usure.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "TUBE_NEUF",
+   "kind": "simple",
+   "path": "TUBE_NEUF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "ETAT_INIT",
+   "kind": "factor",
+   "path": "ETAT_INIT",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "TABL_USURE",
+     "kind": "simple",
+     "path": "ETAT_INIT/TABL_USURE",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "INST_INIT",
+     "kind": "simple",
+     "path": "ETAT_INIT/INST_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "f",
+   "type": [
+    "tran_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "INST_FIN",
+   "kind": "simple",
+   "path": "INST_FIN",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "PUIS_USURE",
+   "kind": "simple",
+   "path": "PUIS_USURE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "LOI_USURE",
+   "kind": "simple",
+   "path": "LOI_USURE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ARCHARD",
+    "KWU_EPRI",
+    "EDF_MZ"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "b_resu_gene",
+   "kind": "bloc",
+   "path": "[b_resu_gene]",
+   "condition": "exists(\"RESU_GENE\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 57
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_archard",
+   "kind": "bloc",
+   "path": "[b_archard]",
+   "condition": "equal_to(\"LOI_USURE\", 'ARCHARD')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MOBILE",
+      "MATER_USURE",
+      "SECTEUR"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MATER_USURE",
+      "OBSTACLE"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MOBILE",
+      "USURE_OBST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 59
+   },
+   "keywords": [
+    {
+     "name": "MOBILE",
+     "kind": "factor",
+     "path": "MOBILE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 66
+     },
+     "keywords": [
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "MOBILE/COEF_USURE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 66
+       }
+      }
+     ]
+    },
+    {
+     "name": "OBSTACLE",
+     "kind": "factor",
+     "path": "OBSTACLE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 67
+     },
+     "keywords": [
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_USURE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 67
+       }
+      }
+     ]
+    },
+    {
+     "name": "SECTEUR",
+     "kind": "factor",
+     "path": "SECTEUR",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 68
+     },
+     "keywords": [
+      {
+       "name": "COEF_USUR_MOBILE",
+       "kind": "simple",
+       "path": "SECTEUR/COEF_USUR_MOBILE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "COEF_USUR_OBST",
+       "kind": "simple",
+       "path": "SECTEUR/COEF_USUR_OBST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "ANGL_INIT",
+       "kind": "simple",
+       "path": "SECTEUR/ANGL_INIT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "ANGL_FIN",
+       "kind": "simple",
+       "path": "SECTEUR/ANGL_FIN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 74
+       }
+      }
+     ]
+    },
+    {
+     "name": "MATER_USURE",
+     "kind": "simple",
+     "path": "MATER_USURE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "USURE_OBST",
+     "kind": "simple",
+     "path": "USURE_OBST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_kwu_epri",
+   "kind": "bloc",
+   "path": "[b_kwu_epri]",
+   "condition": "equal_to(\"LOI_USURE\", 'KWU_EPRI')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MOBILE",
+      "MATER_USURE"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MATER_USURE",
+      "OBSTACLE"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MOBILE",
+      "USURE_OBST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "MOBILE",
+     "kind": "factor",
+     "path": "MOBILE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 86
+     },
+     "keywords": [
+      {
+       "name": "COEF_FNOR",
+       "kind": "simple",
+       "path": "MOBILE/COEF_FNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 88
+       }
+      },
+      {
+       "name": "COEF_VTAN",
+       "kind": "simple",
+       "path": "MOBILE/COEF_VTAN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "MOBILE/COEF_USURE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 90
+       }
+      },
+      {
+       "name": "COEF_K",
+       "kind": "simple",
+       "path": "MOBILE/COEF_K",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 5.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 91
+       }
+      },
+      {
+       "name": "COEF_C",
+       "kind": "simple",
+       "path": "MOBILE/COEF_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 10.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 92
+       }
+      }
+     ]
+    },
+    {
+     "name": "OBSTACLE",
+     "kind": "factor",
+     "path": "OBSTACLE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 94
+     },
+     "keywords": [
+      {
+       "name": "COEF_FNOR",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_FNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 96
+       }
+      },
+      {
+       "name": "COEF_VTAN",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_VTAN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 97
+       }
+      },
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_USURE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 98
+       }
+      },
+      {
+       "name": "COEF_K",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_K",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 5.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 99
+       }
+      },
+      {
+       "name": "COEF_C",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_C",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 10.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 100
+       }
+      }
+     ]
+    },
+    {
+     "name": "MATER_USURE",
+     "kind": "simple",
+     "path": "MATER_USURE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "USURE_OBST",
+     "kind": "simple",
+     "path": "USURE_OBST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "FNOR_MAXI",
+     "kind": "simple",
+     "path": "FNOR_MAXI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 104
+     }
+    },
+    {
+     "name": "VTAN_MAXI",
+     "kind": "simple",
+     "path": "VTAN_MAXI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 105
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_edf_mz",
+   "kind": "bloc",
+   "path": "[b_edf_mz]",
+   "condition": "equal_to(\"LOI_USURE\", 'EDF_MZ')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MOBILE",
+      "MATER_USURE"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MATER_USURE",
+      "OBSTACLE"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MOBILE",
+      "USURE_OBST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 107
+   },
+   "keywords": [
+    {
+     "name": "MOBILE",
+     "kind": "factor",
+     "path": "MOBILE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 114
+     },
+     "keywords": [
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "MOBILE/COEF_USURE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-13,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 116
+       }
+      },
+      {
+       "name": "COEF_B",
+       "kind": "simple",
+       "path": "MOBILE/COEF_B",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "COEF_N",
+       "kind": "simple",
+       "path": "MOBILE/COEF_N",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 2.44e-08,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 118
+       }
+      },
+      {
+       "name": "COEF_S",
+       "kind": "simple",
+       "path": "MOBILE/COEF_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.14e-16,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 119
+       }
+      }
+     ]
+    },
+    {
+     "name": "OBSTACLE",
+     "kind": "factor",
+     "path": "OBSTACLE",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 121
+     },
+     "keywords": [
+      {
+       "name": "COEF_USURE",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_USURE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-13,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "COEF_B",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_B",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 124
+       }
+      },
+      {
+       "name": "COEF_N",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_N",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 2.44e-08,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 125
+       }
+      },
+      {
+       "name": "COEF_S",
+       "kind": "simple",
+       "path": "OBSTACLE/COEF_S",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.14e-16,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_usure.py",
+        "line": 126
+       }
+      }
+     ]
+    },
+    {
+     "name": "MATER_USURE",
+     "kind": "simple",
+     "path": "MATER_USURE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "USURE_OBST",
+     "kind": "simple",
+     "path": "USURE_OBST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 129
+     }
+    }
+   ]
+  },
+  {
+   "name": "CONTACT",
+   "kind": "simple",
+   "path": "CONTACT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "TUBE_BAV",
+    "TUBE_ALESAGE",
+    "TUBE_4_ENCO",
+    "GRAPPE_ALESAGE",
+    "TUBE_3_ENCO",
+    "TUBE_TUBE",
+    "GRAPPE_1_ENCO",
+    "GRAPPE_2_ENCO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 131
+   }
+  },
+  {
+   "name": "RAYON_MOBILE",
+   "kind": "simple",
+   "path": "RAYON_MOBILE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 145
+   }
+  },
+  {
+   "name": "RAYON_OBST",
+   "kind": "simple",
+   "path": "RAYON_OBST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 146
+   }
+  },
+  {
+   "name": "LARGEUR_OBST",
+   "kind": "simple",
+   "path": "LARGEUR_OBST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 147
+   }
+  },
+  {
+   "name": "ANGL_INCLI",
+   "kind": "simple",
+   "path": "ANGL_INCLI",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 148
+   }
+  },
+  {
+   "name": "ANGL_ISTHME",
+   "kind": "simple",
+   "path": "ANGL_ISTHME",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 149
+   }
+  },
+  {
+   "name": "ANGL_IMPACT",
+   "kind": "simple",
+   "path": "ANGL_IMPACT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 150
+   }
+  },
+  {
+   "name": "b_not_tube_neuf",
+   "kind": "bloc",
+   "path": "[b_not_tube_neuf]",
+   "condition": "not exists(\"TUBE_NEUF\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "INST",
+      "LIST_INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 151
+   },
+   "keywords": [
+    {
+     "name": "INST_INIT",
+     "kind": "simple",
+     "path": "INST_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": -1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 154
+     }
+    },
+    {
+     "name": "NB_BLOC",
+     "kind": "simple",
+     "path": "NB_BLOC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 155
+     }
+    },
+    {
+     "name": "COEF_INST",
+     "kind": "simple",
+     "path": "COEF_INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 157
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 158
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_tube_neuf",
+   "kind": "bloc",
+   "path": "[b_tube_neuf]",
+   "condition": "exists(\"TUBE_NEUF\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 160
+   },
+   "keywords": [
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "TABL_USURE",
+     "kind": "simple",
+     "path": "TABL_USURE",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_usure.py",
+      "line": 163
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 165
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_usure.py",
+    "line": 166
+   }
+  }
+ ]
+}

@@ -1,0 +1,1639 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/modi_repere.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MODI_REPERE",
+ "kind": "OPER",
+ "fr": "Calcule les champs dans un nouveau repère.",
+ "translation_upstream": null,
+ "op": 191,
+ "reentrant": "f:RESULTAT",
+ "result_types": [
+  "resultat_sdaster",
+  "cham_gd_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "CHAM_GD",
+    "RESULTAT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/modi_repere.py",
+  "line": 37
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "CHAM_GD",
+   "kind": "simple",
+   "path": "CHAM_GD",
+   "status": "f",
+   "type": [
+    "cham_gd_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "b_resultat",
+   "kind": "bloc",
+   "path": "[b_resultat]",
+   "condition": "exists(\"RESULTAT\")",
+   "fr": "Changement de repère d'un champ extrait d'un résultat",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TOUT_ORDRE",
+      "NUME_ORDRE",
+      "INST",
+      "FREQ",
+      "LIST_ORDRE",
+      "NUME_MODE",
+      "NOEUD_CMP",
+      "LIST_INST",
+      "LIST_FREQ",
+      "NOM_CAS"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 50
+   },
+   "keywords": [
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "NOEUD_CMP",
+     "kind": "simple",
+     "path": "NOEUD_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "NOM_CAS",
+     "kind": "simple",
+     "path": "NOM_CAS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "b_prec_rela",
+     "kind": "bloc",
+     "path": "[b_prec_rela]",
+     "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 78
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 80
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_prec_abso",
+     "kind": "bloc",
+     "path": "[b_prec_abso]",
+     "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 82
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 83
+       }
+      }
+     ]
+    },
+    {
+     "name": "MODI_CHAM",
+     "kind": "factor",
+     "path": "MODI_CHAM",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 85
+     },
+     "keywords": [
+      {
+       "name": "TYPE_CHAM",
+       "kind": "simple",
+       "path": "MODI_CHAM/TYPE_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "VECT_2D",
+        "VECT_3D",
+        "TENS_2D",
+        "TENS_3D",
+        "COQUE_GENE",
+        "1D_GENE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "MODI_CHAM/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "MODI_CHAM/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 95
+       }
+      },
+      {
+       "name": "b_vect",
+       "kind": "bloc",
+       "path": "MODI_CHAM/[b_vect]",
+       "condition": "(equal_to(\"TYPE_CHAM\", \"VECT_2D\") or equal_to(\"TYPE_CHAM\", \"VECT_3D\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 96
+       },
+       "keywords": [
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "MODI_CHAM/NOM_CHAM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "DEPL",
+          "VITE",
+          "ACCE",
+          "FORC_NODA",
+          "REAC_NODA",
+          "FLUX_NOEU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 98
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_1d",
+       "kind": "bloc",
+       "path": "MODI_CHAM/[b_1d]",
+       "condition": "(equal_to(\"TYPE_CHAM\", \"1D_GENE\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 105
+       },
+       "keywords": [
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "MODI_CHAM/NOM_CHAM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "EFGE_ELNO",
+          "EGRU_ELNO",
+          "EFGE_ELGA",
+          "SIEF_ELNO",
+          "SIEF_ELGA"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 107
+         }
+        },
+        {
+         "name": "cham_resu",
+         "kind": "bloc",
+         "path": "MODI_CHAM/[cham_resu]",
+         "condition": "(equal_to(\"NOM_CHAM\", \"EFGE_ELNO\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 113
+         },
+         "keywords": [
+          {
+           "name": "NOM_CHAM_RESU",
+           "kind": "simple",
+           "path": "MODI_CHAM/NOM_CHAM_RESU",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "max": 1,
+           "into": [
+            "EGRU_ELNO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/modi_repere.py",
+            "line": 115
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_cgene",
+       "kind": "bloc",
+       "path": "MODI_CHAM/[b_cgene]",
+       "condition": "(equal_to(\"TYPE_CHAM\", \"COQUE_GENE\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 118
+       },
+       "keywords": [
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "MODI_CHAM/NOM_CHAM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "EFGE_ELNO",
+          "EGRU_ELNO",
+          "EFGE_ELGA",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "DEGE_ELNO",
+          "DEGE_ELGA"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 120
+         }
+        },
+        {
+         "name": "cham_resu",
+         "kind": "bloc",
+         "path": "MODI_CHAM/[cham_resu]",
+         "condition": "(equal_to(\"NOM_CHAM\", \"EFGE_ELNO\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 134
+         },
+         "keywords": [
+          {
+           "name": "NOM_CHAM_RESU",
+           "kind": "simple",
+           "path": "MODI_CHAM/NOM_CHAM_RESU",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "max": 1,
+           "into": [
+            "EGRU_ELNO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/modi_repere.py",
+            "line": 136
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_tens",
+       "kind": "bloc",
+       "path": "MODI_CHAM/[b_tens]",
+       "condition": "(equal_to(\"TYPE_CHAM\", \"TENS_2D\") or equal_to(\"TYPE_CHAM\", \"TENS_3D\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 139
+       },
+       "keywords": [
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "MODI_CHAM/NOM_CHAM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/modi_repere.py",
+          "line": 141
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "REPERE",
+   "kind": "simple",
+   "path": "REPERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "UTILISATEUR",
+    "CYLINDRIQUE",
+    "COQUE",
+    "GLOBAL_UTIL",
+    "COQUE_INTR_UTIL",
+    "COQUE_UTIL_INTR",
+    "COQUE_UTIL_CYL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 146
+   }
+  },
+  {
+   "name": "b_cyl",
+   "kind": "bloc",
+   "path": "[b_cyl]",
+   "condition": "is_in(\"REPERE\", ('CYLINDRIQUE', 'COQUE_UTIL_CYL'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 159
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 161
+     },
+     "keywords": [
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "AFFE/ORIGINE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 165
+       }
+      },
+      {
+       "name": "AXE_Z",
+       "kind": "simple",
+       "path": "AFFE/AXE_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 166
+       }
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 167
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 168
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "AFFE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 169
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "AFFE/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 170
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "AFFE/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 171
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_uti",
+   "kind": "bloc",
+   "path": "[b_uti]",
+   "condition": "equal_to(\"REPERE\", 'UTILISATEUR')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 174
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_X"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "VECT_X",
+        "VECT_Y"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 176
+     },
+     "keywords": [
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "AFFE/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 184
+       }
+      },
+      {
+       "name": "VECT_X",
+       "kind": "simple",
+       "path": "AFFE/VECT_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 185
+       }
+      },
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "AFFE/VECT_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 186
+       }
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 187
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 188
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "AFFE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 189
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "AFFE/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 190
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "AFFE/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 191
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_coq",
+   "kind": "bloc",
+   "path": "[b_coq]",
+   "condition": "equal_to(\"REPERE\", 'COQUE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 194
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_REP",
+        "VECTEUR"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 196
+     },
+     "keywords": [
+      {
+       "name": "ANGL_REP",
+       "kind": "simple",
+       "path": "AFFE/ANGL_REP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 203
+       }
+      },
+      {
+       "name": "VECTEUR",
+       "kind": "simple",
+       "path": "AFFE/VECTEUR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 204
+       }
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 205
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 206
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "AFFE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "AFFE/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 208
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "AFFE/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 209
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_autre",
+   "kind": "bloc",
+   "path": "[b_autre]",
+   "condition": "is_in(\"REPERE\", ('GLOBAL_UTIL', 'COQUE_INTR_UTIL', 'COQUE_UTIL_INTR'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 212
+   },
+   "keywords": [
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_repere.py",
+      "line": 214
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 218
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 219
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "AFFE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 220
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "AFFE/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 221
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "AFFE/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_repere.py",
+        "line": 222
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 228
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 229
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_repere.py",
+    "line": 230
+   }
+  }
+ ]
+}

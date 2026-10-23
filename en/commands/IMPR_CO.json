@@ -1,0 +1,244 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_co.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_CO",
+ "kind": "PROC",
+ "fr": "Imprimer tous les objets JEVEUX qui constituent un concept utilisateur existant (pour les développeurs)",
+ "translation_upstream": null,
+ "op": 17,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "CONCEPT",
+    "CHAINE",
+    "TOUT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_co.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "UNITE",
+   "kind": "simple",
+   "path": "UNITE",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 8,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "NIVEAU",
+   "kind": "simple",
+   "path": "NIVEAU",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 2,
+   "into": [
+    -1,
+    0,
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "ATTRIBUT",
+   "kind": "simple",
+   "path": "ATTRIBUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "CONTENU",
+   "kind": "simple",
+   "path": "CONTENU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "NON",
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "BASE",
+   "kind": "simple",
+   "path": "BASE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "G",
+   "into": [
+    " ",
+    "G",
+    "V",
+    "L"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "CONCEPT",
+   "kind": "factor",
+   "path": "CONCEPT",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "CONCEPT/NOM",
+     "status": "o",
+     "type": [
+      "DataStructure"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_co.py",
+      "line": 39
+     }
+    }
+   ]
+  },
+  {
+   "name": "CHAINE",
+   "kind": "simple",
+   "path": "CHAINE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "POSITION",
+   "kind": "simple",
+   "path": "POSITION",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "b_permut",
+   "kind": "bloc",
+   "path": "[b_permut]",
+   "condition": "equal_to(\"NIVEAU\", -1) ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_co.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "PERMUTATION",
+     "kind": "simple",
+     "path": "PERMUTATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_co.py",
+      "line": 46
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_coque.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_COQUE",
+ "kind": "MACRO",
+ "fr": "Calcul des efforts et déformations en un point et une cote quelconque de la coque",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_coque_ops.post_coque_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "INST",
+    "NUME_ORDRE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_coque.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": "RESULTAT à posttraiter",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_coque.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "CHAM",
+   "kind": "simple",
+   "path": "CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "EFFORT",
+    "DEFORMATION"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_coque.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_coque.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_coque.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "COOR_POINT",
+   "kind": "factor",
+   "path": "COOR_POINT",
+   "status": "o",
+   "max": "**",
+   "fr": "coordonnées et position dans l'épaisseur",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_coque.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "COOR",
+     "kind": "simple",
+     "path": "COOR_POINT/COOR",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 4,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_coque.py",
+      "line": 43
+     }
+    }
+   ]
+  }
+ ]
+}

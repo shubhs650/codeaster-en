@@ -1,0 +1,239 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_concept.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_CONCEPT",
+ "kind": "PROC",
+ "fr": "Imprimer un concept d'un calcul (champs de donnée) au format MED",
+ "translation_upstream": null,
+ "op": 21,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_concept.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MED",
+   "into": [
+    "MED",
+    "RESULTAT"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_concept.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "UNITE",
+   "kind": "simple",
+   "path": "UNITE",
+   "status": "f",
+   "type": [
+    "UnitMed"
+   ],
+   "default": 80,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_concept.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "b_format_med",
+   "kind": "bloc",
+   "path": "[b_format_med]",
+   "condition": "equal_to(\"FORMAT\", 'MED')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_concept.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "VERSION_MED",
+     "kind": "simple",
+     "path": "VERSION_MED",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "3.3.1",
+     "into": [
+      "3.3.1",
+      "4.0.0",
+      "4.1.0"
+     ],
+     "fr": "Choix de la version du fichier MED",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_concept.py",
+      "line": 35
+     }
+    }
+   ]
+  },
+  {
+   "name": "CONCEPT",
+   "kind": "factor",
+   "path": "CONCEPT",
+   "status": "o",
+   "max": "**",
+   "fr": "Pour imprimer les champs de \"données\" à des fins de visualisation (controle des affectations).",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "CHAM_MATER",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_concept.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CONCEPT/CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_concept.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CONCEPT/CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_concept.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CONCEPT/CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_concept.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "b_cara_elem",
+     "kind": "bloc",
+     "path": "CONCEPT/[b_cara_elem]",
+     "condition": "exists(\"CARA_ELEM\")",
+     "fr": "impression des repères locaux.",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_concept.py",
+      "line": 53
+     },
+     "keywords": [
+      {
+       "name": "REPERE_LOCAL",
+       "kind": "simple",
+       "path": "CONCEPT/REPERE_LOCAL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "NON",
+        "ELEM",
+        "ELNO"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_concept.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "b_reploc",
+       "kind": "bloc",
+       "path": "CONCEPT/[b_reploc]",
+       "condition": "not equal_to(\"REPERE_LOCAL\", 'NON')",
+       "fr": "impression des repères locaux.",
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_concept.py",
+        "line": 57
+       },
+       "keywords": [
+        {
+         "name": "MODELE",
+         "kind": "simple",
+         "path": "CONCEPT/MODELE",
+         "status": "o",
+         "type": [
+          "modele_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_concept.py",
+          "line": 60
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_concept.py",
+    "line": 64
+   }
+  }
+ ]
+}

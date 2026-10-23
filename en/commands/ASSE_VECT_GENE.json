@@ -1,0 +1,116 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "ASSE_VECT_GENE",
+ "kind": "OPER",
+ "fr": "Projection des chargements sur la base modale d'une sous structure",
+ "translation_upstream": null,
+ "op": 140,
+ "reentrant": "n",
+ "result_types": [
+  "vect_asse_gene"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "NUME_DDL_GENE",
+   "kind": "simple",
+   "path": "NUME_DDL_GENE",
+   "status": "o",
+   "type": [
+    "nume_ddl_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "CLASSIQUE",
+   "into": [
+    "CLASSIQUE",
+    "INITIAL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_nume",
+   "kind": "bloc",
+   "path": "[b_nume]",
+   "condition": "equal_to(\"METHODE\", 'CLASSIQUE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "CHAR_SOUS_STRUC",
+     "kind": "factor",
+     "path": "CHAR_SOUS_STRUC",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+      "line": 36
+     },
+     "keywords": [
+      {
+       "name": "SOUS_STRUC",
+       "kind": "simple",
+       "path": "CHAR_SOUS_STRUC/SOUS_STRUC",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+        "line": 39
+       }
+      },
+      {
+       "name": "VECT_ASSE",
+       "kind": "simple",
+       "path": "CHAR_SOUS_STRUC/VECT_ASSE",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/asse_vect_gene.py",
+        "line": 40
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

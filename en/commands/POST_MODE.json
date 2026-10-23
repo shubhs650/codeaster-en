@@ -1,0 +1,91 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_mode.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_MODE",
+ "kind": "MACRO",
+ "fr": "Calculer des paramètres modaux (masses et inertie effective) sur une partie du modèle",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.Modal.post_mode_ops.post_mode_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_mode.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MODE",
+   "kind": "simple",
+   "path": "MODE",
+   "status": "o",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mode.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mode.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mode.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "MATR_MASS",
+   "kind": "simple",
+   "path": "MATR_MASS",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_mode.py",
+    "line": 35
+   }
+  }
+ ]
+}

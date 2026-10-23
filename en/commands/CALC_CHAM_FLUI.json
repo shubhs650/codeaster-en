@@ -1,0 +1,178 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_CHAM_FLUI",
+ "kind": "OPER",
+ "fr": "Calculer le champ de vitesses et de pression fluides",
+ "translation_upstream": null,
+ "op": 116,
+ "reentrant": null,
+ "result_types": [
+  "evol_ther"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "RIGI_THER",
+   "kind": "simple",
+   "path": "RIGI_THER",
+   "status": "o",
+   "type": [
+    "matr_asse_temp_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "o",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "EXCIT",
+   "kind": "factor",
+   "path": "EXCIT",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "EXCIT/CHARGE",
+     "status": "o",
+     "type": [
+      "char_ther"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "FONC_MULT",
+     "kind": "simple",
+     "path": "EXCIT/FONC_MULT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+      "line": 38
+     }
+    }
+   ]
+  },
+  {
+   "name": "POTENTIEL",
+   "kind": "simple",
+   "path": "POTENTIEL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DEPL",
+   "into": [
+    "DEPL",
+    "VITE",
+    "PRES"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "DIST_REFE",
+   "kind": "simple",
+   "path": "DIST_REFE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.01,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "o",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "b_coefmult",
+   "kind": "bloc",
+   "path": "[b_coefmult]",
+   "condition": "exists(\"MODE_MECA\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "COEF_MULT",
+     "kind": "simple",
+     "path": "COEF_MULT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_cham_flui.py",
+      "line": 45
+     }
+    }
+   ]
+  }
+ ]
+}
