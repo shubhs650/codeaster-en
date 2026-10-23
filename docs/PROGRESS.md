@@ -14,6 +14,23 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 0.6 glossary seed (partial: GLOBAL_DICT pending) — agent
+Done: `en/glossary.yaml` 250 → 320 entries, all `proposed`. Added every Tier 1/2 identifier in
+`docs/COMMAND-SET.md` that had no entry (5 commands, 51 keywords, 13 values, 1 concept), each with
+a `source` (upstream catalog file:line at 17.4.26) and English drafted from the catalog `fr=`
+strings and allowed values; uncertain wording marked TODO(verify). `BANDE` broadened from
+"frequency band" to "band" (it is also a DEFI_GROUP geometric option). New
+`tests/test_glossary_coverage.py`: Tier 1/2 identifiers all have entries; `source` lines resolve.
+Optional `source` field documented in ARCHITECTURE §4.1.
+Open: AsterStudy `GLOBAL_DICT` merge — file not attached, gitlab.com unreachable. Acceptance
+count (≥ 150) already met without it.
+Decisions: none. Message-family names and the out-of-scope items in COMMAND-SET (CALC_G,
+MISS3D, HHO, …) deliberately not added. Findings vs COMMAND-SET: `SPHERE`/`BANDE` are values
+of `CREA_GROUP_MA/NO` `OPTION`, not keywords; `MASS_EFFE_UN` is a `CRIT_EXTR` value.
+Needs owner: attach AsterStudy GLOBAL_DICT; engineer review of new English (PR labelled
+`needs-engineer-review`), esp. AFFE_VARC/NOM_VARC ("external state variable" vs upstream's
+"command variable"), PM_PB, K_T_D_N.
+
 ## 2026-10-23 — 0.3 + 0.5 upstream pin and tooling skeleton — agent
 Done: `upstream/` submodule → github.com/shubhs650/code_aster (shallow), pinned to **17.4.26**
 (commit 5d2a06d, 2026-07-06; same commit as tags `17.5.0` and `stable`). `UPSTREAM_VERSION` =
