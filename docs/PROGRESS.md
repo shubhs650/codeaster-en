@@ -14,6 +14,33 @@ Needs owner: …
 
 ---
 
+## 2026-10-23 — 1.2 catalog extractor — agent
+Done: `caen extract catalog` (`tools/codeaster_en/extract/catalog.py`) writes
+`en/commands/<CMD>.json` for all 268 commands (135 OPER, 116 MACRO, 16 PROC, 1 FORM; `VARIABLE`
+skipped). It **imports** the catalog (no solver needed, as 0.4 found); no AST fallback. Source
+file and line come from wrapping `PartOfSyntax.__init__` before the import and reading the
+caller's frame, so every command, keyword and bloc (21,764 objects) has a line, including the
+ones built by `Cata/Commons/` factories (their source is the Commons file). The import runs in
+a child interpreter with `-B` and `PYTHONHASHSEED=0`. Schema: `docs/schemas/command.schema.json`.
+Counts match INVENTORY §1 (17,595 SIMP, 1,322 FACT, 2,847 BLOC, 258 commands with `fr=`).
+`tests/test_catalog.py`: fresh extraction must equal every committed file, all files validate
+against the schema, snapshot + hand checks against the source for AFFE_MODELE, DEFI_MATERIAU,
+MECA_STATIQUE, nothing is written under `upstream/`. Output is identical on Python 3.11 and 3.13.
+Open: none for 1.2. Task 1.6 (`caen validate`) can use `catalog.iter_keywords` and `path`.
+Decisions: none (no ADR). Choices, all documented in the schema: a keyword `path` is what the
+user writes (`AFFE/MODELISATION`); blocs add no segment and get their own path `AFFE/[b_name]`.
+Optional fields are emitted only when the catalog sets them; the checker's defaults (`max`=1,
+`statut`=`f`) are stated in the schema with their upstream source, not filled in. Arguments the
+extractor does not interpret go to `other` verbatim. Upstream's own English labels
+(`translation=` on 14 commands) are kept as `translation_upstream` (data only; glossary wins).
+`PYTHONHASHSEED=0` because `Commons/c_nom_cham_into.py:594` builds `into=` with
+`tuple(set(...))`, whose order otherwise changes per run.
+Needs owner: possible upstream contribution (not filed): catalog typos the syntax checker
+ignores — `default=` instead of `defaut=` (6 SIMP: `post_jmod.py:33`, `post_newmark.py`,
+`rest_gene_phys.py:80`), `ft=` instead of `fr=` (`calc_stab_pente.py:110`), and `condition=` on
+6 SIMP and 2 FACT (only BLOC reads it). TODO(verify) whether these defaults are applied
+elsewhere (e.g. in the macro's Python); the extractor records them under `other`, not `default`.
+
 ## 2026-10-23 — 4.1 fixture cases — agent
 Done: `tests/fixtures/{solid_static,shell_static,modal}/input/` with `mesh.geo` (Gmsh 4.15.2),
 `mesh.med`, `run.comm`, `run.export` (1 cpu, 600 s, 2048 MB; outputs to `../output/`),
