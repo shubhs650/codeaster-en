@@ -25,16 +25,17 @@ import. `code_aster.Messages` does **not** import without the solver (`Utmess` �
 task 1.3 must use `ast`. Upstream gettext: `_()` → domain `aster_messages`, switched on only by
 `DEBUT(LANG=...)`, `.mo` built only with `--enable-i18n`. Upstream `en-US/aster_messages.po` covers
 3,308/6,890 current messages (48 %) verbatim, literal 2016 quality.
-Open: ADR-004 drafted (status proposed) — owner decision. Task 4.2 must check whether the official
+Open: Task 4.2 must check whether the official
 image ships an English `.mo` and whether `ASTER_LOCALEDIR` can be overridden.
-Decisions: none taken; ADR-004 draft recommends `en/messages` as source of truth + generated `.mo`
-via `DEBUT(LANG='EN')` + runtime renderer as fallback.
+Decisions: ADR-004 accepted by the owner (2026-10-23): `en/messages` is the source of truth, a
+generated `.mo` is loaded via `DEBUT(LANG='EN')`, and the runtime renderer is the fallback. This
+settles task 1.1.
 Findings for later tasks: `POURSUITE` has no catalog (runs on `DEBUT`'s) — its Tier 1 reference
 should say so; 4 messages numbered ≥ 100 are unreachable (`Utmess` asserts N < 100); `POST0_55/56`
 are f-strings interpolating a module constant; 15 messages are not wrapped in `_()`; plain `I`
 messages print without their ID in `.mess`. Licence headers GPL-3.0-or-later as ADR-007 assumes;
 `.po`/`.ts` have no own licence header (owner to confirm reuse under GPL with attribution).
-Needs owner: ADR-004 decision; confirm reuse of the Crowdin `.po`/`.ts` translations.
+Needs owner: confirm reuse of the Crowdin `.po`/`.ts` translations.
 Branch is `claude/project-thread-ux6ket` (session-assigned) rather than `task/0-4-…`.
 
 ## 2026-10-23 — 0.3 + 0.5 upstream pin and tooling skeleton — agent

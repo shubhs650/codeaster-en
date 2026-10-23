@@ -38,7 +38,7 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 ---
 
 ## ADR-004 — Message strategy: gettext catalog vs runtime mapping
-**Date:** 2026-10-23 (draft, task 0.4) · **Status:** proposed (owner decides; task 1.1)
+**Date:** 2026-10-23 · **Status:** accepted (owner, 2026-10-23: hybrid — generated `.mo` + runtime fallback)
 
 **Options.** (a) Runtime only: parse `.mess`, map `FAMILY_N` → English. Works with any image, no solver change. (b) If upstream wraps messages in gettext and honours a locale, ship an English `.po/.mo`; solver prints English natively; runtime renderer remains for IDs/classification and as fallback.
 
@@ -51,14 +51,14 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 6. *Upstream English exists but is weak.* `i18n/en-US/aster_messages.po`: 2016, v13, one Crowdin translator; 3,308 of 6,890 current messages (48 %) reusable verbatim, 1 with a placeholder mismatch; literal quality and glossary conflicts (*maille* → "mesh"). `catapy_en_US.ts`: 1,033 finished translations matching current `fr=` strings.
 7. *Runtime mapping has a blind spot.* Plain informational messages (type `I` without `DECORATED`) are printed with no `<FAMILY_N>` ID (`Utmess.format_message`), so option (a) alone must reverse-match their text against French templates.
 
-**Draft recommendation (for the owner to accept or change).** Both, with one source of truth:
+**Decision.** Both, with one source of truth:
 - `en/messages/<FAMILY>.en.json` stays the only place English message text is edited. Seed it from the upstream `.po` where the French matches exactly, as `method: machine` with provenance `upstream:i18n/en-US/aster_messages.po`; never `reviewed` until the owner says so.
 - Generate `aster_messages.po` → `.mo` from it as a build artefact (task 3.4), install it at `<localedir>/en/LC_MESSAGES/` in the run image or via `ASTER_LOCALEDIR`, and have the `.comm` builder emit `DEBUT(LANG='EN')`. The solver then prints English for everything gettext reaches.
 - Keep the runtime `.mess` renderer (tasks 4.3–4.4) for IDs, classification, and the French that leaks through (point 3, 4, and runs made without our `.mo`). It must handle both French and already-English bodies.
 - Gate on task 4.2: one fixture run with `LANG='EN'` + our `.mo` must show English diagnostics before we rely on (b).
 - Offer upstream (via `docs/DECISIONS.md`, not by editing `upstream/`): wrap the 15 bare strings, replace the two f-strings, and apply `LANG` before the first `UTMESS` in `DEBUT`.
 
-**Consequences if accepted.** Task 1.3 adds a `.po` import step and records `source: upstream-po`; task 1.6 validates generated `.po` placeholders; task 3.4 emits the `.po` and checks it with `msgfmt`; task 4.2 adds a `LANG='EN'` fixture variant. If rejected (runtime only), the `.po` is still worth importing as a machine seed.
+**Consequences.** Task 1.3 adds a `.po` import step and records `source: upstream-po`; task 1.6 validates generated `.po` placeholders; task 3.4 emits the `.po` and checks it with `msgfmt`; task 4.2 adds a `LANG='EN'` fixture variant. If rejected (runtime only), the `.po` is still worth importing as a machine seed.
 
 ---
 
