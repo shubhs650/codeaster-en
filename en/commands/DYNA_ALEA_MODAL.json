@@ -1,0 +1,783 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DYNA_ALEA_MODAL",
+ "kind": "OPER",
+ "fr": "Calcul de la réponse spectrale d'une structure linéaire sous une excitation connue par sa DSP",
+ "translation_upstream": null,
+ "op": 131,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "BASE_MODALE",
+   "kind": "factor",
+   "path": "BASE_MODALE",
+   "status": "o",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE",
+      "BANDE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "MODE_MECA",
+     "kind": "simple",
+     "path": "BASE_MODALE/MODE_MECA",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "BANDE",
+     "kind": "simple",
+     "path": "BASE_MODALE/BANDE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 2,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "BASE_MODALE/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "b_bande",
+     "kind": "bloc",
+     "path": "BASE_MODALE/[b_bande]",
+     "condition": "exists(\"BANDE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 40
+     },
+     "keywords": [
+      {
+       "name": "AMOR_UNIF",
+       "kind": "simple",
+       "path": "BASE_MODALE/AMOR_UNIF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 40
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_nume_ordre",
+     "kind": "bloc",
+     "path": "BASE_MODALE/[b_nume_ordre]",
+     "condition": "exists(\"NUME_ORDRE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 41
+     },
+     "keywords": [
+      {
+       "name": "AMOR_REDUIT",
+       "kind": "simple",
+       "path": "BASE_MODALE/AMOR_REDUIT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 42
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MODE_STAT",
+   "kind": "simple",
+   "path": "MODE_STAT",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "EXCIT",
+   "kind": "factor",
+   "path": "EXCIT",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "INTE_SPEC",
+     "kind": "simple",
+     "path": "EXCIT/INTE_SPEC",
+     "status": "o",
+     "type": [
+      "interspectre"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "NUME_VITE_FLUI",
+     "kind": "simple",
+     "path": "EXCIT/NUME_VITE_FLUI",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "EXCIT/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TOUT",
+     "into": [
+      "TOUT",
+      "DIAG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "MODAL",
+     "kind": "simple",
+     "path": "EXCIT/MODAL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "b_modal_non",
+     "kind": "bloc",
+     "path": "EXCIT/[b_modal_non]",
+     "condition": "(not exists(\"MODAL\")) or (equal_to(\"MODAL\", 'NON'))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NOEUD_I",
+        "NUME_ORDRE_I"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 54
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_I",
+       "kind": "simple",
+       "path": "EXCIT/NUME_ORDRE_I",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "NOEUD_I",
+       "kind": "simple",
+       "path": "EXCIT/NOEUD_I",
+       "status": "f",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 58
+       }
+      },
+      {
+       "name": "b_nume_ordre_i",
+       "kind": "bloc",
+       "path": "EXCIT/[b_nume_ordre_i]",
+       "condition": "exists(\"NUME_ORDRE_I\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "CHAM_NO",
+          "NOEUD"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 59
+       },
+       "keywords": [
+        {
+         "name": "CHAM_NO",
+         "kind": "simple",
+         "path": "EXCIT/CHAM_NO",
+         "status": "f",
+         "type": [
+          "cham_no_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 64
+         }
+        },
+        {
+         "name": "NOEUD",
+         "kind": "simple",
+         "path": "EXCIT/NOEUD",
+         "status": "f",
+         "type": [
+          "no"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 65
+         }
+        },
+        {
+         "name": "b_noeud",
+         "kind": "bloc",
+         "path": "EXCIT/[b_noeud]",
+         "condition": "exists(\"NOEUD\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 66
+         },
+         "keywords": [
+          {
+           "name": "NOM_CMP",
+           "kind": "simple",
+           "path": "EXCIT/NOM_CMP",
+           "status": "o",
+           "type": [
+            "TXM"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+            "line": 67
+           }
+          }
+         ]
+        },
+        {
+         "name": "GRANDEUR",
+         "kind": "simple",
+         "path": "EXCIT/GRANDEUR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "DEPL_R",
+         "into": [
+          "DEPL_R",
+          "EFFO",
+          "SOUR_DEBI_VOLU",
+          "SOUR_DEBI_MASS",
+          "SOUR_PRESS",
+          "SOUR_FORCE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 69
+         }
+        },
+        {
+         "name": "DERIVATION",
+         "kind": "simple",
+         "path": "EXCIT/DERIVATION",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 0,
+         "into": [
+          0,
+          1,
+          2
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 83
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_noeud_i",
+       "kind": "bloc",
+       "path": "EXCIT/[b_noeud_i]",
+       "condition": "exists(\"NOEUD_I\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 85
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP_I",
+         "kind": "simple",
+         "path": "EXCIT/NOM_CMP_I",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 87
+         }
+        },
+        {
+         "name": "NOEUD",
+         "kind": "simple",
+         "path": "EXCIT/NOEUD",
+         "status": "o",
+         "type": [
+          "no"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 88
+         }
+        },
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "EXCIT/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 89
+         }
+        },
+        {
+         "name": "GRANDEUR",
+         "kind": "simple",
+         "path": "EXCIT/GRANDEUR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "DEPL_R",
+         "into": [
+          "DEPL_R",
+          "EFFO",
+          "SOUR_DEBI_VOLU",
+          "SOUR_DEBI_MASS",
+          "SOUR_PRESS",
+          "SOUR_FORCE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 92
+         }
+        },
+        {
+         "name": "DERIVATION",
+         "kind": "simple",
+         "path": "EXCIT/DERIVATION",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 0,
+         "into": [
+          0,
+          1,
+          2
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+          "line": 106
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_modal_oui",
+     "kind": "bloc",
+     "path": "EXCIT/[b_modal_oui]",
+     "condition": "(equal_to(\"MODAL\", 'OUI'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 109
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_I",
+       "kind": "simple",
+       "path": "EXCIT/NUME_ORDRE_I",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "GRANDEUR",
+       "kind": "simple",
+       "path": "EXCIT/GRANDEUR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "DEPL_R",
+       "into": [
+        "DEPL_R",
+        "EFFO",
+        "SOUR_DEBI_VOLU",
+        "SOUR_DEBI_MASS",
+        "SOUR_PRESS",
+        "SOUR_FORCE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "DERIVATION",
+       "kind": "simple",
+       "path": "EXCIT/DERIVATION",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "into": [
+        0,
+        1,
+        2
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 126
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "REPONSE",
+   "kind": "factor",
+   "path": "REPONSE",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "FREQ_MIN",
+      "FREQ_MAX"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 131
+   },
+   "keywords": [
+    {
+     "name": "DERIVATION",
+     "kind": "simple",
+     "path": "REPONSE/DERIVATION",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "into": [
+      0,
+      1,
+      2
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 134
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "REPONSE/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TOUT",
+     "into": [
+      "TOUT",
+      "DIAG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "REPONSE/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "REPONSE/FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "REPONSE/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "b_defaut_freq",
+     "kind": "bloc",
+     "path": "REPONSE/[b_defaut_freq]",
+     "condition": "not exists(\"FREQ_MIN\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+      "line": 139
+     },
+     "keywords": [
+      {
+       "name": "FREQ_EXCIT",
+       "kind": "simple",
+       "path": "REPONSE/FREQ_EXCIT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AVEC",
+       "into": [
+        "AVEC",
+        "SANS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "NB_POIN_MODE",
+       "kind": "simple",
+       "path": "REPONSE/NB_POIN_MODE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 50,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+        "line": 142
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 145
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_alea_modal.py",
+    "line": 146
+   }
+  }
+ ]
+}

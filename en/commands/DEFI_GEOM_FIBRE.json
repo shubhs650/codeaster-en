@@ -1,0 +1,463 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_GEOM_FIBRE",
+ "kind": "OPER",
+ "fr": "Définition des groupes de fibres pour les éléments multifibres",
+ "translation_upstream": null,
+ "op": 119,
+ "reentrant": "n",
+ "result_types": [
+  "gfibre_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "SECTION",
+    "FIBRE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "SECTION",
+   "kind": "factor",
+   "path": "SECTION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT_SECT",
+      "GROUP_MA_SECT"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TOUT_SECT",
+      "GROUP_MA_SECT"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COOR_AXE_POUTRE",
+      "TABLE_CARA"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "TABLE_CARA",
+      "NOM_SEC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+    "line": 33
+   },
+   "keywords": [
+    {
+     "name": "GROUP_FIBRE",
+     "kind": "simple",
+     "path": "SECTION/GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "TOUT_SECT",
+     "kind": "simple",
+     "path": "SECTION/TOUT_SECT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "GROUP_MA_SECT",
+     "kind": "simple",
+     "path": "SECTION/GROUP_MA_SECT",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "MAILLAGE_SECT",
+     "kind": "simple",
+     "path": "SECTION/MAILLAGE_SECT",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "COOR_AXE_POUTRE",
+     "kind": "simple",
+     "path": "SECTION/COOR_AXE_POUTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "ANGLE",
+     "kind": "simple",
+     "path": "SECTION/ANGLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "TABLE_CARA",
+     "kind": "simple",
+     "path": "SECTION/TABLE_CARA",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "NOM_SEC",
+     "kind": "simple",
+     "path": "SECTION/NOM_SEC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        8
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "FIBRE",
+   "kind": "factor",
+   "path": "FIBRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COOR_AXE_POUTRE",
+      "TABLE_CARA"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "TABLE_CARA",
+      "NOM_SEC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "GROUP_FIBRE",
+     "kind": "simple",
+     "path": "FIBRE/GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "CARA",
+     "kind": "simple",
+     "path": "FIBRE/CARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SURFACE",
+     "into": [
+      "SURFACE",
+      "DIAMETRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "FIBRE/VALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "COOR_AXE_POUTRE",
+     "kind": "simple",
+     "path": "FIBRE/COOR_AXE_POUTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "ANGLE",
+     "kind": "simple",
+     "path": "FIBRE/ANGLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "TABLE_CARA",
+     "kind": "simple",
+     "path": "FIBRE/TABLE_CARA",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "NOM_SEC",
+     "kind": "simple",
+     "path": "FIBRE/NOM_SEC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        8
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 69
+     }
+    }
+   ]
+  },
+  {
+   "name": "ASSEMBLAGE_FIBRE",
+   "kind": "factor",
+   "path": "ASSEMBLAGE_FIBRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+    "line": 72
+   },
+   "keywords": [
+    {
+     "name": "GROUP_ASSE_FIBRE",
+     "kind": "simple",
+     "path": "ASSEMBLAGE_FIBRE/GROUP_ASSE_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "GROUP_FIBRE",
+     "kind": "simple",
+     "path": "ASSEMBLAGE_FIBRE/GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "COOR_GROUP_FIBRE",
+     "kind": "simple",
+     "path": "ASSEMBLAGE_FIBRE/COOR_GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "GX_GROUP_FIBRE",
+     "kind": "simple",
+     "path": "ASSEMBLAGE_FIBRE/GX_GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_geom_fibre.py",
+      "line": 78
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,326 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_FONC_INTERP",
+ "kind": "OPER",
+ "fr": "Définit une fonction (ou une nappe) à partir d'une fonction FORMULE à 1 ou 2 variables",
+ "translation_upstream": null,
+ "op": 134,
+ "reentrant": "n",
+ "result_types": [
+  "nappe_sdaster",
+  "fonction_sdaster",
+  "fonction_c",
+  "formule"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "docu": "U4.32.01",
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "VALE_PARA",
+    "LIST_PARA"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+  "line": 46
+ },
+ "keywords": [
+  {
+   "name": "FONCTION",
+   "kind": "simple",
+   "path": "FONCTION",
+   "status": "o",
+   "type": [
+    "formule",
+    "fonction_sdaster",
+    "nappe_sdaster",
+    "fonction_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "VALE_PARA",
+   "kind": "simple",
+   "path": "VALE_PARA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "LIST_PARA",
+   "kind": "simple",
+   "path": "LIST_PARA",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "NOM_RESU",
+   "kind": "simple",
+   "path": "NOM_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "EXCLU",
+    "CONSTANT",
+    "LINEAIRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "EXCLU",
+    "CONSTANT",
+    "LINEAIRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "NOM_PARA_FONC",
+   "kind": "simple",
+   "path": "NOM_PARA_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "b_eval_nappe",
+   "kind": "bloc",
+   "path": "[b_eval_nappe]",
+   "condition": "exists(\"NOM_PARA_FONC\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VALE_PARA_FONC",
+      "LIST_PARA_FONC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "VALE_PARA_FONC",
+     "kind": "simple",
+     "path": "VALE_PARA_FONC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "LIST_PARA_FONC",
+     "kind": "simple",
+     "path": "LIST_PARA_FONC",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "INTERPOL_FONC",
+     "kind": "simple",
+     "path": "INTERPOL_FONC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "PROL_DROITE_FONC",
+     "kind": "simple",
+     "path": "PROL_DROITE_FONC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "EXCLU",
+      "CONSTANT",
+      "LINEAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "PROL_GAUCHE_FONC",
+     "kind": "simple",
+     "path": "PROL_GAUCHE_FONC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "EXCLU",
+      "CONSTANT",
+      "LINEAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+      "line": 70
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonc_interp.py",
+    "line": 73
+   }
+  }
+ ]
+}

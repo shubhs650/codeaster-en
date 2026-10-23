@@ -1,0 +1,512 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_DYNA_ALEA",
+ "kind": "MACRO",
+ "fr": "Traitements statistiques de résultats de type interspectre et impression sur fichiers",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_dyna_alea_ops.post_dyna_alea_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FRAGILITE",
+    "INTERSPECTRE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "FRAGILITE",
+   "kind": "factor",
+   "path": "FRAGILITE",
+   "status": "f",
+   "max": 1,
+   "fr": "donnees pour courbe de fragilite",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VALE",
+      "LIST_PARA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "TABL_RESU",
+     "kind": "simple",
+     "path": "FRAGILITE/TABL_RESU",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "FRAGILITE/VALE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "LIST_PARA",
+     "kind": "simple",
+     "path": "FRAGILITE/LIST_PARA",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "FRAGILITE/METHODE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "EMV",
+      "REGRESSION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "a_methode",
+     "kind": "bloc",
+     "path": "FRAGILITE/[a_methode]",
+     "condition": "equal_to(\"METHODE\", 'REGRESSION')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 44
+     },
+     "keywords": [
+      {
+       "name": "SEUIL",
+       "kind": "simple",
+       "path": "FRAGILITE/SEUIL",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 45
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_methode",
+     "kind": "bloc",
+     "path": "FRAGILITE/[b_methode]",
+     "condition": "equal_to(\"METHODE\", 'EMV')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 47
+     },
+     "keywords": [
+      {
+       "name": "SEUIL",
+       "kind": "simple",
+       "path": "FRAGILITE/SEUIL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 49
+       }
+      },
+      {
+       "name": "AM_INI",
+       "kind": "simple",
+       "path": "FRAGILITE/AM_INI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 50
+       }
+      },
+      {
+       "name": "BETA_INI",
+       "kind": "simple",
+       "path": "FRAGILITE/BETA_INI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 51
+       }
+      },
+      {
+       "name": "FRACTILE",
+       "kind": "simple",
+       "path": "FRAGILITE/FRACTILE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": "**",
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 52
+       }
+      },
+      {
+       "name": "b_inte_spec_f",
+       "kind": "bloc",
+       "path": "FRAGILITE/[b_inte_spec_f]",
+       "condition": "exists(\"FRACTILE\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 61
+       },
+       "keywords": [
+        {
+         "name": "NB_TIRAGE",
+         "kind": "simple",
+         "path": "FRAGILITE/NB_TIRAGE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+          "line": 62
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INTERSPECTRE",
+   "kind": "factor",
+   "path": "INTERSPECTRE",
+   "status": "f",
+   "max": 1,
+   "fr": "donnees pour interspectre",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOEUD_I",
+      "NUME_ORDRE_I",
+      "OPTION"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "INTE_SPEC",
+     "kind": "simple",
+     "path": "INTERSPECTRE/INTE_SPEC",
+     "status": "o",
+     "type": [
+      "interspectre"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "NUME_ORDRE_I",
+     "kind": "simple",
+     "path": "INTERSPECTRE/NUME_ORDRE_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "NOEUD_I",
+     "kind": "simple",
+     "path": "INTERSPECTRE/NOEUD_I",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "INTERSPECTRE/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DIAG",
+      "TOUT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "b_nume_ordre_i",
+     "kind": "bloc",
+     "path": "INTERSPECTRE/[b_nume_ordre_i]",
+     "condition": "exists(\"NUME_ORDRE_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 75
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_J",
+       "kind": "simple",
+       "path": "INTERSPECTRE/NUME_ORDRE_J",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 76
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_i",
+     "kind": "bloc",
+     "path": "INTERSPECTRE/[b_noeud_i]",
+     "condition": "exists(\"NOEUD_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 78
+     },
+     "keywords": [
+      {
+       "name": "NOEUD_J",
+       "kind": "simple",
+       "path": "INTERSPECTRE/NOEUD_J",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 80
+       }
+      },
+      {
+       "name": "NOM_CMP_I",
+       "kind": "simple",
+       "path": "INTERSPECTRE/NOM_CMP_I",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 81
+       }
+      },
+      {
+       "name": "NOM_CMP_J",
+       "kind": "simple",
+       "path": "INTERSPECTRE/NOM_CMP_J",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+        "line": 82
+       }
+      }
+     ]
+    },
+    {
+     "name": "FRACTILE",
+     "kind": "simple",
+     "path": "INTERSPECTRE/FRACTILE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "default": 0.5,
+     "fr": "fractile pour le calcul du facteur de pic",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "MOMENT",
+     "kind": "simple",
+     "path": "INTERSPECTRE/MOMENT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": "Moments spectraux en complément des cinq premiers",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "DUREE",
+     "kind": "simple",
+     "path": "INTERSPECTRE/DUREE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "durée de la phase forte pour facteur de peak",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+      "line": 98
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+    "line": 100
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_alea.py",
+    "line": 101
+   }
+  }
+ ]
+}

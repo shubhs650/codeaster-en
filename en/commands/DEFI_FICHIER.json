@@ -1,0 +1,367 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fichier.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FICHIER",
+ "kind": "MACRO",
+ "fr": "Ouvre ou ferme un fichier associé à un numéro d'unité logique",
+ "translation_upstream": null,
+ "op": 2,
+ "reentrant": "n",
+ "result_types": [
+  "entier"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fichier.py",
+  "line": 42
+ },
+ "keywords": [
+  {
+   "name": "ACTION",
+   "kind": "simple",
+   "path": "ACTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ASSOCIER",
+   "into": [
+    "ASSOCIER",
+    "LIBERER",
+    "RESERVER"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fichier.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "b_associer",
+   "kind": "bloc",
+   "path": "[b_associer]",
+   "condition": "equal_to(\"ACTION\", 'ASSOCIER')",
+   "fr": "Paramètres pour l'ouverture du fichier",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FICHIER",
+      "UNITE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fichier.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "FICHIER",
+     "kind": "simple",
+     "path": "FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        255
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ASCII",
+     "into": [
+      "ASCII",
+      "BINARY",
+      "LIBRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "b_type_ascii",
+     "kind": "bloc",
+     "path": "[b_type_ascii]",
+     "condition": "equal_to(\"TYPE\", 'ASCII')",
+     "fr": "Paramètres pour le type ASCII",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 56
+     },
+     "keywords": [
+      {
+       "name": "ACCES",
+       "kind": "simple",
+       "path": "ACCES",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NEW",
+       "into": [
+        "NEW",
+        "APPEND",
+        "OLD"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fichier.py",
+        "line": 59
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_type_autre",
+     "kind": "bloc",
+     "path": "[b_type_autre]",
+     "condition": "not equal_to(\"TYPE\", 'ASCII')",
+     "fr": "Paramètres pour les types BINARY et LIBRE",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 61
+     },
+     "keywords": [
+      {
+       "name": "ACCES",
+       "kind": "simple",
+       "path": "ACCES",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NEW",
+       "into": [
+        "NEW",
+        "OLD"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fichier.py",
+        "line": 64
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_reserver",
+   "kind": "bloc",
+   "path": "[b_reserver]",
+   "condition": "equal_to(\"ACTION\", 'RESERVER')",
+   "fr": "Paramètres pour la réservation de l'unité du fichier",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "FICHIER",
+      "UNITE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fichier.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "FICHIER",
+     "kind": "simple",
+     "path": "FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        255
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ASCII",
+     "into": [
+      "ASCII"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "ACCES",
+     "kind": "simple",
+     "path": "ACCES",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "APPEND",
+     "into": [
+      "APPEND"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 74
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_liberer",
+   "kind": "bloc",
+   "path": "[b_liberer]",
+   "condition": "equal_to(\"ACTION\", 'LIBERER')",
+   "fr": "Paramètres pour la fermeture du fichier",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "FICHIER",
+      "UNITE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fichier.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "FICHIER",
+     "kind": "simple",
+     "path": "FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        255
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fichier.py",
+      "line": 81
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fichier.py",
+    "line": 83
+   }
+  }
+ ]
+}

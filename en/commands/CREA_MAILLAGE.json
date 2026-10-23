@@ -1,0 +1,1398 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/crea_maillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CREA_MAILLAGE",
+ "kind": "OPER",
+ "fr": "Crée un maillage à partir d'un maillage existant",
+ "translation_upstream": null,
+ "op": 167,
+ "reentrant": "n",
+ "result_types": [
+  "maillage_sdaster",
+  "maillage_p"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "COQU_VOLU",
+    "CREA_FISS",
+    "CREA_MAILLE",
+    "CREA_POI1",
+    "ECLA_PG",
+    "HEXA20_27",
+    "LINE_QUAD",
+    "MODI_MAILLE",
+    "QUAD_LINE",
+    "REPERE",
+    "RESTREINT",
+    "PENTA15_18",
+    "GEOM_FIBRE",
+    "DECOUPE_LAC",
+    "MODI_HHO",
+    "COQUE_SOLIDE",
+    "RAFFINEMENT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/crea_maillage.py",
+  "line": 38
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster",
+    "maillage_p"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "GEOM_FIBRE",
+   "kind": "simple",
+   "path": "GEOM_FIBRE",
+   "status": "f",
+   "type": [
+    "gfibre_sdaster"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "CREA_POI1",
+   "kind": "factor",
+   "path": "CREA_POI1",
+   "status": "f",
+   "max": "**",
+   "fr": "Création de mailles de type POI1 à partir de noeuds",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 68
+   },
+   "keywords": [
+    {
+     "name": "NOM_GROUP_MA",
+     "kind": "simple",
+     "path": "CREA_POI1/NOM_GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "CREA_POI1/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "CREA_POI1/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "CREA_POI1/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "CREA_POI1/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "CREA_MAILLE",
+   "kind": "factor",
+   "path": "CREA_MAILLE",
+   "status": "f",
+   "max": "**",
+   "fr": "Duplication de mailles",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "CREA_MAILLE/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "CREA_MAILLE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "CREA_MAILLE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 86
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESTREINT",
+   "kind": "factor",
+   "path": "RESTREINT",
+   "status": "f",
+   "max": 1,
+   "fr": "Restreindre un maillage à des groupes de mailles",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 88
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "RESTREINT/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "TOUT_GROUP_MA",
+     "kind": "simple",
+     "path": "RESTREINT/TOUT_GROUP_MA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "RESTREINT/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "TOUT_GROUP_NO",
+     "kind": "simple",
+     "path": "RESTREINT/TOUT_GROUP_NO",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 95
+     }
+    }
+   ]
+  },
+  {
+   "name": "COQU_VOLU",
+   "kind": "factor",
+   "path": "COQU_VOLU",
+   "status": "f",
+   "fr": "Creation de mailles volumiques à partir de mailles surfaciques",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 97
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "COQU_VOLU/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COQU_VOLU/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "EPAIS",
+     "kind": "simple",
+     "path": "COQU_VOLU/EPAIS",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "PLAN",
+     "kind": "simple",
+     "path": "COQU_VOLU/PLAN",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "SUP",
+      "MOY",
+      "INF"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "b_MOY",
+     "kind": "bloc",
+     "path": "COQU_VOLU/[b_MOY]",
+     "condition": "equal_to(\"PLAN\", 'MOY')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 104
+     },
+     "keywords": [
+      {
+       "name": "TRANSLATION",
+       "kind": "simple",
+       "path": "COQU_VOLU/TRANSLATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "SUP",
+        "INF"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_maillage.py",
+        "line": 106
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MODI_MAILLE",
+   "kind": "factor",
+   "path": "MODI_MAILLE",
+   "status": "f",
+   "max": "**",
+   "fr": "Modification du type de mailles",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "MAILLE",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 109
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "MODI_MAILLE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 114
+     }
+    },
+    {
+     "name": "MAILLE",
+     "kind": "simple",
+     "path": "MODI_MAILLE/MAILLE",
+     "status": "c",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MODI_MAILLE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "MODI_MAILLE/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "TRIA6_7",
+      "QUAD8_9",
+      "SEG3_4",
+      "QUAD_TRIA3"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Choix de la transformation",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 117
+     }
+    }
+   ]
+  },
+  {
+   "name": "RAFFINEMENT",
+   "kind": "factor",
+   "path": "RAFFINEMENT",
+   "status": "f",
+   "fr": "Raffinement uniforme du maillage",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 125
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "RAFFINEMENT/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "NIVEAU",
+     "kind": "simple",
+     "path": "RAFFINEMENT/NIVEAU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 129
+     }
+    }
+   ]
+  },
+  {
+   "name": "CREA_FISS",
+   "kind": "factor",
+   "path": "CREA_FISS",
+   "status": "f",
+   "max": "**",
+   "fr": "Creation d'une fissure potentielle avec elts de joint ou elts à disc",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 131
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "CREA_FISS/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "GROUP_NO_1",
+     "kind": "simple",
+     "path": "CREA_FISS/GROUP_NO_1",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "GROUP_NO_2",
+     "kind": "simple",
+     "path": "CREA_FISS/GROUP_NO_2",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 137
+     }
+    }
+   ]
+  },
+  {
+   "name": "LINE_QUAD",
+   "kind": "factor",
+   "path": "LINE_QUAD",
+   "status": "f",
+   "fr": "Passage linéaire -> quadratique",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 139
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "LINE_QUAD/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "LINE_QUAD/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 144
+     }
+    }
+   ]
+  },
+  {
+   "name": "HEXA20_27",
+   "kind": "factor",
+   "path": "HEXA20_27",
+   "status": "f",
+   "fr": "Passage HEXA20 -> HEXA27",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 146
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "HEXA20_27/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "HEXA20_27/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 151
+     }
+    }
+   ]
+  },
+  {
+   "name": "PENTA15_18",
+   "kind": "factor",
+   "path": "PENTA15_18",
+   "status": "f",
+   "fr": "Passage PENTA15 -> PENTA18",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 153
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "PENTA15_18/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 157
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "PENTA15_18/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 158
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODI_HHO",
+   "kind": "factor",
+   "path": "MODI_HHO",
+   "status": "f",
+   "fr": "Création maillage pour HHO",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 160
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "MODI_HHO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 163
+     }
+    }
+   ]
+  },
+  {
+   "name": "COQUE_SOLIDE",
+   "kind": "factor",
+   "path": "COQUE_SOLIDE",
+   "status": "f",
+   "max": "**",
+   "fr": "Création maillage pour COQUE_SOLIDE",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 165
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COQUE_SOLIDE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 169
+     }
+    },
+    {
+     "name": "GROUP_MA_SURF",
+     "kind": "simple",
+     "path": "COQUE_SOLIDE/GROUP_MA_SURF",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 170
+     }
+    }
+   ]
+  },
+  {
+   "name": "QUAD_LINE",
+   "kind": "factor",
+   "path": "QUAD_LINE",
+   "status": "f",
+   "fr": "Passage quadratique -> linéaire",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ],
+     "defaults": {
+      "TOUT": "OUI"
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 172
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "QUAD_LINE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "QUAD_LINE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 177
+     }
+    }
+   ]
+  },
+  {
+   "name": "REPERE",
+   "kind": "factor",
+   "path": "REPERE",
+   "status": "f",
+   "fr": "changement de repère servant à déterminer les caractéristiques d'une section de poutre",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 179
+   },
+   "keywords": [
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "REPERE/TABLE",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": "Nom de la table contenant les caractéristiques de la section de poutre",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "NOM_ORIG",
+     "kind": "simple",
+     "path": "REPERE/NOM_ORIG",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CDG",
+      "TORSION"
+     ],
+     "fr": "Origine du nouveau repère",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "NOM_ROTA",
+     "kind": "simple",
+     "path": "REPERE/NOM_ROTA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "INERTIE"
+     ],
+     "fr": "Direction du repére",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "b_cdg",
+     "kind": "bloc",
+     "path": "REPERE/[b_cdg]",
+     "condition": "equal_to(\"NOM_ORIG\", 'CDG')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 193
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "REPERE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "fr": "Nom du groupe de mailles dont le centre de gravité sera l origine du nouveau repère",
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_maillage.py",
+        "line": 195
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DECOUPE_LAC",
+   "kind": "factor",
+   "path": "DECOUPE_LAC",
+   "status": "f",
+   "fr": "creation des patchs LAC pour le  contact",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA_ESCL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 204
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_ESCL",
+     "kind": "simple",
+     "path": "DECOUPE_LAC/GROUP_MA_ESCL",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 208
+     }
+    },
+    {
+     "name": "DECOUPE_HEXA",
+     "kind": "simple",
+     "path": "DECOUPE_LAC/DECOUPE_HEXA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PYRA",
+     "into": [
+      "PYRA",
+      "HEXA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 209
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECLA_PG",
+   "kind": "factor",
+   "path": "ECLA_PG",
+   "status": "f",
+   "fr": "Eclatement des mailles en petites mailles contenant chacune un seul point de gauss",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 213
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "ECLA_PG/MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 216
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ECLA_PG/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 217
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ECLA_PG/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 218
+     }
+    },
+    {
+     "name": "SHRINK",
+     "kind": "simple",
+     "path": "ECLA_PG/SHRINK",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.9,
+     "fr": "Facteur de réduction",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 219
+     }
+    },
+    {
+     "name": "TAILLE_MIN",
+     "kind": "simple",
+     "path": "ECLA_PG/TAILLE_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": "Taille minimale d'un coté",
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 220
+     }
+    },
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "ECLA_PG/NOM_CHAM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "DEGE_ELGA",
+      "DEPL_ELGA",
+      "DERA_ELGA",
+      "DIFF_ELGA",
+      "DISS_ELGA",
+      "EFGE_ELGA",
+      "ENDO_ELGA",
+      "ENEL_ELGA",
+      "EPEQ_ELGA",
+      "EPFD_ELGA",
+      "EPFP_ELGA",
+      "EPGQ_ELGA",
+      "EPME_ELGA",
+      "EPMG_ELGA",
+      "EPMQ_ELGA",
+      "EPSG_ELGA",
+      "EPSI_ELGA",
+      "EPSL_ELGA",
+      "EPSP_ELGA",
+      "EPVC_ELGA",
+      "ETOT_ELGA",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "HYDR_ELGA",
+      "HYGR_ELGA",
+      "INDL_ELGA",
+      "MATE_ELGA",
+      "PDIL_ELGA",
+      "SIEF_ELGA",
+      "SIEQ_ELGA",
+      "SIGM_ELGA",
+      "SIMY_ELGA",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP_ELGA",
+      "UT01_ELGA",
+      "UT02_ELGA",
+      "UT03_ELGA",
+      "UT04_ELGA",
+      "UT05_ELGA",
+      "UT06_ELGA",
+      "UT07_ELGA",
+      "UT08_ELGA",
+      "UT09_ELGA",
+      "UT10_ELGA",
+      "VARC_ELGA",
+      "VARI_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_maillage.py",
+      "line": 221
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 229
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_maillage.py",
+    "line": 231
+   }
+  }
+ ]
+}

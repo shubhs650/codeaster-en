@@ -1,0 +1,5098 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_rccm.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_RCCM",
+ "kind": "OPER",
+ "fr": "Vérification des critères de niveau 0 et certains critères de niveau A du RCC-M",
+ "translation_upstream": null,
+ "op": 165,
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_rccm.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "TYPE_RESU",
+   "kind": "simple",
+   "path": "TYPE_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "VALE_MAX",
+   "into": [
+    "VALE_MAX",
+    "DETAILS",
+    "SYSTUS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "TYPE_RESU_MECA",
+   "kind": "simple",
+   "path": "TYPE_RESU_MECA",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "EVOLUTION",
+    "ZE200a",
+    "ZE200b",
+    "B3200",
+    "B3600"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "AXIS",
+   "kind": "simple",
+   "path": "AXIS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "OUI"
+   ],
+   "fr": "Indiquer si le modèle est axisymétrique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "b_evolution",
+   "kind": "bloc",
+   "path": "[b_evolution]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'EVOLUTION') and not equal_to(\"TYPE_RESU\",\"SYSTUS\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "into": [
+      "PM_PB",
+      "SN",
+      "FATIGUE_ZH210",
+      "AMORCAGE"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "SY_MAX",
+     "kind": "simple",
+     "path": "SY_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "limite élastique utilisée pour le calcul du rochet thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "TYPE_KE",
+     "kind": "simple",
+     "path": "TYPE_KE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "KE_MECA",
+     "into": [
+      "KE_MECA",
+      "KE_MIXTE"
+     ],
+     "fr": "Ke meca seul ou partition mecanique + thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "RAYON_MOYEN",
+     "kind": "simple",
+     "path": "RAYON_MOYEN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": -1.0,
+     "fr": "La courbure attribuées à la ligne coupe",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "TRANSITOIRE",
+     "kind": "factor",
+     "path": "TRANSITOIRE",
+     "status": "o",
+     "max": "**",
+     "fr": "transitoire à dépouiller",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT_ORDRE",
+        "INST",
+        "LIST_INST",
+        "TOUT_INST"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TABL_RESU_MECA",
+        "TABL_SIGM_THETA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 73
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "TRANSITOIRE/NB_OCCUR",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 1,
+       "fr": "nombre d occurences réelles de ce transitoire",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 81
+       }
+      },
+      {
+       "name": "TABL_RESU_MECA",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TABL_RESU_MECA",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "relevé des contraintes sur le chemin",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 87
+       }
+      },
+      {
+       "name": "TABL_SIGM_THER",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TABL_SIGM_THER",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "résultat sous chargement thermique seul",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 90
+       }
+      },
+      {
+       "name": "TABL_RESU_PRES",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TABL_RESU_PRES",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes sous chargement de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "TABL_SIGM_THETA",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TABL_SIGM_THETA",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes a la distance d de la singularité pour chacun des angles THETA",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 98
+       }
+      },
+      {
+       "name": "TOUT_ORDRE",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TOUT_ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "TOUT_INST",
+       "kind": "simple",
+       "path": "TRANSITOIRE/TOUT_INST",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "TRANSITOIRE/INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "TRANSITOIRE/LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "b_inst",
+       "kind": "bloc",
+       "path": "TRANSITOIRE/[b_inst]",
+       "condition": "(exists(\"INST\")) or (exists(\"LIST_INST\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 109
+       },
+       "keywords": [
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "TRANSITOIRE/CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 111
+         }
+        },
+        {
+         "name": "b_prec_rela",
+         "kind": "bloc",
+         "path": "TRANSITOIRE/[b_prec_rela]",
+         "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 112
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "TRANSITOIRE/PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 1e-06,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 114
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_prec_abso",
+         "kind": "bloc",
+         "path": "TRANSITOIRE/[b_prec_abso]",
+         "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 116
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "TRANSITOIRE/PRECISION",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 118
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_ze200",
+   "kind": "bloc",
+   "path": "[b_ze200]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'ZE200a') or equal_to(\"TYPE_RESU_MECA\", 'ZE200b')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 124
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "into": [
+      "SN",
+      "FATIGUE",
+      "EFAT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "SOUS_CYCL",
+     "kind": "simple",
+     "path": "SOUS_CYCL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Prise en compte des sous cycles",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TRESCA",
+     "into": [
+      "TRESCA",
+      "TOUT_INST"
+     ],
+     "fr": "Méthode de sélection des instants",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 134
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "SY_MAX",
+     "kind": "simple",
+     "path": "SY_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "limite élastique utilisée pourle calcul du rochet thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "TYPE_KE",
+     "kind": "simple",
+     "path": "TYPE_KE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "KE_MECA",
+     "into": [
+      "KE_MECA",
+      "KE_MIXTE"
+     ],
+     "fr": "Ke meca seul ou partition mecanique + thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 147
+     }
+    },
+    {
+     "name": "CHAR_MECA",
+     "kind": "factor",
+     "path": "CHAR_MECA",
+     "status": "o",
+     "max": "**",
+     "fr": "Chargements mécaniques",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "MX",
+        "MX_TUBU"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 154
+     },
+     "keywords": [
+      {
+       "name": "NUME_CHAR",
+       "kind": "simple",
+       "path": "CHAR_MECA/NUME_CHAR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro du chargement",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 159
+       }
+      },
+      {
+       "name": "NOM_CHAR",
+       "kind": "simple",
+       "path": "CHAR_MECA/NOM_CHAR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom du chargement",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 160
+       }
+      },
+      {
+       "name": "MX",
+       "kind": "simple",
+       "path": "CHAR_MECA/MX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "moment suivant x",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 161
+       }
+      },
+      {
+       "name": "MX_TUBU",
+       "kind": "simple",
+       "path": "CHAR_MECA/MX_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "moment suivant x, tubulure",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 162
+       }
+      },
+      {
+       "name": "b_1_tenseur",
+       "kind": "bloc",
+       "path": "CHAR_MECA/[b_1_tenseur]",
+       "condition": "exists(\"MX\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 163
+       },
+       "keywords": [
+        {
+         "name": "MY",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 165
+         }
+        },
+        {
+         "name": "MZ",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 166
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_2_tenseurs",
+       "kind": "bloc",
+       "path": "CHAR_MECA/[b_2_tenseurs]",
+       "condition": "exists(\"MX_TUBU\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 168
+       },
+       "keywords": [
+        {
+         "name": "MY_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY_TUBU",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 170
+         }
+        },
+        {
+         "name": "MZ_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ_TUBU",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 171
+         }
+        },
+        {
+         "name": "MX_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MX_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant x, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 172
+         }
+        },
+        {
+         "name": "MY_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 173
+         }
+        },
+        {
+         "name": "MZ_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 174
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "INDI_SIGM",
+     "kind": "factor",
+     "path": "INDI_SIGM",
+     "status": "o",
+     "max": 1,
+     "fr": "indices de contraintes",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "C2",
+        "C2_TUBU"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 177
+     },
+     "keywords": [
+      {
+       "name": "C1",
+       "kind": "simple",
+       "path": "INDI_SIGM/C1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C1 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 182
+       }
+      },
+      {
+       "name": "K1",
+       "kind": "simple",
+       "path": "INDI_SIGM/K1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K1 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 183
+       }
+      },
+      {
+       "name": "C3",
+       "kind": "simple",
+       "path": "INDI_SIGM/C3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C3 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 184
+       }
+      },
+      {
+       "name": "K3",
+       "kind": "simple",
+       "path": "INDI_SIGM/K3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K3 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 185
+       }
+      },
+      {
+       "name": "C2",
+       "kind": "simple",
+       "path": "INDI_SIGM/C2",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C2 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 186
+       }
+      },
+      {
+       "name": "C2_TUBU",
+       "kind": "simple",
+       "path": "INDI_SIGM/C2_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice C2 du RCCM (tubulure)",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 187
+       }
+      },
+      {
+       "name": "K2",
+       "kind": "simple",
+       "path": "INDI_SIGM/K2",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K2 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 188
+       }
+      },
+      {
+       "name": "K2_TUBU",
+       "kind": "simple",
+       "path": "INDI_SIGM/K2_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice K2 du RCCM (tubulure)",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 189
+       }
+      },
+      {
+       "name": "C2_CORP",
+       "kind": "simple",
+       "path": "INDI_SIGM/C2_CORP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice C2 du RCCM (corps)",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 190
+       }
+      },
+      {
+       "name": "K2_CORP",
+       "kind": "simple",
+       "path": "INDI_SIGM/K2_CORP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "indice K2 du RCCM (corps)",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 191
+       }
+      }
+     ]
+    },
+    {
+     "name": "TUYAU",
+     "kind": "factor",
+     "path": "TUYAU",
+     "status": "o",
+     "max": 1,
+     "fr": "caracteristiques geometriques de la tuyauterie",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "I",
+        "I_TUBU"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 193
+     },
+     "keywords": [
+      {
+       "name": "R",
+       "kind": "simple",
+       "path": "TUYAU/R",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "rayon de la tuyauterie",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 198
+       }
+      },
+      {
+       "name": "R_TUBU",
+       "kind": "simple",
+       "path": "TUYAU/R_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "rayon de la tubulure",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 199
+       }
+      },
+      {
+       "name": "R_CORP",
+       "kind": "simple",
+       "path": "TUYAU/R_CORP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "rayon du corps",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 200
+       }
+      },
+      {
+       "name": "EP",
+       "kind": "simple",
+       "path": "TUYAU/EP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "epaisseur de la tuyauterie",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 201
+       }
+      },
+      {
+       "name": "I",
+       "kind": "simple",
+       "path": "TUYAU/I",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "inertie de la tuyauterie",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 202
+       }
+      },
+      {
+       "name": "I_TUBU",
+       "kind": "simple",
+       "path": "TUYAU/I_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "inertie de la tubulure",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 203
+       }
+      },
+      {
+       "name": "I_CORP",
+       "kind": "simple",
+       "path": "TUYAU/I_CORP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "inertie du corps",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 204
+       }
+      }
+     ]
+    },
+    {
+     "name": "RESU_THER",
+     "kind": "factor",
+     "path": "RESU_THER",
+     "status": "f",
+     "max": "**",
+     "fr": "resultats thermiques",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 206
+     },
+     "keywords": [
+      {
+       "name": "NUME_RESU_THER",
+       "kind": "simple",
+       "path": "RESU_THER/NUME_RESU_THER",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la table de résultat thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 210
+       }
+      },
+      {
+       "name": "TABL_RESU_THER",
+       "kind": "simple",
+       "path": "RESU_THER/TABL_RESU_THER",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes sous chargement thermique seul",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 213
+       }
+      }
+     ]
+    },
+    {
+     "name": "ENVIRONNEMENT",
+     "kind": "factor",
+     "path": "ENVIRONNEMENT",
+     "status": "f",
+     "max": 1,
+     "fr": "Donnees pour le calcul du fen",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 219
+     },
+     "keywords": [
+      {
+       "name": "TABL_YOUNG",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/TABL_YOUNG",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé du module d'young en fonction de la température",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 223
+       }
+      },
+      {
+       "name": "FEN_INTEGRE",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/FEN_INTEGRE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 228
+       }
+      },
+      {
+       "name": "S_ETOILE",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/S_ETOILE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 229
+       }
+      },
+      {
+       "name": "SEUIL_EPSI_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_EPSI_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %/s",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 230
+       }
+      },
+      {
+       "name": "SEUIL_EPSI_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_EPSI_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %/s",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 231
+       }
+      },
+      {
+       "name": "CRIT_EPSI",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/CRIT_EPSI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 232
+       }
+      },
+      {
+       "name": "A_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/A_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 233
+       }
+      },
+      {
+       "name": "B_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/B_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 234
+       }
+      },
+      {
+       "name": "C_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/C_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 235
+       }
+      },
+      {
+       "name": "SEUIL_T_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_T_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 236
+       }
+      },
+      {
+       "name": "SEUIL_T_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_T_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 237
+       }
+      },
+      {
+       "name": "VALE_T_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur inférieure de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 238
+       }
+      },
+      {
+       "name": "VALE_T_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur supérieure de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 241
+       }
+      },
+      {
+       "name": "VALE_T_MOY_NUM",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_MOY_NUM",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur moyenne au numérateur de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 244
+       }
+      },
+      {
+       "name": "VALE_T_MOY_DEN",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_MOY_DEN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur moyenne au dénominateur de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 249
+       }
+      }
+     ]
+    },
+    {
+     "name": "SEISME",
+     "kind": "factor",
+     "path": "SEISME",
+     "status": "f",
+     "max": 1,
+     "fr": "Situation séisme",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 255
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "SEISME/NB_OCCUR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre d'occurences de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 259
+       }
+      },
+      {
+       "name": "NB_CYCL_SEISME",
+       "kind": "simple",
+       "path": "SEISME/NB_CYCL_SEISME",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre de cycles associé au séisme",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 260
+       }
+      },
+      {
+       "name": "NUME_SITU",
+       "kind": "simple",
+       "path": "SEISME/NUME_SITU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 261
+       }
+      },
+      {
+       "name": "NOM_SITU",
+       "kind": "simple",
+       "path": "SEISME/NOM_SITU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 262
+       }
+      },
+      {
+       "name": "CHAR_ETAT",
+       "kind": "simple",
+       "path": "SEISME/CHAR_ETAT",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat S",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 263
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_ze200a",
+   "kind": "bloc",
+   "path": "[b_ze200a]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'ZE200a')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 266
+   },
+   "keywords": [
+    {
+     "name": "SITUATION",
+     "kind": "factor",
+     "path": "SITUATION",
+     "status": "o",
+     "max": "**",
+     "fr": "Situation",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 268
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "SITUATION/NB_OCCUR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre d'occurences de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 272
+       }
+      },
+      {
+       "name": "NUME_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NUME_SITU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 273
+       }
+      },
+      {
+       "name": "NOM_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NOM_SITU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 274
+       }
+      },
+      {
+       "name": "COMBINABLE",
+       "kind": "simple",
+       "path": "SITUATION/COMBINABLE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "non = sous-cycle",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 275
+       }
+      },
+      {
+       "name": "NUME_GROUPE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_GROUPE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 20,
+       "fr": "numéro du ou des groupes de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 278
+       }
+      },
+      {
+       "name": "NUME_PASSAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PASSAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 2,
+       "max": 20,
+       "fr": "numéros des groupes de la situation de passage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 285
+       }
+      },
+      {
+       "name": "NUME_PARTAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PARTAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": "numéro du groupe de partage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 292
+       }
+      },
+      {
+       "name": "NUME_RESU_THER",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_THER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numéro du transitoire thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 295
+       }
+      },
+      {
+       "name": "CHAR_ETAT_A",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_A",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 298
+       }
+      },
+      {
+       "name": "CHAR_ETAT_B",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_B",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 299
+       }
+      },
+      {
+       "name": "PRES_A",
+       "kind": "simple",
+       "path": "SITUATION/PRES_A",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "pression etat A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 300
+       }
+      },
+      {
+       "name": "PRES_B",
+       "kind": "simple",
+       "path": "SITUATION/PRES_B",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "pression etat B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 301
+       }
+      },
+      {
+       "name": "O_ETOILE",
+       "kind": "simple",
+       "path": "SITUATION/O_ETOILE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 302
+       }
+      },
+      {
+       "name": "TABL_TEMP",
+       "kind": "simple",
+       "path": "SITUATION/TABL_TEMP",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des températures pendant le transitoire",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 303
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_ze200b",
+   "kind": "bloc",
+   "path": "[b_ze200b]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'ZE200b')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 310
+   },
+   "keywords": [
+    {
+     "name": "RESU_PRES",
+     "kind": "factor",
+     "path": "RESU_PRES",
+     "status": "f",
+     "max": "**",
+     "fr": "resultats dus à la pression",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 312
+     },
+     "keywords": [
+      {
+       "name": "NUME_RESU_PRES",
+       "kind": "simple",
+       "path": "RESU_PRES/NUME_RESU_PRES",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la table de transitoire de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 316
+       }
+      },
+      {
+       "name": "TABL_RESU_PRES",
+       "kind": "simple",
+       "path": "RESU_PRES/TABL_RESU_PRES",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes dues à la pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 319
+       }
+      }
+     ]
+    },
+    {
+     "name": "SITUATION",
+     "kind": "factor",
+     "path": "SITUATION",
+     "status": "o",
+     "max": "**",
+     "fr": "Situation",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 325
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "SITUATION/NB_OCCUR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre d'occurences de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 329
+       }
+      },
+      {
+       "name": "NUME_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NUME_SITU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 330
+       }
+      },
+      {
+       "name": "NOM_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NOM_SITU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 331
+       }
+      },
+      {
+       "name": "COMBINABLE",
+       "kind": "simple",
+       "path": "SITUATION/COMBINABLE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "non = sous-cycle",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 332
+       }
+      },
+      {
+       "name": "NUME_GROUPE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_GROUPE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 20,
+       "fr": "numéro du ou des groupes de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 335
+       }
+      },
+      {
+       "name": "NUME_PASSAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PASSAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 2,
+       "max": 20,
+       "fr": "numéros des groupes de la situation de passage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 342
+       }
+      },
+      {
+       "name": "NUME_PARTAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PARTAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": "numéro du groupe de partage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 349
+       }
+      },
+      {
+       "name": "NUME_RESU_THER",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_THER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du transitoire thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 352
+       }
+      },
+      {
+       "name": "NUME_RESU_PRES",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_PRES",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du transitoire de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 355
+       }
+      },
+      {
+       "name": "CHAR_ETAT_A",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_A",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 358
+       }
+      },
+      {
+       "name": "CHAR_ETAT_B",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_B",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 359
+       }
+      },
+      {
+       "name": "O_ETOILE",
+       "kind": "simple",
+       "path": "SITUATION/O_ETOILE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 360
+       }
+      },
+      {
+       "name": "TABL_TEMP",
+       "kind": "simple",
+       "path": "SITUATION/TABL_TEMP",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des températures pendant le transitoire",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 361
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_b3200",
+   "kind": "bloc",
+   "path": "[b_b3200]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'B3200')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "CHAR_MECA",
+      "RESU_MECA_UNIT"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 369
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "into": [
+      "PM_PB",
+      "SN",
+      "FATIGUE",
+      "EFAT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 371
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TRESCA",
+     "into": [
+      "TRESCA",
+      "TOUT_INST"
+     ],
+     "fr": "Méthode de sélection des instants",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 372
+     }
+    },
+    {
+     "name": "SOUS_CYCL",
+     "kind": "simple",
+     "path": "SOUS_CYCL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Prise en compte des sous cycles",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 379
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 386
+     }
+    },
+    {
+     "name": "SY_MAX",
+     "kind": "simple",
+     "path": "SY_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "limite élastique utilisée pourle calcul du rochet thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 387
+     }
+    },
+    {
+     "name": "TYPE_KE",
+     "kind": "simple",
+     "path": "TYPE_KE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "KE_MECA",
+     "into": [
+      "KE_MECA",
+      "KE_MIXTE"
+     ],
+     "fr": "Ke meca seul ou partition mecanique + thermique",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 392
+     }
+    },
+    {
+     "name": "FACT_SIGM",
+     "kind": "factor",
+     "path": "FACT_SIGM",
+     "status": "f",
+     "max": 1,
+     "fr": "facteurs d'intensité de contraintes (soudure)",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 399
+     },
+     "keywords": [
+      {
+       "name": "KT_SN",
+       "kind": "simple",
+       "path": "FACT_SIGM/KT_SN",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Kt appliqué à Sn",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 403
+       }
+      },
+      {
+       "name": "KT_SP",
+       "kind": "simple",
+       "path": "FACT_SIGM/KT_SP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Kt appliqué à Sp",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 404
+       }
+      }
+     ]
+    },
+    {
+     "name": "INDI_SIGM",
+     "kind": "factor",
+     "path": "INDI_SIGM",
+     "status": "f",
+     "max": 1,
+     "fr": "indices de contraintes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 406
+     },
+     "keywords": [
+      {
+       "name": "C1",
+       "kind": "simple",
+       "path": "INDI_SIGM/C1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C1 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 410
+       }
+      },
+      {
+       "name": "K1",
+       "kind": "simple",
+       "path": "INDI_SIGM/K1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K1 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 411
+       }
+      },
+      {
+       "name": "C2",
+       "kind": "simple",
+       "path": "INDI_SIGM/C2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C2 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 412
+       }
+      },
+      {
+       "name": "K2",
+       "kind": "simple",
+       "path": "INDI_SIGM/K2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K2 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 413
+       }
+      },
+      {
+       "name": "C3",
+       "kind": "simple",
+       "path": "INDI_SIGM/C3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes C3 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 414
+       }
+      },
+      {
+       "name": "K3",
+       "kind": "simple",
+       "path": "INDI_SIGM/K3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "indice de contraintes K3 du RCCM",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 415
+       }
+      }
+     ]
+    },
+    {
+     "name": "CHAR_MECA",
+     "kind": "factor",
+     "path": "CHAR_MECA",
+     "status": "f",
+     "max": "**",
+     "fr": "Chargements mécaniques",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "MX",
+        "MX_TUBU"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 418
+     },
+     "keywords": [
+      {
+       "name": "NUME_CHAR",
+       "kind": "simple",
+       "path": "CHAR_MECA/NUME_CHAR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro du chargement",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 423
+       }
+      },
+      {
+       "name": "NOM_CHAR",
+       "kind": "simple",
+       "path": "CHAR_MECA/NOM_CHAR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom du chargement",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 424
+       }
+      },
+      {
+       "name": "MX",
+       "kind": "simple",
+       "path": "CHAR_MECA/MX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "moment suivant x",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 425
+       }
+      },
+      {
+       "name": "MX_TUBU",
+       "kind": "simple",
+       "path": "CHAR_MECA/MX_TUBU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "moment suivant x, tubulure",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 426
+       }
+      },
+      {
+       "name": "b_1_tenseur",
+       "kind": "bloc",
+       "path": "CHAR_MECA/[b_1_tenseur]",
+       "condition": "exists(\"MX\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 427
+       },
+       "keywords": [
+        {
+         "name": "FX",
+         "kind": "simple",
+         "path": "CHAR_MECA/FX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant x",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 429
+         }
+        },
+        {
+         "name": "FY",
+         "kind": "simple",
+         "path": "CHAR_MECA/FY",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant y",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 430
+         }
+        },
+        {
+         "name": "FZ",
+         "kind": "simple",
+         "path": "CHAR_MECA/FZ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant z",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 431
+         }
+        },
+        {
+         "name": "MY",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 432
+         }
+        },
+        {
+         "name": "MZ",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 433
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_2_tenseurs",
+       "kind": "bloc",
+       "path": "CHAR_MECA/[b_2_tenseurs]",
+       "condition": "exists(\"MX_TUBU\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 435
+       },
+       "keywords": [
+        {
+         "name": "FX_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/FX_TUBU",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant x, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 437
+         }
+        },
+        {
+         "name": "FY_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/FY_TUBU",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant y, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 438
+         }
+        },
+        {
+         "name": "FZ_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/FZ_TUBU",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant z, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 439
+         }
+        },
+        {
+         "name": "MY_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY_TUBU",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 440
+         }
+        },
+        {
+         "name": "MZ_TUBU",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ_TUBU",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z, tubulure",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 441
+         }
+        },
+        {
+         "name": "FX_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/FX_CORP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant x, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 442
+         }
+        },
+        {
+         "name": "FY_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/FY_CORP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant y, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 443
+         }
+        },
+        {
+         "name": "FZ_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/FZ_CORP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "effort suivant z, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 444
+         }
+        },
+        {
+         "name": "MX_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MX_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant x, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 445
+         }
+        },
+        {
+         "name": "MY_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MY_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant y, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 446
+         }
+        },
+        {
+         "name": "MZ_CORP",
+         "kind": "simple",
+         "path": "CHAR_MECA/MZ_CORP",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "moment suivant z, corps du piquage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 447
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "RESU_MECA_UNIT",
+     "kind": "factor",
+     "path": "RESU_MECA_UNIT",
+     "status": "f",
+     "fr": "resultats mécaniques unitaires",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TABL_MX",
+        "TABL_MX_TUBU"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 450
+     },
+     "keywords": [
+      {
+       "name": "TABL_MX",
+       "kind": "simple",
+       "path": "RESU_MECA_UNIT/TABL_MX",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour chargement unitaire MX",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 454
+       }
+      },
+      {
+       "name": "TABL_MX_TUBU",
+       "kind": "simple",
+       "path": "RESU_MECA_UNIT/TABL_MX_TUBU",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour chargement unitaire MX_TUBU",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 459
+       }
+      },
+      {
+       "name": "b_1_tenseur",
+       "kind": "bloc",
+       "path": "RESU_MECA_UNIT/[b_1_tenseur]",
+       "condition": "exists(\"TABL_MX\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 464
+       },
+       "keywords": [
+        {
+         "name": "TABL_FX",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FX",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FX",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 466
+         }
+        },
+        {
+         "name": "TABL_FY",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FY",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FY",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 471
+         }
+        },
+        {
+         "name": "TABL_FZ",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FZ",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FZ",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 476
+         }
+        },
+        {
+         "name": "TABL_MY",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MY",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MY",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 481
+         }
+        },
+        {
+         "name": "TABL_MZ",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MZ",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MZ",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 486
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_2_tenseurs",
+       "kind": "bloc",
+       "path": "RESU_MECA_UNIT/[b_2_tenseurs]",
+       "condition": "exists(\"TABL_MX_TUBU\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 492
+       },
+       "keywords": [
+        {
+         "name": "TABL_FX_TUBU",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FX_TUBU",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FX_TUBU",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 494
+         }
+        },
+        {
+         "name": "TABL_FY_TUBU",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FY_TUBU",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FY_TUBU",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 499
+         }
+        },
+        {
+         "name": "TABL_FZ_TUBU",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FZ_TUBU",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FZ_TUBU",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 504
+         }
+        },
+        {
+         "name": "TABL_MY_TUBU",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MY_TUBU",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MY_TUBU",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 509
+         }
+        },
+        {
+         "name": "TABL_MZ_TUBU",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MZ_TUBU",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MZ_TUBU",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 514
+         }
+        },
+        {
+         "name": "TABL_FX_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FX_CORP",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FX_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 519
+         }
+        },
+        {
+         "name": "TABL_FY_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FY_CORP",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FY_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 524
+         }
+        },
+        {
+         "name": "TABL_FZ_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_FZ_CORP",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire FZ_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 529
+         }
+        },
+        {
+         "name": "TABL_MX_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MX_CORP",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MX_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 534
+         }
+        },
+        {
+         "name": "TABL_MY_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MY_CORP",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MY_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 539
+         }
+        },
+        {
+         "name": "TABL_MZ_CORP",
+         "kind": "simple",
+         "path": "RESU_MECA_UNIT/TABL_MZ_CORP",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des contraintes pour chargement unitaire MZ_CORP",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 544
+         }
+        }
+       ]
+      },
+      {
+       "name": "TABL_PRES",
+       "kind": "simple",
+       "path": "RESU_MECA_UNIT/TABL_PRES",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour chargement unitaire de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 550
+       }
+      }
+     ]
+    },
+    {
+     "name": "RESU_THER",
+     "kind": "factor",
+     "path": "RESU_THER",
+     "status": "f",
+     "max": "**",
+     "fr": "resultats thermiques",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 556
+     },
+     "keywords": [
+      {
+       "name": "NUME_RESU_THER",
+       "kind": "simple",
+       "path": "RESU_THER/NUME_RESU_THER",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la table de résultat thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 560
+       }
+      },
+      {
+       "name": "TABL_RESU_THER",
+       "kind": "simple",
+       "path": "RESU_THER/TABL_RESU_THER",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes sous chargement thermique seul",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 563
+       }
+      }
+     ]
+    },
+    {
+     "name": "RESU_PRES",
+     "kind": "factor",
+     "path": "RESU_PRES",
+     "status": "f",
+     "max": "**",
+     "fr": "resultats dus à la pression",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 569
+     },
+     "keywords": [
+      {
+       "name": "NUME_RESU_PRES",
+       "kind": "simple",
+       "path": "RESU_PRES/NUME_RESU_PRES",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la table de transitoire de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 573
+       }
+      },
+      {
+       "name": "TABL_RESU_PRES",
+       "kind": "simple",
+       "path": "RESU_PRES/TABL_RESU_PRES",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes dues à la pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 576
+       }
+      }
+     ]
+    },
+    {
+     "name": "RESU_MECA",
+     "kind": "factor",
+     "path": "RESU_MECA",
+     "status": "f",
+     "max": "**",
+     "fr": "resultats dus aux efforts externes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 582
+     },
+     "keywords": [
+      {
+       "name": "NUME_RESU_MECA",
+       "kind": "simple",
+       "path": "RESU_MECA/NUME_RESU_MECA",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la table de transitoire dus aux efforts",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 586
+       }
+      },
+      {
+       "name": "TABL_RESU_MECA",
+       "kind": "simple",
+       "path": "RESU_MECA/TABL_RESU_MECA",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 589
+       }
+      }
+     ]
+    },
+    {
+     "name": "SITUATION",
+     "kind": "factor",
+     "path": "SITUATION",
+     "status": "o",
+     "max": "**",
+     "fr": "Situation",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "CHAR_ETAT_A",
+        "NUME_RESU_MECA"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "PRES_A",
+        "NUME_RESU_PRES"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "PRES_A",
+        "PRES_B"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "CHAR_ETAT_A",
+        "CHAR_ETAT_B"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "TEMP_A",
+        "TABL_TEMP"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "O_ETOILE",
+        "TABL_TEMP"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "TEMP_A",
+        "TEMP_B"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 591
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "SITUATION/NB_OCCUR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre d'occurences de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 595
+       }
+      },
+      {
+       "name": "NUME_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NUME_SITU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 596
+       }
+      },
+      {
+       "name": "NOM_SITU",
+       "kind": "simple",
+       "path": "SITUATION/NOM_SITU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 597
+       }
+      },
+      {
+       "name": "COMBINABLE",
+       "kind": "simple",
+       "path": "SITUATION/COMBINABLE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "non = sous-cycle",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 598
+       }
+      },
+      {
+       "name": "NUME_GROUPE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_GROUPE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 20,
+       "fr": "numéro du ou des groupes de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 601
+       }
+      },
+      {
+       "name": "NUME_PASSAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PASSAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 2,
+       "max": 20,
+       "fr": "numéros des groupes de la situation de passage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 608
+       }
+      },
+      {
+       "name": "NUME_PARTAGE",
+       "kind": "simple",
+       "path": "SITUATION/NUME_PARTAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": "numéro du groupe de partage",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 615
+       }
+      },
+      {
+       "name": "NUME_RESU_THER",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_THER",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du transitoire thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 618
+       }
+      },
+      {
+       "name": "NUME_RESU_PRES",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_PRES",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du transitoire de pression",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 630
+       }
+      },
+      {
+       "name": "NUME_RESU_MECA",
+       "kind": "simple",
+       "path": "SITUATION/NUME_RESU_MECA",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du transitoire dus aux efforts",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 633
+       }
+      },
+      {
+       "name": "CHAR_ETAT_A",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_A",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 636
+       }
+      },
+      {
+       "name": "CHAR_ETAT_B",
+       "kind": "simple",
+       "path": "SITUATION/CHAR_ETAT_B",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero du chargement etat B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 637
+       }
+      },
+      {
+       "name": "PRES_A",
+       "kind": "simple",
+       "path": "SITUATION/PRES_A",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "pression etat A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 638
+       }
+      },
+      {
+       "name": "PRES_B",
+       "kind": "simple",
+       "path": "SITUATION/PRES_B",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "pression etat B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 639
+       }
+      },
+      {
+       "name": "O_ETOILE",
+       "kind": "simple",
+       "path": "SITUATION/O_ETOILE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 640
+       }
+      },
+      {
+       "name": "TABL_TEMP",
+       "kind": "simple",
+       "path": "SITUATION/TABL_TEMP",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des températures pendant le transitoire",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 641
+       }
+      },
+      {
+       "name": "TEMP_A",
+       "kind": "simple",
+       "path": "SITUATION/TEMP_A",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "temperature de CHAR ETAT A",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 646
+       }
+      },
+      {
+       "name": "TEMP_B",
+       "kind": "simple",
+       "path": "SITUATION/TEMP_B",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "temperature de CHAR ETAT B",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 647
+       }
+      }
+     ]
+    },
+    {
+     "name": "ENVIRONNEMENT",
+     "kind": "factor",
+     "path": "ENVIRONNEMENT",
+     "status": "f",
+     "max": 1,
+     "fr": "Donnees pour le calcul du fen",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 649
+     },
+     "keywords": [
+      {
+       "name": "TABL_YOUNG",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/TABL_YOUNG",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé du module d'young en fonction de la température",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 653
+       }
+      },
+      {
+       "name": "FEN_INTEGRE",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/FEN_INTEGRE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 658
+       }
+      },
+      {
+       "name": "S_ETOILE",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/S_ETOILE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 659
+       }
+      },
+      {
+       "name": "SEUIL_EPSI_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_EPSI_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %/s",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 660
+       }
+      },
+      {
+       "name": "SEUIL_EPSI_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_EPSI_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %/s",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 661
+       }
+      },
+      {
+       "name": "CRIT_EPSI",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/CRIT_EPSI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en %",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 662
+       }
+      },
+      {
+       "name": "A_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/A_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 663
+       }
+      },
+      {
+       "name": "B_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/B_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 664
+       }
+      },
+      {
+       "name": "C_ENV",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/C_ENV",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 665
+       }
+      },
+      {
+       "name": "SEUIL_T_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_T_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 666
+       }
+      },
+      {
+       "name": "SEUIL_T_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/SEUIL_T_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "seuil en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 667
+       }
+      },
+      {
+       "name": "VALE_T_INF",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_INF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur inférieure de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 668
+       }
+      },
+      {
+       "name": "VALE_T_SUP",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_SUP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur supérieure de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 671
+       }
+      },
+      {
+       "name": "VALE_T_MOY_NUM",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_MOY_NUM",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur moyenne au numérateur de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 674
+       }
+      },
+      {
+       "name": "VALE_T_MOY_DEN",
+       "kind": "simple",
+       "path": "ENVIRONNEMENT/VALE_T_MOY_DEN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur moyenne au dénominateur de la température en degré",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 679
+       }
+      }
+     ]
+    },
+    {
+     "name": "SEISME",
+     "kind": "factor",
+     "path": "SEISME",
+     "status": "f",
+     "max": 1,
+     "fr": "Situation séisme",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "CHAR_ETAT",
+        "TABL_MX"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "TABL_MX",
+        "TABL_MY",
+        "TABL_MZ",
+        "TABL_FX",
+        "TABL_FY",
+        "TABL_FZ"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 685
+     },
+     "keywords": [
+      {
+       "name": "NB_OCCUR",
+       "kind": "simple",
+       "path": "SEISME/NB_OCCUR",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre d'occurences de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 689
+       }
+      },
+      {
+       "name": "NB_CYCL_SEISME",
+       "kind": "simple",
+       "path": "SEISME/NB_CYCL_SEISME",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "nombre de cycles associé au séisme",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 690
+       }
+      },
+      {
+       "name": "NUME_SITU",
+       "kind": "simple",
+       "path": "SEISME/NUME_SITU",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "numéro de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 691
+       }
+      },
+      {
+       "name": "NOM_SITU",
+       "kind": "simple",
+       "path": "SEISME/NOM_SITU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "nom de la situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 692
+       }
+      },
+      {
+       "name": "CHAR_ETAT",
+       "kind": "simple",
+       "path": "SEISME/CHAR_ETAT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": "numero de chargement etat S",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 697
+       }
+      },
+      {
+       "name": "TABL_FX",
+       "kind": "simple",
+       "path": "SEISME/TABL_FX",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme FX",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 698
+       }
+      },
+      {
+       "name": "TABL_FY",
+       "kind": "simple",
+       "path": "SEISME/TABL_FY",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme FY",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 701
+       }
+      },
+      {
+       "name": "TABL_FZ",
+       "kind": "simple",
+       "path": "SEISME/TABL_FZ",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme FZ",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 704
+       }
+      },
+      {
+       "name": "TABL_MX",
+       "kind": "simple",
+       "path": "SEISME/TABL_MX",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme MX",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 707
+       }
+      },
+      {
+       "name": "TABL_MY",
+       "kind": "simple",
+       "path": "SEISME/TABL_MY",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme MY",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 710
+       }
+      },
+      {
+       "name": "TABL_MZ",
+       "kind": "simple",
+       "path": "SEISME/TABL_MZ",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "table relevé des contraintes pour séisme MZ",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 713
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_tuyauterie",
+   "kind": "bloc",
+   "path": "[b_tuyauterie]",
+   "condition": "equal_to(\"TYPE_RESU_MECA\", 'B3600') and not equal_to(\"TYPE_RESU\",\"SYSTUS\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rccm.py",
+    "line": 719
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FATIGUE",
+      "MOMENT_EQUIVALENT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 721
+     }
+    },
+    {
+     "name": "ZONE_ANALYSE",
+     "kind": "factor",
+     "path": "ZONE_ANALYSE",
+     "status": "o",
+     "fr": "liste des mailles ou des noeuds analysés",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 722
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "ZONE_ANALYSE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 726
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ZONE_ANALYSE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 727
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_momeq",
+     "kind": "bloc",
+     "path": "[b_momeq]",
+     "condition": "equal_to(\"OPTION\", 'MOMENT_EQUIVALENT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 729
+     },
+     "keywords": [
+      {
+       "name": "RESU_MECA",
+       "kind": "factor",
+       "path": "RESU_MECA",
+       "status": "o",
+       "max": 1,
+       "fr": "Chargements mécaniques",
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "CHAM_GD",
+          "RESULTAT"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 731
+       },
+       "keywords": [
+        {
+         "name": "CHAM_GD",
+         "kind": "simple",
+         "path": "RESU_MECA/CHAM_GD",
+         "status": "f",
+         "type": [
+          "cham_elem"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 736
+         }
+        },
+        {
+         "name": "RESULTAT",
+         "kind": "simple",
+         "path": "RESU_MECA/RESULTAT",
+         "status": "f",
+         "type": [
+          "resultat_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 737
+         }
+        },
+        {
+         "name": "b_extrac",
+         "kind": "bloc",
+         "path": "RESU_MECA/[b_extrac]",
+         "condition": "exists(\"RESULTAT\")",
+         "fr": "extraction d un champ de grandeur",
+         "rules": [
+          {
+           "rule": "UN_PARMI",
+           "keywords": [
+            "TOUT_ORDRE",
+            "NUME_ORDRE",
+            "INST"
+           ]
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 738
+         },
+         "keywords": [
+          {
+           "name": "NOM_CHAM",
+           "kind": "simple",
+           "path": "RESU_MECA/NOM_CHAM",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "EFGE_ELNO",
+           "into": [
+            "EFGE_ELNO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 742
+           }
+          },
+          {
+           "name": "TOUT_ORDRE",
+           "kind": "simple",
+           "path": "RESU_MECA/TOUT_ORDRE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "into": [
+            "OUI"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 743
+           }
+          },
+          {
+           "name": "NUME_ORDRE",
+           "kind": "simple",
+           "path": "RESU_MECA/NUME_ORDRE",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 744
+           }
+          },
+          {
+           "name": "INST",
+           "kind": "simple",
+           "path": "RESU_MECA/INST",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": "**",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 745
+           }
+          },
+          {
+           "name": "b_acce_reel",
+           "kind": "bloc",
+           "path": "RESU_MECA/[b_acce_reel]",
+           "condition": "(exists(\"INST\"))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 746
+           },
+           "keywords": [
+            {
+             "name": "CRITERE",
+             "kind": "simple",
+             "path": "RESU_MECA/CRITERE",
+             "status": "f",
+             "type": [
+              "TXM"
+             ],
+             "default": "RELATIF",
+             "into": [
+              "RELATIF",
+              "ABSOLU"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 748
+             }
+            },
+            {
+             "name": "b_prec_rela",
+             "kind": "bloc",
+             "path": "RESU_MECA/[b_prec_rela]",
+             "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 751
+             },
+             "keywords": [
+              {
+               "name": "PRECISION",
+               "kind": "simple",
+               "path": "RESU_MECA/PRECISION",
+               "status": "f",
+               "type": [
+                "R"
+               ],
+               "default": 1e-06,
+               "fr": null,
+               "source": {
+                "file": "code_aster/Cata/Commands/post_rccm.py",
+                "line": 753
+               }
+              }
+             ]
+            },
+            {
+             "name": "b_prec_abso",
+             "kind": "bloc",
+             "path": "RESU_MECA/[b_prec_abso]",
+             "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 755
+             },
+             "keywords": [
+              {
+               "name": "PRECISION",
+               "kind": "simple",
+               "path": "RESU_MECA/PRECISION",
+               "status": "o",
+               "type": [
+                "R"
+               ],
+               "fr": null,
+               "source": {
+                "file": "code_aster/Cata/Commands/post_rccm.py",
+                "line": 757
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_fatigue",
+     "kind": "bloc",
+     "path": "[b_fatigue]",
+     "condition": "equal_to(\"OPTION\", 'FATIGUE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rccm.py",
+      "line": 763
+     },
+     "keywords": [
+      {
+       "name": "CHAM_MATER",
+       "kind": "simple",
+       "path": "CHAM_MATER",
+       "status": "o",
+       "type": [
+        "cham_mater"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 765
+       }
+      },
+      {
+       "name": "TYPE_KE",
+       "kind": "simple",
+       "path": "TYPE_KE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "KE_MECA",
+       "into": [
+        "KE_MECA",
+        "KE_MIXTE"
+       ],
+       "fr": "Ke meca seul ou partition mecanique + thermique",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 766
+       }
+      },
+      {
+       "name": "MODELE",
+       "kind": "simple",
+       "path": "MODELE",
+       "status": "o",
+       "type": [
+        "modele_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 773
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "CARA_ELEM",
+       "status": "o",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 774
+       }
+      },
+      {
+       "name": "RESU_MECA",
+       "kind": "factor",
+       "path": "RESU_MECA",
+       "status": "o",
+       "max": "**",
+       "fr": "Chargements mécaniques",
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "CHAM_GD",
+          "RESULTAT"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 775
+       },
+       "keywords": [
+        {
+         "name": "NUME_CHAR",
+         "kind": "simple",
+         "path": "RESU_MECA/NUME_CHAR",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro du chargement",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 780
+         }
+        },
+        {
+         "name": "NOM_CHAR",
+         "kind": "simple",
+         "path": "RESU_MECA/NOM_CHAR",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": "nom du chargement",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 781
+         }
+        },
+        {
+         "name": "CHAM_GD",
+         "kind": "simple",
+         "path": "RESU_MECA/CHAM_GD",
+         "status": "f",
+         "type": [
+          "cham_gd_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 782
+         }
+        },
+        {
+         "name": "RESULTAT",
+         "kind": "simple",
+         "path": "RESU_MECA/RESULTAT",
+         "status": "f",
+         "type": [
+          "resultat_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 783
+         }
+        },
+        {
+         "name": "b_extrac",
+         "kind": "bloc",
+         "path": "RESU_MECA/[b_extrac]",
+         "condition": "exists(\"RESULTAT\")",
+         "fr": "extraction d un champ de grandeur",
+         "rules": [
+          {
+           "rule": "UN_PARMI",
+           "keywords": [
+            "TOUT_ORDRE",
+            "NUME_ORDRE",
+            "INST",
+            "NOEUD_CMP",
+            "NOM_CAS"
+           ]
+          }
+         ],
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 784
+         },
+         "keywords": [
+          {
+           "name": "NOM_CHAM",
+           "kind": "simple",
+           "path": "RESU_MECA/NOM_CHAM",
+           "status": "o",
+           "type": [
+            "TXM"
+           ],
+           "into": [
+            "EFGE_ELNO",
+            "SIEF_ELNO"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 788
+           }
+          },
+          {
+           "name": "TOUT_ORDRE",
+           "kind": "simple",
+           "path": "RESU_MECA/TOUT_ORDRE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "into": [
+            "OUI"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 789
+           }
+          },
+          {
+           "name": "NUME_ORDRE",
+           "kind": "simple",
+           "path": "RESU_MECA/NUME_ORDRE",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 790
+           }
+          },
+          {
+           "name": "INST",
+           "kind": "simple",
+           "path": "RESU_MECA/INST",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 791
+           }
+          },
+          {
+           "name": "NOEUD_CMP",
+           "kind": "simple",
+           "path": "RESU_MECA/NOEUD_CMP",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "max": "**",
+           "validators": [
+            {
+             "name": "NoRepeat",
+             "args": []
+            }
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 792
+           }
+          },
+          {
+           "name": "NOM_CAS",
+           "kind": "simple",
+           "path": "RESU_MECA/NOM_CAS",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 793
+           }
+          },
+          {
+           "name": "b_acce_reel",
+           "kind": "bloc",
+           "path": "RESU_MECA/[b_acce_reel]",
+           "condition": "(exists(\"INST\"))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 794
+           },
+           "keywords": [
+            {
+             "name": "CRITERE",
+             "kind": "simple",
+             "path": "RESU_MECA/CRITERE",
+             "status": "f",
+             "type": [
+              "TXM"
+             ],
+             "default": "RELATIF",
+             "into": [
+              "RELATIF",
+              "ABSOLU"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 796
+             }
+            },
+            {
+             "name": "b_prec_rela",
+             "kind": "bloc",
+             "path": "RESU_MECA/[b_prec_rela]",
+             "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 799
+             },
+             "keywords": [
+              {
+               "name": "PRECISION",
+               "kind": "simple",
+               "path": "RESU_MECA/PRECISION",
+               "status": "f",
+               "type": [
+                "R"
+               ],
+               "default": 1e-06,
+               "fr": null,
+               "source": {
+                "file": "code_aster/Cata/Commands/post_rccm.py",
+                "line": 801
+               }
+              }
+             ]
+            },
+            {
+             "name": "b_prec_abso",
+             "kind": "bloc",
+             "path": "RESU_MECA/[b_prec_abso]",
+             "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/post_rccm.py",
+              "line": 803
+             },
+             "keywords": [
+              {
+               "name": "PRECISION",
+               "kind": "simple",
+               "path": "RESU_MECA/PRECISION",
+               "status": "o",
+               "type": [
+                "R"
+               ],
+               "fr": null,
+               "source": {
+                "file": "code_aster/Cata/Commands/post_rccm.py",
+                "line": 805
+               }
+              }
+             ]
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "INDI_SIGM",
+       "kind": "factor",
+       "path": "INDI_SIGM",
+       "status": "o",
+       "max": "**",
+       "fr": "indices de contraintes",
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT",
+          "GROUP_MA"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 810
+       },
+       "keywords": [
+        {
+         "name": "C1",
+         "kind": "simple",
+         "path": "INDI_SIGM/C1",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1.0,
+         "fr": "indice de contraintes C1 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 815
+         }
+        },
+        {
+         "name": "K1",
+         "kind": "simple",
+         "path": "INDI_SIGM/K1",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1.0,
+         "fr": "indice de contraintes K1 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 816
+         }
+        },
+        {
+         "name": "C2",
+         "kind": "simple",
+         "path": "INDI_SIGM/C2",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1.0,
+         "fr": "indice de contraintes C2 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 817
+         }
+        },
+        {
+         "name": "K2",
+         "kind": "simple",
+         "path": "INDI_SIGM/K2",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1.0,
+         "fr": "indice de contraintes K2 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 818
+         }
+        },
+        {
+         "name": "C3",
+         "kind": "simple",
+         "path": "INDI_SIGM/C3",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.5,
+         "fr": "indice de contraintes C3 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 819
+         }
+        },
+        {
+         "name": "K3",
+         "kind": "simple",
+         "path": "INDI_SIGM/K3",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1.0,
+         "fr": "indice de contraintes K3 du RCCM",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 820
+         }
+        },
+        {
+         "name": "TOUT",
+         "kind": "simple",
+         "path": "INDI_SIGM/TOUT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 821
+         }
+        },
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "INDI_SIGM/GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "groupe(s) de mailles ou sont affectés les indices de contraintes",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 822
+         }
+        },
+        {
+         "name": "MAILLE",
+         "kind": "simple",
+         "path": "INDI_SIGM/MAILLE",
+         "status": "c",
+         "type": [
+          "ma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "liste des mailles ou sont affectés les indices de contraintes",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 829
+         }
+        },
+        {
+         "name": "b_grma",
+         "kind": "bloc",
+         "path": "INDI_SIGM/[b_grma]",
+         "condition": "(exists(\"GROUP_MA\"))or(exists(\"MAILLE\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 836
+         },
+         "keywords": [
+          {
+           "name": "GROUP_NO",
+           "kind": "simple",
+           "path": "INDI_SIGM/GROUP_NO",
+           "status": "f",
+           "type": [
+            "grno"
+           ],
+           "max": "**",
+           "validators": [
+            {
+             "name": "NoRepeat",
+             "args": []
+            }
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 838
+           }
+          }
+         ]
+        },
+        {
+         "name": "TYPE_ELEM_STANDARD",
+         "kind": "simple",
+         "path": "INDI_SIGM/TYPE_ELEM_STANDARD",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "DRO",
+          "COU",
+          "TRN",
+          "TEE"
+         ],
+         "fr": "type d'élément de tuyauterie ou sont affectés les indices de contraintes",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 840
+         }
+        }
+       ]
+      },
+      {
+       "name": "RESU_THER",
+       "kind": "factor",
+       "path": "RESU_THER",
+       "status": "f",
+       "max": "**",
+       "fr": "resultats thermiques",
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT",
+          "GROUP_MA"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 849
+       },
+       "keywords": [
+        {
+         "name": "NUME_RESU_THER",
+         "kind": "simple",
+         "path": "RESU_THER/NUME_RESU_THER",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro de la table de résultat thermique",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 854
+         }
+        },
+        {
+         "name": "TABL_RESU_THER",
+         "kind": "simple",
+         "path": "RESU_THER/TABL_RESU_THER",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des températures sur la section",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 857
+         }
+        },
+        {
+         "name": "TABL_MOYE_THER",
+         "kind": "simple",
+         "path": "RESU_THER/TABL_MOYE_THER",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": "table relevé des moyennes sur la section",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 862
+         }
+        },
+        {
+         "name": "TOUT",
+         "kind": "simple",
+         "path": "RESU_THER/TOUT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 865
+         }
+        },
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "RESU_THER/GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 866
+         }
+        },
+        {
+         "name": "b_grma",
+         "kind": "bloc",
+         "path": "RESU_THER/[b_grma]",
+         "condition": "(exists(\"GROUP_MA\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 867
+         },
+         "keywords": [
+          {
+           "name": "GROUP_NO",
+           "kind": "simple",
+           "path": "RESU_THER/GROUP_NO",
+           "status": "f",
+           "type": [
+            "grno"
+           ],
+           "max": "**",
+           "validators": [
+            {
+             "name": "NoRepeat",
+             "args": []
+            }
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/post_rccm.py",
+            "line": 869
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "SEISME",
+       "kind": "factor",
+       "path": "SEISME",
+       "status": "f",
+       "max": "**",
+       "fr": "Situation séisme",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 872
+       },
+       "keywords": [
+        {
+         "name": "NB_OCCUR",
+         "kind": "simple",
+         "path": "SEISME/NB_OCCUR",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "nombre d'occurences de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 876
+         }
+        },
+        {
+         "name": "NB_CYCL_SEISME",
+         "kind": "simple",
+         "path": "SEISME/NB_CYCL_SEISME",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "nombre de cycles associé au séisme",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 877
+         }
+        },
+        {
+         "name": "NUME_SITU",
+         "kind": "simple",
+         "path": "SEISME/NUME_SITU",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 880
+         }
+        },
+        {
+         "name": "NOM_SITU",
+         "kind": "simple",
+         "path": "SEISME/NOM_SITU",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": "nom de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 881
+         }
+        },
+        {
+         "name": "NUME_GROUPE",
+         "kind": "simple",
+         "path": "SEISME/NUME_GROUPE",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro du groupe de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 882
+         }
+        },
+        {
+         "name": "CHAR_ETAT",
+         "kind": "simple",
+         "path": "SEISME/CHAR_ETAT",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": "numeros de chargements etat A",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 883
+         }
+        },
+        {
+         "name": "TEMP_REF",
+         "kind": "simple",
+         "path": "SEISME/TEMP_REF",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "temperature référence",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 886
+         }
+        }
+       ]
+      },
+      {
+       "name": "SITUATION",
+       "kind": "factor",
+       "path": "SITUATION",
+       "status": "o",
+       "max": "**",
+       "fr": "Situation",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rccm.py",
+        "line": 888
+       },
+       "keywords": [
+        {
+         "name": "NB_OCCUR",
+         "kind": "simple",
+         "path": "SITUATION/NB_OCCUR",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "nombre d'occurences de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 892
+         }
+        },
+        {
+         "name": "NUME_SITU",
+         "kind": "simple",
+         "path": "SITUATION/NUME_SITU",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 893
+         }
+        },
+        {
+         "name": "NOM_SITU",
+         "kind": "simple",
+         "path": "SITUATION/NOM_SITU",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": "nom de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 894
+         }
+        },
+        {
+         "name": "COMBINABLE",
+         "kind": "simple",
+         "path": "SITUATION/COMBINABLE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": "non = sous-cycle",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 895
+         }
+        },
+        {
+         "name": "NUME_GROUPE",
+         "kind": "simple",
+         "path": "SITUATION/NUME_GROUPE",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "fr": "numéro des groupes de la situation",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 902
+         }
+        },
+        {
+         "name": "NUME_PASSAGE",
+         "kind": "simple",
+         "path": "SITUATION/NUME_PASSAGE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "min": 2,
+         "max": 2,
+         "fr": "numéro des situations de passage",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 903
+         }
+        },
+        {
+         "name": "NUME_RESU_THER",
+         "kind": "simple",
+         "path": "SITUATION/NUME_RESU_THER",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": "numeros de transitoires thermiques",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 906
+         }
+        },
+        {
+         "name": "CHAR_ETAT_A",
+         "kind": "simple",
+         "path": "SITUATION/CHAR_ETAT_A",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": "numeros de chargements etat A",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 909
+         }
+        },
+        {
+         "name": "CHAR_ETAT_B",
+         "kind": "simple",
+         "path": "SITUATION/CHAR_ETAT_B",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": "numeros de chargements etat B",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 912
+         }
+        },
+        {
+         "name": "PRES_A",
+         "kind": "simple",
+         "path": "SITUATION/PRES_A",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "pression etat A",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 915
+         }
+        },
+        {
+         "name": "PRES_B",
+         "kind": "simple",
+         "path": "SITUATION/PRES_B",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": "pression etat B",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 916
+         }
+        },
+        {
+         "name": "TEMP_REF_A",
+         "kind": "simple",
+         "path": "SITUATION/TEMP_REF_A",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "temperature référence etat A",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 917
+         }
+        },
+        {
+         "name": "TEMP_REF_B",
+         "kind": "simple",
+         "path": "SITUATION/TEMP_REF_B",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "temperature référence etat B",
+         "source": {
+          "file": "code_aster/Cata/Commands/post_rccm.py",
+          "line": 918
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

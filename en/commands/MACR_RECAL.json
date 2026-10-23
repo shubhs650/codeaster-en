@@ -1,0 +1,971 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_recal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_RECAL",
+ "kind": "MACRO",
+ "fr": "Réalise le recalage des calculs Aster sur des résultats expérimentaux ou sur d'autres résultats de calculs",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macr_recal_ops.macr_recal_ops",
+ "reentrant": null,
+ "result_types": [
+  "listr8_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "PARA_OPTI",
+    "LIST_PARA"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "PARA_OPTI",
+    "COURBE"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "LIST_PARA",
+    "RESU_EXP"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "LIST_PARA",
+    "RESU_CALC"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "LIST_POIDS",
+    "COURBE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_recal.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "UNITE_ESCL",
+   "kind": "simple",
+   "path": "UNITE_ESCL",
+   "status": "o",
+   "type": [
+    "UnitDefault"
+   ],
+   "inout": "in",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "RESU_EXP",
+   "kind": "simple",
+   "path": "RESU_EXP",
+   "status": "f",
+   "type": [
+    "not_checked"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "COURBE",
+   "kind": "factor",
+   "path": "COURBE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "FONC_EXP",
+     "kind": "simple",
+     "path": "COURBE/FONC_EXP",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "NOM_FONC_CALC",
+     "kind": "simple",
+     "path": "COURBE/NOM_FONC_CALC",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "PARA_X",
+     "kind": "simple",
+     "path": "COURBE/PARA_X",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "PARA_Y",
+     "kind": "simple",
+     "path": "COURBE/PARA_Y",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "POIDS",
+     "kind": "simple",
+     "path": "COURBE/POIDS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESU_CALC",
+   "kind": "simple",
+   "path": "RESU_CALC",
+   "status": "f",
+   "type": [
+    "not_checked"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "LIST_PARA",
+   "kind": "simple",
+   "path": "LIST_PARA",
+   "status": "f",
+   "type": [
+    "not_checked"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "PARA_OPTI",
+   "kind": "factor",
+   "path": "PARA_OPTI",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "PARA_OPTI/NOM_PARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "VALE_INI",
+     "kind": "simple",
+     "path": "PARA_OPTI/VALE_INI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "VALE_MIN",
+     "kind": "simple",
+     "path": "PARA_OPTI/VALE_MIN",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "VALE_MAX",
+     "kind": "simple",
+     "path": "PARA_OPTI/VALE_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 69
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIST_POIDS",
+   "kind": "simple",
+   "path": "LIST_POIDS",
+   "status": "f",
+   "type": [
+    "not_checked"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "UNITE_RESU",
+   "kind": "simple",
+   "path": "UNITE_RESU",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 91,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "PARA_DIFF_FINI",
+   "kind": "simple",
+   "path": "PARA_DIFF_FINI",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1e-05,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "GRAPHIQUE",
+   "kind": "factor",
+   "path": "GRAPHIQUE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "FORMAT",
+     "kind": "simple",
+     "path": "GRAPHIQUE/FORMAT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "XMGRACE",
+     "into": [
+      "XMGRACE",
+      "GNUPLOT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "AFFICHAGE",
+     "kind": "simple",
+     "path": "GRAPHIQUE/AFFICHAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TOUTE_ITERATION",
+     "into": [
+      "TOUTE_ITERATION",
+      "ITERATION_FINALE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "GRAPHIQUE/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 29,
+     "inout": "out",
+     "fr": "Unité logique définissant le fichier (fort.N) dans lequel on écrit",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "b_pilote",
+     "kind": "bloc",
+     "path": "GRAPHIQUE/[b_pilote]",
+     "condition": "equal_to(\"FORMAT\", 'XMGRACE')",
+     "fr": "Mots-clés propres à XMGRACE",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 90
+     },
+     "keywords": [
+      {
+       "name": "PILOTE",
+       "kind": "simple",
+       "path": "GRAPHIQUE/PILOTE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "",
+       "into": [
+        "",
+        "POSTSCRIPT",
+        "EPS",
+        "MIF",
+        "SVG",
+        "PNM",
+        "PNG",
+        "JPEG",
+        "PDF",
+        "INTERACTIF",
+        "INTERACTIF_BG"
+       ],
+       "fr": "Pilote de sortie, PNG/JPEG/PDF ne sont pas disponibles sur toutes les installations de xmgrace",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 93
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "LEVENBERG",
+   "into": [
+    "LEVENBERG",
+    "FMIN",
+    "FMINBFGS",
+    "FMINNCG",
+    "GENETIQUE",
+    "HYBRIDE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 118
+   }
+  },
+  {
+   "name": "b_genetique_options",
+   "kind": "bloc",
+   "path": "[b_genetique_options]",
+   "condition": "equal_to(\"METHODE\", 'GENETIQUE') or equal_to(\"METHODE\", 'HYBRIDE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 124
+   },
+   "keywords": [
+    {
+     "name": "NB_PARENTS",
+     "kind": "simple",
+     "path": "NB_PARENTS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "NB_FILS",
+     "kind": "simple",
+     "path": "NB_FILS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 5,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "ECART_TYPE",
+     "kind": "simple",
+     "path": "ECART_TYPE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "GRAINE",
+     "kind": "simple",
+     "path": "GRAINE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "ITER_ALGO_GENE",
+     "kind": "simple",
+     "path": "ITER_ALGO_GENE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "RESI_ALGO_GENE",
+     "kind": "simple",
+     "path": "RESI_ALGO_GENE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 131
+     }
+    }
+   ]
+  },
+  {
+   "name": "ITER_MAXI",
+   "kind": "simple",
+   "path": "ITER_MAXI",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 10,
+   "fr": "Nombre maximum d'iterations d'optimisation",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 135
+   }
+  },
+  {
+   "name": "ITER_FONC_MAXI",
+   "kind": "simple",
+   "path": "ITER_FONC_MAXI",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1000,
+   "fr": "Nombre maximum d'evaluations de la focntionnelle",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 138
+   }
+  },
+  {
+   "name": "RESI_GLOB_RELA",
+   "kind": "simple",
+   "path": "RESI_GLOB_RELA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.001,
+   "fr": "Critere d'arret sur la valeur du residu",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 141
+   }
+  },
+  {
+   "name": "TOLE_PARA",
+   "kind": "simple",
+   "path": "TOLE_PARA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1e-08,
+   "fr": "Critere d'arret sur la valeur des parametres",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 144
+   }
+  },
+  {
+   "name": "TOLE_FONC",
+   "kind": "simple",
+   "path": "TOLE_FONC",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1e-08,
+   "fr": "Critere d'arret sur la valeur de la fonctionnelle",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 147
+   }
+  },
+  {
+   "name": "b_gradient",
+   "kind": "bloc",
+   "path": "[b_gradient]",
+   "condition": "equal_to(\"METHODE\", 'FMINBFGS')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 155
+   },
+   "keywords": [
+    {
+     "name": "GRADIENT",
+     "kind": "simple",
+     "path": "GRADIENT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON_CALCULE",
+     "into": [
+      "NON_CALCULE",
+      "NORMAL",
+      "ADIMENSIONNE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 157
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_gradient_fmincg",
+   "kind": "bloc",
+   "path": "[b_gradient_fmincg]",
+   "condition": "equal_to(\"METHODE\", 'FMINNCG')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 164
+   },
+   "keywords": [
+    {
+     "name": "GRADIENT",
+     "kind": "simple",
+     "path": "GRADIENT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NORMAL",
+      "ADIMENSIONNE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 166
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_gradient_levenberg",
+   "kind": "bloc",
+   "path": "[b_gradient_levenberg]",
+   "condition": "equal_to(\"METHODE\", 'LEVENBERG')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 168
+   },
+   "keywords": [
+    {
+     "name": "GRADIENT",
+     "kind": "simple",
+     "path": "GRADIENT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NORMAL",
+     "into": [
+      "NORMAL",
+      "ADIMENSIONNE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 170
+     }
+    }
+   ]
+  },
+  {
+   "name": "CALCUL_ESCLAVE",
+   "kind": "factor",
+   "path": "CALCUL_ESCLAVE",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 174
+   },
+   "keywords": [
+    {
+     "name": "LANCEMENT",
+     "kind": "simple",
+     "path": "CALCUL_ESCLAVE/LANCEMENT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "INCLUSION",
+     "into": [
+      "DISTRIBUTION",
+      "INCLUSION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "b_eval_distrib",
+     "kind": "bloc",
+     "path": "CALCUL_ESCLAVE/[b_eval_distrib]",
+     "condition": "equal_to(\"LANCEMENT\", 'DISTRIBUTION')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 180
+     },
+     "keywords": [
+      {
+       "name": "UNITE_SUIVI",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/UNITE_SUIVI",
+       "status": "f",
+       "type": [
+        "UnitDefault"
+       ],
+       "default": 29,
+       "inout": "out",
+       "fr": "Affichage de l'output et/ou error des jobs esclaves dans ce fichier",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 182
+       }
+      },
+      {
+       "name": "MODE",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/MODE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "INTERACTIF",
+        "BATCH"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 189
+       }
+      },
+      {
+       "name": "MEMOIRE",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/MEMOIRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": "Memoire demandee pour les calculs esclaves (Mo)",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 190
+       }
+      },
+      {
+       "name": "TEMPS",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/TEMPS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": "Temps demandee pour les calculs esclaves (secondes)",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 193
+       }
+      },
+      {
+       "name": "MPI_NBCPU",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/MPI_NBCPU",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": "Nombre de cpu pour les calculs MPI",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 196
+       }
+      },
+      {
+       "name": "MPI_NBNOEUD",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/MPI_NBNOEUD",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": "Nombre de noeuds pour les calculs MPI",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 199
+       }
+      },
+      {
+       "name": "CLASSE",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/CLASSE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Classe demandee pour les calculs en batch",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 200
+       }
+      },
+      {
+       "name": "NMAX_SIMULT",
+       "kind": "simple",
+       "path": "CALCUL_ESCLAVE/NMAX_SIMULT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": "Nombre de calculs esclaves lances en parallele en mode distribution (non precise = automatique)",
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_recal.py",
+        "line": 201
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DYNAMIQUE",
+   "kind": "factor",
+   "path": "DYNAMIQUE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 210
+   },
+   "keywords": [
+    {
+     "name": "MODE_EXP",
+     "kind": "simple",
+     "path": "DYNAMIQUE/MODE_EXP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 212
+     }
+    },
+    {
+     "name": "MODE_CALC",
+     "kind": "simple",
+     "path": "DYNAMIQUE/MODE_CALC",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 213
+     }
+    },
+    {
+     "name": "APPARIEMENT_MANUEL",
+     "kind": "simple",
+     "path": "DYNAMIQUE/APPARIEMENT_MANUEL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_recal.py",
+      "line": 214
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_recal.py",
+    "line": 216
+   }
+  }
+ ]
+}

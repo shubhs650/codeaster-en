@@ -150,6 +150,6 @@ def test_cli_lists_stub_subcommands() -> None:
 
 
 def test_cli_stub_exits_nonzero() -> None:
-    result = CliRunner().invoke(app, ["extract"])
+    result = CliRunner().invoke(app, ["translate"])
     assert result.exit_code == 2
     assert "not implemented yet" in result.output

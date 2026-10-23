@@ -1,0 +1,99 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_char_cine.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_CHAR_CINE",
+ "kind": "MACRO",
+ "fr": "Calcul des seconds membres associés à des charges cinématiques (conditions aux limites non dualisées)",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_char_cine_ops.calc_char_cine_ops",
+ "reentrant": "n",
+ "result_types": [
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_char_cine.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "o",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_cine.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "CHAR_CINE",
+   "kind": "simple",
+   "path": "CHAR_CINE",
+   "status": "o",
+   "type": [
+    "char_cine_meca",
+    "char_cine_ther",
+    "char_cine_acou"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_cine.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_cine.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_cine.py",
+    "line": 42
+   }
+  }
+ ]
+}

@@ -1,0 +1,5706 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_CARA_ELEM",
+ "kind": "OPER",
+ "fr": "Affectation de caractéristiques à des éléments de structure",
+ "translation_upstream": null,
+ "op": 19,
+ "reentrant": "n",
+ "result_types": [
+  "cara_elem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": true,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "BARRE",
+    "CABLE",
+    "COQUE",
+    "DISCRET",
+    "DISCRET_2D",
+    "GRILLE",
+    "MASSIF",
+    "MASS_REP",
+    "MEMBRANE",
+    "MULTIFIBRE",
+    "POUTRE",
+    "RIGI_PARASOL"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "MULTIFIBRE",
+    "GEOM_FIBRE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "DISCRET",
+    "DISCRET_2D"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+  "line": 481
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 506
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 507
+   }
+  },
+  {
+   "name": "VERIF",
+   "kind": "simple",
+   "path": "VERIF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 508
+   }
+  },
+  {
+   "name": "POUTRE",
+   "kind": "factor",
+   "path": "POUTRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 511
+   },
+   "keywords": [
+    {
+     "name": "SECTION",
+     "kind": "simple",
+     "path": "POUTRE/SECTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GENERALE",
+      "RECTANGLE",
+      "CERCLE",
+      "COUDE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 514
+     }
+    },
+    {
+     "name": "b_generale",
+     "kind": "bloc",
+     "path": "POUTRE/[b_generale]",
+     "condition": " equal_to(\"SECTION\", 'GENERALE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 515
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "POUTRE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 517
+       }
+      },
+      {
+       "name": "VARI_SECT",
+       "kind": "simple",
+       "path": "POUTRE/VARI_SECT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONSTANT",
+       "into": [
+        "CONSTANT",
+        "HOMOTHETIQUE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 518
+       }
+      },
+      {
+       "name": "b_constant",
+       "kind": "bloc",
+       "path": "POUTRE/[b_constant]",
+       "condition": "equal_to(\"VARI_SECT\", 'CONSTANT')",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "PRESENT_ABSENT",
+         "keywords": [
+          "TABLE_CARA",
+          "CARA"
+         ]
+        },
+        {
+         "rule": "PRESENT_PRESENT",
+         "keywords": [
+          "TABLE_CARA",
+          "NOM_SEC"
+         ]
+        },
+        {
+         "rule": "PRESENT_PRESENT",
+         "keywords": [
+          "CARA",
+          "VALE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 521
+       },
+       "keywords": [
+        {
+         "name": "TABLE_CARA",
+         "kind": "simple",
+         "path": "POUTRE/TABLE_CARA",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 528
+         }
+        },
+        {
+         "name": "NOM_SEC",
+         "kind": "simple",
+         "path": "POUTRE/NOM_SEC",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "validators": [
+          {
+           "name": "LongStr",
+           "args": [
+            1,
+            8
+           ]
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 529
+         }
+        },
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "min": 4,
+         "max": 15,
+         "into": [
+          "A",
+          "IY",
+          "IZ",
+          "AY",
+          "AZ",
+          "EY",
+          "EZ",
+          "JX",
+          "RY",
+          "RZ",
+          "RT",
+          "JG",
+          "IYR2",
+          "IZR2",
+          "AI"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "A,IY,IZ,JX sont des paramètres obligatoires",
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 531
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "min": 4,
+         "max": 15,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 556
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_homothetique",
+       "kind": "bloc",
+       "path": "POUTRE/[b_homothetique]",
+       "condition": "equal_to(\"VARI_SECT\", 'HOMOTHETIQUE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 558
+       },
+       "keywords": [
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 8,
+         "max": 28,
+         "into": [
+          "A1",
+          "IY1",
+          "IZ1",
+          "AY1",
+          "AZ1",
+          "EY1",
+          "EZ1",
+          "JX1",
+          "RY1",
+          "RZ1",
+          "A2",
+          "IY2",
+          "IZ2",
+          "AY2",
+          "AZ2",
+          "EY2",
+          "EZ2",
+          "JX2",
+          "RY2",
+          "RZ2",
+          "RT1",
+          "JG1",
+          "IYR21",
+          "IZR21",
+          "RT2",
+          "JG2",
+          "IYR22",
+          "IZR22"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "A1,A2,IY1,IY2,IZ1,IZ2,JX1,JX2 sont des paramètres obligatoires",
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 562
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 8,
+         "max": 30,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 600
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_rectangle",
+     "kind": "bloc",
+     "path": "POUTRE/[b_rectangle]",
+     "condition": "equal_to(\"SECTION\", 'RECTANGLE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 603
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "POUTRE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 605
+       }
+      },
+      {
+       "name": "VARI_SECT",
+       "kind": "simple",
+       "path": "POUTRE/VARI_SECT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONSTANT",
+       "into": [
+        "CONSTANT",
+        "HOMOTHETIQUE",
+        "AFFINE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 606
+       }
+      },
+      {
+       "name": "b_constant",
+       "kind": "bloc",
+       "path": "POUTRE/[b_constant]",
+       "condition": "equal_to(\"VARI_SECT\", 'CONSTANT')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 612
+       },
+       "keywords": [
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 1,
+         "max": 4,
+         "into": [
+          "H",
+          "EP",
+          "HY",
+          "HZ",
+          "EPY",
+          "EPZ"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 614
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 622
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_homothetique",
+       "kind": "bloc",
+       "path": "POUTRE/[b_homothetique]",
+       "condition": "equal_to(\"VARI_SECT\", 'HOMOTHETIQUE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 624
+       },
+       "keywords": [
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 2,
+         "max": 8,
+         "into": [
+          "H1",
+          "HZ1",
+          "HY1",
+          "EP1",
+          "EPY1",
+          "EPZ1",
+          "H2",
+          "HZ2",
+          "HY2",
+          "EP2",
+          "EPY2",
+          "EPZ2"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 628
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 2,
+         "max": 8,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 649
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_affine",
+       "kind": "bloc",
+       "path": "POUTRE/[b_affine]",
+       "condition": "equal_to(\"VARI_SECT\", 'AFFINE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 651
+       },
+       "keywords": [
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 3,
+         "max": 6,
+         "into": [
+          "HY",
+          "EPY",
+          "HZ1",
+          "EPZ1",
+          "HZ2",
+          "EPZ2"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 653
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 661
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_cercle",
+     "kind": "bloc",
+     "path": "POUTRE/[b_cercle]",
+     "condition": " equal_to(\"SECTION\", 'CERCLE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 664
+     },
+     "keywords": [
+      {
+       "name": "VARI_SECT",
+       "kind": "simple",
+       "path": "POUTRE/VARI_SECT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONSTANT",
+       "into": [
+        "CONSTANT",
+        "HOMOTHETIQUE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 666
+       }
+      },
+      {
+       "name": "b_constant",
+       "kind": "bloc",
+       "path": "POUTRE/[b_constant]",
+       "condition": "equal_to(\"VARI_SECT\", 'CONSTANT')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 669
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "POUTRE/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 671
+         }
+        },
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 1,
+         "max": 2,
+         "into": [
+          "R",
+          "EP"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "R est obligatoire",
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 672
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 681
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_homothetique",
+       "kind": "bloc",
+       "path": "POUTRE/[b_homothetique]",
+       "condition": "equal_to(\"VARI_SECT\", 'HOMOTHETIQUE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 683
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "POUTRE/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 685
+         }
+        },
+        {
+         "name": "CARA",
+         "kind": "simple",
+         "path": "POUTRE/CARA",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 2,
+         "max": 4,
+         "into": [
+          "R_DEBUT",
+          "R_FIN",
+          "EP_DEBUT",
+          "EP_FIN"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": "R_DEBUT, R_FIN sont obligatoires",
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 686
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "POUTRE/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 2,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 695
+         }
+        }
+       ]
+      },
+      {
+       "name": "MODI_METRIQUE",
+       "kind": "simple",
+       "path": "POUTRE/MODI_METRIQUE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 697
+       }
+      },
+      {
+       "name": "FCX",
+       "kind": "simple",
+       "path": "POUTRE/FCX",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 698
+       }
+      },
+      {
+       "name": "TUYAU_NSEC",
+       "kind": "simple",
+       "path": "POUTRE/TUYAU_NSEC",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 8,
+       "val_max": 32,
+       "default": 16,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 699
+       }
+      },
+      {
+       "name": "TUYAU_NCOU",
+       "kind": "simple",
+       "path": "POUTRE/TUYAU_NCOU",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "val_max": 10,
+       "default": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 700
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_coude",
+     "kind": "bloc",
+     "path": "POUTRE/[b_coude]",
+     "condition": " equal_to(\"SECTION\", 'COUDE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "COEF_FLEX",
+        "COEF_FLEX_XY"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "COEF_FLEX",
+        "COEF_FLEX_XZ"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "INDI_SIGM",
+        "INDI_SIGM_XY"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "INDI_SIGM",
+        "INDI_SIGM_XZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "COEF_FLEX_XY",
+        "COEF_FLEX_XZ"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "INDI_SIGM_XY",
+        "INDI_SIGM_XZ"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 702
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "POUTRE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 712
+       }
+      },
+      {
+       "name": "COEF_FLEX",
+       "kind": "simple",
+       "path": "POUTRE/COEF_FLEX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 713
+       }
+      },
+      {
+       "name": "INDI_SIGM",
+       "kind": "simple",
+       "path": "POUTRE/INDI_SIGM",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 714
+       }
+      },
+      {
+       "name": "COEF_FLEX_XY",
+       "kind": "simple",
+       "path": "POUTRE/COEF_FLEX_XY",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 715
+       }
+      },
+      {
+       "name": "INDI_SIGM_XY",
+       "kind": "simple",
+       "path": "POUTRE/INDI_SIGM_XY",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 716
+       }
+      },
+      {
+       "name": "COEF_FLEX_XZ",
+       "kind": "simple",
+       "path": "POUTRE/COEF_FLEX_XZ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 717
+       }
+      },
+      {
+       "name": "INDI_SIGM_XZ",
+       "kind": "simple",
+       "path": "POUTRE/INDI_SIGM_XZ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 718
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "BARRE",
+   "kind": "factor",
+   "path": "BARRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 723
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "BARRE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 726
+     }
+    },
+    {
+     "name": "SECTION",
+     "kind": "simple",
+     "path": "BARRE/SECTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GENERALE",
+      "RECTANGLE",
+      "CERCLE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 727
+     }
+    },
+    {
+     "name": "b_generale",
+     "kind": "bloc",
+     "path": "BARRE/[b_generale]",
+     "condition": "equal_to(\"SECTION\", 'GENERALE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "TABLE_CARA",
+        "NOM_SEC"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "CARA",
+        "VALE"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "AIRE",
+        "TABLE_CARA",
+        "CARA"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "AIRE",
+        "TABLE_CARA",
+        "CARA"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 728
+     },
+     "keywords": [
+      {
+       "name": "TABLE_CARA",
+       "kind": "simple",
+       "path": "BARRE/TABLE_CARA",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 737
+       }
+      },
+      {
+       "name": "NOM_SEC",
+       "kind": "simple",
+       "path": "BARRE/NOM_SEC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "validators": [
+        {
+         "name": "LongStr",
+         "args": [
+          1,
+          8
+         ]
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 738
+       }
+      },
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "BARRE/CARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "A"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 740
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "BARRE/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 741
+       }
+      },
+      {
+       "name": "AIRE",
+       "kind": "simple",
+       "path": "BARRE/AIRE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 743
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rectangle",
+     "kind": "bloc",
+     "path": "BARRE/[b_rectangle]",
+     "condition": "equal_to(\"SECTION\", 'RECTANGLE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 745
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "BARRE/CARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 4,
+       "into": [
+        "H",
+        "EP",
+        "HZ",
+        "HY",
+        "EPY",
+        "EPZ"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 747
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "BARRE/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": 4,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 755
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cercle",
+     "kind": "bloc",
+     "path": "BARRE/[b_cercle]",
+     "condition": "equal_to(\"SECTION\", 'CERCLE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 757
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "BARRE/CARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 2,
+       "into": [
+        "R",
+        "EP"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 760
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "BARRE/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 761
+       }
+      }
+     ]
+    },
+    {
+     "name": "FCX",
+     "kind": "simple",
+     "path": "BARRE/FCX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 764
+     }
+    }
+   ]
+  },
+  {
+   "name": "COQUE",
+   "kind": "factor",
+   "path": "COQUE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "ANGL_REP",
+      "VECTEUR"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "EXCENTREMENT",
+      "INER_ROTA"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "EXCENTREMENT_FO",
+      "INER_ROTA"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "EPAIS",
+      "EPAIS_FO"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "EXCENTREMENT",
+      "EXCENTREMENT_FO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 768
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COQUE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 778
+     }
+    },
+    {
+     "name": "EPAIS",
+     "kind": "simple",
+     "path": "COQUE/EPAIS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 779
+     }
+    },
+    {
+     "name": "EPAIS_FO",
+     "kind": "simple",
+     "path": "COQUE/EPAIS_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 780
+     }
+    },
+    {
+     "name": "ANGL_REP",
+     "kind": "simple",
+     "path": "COQUE/ANGL_REP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 781
+     }
+    },
+    {
+     "name": "VECTEUR",
+     "kind": "simple",
+     "path": "COQUE/VECTEUR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 782
+     }
+    },
+    {
+     "name": "A_CIS",
+     "kind": "simple",
+     "path": "COQUE/A_CIS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.8333333,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 783
+     }
+    },
+    {
+     "name": "COEF_RIGI_DRZ",
+     "kind": "simple",
+     "path": "COQUE/COEF_RIGI_DRZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-05,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 784
+     }
+    },
+    {
+     "name": "COQUE_NCOU",
+     "kind": "simple",
+     "path": "COQUE/COQUE_NCOU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 785
+     }
+    },
+    {
+     "name": "EXCENTREMENT",
+     "kind": "simple",
+     "path": "COQUE/EXCENTREMENT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 786
+     }
+    },
+    {
+     "name": "EXCENTREMENT_FO",
+     "kind": "simple",
+     "path": "COQUE/EXCENTREMENT_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 787
+     }
+    },
+    {
+     "name": "INER_ROTA",
+     "kind": "simple",
+     "path": "COQUE/INER_ROTA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 788
+     }
+    },
+    {
+     "name": "MODI_METRIQUE",
+     "kind": "simple",
+     "path": "COQUE/MODI_METRIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 789
+     }
+    }
+   ]
+  },
+  {
+   "name": "CABLE",
+   "kind": "factor",
+   "path": "CABLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "AIRE",
+      "RAYON",
+      "DIAMETRE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 793
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "CABLE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 797
+     }
+    },
+    {
+     "name": "CARA",
+     "kind": "simple",
+     "path": "CABLE/CARA",
+     "status": "c",
+     "type": [
+      "TXM"
+     ],
+     "min": 2,
+     "max": 4,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 799
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "CABLE/VALE",
+     "status": "c",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 4,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 800
+     }
+    },
+    {
+     "name": "N_INIT",
+     "kind": "simple",
+     "path": "CABLE/N_INIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 802
+     }
+    },
+    {
+     "name": "AIRE",
+     "kind": "simple",
+     "path": "CABLE/AIRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 804
+     }
+    },
+    {
+     "name": "RAYON",
+     "kind": "simple",
+     "path": "CABLE/RAYON",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 805
+     }
+    },
+    {
+     "name": "DIAMETRE",
+     "kind": "simple",
+     "path": "CABLE/DIAMETRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 806
+     }
+    },
+    {
+     "name": "FCX",
+     "kind": "simple",
+     "path": "CABLE/FCX",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 808
+     }
+    }
+   ]
+  },
+  {
+   "name": "DISCRET",
+   "kind": "factor",
+   "path": "DISCRET",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 812
+   },
+   "keywords": [
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "DISCRET/REPERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GLOBAL",
+     "into": [
+      "LOCAL",
+      "GLOBAL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 815
+     }
+    },
+    {
+     "name": "AMOR_HYST",
+     "kind": "simple",
+     "path": "DISCRET/AMOR_HYST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 816
+     }
+    },
+    {
+     "name": "SYME",
+     "kind": "simple",
+     "path": "DISCRET/SYME",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 817
+     }
+    },
+    {
+     "name": "b_SYME_OUI",
+     "kind": "bloc",
+     "path": "DISCRET/[b_SYME_OUI]",
+     "condition": "equal_to(\"SYME\", 'OUI')",
+     "fr": "SYMETRIQUE: Affectation de matrices de rigidité, de masse ou d'amortissement à des mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 818
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "DISCRET/CARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "K_T_D_N",
+        "K_T_D_L",
+        "K_TR_D_N",
+        "K_TR_D_L",
+        "K_T_N",
+        "K_T_L",
+        "K_TR_N",
+        "K_TR_L",
+        "M_T_D_N",
+        "M_T_D_L",
+        "M_TR_D_N",
+        "M_TR_D_L",
+        "M_T_N",
+        "M_T_L",
+        "M_TR_N",
+        "M_TR_L",
+        "A_T_D_N",
+        "A_T_D_L",
+        "A_TR_D_N",
+        "A_TR_D_L",
+        "A_T_N",
+        "A_T_L",
+        "A_TR_N",
+        "A_TR_L"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 824
+       }
+      },
+      {
+       "name": "b_AK_T_D_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_AK_T_D_N]",
+       "condition": "((equal_to(\"CARA\", 'K_T_D_N')or(equal_to(\"CARA\", 'A_T_D_N'))))",
+       "fr": "POI1: 3 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 856
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 859
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 860
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_T_D_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_AK_T_D_L]",
+       "condition": "((equal_to(\"CARA\", 'K_T_D_L')or(equal_to(\"CARA\", 'A_T_D_L'))))",
+       "fr": "SEGMENT: 3 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 862
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 865
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 866
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_TR_D_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_AK_TR_D_N]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_D_N')or(equal_to(\"CARA\", 'A_TR_D_N'))))",
+       "fr": "POI1: 6 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 868
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 871
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 6,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 872
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_TR_D_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_AK_TR_D_L]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_D_L')or(equal_to(\"CARA\", 'A_TR_D_L'))))",
+       "fr": "SEGMENT: 6 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 874
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 877
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 6,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 878
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_T_N]",
+       "condition": "((equal_to(\"CARA\", 'K_T_N')or(equal_to(\"CARA\", 'A_T_N')or(equal_to(\"CARA\", 'M_T_N')))))",
+       "fr": "POI1: 6 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 880
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 883
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 6,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 884
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_T_L]",
+       "condition": "((equal_to(\"CARA\", 'K_T_L')or(equal_to(\"CARA\", 'A_T_L')or(equal_to(\"CARA\", 'M_T_L')))))",
+       "fr": "SEGMENT: 21 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 886
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 889
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 21,
+         "max": 21,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 890
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_TR_N]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_N')or(equal_to(\"CARA\", 'A_TR_N')or(equal_to(\"CARA\", 'M_TR_N')))))",
+       "fr": "POI1: 21 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 892
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 895
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 21,
+         "max": 21,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 896
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_TR_L]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_L')or(equal_to(\"CARA\", 'A_TR_L')or(equal_to(\"CARA\", 'M_TR_L')))))",
+       "fr": "SEGMENT: 78 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 898
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 901
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 78,
+         "max": 78,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 902
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_T_D_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_M_T_D_N]",
+       "condition": "(equal_to(\"CARA\", 'M_T_D_N'))",
+       "fr": "POI1: 1 valeur de masse",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 905
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 908
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 909
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_T_D_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_M_T_D_L]",
+       "condition": "(equal_to(\"CARA\", 'M_T_D_L'))",
+       "fr": "SEGMENT: 1 valeur de masse",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 911
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 914
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 915
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_TR_D_N",
+       "kind": "bloc",
+       "path": "DISCRET/[b_M_TR_D_N]",
+       "condition": "(equal_to(\"CARA\", 'M_TR_D_N'))",
+       "fr": "POI1: 1 valeur de masse, 6 valeurs du tenseur d'inertie, 3 composantes du vecteur d'excentrement",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 917
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 922
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 10,
+         "max": 10,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 923
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_TR_D_L",
+       "kind": "bloc",
+       "path": "DISCRET/[b_M_TR_D_L]",
+       "condition": "(equal_to(\"CARA\", 'M_TR_D_L'))",
+       "fr": "SEGMENT: 1 valeur de masse, 3 valeurs du tenseur d'inertie",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 925
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 928
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 4,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 929
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_SYME_NON",
+     "kind": "bloc",
+     "path": "DISCRET/[b_SYME_NON]",
+     "condition": "equal_to(\"SYME\", 'NON')",
+     "fr": "NON-SYMETRIQUE: Affectation de matrices de rigidité, de masse ou d'amortissement à des mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 937
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "DISCRET/CARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "K_T_N",
+        "K_T_L",
+        "K_TR_N",
+        "K_TR_L",
+        "M_T_N",
+        "M_T_L",
+        "M_TR_N",
+        "M_TR_L",
+        "A_T_N",
+        "A_T_L",
+        "A_TR_N",
+        "A_TR_L"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 943
+       }
+      },
+      {
+       "name": "b_MAK_T_N_NS",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_T_N_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_T_N')or(equal_to(\"CARA\", 'A_T_N')or(equal_to(\"CARA\", 'M_T_N')))))",
+       "fr": "POI1: 9 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 963
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 966
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 9,
+         "max": 9,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 967
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_L_NS",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_T_L_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_T_L')or(equal_to(\"CARA\", 'A_T_L')or(equal_to(\"CARA\", 'M_T_L')))))",
+       "fr": "SEGMENT: 36 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 969
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 972
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 36,
+         "max": 36,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 973
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_N_NS",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_TR_N_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_N')or(equal_to(\"CARA\", 'A_TR_N')or(equal_to(\"CARA\", 'M_TR_N')))))",
+       "fr": "POI1: 36 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 975
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 978
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 36,
+         "max": 36,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 979
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_L_NS",
+       "kind": "bloc",
+       "path": "DISCRET/[b_MAK_TR_L_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_L')or(equal_to(\"CARA\", 'A_TR_L')or(equal_to(\"CARA\", 'M_TR_L')))))",
+       "fr": "SEGMENT: 144 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 981
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 984
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 144,
+         "max": 144,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 985
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DISCRET_2D",
+   "kind": "factor",
+   "path": "DISCRET_2D",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 991
+   },
+   "keywords": [
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "DISCRET_2D/REPERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GLOBAL",
+     "into": [
+      "LOCAL",
+      "GLOBAL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 994
+     }
+    },
+    {
+     "name": "AMOR_HYST",
+     "kind": "simple",
+     "path": "DISCRET_2D/AMOR_HYST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 995
+     }
+    },
+    {
+     "name": "SYME",
+     "kind": "simple",
+     "path": "DISCRET_2D/SYME",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 996
+     }
+    },
+    {
+     "name": "b_SYME_OUI",
+     "kind": "bloc",
+     "path": "DISCRET_2D/[b_SYME_OUI]",
+     "condition": "equal_to(\"SYME\", 'OUI')",
+     "fr": "SYMETRIQUE: Affectation de matrices de rigidité, de masse ou d'amortissement à des mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 997
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "DISCRET_2D/CARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "K_T_D_N",
+        "K_T_D_L",
+        "K_TR_D_N",
+        "K_TR_D_L",
+        "K_T_N",
+        "K_T_L",
+        "K_TR_N",
+        "K_TR_L",
+        "M_T_D_N",
+        "M_T_D_L",
+        "M_TR_D_N",
+        "M_TR_D_L",
+        "M_T_N",
+        "M_T_L",
+        "M_TR_N",
+        "M_TR_L",
+        "A_T_D_N",
+        "A_T_D_L",
+        "A_TR_D_N",
+        "A_TR_D_L",
+        "A_T_N",
+        "A_T_L",
+        "A_TR_N",
+        "A_TR_L"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1003
+       }
+      },
+      {
+       "name": "b_AK_T_D_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_AK_T_D_N]",
+       "condition": "((equal_to(\"CARA\", 'K_T_D_N')or(equal_to(\"CARA\", 'A_T_D_N'))))",
+       "fr": "POI1: 2 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1035
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1038
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 2,
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1039
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_T_D_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_AK_T_D_L]",
+       "condition": "((equal_to(\"CARA\", 'K_T_D_L')or(equal_to(\"CARA\", 'A_T_D_L'))))",
+       "fr": "SEGMENT: 2 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1041
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1044
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 2,
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1045
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_TR_D_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_AK_TR_D_N]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_D_N')or(equal_to(\"CARA\", 'A_TR_D_N'))))",
+       "fr": "POI1: 3 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1047
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1050
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1051
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_AK_TR_D_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_AK_TR_D_L]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_D_L')or(equal_to(\"CARA\", 'A_TR_D_L'))))",
+       "fr": "SEGMENT: 3 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1053
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1056
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1057
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_T_N]",
+       "condition": "((equal_to(\"CARA\", 'K_T_N')or(equal_to(\"CARA\", 'A_T_N')or(equal_to(\"CARA\", 'M_T_N')))))",
+       "fr": "POI1: 3 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1059
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1062
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1063
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_T_L]",
+       "condition": "((equal_to(\"CARA\", 'K_T_L')or(equal_to(\"CARA\", 'A_T_L')or(equal_to(\"CARA\", 'M_T_L')))))",
+       "fr": "SEGMENT: 10 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1065
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1068
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 10,
+         "max": 10,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1069
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_TR_N]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_N')or(equal_to(\"CARA\", 'A_TR_N')or(equal_to(\"CARA\", 'M_TR_N')))))",
+       "fr": "POI1: 6 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1071
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1074
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 6,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1075
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_TR_L]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_L')or(equal_to(\"CARA\", 'A_TR_L')or(equal_to(\"CARA\", 'M_TR_L')))))",
+       "fr": "SEGMENT: 21 valeurs (triangulaire supérieure par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1077
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1080
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 21,
+         "max": 21,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1081
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_T_D_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_M_T_D_N]",
+       "condition": "(equal_to(\"CARA\", 'M_T_D_N'))",
+       "fr": "POI1: 1 valeur de masse",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1084
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1087
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1088
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_T_D_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_M_T_D_L]",
+       "condition": "(equal_to(\"CARA\", 'M_T_D_L'))",
+       "fr": "SEGMENT: 1 valeur de masse",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1090
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1093
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 1,
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1094
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_TR_D_N",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_M_TR_D_N]",
+       "condition": "(equal_to(\"CARA\", 'M_TR_D_N'))",
+       "fr": "POI1: 1 valeur de masse, 1 valeur d'inertie, 2 composantes du vecteur d'excentrement",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1096
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1101
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 4,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1102
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_M_TR_D_L",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_M_TR_D_L]",
+       "condition": "(equal_to(\"CARA\", 'M_TR_D_L'))",
+       "fr": "SEGMENT: 1 valeur de masse, 1 valeur d'inertie",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1104
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1107
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 2,
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1108
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_SYME_NON",
+     "kind": "bloc",
+     "path": "DISCRET_2D/[b_SYME_NON]",
+     "condition": "equal_to(\"SYME\", 'NON')",
+     "fr": "NON-SYMETRIQUE: Affectation de matrices de rigidité, de masse ou d'amortissement à des mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1116
+     },
+     "keywords": [
+      {
+       "name": "CARA",
+       "kind": "simple",
+       "path": "DISCRET_2D/CARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "K_T_N",
+        "K_T_L",
+        "K_TR_N",
+        "K_TR_L",
+        "M_T_N",
+        "M_T_L",
+        "M_TR_N",
+        "M_TR_L",
+        "A_T_N",
+        "A_T_L",
+        "A_TR_N",
+        "A_TR_L"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1122
+       }
+      },
+      {
+       "name": "b_MAK_T_N_NS",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_T_N_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_T_N')or(equal_to(\"CARA\", 'A_T_N')or(equal_to(\"CARA\", 'M_T_N')))))",
+       "fr": "POI1: 4 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1142
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1145
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 4,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1146
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_T_L_NS",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_T_L_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_T_L')or(equal_to(\"CARA\", 'A_T_L')or(equal_to(\"CARA\", 'M_T_L')))))",
+       "fr": "SEGMENT: 16 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1148
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1151
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 16,
+         "max": 16,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1152
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_N_NS",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_TR_N_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_N')or(equal_to(\"CARA\", 'A_TR_N')or(equal_to(\"CARA\", 'M_TR_N')))))",
+       "fr": "POI1: 9 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1154
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1157
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 9,
+         "max": 9,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1158
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_MAK_TR_L_NS",
+       "kind": "bloc",
+       "path": "DISCRET_2D/[b_MAK_TR_L_NS]",
+       "condition": "((equal_to(\"CARA\", 'K_TR_L')or(equal_to(\"CARA\", 'A_TR_L')or(equal_to(\"CARA\", 'M_TR_L')))))",
+       "fr": "SEGMENT: 36 valeurs (matrice pleine par colonne)",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1160
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "DISCRET_2D/GROUP_MA",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1163
+         }
+        },
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "DISCRET_2D/VALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 36,
+         "max": 36,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+          "line": 1164
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ORIENTATION",
+   "kind": "factor",
+   "path": "ORIENTATION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1170
+   },
+   "keywords": [
+    {
+     "name": "CARA",
+     "kind": "simple",
+     "path": "ORIENTATION/CARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "VECT_Y",
+      "VECT_Z",
+      "ANGL_VRIL",
+      "VECT_X_Y",
+      "ANGL_NAUT",
+      "GENE_TUYAU",
+      "VECT_MAIL_Y",
+      "VECT_MAIL_Z"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1173
+     }
+    },
+    {
+     "name": "b_cara_vect_y",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_vect_y]",
+     "condition": "(equal_to(\"CARA\", 'VECT_Y'))",
+     "fr": "Maille de longueur non nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1187
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1190
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Vecteur dont la projection sur le plan normal à l'axe X local donne l'axe Y local.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1191
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1200
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_vect_z",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_vect_z]",
+     "condition": "(equal_to(\"CARA\", 'VECT_Z'))",
+     "fr": "Maille de longueur non nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1206
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1209
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Vecteur dont la projection sur le plan normal à l'axe X local donne l'axe Z local.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1210
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1219
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_vect_mail_y",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_vect_mail_y]",
+     "condition": "(equal_to(\"CARA\", 'VECT_MAIL_Y'))",
+     "fr": "Maille de longueur non nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1226
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1229
+       }
+      },
+      {
+       "name": "TABLE_CARA",
+       "kind": "simple",
+       "path": "ORIENTATION/TABLE_CARA",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1230
+       }
+      },
+      {
+       "name": "NOM_SEC",
+       "kind": "simple",
+       "path": "ORIENTATION/NOM_SEC",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "validators": [
+        {
+         "name": "LongStr",
+         "args": [
+          1,
+          8
+         ]
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1231
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Vecteur dont la projection sur le plan normal à l'axe X local\n                            donne l'axe y du maillage de la section.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1232
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1242
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_vect_mail_z",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_vect_mail_z]",
+     "condition": "(equal_to(\"CARA\", 'VECT_MAIL_Z'))",
+     "fr": "Maille de longueur non nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1248
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1251
+       }
+      },
+      {
+       "name": "TABLE_CARA",
+       "kind": "simple",
+       "path": "ORIENTATION/TABLE_CARA",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1252
+       }
+      },
+      {
+       "name": "NOM_SEC",
+       "kind": "simple",
+       "path": "ORIENTATION/NOM_SEC",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "validators": [
+        {
+         "name": "LongStr",
+         "args": [
+          1,
+          8
+         ]
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1253
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Vecteur dont la projection sur le plan normal à l'axe X local\n                            donne l'axe z du maillage de la section.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1254
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1264
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_angl_vril",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_angl_vril]",
+     "condition": "(equal_to(\"CARA\", 'ANGL_VRIL'))",
+     "fr": "Maille de longueur non nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1271
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1274
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Angle de rotation du repère autour de l'axe X local.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1275
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée comme de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1278
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_vect_x_y",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_vect_x_y]",
+     "condition": "(equal_to(\"CARA\", 'VECT_X_Y'))",
+     "fr": "Maille de longueur nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1286
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1289
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 6,
+       "max": 6,
+       "fr": "Les 2 vecteurs formant les axes X et Y locaux.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1290
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée comme de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1297
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_angl_naut",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_angl_naut]",
+     "condition": "(equal_to(\"CARA\", 'ANGL_NAUT'))",
+     "fr": "Maille de longueur nulle.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1305
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1308
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Les 3 angles nautiques alpha, beta, gamma.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1309
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "valeur en-dessous de laquelle la maille est considérée comme de longueur nulle",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1316
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cara_gene_tuyau",
+     "kind": "bloc",
+     "path": "ORIENTATION/[b_cara_gene_tuyau]",
+     "condition": "(equal_to(\"CARA\", 'GENE_TUYAU'))",
+     "fr": "Orientation des tuyaux.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1324
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ORIENTATION/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1327
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ORIENTATION/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": "Vecteur donnant la position de la génératrice.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1328
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "ORIENTATION/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1335
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "ORIENTATION/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1336
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MASSIF",
+   "kind": "factor",
+   "path": "MASSIF",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA",
+      "TOUT"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "ANGL_REP",
+      "ORIG_AXE",
+      "ANGL_EULER",
+      "CHAM_ORIE"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "ANGL_AXE",
+      "ORIG_AXE"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "TOUT",
+      "CHAM_ORIE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1341
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MASSIF/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1350
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "MASSIF/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1351
+     }
+    },
+    {
+     "name": "CHAM_ORIE",
+     "kind": "simple",
+     "path": "MASSIF/CHAM_ORIE",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster",
+      "carte_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1352
+     }
+    },
+    {
+     "name": "ANGL_REP",
+     "kind": "simple",
+     "path": "MASSIF/ANGL_REP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 3,
+     "fr": "Un angle en 2D, 3 angles en 3D.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1353
+     }
+    },
+    {
+     "name": "ANGL_EULER",
+     "kind": "simple",
+     "path": "MASSIF/ANGL_EULER",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 3,
+     "fr": "Un angle en 2D, 3 angles en 3D.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1354
+     }
+    },
+    {
+     "name": "ANGL_AXE",
+     "kind": "simple",
+     "path": "MASSIF/ANGL_AXE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1357
+     }
+    },
+    {
+     "name": "ORIG_AXE",
+     "kind": "simple",
+     "path": "MASSIF/ORIG_AXE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": "2 valeurs en 2D, 3 valeurs en 3D.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1358
+     }
+    }
+   ]
+  },
+  {
+   "name": "POUTRE_FLUI",
+   "kind": "factor",
+   "path": "POUTRE_FLUI",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1364
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1367
+     }
+    },
+    {
+     "name": "B_T",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/B_T",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1368
+     }
+    },
+    {
+     "name": "B_N",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/B_N",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1369
+     }
+    },
+    {
+     "name": "B_TN",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/B_TN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1370
+     }
+    },
+    {
+     "name": "A_FLUI",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/A_FLUI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1371
+     }
+    },
+    {
+     "name": "A_CELL",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/A_CELL",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1372
+     }
+    },
+    {
+     "name": "COEF_ECHELLE",
+     "kind": "simple",
+     "path": "POUTRE_FLUI/COEF_ECHELLE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1373
+     }
+    }
+   ]
+  },
+  {
+   "name": "GRILLE",
+   "kind": "factor",
+   "path": "GRILLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "ANGL_REP_1",
+      "ANGL_REP_2",
+      "VECT_1",
+      "VECT_2"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "SECTION",
+      "SECTION_FO"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "EXCENTREMENT",
+      "EXCENTREMENT_FO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1377
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GRILLE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1385
+     }
+    },
+    {
+     "name": "SECTION",
+     "kind": "simple",
+     "path": "GRILLE/SECTION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1386
+     }
+    },
+    {
+     "name": "SECTION_FO",
+     "kind": "simple",
+     "path": "GRILLE/SECTION_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1387
+     }
+    },
+    {
+     "name": "ANGL_REP_1",
+     "kind": "simple",
+     "path": "GRILLE/ANGL_REP_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Angles de rotation permettant de définir l'axe local x.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1388
+     }
+    },
+    {
+     "name": "ANGL_REP_2",
+     "kind": "simple",
+     "path": "GRILLE/ANGL_REP_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Angles de rotation permettant de définir l'axe local y.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1395
+     }
+    },
+    {
+     "name": "EXCENTREMENT",
+     "kind": "simple",
+     "path": "GRILLE/EXCENTREMENT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1402
+     }
+    },
+    {
+     "name": "EXCENTREMENT_FO",
+     "kind": "simple",
+     "path": "GRILLE/EXCENTREMENT_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1403
+     }
+    },
+    {
+     "name": "VECT_1",
+     "kind": "simple",
+     "path": "GRILLE/VECT_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "La projection de ce vecteur sert à définir l'axe local x.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1404
+     }
+    },
+    {
+     "name": "VECT_2",
+     "kind": "simple",
+     "path": "GRILLE/VECT_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "La projection de ce vecteur sert à définir l'axe local y.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1411
+     }
+    },
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "GRILLE/REPERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GLOBAL",
+     "into": [
+      "CYLINDRIQUE",
+      "GLOBAL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1418
+     }
+    },
+    {
+     "name": "b_repere",
+     "kind": "bloc",
+     "path": "GRILLE/[b_repere]",
+     "condition": "(equal_to(\"REPERE\", \"CYLINDRIQUE\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1419
+     },
+     "keywords": [
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "GRILLE/ORIGINE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1421
+       }
+      },
+      {
+       "name": "AXE_Z",
+       "kind": "simple",
+       "path": "GRILLE/AXE_Z",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1422
+       }
+      }
+     ]
+    },
+    {
+     "name": "COEF_RIGI_DRZ",
+     "kind": "simple",
+     "path": "GRILLE/COEF_RIGI_DRZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1424
+     }
+    }
+   ]
+  },
+  {
+   "name": "MEMBRANE",
+   "kind": "factor",
+   "path": "MEMBRANE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "ANGL_REP_1",
+      "ANGL_REP_2",
+      "VECT_1",
+      "VECT_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1428
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MEMBRANE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1432
+     }
+    },
+    {
+     "name": "EPAIS",
+     "kind": "simple",
+     "path": "MEMBRANE/EPAIS",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Epaisseur de la membrane ; donnée utilisée uniquement dans le cas non linéaire.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1433
+     }
+    },
+    {
+     "name": "ANGL_REP_1",
+     "kind": "simple",
+     "path": "MEMBRANE/ANGL_REP_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Angles de rotation permettant de définir l'axe local x.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1441
+     }
+    },
+    {
+     "name": "ANGL_REP_2",
+     "kind": "simple",
+     "path": "MEMBRANE/ANGL_REP_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": "Angles de rotation permettant de définir l'axe local y.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1448
+     }
+    },
+    {
+     "name": "VECT_1",
+     "kind": "simple",
+     "path": "MEMBRANE/VECT_1",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "La projection de ce vecteur sert à définir l'axe local x.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1455
+     }
+    },
+    {
+     "name": "VECT_2",
+     "kind": "simple",
+     "path": "MEMBRANE/VECT_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "La projection de ce vecteur sert à définir l'axe local y.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1462
+     }
+    },
+    {
+     "name": "N_INIT",
+     "kind": "simple",
+     "path": "MEMBRANE/N_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": "Pré-tension initiale ; donnée utilisée uniquement dans le cas non-linéaire.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1469
+     }
+    }
+   ]
+  },
+  {
+   "name": "RIGI_PARASOL",
+   "kind": "factor",
+   "path": "RIGI_PARASOL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COEF_GROUP",
+      "FONC_GROUP"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COOR_CENTRE",
+      "GROUP_NO_CENTRE"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA_POI1",
+      "GROUP_MA_SEG2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1479
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Surface servant à répartir les caractéristiques des discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1487
+     }
+    },
+    {
+     "name": "GROUP_MA_POI1",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/GROUP_MA_POI1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Mailles POINT correspondant aux discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1494
+     }
+    },
+    {
+     "name": "GROUP_MA_SEG2",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/GROUP_MA_SEG2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Mailles SEGMENT correspondant aux discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1497
+     }
+    },
+    {
+     "name": "FONC_GROUP",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/FONC_GROUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1500
+     }
+    },
+    {
+     "name": "COEF_GROUP",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/COEF_GROUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1501
+     }
+    },
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/REPERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GLOBAL",
+     "into": [
+      "LOCAL",
+      "GLOBAL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1502
+     }
+    },
+    {
+     "name": "CARA",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/CARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "into": [
+      "K_TR_D_N",
+      "K_T_D_N",
+      "K_TR_D_L",
+      "K_T_D_L",
+      "A_TR_D_N",
+      "A_T_D_N",
+      "A_TR_D_L",
+      "A_T_D_L"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Choix des types de discrets du tapis de ressorts.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1504
+     }
+    },
+    {
+     "name": "b_cara",
+     "kind": "bloc",
+     "path": "RIGI_PARASOL/[b_cara]",
+     "condition": "exists(\"CARA\") and (len(CARA)==1 or (len(CARA)==2 and CARA[0][2:]==CARA[1][2:]))",
+     "fr": "Valeurs pour les discrets du tapis de ressorts.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1521
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "RIGI_PARASOL/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": "Valeurs pour les discrets du tapis de ressorts.",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+        "line": 1524
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_NO_CENTRE",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/GROUP_NO_CENTRE",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1531
+     }
+    },
+    {
+     "name": "COOR_CENTRE",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/COOR_CENTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1532
+     }
+    },
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "RIGI_PARASOL/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1533
+     }
+    }
+   ]
+  },
+  {
+   "name": "RIGI_GRILLE",
+   "kind": "factor",
+   "path": "RIGI_GRILLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1537
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_SEG2",
+     "kind": "simple",
+     "path": "RIGI_GRILLE/GROUP_MA_SEG2",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "min": 5,
+     "max": 5,
+     "fr": "Mailles de type seg2 correspondant aux discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1540
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "RIGI_GRILLE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Surface servant à répartir les caractéristiques des discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1547
+     }
+    },
+    {
+     "name": "GROUP_NO_CENTRE",
+     "kind": "simple",
+     "path": "RIGI_GRILLE/GROUP_NO_CENTRE",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "min": 5,
+     "max": 5,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1554
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "RIGI_GRILLE/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RIGI",
+     "into": [
+      "RIGI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1555
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "RIGI_GRILLE/VALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 5,
+     "max": 5,
+     "fr": "Valeurs pour les discrets du tapis de ressorts.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1556
+     }
+    }
+   ]
+  },
+  {
+   "name": "RIGI_MISS_3D",
+   "kind": "factor",
+   "path": "RIGI_MISS_3D",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1566
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_POI1",
+     "kind": "simple",
+     "path": "RIGI_MISS_3D/GROUP_MA_POI1",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1569
+     }
+    },
+    {
+     "name": "GROUP_MA_SEG2",
+     "kind": "simple",
+     "path": "RIGI_MISS_3D/GROUP_MA_SEG2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1570
+     }
+    },
+    {
+     "name": "FREQ_EXTR",
+     "kind": "simple",
+     "path": "RIGI_MISS_3D/FREQ_EXTR",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1571
+     }
+    },
+    {
+     "name": "UNITE_RESU_IMPE",
+     "kind": "simple",
+     "path": "RIGI_MISS_3D/UNITE_RESU_IMPE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 30,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1572
+     }
+    }
+   ]
+  },
+  {
+   "name": "MASS_AJOU",
+   "kind": "factor",
+   "path": "MASS_AJOU",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1576
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MASS_AJOU/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Surface servant à répartir les caractéristiques des discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1579
+     }
+    },
+    {
+     "name": "GROUP_MA_POI1",
+     "kind": "simple",
+     "path": "MASS_AJOU/GROUP_MA_POI1",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Mailles de type point correspondant aux discrets",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1585
+     }
+    },
+    {
+     "name": "FONC_GROUP",
+     "kind": "simple",
+     "path": "MASS_AJOU/FONC_GROUP",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1588
+     }
+    }
+   ]
+  },
+  {
+   "name": "MASS_REP",
+   "kind": "factor",
+   "path": "MASS_REP",
+   "status": "f",
+   "max": "**",
+   "fr": "Masse répartie sur des POI1, pondérée par la surface des mailles connectées.",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1592
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MASS_REP/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Surface ou ligne servant à répartir la masse",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1596
+     }
+    },
+    {
+     "name": "GROUP_MA_POI1",
+     "kind": "simple",
+     "path": "MASS_REP/GROUP_MA_POI1",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Mailles de type POI1 correspondant aux masses.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1599
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "MASS_REP/VALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": "Valeur de la masse à répartir sur les mailles de GROUP_MA.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1602
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "MASS_REP/TYPE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "into": [
+      "TOTALE",
+      "LINEIQUE",
+      "SURFACIQUE"
+     ],
+     "fr": "Type de la masse à répartir.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1608
+     }
+    },
+    {
+     "name": "FONC_MULT",
+     "kind": "simple",
+     "path": "MASS_REP/FONC_MULT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": 1,
+     "fr": "Fonction (X,Y,Z) multiplicatrice de la masse.",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1615
+     }
+    }
+   ]
+  },
+  {
+   "name": "GEOM_FIBRE",
+   "kind": "simple",
+   "path": "GEOM_FIBRE",
+   "status": "f",
+   "type": [
+    "gfibre_sdaster"
+   ],
+   "max": 1,
+   "fr": "Donner le nom de la SD regroupant tous les groupes de fibres (issue de DEFI_GEOM_FIBRE)",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1624
+   }
+  },
+  {
+   "name": "MULTIFIBRE",
+   "kind": "factor",
+   "path": "MULTIFIBRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+    "line": 1634
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MULTIFIBRE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1637
+     }
+    },
+    {
+     "name": "GROUP_FIBRE",
+     "kind": "simple",
+     "path": "MULTIFIBRE/GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1638
+     }
+    },
+    {
+     "name": "PREC_AIRE",
+     "kind": "simple",
+     "path": "MULTIFIBRE/PREC_AIRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.01,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1639
+     }
+    },
+    {
+     "name": "PREC_INERTIE",
+     "kind": "simple",
+     "path": "MULTIFIBRE/PREC_INERTIE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_cara_elem.py",
+      "line": 1640
+     }
+    }
+   ]
+  }
+ ]
+}

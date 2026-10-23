@@ -1,0 +1,723 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_essai.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_ESSAI",
+ "kind": "MACRO",
+ "fr": "Outil de post-traitement pour Meidee ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_essai_ops.calc_essai_ops",
+ "reentrant": "n",
+ "result_types": [
+  "interspectre",
+  "modele_sdaster",
+  "mode_meca",
+  "nume_ddl_sdaster",
+  "maillage_sdaster",
+  "matr_asse_depl_r",
+  "macr_elem_stat",
+  "mode_gene"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_essai.py",
+  "line": 57
+ },
+ "keywords": [
+  {
+   "name": "RESU_IDENTIFICATION",
+   "kind": "factor",
+   "path": "RESU_IDENTIFICATION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "RESU_IDENTIFICATION/TABLE",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 63
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESU_MODIFSTRU",
+   "kind": "factor",
+   "path": "RESU_MODIFSTRU",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 64
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MODELE",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "MODE_MECA",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MODE_MECA",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MAILLAGE",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "NUME_DDL",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/NUME_DDL",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "MASS_MECA",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MASS_MECA",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "RIGI_MECA",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/RIGI_MECA",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "AMOR_MECA",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/AMOR_MECA",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "MACR_ELEM",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MACR_ELEM",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "PROJ_MESU",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/PROJ_MESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "BASE_ES",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/BASE_ES",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "BASE_LMME",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/BASE_LMME",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 77
+     }
+    },
+    {
+     "name": "MODE_STA",
+     "kind": "simple",
+     "path": "RESU_MODIFSTRU/MODE_STA",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "EXPANSION",
+   "kind": "factor",
+   "path": "EXPANSION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "CALCUL",
+     "kind": "simple",
+     "path": "EXPANSION/CALCUL",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "NUME_MODE_CALCUL",
+     "kind": "simple",
+     "path": "EXPANSION/NUME_MODE_CALCUL",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "MESURE",
+     "kind": "simple",
+     "path": "EXPANSION/MESURE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "NUME_MODE_MESURE",
+     "kind": "simple",
+     "path": "EXPANSION/NUME_MODE_MESURE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "default": 0,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "RESOLUTION",
+     "kind": "simple",
+     "path": "EXPANSION/RESOLUTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SVD",
+     "into": [
+      "SVD",
+      "LU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "b_reso",
+     "kind": "bloc",
+     "path": "EXPANSION/[b_reso]",
+     "condition": "equal_to(\"RESOLUTION\", 'SVD')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 88
+     },
+     "keywords": [
+      {
+       "name": "EPS",
+       "kind": "simple",
+       "path": "EXPANSION/EPS",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 89
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "IDENTIFICATION",
+   "kind": "factor",
+   "path": "IDENTIFICATION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "ALPHA",
+     "kind": "simple",
+     "path": "IDENTIFICATION/ALPHA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "EPS",
+     "kind": "simple",
+     "path": "IDENTIFICATION/EPS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "OBSERVABILITE",
+     "kind": "simple",
+     "path": "IDENTIFICATION/OBSERVABILITE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "COMMANDABILITE",
+     "kind": "simple",
+     "path": "IDENTIFICATION/COMMANDABILITE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "INTE_SPEC",
+     "kind": "simple",
+     "path": "IDENTIFICATION/INTE_SPEC",
+     "status": "o",
+     "type": [
+      "interspectre"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "BASE",
+     "kind": "simple",
+     "path": "IDENTIFICATION/BASE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 100
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODIFSTRUCT",
+   "kind": "factor",
+   "path": "MODIFSTRUCT",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 102
+   },
+   "keywords": [
+    {
+     "name": "MESURE",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/MESURE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 105
+     }
+    },
+    {
+     "name": "MODELE_SUP",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/MODELE_SUP",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "MATR_RIGI",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/MATR_RIGI",
+     "status": "o",
+     "type": [
+      "matr_asse_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "RESOLUTION",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/RESOLUTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ES",
+     "into": [
+      "ES",
+      "LMME"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "b_resol",
+     "kind": "bloc",
+     "path": "MODIFSTRUCT/[b_resol]",
+     "condition": "equal_to(\"RESOLUTION\", 'LMME')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 109
+     },
+     "keywords": [
+      {
+       "name": "MATR_MASS",
+       "kind": "simple",
+       "path": "MODIFSTRUCT/MATR_MASS",
+       "status": "o",
+       "type": [
+        "matr_asse_depl_r"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 111
+       }
+      }
+     ]
+    },
+    {
+     "name": "NUME_MODE_MESU",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/NUME_MODE_MESU",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "NUME_MODE_CALCUL",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/NUME_MODE_CALCUL",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 114
+     }
+    },
+    {
+     "name": "MODELE_MODIF",
+     "kind": "simple",
+     "path": "MODIFSTRUCT/MODELE_MODIF",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 115
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_modif",
+   "kind": "bloc",
+   "path": "[b_modif]",
+   "condition": "exists(\"MODIFSTRUCT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai.py",
+    "line": 118
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO_CAPTEURS",
+     "kind": "factor",
+     "path": "GROUP_NO_CAPTEURS",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 120
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "GROUP_NO_CAPTEURS/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "GROUP_NO_CAPTEURS/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 124
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_NO_EXTERIEUR",
+     "kind": "factor",
+     "path": "GROUP_NO_EXTERIEUR",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai.py",
+      "line": 126
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "GROUP_NO_EXTERIEUR/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 129
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "GROUP_NO_EXTERIEUR/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_essai.py",
+        "line": 130
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,756 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_compor.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_COMPOR",
+ "kind": "OPER",
+ "fr": "Définir le comportement d'un monocristal, d'un polycristal ou de groupes de fibres",
+ "translation_upstream": null,
+ "op": 59,
+ "reentrant": "n",
+ "result_types": [
+  "compor_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MONOCRISTAL",
+    "POLYCRISTAL",
+    "MULTIFIBRE"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "MULTIFIBRE",
+    "GEOM_FIBRE",
+    "MATER_SECT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_compor.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MONOCRISTAL",
+   "kind": "factor",
+   "path": "MONOCRISTAL",
+   "status": "f",
+   "max": 5,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MONOCRISTAL/MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "ELAS",
+     "kind": "simple",
+     "path": "MONOCRISTAL/ELAS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "Donner le nom du mot-clé facteur de DEFI_MATERIAU précisant le comportement élastique (un et un seul)",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "ECOULEMENT",
+     "kind": "simple",
+     "path": "MONOCRISTAL/ECOULEMENT",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "into": [
+      "MONO_VISC1",
+      "MONO_VISC2",
+      "MONO_DD_KR",
+      "MONO_DD_CFC",
+      "MONO_DD_CFC_IRRA",
+      "MONO_DD_CC",
+      "MONO_DD_CC_IRRA",
+      "MONO_DD_FAT"
+     ],
+     "fr": "Donner le nom du mot-clé facteur de DEFI_MATERIAU précisant le type d'écoulement viscoplastique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "b_non_dd",
+     "kind": "bloc",
+     "path": "MONOCRISTAL/[b_non_dd]",
+     "condition": "equal_to(\"ECOULEMENT\", 'MONO_VISC1') or equal_to(\"ECOULEMENT\", 'MONO_VISC2')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 70
+     },
+     "keywords": [
+      {
+       "name": "ECRO_ISOT",
+       "kind": "simple",
+       "path": "MONOCRISTAL/ECRO_ISOT",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "MONO_ISOT1",
+        "MONO_ISOT2"
+       ],
+       "fr": "Donner le nom du mot-clé facteur de DEFI_MATERIAU précisant le type d'écrouissage isotrope",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "ECRO_CINE",
+       "kind": "simple",
+       "path": "MONOCRISTAL/ECRO_CINE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "MONO_CINE1",
+        "MONO_CINE2"
+       ],
+       "fr": "Donner le nom du mot-clé facteur de DEFI_MATERIAU précisant le type d'écrouissage cinématique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 81
+       }
+      },
+      {
+       "name": "FAMI_SYST_GLIS",
+       "kind": "simple",
+       "path": "MONOCRISTAL/FAMI_SYST_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "OCTAEDRIQUE",
+        "BCC24",
+        "CUBIQUE1",
+        "CUBIQUE2",
+        "ZIRCONIUM",
+        "UNIAXIAL",
+        "UTILISATEUR"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 90
+       }
+      },
+      {
+       "name": "b_util",
+       "kind": "bloc",
+       "path": "MONOCRISTAL/[b_util]",
+       "condition": "equal_to(\"FAMI_SYST_GLIS\", 'UTILISATEUR')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 104
+       },
+       "keywords": [
+        {
+         "name": "TABL_SYST_GLIS",
+         "kind": "simple",
+         "path": "MONOCRISTAL/TABL_SYST_GLIS",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_compor.py",
+          "line": 106
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_dd_kr",
+     "kind": "bloc",
+     "path": "MONOCRISTAL/[b_dd_kr]",
+     "condition": "equal_to(\"ECOULEMENT\", 'MONO_DD_KR')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 110
+     },
+     "keywords": [
+      {
+       "name": "FAMI_SYST_GLIS",
+       "kind": "simple",
+       "path": "MONOCRISTAL/FAMI_SYST_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "BCC24",
+       "into": [
+        "BCC24",
+        "UTILISATEUR"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "b_util",
+       "kind": "bloc",
+       "path": "MONOCRISTAL/[b_util]",
+       "condition": "equal_to(\"FAMI_SYST_GLIS\", 'UTILISATEUR') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 115
+       },
+       "keywords": [
+        {
+         "name": "TABL_SYST_GLIS",
+         "kind": "simple",
+         "path": "MONOCRISTAL/TABL_SYST_GLIS",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_compor.py",
+          "line": 117
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_ecp_cfc",
+     "kind": "bloc",
+     "path": "MONOCRISTAL/[b_ecp_cfc]",
+     "condition": "equal_to(\"ECOULEMENT\", 'MONO_DD_FAT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 121
+     },
+     "keywords": [
+      {
+       "name": "FAMI_SYST_GLIS",
+       "kind": "simple",
+       "path": "MONOCRISTAL/FAMI_SYST_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "OCTAEDRIQUE",
+       "into": [
+        "OCTAEDRIQUE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 123
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_dd_cfc",
+     "kind": "bloc",
+     "path": "MONOCRISTAL/[b_dd_cfc]",
+     "condition": "equal_to(\"ECOULEMENT\", 'MONO_DD_CFC') or equal_to(\"ECOULEMENT\", 'MONO_DD_CFC_IRRA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 128
+     },
+     "keywords": [
+      {
+       "name": "FAMI_SYST_GLIS",
+       "kind": "simple",
+       "path": "MONOCRISTAL/FAMI_SYST_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "OCTAEDRIQUE",
+       "into": [
+        "OCTAEDRIQUE",
+        "UTILISATEUR"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "b_util",
+       "kind": "bloc",
+       "path": "MONOCRISTAL/[b_util]",
+       "condition": "equal_to(\"FAMI_SYST_GLIS\", 'UTILISATEUR')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 137
+       },
+       "keywords": [
+        {
+         "name": "TABL_SYST_GLIS",
+         "kind": "simple",
+         "path": "MONOCRISTAL/TABL_SYST_GLIS",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_compor.py",
+          "line": 139
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_dd_cc",
+     "kind": "bloc",
+     "path": "MONOCRISTAL/[b_dd_cc]",
+     "condition": "equal_to(\"ECOULEMENT\", 'MONO_DD_CC') or equal_to(\"ECOULEMENT\", 'MONO_DD_CC_IRRA') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 143
+     },
+     "keywords": [
+      {
+       "name": "FAMI_SYST_GLIS",
+       "kind": "simple",
+       "path": "MONOCRISTAL/FAMI_SYST_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "CUBIQUE1",
+       "into": [
+        "CUBIQUE1",
+        "UTILISATEUR"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 145
+       }
+      },
+      {
+       "name": "b_util",
+       "kind": "bloc",
+       "path": "MONOCRISTAL/[b_util]",
+       "condition": "equal_to(\"FAMI_SYST_GLIS\", 'UTILISATEUR')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 148
+       },
+       "keywords": [
+        {
+         "name": "TABL_SYST_GLIS",
+         "kind": "simple",
+         "path": "MONOCRISTAL/TABL_SYST_GLIS",
+         "status": "f",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_compor.py",
+          "line": 150
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_mono",
+   "kind": "bloc",
+   "path": "[b_mono]",
+   "condition": "exists(\"MONOCRISTAL\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 154
+   },
+   "keywords": [
+    {
+     "name": "MATR_INTER",
+     "kind": "simple",
+     "path": "MATR_INTER",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "ROTA_RESEAU",
+     "kind": "simple",
+     "path": "ROTA_RESEAU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "NON",
+     "into": [
+      "NON",
+      "POST",
+      "CALC"
+     ],
+     "fr": "rotation de réseau : NON, POST, CALC",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 157
+     }
+    }
+   ]
+  },
+  {
+   "name": "POLYCRISTAL",
+   "kind": "factor",
+   "path": "POLYCRISTAL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "ANGL_REP",
+      "ANGL_EULER"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 168
+   },
+   "keywords": [
+    {
+     "name": "MONOCRISTAL",
+     "kind": "simple",
+     "path": "POLYCRISTAL/MONOCRISTAL",
+     "status": "o",
+     "type": [
+      "compor_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 172
+     }
+    },
+    {
+     "name": "FRAC_VOL",
+     "kind": "simple",
+     "path": "POLYCRISTAL/FRAC_VOL",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": "fraction volumique de la phase correspondant au monocristal",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 173
+     }
+    },
+    {
+     "name": "ANGL_REP",
+     "kind": "simple",
+     "path": "POLYCRISTAL/ANGL_REP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": "orientation du monocristal : 3 angles nautiques en degrés",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 179
+     }
+    },
+    {
+     "name": "ANGL_EULER",
+     "kind": "simple",
+     "path": "POLYCRISTAL/ANGL_EULER",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": "orientation du monocristal : 3 angles d'Euler   en degrés",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 185
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_poly",
+   "kind": "bloc",
+   "path": "[b_poly]",
+   "condition": "exists(\"POLYCRISTAL\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 192
+   },
+   "keywords": [
+    {
+     "name": "MU_LOCA",
+     "kind": "simple",
+     "path": "MU_LOCA",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "LOCALISATION",
+     "kind": "simple",
+     "path": "LOCALISATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "into": [
+      "BZ",
+      "BETA"
+     ],
+     "fr": "Donner le nom de la règle de localisation",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "b_beta",
+     "kind": "bloc",
+     "path": "[b_beta]",
+     "condition": "equal_to(\"LOCALISATION\", 'BETA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 202
+     },
+     "keywords": [
+      {
+       "name": "DL",
+       "kind": "simple",
+       "path": "DL",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 204
+       }
+      },
+      {
+       "name": "DA",
+       "kind": "simple",
+       "path": "DA",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_compor.py",
+        "line": 205
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "GEOM_FIBRE",
+   "kind": "simple",
+   "path": "GEOM_FIBRE",
+   "status": "f",
+   "type": [
+    "gfibre_sdaster"
+   ],
+   "max": 1,
+   "fr": "Donner le nom du concept regroupant tous les groupes de fibres (issu de DEFI_GEOM_FIBRE)",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 210
+   }
+  },
+  {
+   "name": "MATER_SECT",
+   "kind": "simple",
+   "path": "MATER_SECT",
+   "status": "f",
+   "type": [
+    "mater_sdaster"
+   ],
+   "max": 1,
+   "fr": "Donner le nom du matériau pour les caractéristiques homogénéisées sur la section",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 218
+   }
+  },
+  {
+   "name": "MULTIFIBRE",
+   "kind": "factor",
+   "path": "MULTIFIBRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_compor.py",
+    "line": 224
+   },
+   "keywords": [
+    {
+     "name": "GROUP_FIBRE",
+     "kind": "simple",
+     "path": "MULTIFIBRE/GROUP_FIBRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 227
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MULTIFIBRE/MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "max": 1,
+     "fr": "Donner le nom du matériau pour le groupe de fibres",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 228
+     }
+    },
+    {
+     "name": "RELATION",
+     "kind": "simple",
+     "path": "MULTIFIBRE/RELATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "ELAS",
+     "into": [
+      "ELAS",
+      "CORR_ACIER",
+      "BETON_GRANGER",
+      "GRAN_IRRA_LOG",
+      "MAZARS_UNIL",
+      "VISC_IRRA_LOG",
+      "VMIS_CINE_GC",
+      "VMIS_CINE_LINE",
+      "VMIS_ISOT_LINE",
+      "VMIS_ISOT_TRAC"
+     ],
+     "fr": "Donner le nom de la relation incrémentale pour le groupe de fibres",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_compor.py",
+      "line": 234
+     }
+    }
+   ]
+  }
+ ]
+}

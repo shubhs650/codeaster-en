@@ -1,0 +1,1681 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_list_inst.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_LIST_INST",
+ "kind": "OPER",
+ "fr": "Définition de la gestion de la liste d'instants",
+ "translation_upstream": null,
+ "op": 28,
+ "reentrant": "n",
+ "result_types": [
+  "list_inst"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_list_inst.py",
+  "line": 123
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 129
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "MANUEL",
+   "into": [
+    "MANUEL",
+    "AUTO"
+   ],
+   "fr": "Methode de definition de la liste d'instants",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 130
+   }
+  },
+  {
+   "name": "b_manuel",
+   "kind": "bloc",
+   "path": "[b_manuel]",
+   "condition": "equal_to(\"METHODE\", 'MANUEL') ",
+   "fr": "Liste d'instants donnée par l'utilisateur",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 141
+   },
+   "keywords": [
+    {
+     "name": "DEFI_LIST",
+     "kind": "factor",
+     "path": "DEFI_LIST",
+     "status": "o",
+     "max": 1,
+     "fr": "Definition a priori de la liste d'instants",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "LIST_INST",
+        "VALE",
+        "RESULTAT"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "RESULTAT",
+        "SUBD_PAS"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 144
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "DEFI_LIST/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 152
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "DEFI_LIST/LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 153
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "DEFI_LIST/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 154
+       }
+      },
+      {
+       "name": "SUBD_PAS",
+       "kind": "simple",
+       "path": "DEFI_LIST/SUBD_PAS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 155
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_auto",
+   "kind": "bloc",
+   "path": "[b_auto]",
+   "condition": "(equal_to(\"METHODE\", 'AUTO')) ",
+   "fr": "Gestion automatique de la liste d'instants",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 158
+   },
+   "keywords": [
+    {
+     "name": "DEFI_LIST",
+     "kind": "factor",
+     "path": "DEFI_LIST",
+     "status": "o",
+     "max": 1,
+     "fr": "Definition a priori de la liste d'instants",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "LIST_INST",
+        "VALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 161
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "DEFI_LIST/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 166
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "DEFI_LIST/LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 167
+       }
+      },
+      {
+       "name": "PAS_MINI",
+       "kind": "simple",
+       "path": "DEFI_LIST/PAS_MINI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 1e-12,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 168
+       }
+      },
+      {
+       "name": "PAS_MAXI",
+       "kind": "simple",
+       "path": "DEFI_LIST/PAS_MAXI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 169
+       }
+      },
+      {
+       "name": "NB_PAS_MAXI",
+       "kind": "simple",
+       "path": "DEFI_LIST/NB_PAS_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "val_max": 1000000,
+       "default": 1000000,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 170
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ECHEC",
+   "kind": "factor",
+   "path": "ECHEC",
+   "status": "d",
+   "max": "**",
+   "fr": "Comportement en cas d'echec",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 176
+   },
+   "keywords": [
+    {
+     "name": "EVENEMENT",
+     "kind": "simple",
+     "path": "ECHEC/EVENEMENT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "ERREUR",
+     "into": [
+      "ERREUR",
+      "DELTA_GRANDEUR",
+      "RESI_MAXI",
+      "INTERPENETRATION",
+      "DIVE_RESI",
+      "INSTABILITE"
+     ],
+     "fr": "Type de l'evenement",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "b_erreur",
+     "kind": "bloc",
+     "path": "ECHEC/[b_erreur]",
+     "condition": "equal_to(\"EVENEMENT\", 'ERREUR') ",
+     "fr": "Event: erreur ou iter_maxi",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 195
+     },
+     "keywords": [
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "DECOUPE",
+       "into": [
+        "ARRET",
+        "DECOUPE",
+        "ITER_SUPPL"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 198
+       }
+      },
+      {
+       "name": "b_deco",
+       "kind": "bloc",
+       "path": "ECHEC/[b_deco]",
+       "condition": "equal_to(\"ACTION\", 'DECOUPE')",
+       "fr": "Action de decoupe du pas temps",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 69
+       },
+       "keywords": [
+        {
+         "name": "SUBD_METHODE",
+         "kind": "simple",
+         "path": "ECHEC/SUBD_METHODE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "MANUEL",
+         "into": [
+          "MANUEL",
+          "AUTO"
+         ],
+         "fr": "Méthode de subdivision des pas de temps en cas de divergence",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 72
+         }
+        },
+        {
+         "name": "b_deco_manu",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_manu]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'MANUEL')",
+         "fr": "Subdivision de type manuel",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 39
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 2,
+           "default": 4,
+           "fr": "Nombre de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 42
+           }
+          },
+          {
+           "name": "SUBD_NIVEAU",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_NIVEAU",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 0,
+           "default": 3,
+           "fr": "Nombre maximum de niveau de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 50
+           }
+          },
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 58
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_deco_auto",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_auto]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'AUTO')",
+         "fr": "Subdivision de type automatique",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 25
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 28
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_supp",
+       "kind": "bloc",
+       "path": "ECHEC/[b_supp]",
+       "condition": "equal_to(\"ACTION\", 'ITER_SUPPL')",
+       "fr": "Action d'extrapolation du nombre d'iterations de Newton",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 85
+       },
+       "keywords": [
+        {
+         "name": "PCENT_ITER_PLUS",
+         "kind": "simple",
+         "path": "ECHEC/PCENT_ITER_PLUS",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": 1,
+         "val_min": 20,
+         "default": 50,
+         "fr": "Pourcentage d'itérations autorisées en plus",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 88
+         }
+        },
+        {
+         "name": "SUBD_METHODE",
+         "kind": "simple",
+         "path": "ECHEC/SUBD_METHODE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "MANUEL",
+         "into": [
+          "MANUEL",
+          "AUTO"
+         ],
+         "fr": "Méthode de subdivision des pas de temps en cas de divergence",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 96
+         }
+        },
+        {
+         "name": "b_deco_manu",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_manu]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'MANUEL')",
+         "fr": "Subdivision de type manuel",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 39
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 2,
+           "default": 4,
+           "fr": "Nombre de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 42
+           }
+          },
+          {
+           "name": "SUBD_NIVEAU",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_NIVEAU",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 0,
+           "default": 3,
+           "fr": "Nombre maximum de niveau de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 50
+           }
+          },
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 58
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_deco_auto",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_auto]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'AUTO')",
+         "fr": "Subdivision de type automatique",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 25
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 28
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_edelta",
+     "kind": "bloc",
+     "path": "ECHEC/[b_edelta]",
+     "condition": "equal_to(\"EVENEMENT\", 'DELTA_GRANDEUR') ",
+     "fr": "Event: l'increment d'une composante d'un champ depasse le seuil",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "GROUP_MA",
+        "GROUP_NO"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 209
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ECHEC/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 213
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ECHEC/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 214
+       }
+      },
+      {
+       "name": "VALE_REF",
+       "kind": "simple",
+       "path": "ECHEC/VALE_REF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": "Valeur du seuil",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 215
+       }
+      },
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "ECHEC/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "DEPL",
+        "VARI_ELGA",
+        "SIEF_ELGA"
+       ],
+       "fr": "Nom du champ",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 216
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ECHEC/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": "Nom de la composante",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 223
+       }
+      },
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "DECOUPE",
+       "into": [
+        "ARRET",
+        "DECOUPE"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 224
+       }
+      },
+      {
+       "name": "b_deco",
+       "kind": "bloc",
+       "path": "ECHEC/[b_deco]",
+       "condition": "equal_to(\"ACTION\", 'DECOUPE')",
+       "fr": "Action de decoupe du pas temps",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 69
+       },
+       "keywords": [
+        {
+         "name": "SUBD_METHODE",
+         "kind": "simple",
+         "path": "ECHEC/SUBD_METHODE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "MANUEL",
+         "into": [
+          "MANUEL",
+          "AUTO"
+         ],
+         "fr": "Méthode de subdivision des pas de temps en cas de divergence",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 72
+         }
+        },
+        {
+         "name": "b_deco_manu",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_manu]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'MANUEL')",
+         "fr": "Subdivision de type manuel",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 39
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 2,
+           "default": 4,
+           "fr": "Nombre de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 42
+           }
+          },
+          {
+           "name": "SUBD_NIVEAU",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_NIVEAU",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 0,
+           "default": 3,
+           "fr": "Nombre maximum de niveau de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 50
+           }
+          },
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 58
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_deco_auto",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_auto]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'AUTO')",
+         "fr": "Subdivision de type automatique",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 25
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 28
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_penetration",
+     "kind": "bloc",
+     "path": "ECHEC/[b_penetration]",
+     "condition": "equal_to(\"EVENEMENT\", 'INTERPENETRATION') ",
+     "fr": "Event: interpenetration des surfaces en contact",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 234
+     },
+     "keywords": [
+      {
+       "name": "PENE_MAXI",
+       "kind": "simple",
+       "path": "ECHEC/PENE_MAXI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": "Valeur maxi de l'interpenetration",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 237
+       }
+      },
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "ADAPT_COEF_PENA",
+       "into": [
+        "ARRET",
+        "ADAPT_COEF_PENA"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 238
+       }
+      },
+      {
+       "name": "b_pene",
+       "kind": "bloc",
+       "path": "ECHEC/[b_pene]",
+       "condition": "equal_to(\"ACTION\", 'ADAPT_COEF_PENA')",
+       "fr": "Action d' adaptation du coefficient de penalisation",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 109
+       },
+       "keywords": [
+        {
+         "name": "COEF_MAXI",
+         "kind": "simple",
+         "path": "ECHEC/COEF_MAXI",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "val_min": 1.0,
+         "default": 1000000000000.0,
+         "fr": "Coefficient multiplicateur maximum du coefficient de penalisation",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 112
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_dive_resi",
+     "kind": "bloc",
+     "path": "ECHEC/[b_dive_resi]",
+     "condition": "equal_to(\"EVENEMENT\", 'DIVE_RESI') ",
+     "fr": "Event: divergence du residu",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 248
+     },
+     "keywords": [
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "DECOUPE",
+       "into": [
+        "DECOUPE"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 251
+       }
+      },
+      {
+       "name": "b_deco",
+       "kind": "bloc",
+       "path": "ECHEC/[b_deco]",
+       "condition": "equal_to(\"ACTION\", 'DECOUPE')",
+       "fr": "Action de decoupe du pas temps",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 69
+       },
+       "keywords": [
+        {
+         "name": "SUBD_METHODE",
+         "kind": "simple",
+         "path": "ECHEC/SUBD_METHODE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "MANUEL",
+         "into": [
+          "MANUEL",
+          "AUTO"
+         ],
+         "fr": "Méthode de subdivision des pas de temps en cas de divergence",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 72
+         }
+        },
+        {
+         "name": "b_deco_manu",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_manu]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'MANUEL')",
+         "fr": "Subdivision de type manuel",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 39
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 2,
+           "default": 4,
+           "fr": "Nombre de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 42
+           }
+          },
+          {
+           "name": "SUBD_NIVEAU",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_NIVEAU",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 0,
+           "default": 3,
+           "fr": "Nombre maximum de niveau de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 50
+           }
+          },
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 58
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_deco_auto",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_auto]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'AUTO')",
+         "fr": "Subdivision de type automatique",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 25
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 28
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_resi_maxi",
+     "kind": "bloc",
+     "path": "ECHEC/[b_resi_maxi]",
+     "condition": "equal_to(\"EVENEMENT\", 'RESI_MAXI') ",
+     "fr": "Event: residu trop grand",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 261
+     },
+     "keywords": [
+      {
+       "name": "RESI_GLOB_MAXI",
+       "kind": "simple",
+       "path": "ECHEC/RESI_GLOB_MAXI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": "Valeur du seuil",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 264
+       }
+      },
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "DECOUPE",
+       "into": [
+        "DECOUPE"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 265
+       }
+      },
+      {
+       "name": "b_deco",
+       "kind": "bloc",
+       "path": "ECHEC/[b_deco]",
+       "condition": "equal_to(\"ACTION\", 'DECOUPE')",
+       "fr": "Action de decoupe du pas temps",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 69
+       },
+       "keywords": [
+        {
+         "name": "SUBD_METHODE",
+         "kind": "simple",
+         "path": "ECHEC/SUBD_METHODE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "MANUEL",
+         "into": [
+          "MANUEL",
+          "AUTO"
+         ],
+         "fr": "Méthode de subdivision des pas de temps en cas de divergence",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 72
+         }
+        },
+        {
+         "name": "b_deco_manu",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_manu]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'MANUEL')",
+         "fr": "Subdivision de type manuel",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 39
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 2,
+           "default": 4,
+           "fr": "Nombre de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 42
+           }
+          },
+          {
+           "name": "SUBD_NIVEAU",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_NIVEAU",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "max": 1,
+           "val_min": 0,
+           "default": 3,
+           "fr": "Nombre maximum de niveau de subdivision d'un pas de temps",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 50
+           }
+          },
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 58
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_deco_auto",
+         "kind": "bloc",
+         "path": "ECHEC/[b_deco_auto]",
+         "condition": "equal_to(\"SUBD_METHODE\", 'AUTO')",
+         "fr": "Subdivision de type automatique",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 25
+         },
+         "keywords": [
+          {
+           "name": "SUBD_PAS_MINI",
+           "kind": "simple",
+           "path": "ECHEC/SUBD_PAS_MINI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": "Pas de temps en dessous duquel on ne subdivise plus",
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 28
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_instabilite",
+     "kind": "bloc",
+     "path": "ECHEC/[b_instabilite]",
+     "condition": "equal_to(\"EVENEMENT\", 'INSTABILITE') ",
+     "fr": "Event: instabilité",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 275
+     },
+     "keywords": [
+      {
+       "name": "ACTION",
+       "kind": "simple",
+       "path": "ECHEC/ACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "CONTINUE",
+       "into": [
+        "ARRET",
+        "CONTINUE"
+       ],
+       "fr": "Actions possibles",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 278
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_adap",
+   "kind": "bloc",
+   "path": "[b_adap]",
+   "condition": "equal_to(\"METHODE\", 'AUTO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 291
+   },
+   "keywords": [
+    {
+     "name": "ADAPTATION",
+     "kind": "factor",
+     "path": "ADAPTATION",
+     "status": "d",
+     "max": "**",
+     "fr": "Parametres de l'evenement declencheur de l'adaptation du pas de temps",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_inst.py",
+      "line": 293
+     },
+     "keywords": [
+      {
+       "name": "EVENEMENT",
+       "kind": "simple",
+       "path": "ADAPTATION/EVENEMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "SEUIL",
+       "into": [
+        "SEUIL",
+        "TOUT_INST",
+        "AUCUN"
+       ],
+       "fr": "Nom de l'evenement declencheur de l'adaptation",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 297
+       }
+      },
+      {
+       "name": "b_adap_seuil",
+       "kind": "bloc",
+       "path": "ADAPTATION/[b_adap_seuil]",
+       "condition": "equal_to(\"EVENEMENT\", 'SEUIL') ",
+       "fr": "Seuil d'adaptation",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 305
+       },
+       "keywords": [
+        {
+         "name": "NB_INCR_SEUIL",
+         "kind": "simple",
+         "path": "ADAPTATION/NB_INCR_SEUIL",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 308
+         }
+        },
+        {
+         "name": "NOM_PARA",
+         "kind": "simple",
+         "path": "ADAPTATION/NOM_PARA",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NB_ITER_NEWTON",
+         "into": [
+          "NB_ITER_NEWTON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 309
+         }
+        },
+        {
+         "name": "CRIT_COMP",
+         "kind": "simple",
+         "path": "ADAPTATION/CRIT_COMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "LE",
+         "into": [
+          "LT",
+          "GT",
+          "LE",
+          "GE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 312
+         }
+        },
+        {
+         "name": "b_vale_I",
+         "kind": "bloc",
+         "path": "ADAPTATION/[b_vale_I]",
+         "condition": "equal_to(\"NOM_PARA\", 'NB_ITER_NEWTON') ",
+         "fr": "Valeur entiere",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 313
+         },
+         "keywords": [
+          {
+           "name": "VALE_I",
+           "kind": "simple",
+           "path": "ADAPTATION/VALE_I",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_list_inst.py",
+            "line": 316
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "MODE_CALCUL_TPLUS",
+       "kind": "simple",
+       "path": "ADAPTATION/MODE_CALCUL_TPLUS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "FIXE",
+       "into": [
+        "FIXE",
+        "DELTA_GRANDEUR",
+        "ITER_NEWTON",
+        "IMPLEX"
+       ],
+       "fr": "Parametres du mode de calcul de dt+",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 326
+       }
+      },
+      {
+       "name": "b_mfixe",
+       "kind": "bloc",
+       "path": "ADAPTATION/[b_mfixe]",
+       "condition": "equal_to(\"MODE_CALCUL_TPLUS\", 'FIXE') ",
+       "fr": "Mode de calcul de dt+: fixe",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 334
+       },
+       "keywords": [
+        {
+         "name": "PCENT_AUGM",
+         "kind": "simple",
+         "path": "ADAPTATION/PCENT_AUGM",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "val_min": -100.0,
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 337
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_mdelta",
+       "kind": "bloc",
+       "path": "ADAPTATION/[b_mdelta]",
+       "condition": "equal_to(\"MODE_CALCUL_TPLUS\", 'DELTA_GRANDEUR') ",
+       "fr": "Mode de calcul de dt+: increment d'une grandeur",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "GROUP_MA",
+          "GROUP_NO"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 339
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "ADAPTATION/GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 343
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "ADAPTATION/GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 344
+         }
+        },
+        {
+         "name": "VALE_REF",
+         "kind": "simple",
+         "path": "ADAPTATION/VALE_REF",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 345
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "ADAPTATION/NOM_CHAM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "into": [
+          "DEPL",
+          "VARI_ELGA",
+          "SIEF_ELGA"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 346
+         }
+        },
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "ADAPTATION/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 349
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_mitnew",
+       "kind": "bloc",
+       "path": "ADAPTATION/[b_mitnew]",
+       "condition": "equal_to(\"MODE_CALCUL_TPLUS\", 'ITER_NEWTON') ",
+       "fr": "Mode de calcul de dt+: nb iterations de Newton",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_inst.py",
+        "line": 351
+       },
+       "keywords": [
+        {
+         "name": "NB_ITER_NEWTON_REF",
+         "kind": "simple",
+         "path": "ADAPTATION/NB_ITER_NEWTON_REF",
+         "status": "o",
+         "type": [
+          "I"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_list_inst.py",
+          "line": 354
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_inst.py",
+    "line": 390
+   }
+  }
+ ]
+}

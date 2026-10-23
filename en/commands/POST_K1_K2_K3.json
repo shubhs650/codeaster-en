@@ -1,0 +1,789 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_K1_K2_K3",
+ "kind": "MACRO",
+ "fr": "Calcul des facteurs d'intensité de contraintes en 2D et en 3D par extrapolation des sauts de déplacements sur les lèvres de la fissure",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_k1_k2_k3_ops.post_k1_k2_k3_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FISSURE",
+    "FOND_FISS"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "FOND_FISS",
+   "kind": "simple",
+   "path": "FOND_FISS",
+   "status": "f",
+   "type": [
+    "fond_fissure"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "FISSURE",
+   "kind": "simple",
+   "path": "FISSURE",
+   "status": "f",
+   "type": [
+    "fiss_xfem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "mode_meca"
+   ],
+   "fr": "Déplacement des noeuds de la lèvre supérieure et inférieure",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "MATER",
+   "kind": "simple",
+   "path": "MATER",
+   "status": "f",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": "Matériau homogène et isotrope",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "NB_NOEUD_COUPE",
+   "kind": "simple",
+   "path": "NB_NOEUD_COUPE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "val_min": 3,
+   "default": 5,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "b_fond_fiss",
+   "kind": "bloc",
+   "path": "[b_fond_fiss]",
+   "condition": "exists(\"FOND_FISS\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 46
+   },
+   "keywords": [
+    {
+     "name": "b_no_mod",
+     "kind": "bloc",
+     "path": "[b_no_mod]",
+     "condition": "is_type(\"RESULTAT\")!= mode_meca",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 48
+     },
+     "keywords": [
+      {
+       "name": "TYPE_MAILLAGE",
+       "kind": "simple",
+       "path": "TYPE_MAILLAGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "REGLE",
+       "into": [
+        "LIBRE",
+        "REGLE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 50
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_mod",
+     "kind": "bloc",
+     "path": "[b_mod]",
+     "condition": "is_type(\"RESULTAT\")== mode_meca",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 52
+     },
+     "keywords": [
+      {
+       "name": "TYPE_MAILLAGE",
+       "kind": "simple",
+       "path": "TYPE_MAILLAGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "REGLE",
+       "into": [
+        "REGLE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 54
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "SANS_GROUP_NO",
+     "kind": "simple",
+     "path": "SANS_GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "ABSC_CURV_MAXI",
+     "kind": "simple",
+     "path": "ABSC_CURV_MAXI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Distance maximum à partir du fond de fissure à utiliser pour le calcul",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_fissure",
+   "kind": "bloc",
+   "path": "[b_fissure]",
+   "condition": "exists(\"FISSURE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "NB_POINT_FOND",
+     "kind": "simple",
+     "path": "NB_POINT_FOND",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "NUME_FOND",
+     "kind": "simple",
+     "path": "NUME_FOND",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "ABSC_CURV_MAXI",
+     "kind": "simple",
+     "path": "ABSC_CURV_MAXI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Distance maximum à partir du fond de fissure à utiliser pour le calcul",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 70
+     }
+    }
+   ]
+  },
+  {
+   "name": "PREC_VIS_A_VIS",
+   "kind": "simple",
+   "path": "PREC_VIS_A_VIS",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "b_mod_meca",
+   "kind": "bloc",
+   "path": "[b_mod_meca]",
+   "condition": "is_type(\"RESULTAT\")== mode_meca ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "TOUT_MODE",
+     "kind": "simple",
+     "path": "TOUT_MODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "LIST_MODE",
+     "kind": "simple",
+     "path": "LIST_MODE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"FREQ\")) or (exists(\"LIST_FREQ\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 87
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 90
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+          "line": 92
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 94
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+          "line": 95
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_no_mod_meca",
+   "kind": "bloc",
+   "path": "[b_no_mod_meca]",
+   "condition": "is_type(\"RESULTAT\")!= mode_meca ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 99
+   },
+   "keywords": [
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 104
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 105
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+      "line": 106
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 109
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+          "line": 111
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+        "line": 113
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+          "line": 114
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 118
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_k1_k2_k3.py",
+    "line": 119
+   }
+  }
+ ]
+}

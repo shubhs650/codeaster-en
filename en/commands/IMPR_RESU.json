@@ -1,0 +1,5030 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_resu.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_RESU",
+ "kind": "PROC",
+ "fr": "Imprimer un maillage et/ou les résultats d'un calcul (différents formats)",
+ "translation_upstream": {
+  "IMPR_RESU": "Set output results",
+  "UNITE": "Result file location"
+ },
+ "op": 39,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_resu.py",
+  "line": 25
+ },
+ "keywords": [
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MED",
+   "into": [
+    "RESULTAT",
+    "IDEAS",
+    "ASTER",
+    "MED",
+    "GMSH"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 29
+   }
+  },
+  {
+   "name": "PROC0",
+   "kind": "simple",
+   "path": "PROC0",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "b_modele",
+   "kind": "bloc",
+   "path": "[b_modele]",
+   "condition": "not equal_to(\"FORMAT\", 'MED')",
+   "fr": "Modèle",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 33
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 36
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_resultat",
+   "kind": "bloc",
+   "path": "[b_format_resultat]",
+   "condition": "equal_to(\"FORMAT\", 'RESULTAT')",
+   "fr": "unité logique d'impression au format RESULTAT",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 8,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 41
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_ideas",
+   "kind": "bloc",
+   "path": "[b_format_ideas]",
+   "condition": "equal_to(\"FORMAT\", 'IDEAS')",
+   "fr": "unité logique d'impression et version IDEAS",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 30,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "VERSION",
+     "kind": "simple",
+     "path": "VERSION",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 5,
+     "into": [
+      4,
+      5
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_aster",
+   "kind": "bloc",
+   "path": "[b_format_aster]",
+   "condition": "equal_to(\"FORMAT\", 'ASTER')",
+   "fr": "unité logique d'impression au format ASTER",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 26,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 52
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_med",
+   "kind": "bloc",
+   "path": "[b_format_med]",
+   "condition": "equal_to(\"FORMAT\", 'MED')",
+   "fr": "unité logique d'impression au format MED",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitMed"
+     ],
+     "default": 80,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "FICHIER_UNIQUE",
+     "kind": "simple",
+     "path": "FICHIER_UNIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Paramètre permettant d'imprimer les résultats dans un fichier unique",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "b_fichier_unique",
+     "kind": "bloc",
+     "path": "[b_fichier_unique]",
+     "condition": "(equal_to(\"FICHIER_UNIQUE\", 'NON'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 66
+     },
+     "keywords": [
+      {
+       "name": "VERSION_MED",
+       "kind": "simple",
+       "path": "VERSION_MED",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "3.3.1",
+       "into": [
+        "3.3.1",
+        "4.0.0",
+        "4.1.0",
+        "4.2.0"
+       ],
+       "fr": "Choix de la version du fichier MED",
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 68
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_not_fichier_unique",
+     "kind": "bloc",
+     "path": "[b_not_fichier_unique]",
+     "condition": "equal_to(\"FICHIER_UNIQUE\", \"OUI\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 76
+     },
+     "keywords": [
+      {
+       "name": "VERSION_MED",
+       "kind": "simple",
+       "path": "VERSION_MED",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "4.2.0",
+       "into": [
+        "4.2.0"
+       ],
+       "fr": "Choix de la version du fichier MED",
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 78
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_format_gmsh",
+   "kind": "bloc",
+   "path": "[b_format_gmsh]",
+   "condition": "equal_to(\"FORMAT\", 'GMSH')",
+   "fr": "unité logique d'impression et version GMSH",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 37,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "VERSION",
+     "kind": "simple",
+     "path": "VERSION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.2,
+     "into": [
+      1.0,
+      1.2
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 91
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_fmt_med",
+   "kind": "bloc",
+   "path": "[b_fmt_med]",
+   "condition": "equal_to(\"FORMAT\", 'MED')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 93
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT",
+        "MAILLAGE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 103
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "RESU/CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "b_visu_sp",
+       "kind": "bloc",
+       "path": "RESU/[b_visu_sp]",
+       "condition": "(not exists(\"CARA_ELEM\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 105
+       },
+       "keywords": [
+        {
+         "name": "VISU_SP",
+         "kind": "simple",
+         "path": "RESU/VISU_SP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 107
+         }
+        }
+       ]
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 110
+       }
+      },
+      {
+       "name": "b_rangement",
+       "kind": "bloc",
+       "path": "RESU/[b_rangement]",
+       "condition": "is_type(\"RESULTAT\") == mult_elas",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 111
+       },
+       "keywords": [
+        {
+         "name": "TYPE_NOM",
+         "kind": "simple",
+         "path": "RESU/TYPE_NOM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NUME_ORDRE",
+         "into": [
+          "NUME_ORDRE",
+          "NOM_CAS"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 113
+         }
+        }
+       ]
+      },
+      {
+       "name": "INFO_MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/INFO_MAILLAGE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "b_partie",
+       "kind": "bloc",
+       "path": "RESU/[b_partie]",
+       "condition": "(is_type(\"RESULTAT\") in (dyna_harmo, acou_harmo) or is_type(\"CHAM_GD\") != carte_sdaster)",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 118
+       },
+       "keywords": [
+        {
+         "name": "PARTIE",
+         "kind": "simple",
+         "path": "RESU/PARTIE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "REEL",
+          "IMAG",
+          "MODULE",
+          "PHASE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 120
+         }
+        }
+       ]
+      },
+      {
+       "name": "IMPR_NOM_VARI",
+       "kind": "simple",
+       "path": "RESU/IMPR_NOM_VARI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 122
+       }
+      },
+      {
+       "name": "b_extrac",
+       "kind": "bloc",
+       "path": "RESU/[b_extrac]",
+       "condition": "exists(\"RESULTAT\")",
+       "fr": "extraction d un champ de grandeur",
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT_CHAM",
+          "NOM_CHAM"
+         ],
+         "defaults": {
+          "TOUT_CHAM": "OUI"
+         }
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "LIST_INST",
+          "LIST_FREQ",
+          "LIST_ORDRE",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 123
+       },
+       "keywords": [
+        {
+         "name": "TOUT_CHAM",
+         "kind": "simple",
+         "path": "RESU/TOUT_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 142
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 143
+         }
+        },
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 146
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 147
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 148
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 149
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "RESU/NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 150
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "RESU/NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 151
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "RESU/ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 152
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 153
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 154
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "RESU/INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 155
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "RESU/LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 156
+         }
+        },
+        {
+         "name": "b_acce_reel",
+         "kind": "bloc",
+         "path": "RESU/[b_acce_reel]",
+         "condition": "(exists(\"ANGLE\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 157
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 159
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 162
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 164
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 166
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 168
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_param",
+       "kind": "bloc",
+       "path": "RESU/[b_param]",
+       "condition": "(exists(\"RESULTAT\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 173
+       },
+       "keywords": [
+        {
+         "name": "NOM_PARA",
+         "kind": "simple",
+         "path": "RESU/NOM_PARA",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 175
+         }
+        }
+       ]
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "RESU/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 178
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "RESU/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 179
+       }
+      },
+      {
+       "name": "b_med",
+       "kind": "bloc",
+       "path": "RESU/[b_med]",
+       "condition": "(exists(\"CHAM_GD\") or exists(\"RESULTAT\"))",
+       "fr": "renommage du champ",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "NOM_CHAM_MED",
+          "NOM_RESU_MED"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 181
+       },
+       "keywords": [
+        {
+         "name": "NOM_CHAM_MED",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM_MED",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "AndVal",
+           "args": [
+            {
+             "name": "LongStr",
+             "args": [
+              1,
+              64
+             ]
+            },
+            {
+             "name": "NoRepeat",
+             "args": []
+            }
+           ]
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 185
+         }
+        },
+        {
+         "name": "NOM_RESU_MED",
+         "kind": "simple",
+         "path": "RESU/NOM_RESU_MED",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "validators": [
+          {
+           "name": "LongStr",
+           "args": [
+            1,
+            8
+           ]
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 188
+         }
+        }
+       ]
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "RESU/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 191
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "RESU/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 192
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "RESU/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 193
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "RESU/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 194
+       }
+      },
+      {
+       "name": "SOUS_TITRE",
+       "kind": "simple",
+       "path": "RESU/SOUS_TITRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 195
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_fmt_resultat",
+   "kind": "bloc",
+   "path": "[b_fmt_resultat]",
+   "condition": "equal_to(\"FORMAT\", 'RESULTAT')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 198
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT",
+        "MAILLAGE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_PARA",
+        "NOM_PARA"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 200
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 209
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "RESU/CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 210
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 211
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 212
+       }
+      },
+      {
+       "name": "PARTIE",
+       "kind": "simple",
+       "path": "RESU/PARTIE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "REEL",
+        "IMAG",
+        "MODULE",
+        "PHASE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 213
+       }
+      },
+      {
+       "name": "b_extrac",
+       "kind": "bloc",
+       "path": "RESU/[b_extrac]",
+       "condition": "exists(\"RESULTAT\")",
+       "fr": "extraction d un champ de grandeur",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_CHAM",
+          "NOM_CHAM"
+         ]
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "LIST_INST",
+          "LIST_FREQ",
+          "LIST_ORDRE",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 214
+       },
+       "keywords": [
+        {
+         "name": "TOUT_CHAM",
+         "kind": "simple",
+         "path": "RESU/TOUT_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 233
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 234
+         }
+        },
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 237
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 238
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 239
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 240
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "RESU/NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 241
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "RESU/NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 242
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "RESU/ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 243
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 244
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 245
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "RESU/INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 246
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "RESU/LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 247
+         }
+        },
+        {
+         "name": "b_acce_reel",
+         "kind": "bloc",
+         "path": "RESU/[b_acce_reel]",
+         "condition": "(exists(\"ANGLE\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 248
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 250
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 253
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 255
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 257
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 259
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "TOUT_PARA",
+       "kind": "simple",
+       "path": "RESU/TOUT_PARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 263
+       }
+      },
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "RESU/NOM_PARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 264
+       }
+      },
+      {
+       "name": "FORM_TABL",
+       "kind": "simple",
+       "path": "RESU/FORM_TABL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON",
+        "EXCEL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 265
+       }
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "RESU/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 266
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "RESU/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 267
+       }
+      },
+      {
+       "name": "b_topologie",
+       "kind": "bloc",
+       "path": "RESU/[b_topologie]",
+       "condition": "(exists(\"CHAM_GD\") or exists(\"RESULTAT\"))",
+       "fr": "sélection des entités topologiques",
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 268
+       },
+       "keywords": [
+        {
+         "name": "TOUT",
+         "kind": "simple",
+         "path": "RESU/TOUT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 271
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "RESU/GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 272
+         }
+        },
+        {
+         "name": "MAILLE",
+         "kind": "simple",
+         "path": "RESU/MAILLE",
+         "status": "c",
+         "type": [
+          "ma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 273
+         }
+        },
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "RESU/GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 274
+         }
+        }
+       ]
+      },
+      {
+       "name": "VALE_MAX",
+       "kind": "simple",
+       "path": "RESU/VALE_MAX",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 276
+       }
+      },
+      {
+       "name": "VALE_MIN",
+       "kind": "simple",
+       "path": "RESU/VALE_MIN",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 277
+       }
+      },
+      {
+       "name": "BORNE_SUP",
+       "kind": "simple",
+       "path": "RESU/BORNE_SUP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 278
+       }
+      },
+      {
+       "name": "BORNE_INF",
+       "kind": "simple",
+       "path": "RESU/BORNE_INF",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 279
+       }
+      },
+      {
+       "name": "IMPR_COOR",
+       "kind": "simple",
+       "path": "RESU/IMPR_COOR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 280
+       }
+      },
+      {
+       "name": "FORMAT_R",
+       "kind": "simple",
+       "path": "RESU/FORMAT_R",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "1PE21.14",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 281
+       }
+      },
+      {
+       "name": "SOUS_TITRE",
+       "kind": "simple",
+       "path": "RESU/SOUS_TITRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 282
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_fmt_gmsh",
+   "kind": "bloc",
+   "path": "[b_fmt_gmsh]",
+   "condition": "equal_to(\"FORMAT\", 'GMSH')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 285
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT",
+        "MAILLAGE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 287
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 291
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "RESU/CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 292
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 293
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 294
+       }
+      },
+      {
+       "name": "PARTIE",
+       "kind": "simple",
+       "path": "RESU/PARTIE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "REEL",
+        "IMAG"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 295
+       }
+      },
+      {
+       "name": "b_extrac",
+       "kind": "bloc",
+       "path": "RESU/[b_extrac]",
+       "condition": "exists(\"RESULTAT\")",
+       "fr": "extraction d un champ de grandeur",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_CHAM",
+          "NOM_CHAM"
+         ]
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "LIST_INST",
+          "LIST_FREQ",
+          "LIST_ORDRE",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 296
+       },
+       "keywords": [
+        {
+         "name": "TOUT_CHAM",
+         "kind": "simple",
+         "path": "RESU/TOUT_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 315
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 316
+         }
+        },
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 319
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 320
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 321
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 322
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "RESU/NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 323
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "RESU/NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 324
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "RESU/ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 325
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 326
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 327
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "RESU/INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 328
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "RESU/LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 329
+         }
+        },
+        {
+         "name": "b_acce_reel",
+         "kind": "bloc",
+         "path": "RESU/[b_acce_reel]",
+         "condition": "(exists(\"ANGLE\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 330
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 332
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 335
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 337
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 339
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 341
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "RESU/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 345
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "RESU/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 346
+       }
+      },
+      {
+       "name": "TYPE_CHAM",
+       "kind": "simple",
+       "path": "RESU/TYPE_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "SCALAIRE",
+       "into": [
+        "VECT_2D",
+        "VECT_3D",
+        "SCALAIRE",
+        "TENS_2D",
+        "TENS_3D"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 347
+       }
+      },
+      {
+       "name": "b_scal",
+       "kind": "bloc",
+       "path": "RESU/[b_scal]",
+       "condition": "equal_to(\"TYPE_CHAM\", 'SCALAIRE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 353
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "RESU/NOM_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 355
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vect_2d",
+       "kind": "bloc",
+       "path": "RESU/[b_vect_2d]",
+       "condition": "equal_to(\"TYPE_CHAM\", 'VECT_2D')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 357
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "RESU/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 2,
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 359
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vect_3d",
+       "kind": "bloc",
+       "path": "RESU/[b_vect_3d]",
+       "condition": "equal_to(\"TYPE_CHAM\", 'VECT_3D')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 361
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "RESU/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 363
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_tens_2d",
+       "kind": "bloc",
+       "path": "RESU/[b_tens_2d]",
+       "condition": "equal_to(\"TYPE_CHAM\", 'TENS_2D')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 365
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "RESU/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 4,
+         "max": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 367
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_tens_3d",
+       "kind": "bloc",
+       "path": "RESU/[b_tens_3d]",
+       "condition": "equal_to(\"TYPE_CHAM\", 'TENS_3D')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 369
+       },
+       "keywords": [
+        {
+         "name": "NOM_CMP",
+         "kind": "simple",
+         "path": "RESU/NOM_CMP",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "min": 6,
+         "max": 6,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 371
+         }
+        }
+       ]
+      },
+      {
+       "name": "SOUS_TITRE",
+       "kind": "simple",
+       "path": "RESU/SOUS_TITRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 373
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_fmt_ideas",
+   "kind": "bloc",
+   "path": "[b_fmt_ideas]",
+   "condition": "equal_to(\"FORMAT\", 'IDEAS')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 376
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT",
+        "MAILLAGE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 378
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 386
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "RESU/CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 387
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 388
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 389
+       }
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "RESU/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 390
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "RESU/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 391
+       }
+      },
+      {
+       "name": "b_extrac",
+       "kind": "bloc",
+       "path": "RESU/[b_extrac]",
+       "condition": "exists(\"RESULTAT\")",
+       "fr": "extraction d un champ de grandeur",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_CHAM",
+          "NOM_CHAM"
+         ]
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "LIST_INST",
+          "LIST_FREQ",
+          "LIST_ORDRE",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 392
+       },
+       "keywords": [
+        {
+         "name": "TOUT_CHAM",
+         "kind": "simple",
+         "path": "RESU/TOUT_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 411
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 412
+         }
+        },
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 415
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 416
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 417
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 418
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "RESU/NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 419
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "RESU/NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 420
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "RESU/ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 421
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 422
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 423
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "RESU/INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 424
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "RESU/LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 425
+         }
+        },
+        {
+         "name": "b_acce_reel",
+         "kind": "bloc",
+         "path": "RESU/[b_acce_reel]",
+         "condition": "(exists(\"ANGLE\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 426
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 428
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 431
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 433
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 435
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 437
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_topologie",
+       "kind": "bloc",
+       "path": "RESU/[b_topologie]",
+       "condition": "(exists(\"CHAM_GD\") or exists(\"RESULTAT\"))",
+       "fr": "sélection des entités topologiques",
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 441
+       },
+       "keywords": [
+        {
+         "name": "TOUT",
+         "kind": "simple",
+         "path": "RESU/TOUT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 444
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "RESU/GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 445
+         }
+        },
+        {
+         "name": "MAILLE",
+         "kind": "simple",
+         "path": "RESU/MAILLE",
+         "status": "c",
+         "type": [
+          "ma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 446
+         }
+        },
+        {
+         "name": "GROUP_MA",
+         "kind": "simple",
+         "path": "RESU/GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 447
+         }
+        }
+       ]
+      },
+      {
+       "name": "SOUS_TITRE",
+       "kind": "simple",
+       "path": "RESU/SOUS_TITRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 449
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_fmt_aster",
+   "kind": "bloc",
+   "path": "[b_fmt_aster]",
+   "condition": "equal_to(\"FORMAT\", 'ASTER')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 452
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT",
+        "MAILLAGE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_resu.py",
+      "line": 454
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "RESU/MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 458
+       }
+      },
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "RESU/CARA_ELEM",
+       "status": "f",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 459
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 460
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU/RESULTAT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 461
+       }
+      },
+      {
+       "name": "b_extrac",
+       "kind": "bloc",
+       "path": "RESU/[b_extrac]",
+       "condition": "exists(\"RESULTAT\")",
+       "fr": "extraction d un champ de grandeur",
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_CHAM",
+          "NOM_CHAM"
+         ]
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "LIST_INST",
+          "LIST_FREQ",
+          "LIST_ORDRE",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 462
+       },
+       "keywords": [
+        {
+         "name": "TOUT_CHAM",
+         "kind": "simple",
+         "path": "RESU/TOUT_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 481
+         }
+        },
+        {
+         "name": "NOM_CHAM",
+         "kind": "simple",
+         "path": "RESU/NOM_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "into": [
+          "ACCE",
+          "ACCE_ABSOLU",
+          "COEF_H",
+          "COMPORTEMENT",
+          "COMPORTHER",
+          "CONT_ELEM",
+          "CONT_NOEU",
+          "DEGE_ELGA",
+          "DEGE_ELNO",
+          "DEGE_NOEU",
+          "DEPL",
+          "DEPL_ABSOLU",
+          "DEPL_ELGA",
+          "DEPL_VIBR",
+          "DERA_ELGA",
+          "DERA_ELNO",
+          "DERA_NOEU",
+          "DIFF_ELGA",
+          "DIFF_ELNO",
+          "DIFF_NOEU",
+          "DISS_ELEM",
+          "DISS_ELGA",
+          "DISS_ELNO",
+          "DISS_NOEU",
+          "DIVU",
+          "DURT_ELNO",
+          "DURT_NOEU",
+          "ECIN_ELEM",
+          "EFGE_ELGA",
+          "EFGE_ELNO",
+          "EFGE_NOEU",
+          "EGRU_ELNO",
+          "ENDO_ELGA",
+          "ENDO_ELNO",
+          "ENDO_NOEU",
+          "ENEL_ELEM",
+          "ENEL_ELGA",
+          "ENEL_ELNO",
+          "ENEL_NOEU",
+          "ENTR_ELEM",
+          "EPEQ_ELGA",
+          "EPEQ_ELNO",
+          "EPEQ_NOEU",
+          "EPFD_ELGA",
+          "EPFD_ELNO",
+          "EPFD_NOEU",
+          "EPFP_ELGA",
+          "EPFP_ELNO",
+          "EPFP_NOEU",
+          "EPGQ_ELGA",
+          "EPGQ_ELNO",
+          "EPGQ_NOEU",
+          "EPME_ELGA",
+          "EPME_ELNO",
+          "EPME_NOEU",
+          "EPMG_ELGA",
+          "EPMG_ELNO",
+          "EPMG_NOEU",
+          "EPMQ_ELGA",
+          "EPMQ_ELNO",
+          "EPMQ_NOEU",
+          "EPOT_ELEM",
+          "EPSA_ELNO",
+          "EPSA_NOEU",
+          "EPSG_ELGA",
+          "EPSG_ELNO",
+          "EPSG_NOEU",
+          "EPSI_ELGA",
+          "EPSI_ELNO",
+          "EPSI_NOEU",
+          "EPSL_ELGA",
+          "EPSL_ELNO",
+          "EPSL_NOEU",
+          "EPSP_ELGA",
+          "EPSP_ELNO",
+          "EPSP_NOEU",
+          "EPVC_ELGA",
+          "EPVC_ELNO",
+          "EPVC_NOEU",
+          "ERME_ELEM",
+          "ERME_ELNO",
+          "ERME_NOEU",
+          "ERTH_ELEM",
+          "ERTH_ELNO",
+          "ERTH_NOEU",
+          "ERZ1_ELEM",
+          "ERZ2_ELEM",
+          "ETHE_ELEM",
+          "ETOT_ELEM",
+          "ETOT_ELGA",
+          "ETOT_ELNO",
+          "ETOT_NOEU",
+          "FERR_ELEM",
+          "FLHN_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELGA",
+          "FLUX_ELNO",
+          "FLUX_ELNO",
+          "FLUX_NOEU",
+          "FLUX_NOEU",
+          "FORC_NODA",
+          "FSUR_2D",
+          "FSUR_3D",
+          "FVOL_2D",
+          "FVOL_3D",
+          "GRAT_ELGA",
+          "GRAT_ELGA",
+          "GRAT_ELNO",
+          "GRAT_ELNO",
+          "GRAT_NOEU",
+          "GRAT_NOEU",
+          "HHO_DEPL",
+          "HHO_TEMP",
+          "HHO_VITE",
+          "HYDR_ELGA",
+          "HYDR_ELNO",
+          "HYDR_NOEU",
+          "HYGR_ELGA",
+          "HYGR_ELNO",
+          "HYGR_NOEU",
+          "INDL_ELGA",
+          "INTE_ELNO",
+          "INTE_NOEU",
+          "IRRA",
+          "MARG_ELEM",
+          "MATE_ELEM",
+          "MATE_ELGA",
+          "META_ELNO",
+          "META_NOEU",
+          "MODE_FLAMB",
+          "MODE_STAB",
+          "NEUT",
+          "PDIL_ELGA",
+          "PRAC_ELNO",
+          "PRAC_NOEU",
+          "PRES",
+          "PRES_NOEU",
+          "PRME_ELNO",
+          "PTOT",
+          "QIRE_ELEM",
+          "QIRE_ELNO",
+          "QIRE_NOEU",
+          "QIZ1_ELEM",
+          "QIZ2_ELEM",
+          "REAC_NODA",
+          "RESI_NOEU",
+          "RESI_RELA_NOEU",
+          "ROC1_ELNO",
+          "ROC2_ELNO",
+          "SECH",
+          "SIEF_ELGA",
+          "SIEF_ELNO",
+          "SIEF_NOEU",
+          "SIEQ_ELGA",
+          "SIEQ_ELNO",
+          "SIEQ_NOEU",
+          "SIGM_ELGA",
+          "SIGM_ELNO",
+          "SIGM_NOEU",
+          "SIMY_ELGA",
+          "SING_ELEM",
+          "SING_ELNO",
+          "SIPM_ELNO",
+          "SIPO_ELNO",
+          "SIPO_NOEU",
+          "SIRO_ELEM",
+          "SISE_ELNO",
+          "SIZ1_NOEU",
+          "SIZ2_NOEU",
+          "SOUR_ELGA",
+          "STRX_ELGA",
+          "TEMP",
+          "TEMP_ELGA",
+          "T_EXT",
+          "UT01_CART",
+          "UT01_ELEM",
+          "UT01_ELGA",
+          "UT01_ELNO",
+          "UT01_NOEU",
+          "UT02_CART",
+          "UT02_ELEM",
+          "UT02_ELGA",
+          "UT02_ELNO",
+          "UT02_NOEU",
+          "UT03_CART",
+          "UT03_ELEM",
+          "UT03_ELGA",
+          "UT03_ELNO",
+          "UT03_NOEU",
+          "UT04_CART",
+          "UT04_ELEM",
+          "UT04_ELGA",
+          "UT04_ELNO",
+          "UT04_NOEU",
+          "UT05_CART",
+          "UT05_ELEM",
+          "UT05_ELGA",
+          "UT05_ELNO",
+          "UT05_NOEU",
+          "UT06_CART",
+          "UT06_ELEM",
+          "UT06_ELGA",
+          "UT06_ELNO",
+          "UT06_NOEU",
+          "UT07_CART",
+          "UT07_ELEM",
+          "UT07_ELGA",
+          "UT07_ELNO",
+          "UT07_NOEU",
+          "UT08_CART",
+          "UT08_ELEM",
+          "UT08_ELGA",
+          "UT08_ELNO",
+          "UT08_NOEU",
+          "UT09_CART",
+          "UT09_ELEM",
+          "UT09_ELGA",
+          "UT09_ELNO",
+          "UT09_NOEU",
+          "UT10_CART",
+          "UT10_ELEM",
+          "UT10_ELGA",
+          "UT10_ELNO",
+          "UT10_NOEU",
+          "VARC_ELGA",
+          "VARC_ELNO",
+          "VARC_NOEU",
+          "VARI_ELGA",
+          "VARI_ELNO",
+          "VARI_NOEU",
+          "VITE",
+          "VITE_ABSOLU",
+          "VITE_VENT"
+         ],
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 482
+         }
+        },
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 485
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 486
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 487
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 488
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "RESU/NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 489
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "RESU/NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 490
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "RESU/ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 491
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 492
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 493
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "RESU/INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 494
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "RESU/LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 495
+         }
+        },
+        {
+         "name": "b_acce_reel",
+         "kind": "bloc",
+         "path": "RESU/[b_acce_reel]",
+         "condition": "(exists(\"ANGLE\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/impr_resu.py",
+          "line": 496
+         },
+         "keywords": [
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 498
+           }
+          },
+          {
+           "name": "b_prec_rela",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_rela]",
+           "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 501
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "f",
+             "type": [
+              "R"
+             ],
+             "default": 1e-06,
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 503
+             }
+            }
+           ]
+          },
+          {
+           "name": "b_prec_abso",
+           "kind": "bloc",
+           "path": "RESU/[b_prec_abso]",
+           "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/impr_resu.py",
+            "line": 505
+           },
+           "keywords": [
+            {
+             "name": "PRECISION",
+             "kind": "simple",
+             "path": "RESU/PRECISION",
+             "status": "o",
+             "type": [
+              "R"
+             ],
+             "fr": null,
+             "source": {
+              "file": "code_aster/Cata/Commands/impr_resu.py",
+              "line": 507
+             }
+            }
+           ]
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "FORMAT_R",
+       "kind": "simple",
+       "path": "RESU/FORMAT_R",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "1PE21.14",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 511
+       }
+      },
+      {
+       "name": "SOUS_TITRE",
+       "kind": "simple",
+       "path": "RESU/SOUS_TITRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/impr_resu.py",
+        "line": 512
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_resu.py",
+    "line": 515
+   }
+  }
+ ]
+}

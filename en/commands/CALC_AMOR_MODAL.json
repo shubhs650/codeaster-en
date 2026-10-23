@@ -1,0 +1,608 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_AMOR_MODAL",
+ "kind": "OPER",
+ "fr": "Création d'une liste d'amortissements modaux calculés selon la règle du RCC-G",
+ "translation_upstream": null,
+ "op": 172,
+ "reentrant": "n",
+ "result_types": [
+  "listr8_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "AMOR_RAYLEIGH",
+    "ENER_SOL"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "AMOR_RAYLEIGH",
+    "AMOR_INTERNE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "AMOR_RAYLEIGH",
+    "AMOR_SOL"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ENER_SOL",
+    "AMOR_INTERNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ENER_SOL",
+    "AMOR_SOL"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "AMOR_RAYLEIGH",
+   "kind": "factor",
+   "path": "AMOR_RAYLEIGH",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "AMOR_ALPHA",
+     "kind": "simple",
+     "path": "AMOR_RAYLEIGH/AMOR_ALPHA",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "AMOR_BETA",
+     "kind": "simple",
+     "path": "AMOR_RAYLEIGH/AMOR_BETA",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "MODE_MECA",
+     "kind": "simple",
+     "path": "AMOR_RAYLEIGH/MODE_MECA",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 43
+     }
+    }
+   ]
+  },
+  {
+   "name": "ENER_SOL",
+   "kind": "factor",
+   "path": "ENER_SOL",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO_RADIER",
+      "GROUP_MA_RADIER"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "COEF_GROUP",
+      "FONC_GROUP"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "KRX",
+      "KRY"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "KRX",
+      "KRZ"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "COOR_CENTRE",
+      "NOEUD_CENTRE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "GROUP_NO_CENTRE",
+      "NOEUD_CENTRE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "GROUP_NO_CENTRE",
+      "COOR_CENTRE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "ENER_SOL/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DEPL",
+     "into": [
+      "DEPL",
+      "RIGI_PARASOL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "MODE_MECA",
+     "kind": "simple",
+     "path": "ENER_SOL/MODE_MECA",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "GROUP_NO_RADIER",
+     "kind": "simple",
+     "path": "ENER_SOL/GROUP_NO_RADIER",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "GROUP_MA_RADIER",
+     "kind": "simple",
+     "path": "ENER_SOL/GROUP_MA_RADIER",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "FONC_GROUP",
+     "kind": "simple",
+     "path": "ENER_SOL/FONC_GROUP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "COEF_GROUP",
+     "kind": "simple",
+     "path": "ENER_SOL/COEF_GROUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "KX",
+     "kind": "simple",
+     "path": "ENER_SOL/KX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "KY",
+     "kind": "simple",
+     "path": "ENER_SOL/KY",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "KZ",
+     "kind": "simple",
+     "path": "ENER_SOL/KZ",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "KRX",
+     "kind": "simple",
+     "path": "ENER_SOL/KRX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "KRY",
+     "kind": "simple",
+     "path": "ENER_SOL/KRY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "KRZ",
+     "kind": "simple",
+     "path": "ENER_SOL/KRZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "GROUP_NO_CENTRE",
+     "kind": "simple",
+     "path": "ENER_SOL/GROUP_NO_CENTRE",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "NOEUD_CENTRE",
+     "kind": "simple",
+     "path": "ENER_SOL/NOEUD_CENTRE",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "COOR_CENTRE",
+     "kind": "simple",
+     "path": "ENER_SOL/COOR_CENTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 71
+     }
+    }
+   ]
+  },
+  {
+   "name": "AMOR_INTERNE",
+   "kind": "factor",
+   "path": "AMOR_INTERNE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 73
+   },
+   "keywords": [
+    {
+     "name": "ENER_POT",
+     "kind": "simple",
+     "path": "AMOR_INTERNE/ENER_POT",
+     "status": "o",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 75
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AMOR_INTERNE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "AMOR_INTERNE/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "AMOR_SOL",
+   "kind": "factor",
+   "path": "AMOR_SOL",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 79
+   },
+   "keywords": [
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "AMOR_SOL/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "FONC_AMOR_GEO",
+     "kind": "simple",
+     "path": "AMOR_SOL/FONC_AMOR_GEO",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "HOMOGENE",
+     "kind": "simple",
+     "path": "AMOR_SOL/HOMOGENE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "SEUIL",
+     "kind": "simple",
+     "path": "AMOR_SOL/SEUIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 84
+     }
+    }
+   ]
+  },
+  {
+   "name": "CORR_AMOR_NEGATIF",
+   "kind": "simple",
+   "path": "CORR_AMOR_NEGATIF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "IGNORE",
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 86
+   }
+  },
+  {
+   "name": "b_corr_amor",
+   "kind": "bloc",
+   "path": "[b_corr_amor]",
+   "condition": "equal_to(\"CORR_AMOR_NEGATIF\", 'OUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "COEF_CORR_AMOR",
+     "kind": "simple",
+     "path": "COEF_CORR_AMOR",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 0.001,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_amor_modal.py",
+      "line": 89
+     }
+    }
+   ]
+  }
+ ]
+}

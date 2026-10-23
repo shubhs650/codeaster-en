@@ -1,0 +1,2907 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_ESSAI_GEOMECA",
+ "kind": "MACRO",
+ "fr": "Simulation 0D des essais de laboratoire pour les lois geomecaniques du Code_Aster (Hujeux, Mohr-Coulomb etc.)",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_essai_geomeca_ops.calc_essai_geomeca_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": true,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "COMPORTEMENT"
+   ]
+  },
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "ESSAI_TRIA_DR_M_D",
+    "ESSAI_TRIA_ND_M_D",
+    "ESSAI_CISA_DR_C_D",
+    "ESSAI_TRIA_ND_C_F",
+    "ESSAI_TRIA_ND_C_D",
+    "ESSAI_TRIA_DR_C_D",
+    "ESSAI_OEDO_DR_C_F",
+    "ESSAI_ISOT_DR_C_F"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+  "line": 47
+ },
+ "keywords": [
+  {
+   "name": "MATER",
+   "kind": "simple",
+   "path": "MATER",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "COMPORTEMENT",
+   "kind": "factor",
+   "path": "COMPORTEMENT",
+   "status": "d",
+   "min": 1,
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commons/c_comportement.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "RELATION",
+     "kind": "simple",
+     "path": "COMPORTEMENT/RELATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "HUJEUX",
+      "DRUCK_PRAGER",
+      "DRUCK_PRAG_N_A",
+      "CAM_CLAY",
+      "CJS",
+      "MOHR_COULOMB",
+      "Iwan",
+      "MohrCoulombAS",
+      "GonfElas",
+      "NLH_CSRM",
+      "MCC",
+      "Barcelone",
+      "CSSM",
+      "MFRONT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "b_mfront",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_mfront]",
+     "condition": "equal_to('RELATION', 'MFRONT') ",
+     "fr": "Comportement utilisateur de type MFRONT",
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 80
+     },
+     "keywords": [
+      {
+       "name": "COMPOR_MFRONT",
+       "kind": "simple",
+       "path": "COMPORTEMENT/COMPOR_MFRONT",
+       "status": "o",
+       "type": [
+        "compor_mgis"
+       ],
+       "fr": "Comportement MFRONT à utiliser",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 83
+       }
+      },
+      {
+       "name": "VERI_BORNE",
+       "kind": "simple",
+       "path": "COMPORTEMENT/VERI_BORNE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ARRET",
+       "into": [
+        "ARRET",
+        "SANS",
+        "MESSAGE"
+       ],
+       "fr": "Vérification des bornes physiques de la loi de comportement MFRONT",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 86
+       }
+      },
+      {
+       "name": "SYME_MATR_TANG",
+       "kind": "simple",
+       "path": "COMPORTEMENT/SYME_MATR_TANG",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 93
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_mfront_hidden",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_mfront_hidden]",
+     "condition": "not equal_to('RELATION', 'MFRONT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "COMPOR_MFRONT",
+       "kind": "simple",
+       "path": "COMPORTEMENT/COMPOR_MFRONT",
+       "status": "c",
+       "type": [
+        "compor_mgis"
+       ],
+       "fr": "objet ajouté automatiquement",
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 97
+       }
+      }
+     ]
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "COMPORTEMENT/DEFORMATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PETIT",
+     "into": [
+      "PETIT",
+      "GDEF_LOG",
+      "GREEN_LAGRANGE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "b_mfront_resi",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_mfront_resi]",
+     "condition": "equal_to('RELATION', 'MFRONT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 105
+     },
+     "keywords": [
+      {
+       "name": "RESI_INTE",
+       "kind": "simple",
+       "path": "COMPORTEMENT/RESI_INTE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "ITER_INTE_MAXI",
+       "kind": "simple",
+       "path": "COMPORTEMENT/ITER_INTE_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 108
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_no_mfront",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_no_mfront]",
+     "condition": "not equal_to('RELATION', 'MFRONT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 110
+     },
+     "keywords": [
+      {
+       "name": "RESI_INTE",
+       "kind": "simple",
+       "path": "COMPORTEMENT/RESI_INTE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "ITER_INTE_MAXI",
+       "kind": "simple",
+       "path": "COMPORTEMENT/ITER_INTE_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 20,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 113
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_redec_local",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_redec_local]",
+     "condition": "is_in('DEFORMATION', ('PETIT','PETIT_REAC','GROT_GDEP'))",
+     "fr": "Nombre de redécoupages internes du pas de temps",
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 115
+     },
+     "keywords": [
+      {
+       "name": "ITER_INTE_PAS",
+       "kind": "simple",
+       "path": "COMPORTEMENT/ITER_INTE_PAS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 118
+       }
+      }
+     ]
+    },
+    {
+     "name": "ALGO_INTE",
+     "kind": "simple",
+     "path": "COMPORTEMENT/ALGO_INTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ANALYTIQUE",
+      "SECANTE",
+      "DEKKER",
+      "NEWTON_1D",
+      "BRENT",
+      "NEWTON",
+      "NEWTON_RELI",
+      "NEWTON_PERT",
+      "RUNGE_KUTTA",
+      "SPECIFIQUE",
+      "SEMI_EXPLICITE",
+      "BASCULE_EXPLICITE",
+      "SANS_OBJET"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "TYPE_MATR_TANG",
+     "kind": "simple",
+     "path": "COMPORTEMENT/TYPE_MATR_TANG",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "PERTURBATION",
+      "VERIFICATION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 139
+     }
+    },
+    {
+     "name": "b_perturb",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_perturb]",
+     "condition": " (exists(\"TYPE_MATR_TANG\")) ",
+     "fr": "Calcul de la matrice tangente par perturbation, valeur de la perturbation",
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 140
+     },
+     "keywords": [
+      {
+       "name": "VALE_PERT_RELA",
+       "kind": "simple",
+       "path": "COMPORTEMENT/VALE_PERT_RELA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-05,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 143
+       }
+      }
+     ]
+    },
+    {
+     "name": "PARM_THETA",
+     "kind": "simple",
+     "path": "COMPORTEMENT/PARM_THETA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 145
+     }
+    },
+    {
+     "name": "b_radi",
+     "kind": "bloc",
+     "path": "COMPORTEMENT/[b_radi]",
+     "condition": "not exists(\"TYPE_MATR_TANG\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_comportement.py",
+      "line": 146
+     },
+     "keywords": [
+      {
+       "name": "RESI_RADI_RELA",
+       "kind": "simple",
+       "path": "COMPORTEMENT/RESI_RADI_RELA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_comportement.py",
+        "line": 148
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CONVERGENCE",
+   "kind": "factor",
+   "path": "CONVERGENCE",
+   "status": "d",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "RESI_GLOB_MAXI",
+      "RESI_GLOB_RELA"
+     ],
+     "defaults": {
+      "RESI_GLOB_RELA": 1e-06
+     }
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commons/c_convergence.py",
+    "line": 27
+   },
+   "keywords": [
+    {
+     "name": "RESI_GLOB_MAXI",
+     "kind": "simple",
+     "path": "CONVERGENCE/RESI_GLOB_MAXI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_convergence.py",
+      "line": 30
+     }
+    },
+    {
+     "name": "RESI_GLOB_RELA",
+     "kind": "simple",
+     "path": "CONVERGENCE/RESI_GLOB_RELA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_convergence.py",
+      "line": 31
+     }
+    },
+    {
+     "name": "ITER_GLOB_MAXI",
+     "kind": "simple",
+     "path": "CONVERGENCE/ITER_GLOB_MAXI",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_convergence.py",
+      "line": 32
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_TRIA_DR_M_D",
+   "kind": "factor",
+   "path": "ESSAI_TRIA_DR_M_D",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai triaxial monotone draine a deformation controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "EPSI_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/EPSI_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 100,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 84
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "P-Q",
+      "EPS_AXI-Q",
+      "EPS_AXI-EPS_VOL",
+      "P-EPS_VOL"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "COULEUR",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/COULEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "MARQUEUR",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "STYLE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_M_D/STYLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 99
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_TRIA_ND_M_D",
+   "kind": "factor",
+   "path": "ESSAI_TRIA_ND_M_D",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai triaxial monotone non draine a deformation controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 104
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "EPSI_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/EPSI_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "BIOT_COEF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/BIOT_COEF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 100,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "P-Q",
+      "EPS_AXI-Q",
+      "EPS_AXI-PRE_EAU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 114
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 125
+     }
+    },
+    {
+     "name": "COULEUR",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/COULEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "MARQUEUR",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "STYLE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_M_D/STYLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 128
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_CISA_DR_C_D",
+   "kind": "factor",
+   "path": "ESSAI_CISA_DR_C_D",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai de cisaillement cyclique draine a deformation controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 133
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "GAMMA_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/GAMMA_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "GAMMA_ELAS",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/GAMMA_ELAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_max": 1e-07,
+     "default": 1e-07,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 139
+     }
+    },
+    {
+     "name": "NB_CYCLE",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/NB_CYCLE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 140
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "GAMMA-SIG_XY",
+      "GAMMA-G_SUR_GMAX",
+      "GAMMA-DAMPING",
+      "G_SUR_GMAX-DAMPING"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 154
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 155
+     }
+    },
+    {
+     "name": "COULEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/COULEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/MARQUEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 157
+     }
+    },
+    {
+     "name": "STYLE_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/STYLE_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "COULEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/COULEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/MARQUEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "STYLE_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/STYLE_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 161
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_CISA_DR_C_D/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 162
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_TRIA_ND_C_F",
+   "kind": "factor",
+   "path": "ESSAI_TRIA_ND_C_F",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai triaxial cyclique non draine a force controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 169
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 174
+     }
+    },
+    {
+     "name": "SIGM_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/SIGM_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 175
+     }
+    },
+    {
+     "name": "BIOT_COEF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/BIOT_COEF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "CRIT_LIQUEFACTION",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/CRIT_LIQUEFACTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 3,
+     "into": [
+      "RU_MAX",
+      "EPSI_ABSO_MAX",
+      "EPSI_RELA_MAX"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 178
+     }
+    },
+    {
+     "name": "VALE_CRIT",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/VALE_CRIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 181
+     }
+    },
+    {
+     "name": "ARRET_LIQUEFACTION",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/ARRET_LIQUEFACTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "UN_SUR_K",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/UN_SUR_K",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 183
+     }
+    },
+    {
+     "name": "NB_CYCLE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/NB_CYCLE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "NB_INST_MONO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/NB_INST_MONO",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 100,
+     "default": 400,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 186
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 187
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "NCYCL-DSIGM",
+      "P-Q",
+      "SIG_AXI-PRE_EAU",
+      "EPS_AXI-PRE_EAU",
+      "SIG_AXI-RU",
+      "EPS_AXI-RU",
+      "EPS_AXI-Q"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 203
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 206
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 207
+     }
+    },
+    {
+     "name": "COULEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/COULEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 208
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/MARQUEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "STYLE_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/STYLE_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "COULEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/COULEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 211
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/MARQUEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 212
+     }
+    },
+    {
+     "name": "STYLE_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/STYLE_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 213
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_F/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 214
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_TRIA_ND_C_D",
+   "kind": "factor",
+   "path": "ESSAI_TRIA_ND_C_D",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai triaxial cyclique non draine a deformation controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 221
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 225
+     }
+    },
+    {
+     "name": "EPSI_MINI",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/EPSI_MINI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 226
+     }
+    },
+    {
+     "name": "EPSI_MAXI",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/EPSI_MAXI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 227
+     }
+    },
+    {
+     "name": "EPSI_ELAS",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/EPSI_ELAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_max": 1e-07,
+     "default": 1e-07,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 228
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 229
+     }
+    },
+    {
+     "name": "NB_CYCLE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/NB_CYCLE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 230
+     }
+    },
+    {
+     "name": "BIOT_COEF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/BIOT_COEF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 231
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 232
+     }
+    },
+    {
+     "name": "UN_SUR_K",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/UN_SUR_K",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 233
+     }
+    },
+    {
+     "name": "RU_MAX",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/RU_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.8,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 234
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 235
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "NCYCL-DEPSI",
+      "DEPSI-RU_MAX",
+      "DEPSI-E_SUR_EMAX",
+      "DEPSI-DAMPING",
+      "P-Q",
+      "EPS_AXI-EPS_VOL",
+      "EPS_AXI-Q",
+      "P-EPS_VOL",
+      "EPS_AXI-PRE_EAU",
+      "EPS_AXI-RU",
+      "P-PRE_EAU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 255
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 258
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 259
+     }
+    },
+    {
+     "name": "COULEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/COULEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 260
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/MARQUEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 261
+     }
+    },
+    {
+     "name": "STYLE_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/STYLE_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 262
+     }
+    },
+    {
+     "name": "COULEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/COULEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 263
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/MARQUEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 264
+     }
+    },
+    {
+     "name": "STYLE_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/STYLE_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 265
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_ND_C_D/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 266
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_TRIA_DR_C_D",
+   "kind": "factor",
+   "path": "ESSAI_TRIA_DR_C_D",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai triaxial cyclique draine a deformation controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 273
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 277
+     }
+    },
+    {
+     "name": "EPSI_MINI",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/EPSI_MINI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 278
+     }
+    },
+    {
+     "name": "EPSI_MAXI",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/EPSI_MAXI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 279
+     }
+    },
+    {
+     "name": "EPSI_ELAS",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/EPSI_ELAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_max": 1e-07,
+     "default": 1e-07,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 280
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 281
+     }
+    },
+    {
+     "name": "NB_CYCLE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/NB_CYCLE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 282
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 283
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 284
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "P-Q",
+      "EPS_AXI-Q",
+      "EPS_VOL-Q",
+      "EPS_AXI-EPS_VOL",
+      "P-EPS_VOL",
+      "DEPSI-E_SUR_EMAX",
+      "DEPSI-DAMPING"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 285
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 300
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 303
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 304
+     }
+    },
+    {
+     "name": "COULEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/COULEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 305
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/MARQUEUR_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 306
+     }
+    },
+    {
+     "name": "STYLE_NIV1",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/STYLE_NIV1",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 307
+     }
+    },
+    {
+     "name": "COULEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/COULEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 308
+     }
+    },
+    {
+     "name": "MARQUEUR_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/MARQUEUR_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 309
+     }
+    },
+    {
+     "name": "STYLE_NIV2",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/STYLE_NIV2",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 310
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_TRIA_DR_C_D/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 311
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_OEDO_DR_C_F",
+   "kind": "factor",
+   "path": "ESSAI_OEDO_DR_C_F",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai eodometrique cyclique draine a force controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 318
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 322
+     }
+    },
+    {
+     "name": "SIGM_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/SIGM_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 323
+     }
+    },
+    {
+     "name": "SIGM_DECH",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/SIGM_DECH",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 324
+     }
+    },
+    {
+     "name": "KZERO",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/KZERO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 325
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 326
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 327
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": [
+      "P-EPS_VOL",
+      "SIG_AXI-EPS_VOL"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 328
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 335
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 338
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 339
+     }
+    },
+    {
+     "name": "COULEUR",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/COULEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 340
+     }
+    },
+    {
+     "name": "MARQUEUR",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 341
+     }
+    },
+    {
+     "name": "STYLE",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/STYLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 342
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_OEDO_DR_C_F/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 343
+     }
+    }
+   ]
+  },
+  {
+   "name": "ESSAI_ISOT_DR_C_F",
+   "kind": "factor",
+   "path": "ESSAI_ISOT_DR_C_F",
+   "status": "f",
+   "max": "**",
+   "fr": "Essai isotrope cyclique draine a force controlee",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 350
+   },
+   "keywords": [
+    {
+     "name": "PRES_CONF",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/PRES_CONF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 354
+     }
+    },
+    {
+     "name": "SIGM_IMPOSE",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/SIGM_IMPOSE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 355
+     }
+    },
+    {
+     "name": "SIGM_DECH",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/SIGM_DECH",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 356
+     }
+    },
+    {
+     "name": "NB_INST",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/NB_INST",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 5,
+     "default": 25,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 357
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/TABLE_RESU",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 358
+     }
+    },
+    {
+     "name": "GRAPHIQUE",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/GRAPHIQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "default": "P-EPS_VOL",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 359
+     }
+    },
+    {
+     "name": "PREFIXE_FICHIER",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/PREFIXE_FICHIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": "prefixe des noms de fichier xmgrace recuperes",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 360
+     }
+    },
+    {
+     "name": "TABLE_REF",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/TABLE_REF",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 363
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 364
+     }
+    },
+    {
+     "name": "COULEUR",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/COULEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 365
+     }
+    },
+    {
+     "name": "MARQUEUR",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/MARQUEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 366
+     }
+    },
+    {
+     "name": "STYLE",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/STYLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 367
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "ESSAI_ISOT_DR_C_F/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SINUSOIDAL",
+     "into": [
+      "SINUSOIDAL",
+      "TRIANGULAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+      "line": 368
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_essai_geomeca.py",
+    "line": 387
+   }
+  }
+ ]
+}

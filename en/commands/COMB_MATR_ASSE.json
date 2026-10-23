@@ -1,0 +1,314 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "COMB_MATR_ASSE",
+ "kind": "OPER",
+ "fr": "Effectuer la combinaison linéaire de matrices assemblées",
+ "translation_upstream": null,
+ "op": 31,
+ "reentrant": "f:MATR_ASSE",
+ "result_types": [
+  "matr_asse_depl_c",
+  "matr_asse_gene_c",
+  "matr_asse_temp_c",
+  "matr_asse_pres_c",
+  "matr_asse_depl_r",
+  "matr_asse_gene_r",
+  "matr_asse_temp_r",
+  "matr_asse_pres_r"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "COMB_R",
+    "COMB_C",
+    "CALC_AMOR_GENE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+  "line": 65
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "MATR_ASSE",
+   "kind": "simple",
+   "path": "MATR_ASSE",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_depl_c",
+    "matr_asse_temp_r",
+    "matr_asse_temp_c",
+    "matr_asse_pres_r",
+    "matr_asse_pres_c",
+    "matr_asse_gene_r",
+    "matr_asse_gene_c"
+   ],
+   "fr": "Objet qui sera réutilisé pour l'opération",
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "COMB_R",
+   "kind": "factor",
+   "path": "COMB_R",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "PARTIE",
+     "kind": "simple",
+     "path": "COMB_R/PARTIE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "REEL",
+      "IMAG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "MATR_ASSE",
+     "kind": "simple",
+     "path": "COMB_R/MATR_ASSE",
+     "status": "o",
+     "type": [
+      "matr_asse_depl_r",
+      "matr_asse_depl_c",
+      "matr_asse_temp_r",
+      "matr_asse_temp_c",
+      "matr_asse_pres_r",
+      "matr_asse_pres_c",
+      "matr_asse_gene_r",
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "COEF_R",
+     "kind": "simple",
+     "path": "COMB_R/COEF_R",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 104
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMB_C",
+   "kind": "factor",
+   "path": "COMB_C",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COEF_R",
+      "COEF_C"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "MATR_ASSE",
+     "kind": "simple",
+     "path": "COMB_C/MATR_ASSE",
+     "status": "o",
+     "type": [
+      "matr_asse_depl_r",
+      "matr_asse_depl_c",
+      "matr_asse_temp_r",
+      "matr_asse_temp_c",
+      "matr_asse_pres_r",
+      "matr_asse_pres_c",
+      "matr_asse_gene_r",
+      "matr_asse_gene_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "COEF_R",
+     "kind": "simple",
+     "path": "COMB_C/COEF_R",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 123
+     }
+    },
+    {
+     "name": "COEF_C",
+     "kind": "simple",
+     "path": "COMB_C/COEF_C",
+     "status": "f",
+     "type": [
+      "C"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 124
+     }
+    }
+   ]
+  },
+  {
+   "name": "CALC_AMOR_GENE",
+   "kind": "factor",
+   "path": "CALC_AMOR_GENE",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "AMOR_REDUIT",
+      "LIST_AMOR"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 126
+   },
+   "keywords": [
+    {
+     "name": "RIGI_GENE",
+     "kind": "simple",
+     "path": "CALC_AMOR_GENE/RIGI_GENE",
+     "status": "o",
+     "type": [
+      "matr_asse_gene_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "MASS_GENE",
+     "kind": "simple",
+     "path": "CALC_AMOR_GENE/MASS_GENE",
+     "status": "o",
+     "type": [
+      "matr_asse_gene_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "CALC_AMOR_GENE/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 131
+     }
+    },
+    {
+     "name": "LIST_AMOR",
+     "kind": "simple",
+     "path": "CALC_AMOR_GENE/LIST_AMOR",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+      "line": 132
+     }
+    }
+   ]
+  },
+  {
+   "name": "SANS_CMP",
+   "kind": "simple",
+   "path": "SANS_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "LAGR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_matr_asse.py",
+    "line": 134
+   }
+  }
+ ]
+}

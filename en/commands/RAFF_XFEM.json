@@ -1,0 +1,92 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/raff_xfem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "RAFF_XFEM",
+ "kind": "MACRO",
+ "fr": "Calcul d'un indicateur pour le raffinement",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.raff_xfem_ops.raff_xfem_ops",
+ "reentrant": "n",
+ "result_types": [
+  "cham_no_sdaster",
+  "carte_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/raff_xfem.py",
+  "line": 39
+ },
+ "keywords": [
+  {
+   "name": "TYPE",
+   "kind": "simple",
+   "path": "TYPE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DISTANCE",
+   "into": [
+    "DISTANCE",
+    "ZONE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_xfem.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "FISSURE",
+   "kind": "simple",
+   "path": "FISSURE",
+   "status": "o",
+   "type": [
+    "fiss_xfem"
+   ],
+   "min": 1,
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_xfem.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "b_zone",
+   "kind": "bloc",
+   "path": "[b_zone]",
+   "condition": "equal_to(\"TYPE\", 'ZONE') ",
+   "fr": "Paramètres de la zone",
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_xfem.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "RAYON",
+     "kind": "simple",
+     "path": "RAYON",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_xfem.py",
+      "line": 50
+     }
+    }
+   ]
+  }
+ ]
+}

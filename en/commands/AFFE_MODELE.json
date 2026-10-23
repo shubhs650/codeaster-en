@@ -1,0 +1,964 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_modele.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_MODELE",
+ "kind": "OPER",
+ "fr": "Définir le phénomène physique modélisé et le type d'éléments finis sur le maillage",
+ "translation_upstream": {
+  "AFFE_MODELE": "Assign finite element",
+  "AFFE": "Finite element assignement",
+  "AFFE_SOUS_STRUC": "Substructures assignement",
+  "VERI_JACOBIEN": "Jacobian check",
+  "DISTRIBUTION": "MPI distribution",
+  "TOUT": "Everywhere"
+ },
+ "op": 18,
+ "reentrant": "n",
+ "result_types": [
+  "modele_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "AFFE",
+    "AFFE_SOUS_STRUC"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_modele.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "GRANDEUR_CARA",
+   "kind": "factor",
+   "path": "GRANDEUR_CARA",
+   "status": "f",
+   "max": 1,
+   "fr": "Grandeurs caractéristiques pour l'adimensionnement des indicateurs d'erreur HM",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "LONGUEUR",
+     "kind": "simple",
+     "path": "GRANDEUR_CARA/LONGUEUR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0,
+     "fr": "Longueur caractéristique",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "PRESSION",
+     "kind": "simple",
+     "path": "GRANDEUR_CARA/PRESSION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0,
+     "fr": "Pression caractéristique",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "TEMPERATURE",
+     "kind": "simple",
+     "path": "GRANDEUR_CARA/TEMPERATURE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0,
+     "fr": "Température caractéristique",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "AFFE_SOUS_STRUC",
+   "kind": "factor",
+   "path": "AFFE_SOUS_STRUC",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "SUPER_MAILLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 50
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE_SOUS_STRUC/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "SUPER_MAILLE",
+     "kind": "simple",
+     "path": "AFFE_SOUS_STRUC/SUPER_MAILLE",
+     "status": "f",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "PHENOMENE",
+     "kind": "simple",
+     "path": "AFFE_SOUS_STRUC/PHENOMENE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MECANIQUE",
+     "into": [
+      "MECANIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "AFFE",
+   "kind": "factor",
+   "path": "AFFE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 57
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AFFE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "PHENOMENE",
+     "kind": "simple",
+     "path": "AFFE/PHENOMENE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "MECANIQUE",
+      "THERMIQUE",
+      "ACOUSTIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "b_mecanique",
+     "kind": "bloc",
+     "path": "AFFE/[b_mecanique]",
+     "condition": "equal_to(\"PHENOMENE\", 'MECANIQUE')",
+     "fr": "modélisations mécaniques",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 64
+     },
+     "keywords": [
+      {
+       "name": "MODELISATION",
+       "kind": "simple",
+       "path": "AFFE/MODELISATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "2D_DIS_T",
+        "2D_DIS_TR",
+        "2D_FLUI_ABSO",
+        "2D_FLUI_PESA",
+        "2D_FLUI_STRU",
+        "2D_FLUIDE",
+        "3D",
+        "3D_ABSO",
+        "3D_FAISCEAU",
+        "3D_FLUI_ABSO",
+        "3D_FLUIDE",
+        "3D_INCO_UPG",
+        "3D_INCO_UP",
+        "3D_INCO_UPO",
+        "3D_SI",
+        "3D_GRAD_VARI",
+        "3D_GRAD_INCO",
+        "3D_GVNO",
+        "3D_JOINT",
+        "3D_JOINT_HYME",
+        "3D_INTERFACE",
+        "3D_INTERFACE_S",
+        "AXIS",
+        "AXIS_FLUI_STRU",
+        "AXIS_FLUI_ABSO",
+        "AXIS_FLUIDE",
+        "AXIS_FOURIER",
+        "AXIS_INCO_UPG",
+        "AXIS_INCO_UP",
+        "AXIS_INCO_UPO",
+        "AXIS_SI",
+        "AXIS_GRAD_VARI",
+        "AXIS_GRAD_INCO",
+        "AXIS_GVNO",
+        "AXIS_JOINT",
+        "AXIS_INTERFACE",
+        "AXIS_INTERFACE_S",
+        "BARRE",
+        "CABLE_GAINE",
+        "2D_BARRE",
+        "C_PLAN",
+        "C_PLAN_SI",
+        "CABLE",
+        "CABLE_POULIE",
+        "COQUE_3D",
+        "COQUE_AXIS",
+        "D_PLAN",
+        "D_PLAN_GRAD_VARI",
+        "D_PLAN_GRAD_INCO",
+        "D_PLAN_GVNO",
+        "D_PLAN_GRAD_SIGM",
+        "PLAN_JOINT",
+        "PLAN_JOINT_HYME",
+        "PLAN_INTERFACE",
+        "PLAN_INTERFACE_S",
+        "D_PLAN_ABSO",
+        "D_PLAN_INCO_UPG",
+        "D_PLAN_INCO_UP",
+        "D_PLAN_INCO_UPO",
+        "D_PLAN_SI",
+        "DIS_T",
+        "DIS_TR",
+        "DKT",
+        "DKTG",
+        "DST",
+        "FLUI_STRU",
+        "POU_FLUI_STRU",
+        "GRILLE_EXCENTRE",
+        "GRILLE_MEMBRANE",
+        "MEMBRANE",
+        "POU_D_E",
+        "POU_D_EM",
+        "POU_D_T",
+        "POU_D_T_GD",
+        "POU_D_TG",
+        "POU_D_TGM",
+        "POU_D_SQUE",
+        "Q4G",
+        "Q4GG",
+        "TUYAU_3M",
+        "TUYAU_6M",
+        "COQUE_SOLIDE",
+        "D_PLAN_HHM",
+        "D_PLAN_HH2M_SI",
+        "D_PLAN_HM",
+        "D_PLAN_HM_SI",
+        "D_PLAN_HM_SI_DIL",
+        "D_PLAN_THM",
+        "D_PLAN_HHMD",
+        "D_PLAN_HH2MD",
+        "D_PLAN_HMD",
+        "D_PLAN_THHD",
+        "D_PLAN_THH2D",
+        "D_PLAN_THVD",
+        "D_PLAN_THH2MD",
+        "D_PLAN_THHMD",
+        "D_PLAN_THMD",
+        "D_PLAN_HHMS",
+        "D_PLAN_HH2MS",
+        "D_PLAN_HH2MS_DIL",
+        "D_PLAN_HMS",
+        "D_PLAN_HMS_DIL",
+        "D_PLAN_THHS",
+        "D_PLAN_THH2S",
+        "D_PLAN_THVS",
+        "D_PLAN_THH2MS",
+        "D_PLAN_THHMS",
+        "D_PLAN_THMS",
+        "D_PLAN_THMS_DIL",
+        "D_PLAN_HS",
+        "D_PLAN_HHD",
+        "D_PLAN_HHS",
+        "D_PLAN_HH2D",
+        "D_PLAN_HH2S",
+        "D_PLAN_2DG",
+        "D_PLAN_DIL",
+        "3D_DIL",
+        "AXIS_THM",
+        "AXIS_HHM",
+        "AXIS_HM",
+        "AXIS_HH2MD",
+        "AXIS_HHMD",
+        "AXIS_HMD",
+        "AXIS_THHD",
+        "AXIS_THH2D",
+        "AXIS_THVD",
+        "AXIS_THHMD",
+        "AXIS_THH2MD",
+        "AXIS_THMD",
+        "AXIS_HH2MS",
+        "AXIS_HHMS",
+        "AXIS_HMS",
+        "AXIS_THHS",
+        "AXIS_THH2S",
+        "AXIS_THVS",
+        "AXIS_THHMS",
+        "AXIS_THH2MS",
+        "AXIS_THMS",
+        "AXIS_HHD",
+        "AXIS_HHS",
+        "AXIS_HH2D",
+        "AXIS_HH2S",
+        "3D_HHM",
+        "3D_HH2M_SI",
+        "3D_HM",
+        "3D_HM_SI",
+        "3D_HM_SI_DIL",
+        "3D_THHM",
+        "3D_THM",
+        "3D_HHMD",
+        "3D_HMD",
+        "3D_THHD",
+        "3D_THVD",
+        "3D_THHMD",
+        "3D_THMD",
+        "3D_HHMS",
+        "3D_HMS",
+        "3D_HMS_DIL",
+        "3D_THHS",
+        "3D_THVS",
+        "3D_THHMS",
+        "3D_THMS",
+        "3D_THMS_DIL",
+        "3D_THH2MD",
+        "3D_THH2MS",
+        "3D_HH2MD",
+        "3D_HH2MS",
+        "3D_HH2MS_DIL",
+        "3D_THH2S",
+        "3D_THH2D",
+        "3D_HS",
+        "3D_HHD",
+        "3D_HHS",
+        "3D_HH2D",
+        "3D_HH2S",
+        "3D_HH2SUDA",
+        "D_PLAN_HH2SUDA",
+        "PLAN_JHMS",
+        "AXIS_JHMS",
+        "3D_HHO",
+        "D_PLAN_HHO",
+        "3D_GRAD_HHO",
+        "D_PLAN_GRAD_HHO",
+        "PLAQ_MITC"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 67
+       }
+      },
+      {
+       "name": "b_formu_hho",
+       "kind": "bloc",
+       "path": "AFFE/[b_formu_hho]",
+       "condition": "equal_to('MODELISATION', ('3D_HHO', 'D_PLAN_HHO' ))",
+       "fr": "HHO formulation",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 259
+       },
+       "keywords": [
+        {
+         "name": "FORMULATION",
+         "kind": "simple",
+         "path": "AFFE/FORMULATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "LINEAIRE",
+         "into": [
+          "LINEAIRE",
+          "QUADRATIQUE",
+          "CUBIQUE",
+          "QUARTIQUE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_modele.py",
+          "line": 262
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_formu_hho_grad",
+       "kind": "bloc",
+       "path": "AFFE/[b_formu_hho_grad]",
+       "condition": "equal_to('MODELISATION', (\"D_PLAN_GRAD_HHO\", \"3D_GRAD_HHO\" ))",
+       "fr": "HHO formulation with GRAD_VARI",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 270
+       },
+       "keywords": [
+        {
+         "name": "FORMULATION",
+         "kind": "simple",
+         "path": "AFFE/FORMULATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "LINEAIRE",
+         "into": [
+          "LINEAIRE",
+          "QUADRATIQUE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_modele.py",
+          "line": 273
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_formu_fsi",
+       "kind": "bloc",
+       "path": "AFFE/[b_formu_fsi]",
+       "condition": "equal_to('MODELISATION', ('2D_FLUIDE', '2D_FLUI_ABSO', '2D_FLUI_PESA', '2D_FLUI_STRU','3D_FLUIDE','3D_FLUI_ABSO', 'AXIS_FLUIDE', 'AXIS_FLUI_STRU', 'AXIS_FLUI_ABSO', 'FLUI_STRU'))",
+       "fr": "FSI formulation",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 281
+       },
+       "keywords": [
+        {
+         "name": "FORMULATION",
+         "kind": "simple",
+         "path": "AFFE/FORMULATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "U_P_PHI",
+         "into": [
+          "U_P_PHI",
+          "U_P",
+          "U_PSI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_modele.py",
+          "line": 284
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_formu_dil",
+       "kind": "bloc",
+       "path": "AFFE/[b_formu_dil]",
+       "condition": "equal_to('MODELISATION', ('D_PLAN_DIL', '3D_DIL', ))",
+       "fr": "DIL formulation",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 288
+       },
+       "keywords": [
+        {
+         "name": "FORMULATION",
+         "kind": "simple",
+         "path": "AFFE/FORMULATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "DIL",
+         "into": [
+          "DIL",
+          "DIL_INCO"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_modele.py",
+          "line": 291
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_thermique",
+     "kind": "bloc",
+     "path": "AFFE/[b_thermique]",
+     "condition": "equal_to(\"PHENOMENE\", 'THERMIQUE')",
+     "fr": "modélisations thermiques",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 296
+     },
+     "keywords": [
+      {
+       "name": "MODELISATION",
+       "kind": "simple",
+       "path": "AFFE/MODELISATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "3D",
+        "3D_DIAG",
+        "AXIS",
+        "AXIS_DIAG",
+        "AXIS_FOURIER",
+        "COQUE",
+        "COQUE_AXIS",
+        "COQUE_PLAN",
+        "PLAN",
+        "PLAN_DIAG",
+        "3D_HHO",
+        "PLAN_HHO",
+        "AXIS_HHO",
+        "AXIS_SECH",
+        "3D_SECH",
+        "AXIS_SECH_DIAG",
+        "3D_SECH_DIAG"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 299
+       }
+      },
+      {
+       "name": "b_formu_hho",
+       "kind": "bloc",
+       "path": "AFFE/[b_formu_hho]",
+       "condition": "equal_to('MODELISATION', ('3D_HHO', 'PLAN_HHO', 'AXIS_HHO'))",
+       "fr": "HHO formulation",
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 324
+       },
+       "keywords": [
+        {
+         "name": "FORMULATION",
+         "kind": "simple",
+         "path": "AFFE/FORMULATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 1,
+         "default": "LINEAIRE",
+         "into": [
+          "CONSTANTE",
+          "LINEAIRE",
+          "QUADRATIQUE",
+          "CUBIQUE",
+          "QUARTIQUE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/affe_modele.py",
+          "line": 327
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_acoustique",
+     "kind": "bloc",
+     "path": "AFFE/[b_acoustique]",
+     "condition": "equal_to(\"PHENOMENE\", 'ACOUSTIQUE')",
+     "fr": "modélisations acoustiques",
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 336
+     },
+     "keywords": [
+      {
+       "name": "MODELISATION",
+       "kind": "simple",
+       "path": "AFFE/MODELISATION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "3D",
+        "PLAN",
+        "3D_ABSO",
+        "PLAN_ABSO"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 339
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DISTRIBUTION",
+   "kind": "factor",
+   "path": "DISTRIBUTION",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 353
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "DISTRIBUTION/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SOUS_DOMAINE",
+     "into": [
+      "MAIL_CONTIGU",
+      "MAIL_DISPERSE",
+      "CENTRALISE",
+      "GROUP_ELEM",
+      "SOUS_DOMAINE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 355
+     }
+    },
+    {
+     "name": "b_dist_maille",
+     "kind": "bloc",
+     "path": "DISTRIBUTION/[b_dist_maille]",
+     "condition": "is_in(\"METHODE\", ('MAIL_DISPERSE','MAIL_CONTIGU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 361
+     },
+     "keywords": [
+      {
+       "name": "CHARGE_PROC0_MA",
+       "kind": "simple",
+       "path": "DISTRIBUTION/CHARGE_PROC0_MA",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 0,
+       "val_max": 100,
+       "default": 100,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 363
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_partition",
+     "kind": "bloc",
+     "path": "DISTRIBUTION/[b_partition]",
+     "condition": "equal_to(\"METHODE\",'SOUS_DOMAINE' )",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_modele.py",
+      "line": 365
+     },
+     "keywords": [
+      {
+       "name": "NB_SOUS_DOMAINE",
+       "kind": "simple",
+       "path": "DISTRIBUTION/NB_SOUS_DOMAINE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 367
+       }
+      },
+      {
+       "name": "PARTITIONNEUR",
+       "kind": "simple",
+       "path": "DISTRIBUTION/PARTITIONNEUR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "METIS",
+       "into": [
+        "METIS",
+        "SCOTCH"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/affe_modele.py",
+        "line": 368
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "VERI_JACOBIEN",
+   "kind": "simple",
+   "path": "VERI_JACOBIEN",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Vérification de la forme des mailles (jacobiens tous de meme signe).",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 371
+   }
+  },
+  {
+   "name": "VERI_NORM_IFS",
+   "kind": "simple",
+   "path": "VERI_NORM_IFS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Vérification de l'orientation des normales pour l'IFS",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 378
+   }
+  },
+  {
+   "name": "VERI_FORMULATION_IFS",
+   "kind": "simple",
+   "path": "VERI_FORMULATION_IFS",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Vérification de la cohérent de la formulation pour l'IFS",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 385
+   }
+  },
+  {
+   "name": "VERI_PLAN",
+   "kind": "simple",
+   "path": "VERI_PLAN",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Vérification de la planéité des éléments",
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_modele.py",
+    "line": 392
+   }
+  }
+ ]
+}

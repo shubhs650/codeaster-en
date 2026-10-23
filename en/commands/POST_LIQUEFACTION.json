@@ -1,0 +1,206 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_liquefaction.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_LIQUEFACTION",
+ "kind": "MACRO",
+ "fr": null,
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_liquefaction_ops.post_liquefaction_ops",
+ "reentrant": "n",
+ "result_types": [
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_liquefaction.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "AXE",
+   "kind": "simple",
+   "path": "AXE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "X",
+    "Y",
+    "Z"
+   ],
+   "fr": "Direction de la pesanteur",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 29
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_noli"
+   ],
+   "fr": "Resultat contenant les pressions",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "DP_SIGV_REF",
+    "DP_SIGM_REF",
+    "DP",
+    "P_SIGM"
+   ],
+   "fr": "Choix de la formule du critere de liquefaction",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_def_ref",
+   "kind": "bloc",
+   "path": "[b_def_ref]",
+   "condition": "equal_to('CRITERE', 'DP_SIGV_REF')",
+   "fr": "Bloc associe aux donnees à l instant de reference pour le critere DP_SIGV_REF",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "RESU_REF",
+     "kind": "simple",
+     "path": "RESU_REF",
+     "status": "o",
+     "type": [
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "INST_REF",
+     "kind": "simple",
+     "path": "INST_REF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 44
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_moy_ref",
+   "kind": "bloc",
+   "path": "[b_moy_ref]",
+   "condition": "equal_to('CRITERE', 'DP_SIGM_REF')",
+   "fr": "Bloc associe aux donnees à l instant de reference pour le critere DP_SIGM_REF",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 46
+   },
+   "keywords": [
+    {
+     "name": "RESU_REF",
+     "kind": "simple",
+     "path": "RESU_REF",
+     "status": "o",
+     "type": [
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "INST_REF",
+     "kind": "simple",
+     "path": "INST_REF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_delta_ref",
+   "kind": "bloc",
+   "path": "[b_delta_ref]",
+   "condition": "equal_to('CRITERE', 'DP')",
+   "fr": "Bloc associe aux donnees à l instant de reference pour le critere DP",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_liquefaction.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "RESU_REF",
+     "kind": "simple",
+     "path": "RESU_REF",
+     "status": "o",
+     "type": [
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "INST_REF",
+     "kind": "simple",
+     "path": "INST_REF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_liquefaction.py",
+      "line": 56
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,784 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/factoriser.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "FACTORISER",
+ "kind": "OPER",
+ "fr": "Factoriser une matrice assemblée en un produit de deux matrices triangulairesou construire une matrice de préconditionnement pour une résolution par gradient conjugué",
+ "translation_upstream": null,
+ "op": 14,
+ "reentrant": "f:MATR_ASSE",
+ "result_types": [
+  "matr_asse_depl_r",
+  "matr_asse_depl_c",
+  "matr_asse_temp_r",
+  "matr_asse_temp_c",
+  "matr_asse_pres_r",
+  "matr_asse_pres_c"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/factoriser.py",
+  "line": 53
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "MATR_ASSE",
+   "kind": "simple",
+   "path": "MATR_ASSE",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r",
+    "matr_asse_depl_c",
+    "matr_asse_temp_r",
+    "matr_asse_temp_c",
+    "matr_asse_pres_r",
+    "matr_asse_pres_c"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MUMPS",
+   "into": [
+    "MULT_FRONT",
+    "LDLT",
+    "GCPC",
+    "PETSC",
+    "MUMPS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "b_mult_front",
+   "kind": "bloc",
+   "path": "[b_mult_front]",
+   "condition": "equal_to(\"METHODE\", 'MULT_FRONT')",
+   "fr": "paramètres associés à la méthode multifrontale",
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "RENUM",
+     "kind": "simple",
+     "path": "RENUM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MDA",
+     "into": [
+      "MD",
+      "MDA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "STOP_SINGULIER",
+     "kind": "simple",
+     "path": "STOP_SINGULIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "NPREC",
+     "kind": "simple",
+     "path": "NPREC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 8,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_ldlt",
+   "kind": "bloc",
+   "path": "[b_ldlt]",
+   "condition": "equal_to(\"METHODE\", 'LDLT')",
+   "fr": "paramètres associés à la méthode LDLT",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "BLOC_DEBUT",
+      "DDL_DEBUT"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "BLOC_FIN",
+      "DDL_FIN"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 84
+   },
+   "keywords": [
+    {
+     "name": "RENUM",
+     "kind": "simple",
+     "path": "RENUM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RCMK",
+     "into": [
+      "RCMK"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "STOP_SINGULIER",
+     "kind": "simple",
+     "path": "STOP_SINGULIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "NPREC",
+     "kind": "simple",
+     "path": "NPREC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 8,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "BLOC_DEBUT",
+     "kind": "simple",
+     "path": "BLOC_DEBUT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "DDL_DEBUT",
+     "kind": "simple",
+     "path": "DDL_DEBUT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "BLOC_FIN",
+     "kind": "simple",
+     "path": "BLOC_FIN",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "DDL_FIN",
+     "kind": "simple",
+     "path": "DDL_FIN",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 93
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mumps",
+   "kind": "bloc",
+   "path": "[b_mumps]",
+   "condition": "equal_to(\"METHODE\", 'MUMPS') ",
+   "fr": "Paramètres de la méthode MUMPS",
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 96
+   },
+   "keywords": [
+    {
+     "name": "RENUM",
+     "kind": "simple",
+     "path": "RENUM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTO",
+     "into": [
+      "AMD",
+      "AMF",
+      "PORD",
+      "METIS",
+      "QAMD",
+      "SCOTCH",
+      "AUTO",
+      "PARMETIS",
+      "PTSCOTCH"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "STOP_SINGULIER",
+     "kind": "simple",
+     "path": "STOP_SINGULIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 105
+     }
+    },
+    {
+     "name": "NPREC",
+     "kind": "simple",
+     "path": "NPREC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 8,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "TYPE_RESOL",
+     "kind": "simple",
+     "path": "TYPE_RESOL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTO",
+     "into": [
+      "NONSYM",
+      "SYMGEN",
+      "SYMDEF",
+      "AUTO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "PRETRAITEMENTS",
+     "kind": "simple",
+     "path": "PRETRAITEMENTS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTO",
+     "into": [
+      "SANS",
+      "AUTO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "PCENT_PIVOT",
+     "kind": "simple",
+     "path": "PCENT_PIVOT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 20,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "ELIM_LAGR",
+     "kind": "simple",
+     "path": "ELIM_LAGR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LAGR2",
+     "into": [
+      "LAGR2",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "GESTION_MEMOIRE",
+     "kind": "simple",
+     "path": "GESTION_MEMOIRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "IN_CORE",
+     "into": [
+      "IN_CORE",
+      "OUT_OF_CORE",
+      "EVAL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "ACCELERATION",
+     "kind": "simple",
+     "path": "ACCELERATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTO",
+     "into": [
+      "AUTO",
+      "FR",
+      "FR+",
+      "LR",
+      "LR+"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "LOW_RANK_SEUIL",
+     "kind": "simple",
+     "path": "LOW_RANK_SEUIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 119
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_iterat",
+   "kind": "bloc",
+   "path": "[b_iterat]",
+   "condition": "equal_to(\"METHODE\", 'GCPC') or equal_to(\"METHODE\", 'PETSC')",
+   "fr": "paramètres associés à la GCPC ou PETSc",
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 121
+   },
+   "keywords": [
+    {
+     "name": "PRE_COND",
+     "kind": "simple",
+     "path": "PRE_COND",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LDLT_INC",
+     "into": [
+      "LDLT_INC",
+      "JACOBI",
+      "SOR",
+      "LDLT_SP",
+      "LDLT_DP"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "b_ldlt_inc",
+     "kind": "bloc",
+     "path": "[b_ldlt_inc]",
+     "condition": "equal_to(\"PRE_COND\", 'LDLT_INC') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 130
+     },
+     "keywords": [
+      {
+       "name": "NIVE_REMPLISSAGE",
+       "kind": "simple",
+       "path": "NIVE_REMPLISSAGE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "REMPLISSAGE",
+       "kind": "simple",
+       "path": "REMPLISSAGE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "RENUM",
+       "kind": "simple",
+       "path": "RENUM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RCMK",
+       "into": [
+        "RCMK"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 134
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ldlt_sp",
+     "kind": "bloc",
+     "path": "[b_ldlt_sp]",
+     "condition": "is_in(\"PRE_COND\", ('LDLT_SP', 'LDLT_DP')) ",
+     "fr": "Paramètres de la factorisation LDLT MUMPS",
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 136
+     },
+     "keywords": [
+      {
+       "name": "GESTION_MEMOIRE",
+       "kind": "simple",
+       "path": "GESTION_MEMOIRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "IN_CORE",
+        "AUTO"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 139
+       }
+      },
+      {
+       "name": "PCENT_PIVOT",
+       "kind": "simple",
+       "path": "PCENT_PIVOT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 20,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 140
+       }
+      },
+      {
+       "name": "REAC_PRECOND",
+       "kind": "simple",
+       "path": "REAC_PRECOND",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 30,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "LOW_RANK_SEUIL",
+       "kind": "simple",
+       "path": "LOW_RANK_SEUIL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 142
+       }
+      },
+      {
+       "name": "RENUM",
+       "kind": "simple",
+       "path": "RENUM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "SANS",
+       "into": [
+        "SANS",
+        "PARMETIS",
+        "METIS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 143
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_jacobi_sor",
+     "kind": "bloc",
+     "path": "[b_jacobi_sor]",
+     "condition": "equal_to(\"PRE_COND\", 'JACOBI') or equal_to(\"PRE_COND\", 'SOR')",
+     "fr": "Paramètres des préconditionneurs JACOBI et SOR",
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 145
+     },
+     "keywords": [
+      {
+       "name": "RENUM",
+       "kind": "simple",
+       "path": "RENUM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "SANS",
+       "into": [
+        "SANS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 148
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_petsc",
+     "kind": "bloc",
+     "path": "[b_petsc]",
+     "condition": "equal_to(\"METHODE\", 'PETSC')",
+     "fr": "paramètres associés à PETSc",
+     "source": {
+      "file": "code_aster/Cata/Commands/factoriser.py",
+      "line": 150
+     },
+     "keywords": [
+      {
+       "name": "OPTION_PETSC",
+       "kind": "simple",
+       "path": "OPTION_PETSC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/factoriser.py",
+        "line": 153
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 156
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/factoriser.py",
+    "line": 157
+   }
+  }
+ ]
+}

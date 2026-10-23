@@ -1,0 +1,317 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_DOMAINE_REDUIT",
+ "kind": "OPER",
+ "fr": null,
+ "translation_upstream": null,
+ "op": 50,
+ "reentrant": "o:MAILLAGE",
+ "result_types": [
+  "maillage_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "BASE_PRIMAL",
+   "kind": "simple",
+   "path": "BASE_PRIMAL",
+   "status": "o",
+   "type": [
+    "mode_empi"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "BASE_DUAL",
+   "kind": "simple",
+   "path": "BASE_DUAL",
+   "status": "o",
+   "type": [
+    "mode_empi"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "NOM_DOMAINE",
+   "kind": "simple",
+   "path": "NOM_DOMAINE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "NB_COUCHE_SUPPL",
+   "kind": "simple",
+   "path": "NB_COUCHE_SUPPL",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "GROUP_NO_INTERF",
+   "kind": "simple",
+   "path": "GROUP_NO_INTERF",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Maillage réutlisé en entrée",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "DOMAINE_MINI",
+   "kind": "factor",
+   "path": "DOMAINE_MINI",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "DOMAINE_MINI/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "DOMAINE_MINI/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+      "line": 42
+     }
+    }
+   ]
+  },
+  {
+   "name": "DOMAINE_MAXI",
+   "kind": "factor",
+   "path": "DOMAINE_MAXI",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "DOMAINE_MAXI/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "CORR_COMPLET",
+   "kind": "simple",
+   "path": "CORR_COMPLET",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "p_correcteur",
+   "kind": "bloc",
+   "path": "[p_correcteur]",
+   "condition": "(equal_to(\"CORR_COMPLET\", 'OUI'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO_ENCASTRE",
+     "kind": "simple",
+     "path": "GROUP_NO_ENCASTRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "NB_COUCHE_ENCASTRE",
+     "kind": "simple",
+     "path": "NB_COUCHE_ENCASTRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_domaine_reduit.py",
+    "line": 54
+   }
+  }
+ ]
+}

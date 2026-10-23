@@ -1,0 +1,874 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_G_XFEM",
+ "kind": "OPER",
+ "fr": "Calcul du taux de restitution d'énergie par la méthode theta en thermo-élasticité et les facteurs d'intensité de contraintes.",
+ "translation_upstream": null,
+ "op": 100,
+ "reentrant": "n",
+ "result_types": [
+  "table_container"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "LIST_ORDRE",
+    "INST",
+    "LIST_INST",
+    "TOUT_MODE",
+    "NUME_MODE",
+    "LIST_MODE",
+    "FREQ",
+    "LIST_FREQ"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "CHAM_THETA",
+   "kind": "simple",
+   "path": "CHAM_THETA",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "THETA",
+   "kind": "factor",
+   "path": "THETA",
+   "status": "o",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "R_INF",
+      "R_SUP"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "R_INF_FO",
+      "R_SUP_FO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 37
+   },
+   "keywords": [
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "THETA/FISSURE",
+     "status": "o",
+     "type": [
+      "fiss_xfem"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "NB_POINT_FOND",
+     "kind": "simple",
+     "path": "THETA/NB_POINT_FOND",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "NUME_FOND",
+     "kind": "simple",
+     "path": "THETA/NUME_FOND",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "R_INF",
+     "kind": "simple",
+     "path": "THETA/R_INF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "R_SUP",
+     "kind": "simple",
+     "path": "THETA/R_SUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "R_INF_FO",
+     "kind": "simple",
+     "path": "THETA/R_INF_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "R_SUP_FO",
+     "kind": "simple",
+     "path": "THETA/R_SUP_FO",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "DIRECTION",
+     "kind": "simple",
+     "path": "THETA/DIRECTION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "dyna_trans",
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "LIST_ORDRE",
+   "kind": "simple",
+   "path": "LIST_ORDRE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "TOUT_MODE",
+   "kind": "simple",
+   "path": "TOUT_MODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "LIST_MODE",
+   "kind": "simple",
+   "path": "LIST_MODE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "b_acce_reel",
+   "kind": "bloc",
+   "path": "[b_acce_reel]",
+   "condition": "(exists(\"INST\"))or(exists(\"LIST_INST\"))or(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 76
+     }
+    },
+    {
+     "name": "b_prec_rela",
+     "kind": "bloc",
+     "path": "[b_prec_rela]",
+     "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 77
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+        "line": 79
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_prec_abso",
+     "kind": "bloc",
+     "path": "[b_prec_abso]",
+     "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 81
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+        "line": 82
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "EXCIT",
+   "kind": "factor",
+   "path": "EXCIT",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 85
+   },
+   "keywords": [
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "EXCIT/CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca",
+      "char_cine_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "FONC_MULT",
+     "kind": "simple",
+     "path": "EXCIT/FONC_MULT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "EXCIT/TYPE_CHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "FIXE_CSTE",
+     "into": [
+      "FIXE_CSTE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 90
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMPORTEMENT",
+   "kind": "factor",
+   "path": "COMPORTEMENT",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "MAILLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "RELATION",
+     "kind": "simple",
+     "path": "COMPORTEMENT/RELATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ELAS",
+      "ELAS_VMIS_LINE",
+      "ELAS_VMIS_TRAC",
+      "ELAS_VMIS_PUIS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "COMPORTEMENT/DEFORMATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PETIT",
+     "into": [
+      "PETIT",
+      "PETIT_REAC"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "COMPORTEMENT/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COMPORTEMENT/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "MAILLE",
+     "kind": "simple",
+     "path": "COMPORTEMENT/MAILLE",
+     "status": "c",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 99
+     }
+    }
+   ]
+  },
+  {
+   "name": "ETAT_INIT",
+   "kind": "factor",
+   "path": "ETAT_INIT",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 101
+   },
+   "keywords": [
+    {
+     "name": "SIGM",
+     "kind": "simple",
+     "path": "ETAT_INIT/SIGM",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 103
+     }
+    }
+   ]
+  },
+  {
+   "name": "LISSAGE",
+   "kind": "factor",
+   "path": "LISSAGE",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "LISSAGE_THETA",
+     "kind": "simple",
+     "path": "LISSAGE/LISSAGE_THETA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LEGENDRE",
+     "into": [
+      "LEGENDRE",
+      "LAGRANGE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "LISSAGE_G",
+     "kind": "simple",
+     "path": "LISSAGE/LISSAGE_G",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LEGENDRE",
+     "into": [
+      "LEGENDRE",
+      "LAGRANGE",
+      "LAGRANGE_NO_NO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "b_legen",
+     "kind": "bloc",
+     "path": "LISSAGE/[b_legen]",
+     "condition": "(equal_to(\"LISSAGE_THETA\", 'LEGENDRE')) or (equal_to(\"LISSAGE_G\", 'LEGENDRE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 115
+     },
+     "keywords": [
+      {
+       "name": "DEGRE",
+       "kind": "simple",
+       "path": "LISSAGE/DEGRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 5,
+       "into": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+        "line": 117
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "CALC_G",
+   "into": [
+    "CALC_G",
+    "CALC_K_G"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 120
+   }
+  },
+  {
+   "name": "b_cal_contrainte",
+   "kind": "bloc",
+   "path": "[b_cal_contrainte]",
+   "condition": "(exists(\"COMPORTEMENT\") and (equal_to(\"OPTION\", 'CALC_G')))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 121
+   },
+   "keywords": [
+    {
+     "name": "CALCUL_CONTRAINTE",
+     "kind": "simple",
+     "path": "CALCUL_CONTRAINTE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+      "line": 123
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 125
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g_xfem.py",
+    "line": 126
+   }
+  }
+ ]
+}

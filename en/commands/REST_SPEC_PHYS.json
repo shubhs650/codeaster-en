@@ -1,0 +1,422 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_SPEC_PHYS",
+ "kind": "OPER",
+ "fr": "Calculer la réponse d'une structure dans la base physique",
+ "translation_upstream": null,
+ "op": 148,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "BASE_ELAS_FLUI",
+    "MODE_MECA"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "NOEUD",
+    "GROUP_NO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "BASE_ELAS_FLUI",
+   "kind": "simple",
+   "path": "BASE_ELAS_FLUI",
+   "status": "f",
+   "type": [
+    "melasflu_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_fluide",
+   "kind": "bloc",
+   "path": "[b_fluide]",
+   "condition": "exists(\"BASE_ELAS_FLUI\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "VITE_FLUI",
+     "kind": "simple",
+     "path": "VITE_FLUI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+      "line": 37
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "BANDE",
+   "kind": "simple",
+   "path": "BANDE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": 2,
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "INTE_SPEC_GENE",
+   "kind": "simple",
+   "path": "INTE_SPEC_GENE",
+   "status": "o",
+   "type": [
+    "interspectre"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "NOEUD",
+   "kind": "simple",
+   "path": "NOEUD",
+   "status": "c",
+   "type": [
+    "no"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "NOM_CMP",
+   "kind": "simple",
+   "path": "NOM_CMP",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 7,
+   "into": [
+    "DEPL",
+    "VITE",
+    "ACCE",
+    "EFGE_ELNO",
+    "SIPO_ELNO",
+    "SIGM_ELNO",
+    "FORC_NODA"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "MODE_STAT",
+   "kind": "simple",
+   "path": "MODE_STAT",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "EXCIT",
+   "kind": "factor",
+   "path": "EXCIT",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "EXCIT/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "EXCIT/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "EXCIT/NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+      "line": 61
+     }
+    }
+   ]
+  },
+  {
+   "name": "MOUVEMENT",
+   "kind": "simple",
+   "path": "MOUVEMENT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ABSOLU",
+   "into": [
+    "RELATIF",
+    "ABSOLU",
+    "DIFFERENTIEL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DIAG_DIAG",
+   "into": [
+    "DIAG_TOUT",
+    "DIAG_DIAG",
+    "TOUT_TOUT",
+    "TOUT_DIAG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_phys.py",
+    "line": 72
+   }
+  }
+ ]
+}

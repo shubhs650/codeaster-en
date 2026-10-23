@@ -1,0 +1,255 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_pression.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_PRESSION",
+ "kind": "MACRO",
+ "fr": "Calcul de la pression nodale sur une interface a partir de SIEF_NOEU. Cette option n existe que pour les éléments isoparamétriques.",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_pression_ops.calc_pression_ops",
+ "reentrant": "o:RESULTAT",
+ "result_types": [
+  "evol_elas",
+  "evol_noli",
+  "evol_ther",
+  "mult_elas",
+  "mode_meca",
+  "mode_meca_c",
+  "dyna_trans",
+  "dyna_harmo",
+  "fourier_elas",
+  "fourier_ther",
+  "evol_varc",
+  "evol_char"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TOUT_ORDRE",
+    "INST"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_pression.py",
+  "line": 54
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "GEOMETRIE",
+   "kind": "simple",
+   "path": "GEOMETRIE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DEFORMEE",
+   "into": [
+    "INITIALE",
+    "DEFORMEE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "b_prec_rela",
+   "kind": "bloc",
+   "path": "[b_prec_rela]",
+   "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 69
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_pression.py",
+      "line": 71
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_prec_abso",
+   "kind": "bloc",
+   "path": "[b_prec_abso]",
+   "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 73
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_pression.py",
+      "line": 74
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_pression.py",
+    "line": 76
+   }
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_THERMECA_MULT",
+ "kind": "MACRO",
+ "fr": "Macro permettant la multiplication de resultats mecaniques ou thermiques issus de chocs thermiques unitaires",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_thermeca_mult_ops.calc_thermeca_mult_ops",
+ "reentrant": "n",
+ "result_types": [
+  "evol_elas",
+  "evol_ther"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "TEMP_FIN",
+   "kind": "simple",
+   "path": "TEMP_FIN",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TEMP_INIT",
+   "kind": "simple",
+   "path": "TEMP_INIT",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "RESU_MECA_UNIT",
+   "kind": "simple",
+   "path": "RESU_MECA_UNIT",
+   "status": "o",
+   "type": [
+    "evol_elas"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "RESU_SUPL_THER",
+   "kind": "simple",
+   "path": "RESU_SUPL_THER",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "b_resu_ther",
+   "kind": "bloc",
+   "path": "[b_resu_ther]",
+   "condition": "equal_to('RESU_SUPL_THER', 'OUI')",
+   "fr": "Calcul du résultat thermique",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "RESU_THER_UNIT",
+     "kind": "simple",
+     "path": "RESU_THER_UNIT",
+     "status": "o",
+     "type": [
+      "evol_ther"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "RESU_THER",
+     "kind": "simple",
+     "path": "RESU_THER",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_thermeca_mult.py",
+      "line": 49
+     }
+    }
+   ]
+  }
+ ]
+}

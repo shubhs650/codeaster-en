@@ -1,0 +1,1766 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_LIGN_COUPE",
+ "kind": "MACRO",
+ "fr": "Extraction des valeurs d'un résultat dans une ou plusieurs tables sur des lignes de coupe définies par deux points et un intervalle",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macr_lign_coupe_ops.macr_lign_coupe_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "RESULTAT",
+    "CHAM_GD"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+  "line": 25
+ },
+ "keywords": [
+  {
+   "name": "REPERE_INIT",
+   "kind": "simple",
+   "path": "REPERE_INIT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "GLOBAL",
+    "LOCAL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "evol_ther",
+    "evol_sech",
+    "mode_meca",
+    "comb_fourier",
+    "mult_elas",
+    "fourier_elas",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "CHAM_GD",
+   "kind": "simple",
+   "path": "CHAM_GD",
+   "status": "f",
+   "type": [
+    "cham_gd_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "b_extrac",
+   "kind": "bloc",
+   "path": "[b_extrac]",
+   "condition": "exists(\"RESULTAT\")",
+   "fr": "extraction des résultats",
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NUME_ORDRE",
+      "NUME_MODE",
+      "LIST_ORDRE",
+      "INST",
+      "LIST_INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 60
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 62
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 63
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+          "line": 65
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 67
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+          "line": 68
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_meca",
+   "kind": "bloc",
+   "path": "[b_meca]",
+   "condition": "is_type(\"RESULTAT\") in (evol_elas,evol_noli,mode_meca, comb_fourier,\n                                            mult_elas, fourier_elas, dyna_trans)",
+   "fr": "résultat mécanique",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 73
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SIGM_NOEU",
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_ther",
+   "kind": "bloc",
+   "path": "[b_ther]",
+   "condition": "is_type(\"RESULTAT\") in (evol_ther,)",
+   "fr": "résultat thermique",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TEMP",
+     "into": [
+      "TEMP",
+      "HHO_TEMP",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "META_ELNO",
+      "META_NOEU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "DETE_ELNO",
+      "DETE_NOEU",
+      "SOUR_ELGA",
+      "COMPORTHER",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 84
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_sech",
+   "kind": "bloc",
+   "path": "[b_sech]",
+   "condition": "is_type(\"RESULTAT\") in (evol_sech,)",
+   "fr": "résultat de séchage",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 111
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SECH",
+     "into": [
+      "SECH",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "COMPORTHER"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 114
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_cham",
+   "kind": "bloc",
+   "path": "[b_cham]",
+   "condition": "exists(\"CHAM_GD\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 122
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 124
+     }
+    }
+   ]
+  },
+  {
+   "name": "UNITE_MAILLAGE",
+   "kind": "simple",
+   "path": "UNITE_MAILLAGE",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 128
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 129
+   }
+  },
+  {
+   "name": "VIS_A_VIS",
+   "kind": "factor",
+   "path": "VIS_A_VIS",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_MA_1",
+      "MAILLE_1"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 130
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "VIS_A_VIS/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 134
+     }
+    },
+    {
+     "name": "MAILLE_1",
+     "kind": "simple",
+     "path": "VIS_A_VIS/MAILLE_1",
+     "status": "c",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 135
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIGN_COUPE",
+   "kind": "factor",
+   "path": "LIGN_COUPE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "NOM_CMP",
+      "INVARIANT",
+      "ELEM_PRINCIPAUX",
+      "RESULTANTE"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "TRAC_DIR",
+      "DIRECTION"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TRAC_DIR",
+      "TRAC_NOR"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "TRAC_DIR",
+      "NOM_CMP"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "TRAC_NOR",
+      "NOM_CMP"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "MOMENT",
+      "POINT"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+    "line": 137
+   },
+   "keywords": [
+    {
+     "name": "INTITULE",
+     "kind": "simple",
+     "path": "LIGN_COUPE/INTITULE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 148
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "LIGN_COUPE/TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SEGMENT",
+     "into": [
+      "GROUP_NO",
+      "SEGMENT",
+      "ARC",
+      "GROUP_MA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "LIGN_COUPE/REPERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "INITIAL",
+     "into": [
+      "INITIAL",
+      "LOCAL",
+      "POLAIRE",
+      "UTILISATEUR",
+      "CYLINDRIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "OPERATION",
+     "kind": "simple",
+     "path": "LIGN_COUPE/OPERATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXTRACTION",
+     "into": [
+      "EXTRACTION",
+      "MOYENNE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "LIGN_COUPE/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 163
+     }
+    },
+    {
+     "name": "INVARIANT",
+     "kind": "simple",
+     "path": "LIGN_COUPE/INVARIANT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 164
+     }
+    },
+    {
+     "name": "ELEM_PRINCIPAUX",
+     "kind": "simple",
+     "path": "LIGN_COUPE/ELEM_PRINCIPAUX",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 165
+     }
+    },
+    {
+     "name": "TRAC_NOR",
+     "kind": "simple",
+     "path": "LIGN_COUPE/TRAC_NOR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 166
+     }
+    },
+    {
+     "name": "TRAC_DIR",
+     "kind": "simple",
+     "path": "LIGN_COUPE/TRAC_DIR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 167
+     }
+    },
+    {
+     "name": "DIRECTION",
+     "kind": "simple",
+     "path": "LIGN_COUPE/DIRECTION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 168
+     }
+    },
+    {
+     "name": "b_forc_noda",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_forc_noda]",
+     "condition": "equal_to(\"TYPE\", 'GROUP_NO') or equal_to(\"TYPE\", 'GROUP_MA')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "MOMENT",
+        "RESULTANTE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 169
+     },
+     "keywords": [
+      {
+       "name": "RESULTANTE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/RESULTANTE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "DX",
+        "DY",
+        "DZ",
+        "NXX",
+        "NYY",
+        "NXY"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 172
+       }
+      },
+      {
+       "name": "MOMENT",
+       "kind": "simple",
+       "path": "LIGN_COUPE/MOMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "DRX",
+        "DRY",
+        "DRZ",
+        "MXX",
+        "MYY",
+        "MXY"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 175
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "LIGN_COUPE/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 178
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_local",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_local]",
+     "condition": "equal_to(\"REPERE\", 'LOCAL') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 180
+     },
+     "keywords": [
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "LIGN_COUPE/VECT_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 182
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_utili",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_utili]",
+     "condition": "equal_to(\"REPERE\", 'UTILISATEUR')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 184
+     },
+     "keywords": [
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "LIGN_COUPE/ANGL_NAUT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 186
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_grno",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_grno]",
+     "condition": "equal_to(\"TYPE\", 'GROUP_NO')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 188
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 189
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_grma",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_grma]",
+     "condition": "equal_to(\"TYPE\", 'GROUP_MA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 191
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 193
+       }
+      },
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/MAILLAGE",
+       "status": "o",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 194
+       }
+      },
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 197
+       }
+      },
+      {
+       "name": "GROUP_NO_EXTR",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_NO_EXTR",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 198
+       }
+      },
+      {
+       "name": "VECT_ORIE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/VECT_ORIE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 200
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_segment",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_segment]",
+     "condition": "equal_to(\"TYPE\", 'SEGMENT')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "COOR_ORIG",
+        "GROUP_NO_ORIG"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "COOR_EXTR",
+        "GROUP_NO_EXTR"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 204
+     },
+     "keywords": [
+      {
+       "name": "NB_POINTS",
+       "kind": "simple",
+       "path": "LIGN_COUPE/NB_POINTS",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 206
+       }
+      },
+      {
+       "name": "COOR_ORIG",
+       "kind": "simple",
+       "path": "LIGN_COUPE/COOR_ORIG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "COOR_EXTR",
+       "kind": "simple",
+       "path": "LIGN_COUPE/COOR_EXTR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 208
+       }
+      },
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 209
+       }
+      },
+      {
+       "name": "GROUP_NO_EXTR",
+       "kind": "simple",
+       "path": "LIGN_COUPE/GROUP_NO_EXTR",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 210
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_arc",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_arc]",
+     "condition": "equal_to(\"TYPE\", 'ARC')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 213
+     },
+     "keywords": [
+      {
+       "name": "NB_POINTS",
+       "kind": "simple",
+       "path": "LIGN_COUPE/NB_POINTS",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "val_min": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 215
+       }
+      },
+      {
+       "name": "COOR_ORIG",
+       "kind": "simple",
+       "path": "LIGN_COUPE/COOR_ORIG",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 216
+       }
+      },
+      {
+       "name": "CENTRE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/CENTRE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 217
+       }
+      },
+      {
+       "name": "ANGLE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/ANGLE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 218
+       }
+      },
+      {
+       "name": "DNOR",
+       "kind": "simple",
+       "path": "LIGN_COUPE/DNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 219
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cylind",
+     "kind": "bloc",
+     "path": "LIGN_COUPE/[b_cylind]",
+     "condition": "equal_to(\"REPERE\", 'CYLINDRIQUE') and not equal_to(\"TYPE\", 'ARC')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 221
+     },
+     "keywords": [
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "LIGN_COUPE/ORIGINE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 223
+       }
+      },
+      {
+       "name": "AXE_Z",
+       "kind": "simple",
+       "path": "LIGN_COUPE/AXE_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+        "line": 224
+       }
+      }
+     ]
+    },
+    {
+     "name": "DISTANCE_MAX",
+     "kind": "simple",
+     "path": "LIGN_COUPE/DISTANCE_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": "Si la distance entre un noeud de la ligne de coupe et le maillage coupé est > DISTANCE_MAX, ce noeud sera ignoré.",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 226
+     }
+    },
+    {
+     "name": "DISTANCE_ALARME",
+     "kind": "simple",
+     "path": "LIGN_COUPE/DISTANCE_ALARME",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Si la distance entre un noeud de la ligne de coupe et le maillage coupé est > DISTANCE_ALARME, une alarme sera émise.",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_lign_coupe.py",
+      "line": 235
+     }
+    }
+   ]
+  }
+ ]
+}

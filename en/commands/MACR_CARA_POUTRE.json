@@ -1,0 +1,453 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_CARA_POUTRE",
+ "kind": "MACRO",
+ "fr": "Calculer les caractéristiques d'une section transversale de poutre à partir d'un maillage 2D de la section",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macr_cara_poutre_ops.macr_cara_poutre_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYME_Y",
+    "GROUP_MA_BORD"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYME_Z",
+    "GROUP_MA_BORD"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Nom du concept maillage",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "b_maillage",
+   "kind": "bloc",
+   "path": "[b_maillage]",
+   "condition": "not exists(\"MAILLAGE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "FORMAT",
+     "kind": "simple",
+     "path": "FORMAT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MED",
+     "into": [
+      "ASTER",
+      "MED"
+     ],
+     "fr": "Format du fichier",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 44
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_med",
+   "kind": "bloc",
+   "path": "[b_format_med]",
+   "condition": " ( equal_to(\"FORMAT\", 'MED') ) ",
+   "fr": "Informations complémentaires pour le format MED.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitMed"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_autre",
+   "kind": "bloc",
+   "path": "[b_format_autre]",
+   "condition": " ( not equal_to(\"FORMAT\", 'MED') ) ",
+   "fr": "Informations complémentaires pour les autres formats.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 56
+     }
+    }
+   ]
+  },
+  {
+   "name": "ORIG_INER",
+   "kind": "simple",
+   "path": "ORIG_INER",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 3,
+   "default": [
+    0.0,
+    0.0
+   ],
+   "fr": "Point par rapport auquel sont calculées les inerties",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "QUADRANT",
+   "kind": "simple",
+   "path": "QUADRANT",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "TABLE_CARA",
+   "kind": "simple",
+   "path": "TABLE_CARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "SYME_Y",
+   "kind": "simple",
+   "path": "SYME_Y",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": "demi maillage par rapport a y=0",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "SYME_Z",
+   "kind": "simple",
+   "path": "SYME_Z",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": "demi maillage par rapport a z=0",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": "Calcul des caractéristiques équivalentes à plusieurs sections disjointes",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "GROUP_MA_BORD",
+   "kind": "simple",
+   "path": "GROUP_MA_BORD",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": "Groupe(s) de mailles linéiques, bord(s) de(s) section(s)",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "b_nom",
+   "kind": "bloc",
+   "path": "[b_nom]",
+   "condition": "not (equal_to(\"TABLE_CARA\", 'OUI') and exists(\"GROUP_MA\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 84
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        8
+       ]
+      }
+     ],
+     "fr": "Nom de la section, 8 caractères maximum.",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 86
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_gma_bord",
+   "kind": "bloc",
+   "path": "[b_gma_bord]",
+   "condition": "exists(\"GROUP_MA_BORD\")",
+   "fr": " calcul des carac. mécaniques",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 94
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": "Simplement pour empêcher des pivots nuls le cas échéant. Fournir un noeud quelconque par GROUP_MA",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "GROUP_MA_INTE",
+     "kind": "simple",
+     "path": "GROUP_MA_INTE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "groupes de mailles linéiques bordant des trous dans la section",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 106
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_reseau",
+   "kind": "bloc",
+   "path": "[b_reseau]",
+   "condition": "(exists(\"GROUP_MA_BORD\")) and (exists(\"GROUP_MA\"))",
+   "fr": " calcul des coef de cisaillement équivalents a un reseau de poutres",
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "LONGUEUR",
+      "LIAISON",
+      "MATERIAU"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+    "line": 114
+   },
+   "keywords": [
+    {
+     "name": "LONGUEUR",
+     "kind": "simple",
+     "path": "LONGUEUR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Longueur du réseau de poutres",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "MATERIAU",
+     "kind": "simple",
+     "path": "MATERIAU",
+     "status": "f",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": "Matériau élastique linéaire du réseau",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "LIAISON",
+     "kind": "simple",
+     "path": "LIAISON",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ROTULE",
+      "ENCASTREMENT"
+     ],
+     "fr": "type de conditions aux limites sur le plancher supérieur",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_cara_poutre.py",
+      "line": 122
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,247 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_DYNA_MODA_T",
+ "kind": "OPER",
+ "fr": "Post-traiter les résultats en coordonnées généralisées produit par DYNA_TRAN_MODAL",
+ "translation_upstream": null,
+ "op": 130,
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "CHOC",
+    "RELA_EFFO_DEPL"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "o",
+   "type": [
+    "tran_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "CHOC",
+   "kind": "factor",
+   "path": "CHOC",
+   "status": "f",
+   "max": "**",
+   "fr": "Analyse des non linéarités de choc",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "INST_INIT",
+     "kind": "simple",
+     "path": "CHOC/INST_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": -1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "INST_FIN",
+     "kind": "simple",
+     "path": "CHOC/INST_FIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 999.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "NB_BLOC",
+     "kind": "simple",
+     "path": "CHOC/NB_BLOC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "SEUIL_FORCE",
+     "kind": "simple",
+     "path": "CHOC/SEUIL_FORCE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "DUREE_REPOS",
+     "kind": "simple",
+     "path": "CHOC/DUREE_REPOS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "CHOC/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "USURE",
+     "into": [
+      "IMPACT",
+      "USURE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "NB_CLASSE",
+     "kind": "simple",
+     "path": "CHOC/NB_CLASSE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 44
+     }
+    }
+   ]
+  },
+  {
+   "name": "RELA_EFFO_DEPL",
+   "kind": "factor",
+   "path": "RELA_EFFO_DEPL",
+   "status": "f",
+   "fr": "Analyse des relationsnon linéaires effort-déplacement",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+    "line": 46
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "RELA_EFFO_DEPL/GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "RELA_EFFO_DEPL/NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_dyna_moda_t.py",
+    "line": 53
+   }
+  }
+ ]
+}

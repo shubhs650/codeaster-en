@@ -1,0 +1,876 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_table.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_TABLE",
+ "kind": "MACRO",
+ "fr": "Opérations sur une table",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_table_ops.calc_table_ops",
+ "reentrant": "f:TABLE",
+ "result_types": [
+  "table_sdaster",
+  "table_container",
+  "table_fonction"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_table.py",
+  "line": 53
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "ACTION",
+   "kind": "factor",
+   "path": "ACTION",
+   "status": "o",
+   "max": "**",
+   "fr": "Suite des opérations à effectuer sur la table",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "OPERATION",
+     "kind": "simple",
+     "path": "ACTION/OPERATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FILTRE",
+      "EXTR",
+      "RENOMME",
+      "TRI",
+      "COMB",
+      "AJOUT_LIGNE",
+      "OPER",
+      "SUPPRIME",
+      "UNIQUE",
+      "AJOUT_COLONNE",
+      "STATISTIQUES",
+      "CALCUL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "b_filtre",
+     "kind": "bloc",
+     "path": "ACTION/[b_filtre]",
+     "condition": "equal_to(\"OPERATION\", 'FILTRE')",
+     "fr": "Sélectionne les lignes de la table vérifiant un critère",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 83
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 86
+       }
+      },
+      {
+       "name": "CRIT_COMP",
+       "kind": "simple",
+       "path": "ACTION/CRIT_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "EQ",
+       "into": [
+        "EQ",
+        "NE",
+        "GT",
+        "LT",
+        "GE",
+        "LE",
+        "REGEXP",
+        "VIDE",
+        "NON_VIDE",
+        "MAXI",
+        "MAXI_ABS",
+        "MINI",
+        "MINI_ABS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 87
+       }
+      },
+      {
+       "name": "b_vale",
+       "kind": "bloc",
+       "path": "ACTION/[b_vale]",
+       "condition": "(is_in(\"CRIT_COMP\", ('EQ','NE','GT','LT','GE','LE')))",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "VALE",
+          "VALE_I",
+          "VALE_K",
+          "VALE_C"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 107
+       },
+       "keywords": [
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "ACTION/VALE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 110
+         }
+        },
+        {
+         "name": "VALE_I",
+         "kind": "simple",
+         "path": "ACTION/VALE_I",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 111
+         }
+        },
+        {
+         "name": "VALE_C",
+         "kind": "simple",
+         "path": "ACTION/VALE_C",
+         "status": "f",
+         "type": [
+          "C"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 112
+         }
+        },
+        {
+         "name": "VALE_K",
+         "kind": "simple",
+         "path": "ACTION/VALE_K",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 113
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_regexp",
+       "kind": "bloc",
+       "path": "ACTION/[b_regexp]",
+       "condition": "equal_to(\"CRIT_COMP\", 'REGEXP')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 115
+       },
+       "keywords": [
+        {
+         "name": "VALE_K",
+         "kind": "simple",
+         "path": "ACTION/VALE_K",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 116
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_crit",
+       "kind": "bloc",
+       "path": "ACTION/[b_crit]",
+       "condition": "is_in(\"CRIT_COMP\", ('EQ','NE'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 118
+       },
+       "keywords": [
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "ACTION/CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 120
+         }
+        },
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "ACTION/PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.001,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_table.py",
+          "line": 121
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_extr",
+     "kind": "bloc",
+     "path": "ACTION/[b_extr]",
+     "condition": "equal_to(\"OPERATION\", 'EXTR')",
+     "fr": "Extrait une ou plusieurs colonnes de la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 124
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Noms des colonnes à extraire",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 127
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_suppr",
+     "kind": "bloc",
+     "path": "ACTION/[b_suppr]",
+     "condition": "equal_to(\"OPERATION\", 'SUPPRIME')",
+     "fr": "Supprime une ou plusieurs colonnes de la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 135
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Noms des colonnes à supprimer",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 138
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_supdbl",
+     "kind": "bloc",
+     "path": "ACTION/[b_supdbl]",
+     "condition": "equal_to(\"OPERATION\", 'UNIQUE')",
+     "fr": "Supprime les lignes si les valeurs des paramètres ont déjà été vues.",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 146
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Noms des paramètres à tester pour supprimer les lignes",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 149
+       }
+      },
+      {
+       "name": "FORMAT_R",
+       "kind": "simple",
+       "path": "ACTION/FORMAT_R",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 156
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_renomme",
+     "kind": "bloc",
+     "path": "ACTION/[b_renomme]",
+     "condition": "equal_to(\"OPERATION\", 'RENOMME')",
+     "fr": "Renomme un ou plusieurs paramètres de la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 158
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 2,
+       "max": 2,
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Couple (ancien nom du paramètre, nouveau nom du paramètre)",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 161
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_tri",
+     "kind": "bloc",
+     "path": "ACTION/[b_tri]",
+     "condition": "equal_to(\"OPERATION\", 'TRI')",
+     "fr": "Ordonne les lignes de la table selon les valeurs d'un ou plusieurs paramètres",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 170
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 173
+       }
+      },
+      {
+       "name": "ORDRE",
+       "kind": "simple",
+       "path": "ACTION/ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CROISSANT",
+       "into": [
+        "CROISSANT",
+        "DECROISSANT"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 174
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_comb",
+     "kind": "bloc",
+     "path": "ACTION/[b_comb]",
+     "condition": "equal_to(\"OPERATION\", 'COMB')",
+     "fr": "Combine deux tables ayant éventuellement des paramètres communs",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 178
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "ACTION/TABLE",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "Table dont les colonnes vont venir surcharger la table initiale",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 181
+       }
+      },
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": "Noms des paramètres dont les valeurs doivent etre identiques dans les deux tables pour que les colonnes soient combinées",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 186
+       }
+      },
+      {
+       "name": "RESTREINT",
+       "kind": "simple",
+       "path": "ACTION/RESTREINT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "Restreint la fusion uniquement aux lignes où les NOM_PARA sont communs",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 195
+       }
+      },
+      {
+       "name": "FORMAT_R",
+       "kind": "simple",
+       "path": "ACTION/FORMAT_R",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 202
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ajout_lig",
+     "kind": "bloc",
+     "path": "ACTION/[b_ajout_lig]",
+     "condition": "equal_to(\"OPERATION\", 'AJOUT_LIGNE')",
+     "fr": "Ajoute une ligne à la table initiale",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 204
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": "Noms des paramètres dont les valeurs sont fournies sous VALE",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ACTION/VALE",
+       "status": "o",
+       "type": [
+        "not_checked"
+       ],
+       "max": "**",
+       "fr": "Valeurs des paramètres",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 213
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ajout_col",
+     "kind": "bloc",
+     "path": "ACTION/[b_ajout_col]",
+     "condition": "equal_to(\"OPERATION\", 'AJOUT_COLONNE')",
+     "fr": "Ajoute une colonne constante à la table initiale",
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VALE",
+        "VALE_COLONNE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 215
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": "Noms des paramètres des colonnes à ajouter",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 219
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "ACTION/VALE",
+       "status": "f",
+       "type": [
+        "not_checked"
+       ],
+       "max": "**",
+       "fr": "Valeur constante pour chaque colonne",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 222
+       }
+      },
+      {
+       "name": "VALE_COLONNE",
+       "kind": "simple",
+       "path": "ACTION/VALE_COLONNE",
+       "status": "f",
+       "type": [
+        "not_checked"
+       ],
+       "max": "**",
+       "fr": "Valeur de la colonne pour chaque ligne",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 225
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_oper",
+     "kind": "bloc",
+     "path": "ACTION/[b_oper]",
+     "condition": "equal_to(\"OPERATION\", 'OPER')",
+     "fr": "Applique une formule dans laquelle les variables sont les paramètres de la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 232
+     },
+     "keywords": [
+      {
+       "name": "FORMULE",
+       "kind": "simple",
+       "path": "ACTION/FORMULE",
+       "status": "o",
+       "type": [
+        "formule"
+       ],
+       "fr": "Formule à appliquer aux colonnes de la table",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 237
+       }
+      },
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": "Nom de la nouvelle colonne",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 240
+       }
+      },
+      {
+       "name": "NOM_COLONNE",
+       "kind": "simple",
+       "path": "ACTION/NOM_COLONNE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": "Nom des colonnes à utiliser en tant que paramètres de la formule",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 241
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_calcul",
+     "kind": "bloc",
+     "path": "ACTION/[b_calcul]",
+     "condition": "equal_to(\"OPERATION\", 'CALCUL')",
+     "fr": "Appliquer des calculs simples sur des colonnes de la table",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_table.py",
+      "line": 248
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "ACTION/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Nom des colonnes à calculer",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 251
+       }
+      },
+      {
+       "name": "TYPE_CALCUL",
+       "kind": "simple",
+       "path": "ACTION/TYPE_CALCUL",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "MAXI",
+        "MINI",
+        "SOMM",
+        "MOY",
+        "MAXI_ABS",
+        "MINI_ABS",
+        "SOMM_ABS"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "Type des calculs à appliquer",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_table.py",
+        "line": 258
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TYPE_TABLE",
+   "kind": "simple",
+   "path": "TYPE_TABLE",
+   "status": "c",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "TABLE",
+    "TABLE_FONCTION",
+    "TABLE_CONTAINER"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 268
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Titre de la table produite",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 269
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_table.py",
+    "line": 270
+   }
+  }
+ ]
+}

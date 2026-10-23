@@ -1,0 +1,469 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_bordet.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_BORDET",
+ "kind": "MACRO",
+ "fr": "calcul de la probabilite de clivage via le modele de Bordet",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_bordet_ops.post_bordet_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TOUT",
+    "GROUP_MA"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "INST",
+    "NUME_ORDRE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_bordet.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": "le calcul ne sera effectué que sur ces mailles",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "val_max": 0.001,
+   "default": 1e-06,
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ABSOLU",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "PROBA_NUCL",
+   "kind": "simple",
+   "path": "PROBA_NUCL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "OUI"
+   ],
+   "fr": "prise en compte du facteur exponentiel",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "b_nucl",
+   "kind": "bloc",
+   "path": "[b_nucl]",
+   "condition": "equal_to(\"PROBA_NUCL\", 'OUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "PARAM",
+     "kind": "factor",
+     "path": "PARAM",
+     "status": "o",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_bordet.py",
+      "line": 56
+     },
+     "keywords": [
+      {
+       "name": "M",
+       "kind": "simple",
+       "path": "PARAM/M",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 58
+       }
+      },
+      {
+       "name": "SIGM_REFE",
+       "kind": "simple",
+       "path": "PARAM/SIGM_REFE",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 59
+       }
+      },
+      {
+       "name": "VOLU_REFE",
+       "kind": "simple",
+       "path": "PARAM/VOLU_REFE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 60
+       }
+      },
+      {
+       "name": "SIG_CRIT",
+       "kind": "simple",
+       "path": "PARAM/SIG_CRIT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 61
+       }
+      },
+      {
+       "name": "SEUIL_REFE",
+       "kind": "simple",
+       "path": "PARAM/SEUIL_REFE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 62
+       }
+      },
+      {
+       "name": "SEUIL_CALC",
+       "kind": "simple",
+       "path": "PARAM/SEUIL_CALC",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 63
+       }
+      },
+      {
+       "name": "DEF_PLAS_REFE",
+       "kind": "simple",
+       "path": "PARAM/DEF_PLAS_REFE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 64
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_prop",
+   "kind": "bloc",
+   "path": "[b_prop]",
+   "condition": "equal_to(\"PROBA_NUCL\", 'NON')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "PARAM",
+     "kind": "factor",
+     "path": "PARAM",
+     "status": "o",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_bordet.py",
+      "line": 69
+     },
+     "keywords": [
+      {
+       "name": "M",
+       "kind": "simple",
+       "path": "PARAM/M",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "SIGM_REFE",
+       "kind": "simple",
+       "path": "PARAM/SIGM_REFE",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "VOLU_REFE",
+       "kind": "simple",
+       "path": "PARAM/VOLU_REFE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "SIG_CRIT",
+       "kind": "simple",
+       "path": "PARAM/SIG_CRIT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "SEUIL_REFE",
+       "kind": "simple",
+       "path": "PARAM/SEUIL_REFE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "SEUIL_CALC",
+       "kind": "simple",
+       "path": "PARAM/SEUIL_CALC",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_bordet.py",
+        "line": 76
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": "Resultat d'une commande globale STAT_NON_LINE",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 79
+   }
+  },
+  {
+   "name": "TEMP",
+   "kind": "simple",
+   "path": "TEMP",
+   "status": "o",
+   "type": [
+    "fonction_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 82
+   }
+  },
+  {
+   "name": "COEF_MULT",
+   "kind": "simple",
+   "path": "COEF_MULT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_bordet.py",
+    "line": 83
+   }
+  }
+ ]
+}
