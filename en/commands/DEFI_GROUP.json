@@ -1,0 +1,2570 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_group.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_GROUP",
+ "kind": "OPER",
+ "fr": "Définition de nouveaux groupes de noeuds et/ou de mailles dans un concept maillage",
+ "translation_upstream": null,
+ "op": 104,
+ "reentrant": "o:MAILLAGE|GRILLE",
+ "result_types": [
+  "maillage_sdaster",
+  "squelette",
+  "grille_sdaster",
+  "maillage_p"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "CREA_GROUP_MA",
+    "CREA_GROUP_NO",
+    "DETR_GROUP_NO",
+    "DETR_GROUP_MA"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MAILLAGE",
+    "GRILLE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_group.py",
+  "line": 42
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster",
+    "squelette"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "GRILLE",
+   "kind": "simple",
+   "path": "GRILLE",
+   "status": "f",
+   "type": [
+    "grille_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "DETR_GROUP_MA",
+   "kind": "factor",
+   "path": "DETR_GROUP_MA",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 55
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "DETR_GROUP_MA/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 56
+     }
+    }
+   ]
+  },
+  {
+   "name": "DETR_GROUP_NO",
+   "kind": "factor",
+   "path": "DETR_GROUP_NO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 58
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "DETR_GROUP_NO/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "CREA_GROUP_MA",
+   "kind": "factor",
+   "path": "CREA_GROUP_MA",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "MAILLE",
+      "INTERSEC",
+      "UNION",
+      "DIFFE",
+      "OPTION"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "MAILLE",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/MAILLE",
+     "status": "c",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "INTERSEC",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/INTERSEC",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "UNION",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/UNION",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "DIFFE",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/DIFFE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "min": 1,
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "TYPE_MAILLE",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/TYPE_MAILLE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "TOUT",
+     "into": [
+      "TOUT",
+      "1D",
+      "2D",
+      "3D",
+      "POI1",
+      "SEG2",
+      "SEG3",
+      "SEG4",
+      "TRIA3",
+      "TRIA6",
+      "TRIA7",
+      "QUAD4",
+      "QUAD8",
+      "QUAD9",
+      "TETRA4",
+      "TETRA10",
+      "PENTA6",
+      "PENTA15",
+      "PENTA18",
+      "HEXA8",
+      "HEXA20",
+      "HEXA27",
+      "PYRAM5",
+      "PYRAM13"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "CREA_GROUP_MA/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FACE_NORMALE",
+      "SPHERE",
+      "CYLINDRE",
+      "BANDE",
+      "APPUI",
+      "FISS_XFEM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 104
+     }
+    },
+    {
+     "name": "b_group_ma",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_group_ma]",
+     "condition": "exists(\"GROUP_MA\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "POSITION",
+        "NUME_INIT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 109
+     },
+     "keywords": [
+      {
+       "name": "NUME_INIT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/NUME_INIT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "POSITION",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/POSITION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "INIT",
+        "FIN",
+        "MILIEU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "b_nume_init",
+       "kind": "bloc",
+       "path": "CREA_GROUP_MA/[b_nume_init]",
+       "condition": "exists(\"NUME_INIT\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 114
+       },
+       "keywords": [
+        {
+         "name": "NUME_FIN",
+         "kind": "simple",
+         "path": "CREA_GROUP_MA/NUME_FIN",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "val_min": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 115
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_face_normale",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_face_normale]",
+     "condition": "equal_to(\"OPTION\", 'FACE_NORMALE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_NORMALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 118
+     },
+     "keywords": [
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 121
+       }
+      },
+      {
+       "name": "VECT_NORMALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/VECT_NORMALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 122
+       }
+      },
+      {
+       "name": "ANGL_PREC",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/ANGL_PREC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "VERI_SIGNE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/VERI_SIGNE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 124
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_sphere",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_sphere]",
+     "condition": "equal_to(\"OPTION\", 'SPHERE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 126
+     },
+     "keywords": [
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 129
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 131
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "CRIT_NOEUD",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/CRIT_NOEUD",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AU_MOINS_UN",
+       "into": [
+        "TOUS",
+        "AU_MOINS_UN",
+        "MAJORITE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 133
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cylindre",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_cylindre]",
+     "condition": "equal_to(\"OPTION\", 'CYLINDRE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_NORMALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 140
+     },
+     "keywords": [
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 146
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 147
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 149
+       }
+      },
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 150
+       }
+      },
+      {
+       "name": "VECT_NORMALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/VECT_NORMALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 151
+       }
+      },
+      {
+       "name": "CRIT_NOEUD",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/CRIT_NOEUD",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AU_MOINS_UN",
+       "into": [
+        "TOUS",
+        "AU_MOINS_UN",
+        "MAJORITE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 152
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_bande",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_bande]",
+     "condition": "equal_to(\"OPTION\", 'BANDE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_NORMALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 159
+     },
+     "keywords": [
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 165
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 166
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 167
+       }
+      },
+      {
+       "name": "DIST",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/DIST",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 168
+       }
+      },
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 169
+       }
+      },
+      {
+       "name": "VECT_NORMALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/VECT_NORMALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 170
+       }
+      },
+      {
+       "name": "CRIT_NOEUD",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/CRIT_NOEUD",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AU_MOINS_UN",
+       "into": [
+        "TOUS",
+        "AU_MOINS_UN",
+        "MAJORITE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 171
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_appui",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_appui]",
+     "condition": "equal_to(\"OPTION\", 'APPUI')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NOEUD",
+        "GROUP_NO"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 178
+     },
+     "keywords": [
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 181
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 182
+       }
+      },
+      {
+       "name": "TYPE_APPUI",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/TYPE_APPUI",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "AU_MOINS_UN",
+        "TOUT",
+        "SOMMET",
+        "MAJORITE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 183
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_fiss_xfem",
+     "kind": "bloc",
+     "path": "CREA_GROUP_MA/[b_fiss_xfem]",
+     "condition": "equal_to(\"OPTION\", 'FISS_XFEM')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 187
+     },
+     "keywords": [
+      {
+       "name": "TYPE_GROUP",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/TYPE_GROUP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "XFEM",
+       "into": [
+        "HEAVISIDE",
+        "CRACKTIP",
+        "MIXTE",
+        "FISSUREE",
+        "XFEM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 189
+       }
+      },
+      {
+       "name": "FISSURE",
+       "kind": "simple",
+       "path": "CREA_GROUP_MA/FISSURE",
+       "status": "o",
+       "type": [
+        "fiss_xfem"
+       ],
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 196
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CREA_GROUP_NO",
+   "kind": "factor",
+   "path": "CREA_GROUP_NO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 199
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "CREA_GROUP_NO/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ENV_SPHERE",
+      "ENV_CYLINDRE",
+      "PLAN",
+      "SEGM_DROI_ORDO",
+      "NOEUD_ORDO",
+      "TUNNEL",
+      "INCLUSION",
+      "FISS_XFEM",
+      "INTERVALLE_VALE",
+      "RELA_CINE_BP"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 202
+     }
+    },
+    {
+     "name": "b_option",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_option]",
+     "condition": "not exists(\"OPTION\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT_GROUP_MA",
+        "GROUP_MA",
+        "GROUP_NO",
+        "NOEUD",
+        "INTERSEC",
+        "UNION",
+        "DIFFE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 218
+     },
+     "keywords": [
+      {
+       "name": "TOUT_GROUP_MA",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/TOUT_GROUP_MA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 225
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 226
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 227
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 228
+       }
+      },
+      {
+       "name": "INTERSEC",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/INTERSEC",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 229
+       }
+      },
+      {
+       "name": "UNION",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/UNION",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 230
+       }
+      },
+      {
+       "name": "DIFFE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/DIFFE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "min": 1,
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 231
+       }
+      },
+      {
+       "name": "b_nom_group_ma",
+       "kind": "bloc",
+       "path": "CREA_GROUP_NO/[b_nom_group_ma]",
+       "condition": "exists(\"GROUP_MA\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 232
+       },
+       "keywords": [
+        {
+         "name": "NOM",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/NOM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 234
+         }
+        },
+        {
+         "name": "CRIT_NOEUD",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/CRIT_NOEUD",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "TOUS",
+         "into": [
+          "TOUS",
+          "SOMMET",
+          "MILIEU",
+          "CENTRE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 235
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_group_no",
+       "kind": "bloc",
+       "path": "CREA_GROUP_NO/[b_group_no]",
+       "condition": "exists(\"GROUP_NO\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "POSITION",
+          "NUME_INIT"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 242
+       },
+       "keywords": [
+        {
+         "name": "NUME_INIT",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/NUME_INIT",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "val_min": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 245
+         }
+        },
+        {
+         "name": "POSITION",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/POSITION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "INIT",
+          "FIN",
+          "MILIEU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 246
+         }
+        },
+        {
+         "name": "b_nume_init",
+         "kind": "bloc",
+         "path": "CREA_GROUP_NO/[b_nume_init]",
+         "condition": "exists(\"NUME_INIT\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 247
+         },
+         "keywords": [
+          {
+           "name": "NUME_FIN",
+           "kind": "simple",
+           "path": "CREA_GROUP_NO/NUME_FIN",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_group.py",
+            "line": 249
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_nom",
+       "kind": "bloc",
+       "path": "CREA_GROUP_NO/[b_nom]",
+       "condition": "not exists(\"GROUP_MA\") and not exists(\"TOUT_GROUP_MA\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 252
+       },
+       "keywords": [
+        {
+         "name": "NOM",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/NOM",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 254
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_env_sphere",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_env_sphere]",
+     "condition": "equal_to(\"OPTION\", 'ENV_SPHERE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 257
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 260
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 261
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 262
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 263
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 264
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 265
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_env_cylindre",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_env_cylindre]",
+     "condition": "equal_to(\"OPTION\", 'ENV_CYLINDRE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_NORMALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 267
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 273
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 274
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 275
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 276
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 277
+       }
+      },
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 278
+       }
+      },
+      {
+       "name": "VECT_NORMALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/VECT_NORMALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 279
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 280
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_env_plan",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_env_plan]",
+     "condition": "equal_to(\"OPTION\", 'PLAN')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "POINT",
+        "NOEUD_CENTRE",
+        "GROUP_NO_CENTRE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "ANGL_NAUT",
+        "VECT_NORMALE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 282
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 288
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 289
+       }
+      },
+      {
+       "name": "NOEUD_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOEUD_CENTRE",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 290
+       }
+      },
+      {
+       "name": "GROUP_NO_CENTRE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_CENTRE",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 291
+       }
+      },
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 292
+       }
+      },
+      {
+       "name": "VECT_NORMALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/VECT_NORMALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 293
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 294
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_segm_droi_ordo",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_segm_droi_ordo]",
+     "condition": "equal_to(\"OPTION\", 'SEGM_DROI_ORDO')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 296
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 298
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 299
+       }
+      },
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_ORIG",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 300
+       }
+      },
+      {
+       "name": "GROUP_NO_EXTR",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_EXTR",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 301
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 302
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/CRITERE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ABSOLU",
+        "RELATIF"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 303
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_ordo",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_noeud_ordo]",
+     "condition": "equal_to(\"OPTION\", 'NOEUD_ORDO')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 305
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 307
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 308
+       }
+      },
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 312
+       }
+      },
+      {
+       "name": "GROUP_NO_EXTR",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_EXTR",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 313
+       }
+      },
+      {
+       "name": "VECT_ORIE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/VECT_ORIE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 315
+       }
+      },
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/ORIGINE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "SANS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 318
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_tunnel",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_tunnel]",
+     "condition": "equal_to(\"OPTION\", 'TUNNEL')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "MAILLE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 320
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 323
+       }
+      },
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 324
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 325
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 326
+       }
+      },
+      {
+       "name": "GROUP_MA_AXE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA_AXE",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 327
+       }
+      },
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 328
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 329
+       }
+      },
+      {
+       "name": "LONGUEUR",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/LONGUEUR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 330
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_inclusion",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_inclusion]",
+     "condition": "equal_to(\"OPTION\", 'INCLUSION')",
+     "fr": "crée le groupe des noeuds des mailles de GROUP_MA inclus géométriquementdans les mailles de GROUP_MA_INCL",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 332
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 338
+       }
+      },
+      {
+       "name": "CAS_FIGURE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/CAS_FIGURE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "2D",
+        "3D",
+        "2.5D"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 339
+       }
+      },
+      {
+       "name": "DISTANCE_MAX",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/DISTANCE_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 340
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 341
+       }
+      },
+      {
+       "name": "GROUP_MA_INCL",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/GROUP_MA_INCL",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 342
+       }
+      },
+      {
+       "name": "MAILLAGE_INCL",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/MAILLAGE_INCL",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 343
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_fiss_xfem",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_fiss_xfem]",
+     "condition": "equal_to(\"OPTION\", 'FISS_XFEM')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 345
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 347
+       }
+      },
+      {
+       "name": "TYPE_GROUP",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/TYPE_GROUP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "into": [
+        "HEAVISIDE",
+        "CRACKTIP",
+        "MIXTE",
+        "XFEM",
+        "ZONE_MAJ",
+        "TORE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 348
+       }
+      },
+      {
+       "name": "FISSURE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/FISSURE",
+       "status": "o",
+       "type": [
+        "fiss_xfem"
+       ],
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 354
+       }
+      },
+      {
+       "name": "b_rayon",
+       "kind": "bloc",
+       "path": "CREA_GROUP_NO/[b_rayon]",
+       "condition": "equal_to(\"TYPE_GROUP\", 'TORE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 355
+       },
+       "keywords": [
+        {
+         "name": "RAYON_TORE",
+         "kind": "simple",
+         "path": "CREA_GROUP_NO/RAYON_TORE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_group.py",
+          "line": 357
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_intervalle_vale",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_intervalle_vale]",
+     "condition": "equal_to(\"OPTION\", 'INTERVALLE_VALE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 360
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 362
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/CHAM_GD",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 363
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 364
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 365
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rela_cine_bp",
+     "kind": "bloc",
+     "path": "CREA_GROUP_NO/[b_rela_cine_bp]",
+     "condition": "equal_to(\"OPTION\", 'RELA_CINE_BP')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_group.py",
+      "line": 367
+     },
+     "keywords": [
+      {
+       "name": "CABLE_BP",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/CABLE_BP",
+       "status": "o",
+       "type": [
+        "cabl_precont"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 369
+       }
+      },
+      {
+       "name": "PREF_GRNO",
+       "kind": "simple",
+       "path": "CREA_GROUP_NO/PREF_GRNO",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RCBP",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_group.py",
+        "line": 370
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ALARME",
+   "kind": "simple",
+   "path": "ALARME",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 373
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_group.py",
+    "line": 374
+   }
+  }
+ ]
+}

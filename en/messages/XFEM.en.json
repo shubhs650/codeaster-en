@@ -1,0 +1,919 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/xfem.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "XFEM",
+ "source": {
+  "file": "code_aster/Messages/xfem.py"
+ },
+ "messages": {
+  "1": {
+   "id": "XFEM_1",
+   "fr": "\n  -> Lors de la définition du champ de matériaux %(k1)s, vous avez renseigné le mot-clé\n     EVOL de AFFE_MATERIAU / AFFE_VARC avec un résultat thermique X-FEM.\n     Cette fonctionnalité n'est pas compatible avec l'opérateur POST_K1_K2_K3 lorsque le\n     matériau dépend de la température.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 24
+   },
+   "en": null
+  },
+  "2": {
+   "id": "XFEM_2",
+   "fr": "\n  -> Le calcul de la distance d'un noeud à l'ellipse n'a pas convergé\n     avec le nombre d'itérations maximal fixé (10). Cela est dû à une\n     ellipse très allongée.\n  -> Conseil:\n     Contacter les développeurs.\n     Dans la mesure du possible, définissez une ellipse moins allongée.\n",
+   "placeholders": [],
+   "source": {
+    "line": 32
+   },
+   "en": null
+  },
+  "3": {
+   "id": "XFEM_3",
+   "fr": "\n  -> Le modèle %(k1)s est incompatible avec la méthode X-FEM.\n  -> Risque & Conseil:\n     Vérifiez qu'il a bien été créé par l'opérateur MODI_MODELE_XFEM.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 42
+   },
+   "en": null
+  },
+  "5": {
+   "id": "XFEM_5",
+   "fr": "\n  -> Attention, vous avez défini un enrichissement géométrique sur %(i1)d\n     couches d'éléments autour du fond de fissure.\n  -> Risque :\n     Au delà de 7 couches, il y a des risques de pivots nuls lors de la\n     résolution dans STAT_NON_LINE.\n  -> Conseils :\n     Pour éviter ces risques de pivots nuls, il est conseillé de ne pas\n     dépasser NB_COUCHES = 7.\n     Vous pouvez aussi laisser NB_COUCHES = %(i1)d, mais il pourra s'avérer\n     nécessaire d'augmenter le nombre maximales de décimales perdues dans\n     STAT_NON_LINE (mot-clé NPREC de SOLVEUR pour les méthodes LDLT ou MULT_FRONT)\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "6": {
+   "id": "XFEM_6",
+   "fr": "\n  -> Le rayon d'enrichissement RAYON_ENRI doit être un réel strictement\n     supérieur à 0.\n",
+   "placeholders": [],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "7": {
+   "id": "XFEM_7",
+   "fr": "\n     Il y a %(i1)d mailles %(k1)s\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 70
+   },
+   "en": null
+  },
+  "8": {
+   "id": "XFEM_8",
+   "fr": "\n     Le nombre de %(k1)s X-FEM est limité à 2.10E9\n     Risque & Conseil:\n     Veuillez réduire la taille du maillage.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 75
+   },
+   "en": null
+  },
+  "9": {
+   "id": "XFEM_9",
+   "fr": "\n     Le groupe de mailles donné pour définir la fissure contient des\n     mailles qui ne sont pas connectées aux autres. Cela empêche\n     d'orienter correctement la normale à la surface de la fissure.\n\n     Risque & Conseil:\n       Veuillez vérifier que les mailles données en entrée sont toutes\n       connectées entre elles, c'est-à-dire qu'elle forme un groupe de\n       mailles contiguës.\n       Sinon, il faut définir une fissure pour chacun des groupes\n       non connexes.\n",
+   "placeholders": [],
+   "source": {
+    "line": 82
+   },
+   "en": null
+  },
+  "10": {
+   "id": "XFEM_10",
+   "fr": "\n     La direction du champ thêta n'a pas été donnée. La direction automatique\n     est une direction variable, basée sur le gradient de la level-set tangente.\n",
+   "placeholders": [],
+   "source": {
+    "line": 96
+   },
+   "en": null
+  },
+  "11": {
+   "id": "XFEM_11",
+   "fr": "\n  -> On a trouvé plus de 2 points de fond de fissure, ce qui est impossible en 2D.\n  -> Risque & Conseil:\n     Cela est normalement causé par une mauvaise définition des level-sets.\n\n     Si les level-sets ont été définies par DEFI_FISS_XFEM, veuillez revoir leur\n     définition.\n\n     Si les level-sets ont été calculées par PROPA_FISS, vous pouvez essayer\n     d'utiliser un maillage plus raffiné dans toute la zone de propagation ou bien\n     une grille auxiliaire.\n     Si vous avez utilisé la méthode simplexe avec restriction de la zone de mise à\n     jour des level-sets (ZONA_MAJ='TORE'), vous pouvez spécifier un rayon plus élevé\n     de celui qui a été utilisé (écrit dans le fichier .mess) en utilisant l'opérande\n     RAYON_TORE ou vous pouvez déactiver la restriction de la zone de mise à jour\n     (ZONE_MAJ='TOUT').\n     Sinon vous pouvez changer la méthode utilisée par PROPA_FISS (opérande\n     METHODE_PROPA).\n",
+   "placeholders": [],
+   "source": {
+    "line": 102
+   },
+   "en": null
+  },
+  "12": {
+   "id": "XFEM_12",
+   "fr": "\n  Le gradient de la level-set tangente est nul au noeud %(k1)s.\n  Ceci est certainement du à un point singulier dans la définition de la level-set.\n  Il vaut veiller à ce que ce point singulier ne soit pas inclus dans la couronne\n  d'intégration du champ thêta.\n  Conseil : réduisez la taille de la couronne du champ thêta\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 123
+   },
+   "en": null
+  },
+  "13": {
+   "id": "XFEM_13",
+   "fr": "\n     Dans le modèle, des mailles SEG2 ou SEG3 possèdent des noeuds enrichis par X-FEM.\n     Ceci n'est pas encore possible en 3D.\n     Conseils : si ces mailles sont importantes pour le calcul (charge linéique...), il faut\n     les mettre loin de de la fissure.\n     Si ces mailles ne servent pas pour le calcul, il vaut mieux ne pas les affecter dans le modèle,\n     ou bien les supprimer du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 132
+   },
+   "en": null
+  },
+  "14": {
+   "id": "XFEM_14",
+   "fr": "\nLe calcul de la norme L2 de la pression de contact sur une fissure XFEM n'est pas disponible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 142
+   },
+   "en": null
+  },
+  "15": {
+   "id": "XFEM_15",
+   "fr": "\n  -> Cette option n'a pas encore été programmée.\n  -> Risque & Conseil:\n     Veuillez utiliser un autre chargement (en pression) ou contacter votre\n     correspondant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 147
+   },
+   "en": null
+  },
+  "16": {
+   "id": "XFEM_16",
+   "fr": "\n  -> Il n'y a aucun élément enrichi.\n",
+   "placeholders": [],
+   "source": {
+    "line": 155
+   },
+   "en": null
+  },
+  "17": {
+   "id": "XFEM_17",
+   "fr": "\n     il ne faut qu'un mot-clé parmi RAYON_ENRI et NB_COUCHES.\n",
+   "placeholders": [],
+   "source": {
+    "line": 160
+   },
+   "en": null
+  },
+  "18": {
+   "id": "XFEM_18",
+   "fr": "\n     Dimension de l'espace incorrecte.\n     Le modèle doit être 2D ou 3D et ne pas comporter de sous-structures.\n",
+   "placeholders": [],
+   "source": {
+    "line": 165
+   },
+   "en": null
+  },
+  "19": {
+   "id": "XFEM_19",
+   "fr": "\n     Il y a %(i1)d mailles dans la zone fissure.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "20": {
+   "id": "XFEM_20",
+   "fr": "\n     Vous avez défini plus d'un fond fermé lors d'un appel à DEFI_FISS_XFEM.\n     Conseil:\n     Veuillez définir chacun des fonds dans des DEFI_FISS_XFEM différents.\n",
+   "placeholders": [],
+   "source": {
+    "line": 176
+   },
+   "en": null
+  },
+  "21": {
+   "id": "XFEM_21",
+   "fr": "\n     Vous avez défini au moins un fond ouvert et un fond fermé lors d'un appel à\n     DEFI_FISS_XFEM.\n     Conseil:\n     Veuillez définir chacun des fonds dans des DEFI_FISS_XFEM différents.\n",
+   "placeholders": [],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "22": {
+   "id": "XFEM_22",
+   "fr": "\n     Une relation cinématique est imposée au niveau du noeud %(k1)s sur lequel une\n     fissure passe et cette relation est imposée de part et d'autre de la fissure.\n     Deux relations sont donc imposées, bloquant ainsi le ddl Heaviside associé.\n     Si vous avez également imposé une relation cinématique sur le degré de liberté\n     Heaviside associé du noeud  %(k1)s, la matrice sera non factorisable.\n     Conseil :\n     Vous pouvez exclure le noeud %(k1)s du groupe affecté par\n     cette deuxième relation en utilisant par exemple l'opérande DIFFE.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 191
+   },
+   "en": null
+  },
+  "23": {
+   "id": "XFEM_23",
+   "fr": "\n     Erreur dans le choix de la méthode de calcul des level-sets.\n     Vous souhaitez définir une %(k1)s.\n     Or la forme que vous avez sélectionnée < %(k2)s >\n     correspond à une %(k3)s.\n     Conseil :\n     Sélectionnez une forme de %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 203
+   },
+   "en": null
+  },
+  "24": {
+   "id": "XFEM_24",
+   "fr": "\n     Erreur dans le choix de la méthode de calcul des level-sets.\n     Vous souhaitez définir une fissure.\n     Pour cela il est nécessaire de définir 2 level-sets : LT et LN.\n     Conseil :\n     Veuillez renseignez %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 213
+   },
+   "en": null
+  },
+  "25": {
+   "id": "XFEM_25",
+   "fr": "\n     Erreur dans le choix de la méthode de calcul des level-sets.\n     Vous souhaitez définir une interface.\n     Pour cela il ne faut est pas définir la level-set normale LT.\n     %(k1)s ne sera pas considéré.\n     Conseil :\n     Pour ne plus obtenir ce message, ne renseignez pas %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "26": {
+   "id": "XFEM_26",
+   "fr": "\n     Numéros des mailles de la zone fissure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 232
+   },
+   "en": null
+  },
+  "27": {
+   "id": "XFEM_27",
+   "fr": "\n     L'utilisation de la grille auxiliaire avec la méthode SIMPLEXE n'est pas disponible.\n     Utiliser la méthode UPWIND ou effectuer le calcul sur le maillage physique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 237
+   },
+   "en": null
+  },
+  "28": {
+   "id": "XFEM_28",
+   "fr": "\n     Les flux de fluide dans les fractures ne sont autorisés que pour les modélisations HM-XFEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 243
+   },
+   "en": null
+  },
+  "29": {
+   "id": "XFEM_29",
+   "fr": "\n     Nombre de mailles contenant le fond de fissure : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 248
+   },
+   "en": null
+  },
+  "30": {
+   "id": "XFEM_30",
+   "fr": "\n     Nombre de mailles de type Heaviside : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 253
+   },
+   "en": null
+  },
+  "31": {
+   "id": "XFEM_31",
+   "fr": "\n     Nombre de mailles de type Crack-tip : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 258
+   },
+   "en": null
+  },
+  "32": {
+   "id": "XFEM_32",
+   "fr": "\n     Nombre de mailles de type Heaviside Crack-tip : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 263
+   },
+   "en": null
+  },
+  "33": {
+   "id": "XFEM_33",
+   "fr": "\n     Nombre de points du fond de fissure : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 268
+   },
+   "en": null
+  },
+  "34": {
+   "id": "XFEM_34",
+   "fr": "\n     Nombre de fonds de fissure : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 273
+   },
+   "en": null
+  },
+  "35": {
+   "id": "XFEM_35",
+   "fr": "\n     Coordonnées des points des fonds de fissure\n",
+   "placeholders": [],
+   "source": {
+    "line": 278
+   },
+   "en": null
+  },
+  "36": {
+   "id": "XFEM_36",
+   "fr": "\n     fond de fissure : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 283
+   },
+   "en": null
+  },
+  "37": {
+   "id": "XFEM_37",
+   "fr": "\n     Nombre de level-sets réajustées : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 288
+   },
+   "en": null
+  },
+  "39": {
+   "id": "XFEM_39",
+   "fr": "\n     Erreur utilisateur : incohérence entre les mots-clés FISSURE et MODELE_IN.\n     Il faut que les (ou la) fissure sous le mot-clé FISSURE soient toutes définies à\n     partir du même maillage.\n     Or :\n     - la fissure %(k1)s est définie à partir du maillage %(k2)s\n     - le modèle renseigné sous MODELE_IN est défini à partir du maillage %(k3)s.\n     Conseil :\n     Veuillez revoir la définition de la fissure %(k1)s ou bien changer MODELE_IN.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 293
+   },
+   "en": null
+  },
+  "40": {
+   "id": "XFEM_40",
+   "fr": "\n      La maille %(k1)s doit être enrichie avec plus de 4 fonctions Heaviside,\n      le multi-Heaviside est limité à 4 fonctions Heaviside, un noeud du maillage\n      ne doit pas être connecté à plus de 4 fissures.\n      Pour ne pas activer le multi-Heaviside, les fissures doivent être séparées de 2 mailles\n      minimum. Veuillez raffiner le maillage entre les fissures (ou écarter les fissures).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 305
+   },
+   "en": null
+  },
+  "41": {
+   "id": "XFEM_41",
+   "fr": "\n      La maille %(k1)s est quadratique et elle est connectée à 2 fissures,\n      le multi-Heaviside n'a été généralisé en quadratique que pour les modélisations HM.\n      Pour ne pas activer le multi-Heaviside, les fissures doivent être séparées de 2 mailles\n      minimum. Veuillez raffiner le maillage entre les fissures (ou écarter les fissures).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 314
+   },
+   "en": null
+  },
+  "42": {
+   "id": "XFEM_42",
+   "fr": "\n      La table de facteurs d'intensité des contraintes donnée en entré pour la fissure\n      %(k1)s ne contient pas le bon numéro de fonds de fissure et/ou de points.\n\n      Veuillez faire les vérifications suivantes:\n      - si la fissure %(k1)s  est formée par un seul fond, veuillez vérifier d'avoir donné\n        la bonne table\n      - si la fissure %(k1)s est formée par plusieurs fonds, veuillez vérifier que la\n        table donnée contient les valeurs des facteurs d'intensité des contraintes de\n        chaque fond (voir colonne NUME_FOND de la table)\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 322
+   },
+   "en": null
+  },
+  "43": {
+   "id": "XFEM_43",
+   "fr": "\n      Le contact autre que P1P1 est actif et la maille %(k1)s est connectée à 2 fissures,\n      à l'exception des modélisations HM-XFEM, le multi-Heaviside ne peut pas être pris\n      en compte si le contact autre que P1P1 est utilisé.\n      Pour ne pas activer le multi-Heaviside, les fissures doivent être séparées de 2 mailles\n      minimum. Veuillez raffiner le maillage entre les fissures (ou écarter les fissures).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 335
+   },
+   "en": null
+  },
+  "44": {
+   "id": "XFEM_44",
+   "fr": "\n      La maille %(k1)s est connectée à 2 fissures, or il s'agit d'une maille possédant des\n      enrichissements de fond de fissure.\n      Le multi-Heaviside ne peut pas être pris en compte en fond de fissure.\n      Pour ne pas activer le multi-Heaviside, les fissures doivent être séparées de 2 mailles\n      minimum. Veuillez raffiner le maillage entre les fissures (ou écarter les fissures).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 344
+   },
+   "en": null
+  },
+  "45": {
+   "id": "XFEM_45",
+   "fr": "\n      Jonction X-FEM et contact\n\n      Une facette de contact XFEM doit être redécoupée. Ceci n'est pas implémenté pour l'instant.\n      Les efforts de contact ne seront pas prise en compte sur cette facette.\n",
+   "placeholders": [],
+   "source": {
+    "line": 353
+   },
+   "en": null
+  },
+  "46": {
+   "id": "XFEM_46",
+   "fr": "\n      Les fissures sont mal ordonnées dans le mot clé FISSURE de MODI_MODELE_XFEM\n\n      L'ordre dans lequel sont définis les fissures avec l'utilisation du mot clé JONCTION impose que %(k1)s doit\n      être donné après %(k2)s. Veiller permuter %(k1)s et %(k2)s dans le mot clé FISSURE de MODI_MODELE_XFEM.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 361
+   },
+   "en": null
+  },
+  "47": {
+   "id": "XFEM_47",
+   "fr": "\n      La fissure %(k1)s est déjà attaché à la fissure %(k2)s, on ne peut pas l'attacher à %(k3)s.\n\n      Il est possible d'attacher globalement %(k1)s à la fois à %(k2)s et %(k3)s,\n      mais il ne faut pas qu'un élément soit connecté à la fois à %(k2)s, %(k3)s et %(k1)s.\n\n      Pour résoudre ce problème, soit il faut écarter (ou raffiner le maillage entre) les fissures %(k2)s et %(k3)s.\n      Soit il faut lier la fissure %(k3)s à la fissure %(k2)s en ajoutant une ligne du type\n      JONCTION=_F(FISSURE=%(k2)s,POINT=...) lorsqu'on appelle DEFI_FISS_XFEM pour définir %(k3)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 369
+   },
+   "en": null
+  },
+  "48": {
+   "id": "XFEM_48",
+   "fr": "\n      Les flux correspondant a PRE2 et TEMP sont interdits pour les\n      éléments HM-XFEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 381
+   },
+   "en": null
+  },
+  "50": {
+   "id": "XFEM_50",
+   "fr": "\n     La méthode X-FEM n'est pas disponible avec %(k1)s.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 387
+   },
+   "en": null
+  },
+  "51": {
+   "id": "XFEM_51",
+   "fr": "\n     La maille %(k1)s possède %(i1)d points de fond de fissure de coordonnées :\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 392
+   },
+   "en": null
+  },
+  "52": {
+   "id": "XFEM_52",
+   "fr": "\n     Une ou des mailles contenant plus de 2 points du fond de fissure ont été détectées.\n     Le fond ne peut pas être orienté sous cette condition. Il n'est donc pas possible\n     de calculer les abscisses curvilignes du fond et de détecter les fonds multiples.\n     Par conséquent le post-traitement avec la commande CALC_G_XFEM n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 397
+   },
+   "en": null
+  },
+  "54": {
+   "id": "XFEM_54",
+   "fr": "\n     Attention, deux jonctions de fissure sont présentes dans le même élément. Les facettes\n     de contact récupérées dans cet élément risquent de ne pas être conformes à chaque jonction.\n  -> Conseil :\n     Raffinez le maillage afin de n'avoir qu'une seule jonction de fissure par élément.\n",
+   "placeholders": [],
+   "source": {
+    "line": 405
+   },
+   "en": null
+  },
+  "55": {
+   "id": "XFEM_55",
+   "fr": "\n     La découpe des facettes de contact XFEM à rencontrer un problème d'espace mémoire\n     lors de l'écriture du mode local %(k1)s.\n     La longueur du mode local dans le catalogue est %(i1)d, pourtant on a calculé qu'il\n     faudrait %(i2)d.\n     Le calcul s'arrête pour prévenir un dépassement mémoire.\n  -> Conseils:\n     - Vous pouvez augmenter le dimensionnement du mode local %(k1)s.\n     - Veuillez aussi contacter l'équipe de développement pour reporter la configuration de\n     coupe pour l'amélioration du catalogue.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 413
+   },
+   "en": null
+  },
+  "56": {
+   "id": "XFEM_56",
+   "fr": "\n  -> L'élément X-FEM de type %(k1)s porté par la maille %(k2)s ne\n     possède pas suffisamment de points de Gauss pour stocker les\n     informations aux points de Gauss de ses sous-éléments. Le nombre\n     de points de Gauss de la famille XFEM pour cet élément est %(i1)d,\n     alors que le nombre de points de Gauss nécessaire est %(i2)d.\n  -> Conseil:\n     Vous pouvez essayer de raffiner le maillage afin d'obtenir une\n     découpe mettant en jeu moins de sous-éléments.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 426
+   },
+   "en": null
+  },
+  "57": {
+   "id": "XFEM_57",
+   "fr": "\n  -> La fissure (ou l'interface) définie dans DEFI_FISS_XFEM ne coupe aucune des mailles\n     du maillage. La fissure (ou l'interface) se trouve donc en dehors de la structure ou\n     bien coïncide avec un bord de la structure. Cela est interdit. Il y a probablement\n     une erreur de mise en données.\n  -> Conseil :\n     Vérifier la cohérence entre la définition de la géométrie de la fissure et le maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 438
+   },
+   "en": null
+  },
+  "58": {
+   "id": "XFEM_58",
+   "fr": "\n  -> Aucun point du fond de fissure n'a été trouvé !\n     Cela signifie que le fond de fissure se trouve en dehors de la structure.\n\n  -> Risque & Conseil :\n     - Si vous souhaitiez définir une interface, il faut choisir TYPE_DISCONTINUITE = 'INTERFACE'\n        pour ne plus avoir ce message.\n     -  Si vous souhaitiez définir une fissure, il doit y avoir une erreur lors de la définition\n        de la level-set tangente Vérifier la définition des level-sets.\n     -  S'il s'agit d'un calcul de propagation, cela signifie que la fissure débouche et traverse\n        entièrement la structure (risque de pivot nul dans le prochain calcul mécanique pour cause\n        de modes de corps rigides non bloqués).\n",
+   "placeholders": [],
+   "source": {
+    "line": 448
+   },
+   "en": null
+  },
+  "59": {
+   "id": "XFEM_59",
+   "fr": "\n     Ne pas utiliser le mot-clef RAYON_ENRI lorsque le fond de fissure\n     est en dehors de la structure.\n",
+   "placeholders": [],
+   "source": {
+    "line": 463
+   },
+   "en": null
+  },
+  "60": {
+   "id": "XFEM_60",
+   "fr": "\n     -> Pour le fond fermé, un point supplémentaire du fond a été ajouté.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 469
+   },
+   "en": null
+  },
+  "63": {
+   "id": "XFEM_63",
+   "fr": "\n      -> ---Éléments XFEM quadratiques ---\n    On a effectué un ajustement géométrique de la fissure, car les arêtes du maillage sain sont\n    coupées plusieurs fois par l'isovaleur zéro de la level-set.\n    Le nombre d'ajustements effectués est : %(i1)d.\n    Cette correction impacte légèrement la localisation de la fissure.\n  -> Conseil :\n    Veuillez vérifier en post-traitement grâce à la commande POST_MAIL_XFEM que la nouvelle\n    géométrie de la fissure respecte la géométrie imposée dans la commande DEFI_FISS_XFEM.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 475
+   },
+   "en": null
+  },
+  "64": {
+   "id": "XFEM_64",
+   "fr": "\n  -> ---Éléments XFEM quadratiques 2D---\n     Le calcul ne peut aboutir pour l'une des raisons suivante :\n     - les calculs des coordonnées des points d'intersection entre un élément et la fissure\n       se sont mal déroulés\n     - l'élément ne peut être découpé selon la configuration de fissure qui le traverse\n",
+   "placeholders": [],
+   "source": {
+    "line": 487
+   },
+   "en": null
+  },
+  "65": {
+   "id": "XFEM_65",
+   "fr": "\n  -> ---Éléments XFEM quadratiques 2D---\n     Le calcul d'abscisse curviligne sur une arête quadratique n'est pas encore supporté pour\n     arête courbe.\n",
+   "placeholders": [],
+   "source": {
+    "line": 496
+   },
+   "en": null
+  },
+  "66": {
+   "id": "XFEM_66",
+   "fr": "\n  -> ---Éléments XFEM quadratiques 2D---\n     Le calcul d'abscisse curviligne sur une arête quadratique ne peut aboutir pour l'une des\n     raisons suivante :\n     - les trois points qui définissent l'arête quadratique sont identiques\n     - l'arête est \"trop\" arrondie\n",
+   "placeholders": [],
+   "source": {
+    "line": 503
+   },
+   "en": null
+  },
+  "67": {
+   "id": "XFEM_67",
+   "fr": "\n  -> ---Éléments XFEM quadratiques 2D---\n     Newton : nombre d'itérations maximal atteint\n",
+   "placeholders": [],
+   "source": {
+    "line": 512
+   },
+   "en": null
+  },
+  "68": {
+   "id": "XFEM_68",
+   "fr": "\n  -> Aucune grille n'est associée à la fissure donnée par FISS_GRILLE.\n\n  -> Risque & Conseil:\n     Veuillez donner une fissure avec une grille associée.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 518
+   },
+   "en": null
+  },
+  "69": {
+   "id": "XFEM_69",
+   "fr": "\n  -> La fissure à propager a été définie par DEFI_FISS_XFEM en donnant directement les deux\n     champs level-sets (mots-clés CHAMP_NO_LSN et CHAMP_NO_LST).\n     Aucune grille auxiliaire n'a été associée à cette fissure.\n\n  -> Risque & Conseil:\n     Dans le cas où les deux champs level-sets ont été obtenus d'une fissure propagée par\n     PROPA_FISS, les informations sur la localisation du domaine (mot-clé ZONE_MAJ) et sur\n     l'utilisation d'une grille auxiliaire ont été perdues, ce qui fait que le calcul de la\n     propagation de la fissure pourrait donner des résultats faux.\n\n     Vous pouvez ignorer cette alarme seulement si les deux champs level-sets donnés dans\n     DEFI_FISS_XFEM:\n     - n'ont pas été calculés par PROPA_FISS, c'est-à-dire qu'ils n'ont pas été extraits\n       d'une fissure propagée par PROPA_FISS\n     - ont été extraits d'une fissure propagée par PROPA_FISS sans grille auxiliaire associée\n       et la mise à jours des level-sets a été faite sur tous les noeuds du maillage\n       (mot-clé ZONE_MAJ='TOUT' dans PROPA_FISS)\n\n     Dans tous les autres cas, pour éviter des résultats faux, il faut absolument associer\n     une grille auxiliaire à la fissure à propager, grille héritée de la fissure de laquelle\n     les deux level-sets ont été extraites (mot-clé FISS_GRILLE de DEFI_FISS_XFEM).\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 527
+   },
+   "en": null
+  },
+  "70": {
+   "id": "XFEM_70",
+   "fr": "\n  -> Un élément convexe a été détecté sur le fond de la fissure %(k1)s. PROPA_FISS ne sait\n     pas traiter ce cas. Le calcul de propagation ne peut se poursuivre.\n  -> Conseil:\n     Veuillez revoir la définition de votre fissure.\n\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 553
+   },
+   "en": null
+  },
+  "71": {
+   "id": "XFEM_71",
+   "fr": "\n     La jonction de fissures est une fonctionnalité disponible uniquement pour les\n     modélisations mécaniques et hydro-mécaniques. Or le modèle %(k1)s est un modèle\n     thermique.\n  -> Conseil:\n     Revoyez la définition de votre modèle, ou celle de la fissure (ou des fissures).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 562
+   },
+   "en": null
+  },
+  "72": {
+   "id": "XFEM_72",
+   "fr": "\n  -> Vous utilisez le mot-clé FISSURE, or le modèle %(k1)s que vous avez renseigné\n     pour le mot clé MODELE n'est pas un modèle X-FEM.\n  -> Conseil:\n     Veuillez utiliser un autre mot-clé ou revoyez la définition de votre modèle.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 571
+   },
+   "en": null
+  },
+  "73": {
+   "id": "XFEM_73",
+   "fr": "\n  -> Vous avez renseigné %(k1)s pour le mot-clé FISSURE, or cette fissure est absente\n     du modèle %(k2)s que vous avez renseigné pour le mot-clé MODELE.\n  -> Conseil:\n     Assurez vous de renseigner pour le mot-clé FISSURE une liste de fissures\n     présentes dans le modèle ou revoyez la définition de votre modèle.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 579
+   },
+   "en": null
+  },
+  "74": {
+   "id": "XFEM_74",
+   "fr": "\n     Nombre de points du fond de fissure sur la grille : %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 588
+   },
+   "en": null
+  },
+  "75": {
+   "id": "XFEM_75",
+   "fr": "\n     Coordonnées des points du fond de fissure sur la grille\n",
+   "placeholders": [],
+   "source": {
+    "line": 593
+   },
+   "en": null
+  },
+  "77": {
+   "id": "XFEM_77",
+   "fr": "\n  -> Il y a éventuellement des créations de mailles\n     supplémentaires de type POI1 lorsque des affectations sont faites sur des nœuds ou des groupes de\n     noeuds. Ces mailles ne sont pas accessibles à l’utilisateur. Ceci a crée une maille tardive.\n\n  -> Risque & Conseil:\n     Veuillez voir le document [U4.41.01], section 4:  Il est fortement conseillé\n     d’utiliser CREA_MAILLAGE [U4.23.02] pour créer des mailles POI1 utilisables dans le fichier de\n     commande (pour STAT_NON_LINE par exemple).\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 598
+   },
+   "en": null
+  },
+  "78": {
+   "id": "XFEM_78",
+   "fr": "\n  -> Erreur, pour une modélisation %(k1)s, l'introduction de fissures dans le modèle n'est pas possible.\n\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 611
+   },
+   "en": null
+  },
+  "79": {
+   "id": "XFEM_79",
+   "fr": "\n  -> Vous devez renseigner le mot-clé MODELE_IN avec un modèle sain (produit par\n     l'opérateur AFFE_MODELE), or vous avez renseigné ce mot-clé avec %(k1)s\n     qui est un modèle X-FEM (produit par l'opérateur MODI_MODELE_XFEM)\n  -> Conseil:\n     Revoyez la définition de ce modèle\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 617
+   },
+   "en": null
+  },
+  "80": {
+   "id": "XFEM_80",
+   "fr": "\n  -> En présence du mot-clé MODELE_THER, vous devez renseigner le mot-clé MODELE_IN\n     avec un modèle mécanique. Or le modèle %(k1)s n'est pas un modèle mécanique.\n  -> Conseil:\n     Revoyez la définition de ce modèle.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 626
+   },
+   "en": null
+  },
+  "81": {
+   "id": "XFEM_81",
+   "fr": "\n  -> Vous devez renseigner le mot-clé MODELE_THER avec un modèle X-FEM (produit par\n     l'opérateur MODI_MODELE_XFEM), or vous avez renseigné ce mot-clé avec %(k1)s\n     qui est un modèle sain (produit par l'opérateur AFFE_MODELE)\n  -> Conseil:\n     Revoyez la définition de ce modèle\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 634
+   },
+   "en": null
+  },
+  "82": {
+   "id": "XFEM_82",
+   "fr": "\n  -> Vous devez renseigner le mot-clé MODELE_THER avec un modèle thermique.\n     Or le modèle %(k1)s n'est pas un modèle thermique.\n  -> Conseil:\n     Revoyez la définition de ce modèle\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 643
+   },
+   "en": null
+  },
+  "83": {
+   "id": "XFEM_83",
+   "fr": "\n  -> Les modèles %(k1)s et %(k2)s doivent nécessairement avoir été créés à partir\n     du même maillage. Or %(k1)s et %(k2)s ont respectivement été définis à partir\n     des maillages %(k3)s et %(k4)s.\n  -> Conseil:\n     Revoyez la définition de ces modèles.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 651
+   },
+   "en": null
+  },
+  "84": {
+   "id": "XFEM_84",
+   "fr": "\n  On ne peut pas créer un modèle X-FEM avec contact dans le cas où le mot clé MODELE_THER est présent.\n  -> Conseil:\n     Vous devez renseigner CONTACT='NON' pour ne pas activer le contact.\n",
+   "placeholders": [],
+   "source": {
+    "line": 660
+   },
+   "en": null
+  },
+  "85": {
+   "id": "XFEM_85",
+   "fr": "\n  La maille %(k1)s est affectée par un élément fini thermique dans le modèle thermique enrichi %(k2)s,\n  or cette maille n'est affectée par aucun élément fini dans le modèle mécanique sain %(k3)s.\n  -> Conseil:\n     Revoyez la définition de ces deux modèles.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 667
+   },
+   "en": null
+  },
+  "86": {
+   "id": "XFEM_86",
+   "fr": "\nLe CHAM_GD utilisé par l'opération ASSE_DEPL de l'opérateur CREA_CHAMP doit être un champ nodal.\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 675
+   },
+   "en": null
+  },
+  "87": {
+   "id": "XFEM_87",
+   "fr": "\nLe CHAM_GD utilisé par l'opération ASSE_DEPL de l'opérateur CREA_CHAMP doit être de type DEPL_R.\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 680
+   },
+   "en": null
+  },
+  "88": {
+   "id": "XFEM_88",
+   "fr": "\nL'opération ASSE_DEPL de l'opérateur CREA_CHAMP ne doit pas être utilisée si le modèle le comporte pas d'éléments X-FEM.\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 685
+   },
+   "en": null
+  },
+  "89": {
+   "id": "XFEM_89",
+   "fr": "\nL'opération ASSE_DEPL de l'opérateur CREA_CHAMP ne prend pas en charge les éléments HM.\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 690
+   },
+   "en": null
+  },
+  "95": {
+   "id": "XFEM_95",
+   "fr": "\n  -> Le mot-clé CRITERE de PROPA_FISS vaut 'ANGLE_IMPO_GAMMA' ou 'ANGLE_IMPO_BETA_GAMMA' et le tableau\n     des facteurs d'intensité de contraintes de la fissure %(k1)s ne contient\n     pas de colonne 'GAMMA'.\n  -> Risque & Conseil:\n     Si vous souhaitez imposer les valeurs de l'angle de déversement aux points\n     du fonds de fissure, veuillez indiquer CRITERE='ANGLE_IMPO_GAMMA' ou 'ANGLE_IMPO_BETA_GAMMA' et ajouter\n     une colonne 'GAMMA' au tableau des facteurs d'intensité de contraintes manuellement.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 695
+   },
+   "en": null
+  },
+  "96": {
+   "id": "XFEM_96",
+   "fr": "\n  -> Vous avez renseigné le mot-clé EVOL de AFFE_MATERIAU / AFFE_VARC avec un résultat thermique X-FEM.\n     Dans ce cas, vous ne pouvez définir qu'une seule occurrence du mot-clé facteur AFFE_VARC.\n",
+   "placeholders": [],
+   "source": {
+    "line": 706
+   },
+   "en": null
+  },
+  "97": {
+   "id": "XFEM_97",
+   "fr": "\n  -> Vous avez renseigné le mot-clé EVOL de AFFE_MATERIAU / AFFE_VARC avec un résultat thermique X-FEM.\n     Dans ce cas, le mot-clé MODELE de AFFE_MATERIAU devient obligatoire.\n",
+   "placeholders": [],
+   "source": {
+    "line": 712
+   },
+   "en": null
+  },
+  "98": {
+   "id": "XFEM_98",
+   "fr": "\n  -> Les chargements de type FORCE_FACE ne sont pas gérés pour le calcul de l'option CALC_G_XFEM sur les éléments de bord X-FEM.\n     Seuls les chargements de type PRES_REP peuvent être pris en compte.\n",
+   "placeholders": [],
+   "source": {
+    "line": 718
+   },
+   "en": null
+  },
+  "99": {
+   "id": "XFEM_99",
+   "fr": "\n  -> L'opérateur CALC_G_XFEM ne sait pas traiter le cas d'une pression fonction d'un ou de plusieurs paramètres appliquée\n     sur les lèvres d'une fissure X-FEM. Seul le cas d'une pression constante en espace et en temps est prévu.\n     Veuillez utiliser l'opérateur POST_K1_K2_K3.\n",
+   "placeholders": [],
+   "source": {
+    "line": 724
+   },
+   "en": null
+  },
+  "100": {
+   "id": "XFEM_100",
+   "fr": "\n  -> Le champ matériau est absent de la liste des arguments de l'opérateur\n     POST_ERREUR, pour une fissure XFEM, avec fond de fissure. L'assemblage\n     du champ de déplacement X-FEM est impossible.\n  -> Conseil:\n     Rajouter le CHAM_MATER en entrée de la commande POST_ERREUR.\n",
+   "placeholders": [],
+   "source": {
+    "line": 731
+   },
+   "reachable": false,
+   "en": null
+  }
+ }
+}

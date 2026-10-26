@@ -1,0 +1,290 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/extr_table.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "EXTR_TABLE",
+ "kind": "OPER",
+ "fr": "Extraire d'une table des concepts Code_Aster",
+ "translation_upstream": null,
+ "op": 173,
+ "reentrant": "n",
+ "result_types": [
+  "matr_asse_gene_r",
+  "matr_elem_depl_r",
+  "vect_elem_depl_r",
+  "matr_elem_temp_r",
+  "vect_elem_temp_r",
+  "cham_gd_sdaster",
+  "cham_no_sdaster",
+  "carte_sdaster",
+  "cham_elem",
+  "mode_meca",
+  "table_sdaster",
+  "fonction_sdaster",
+  "fonction_c",
+  "nappe_sdaster",
+  "entier",
+  "reel"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/extr_table.py",
+  "line": 56
+ },
+ "keywords": [
+  {
+   "name": "TYPE_RESU",
+   "kind": "simple",
+   "path": "TYPE_RESU",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MATR_ASSE_GENE_R",
+    "MATR_ELEM_DEPL_R",
+    "VECT_ELEM_DEPL_R",
+    "MATR_ELEM_TEMP_R",
+    "VECT_ELEM_TEMP_R",
+    "CHAM_GD_SDASTER",
+    "CHAM_NO_SDASTER",
+    "CARTE_SDASTER",
+    "CHAM_ELEM",
+    "MODE_MECA",
+    "TABLE_SDASTER",
+    "FONCTION_SDASTER",
+    "FONCTION_C",
+    "NAPPE_SDASTER",
+    "ENTIER",
+    "REEL"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_table.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster",
+    "table_container"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_table.py",
+    "line": 84
+   }
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_table.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "FILTRE",
+   "kind": "factor",
+   "path": "FILTRE",
+   "status": "f",
+   "min": 1,
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_table.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "FILTRE/NOM_PARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_table.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "CRIT_COMP",
+     "kind": "simple",
+     "path": "FILTRE/CRIT_COMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EQ",
+     "into": [
+      "EQ",
+      "LT",
+      "GT",
+      "NE",
+      "LE",
+      "GE",
+      "VIDE",
+      "NON_VIDE",
+      "MAXI",
+      "MAXI_ABS",
+      "MINI",
+      "MINI_ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_table.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "b_vale",
+     "kind": "bloc",
+     "path": "FILTRE/[b_vale]",
+     "condition": "(is_in(\"CRIT_COMP\", ('EQ','NE','GT','LT','GE','LE')))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VALE",
+        "VALE_I",
+        "VALE_K",
+        "VALE_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_table.py",
+      "line": 110
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "FILTRE/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_table.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "VALE_I",
+       "kind": "simple",
+       "path": "FILTRE/VALE_I",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_table.py",
+        "line": 114
+       }
+      },
+      {
+       "name": "VALE_C",
+       "kind": "simple",
+       "path": "FILTRE/VALE_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_table.py",
+        "line": 115
+       }
+      },
+      {
+       "name": "VALE_K",
+       "kind": "simple",
+       "path": "FILTRE/VALE_K",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_table.py",
+        "line": 116
+       }
+      }
+     ]
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "FILTRE/CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_table.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "FILTRE/PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_table.py",
+      "line": 119
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_table.py",
+    "line": 121
+   }
+  }
+ ]
+}

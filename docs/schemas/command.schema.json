@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shubhs650/codeaster-en/docs/schemas/command.schema.json",
+  "title": "codeaster-en command catalog extract (en/commands/<COMMAND>.json)",
+  "description": "One code_aster command as defined in the pinned upstream catalog (code_aster/Cata/Commands/), written by `caen extract catalog` (task 1.2). Generated: never hand-edit; change the extractor (tools/codeaster_en/extract/catalog.py) instead. Values are copied from the catalog definition without interpretation. Where an optional field is absent, the catalog did not set the argument; the defaults the syntax checker then applies are given in each field's description, citing upstream code_aster/Cata/Language/.",
+  "type": "object",
+  "required": [
+    "_generated_from",
+    "schema_version",
+    "command",
+    "kind",
+    "fr",
+    "translation_upstream",
+    "op",
+    "reentrant",
+    "result_types",
+    "result_type_depends_on_keywords",
+    "has_compat_syntax",
+    "rules",
+    "source",
+    "keywords"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "_generated_from": {
+      "type": "object",
+      "required": ["upstream", "upstream_commit", "file", "extractor", "extractor_version"],
+      "additionalProperties": false,
+      "properties": {
+        "upstream": {"description": "Pinned upstream tag (UPSTREAM_VERSION).", "type": ["string", "null"]},
+        "upstream_commit": {"description": "Commit of the upstream/ submodule.", "type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+        "file": {"description": "Catalog module that defines the command, relative to upstream/.", "type": ["string", "null"]},
+        "extractor": {"const": "codeaster_en.extract.catalog"},
+        "extractor_version": {"type": "string"}
+      }
+    },
+    "schema_version": {"const": 1},
+    "command": {"description": "Command name exactly as in the catalog (French; never renamed).", "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+    "kind": {
+      "description": "Catalog constructor: OPER (operator, op= is a Fortran operator number), MACRO (Python macro-command), PROC (procedure, no result), FORM (FORMULE).",
+      "enum": ["OPER", "MACRO", "PROC", "FORM"]
+    },
+    "fr": {"description": "French help string of the command (fr=), or null when the catalog has none.", "type": ["string", "null"]},
+    "translation_upstream": {
+      "description": "Upstream's own English labels (translation= argument, used by AsterStudy): {French name: English label}. Null when absent. Data only: the glossary (en/glossary.yaml) decides our English.",
+      "type": ["object", "null"],
+      "additionalProperties": {"type": "string"}
+    },
+    "op": {"description": "op= argument: Fortran operator number for OPER/PROC, Python callable path for MACRO, or null.", "type": ["integer", "string", "null"]},
+    "reentrant": {"description": "reentrant= argument verbatim: 'n' (no), 'o:<KW>' (mandatory), 'f:<KW>' (optional, result can be reused through keyword <KW>). Null when absent.", "type": ["string", "null"]},
+    "result_types": {
+      "description": "Concept types the command can produce (sd_prod=). Empty for commands without a result. When sd_prod is a function, this is upstream's Command.get_all_types() list; null if that call fails.",
+      "type": ["array", "null"],
+      "items": {"type": "string"}
+    },
+    "result_type_depends_on_keywords": {"description": "True when sd_prod= is a function of the keywords given.", "type": "boolean"},
+    "has_compat_syntax": {"description": "True when the catalog defines compat_syntax= (a converter for deprecated syntax).", "type": "boolean"},
+    "docu": {"description": "docu= argument verbatim (documentation reference) when present.", "type": "string"},
+    "repetable": {"description": "repetable= argument verbatim when present.", "type": "string"},
+    "rules": {"$ref": "#/$defs/rules"},
+    "other": {"$ref": "#/$defs/other"},
+    "source": {"$ref": "#/$defs/source"},
+    "keywords": {"$ref": "#/$defs/entities"}
+  },
+  "$defs": {
+    "source": {
+      "description": "Where the object is constructed in upstream: file relative to upstream/ and the line of the OPER/MACRO/PROC/SIMP/FACT/BLOC call. Shared keywords (code_aster/Cata/Commons/) point to the Commons file.",
+      "type": "object",
+      "required": ["file", "line"],
+      "additionalProperties": false,
+      "properties": {
+        "file": {"type": "string", "pattern": "^code_aster/Cata/"},
+        "line": {"type": "integer", "minimum": 1}
+      }
+    },
+    "path": {
+      "description": "Keyword path as the user writes it: factor keywords add a segment (AFFE/GROUP_MA); blocs do not, because their keywords are written at the bloc's parent level. A bloc's own path ends with its name in brackets (SOLVEUR/[b_mumps]).",
+      "type": "string",
+      "pattern": "^([A-Za-z0-9_]+/)*(\\[[A-Za-z0-9_]+\\]|[A-Za-z0-9_]+)$"
+    },
+    "status": {
+      "description": "statut= argument: 'o' mandatory, 'f' optional, 'c' hidden (filled by the supervisor), 'd' factor keyword present by default. Absent statut is 'f' (SyntaxObjects.PartOfSyntax._def_status).",
+      "enum": ["o", "f", "c", "d"]
+    },
+    "fr": {"description": "French help string (fr=), or null.", "type": ["string", "null"]},
+    "value": {
+      "description": "A catalog value. Complex numbers are {\"complex\": [re, im]}; non-finite floats are {\"float\": repr}; class objects are their class name.",
+      "anyOf": [
+        {"type": ["string", "number", "boolean", "null"]},
+        {"type": "array", "items": {"$ref": "#/$defs/value"}},
+        {"type": "object", "required": ["complex"], "additionalProperties": false, "properties": {"complex": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2}}},
+        {"type": "object", "required": ["float"], "additionalProperties": false, "properties": {"float": {"type": "string"}}}
+      ]
+    },
+    "cardinality": {
+      "description": "min=/max= as written. max '**' means unbounded. Absent max means 1 (SyntaxChecker: definition.get('max', 1)). Absent min means no lower bound on the number of values of a simple keyword and 0 occurrences of a factor keyword (SyntaxChecker: definition.get('min') / definition.get('min', 0)).",
+      "anyOf": [{"type": "integer"}, {"const": "**"}]
+    },
+    "rules": {
+      "description": "Catalog rules (regles=), by their catalog name.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "keywords"],
+        "additionalProperties": false,
+        "properties": {
+          "rule": {"enum": ["AU_MOINS_UN", "UN_PARMI", "EXCLUS", "PRESENT_PRESENT", "PRESENT_ABSENT", "ENSEMBLE", "NON_VIDE"]},
+          "keywords": {"type": "array", "items": {"type": "string"}},
+          "defaults": {"description": "Default values inserted by AU_MOINS_UN/UN_PARMI when none of the keywords is given.", "type": "object", "additionalProperties": {"$ref": "#/$defs/value"}}
+        }
+      }
+    },
+    "validators": {
+      "description": "validators= argument: validator class name (code_aster/Cata/Language/Validators.py) and its arguments.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "args"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string"},
+          "args": {"type": "array", "items": {"anyOf": [{"$ref": "#/$defs/value"}, {"type": "object", "required": ["name", "args"]}]}}
+        }
+      }
+    },
+    "other": {
+      "description": "Definition arguments this extractor does not interpret, copied verbatim (e.g. a misspelt 'default=' that the syntax checker ignores). Present only when non-empty.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"$ref": "#/$defs/value"}
+    },
+    "entities": {
+      "description": "Keywords and blocs in catalog order.",
+      "type": "array",
+      "items": {"oneOf": [{"$ref": "#/$defs/simple"}, {"$ref": "#/$defs/factor"}, {"$ref": "#/$defs/bloc"}]}
+    },
+    "simple": {
+      "description": "Simple keyword (SIMP).",
+      "type": "object",
+      "required": ["name", "kind", "path", "status", "type", "fr", "source"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "kind": {"const": "simple"},
+        "path": {"$ref": "#/$defs/path"},
+        "status": {"$ref": "#/$defs/status"},
+        "type": {
+          "description": "typ= as a list: 'R' real, 'I' integer, 'C' complex, 'TXM' text, or a concept/unit class name (maillage_sdaster, grma, UnitDefault, ...). Several entries mean any of them is accepted.",
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "min": {"$ref": "#/$defs/cardinality"},
+        "max": {"$ref": "#/$defs/cardinality"},
+        "val_min": {"type": "number"},
+        "val_max": {"type": "number"},
+        "val_min_included": {"description": "Absent means true (SyntaxChecker).", "type": "boolean"},
+        "val_max_included": {"description": "Absent means true (SyntaxChecker).", "type": "boolean"},
+        "default": {"description": "defaut= argument. Absent when the catalog gives no default.", "$ref": "#/$defs/value"},
+        "into": {"description": "into= argument: the allowed values.", "type": "array", "items": {"$ref": "#/$defs/value"}},
+        "enum": {"description": "enum= argument verbatim (integer codes parallel to into=).", "type": "array", "items": {"$ref": "#/$defs/value"}},
+        "inout": {"description": "inout= argument verbatim ('in'/'out', for file units).", "type": "string"},
+        "validators": {"$ref": "#/$defs/validators"},
+        "fr": {"$ref": "#/$defs/fr"},
+        "rules": {"$ref": "#/$defs/rules"},
+        "other": {"$ref": "#/$defs/other"},
+        "source": {"$ref": "#/$defs/source"}
+      }
+    },
+    "factor": {
+      "description": "Factor keyword (FACT): a group of keywords, possibly repeated (max > 1).",
+      "type": "object",
+      "required": ["name", "kind", "path", "status", "fr", "source", "keywords"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "kind": {"const": "factor"},
+        "path": {"$ref": "#/$defs/path"},
+        "status": {"$ref": "#/$defs/status"},
+        "min": {"$ref": "#/$defs/cardinality"},
+        "max": {"$ref": "#/$defs/cardinality"},
+        "fr": {"$ref": "#/$defs/fr"},
+        "rules": {"$ref": "#/$defs/rules"},
+        "other": {"$ref": "#/$defs/other"},
+        "source": {"$ref": "#/$defs/source"},
+        "keywords": {"$ref": "#/$defs/entities"}
+      }
+    },
+    "bloc": {
+      "description": "Conditional bloc (BLOC): its keywords are allowed only when the condition holds. The condition is a Python expression evaluated by upstream (SyntaxObjects.Bloc.isEnabled) against the keywords already given.",
+      "type": "object",
+      "required": ["name", "kind", "path", "condition", "fr", "source", "keywords"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "kind": {"const": "bloc"},
+        "path": {"$ref": "#/$defs/path"},
+        "condition": {"type": "string"},
+        "fr": {"$ref": "#/$defs/fr"},
+        "rules": {"$ref": "#/$defs/rules"},
+        "other": {"$ref": "#/$defs/other"},
+        "source": {"$ref": "#/$defs/source"},
+        "keywords": {"$ref": "#/$defs/entities"}
+      }
+    }
+  }
+}

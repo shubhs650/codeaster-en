@@ -1,0 +1,352 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/proj_spec_base.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "PROJ_SPEC_BASE",
+ "kind": "OPER",
+ "fr": "Projecter un ou plusieurs spectres de turbulence sur une (ou plusieurs) base(s) modale(s) ",
+ "translation_upstream": null,
+ "op": 146,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "BASE_ELAS_FLUI",
+    "MODE_MECA",
+    "CHAM_NO"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TOUT",
+    "GROUP_MA"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "CHAM_NO",
+    "MODELE_INTERFACE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/proj_spec_base.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "SPEC_TURB",
+   "kind": "simple",
+   "path": "SPEC_TURB",
+   "status": "o",
+   "type": [
+    "spectre_sdaster"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "TOUT_CMP",
+   "kind": "simple",
+   "path": "TOUT_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "BASE_ELAS_FLUI",
+   "kind": "simple",
+   "path": "BASE_ELAS_FLUI",
+   "status": "f",
+   "type": [
+    "melasflu_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "b_fluide",
+   "kind": "bloc",
+   "path": "[b_fluide]",
+   "condition": "exists(\"BASE_ELAS_FLUI\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "VITE_FLUI",
+     "kind": "simple",
+     "path": "VITE_FLUI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_spec_base.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_spec_base.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "CHAM_NO",
+   "kind": "simple",
+   "path": "CHAM_NO",
+   "status": "f",
+   "type": [
+    "cham_no_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "FREQ_INIT",
+   "kind": "simple",
+   "path": "FREQ_INIT",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "FREQ_FIN",
+   "kind": "simple",
+   "path": "FREQ_FIN",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "NB_POIN",
+   "kind": "simple",
+   "path": "NB_POIN",
+   "status": "o",
+   "type": [
+    "I"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TOUT",
+   "into": [
+    "TOUT",
+    "DIAG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "TOUT",
+   "kind": "simple",
+   "path": "TOUT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "MODELE_INTERFACE",
+   "kind": "simple",
+   "path": "MODELE_INTERFACE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "VECT_X",
+   "kind": "simple",
+   "path": "VECT_X",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 3,
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "VECT_Y",
+   "kind": "simple",
+   "path": "VECT_Y",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 3,
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "ORIG_AXE",
+   "kind": "simple",
+   "path": "ORIG_AXE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 3,
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_spec_base.py",
+    "line": 60
+   }
+  }
+ ]
+}

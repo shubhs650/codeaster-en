@@ -1,0 +1,955 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/med.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MED",
+ "source": {
+  "file": "code_aster/Messages/med.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MED_1",
+   "fr": "\n  -> Absence de localisation de points de Gauss dans le fichier MED\n     pour l'élément de référence %(k1)s.\n     On suppose que l'ordre des points de Gauss est celui de Code_Aster.\n  -> Risque & Conseil :\n     Risque de résultats faux.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MED_2",
+   "fr": "\n  -> Le nombre de points de Gauss est différent entre le fichier MED et Aster:\n      - nombre de points de Gauss contenu dans le fichier MED : %(i1)d\n      - nombre de points de Gauss défini dans Aster           : %(i2)d\n\n     Cette partie du champ ne sera pas relu.\n\n  -> Conseil :\n      - Choisissez des éléments finis compatibles entre Aster et le code tiers\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 32
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MED_3",
+   "fr": "\n  -> Les point de Gauss MED/Aster ne correspondent pas géométriquement.\n  -> Risque & Conseil:\n     Risque de résultats faux à cause cette incompatibilité.\n",
+   "placeholders": [],
+   "source": {
+    "line": 44
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MED_4",
+   "fr": "\n\n     Point De Gauss : %(i1)d              MED               ASTER\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 51
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MED_5",
+   "fr": "\n        %(k1)s                          %(r1)f          %(r2)f\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MED_6",
+   "fr": "\n  -> Une ou plusieurs permutations ont été effectuées sur l'ordre des points\n     de Gauss pour que la localisation MED corresponde à celle de Code_Aster.\n",
+   "placeholders": [],
+   "source": {
+    "line": 62
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MED_7",
+   "fr": "\n  -> Le nom de groupe \"%(k1)s\" est trop long. Il sera ignoré dans le maillage\n     utilisé par le calcul.\n\n  -> Conseil:\n     Si vous voulez utiliser ce groupe dans le calcul, il faut le renommer en limitant\n     à 24 caractères son nom.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 68
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MED_8",
+   "fr": "\nCréation du fichier au format MED %(i1)d.%(i2)d.%(i3)d.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 78
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MED_9",
+   "fr": "\nOn ne peut pas écrire au format MED %(i1)d.%(i2)d.%(i3)d.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 83
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MED_10",
+   "fr": "\nNom MED du maillage : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 88
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MED_11",
+   "fr": "\nOn essaie d'imprimer dans '%(k1)s'.\nPour imprimer des résultats au format MED dans un unique fichier, il est nécessaire\nde préciser un chemin absolu vers ce fichier (doit commencer par '/').\n\nRisque & Conseil : Utiliser DEFI_FICHIER pour associer l'unité logique à un chemin absolu.\n    ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 93
+   },
+   "en": null
+  },
+  "12": {
+   "id": "MED_12",
+   "fr": "\nVous avez demandé de relire un champ MED pour lequel les numéros de pas de temps et d'itération\nne sont pas égaux. Ce n'est pas autorisé dans LIRE_RESU.\n\nConseil : Utilisez %(k1)s.\n    ",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 102
+   },
+   "en": null
+  },
+  "18": {
+   "id": "MED_18",
+   "fr": "\n  Vous essayer de partitionner le maillage alors que le calcul est séquentiel.\n  Le partitionnement est désactivé.\n  -> Conseil :\n     Pour enlever cette alarme, utiliser le mot-clé SANS dans PARTITIONNEUR\n",
+   "placeholders": [],
+   "source": {
+    "line": 110
+   },
+   "en": null
+  },
+  "20": {
+   "id": "MED_20",
+   "fr": "\n  Le partitionneur de maillage n'est compatible qu'avec une version de MED >= %(k1)s. La version de MED du maillage utilisé est %(k2)s, d'où l'incompatibilité.\n\n  -> Conseil :\n     Convertissez votre maillage vers une version plus récente.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 118
+   },
+   "en": null
+  },
+  "24": {
+   "id": "MED_24",
+   "fr": "\n  -> Le fichier n'a pas été construit avec la même version de MED.\n  -> Risque & Conseil :\n     La lecture du fichier peut échouer !\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 126
+   },
+   "en": null
+  },
+  "25": {
+   "id": "MED_25",
+   "fr": "\n   Version de la bibliothèque MED utilisée par Code_Aster:  %(i1)d %(i2)d %(i3)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 134
+   },
+   "en": null
+  },
+  "26": {
+   "id": "MED_26",
+   "fr": "\n   Version de la bibliothèque MED qui a créé le fichier  : < 2.1.5\n",
+   "placeholders": [],
+   "source": {
+    "line": 139
+   },
+   "en": null
+  },
+  "27": {
+   "id": "MED_27",
+   "fr": "\n   Version de la bibliothèque MED pour créer le fichier  :  %(i1)d %(i2)d %(i3)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 144
+   },
+   "en": null
+  },
+  "28": {
+   "id": "MED_28",
+   "fr": "\n\n   Un utilitaire vous permet peut-être de convertir votre fichier (medimport)\n",
+   "placeholders": [],
+   "source": {
+    "line": 149
+   },
+   "en": null
+  },
+  "30": {
+   "id": "MED_30",
+   "fr": "\n  -> Votre modèle semble être composé de plusieurs modélisations, les composantes\n      de %(k1)s qui n'existent pas pour une partie du modèle ont été\n      mises à zéro.\n\n     Dans certains cas, le fichier MED produit peut devenir volumineux. Dans ce\n     cas, l'utilisation du mot-clé NOM_CMP est conseillée.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 155
+   },
+   "en": null
+  },
+  "31": {
+   "id": "MED_31",
+   "fr": "\n  -> Ce champ existe déjà dans le fichier MED avec un nombre de composantes\n     différent à un instant précédent. On ne peut pas le créer de nouveau.\n\n     Nom MED du champ : \"%(k1)s\"\n\n  -> Risque & Conseil :\n     On ne peut pas imprimer un champ dont le nombre de composantes varie en\n     fonction du temps. Plusieurs possibilités s'offrent à vous:\n     - si vous souhaitez disposer d'un champ disposant des mêmes composantes\n     à chaque instant, il faut renseigner derrière le mot-clé NOM_CMP le nom\n     des composantes commun aux différents instants.\n     - si vous souhaitez imprimer un champ avec l'ensemble des composantes\n     Aster qu'il contient, il suffit de faire plusieurs IMPR_RESU et de\n     renseigner pour chaque impression une liste d'instants ad hoc.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 165
+   },
+   "en": null
+  },
+  "32": {
+   "id": "MED_32",
+   "fr": "\n     Le champ %(k1)s est inconnu dans le fichier MED.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "33": {
+   "id": "MED_33",
+   "fr": "\n     Il manque des composantes.\n",
+   "placeholders": [],
+   "source": {
+    "line": 188
+   },
+   "en": null
+  },
+  "34": {
+   "id": "MED_34",
+   "fr": "\n     Aucune valeur n'est présente à cet instant.\n",
+   "placeholders": [],
+   "source": {
+    "line": 193
+   },
+   "en": null
+  },
+  "35": {
+   "id": "MED_35",
+   "fr": "\n     Aucune valeur n'est présente à ce numéro d'ordre.\n",
+   "placeholders": [],
+   "source": {
+    "line": 198
+   },
+   "en": null
+  },
+  "36": {
+   "id": "MED_36",
+   "fr": "\n     Le nombre de valeurs n'est pas correct.\n",
+   "placeholders": [],
+   "source": {
+    "line": 203
+   },
+   "en": null
+  },
+  "37": {
+   "id": "MED_37",
+   "fr": "\n  -> La lecture est donc impossible.\n  -> Risque & Conseil :\n     Veuillez vérifier l'intégrité du fichier MED avec medconforme/mdump.\n",
+   "placeholders": [],
+   "source": {
+    "line": 208
+   },
+   "en": null
+  },
+  "38": {
+   "id": "MED_38",
+   "fr": "\n  -> Incohérence catalogue - fortran\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 215
+   },
+   "en": null
+  },
+  "39": {
+   "id": "MED_39",
+   "fr": "\n  -> Incohérence catalogue - fortran\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "40": {
+   "id": "MED_40",
+   "fr": "\n  -> Ouverture du fichier MED en mode  %(k1)s  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 229
+   },
+   "en": null
+  },
+  "41": {
+   "id": "MED_41",
+   "fr": "\nErreur à la lecture du maillage.\n\nException :\n%(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 234
+   },
+   "en": null
+  },
+  "42": {
+   "id": "MED_42",
+   "fr": "\n  -> Le type d'entité  %(k1)s  est inconnu.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 242
+   },
+   "en": null
+  },
+  "43": {
+   "id": "MED_43",
+   "fr": "\n  Le champ %(k1)s est introuvable dans le fichier MED.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "44": {
+   "id": "MED_44",
+   "fr": "\n  -> Pas d'écriture pour  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 252
+   },
+   "en": null
+  },
+  "45": {
+   "id": "MED_45",
+   "fr": "\n     Issu de  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 257
+   },
+   "en": null
+  },
+  "46": {
+   "id": "MED_46",
+   "fr": "\n  -> Le type de champ est inconnu :  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 262
+   },
+   "en": null
+  },
+  "47": {
+   "id": "MED_47",
+   "fr": "\n  -> Création des tableaux de valeurs à écrire avec :\n",
+   "placeholders": [],
+   "source": {
+    "line": 267
+   },
+   "en": null
+  },
+  "48": {
+   "id": "MED_48",
+   "fr": "\n  -> Renumérotation impossible avec plus d'un sous-point.\n",
+   "placeholders": [],
+   "source": {
+    "line": 272
+   },
+   "en": null
+  },
+  "49": {
+   "id": "MED_49",
+   "fr": "\n  -> Véritable écriture des tableaux de valeurs\n",
+   "placeholders": [],
+   "source": {
+    "line": 277
+   },
+   "en": null
+  },
+  "50": {
+   "id": "MED_50",
+   "fr": "\n  -> Pas de maillage dans  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 282
+   },
+   "en": null
+  },
+  "51": {
+   "id": "MED_51",
+   "fr": "\n  -> Maillage  %(k1)s  inconnu dans  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 287
+   },
+   "en": null
+  },
+  "52": {
+   "id": "MED_52",
+   "fr": "\n  ->  Instant inconnu pour ce champ et ces supports dans le fichier.\n",
+   "placeholders": [],
+   "source": {
+    "line": 292
+   },
+   "en": null
+  },
+  "53": {
+   "id": "MED_53",
+   "fr": "\n  ->  La version de la lib MED utilisée par Code_Aster est plus récente que\n      celle qui a produit votre fichier MED.\n  ->  Conséquence:  On considère les champs aux noeuds par élément\n      comme des pseudo champs aux points de Gauss.\n      (On utilise pour la lecture du champ %(k1)s\n       contenu dans votre fichier MED, le type d'entité MED_MAILLE au lieu\n       de MED_NOEUD_MAILLE).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 297
+   },
+   "en": null
+  },
+  "54": {
+   "id": "MED_54",
+   "fr": "\n  -> Le maillage fourni à la commande n'est pas cohérent avec le type de structure\n     de données résultat que vous souhaitez produire.\n",
+   "placeholders": [],
+   "source": {
+    "line": 308
+   },
+   "en": null
+  },
+  "55": {
+   "id": "MED_55",
+   "fr": "\n  -> Lecture impossible pour  %(k1)s  au format MED\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 314
+   },
+   "en": null
+  },
+  "56": {
+   "id": "MED_56",
+   "fr": "\n     En effet, le phénomène %(k1)s de votre modèle n'est pas compatible avec une\n     structure de données Résultat de type %(k2)s.\n  -> Risque & Conseil :\n     Veuillez fournir à LIRE_RESU un autre modèle ou changer de TYPE_RESU.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 319
+   },
+   "en": null
+  },
+  "57": {
+   "id": "MED_57",
+   "fr": "\n  -> Le champ  %(k1)s n'existe pas dans le fichier MED.\n  -> Conseils :\n     Vérifier la présence du champ demandé dans le fichier.\n     Vérifier l'intégrité du fichier MED avec medconforme/mdump.\n\n  Remarque : Les champs disponibles dans ce fichier sont listés ci-dessous :\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 327
+   },
+   "en": null
+  },
+  "58": {
+   "id": "MED_58",
+   "fr": "\n  -> Le nombre de type de maille présent dans le fichier MED est\n      différent du nombre de type de maille présent dans le maillage fourni.\n  -> Risque & Conseil :\n     Le modèle sur lequel le résultat a été créé n'est pas le même\n      que le modèle fourni.\n     Vérifiez le maillage de votre modèle !\n",
+   "placeholders": [],
+   "source": {
+    "line": 337
+   },
+   "en": null
+  },
+  "59": {
+   "id": "MED_59",
+   "fr": "\n     Les éléments du modèle fourni ont pour support géométrique des\n     mailles ne figurant pas dans le fichier MED.\n     Par exemple, il y a %(i1)d mailles de type %(k1)s dans le fichier MED,\n     alors que le modèle en contient %(i2)d.\n  -> Risque & Conseil :\n     Veuillez fournir un modèle dont le maillage correspond à celui présent\n     dans le fichier MED.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 347
+   },
+   "en": null
+  },
+  "60": {
+   "id": "MED_60",
+   "fr": "\n  -> On ne traite pas les maillages distants.\n",
+   "placeholders": [],
+   "source": {
+    "line": 358
+   },
+   "en": null
+  },
+  "61": {
+   "id": "MED_61",
+   "fr": "\n     Le maillage contenu dans le fichier MED contient plus de mailles\n     que celui associé au maillage en entrée de la commande.\n     Par exemple, on dénombre %(i1)d mailles de type %(k1)s dans le maillage\n     MED, alors que le maillage aster n'en contient que %(i2)d !\n  -> Risque & Conseil :\n     Veuillez vérifier que le maillage fourni ne résulte pas d'une restriction,\n     ou que l'un des maillages est quadratique et l'autre linéaire.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 363
+   },
+   "en": null
+  },
+  "62": {
+   "id": "MED_62",
+   "fr": "\n  -> Impossible de déterminer un nom de maillage MED.\n",
+   "placeholders": [],
+   "source": {
+    "line": 374
+   },
+   "en": null
+  },
+  "64": {
+   "id": "MED_64",
+   "fr": "\n  -> Le CARA_ELEM fournit à IMPR_RESU (%(k1)s) est différent de celui lu\n     dans le résultat a imprimer (%(k2)s). Cela n'est pas autorisé.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 379
+   },
+   "en": null
+  },
+  "65": {
+   "id": "MED_65",
+   "fr": "\n  -> Grandeur inconnue.\n",
+   "placeholders": [],
+   "source": {
+    "line": 385
+   },
+   "en": null
+  },
+  "66": {
+   "id": "MED_66",
+   "fr": "\n  -> Composante inconnue pour la grandeur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 390
+   },
+   "en": null
+  },
+  "67": {
+   "id": "MED_67",
+   "fr": "\n  -> Le maillage %(k2)s est déjà présent dans le fichier MED %(k1)s.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 395
+   },
+   "en": null
+  },
+  "68": {
+   "id": "MED_68",
+   "fr": "\n  -> Instant voulu :  %(r1)f\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 400
+   },
+   "en": null
+  },
+  "69": {
+   "id": "MED_69",
+   "fr": "\n  -> Numéro d'ordre :  %(i1)d numéro de pas de temps :  %(i2)d\n\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 405
+   },
+   "en": null
+  },
+  "70": {
+   "id": "MED_70",
+   "fr": "\n  -> Trop de composantes pour la grandeur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 411
+   },
+   "en": null
+  },
+  "71": {
+   "id": "MED_71",
+   "fr": "\n  -> le mot-clé MODELE est obligatoire pour lire un CHAM_ELEM\n",
+   "placeholders": [],
+   "source": {
+    "line": 416
+   },
+   "en": null
+  },
+  "72": {
+   "id": "MED_72",
+   "fr": "\n  -> Nom de composante tronqué à 8 caractères ( %(k1)s  >>>  %(k2)s )\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 421
+   },
+   "en": null
+  },
+  "73": {
+   "id": "MED_73",
+   "fr": "\n  -> Impossible de trouver la composante ASTER associée a  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 426
+   },
+   "en": null
+  },
+  "74": {
+   "id": "MED_74",
+   "fr": "\n  -> Écriture des localisations des points de gauss.\n",
+   "placeholders": [],
+   "source": {
+    "line": 431
+   },
+   "en": null
+  },
+  "75": {
+   "id": "MED_75",
+   "fr": "\n  -> Problème dans la lecture du nom du champ et de ses composantes.\n",
+   "placeholders": [],
+   "source": {
+    "line": 436
+   },
+   "en": null
+  },
+  "76": {
+   "id": "MED_76",
+   "fr": "\n  -> Problème dans le diagnostic.\n",
+   "placeholders": [],
+   "source": {
+    "line": 441
+   },
+   "en": null
+  },
+  "77": {
+   "id": "MED_77",
+   "fr": "\n  -> On ne peut lire aucune valeur du champ %(k1)s dans le fichier d'unité %(i1)d.\n  -> Risques et conseils:\n     Ce problème est peut-être lié à une incohérence entre le champ à lire dans\n     le fichier MED (NOEU/ELGA/ELNO/...) et le type du champ que vous avez demandé\n     (mot clé TYPE_CHAM).\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 446
+   },
+   "en": null
+  },
+  "78": {
+   "id": "MED_78",
+   "fr": "\n  Problème à l'ouverture du fichier MED sur l'unité %(k1)s\n  -> Conseil :\n     Vérifier la présence de ce fichier dans le répertoire de lancement de l'étude.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 455
+   },
+   "en": null
+  },
+  "79": {
+   "id": "MED_79",
+   "fr": "\n  -> Attention le maillage n'est pas de type non structuré\n",
+   "placeholders": [],
+   "source": {
+    "line": 462
+   },
+   "en": null
+  },
+  "80": {
+   "id": "MED_80",
+   "fr": "\n  -> Le maillage ' %(k1)s ' est inconnu dans le fichier.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 467
+   },
+   "en": null
+  },
+  "81": {
+   "id": "MED_81",
+   "fr": "\n  -> Attention, il s'agit d'un maillage structuré\n",
+   "placeholders": [],
+   "source": {
+    "line": 472
+   },
+   "en": null
+  },
+  "82": {
+   "id": "MED_82",
+   "fr": "\n  Le champ %(k1)s ne repose pas sur le groupe de maille sur lequel l'impression au format\n  MED est demandée.\n\n  Pour ce champ aucune impression ne sera faite.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 477
+   },
+   "en": null
+  },
+  "83": {
+   "id": "MED_83",
+   "fr": "\nLe nombre de valeurs lues dans le fichier MED pour le champ  %(k1)s est différent du\n nombre de valeurs réellement affectées dans le champ dans la structure de données\n résultat :\n  - valeurs lues dans le fichier        : %(i1)d\n  - valeurs non affectées dans le champ : %(i2)d\n\nRisques :\n  Soit le modèle n'est pas adapté au champ que vous souhaitez lire, auquel cas vous risquez\n   d'obtenir des résultats faux. Soit le modèle est constitué d'un mélange de modélisations\n   qui ne portent pas les mêmes composantes sur les différents éléments du maillage auquel\n   cas, cette alarme n'est pas légitime.\n\nConseil :\n  Vérifiez la cohérence du modèle et du fichier MED.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 485
+   },
+   "en": null
+  },
+  "84": {
+   "id": "MED_84",
+   "fr": "\n  Le champ relu n'est pas du bon type. Un champ de réel est attendu\n  mais le champ contenu dans le fichier MED n'est pas de ce type.\n\n  La relecture de ce champ n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 503
+   },
+   "en": null
+  },
+  "85": {
+   "id": "MED_85",
+   "fr": "\n  -> Maillage présent :  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 511
+   },
+   "en": null
+  },
+  "86": {
+   "id": "MED_86",
+   "fr": "\n  -> champ à lire :  %(k1)s type  %(i1)d type  %(i2)d\n     instant voulu :  %(r1)f\n     --> numéro d'ordre :  %(i3)d\n     --> numéro de pas de temps :  %(i4)d\nCe message est un message d'erreur développeur.\nContactez le support technique.\n\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d",
+    "%(i2)d",
+    "%(r1)f",
+    "%(i3)d",
+    "%(i4)d"
+   ],
+   "source": {
+    "line": 516
+   },
+   "en": null
+  },
+  "87": {
+   "id": "MED_87",
+   "fr": "\n  Le numéro d'ordre %(i1)d que vous avez renseigné ne figure pas\n  dans la liste des numéros d'ordre du résultat MED.\n  Conséquence: le champ correspondant ne figurera pas dans la\n  structure de données Résultat %(k1)s\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 527
+   },
+   "en": null
+  },
+  "88": {
+   "id": "MED_88",
+   "fr": "\n  -> Fichier MED :  %(k1)s, nombre de maillages présents : %(i1)d\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 535
+   },
+   "en": null
+  },
+  "89": {
+   "id": "MED_89",
+   "fr": "\n  -> Écriture impossible pour  %(k1)s  au format MED.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 540
+   },
+   "en": null
+  },
+  "90": {
+   "id": "MED_90",
+   "fr": "\n     Début de l'écriture MED de  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 545
+   },
+   "en": null
+  },
+  "91": {
+   "id": "MED_91",
+   "fr": "\n  -> Impossible de déterminer un nom de champ MED.\n  -> Risque & Conseil:\n",
+   "placeholders": [],
+   "source": {
+    "line": 550
+   },
+   "en": null
+  },
+  "92": {
+   "id": "MED_92",
+   "fr": "\n  -> Le type de champ  %(k1)s  est inconnu pour MED.\n  -> Risque & Conseil:\n     Veuillez vérifier la mise en données du mot-clé NOM_CHAM_MED\n     (LIRE_RESU) ou NOM_MED (LIRE_CHAMP).\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 556
+   },
+   "en": null
+  },
+  "93": {
+   "id": "MED_93",
+   "fr": "\n     Fin de l'écriture MED de  %(k1)s en %(r1)f sec\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 564
+   },
+   "en": null
+  },
+  "94": {
+   "id": "MED_94",
+   "fr": "\n  Vous imprimez un champ dont le maillage change au cours du temps.\n  Ce type de champ n'est pas autorisé.\n  -> Conseil :\n     Si la structure de données résultat a été produite par\n     CREA_RESU, vérifiez que les champs fournis à cette commande\n     reposent sur un seul et même maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 569
+   },
+   "en": null
+  },
+  "95": {
+   "id": "MED_95",
+   "fr": "\n  -> Le champ MED %(k1)s est introuvable.\n  -> Risque & Conseil:\n     Veuillez vérifier la mise en données du mot-clé NOM_CHAM_MED\n     ainsi que le fichier MED fourni à l'opérateur.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 579
+   },
+   "en": null
+  },
+  "96": {
+   "id": "MED_96",
+   "fr": "\n  -> NOM_MED absent !\n  -> Risque & Conseil:\n     Veuillez renseigner le mot-clé NOM_MED de l'opérateur LIRE_CHAMP.\n",
+   "placeholders": [],
+   "source": {
+    "line": 587
+   },
+   "en": null
+  },
+  "97": {
+   "id": "MED_97",
+   "fr": "\n  -> Fichier MED :  %(k1)s, Champ :  %(k2)s, Instant voulu :  %(r1)f\n     - Type :  %(i1)d\n     - Type :  %(i2)d\n\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r1)f",
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 594
+   },
+   "en": null
+  },
+  "98": {
+   "id": "MED_98",
+   "fr": "\n  -> Fichier MED :  %(k1)s champ :  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 602
+   },
+   "en": null
+  },
+  "99": {
+   "id": "MED_99",
+   "fr": "\n  Le nombre de composantes à imprimer est trop grand pour le champ %(k1)s.\n  Le format MED accepte au maximum 200 composantes dans un champ.\n\n  Le champ ne sera donc pas imprimé au format MED.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 607
+   },
+   "en": null
+  }
+ }
+}

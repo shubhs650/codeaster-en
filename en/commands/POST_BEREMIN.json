@@ -1,0 +1,580 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_beremin.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_BEREMIN",
+ "kind": "MACRO",
+ "fr": "Post-traitement de Beremin",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_beremin_ops.post_beremin_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster",
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "docu": "U4.81.08",
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "WEIBULL",
+    "WEIBULL_FO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_beremin.py",
+  "line": 36
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_noli"
+   ],
+   "fr": "Résultat mecanique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "DEFORMATION",
+   "kind": "simple",
+   "path": "DEFORMATION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "PETIT",
+    "PETIT_REAC",
+    "GDEF_LOG"
+   ],
+   "fr": "Type de déformation du résultat mécanique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "FILTRE_SIGM",
+   "kind": "simple",
+   "path": "FILTRE_SIGM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "SIGM_ELGA",
+    "SIGM_ELMOY",
+    "SIGM_CORR"
+   ],
+   "fr": "Option de moyennation des contraintes",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "NUME_VARI",
+   "kind": "simple",
+   "path": "NUME_VARI",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "min": 1,
+   "max": 1,
+   "default": 0,
+   "fr": "Numéro de la variable interne INDIPLAS",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "b_gdeflog",
+   "kind": "bloc",
+   "path": "[b_gdeflog]",
+   "condition": "equal_to(\"DEFORMATION\", 'GDEF_LOG')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 60
+   },
+   "keywords": [
+    {
+     "name": "LIST_NUME_SIEF",
+     "kind": "simple",
+     "path": "LIST_NUME_SIEF",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "min": 4,
+     "max": 6,
+     "val_min": 1,
+     "fr": "Numéros des contraintes de Kirchhoff ",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 62
+     }
+    }
+   ]
+  },
+  {
+   "name": "HIST_MAXI",
+   "kind": "simple",
+   "path": "HIST_MAXI",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Maximum temporel ou pas",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "SIGM_MAXI",
+   "kind": "simple",
+   "path": "SIGM_MAXI",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "fr": "Maximum temporel de la contrainte principale majeure",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "COEF_MULT",
+   "kind": "simple",
+   "path": "COEF_MULT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": "Coefficient à renseigner selon u4.81.22",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "b_sigmcorr",
+   "kind": "bloc",
+   "path": "[b_sigmcorr]",
+   "condition": "equal_to(\"FILTRE_SIGM\", 'SIGM_CORR')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "SIGM_CORR",
+     "kind": "simple",
+     "path": "SIGM_CORR",
+     "status": "o",
+     "type": [
+      "evol_noli"
+     ],
+     "fr": "Contrainte principale maximale corrigée",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "WEIBULL",
+   "kind": "factor",
+   "path": "WEIBULL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 84
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "WEIBULL/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Groupe de mailles sur lequel effectuer le post-traitement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "M",
+     "kind": "simple",
+     "path": "WEIBULL/M",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "VOLU_REFE",
+     "kind": "simple",
+     "path": "WEIBULL/VOLU_REFE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "SIGM_REFE",
+     "kind": "simple",
+     "path": "WEIBULL/SIGM_REFE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "SIGM_SEUIL",
+     "kind": "simple",
+     "path": "WEIBULL/SIGM_SEUIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "TYPE_SEUIL",
+     "kind": "simple",
+     "path": "WEIBULL/TYPE_SEUIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "REDUIT",
+     "into": [
+      "REDUIT",
+      "RESTREINT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 97
+     }
+    }
+   ]
+  },
+  {
+   "name": "WEIBULL_FO",
+   "kind": "factor",
+   "path": "WEIBULL_FO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 99
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "WEIBULL_FO/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": "Groupe de mailles sur lequel effectuer le post-traitement",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "M",
+     "kind": "simple",
+     "path": "WEIBULL_FO/M",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "VOLU_REFE",
+     "kind": "simple",
+     "path": "WEIBULL_FO/VOLU_REFE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "SIGM_CNV",
+     "kind": "simple",
+     "path": "WEIBULL_FO/SIGM_CNV",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "SIGM_REFE",
+     "kind": "simple",
+     "path": "WEIBULL_FO/SIGM_REFE",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "SIGM_SEUIL",
+     "kind": "simple",
+     "path": "WEIBULL_FO/SIGM_SEUIL",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "TYPE_SEUIL",
+     "kind": "simple",
+     "path": "WEIBULL_FO/TYPE_SEUIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "REDUIT",
+     "into": [
+      "REDUIT",
+      "RESTREINT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 113
+     }
+    }
+   ]
+  },
+  {
+   "name": "METHODE_2D",
+   "kind": "factor",
+   "path": "METHODE_2D",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "MAILLAGE_PLAN",
+      "NOM_MAIL_MED"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MAILLAGE_PLAN",
+      "GROUP_NO_PLAN"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_NO_PLAN",
+      "NOM_MAIL_MED"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "MAILLAGE_PLAN",
+      "FISSURE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_beremin.py",
+    "line": 115
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE_PLAN",
+     "kind": "simple",
+     "path": "METHODE_2D/MAILLAGE_PLAN",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 123
+     }
+    },
+    {
+     "name": "NOM_MAIL_MED",
+     "kind": "simple",
+     "path": "METHODE_2D/NOM_MAIL_MED",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "GROUP_NO_PLAN",
+     "kind": "simple",
+     "path": "METHODE_2D/GROUP_NO_PLAN",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 125
+     }
+    },
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "METHODE_2D/FISSURE",
+     "status": "f",
+     "type": [
+      "fond_fissure"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "METHODE_2D/PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 1e-12,
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "UNITE_RESU",
+     "kind": "simple",
+     "path": "METHODE_2D/UNITE_RESU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_beremin.py",
+      "line": 128
+     }
+    }
+   ]
+  }
+ ]
+}

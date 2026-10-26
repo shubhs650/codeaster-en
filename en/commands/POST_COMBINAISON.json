@@ -1,0 +1,454 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_combinaison.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_COMBINAISON",
+ "kind": "MACRO",
+ "fr": "Combinaison de grandeurs physiques issues de différents calculs mécaniques",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_combinaison_ops.post_combinaison_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_combinaison.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "TABLE_COEF",
+   "kind": "simple",
+   "path": "TABLE_COEF",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_combinaison.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "TABLE_COEF_RESU",
+   "kind": "simple",
+   "path": "TABLE_COEF_RESU",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_combinaison.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TYPE_COMB",
+   "kind": "simple",
+   "path": "TYPE_COMB",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "TABLE",
+    "RESULTAT"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_combinaison.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "b_resultats",
+   "kind": "bloc",
+   "path": "[b_resultats]",
+   "condition": "equal_to('TYPE_COMB', 'RESULTAT')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_combinaison.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": "Modèle support en sortie",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": "Nom du champ à combiner",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 51
+     },
+     "keywords": [
+      {
+       "name": "NOM_CAS",
+       "kind": "simple",
+       "path": "AFFE/NOM_CAS",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 54
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "AFFE/RESULTAT",
+       "status": "o",
+       "type": [
+        "mult_elas",
+        "evol_elas",
+        "mode_meca"
+       ],
+       "fr": "Renseignement d'un résultat",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 55
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_tables",
+   "kind": "bloc",
+   "path": "[b_tables]",
+   "condition": "equal_to('TYPE_COMB', 'TABLE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_combinaison.py",
+    "line": 62
+   },
+   "keywords": [
+    {
+     "name": "FILTRE",
+     "kind": "factor",
+     "path": "FILTRE",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 64
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "FILTRE/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 67
+       }
+      },
+      {
+       "name": "CRIT_COMP",
+       "kind": "simple",
+       "path": "FILTRE/CRIT_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "EQ",
+       "into": [
+        "EQ",
+        "LT",
+        "GT",
+        "NE",
+        "LE",
+        "GE",
+        "VIDE",
+        "NON_VIDE",
+        "MAXI",
+        "MAXI_ABS",
+        "MINI",
+        "MINI_ABS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 68
+       }
+      },
+      {
+       "name": "b_vale",
+       "kind": "bloc",
+       "path": "FILTRE/[b_vale]",
+       "condition": "(is_in(\"CRIT_COMP\", ('EQ','NE','GT','LT','GE','LE')))",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "VALE",
+          "VALE_I",
+          "VALE_K",
+          "VALE_C"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 87
+       },
+       "keywords": [
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "FILTRE/VALE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 90
+         }
+        },
+        {
+         "name": "VALE_I",
+         "kind": "simple",
+         "path": "FILTRE/VALE_I",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 91
+         }
+        },
+        {
+         "name": "VALE_C",
+         "kind": "simple",
+         "path": "FILTRE/VALE_C",
+         "status": "f",
+         "type": [
+          "C"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 92
+         }
+        },
+        {
+         "name": "VALE_K",
+         "kind": "simple",
+         "path": "FILTRE/VALE_K",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 93
+         }
+        },
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "FILTRE/CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 94
+         }
+        },
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "FILTRE/PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.001,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_combinaison.py",
+          "line": 95
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_combinaison.py",
+      "line": 98
+     },
+     "keywords": [
+      {
+       "name": "NOM_CAS",
+       "kind": "simple",
+       "path": "AFFE/NOM_CAS",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 101
+       }
+      },
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "AFFE/TABLE",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": "Renseignement d'une table",
+       "source": {
+        "file": "code_aster/Cata/Commands/post_combinaison.py",
+        "line": 102
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

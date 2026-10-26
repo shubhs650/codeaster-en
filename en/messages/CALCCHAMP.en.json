@@ -1,0 +1,128 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/calcchamp.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "CALCCHAMP",
+ "source": {
+  "file": "code_aster/Messages/calcchamp.py"
+ },
+ "messages": {
+  "1": {
+   "id": "CALCCHAMP_1",
+   "fr": "\n Le champ %(k1)s est déjà présent dans la structure de données\n à tous les instants demandés.\n Aucun calcul ne sera donc réalisé pour cette option.\n\nConseil :\n Si vous souhaitez réellement calculer à nouveau cette option,\n créez une nouvelle structure de données.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "CALCCHAMP_2",
+   "fr": "\n L'option %(k1)s nécessaire au calcul de l'option %(k2)s est\n manquante dans les structures de données résultat pour le numéro d'ordre %(i1)d.\n\n Le calcul de cette option n'est donc pas possible.\n L'option demandée n'est calculable sur les éléments du modèle.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 34
+   },
+   "en": null
+  },
+  "4": {
+   "id": "CALCCHAMP_4",
+   "fr": "\nLes contributions de l'amortissement liées à la vitesse pour les\nréactions nodales sont négligées dans la version actuelle du code.\n",
+   "placeholders": [],
+   "source": {
+    "line": 43
+   },
+   "en": null
+  },
+  "7": {
+   "id": "CALCCHAMP_7",
+   "fr": "\nLe champ STRX_ELGA n'est pas possible sur une modélisation XFEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "8": {
+   "id": "CALCCHAMP_8",
+   "fr": "Il y a des chargements pilotées dans le résultat, mais on ne peut pas récupérer la valeur du coefficient de pilotage.",
+   "placeholders": [],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "19": {
+   "id": "CALCCHAMP_19",
+   "fr": "\nProblème lors de l'appel de l'option %(k1)s.\n\nContactez le support technique.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "23": {
+   "id": "CALCCHAMP_23",
+   "fr": "Le modèle doit être le même sur tous les pas de temps pour ce post-traitement.\n      Conseil : il faut séparer le post-traitement en le découpant pour garder le même modèle",
+   "placeholders": [],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "24": {
+   "id": "CALCCHAMP_24",
+   "fr": "Le chargement doit être le même sur tous les pas de temps pour ce post-traitement.\n      Conseil : il faut séparer le post-traitement en le découpant pour garder le même chargement",
+   "placeholders": [],
+   "source": {
+    "line": 68
+   },
+   "en": null
+  },
+  "52": {
+   "id": "CALCCHAMP_52",
+   "fr": "\n La commande CALC_CHAMP a besoin de calculer le champ de type %(k1)s mais elle ne peut pas. Or ce champ est nécessaire au calcul du champ %(k2)s.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 72
+   },
+   "en": null
+  },
+  "54": {
+   "id": "CALCCHAMP_54",
+   "fr": "Il n'y a aucun chargement défini pour ce post-traitement. Si le résultat est issu d'un calcul dynamique, pensez à renseigner les chargements dans la commande de post-traitement.",
+   "placeholders": [],
+   "source": {
+    "line": 77
+   },
+   "en": null
+  },
+  "89": {
+   "id": "CALCCHAMP_89",
+   "fr": "\n Le champ  %(k1)s  n'a pas pu être calculé.\n Risques & conseils :\n   * Si le champ est un champ par éléments, c'est que le calcul élémentaire n'est pas disponible\n     pour les éléments finis utilisés. Cela peut se produire soit parce que ce\n     calcul n'a pas été encore programmé, soit parce que ce calcul n'a pas de sens.\n     Par exemple, le champ EFGE_ELNO n'a pas de sens pour les éléments de la modélisation '3D'.\n   * Si le champ est un champ aux noeuds (XXXX_NOEU), cela veut dire que le champ XXXX_ELNO\n     n'existe pas sur les éléments spécifiés.\n     Par exemple, le calcul de SIGM_NOEU sur les éléments de bord est impossible.\n\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 80
+   },
+   "en": null
+  }
+ }
+}

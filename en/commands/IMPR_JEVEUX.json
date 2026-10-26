@@ -1,0 +1,410 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_jeveux.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_JEVEUX",
+ "kind": "PROC",
+ "fr": "Imprimer le contenu des objets créés par JEVEUX (pour développeur)",
+ "translation_upstream": null,
+ "op": 16,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_jeveux.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "ENTITE",
+   "kind": "simple",
+   "path": "ENTITE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DISQUE",
+    "MEMOIRE",
+    "REPERTOIRE",
+    "OBJET",
+    "ATTRIBUT",
+    "SYSTEME",
+    "ENREGISTREMENT"
+   ],
+   "fr": "choix de l'observation",
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "b_objet",
+   "kind": "bloc",
+   "path": "[b_objet]",
+   "condition": "(equal_to(\"ENTITE\", 'OBJET'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "NOMOBJ",
+     "kind": "simple",
+     "path": "NOMOBJ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "nom d'objet",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NUMOC",
+     "kind": "simple",
+     "path": "NUMOC",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": "numéro d objet de collection",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "NOMOC",
+     "kind": "simple",
+     "path": "NOMOC",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "nom d'objet de collection",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 40
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_attribut",
+   "kind": "bloc",
+   "path": "[b_attribut]",
+   "condition": "(equal_to(\"ENTITE\", 'ATTRIBUT'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "NOMOBJ",
+     "kind": "simple",
+     "path": "NOMOBJ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "nom de collection",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "NOMATR",
+     "kind": "simple",
+     "path": "NOMATR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "$$DESO",
+      "$$IADD",
+      "$$IADM",
+      "$$NOM",
+      "$$LONG",
+      "$$LONO",
+      "$$LUTI",
+      "$$NUM"
+     ],
+     "fr": "nom d attribut de collection",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 45
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_systeme",
+   "kind": "bloc",
+   "path": "[b_systeme]",
+   "condition": "(equal_to(\"ENTITE\", 'SYSTEME'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "CLASSE",
+     "kind": "simple",
+     "path": "CLASSE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "G",
+      "V"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "NOMATR",
+     "kind": "simple",
+     "path": "NOMATR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "$$CARA",
+      "$$IADD",
+      "$$GENR",
+      "$$TYPE",
+      "$$MARQ",
+      "$$DOCU",
+      "$$ORIG",
+      "$$RNOM",
+      "$$LTYP",
+      "$$LONG",
+      "$$LONO",
+      "$$DATE",
+      "$$LUTI",
+      "$$HCOD",
+      "$$INDX",
+      "$$TLEC",
+      "$$TECR",
+      "$$IADM",
+      "$$ACCE",
+      "$$USADI"
+     ],
+     "fr": "nom d attribut systeme",
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_repertoire",
+   "kind": "bloc",
+   "path": "[b_repertoire]",
+   "condition": "(equal_to(\"ENTITE\", 'REPERTOIRE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 83
+   },
+   "keywords": [
+    {
+     "name": "CLASSE",
+     "kind": "simple",
+     "path": "CLASSE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": " ",
+     "into": [
+      "G",
+      "V",
+      " "
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 85
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_disque",
+   "kind": "bloc",
+   "path": "[b_disque]",
+   "condition": "(equal_to(\"ENTITE\", 'DISQUE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "CLASSE",
+     "kind": "simple",
+     "path": "CLASSE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": " ",
+     "into": [
+      "G",
+      "V",
+      " "
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 89
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_enregist",
+   "kind": "bloc",
+   "path": "[b_enregist]",
+   "condition": "(equal_to(\"ENTITE\", 'ENREGISTREMENT'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 91
+   },
+   "keywords": [
+    {
+     "name": "CLASSE",
+     "kind": "simple",
+     "path": "CLASSE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "G",
+     "into": [
+      "G",
+      "V"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "NUMERO",
+     "kind": "simple",
+     "path": "NUMERO",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "INFO",
+     "kind": "simple",
+     "path": "INFO",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "into": [
+      1,
+      2
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 95
+     }
+    }
+   ]
+  },
+  {
+   "name": "IMPRESSION",
+   "kind": "factor",
+   "path": "IMPRESSION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 97
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "IMPRESSION/NOM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "IMPRESSION/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_jeveux.py",
+      "line": 100
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMMENTAIRE",
+   "kind": "simple",
+   "path": "COMMENTAIRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_jeveux.py",
+    "line": 102
+   }
+  }
+ ]
+}

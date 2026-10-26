@@ -1,0 +1,1807 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/observation.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "OBSERVATION",
+ "kind": "MACRO",
+ "fr": "Calcul de l'observabilite d'un champ aux noeuds ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.observation_ops.observation_ops",
+ "reentrant": null,
+ "result_types": [
+  "mode_meca",
+  "evol_elas",
+  "dyna_harmo",
+  "dyna_trans"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "FREQ",
+    "LIST_FREQ",
+    "NUME_MODE",
+    "INST",
+    "LIST_INST"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/observation.py",
+  "line": 43
+ },
+ "keywords": [
+  {
+   "name": "MODELE_1",
+   "kind": "simple",
+   "path": "MODELE_1",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "MODELE_2",
+   "kind": "simple",
+   "path": "MODELE_2",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "mode_meca",
+    "evol_elas",
+    "dyna_harmo",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "into": [
+    "ACCE",
+    "ACCE_ABSOLU",
+    "COEF_H",
+    "COMPORTEMENT",
+    "COMPORTHER",
+    "CONT_ELEM",
+    "CONT_NOEU",
+    "DEGE_ELGA",
+    "DEGE_ELNO",
+    "DEGE_NOEU",
+    "DEPL",
+    "DEPL_ABSOLU",
+    "DEPL_ELGA",
+    "DEPL_VIBR",
+    "DERA_ELGA",
+    "DERA_ELNO",
+    "DERA_NOEU",
+    "DIFF_ELGA",
+    "DIFF_ELNO",
+    "DIFF_NOEU",
+    "DISS_ELEM",
+    "DISS_ELGA",
+    "DISS_ELNO",
+    "DISS_NOEU",
+    "DIVU",
+    "DURT_ELNO",
+    "DURT_NOEU",
+    "ECIN_ELEM",
+    "EFGE_ELGA",
+    "EFGE_ELNO",
+    "EFGE_NOEU",
+    "EGRU_ELNO",
+    "ENDO_ELGA",
+    "ENDO_ELNO",
+    "ENDO_NOEU",
+    "ENEL_ELEM",
+    "ENEL_ELGA",
+    "ENEL_ELNO",
+    "ENEL_NOEU",
+    "ENTR_ELEM",
+    "EPEQ_ELGA",
+    "EPEQ_ELNO",
+    "EPEQ_NOEU",
+    "EPFD_ELGA",
+    "EPFD_ELNO",
+    "EPFD_NOEU",
+    "EPFP_ELGA",
+    "EPFP_ELNO",
+    "EPFP_NOEU",
+    "EPGQ_ELGA",
+    "EPGQ_ELNO",
+    "EPGQ_NOEU",
+    "EPME_ELGA",
+    "EPME_ELNO",
+    "EPME_NOEU",
+    "EPMG_ELGA",
+    "EPMG_ELNO",
+    "EPMG_NOEU",
+    "EPMQ_ELGA",
+    "EPMQ_ELNO",
+    "EPMQ_NOEU",
+    "EPOT_ELEM",
+    "EPSA_ELNO",
+    "EPSA_NOEU",
+    "EPSG_ELGA",
+    "EPSG_ELNO",
+    "EPSG_NOEU",
+    "EPSI_ELGA",
+    "EPSI_ELNO",
+    "EPSI_NOEU",
+    "EPSL_ELGA",
+    "EPSL_ELNO",
+    "EPSL_NOEU",
+    "EPSP_ELGA",
+    "EPSP_ELNO",
+    "EPSP_NOEU",
+    "EPVC_ELGA",
+    "EPVC_ELNO",
+    "EPVC_NOEU",
+    "ERME_ELEM",
+    "ERME_ELNO",
+    "ERME_NOEU",
+    "ERTH_ELEM",
+    "ERTH_ELNO",
+    "ERTH_NOEU",
+    "ERZ1_ELEM",
+    "ERZ2_ELEM",
+    "ETHE_ELEM",
+    "ETOT_ELEM",
+    "ETOT_ELGA",
+    "ETOT_ELNO",
+    "ETOT_NOEU",
+    "FERR_ELEM",
+    "FLHN_ELGA",
+    "FLUX_ELGA",
+    "FLUX_ELGA",
+    "FLUX_ELNO",
+    "FLUX_ELNO",
+    "FLUX_NOEU",
+    "FLUX_NOEU",
+    "FORC_NODA",
+    "FSUR_2D",
+    "FSUR_3D",
+    "FVOL_2D",
+    "FVOL_3D",
+    "GRAT_ELGA",
+    "GRAT_ELGA",
+    "GRAT_ELNO",
+    "GRAT_ELNO",
+    "GRAT_NOEU",
+    "GRAT_NOEU",
+    "HHO_DEPL",
+    "HHO_TEMP",
+    "HHO_VITE",
+    "HYDR_ELGA",
+    "HYDR_ELNO",
+    "HYDR_NOEU",
+    "HYGR_ELGA",
+    "HYGR_ELNO",
+    "HYGR_NOEU",
+    "INDL_ELGA",
+    "INTE_ELNO",
+    "INTE_NOEU",
+    "IRRA",
+    "MARG_ELEM",
+    "MATE_ELEM",
+    "MATE_ELGA",
+    "META_ELNO",
+    "META_NOEU",
+    "MODE_FLAMB",
+    "MODE_STAB",
+    "NEUT",
+    "PDIL_ELGA",
+    "PRAC_ELNO",
+    "PRAC_NOEU",
+    "PRES",
+    "PRES_NOEU",
+    "PRME_ELNO",
+    "PTOT",
+    "QIRE_ELEM",
+    "QIRE_ELNO",
+    "QIRE_NOEU",
+    "QIZ1_ELEM",
+    "QIZ2_ELEM",
+    "REAC_NODA",
+    "RESI_NOEU",
+    "RESI_RELA_NOEU",
+    "ROC1_ELNO",
+    "ROC2_ELNO",
+    "SECH",
+    "SIEF_ELGA",
+    "SIEF_ELNO",
+    "SIEF_NOEU",
+    "SIEQ_ELGA",
+    "SIEQ_ELNO",
+    "SIEQ_NOEU",
+    "SIGM_ELGA",
+    "SIGM_ELNO",
+    "SIGM_NOEU",
+    "SIMY_ELGA",
+    "SING_ELEM",
+    "SING_ELNO",
+    "SIPM_ELNO",
+    "SIPO_ELNO",
+    "SIPO_NOEU",
+    "SIRO_ELEM",
+    "SISE_ELNO",
+    "SIZ1_NOEU",
+    "SIZ2_NOEU",
+    "SOUR_ELGA",
+    "STRX_ELGA",
+    "TEMP",
+    "TEMP_ELGA",
+    "T_EXT",
+    "UT01_CART",
+    "UT01_ELEM",
+    "UT01_ELGA",
+    "UT01_ELNO",
+    "UT01_NOEU",
+    "UT02_CART",
+    "UT02_ELEM",
+    "UT02_ELGA",
+    "UT02_ELNO",
+    "UT02_NOEU",
+    "UT03_CART",
+    "UT03_ELEM",
+    "UT03_ELGA",
+    "UT03_ELNO",
+    "UT03_NOEU",
+    "UT04_CART",
+    "UT04_ELEM",
+    "UT04_ELGA",
+    "UT04_ELNO",
+    "UT04_NOEU",
+    "UT05_CART",
+    "UT05_ELEM",
+    "UT05_ELGA",
+    "UT05_ELNO",
+    "UT05_NOEU",
+    "UT06_CART",
+    "UT06_ELEM",
+    "UT06_ELGA",
+    "UT06_ELNO",
+    "UT06_NOEU",
+    "UT07_CART",
+    "UT07_ELEM",
+    "UT07_ELGA",
+    "UT07_ELNO",
+    "UT07_NOEU",
+    "UT08_CART",
+    "UT08_ELEM",
+    "UT08_ELGA",
+    "UT08_ELNO",
+    "UT08_NOEU",
+    "UT09_CART",
+    "UT09_ELEM",
+    "UT09_ELGA",
+    "UT09_ELNO",
+    "UT09_NOEU",
+    "UT10_CART",
+    "UT10_ELEM",
+    "UT10_ELGA",
+    "UT10_ELNO",
+    "UT10_NOEU",
+    "VARC_ELGA",
+    "VARC_ELNO",
+    "VARC_NOEU",
+    "VARI_ELGA",
+    "VARI_ELNO",
+    "VARI_NOEU",
+    "VITE",
+    "VITE_ABSOLU",
+    "VITE_VENT"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "LIST_ORDRE",
+   "kind": "simple",
+   "path": "LIST_ORDRE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "NOEUD_CMP",
+   "kind": "simple",
+   "path": "NOEUD_CMP",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "PROJECTION",
+   "kind": "simple",
+   "path": "PROJECTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "CAS_FIGURE",
+   "kind": "simple",
+   "path": "CAS_FIGURE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "2D",
+    "3D",
+    "2.5D",
+    "1.5D"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "DISTANCE_MAX",
+   "kind": "simple",
+   "path": "DISTANCE_MAX",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "DISTANCE_ALARME",
+   "kind": "simple",
+   "path": "DISTANCE_ALARME",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "ALARME",
+   "kind": "simple",
+   "path": "ALARME",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 79
+   }
+  },
+  {
+   "name": "TYPE_CHAM",
+   "kind": "simple",
+   "path": "TYPE_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "NOEU"
+   ],
+   "fr": "Pour forcer le type des champs projetés. NOEU -> cham_no",
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "MATR_RIGI",
+   "kind": "simple",
+   "path": "MATR_RIGI",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 89
+   }
+  },
+  {
+   "name": "MATR_MASS",
+   "kind": "simple",
+   "path": "MATR_MASS",
+   "status": "f",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 90
+   }
+  },
+  {
+   "name": "VIS_A_VIS",
+   "kind": "factor",
+   "path": "VIS_A_VIS",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT_1",
+      "GROUP_MA_1",
+      "GROUP_NO_1"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT_2",
+      "GROUP_MA_2",
+      "GROUP_NO_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 91
+   },
+   "keywords": [
+    {
+     "name": "TOUT_1",
+     "kind": "simple",
+     "path": "VIS_A_VIS/TOUT_1",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "GROUP_MA_1",
+     "kind": "simple",
+     "path": "VIS_A_VIS/GROUP_MA_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "GROUP_NO_1",
+     "kind": "simple",
+     "path": "VIS_A_VIS/GROUP_NO_1",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "TOUT_2",
+     "kind": "simple",
+     "path": "VIS_A_VIS/TOUT_2",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "GROUP_MA_2",
+     "kind": "simple",
+     "path": "VIS_A_VIS/GROUP_MA_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "GROUP_NO_2",
+     "kind": "simple",
+     "path": "VIS_A_VIS/GROUP_NO_2",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "CAS_FIGURE",
+     "kind": "simple",
+     "path": "VIS_A_VIS/CAS_FIGURE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "2D",
+      "3D",
+      "2.5D",
+      "1.5D"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 104
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODI_REPERE",
+   "kind": "factor",
+   "path": "MODI_REPERE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "REPERE"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 109
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "MODI_REPERE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "MODI_REPERE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 114
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "MODI_REPERE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "MODI_REPERE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "TYPE_CHAM",
+     "kind": "simple",
+     "path": "MODI_REPERE/TYPE_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "VECT_3D",
+     "into": [
+      "VECT_2D",
+      "VECT_3D",
+      "TENS_2D",
+      "TENS_3D"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "b_vect_2d",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_vect_2d]",
+     "condition": "equal_to(\"TYPE_CHAM\", 'VECT_2D')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 124
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "MODI_REPERE/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 2,
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 126
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_vect_3d",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_vect_3d]",
+     "condition": "equal_to(\"TYPE_CHAM\", 'VECT_3D')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 128
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "MODI_REPERE/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "min": 3,
+       "max": 3,
+       "default": [
+        "DX",
+        "DY",
+        "DZ"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 130
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_tens_2d",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_tens_2d]",
+     "condition": "equal_to(\"TYPE_CHAM\", 'TENS_2D')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 132
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "MODI_REPERE/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "min": 4,
+       "max": 4,
+       "default": [
+        "EPXX",
+        "EPYY",
+        "EPZZ",
+        "EPXY"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 134
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_tens_3d",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_tens_3d]",
+     "condition": "equal_to(\"TYPE_CHAM\", 'TENS_3D')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 138
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "MODI_REPERE/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "min": 6,
+       "max": 6,
+       "default": [
+        "EPXX",
+        "EPYY",
+        "EPZZ",
+        "EPXY",
+        "EPXZ",
+        "EPYZ"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 140
+       }
+      }
+     ]
+    },
+    {
+     "name": "REPERE",
+     "kind": "simple",
+     "path": "MODI_REPERE/REPERE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "UTILISATEUR",
+      "CYLINDRIQUE",
+      "NORMALE",
+      "DIR_JAUGE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 148
+     }
+    },
+    {
+     "name": "b_normale",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_normale]",
+     "condition": "equal_to(\"REPERE\", 'NORMALE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VECT_X",
+        "VECT_Y"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 151
+     },
+     "keywords": [
+      {
+       "name": "VECT_X",
+       "kind": "simple",
+       "path": "MODI_REPERE/VECT_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 154
+       }
+      },
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "MODI_REPERE/VECT_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 155
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_utilisateur",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_utilisateur]",
+     "condition": "equal_to(\"REPERE\", 'UTILISATEUR')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 157
+     },
+     "keywords": [
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "MODI_REPERE/ANGL_NAUT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 159
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cylindrique",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_cylindrique]",
+     "condition": "equal_to(\"REPERE\", 'CYLINDRIQUE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 161
+     },
+     "keywords": [
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "MODI_REPERE/ORIGINE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 163
+       }
+      },
+      {
+       "name": "AXE_Z",
+       "kind": "simple",
+       "path": "MODI_REPERE/AXE_Z",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 164
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_dir_jauge",
+     "kind": "bloc",
+     "path": "MODI_REPERE/[b_dir_jauge]",
+     "condition": "equal_to(\"REPERE\", 'DIR_JAUGE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 166
+     },
+     "keywords": [
+      {
+       "name": "VECT_X",
+       "kind": "simple",
+       "path": "MODI_REPERE/VECT_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 168
+       }
+      },
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "MODI_REPERE/VECT_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/observation.py",
+        "line": 169
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "EPSI_MOYENNE",
+   "kind": "factor",
+   "path": "EPSI_MOYENNE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 175
+   },
+   "keywords": [
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "EPSI_MOYENNE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 179
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "EPSI_MOYENNE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "EPSI_MOYENNE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 181
+     }
+    },
+    {
+     "name": "SEUIL_VARI",
+     "kind": "simple",
+     "path": "EPSI_MOYENNE/SEUIL_VARI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.1,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "MASQUE",
+     "kind": "simple",
+     "path": "EPSI_MOYENNE/MASQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 6,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 183
+     }
+    }
+   ]
+  },
+  {
+   "name": "FILTRE",
+   "kind": "factor",
+   "path": "FILTRE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "DDL_ACTIF"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 188
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FILTRE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 196
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "FILTRE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 197
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "FILTRE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 198
+     }
+    },
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "FILTRE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 199
+     }
+    },
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "FILTRE/NOM_CHAM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "DDL_ACTIF",
+     "kind": "simple",
+     "path": "FILTRE/DDL_ACTIF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 6,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/observation.py",
+      "line": 202
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 207
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/observation.py",
+    "line": 208
+   }
+  }
+ ]
+}

@@ -1,0 +1,2739 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/crea_champ.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CREA_CHAMP",
+ "kind": "OPER",
+ "fr": "Création d'un champ ",
+ "translation_upstream": null,
+ "op": 195,
+ "reentrant": "f:CHAM_GD",
+ "result_types": [
+  "carte_sdaster",
+  "cham_no_sdaster",
+  "cham_elem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "NUME_DDL",
+    "CHAM_NO"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/crea_champ.py",
+  "line": 41
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "b_reuse",
+   "kind": "bloc",
+   "path": "[b_reuse]",
+   "condition": "is_in(\"OPERATION\", (\"ASSE\", \"COMB\"))",
+   "fr": "Objet qui sera réutilisé pour l'opération",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "f",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 50
+     }
+    }
+   ]
+  },
+  {
+   "name": "TYPE_CHAM",
+   "kind": "simple",
+   "path": "TYPE_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ELEM_ABSC_R",
+    "ELNO_ABSC_R",
+    "ELGA_ABSC_R",
+    "CART_ABSC_R",
+    "NOEU_ABSC_R",
+    "ELEM_CACOQU_R",
+    "ELNO_CACOQU_R",
+    "ELGA_CACOQU_R",
+    "CART_CACOQU_R",
+    "NOEU_CACOQU_R",
+    "ELEM_CADISK_R",
+    "ELNO_CADISK_R",
+    "ELGA_CADISK_R",
+    "CART_CADISK_R",
+    "NOEU_CADISK_R",
+    "ELEM_CAORIE_R",
+    "ELNO_CAORIE_R",
+    "ELGA_CAORIE_R",
+    "CART_CAORIE_R",
+    "NOEU_CAORIE_R",
+    "ELEM_CAMA_R",
+    "ELNO_CAMA_R",
+    "ELGA_CAMA_R",
+    "CART_CAMA_R",
+    "NOEU_CAMA_R",
+    "ELEM_CHLI_R",
+    "ELNO_CHLI_R",
+    "ELGA_CHLI_R",
+    "CART_CHLI_R",
+    "NOEU_CHLI_R",
+    "ELEM_CODE_I",
+    "ELNO_CODE_I",
+    "ELGA_CODE_I",
+    "CART_CODE_I",
+    "NOEU_CODE_I",
+    "ELEM_COEH_F",
+    "ELNO_COEH_F",
+    "ELGA_COEH_F",
+    "CART_COEH_F",
+    "NOEU_COEH_F",
+    "ELEM_COEH_R",
+    "ELNO_COEH_R",
+    "ELGA_COEH_R",
+    "CART_COEH_R",
+    "NOEU_COEH_R",
+    "ELEM_CORR_R",
+    "ELNO_CORR_R",
+    "ELGA_CORR_R",
+    "CART_CORR_R",
+    "NOEU_CORR_R",
+    "ELEM_CRRU_R",
+    "ELNO_CRRU_R",
+    "ELGA_CRRU_R",
+    "CART_CRRU_R",
+    "NOEU_CRRU_R",
+    "ELEM_DBEL_R",
+    "ELNO_DBEL_R",
+    "ELGA_DBEL_R",
+    "CART_DBEL_R",
+    "NOEU_DBEL_R",
+    "ELEM_DCEL_I",
+    "ELNO_DCEL_I",
+    "ELGA_DCEL_I",
+    "CART_DCEL_I",
+    "NOEU_DCEL_I",
+    "ELEM_DDLI_C",
+    "ELNO_DDLI_C",
+    "ELGA_DDLI_C",
+    "CART_DDLI_C",
+    "NOEU_DDLI_C",
+    "ELEM_DDLI_F",
+    "ELNO_DDLI_F",
+    "ELGA_DDLI_F",
+    "CART_DDLI_F",
+    "NOEU_DDLI_F",
+    "ELEM_DDLI_R",
+    "ELNO_DDLI_R",
+    "ELGA_DDLI_R",
+    "CART_DDLI_R",
+    "NOEU_DDLI_R",
+    "ELEM_DDLM_C",
+    "ELNO_DDLM_C",
+    "ELGA_DDLM_C",
+    "CART_DDLM_C",
+    "NOEU_DDLM_C",
+    "ELEM_DDLM_R",
+    "ELNO_DDLM_R",
+    "ELGA_DDLM_R",
+    "CART_DDLM_R",
+    "NOEU_DDLM_R",
+    "ELEM_DEPL_C",
+    "ELNO_DEPL_C",
+    "ELGA_DEPL_C",
+    "CART_DEPL_C",
+    "NOEU_DEPL_C",
+    "ELEM_DEPL_F",
+    "ELNO_DEPL_F",
+    "ELGA_DEPL_F",
+    "CART_DEPL_F",
+    "NOEU_DEPL_F",
+    "ELEM_DEPL_R",
+    "ELNO_DEPL_R",
+    "ELGA_DEPL_R",
+    "CART_DEPL_R",
+    "NOEU_DEPL_R",
+    "ELEM_DISS_R",
+    "ELNO_DISS_R",
+    "ELGA_DISS_R",
+    "CART_DISS_R",
+    "NOEU_DISS_R",
+    "ELEM_DOMA_R",
+    "ELNO_DOMA_R",
+    "ELGA_DOMA_R",
+    "CART_DOMA_R",
+    "NOEU_DOMA_R",
+    "ELEM_DURT_R",
+    "ELNO_DURT_R",
+    "ELGA_DURT_R",
+    "CART_DURT_R",
+    "NOEU_DURT_R",
+    "ELEM_ENDO_R",
+    "ELNO_ENDO_R",
+    "ELGA_ENDO_R",
+    "CART_ENDO_R",
+    "NOEU_ENDO_R",
+    "ELEM_ENER_R",
+    "ELNO_ENER_R",
+    "ELGA_ENER_R",
+    "CART_ENER_R",
+    "NOEU_ENER_R",
+    "ELEM_EPSI_C",
+    "ELNO_EPSI_C",
+    "ELGA_EPSI_C",
+    "CART_EPSI_C",
+    "NOEU_EPSI_C",
+    "ELEM_EPSI_F",
+    "ELNO_EPSI_F",
+    "ELGA_EPSI_F",
+    "CART_EPSI_F",
+    "NOEU_EPSI_F",
+    "ELEM_EPSI_R",
+    "ELNO_EPSI_R",
+    "ELGA_EPSI_R",
+    "CART_EPSI_R",
+    "NOEU_EPSI_R",
+    "ELEM_ERRE_R",
+    "ELNO_ERRE_R",
+    "ELGA_ERRE_R",
+    "CART_ERRE_R",
+    "NOEU_ERRE_R",
+    "ELEM_FACY_R",
+    "ELNO_FACY_R",
+    "ELGA_FACY_R",
+    "CART_FACY_R",
+    "NOEU_FACY_R",
+    "ELEM_FLAP_R",
+    "ELNO_FLAP_R",
+    "ELGA_FLAP_R",
+    "CART_FLAP_R",
+    "NOEU_FLAP_R",
+    "ELEM_FER2_R",
+    "ELNO_FER2_R",
+    "ELGA_FER2_R",
+    "CART_FER2_R",
+    "NOEU_FER2_R",
+    "ELEM_VFER2_R",
+    "ELNO_VFER2_R",
+    "ELGA_VFER2_R",
+    "CART_VFER2_R",
+    "NOEU_VFER2_R",
+    "ELEM_FISS_R",
+    "ELNO_FISS_R",
+    "ELGA_FISS_R",
+    "CART_FISS_R",
+    "NOEU_FISS_R",
+    "ELEM_FLUN_F",
+    "ELNO_FLUN_F",
+    "ELGA_FLUN_F",
+    "CART_FLUN_F",
+    "NOEU_FLUN_F",
+    "ELEM_FLUN_R",
+    "ELNO_FLUN_R",
+    "ELGA_FLUN_R",
+    "CART_FLUN_R",
+    "NOEU_FLUN_R",
+    "ELEM_FLUX_F",
+    "ELNO_FLUX_F",
+    "ELGA_FLUX_F",
+    "CART_FLUX_F",
+    "NOEU_FLUX_F",
+    "ELEM_FLUX_R",
+    "ELNO_FLUX_R",
+    "ELGA_FLUX_R",
+    "CART_FLUX_R",
+    "NOEU_FLUX_R",
+    "ELEM_FORC_C",
+    "ELNO_FORC_C",
+    "ELGA_FORC_C",
+    "CART_FORC_C",
+    "NOEU_FORC_C",
+    "ELEM_FORC_F",
+    "ELNO_FORC_F",
+    "ELGA_FORC_F",
+    "CART_FORC_F",
+    "NOEU_FORC_F",
+    "ELEM_FORC_R",
+    "ELNO_FORC_R",
+    "ELGA_FORC_R",
+    "CART_FORC_R",
+    "NOEU_FORC_R",
+    "ELEM_FREQ_R",
+    "ELNO_FREQ_R",
+    "ELGA_FREQ_R",
+    "CART_FREQ_R",
+    "NOEU_FREQ_R",
+    "ELEM_FTHM_F",
+    "ELNO_FTHM_F",
+    "ELGA_FTHM_F",
+    "CART_FTHM_F",
+    "NOEU_FTHM_F",
+    "ELEM_FTHM_R",
+    "ELNO_FTHM_R",
+    "ELGA_FTHM_R",
+    "CART_FTHM_R",
+    "NOEU_FTHM_R",
+    "ELEM_ETHM_R",
+    "ELNO_ETHM_R",
+    "ELGA_ETHM_R",
+    "CART_ETHM_R",
+    "NOEU_ETHM_R",
+    "ELEM_ETHM_F",
+    "ELNO_ETHM_F",
+    "ELGA_ETHM_F",
+    "CART_ETHM_F",
+    "NOEU_ETHM_F",
+    "ELEM_ETHMH_R",
+    "ELNO_ETHMH_R",
+    "ELGA_ETHMH_R",
+    "CART_ETHMH_R",
+    "NOEU_ETHMH_R",
+    "ELEM_ETHMH_F",
+    "ELNO_ETHMH_F",
+    "ELGA_ETHMH_F",
+    "CART_ETHMH_F",
+    "NOEU_ETHMH_F",
+    "ELEM_GEOM_R",
+    "ELNO_GEOM_R",
+    "ELGA_GEOM_R",
+    "CART_GEOM_R",
+    "NOEU_GEOM_R",
+    "ELEM_G_DEPL_R",
+    "ELNO_G_DEPL_R",
+    "ELGA_G_DEPL_R",
+    "CART_G_DEPL_R",
+    "NOEU_G_DEPL_R",
+    "ELEM_HYDR_R",
+    "ELNO_HYDR_R",
+    "ELGA_HYDR_R",
+    "CART_HYDR_R",
+    "NOEU_HYDR_R",
+    "ELEM_IMPE_C",
+    "ELNO_IMPE_C",
+    "ELGA_IMPE_C",
+    "CART_IMPE_C",
+    "NOEU_IMPE_C",
+    "ELEM_IMPE_F",
+    "ELNO_IMPE_F",
+    "ELGA_IMPE_F",
+    "CART_IMPE_F",
+    "NOEU_IMPE_F",
+    "ELEM_IMPE_R",
+    "ELNO_IMPE_R",
+    "ELGA_IMPE_R",
+    "CART_IMPE_R",
+    "NOEU_IMPE_R",
+    "ELEM_INDL_R",
+    "ELNO_INDL_R",
+    "ELGA_INDL_R",
+    "CART_INDL_R",
+    "NOEU_INDL_R",
+    "ELEM_INFC_R",
+    "ELNO_INFC_R",
+    "ELGA_INFC_R",
+    "CART_INFC_R",
+    "NOEU_INFC_R",
+    "ELEM_INST_R",
+    "ELNO_INST_R",
+    "ELGA_INST_R",
+    "CART_INST_R",
+    "NOEU_INST_R",
+    "ELEM_INTE_R",
+    "ELNO_INTE_R",
+    "ELGA_INTE_R",
+    "CART_INTE_R",
+    "NOEU_INTE_R",
+    "ELEM_IRRA_R",
+    "ELNO_IRRA_R",
+    "ELGA_IRRA_R",
+    "CART_IRRA_R",
+    "NOEU_IRRA_R",
+    "ELEM_MASS_R",
+    "ELNO_MASS_R",
+    "ELGA_MASS_R",
+    "CART_MASS_R",
+    "NOEU_MASS_R",
+    "ELEM_MATE_R",
+    "ELNO_MATE_R",
+    "ELGA_MATE_R",
+    "CART_MATE_R",
+    "NOEU_MATE_R",
+    "ELEM_MATE_F",
+    "ELNO_MATE_F",
+    "ELGA_MATE_F",
+    "CART_MATE_F",
+    "NOEU_MATE_F",
+    "ELEM_NBSP_I",
+    "ELNO_NBSP_I",
+    "ELGA_NBSP_I",
+    "CART_NBSP_I",
+    "NOEU_NBSP_I",
+    "ELEM_NEUT_F",
+    "ELNO_NEUT_F",
+    "ELGA_NEUT_F",
+    "CART_NEUT_F",
+    "NOEU_NEUT_F",
+    "ELEM_NEUT_I",
+    "ELNO_NEUT_I",
+    "ELGA_NEUT_I",
+    "CART_NEUT_I",
+    "NOEU_NEUT_I",
+    "ELEM_NEUT_R",
+    "ELNO_NEUT_R",
+    "ELGA_NEUT_R",
+    "CART_NEUT_R",
+    "NOEU_NEUT_R",
+    "ELEM_N480_R",
+    "ELNO_N480_R",
+    "ELGA_N480_R",
+    "CART_N480_R",
+    "NOEU_N480_R",
+    "ELEM_NUMC_I",
+    "ELNO_NUMC_I",
+    "ELGA_NUMC_I",
+    "CART_NUMC_I",
+    "NOEU_NUMC_I",
+    "ELEM_ONDE_F",
+    "ELNO_ONDE_F",
+    "ELGA_ONDE_F",
+    "CART_ONDE_F",
+    "NOEU_ONDE_F",
+    "ELEM_ONDE_R",
+    "ELNO_ONDE_R",
+    "ELGA_ONDE_R",
+    "CART_ONDE_R",
+    "NOEU_ONDE_R",
+    "ELEM_PESA_R",
+    "ELNO_PESA_R",
+    "ELGA_PESA_R",
+    "CART_PESA_R",
+    "NOEU_PESA_R",
+    "ELEM_PDIL_R",
+    "ELNO_PDIL_R",
+    "ELGA_PDIL_R",
+    "CART_PDIL_R",
+    "NOEU_PDIL_R",
+    "ELEM_PILO_R",
+    "ELNO_PILO_R",
+    "ELGA_PILO_R",
+    "CART_PILO_R",
+    "NOEU_PILO_R",
+    "ELEM_PRES_C",
+    "ELNO_PRES_C",
+    "ELGA_PRES_C",
+    "CART_PRES_C",
+    "NOEU_PRES_C",
+    "ELEM_PRES_F",
+    "ELNO_PRES_F",
+    "ELGA_PRES_F",
+    "CART_PRES_F",
+    "NOEU_PRES_F",
+    "ELEM_PRES_R",
+    "ELNO_PRES_R",
+    "ELGA_PRES_R",
+    "CART_PRES_R",
+    "NOEU_PRES_R",
+    "ELEM_RAYO_F",
+    "ELNO_RAYO_F",
+    "ELGA_RAYO_F",
+    "CART_RAYO_F",
+    "NOEU_RAYO_F",
+    "ELEM_RAYO_R",
+    "ELNO_RAYO_R",
+    "ELGA_RAYO_R",
+    "CART_RAYO_R",
+    "NOEU_RAYO_R",
+    "ELEM_RCCM_R",
+    "ELNO_RCCM_R",
+    "ELGA_RCCM_R",
+    "CART_RCCM_R",
+    "NOEU_RCCM_R",
+    "ELEM_ROTA_R",
+    "ELNO_ROTA_R",
+    "ELGA_ROTA_R",
+    "CART_ROTA_R",
+    "NOEU_ROTA_R",
+    "ELEM_SIEF_C",
+    "ELNO_SIEF_C",
+    "ELGA_SIEF_C",
+    "CART_SIEF_C",
+    "NOEU_SIEF_C",
+    "ELEM_SIEF_R",
+    "ELNO_SIEF_R",
+    "ELGA_SIEF_R",
+    "CART_SIEF_R",
+    "NOEU_SIEF_R",
+    "ELEM_SIEFMX_R",
+    "ELNO_SIEFMX_R",
+    "ELGA_SIEFMX_R",
+    "CART_SIEFMX_R",
+    "NOEU_SIEFMX_R",
+    "ELEM_SIZZ_R",
+    "ELNO_SIZZ_R",
+    "ELGA_SIZZ_R",
+    "CART_SIZZ_R",
+    "NOEU_SIZZ_R",
+    "ELEM_SOUR_F",
+    "ELNO_SOUR_F",
+    "ELGA_SOUR_F",
+    "CART_SOUR_F",
+    "NOEU_SOUR_F",
+    "ELEM_SOUR_R",
+    "ELNO_SOUR_R",
+    "ELGA_SOUR_R",
+    "CART_SOUR_R",
+    "NOEU_SOUR_R",
+    "ELEM_SPMX_R",
+    "ELNO_SPMX_R",
+    "ELGA_SPMX_R",
+    "CART_SPMX_R",
+    "NOEU_SPMX_R",
+    "ELEM_STRX_R",
+    "ELNO_STRX_R",
+    "ELGA_STRX_R",
+    "CART_STRX_R",
+    "NOEU_STRX_R",
+    "ELEM_TEMP_C",
+    "ELNO_TEMP_C",
+    "ELGA_TEMP_C",
+    "CART_TEMP_C",
+    "NOEU_TEMP_C",
+    "ELEM_TEMP_F",
+    "ELNO_TEMP_F",
+    "ELGA_TEMP_F",
+    "CART_TEMP_F",
+    "NOEU_TEMP_F",
+    "ELEM_TEMP_R",
+    "ELNO_TEMP_R",
+    "ELGA_TEMP_R",
+    "CART_TEMP_R",
+    "NOEU_TEMP_R",
+    "ELEM_VALO_R",
+    "ELNO_VALO_R",
+    "ELGA_VALO_R",
+    "CART_VALO_R",
+    "NOEU_VALO_R",
+    "ELEM_VANL_R",
+    "ELNO_VANL_R",
+    "ELGA_VANL_R",
+    "CART_VANL_R",
+    "NOEU_VANL_R",
+    "ELEM_VAR2_R",
+    "ELNO_VAR2_R",
+    "ELGA_VAR2_R",
+    "CART_VAR2_R",
+    "NOEU_VAR2_R",
+    "ELEM_VARC_R",
+    "ELNO_VARC_R",
+    "ELGA_VARC_R",
+    "CART_VARC_R",
+    "NOEU_VARC_R",
+    "ELEM_VARI_R",
+    "ELNO_VARI_R",
+    "ELGA_VARI_R",
+    "ELEM_VENTCX_F",
+    "ELNO_VENTCX_F",
+    "ELGA_VENTCX_F",
+    "CART_VENTCX_F",
+    "NOEU_VENTCX_F",
+    "ELEM_VFAC_C",
+    "ELNO_VFAC_C",
+    "ELGA_VFAC_C",
+    "CART_VFAC_C",
+    "NOEU_VFAC_C",
+    "ELEM_VFAC_F",
+    "ELNO_VFAC_F",
+    "ELGA_VFAC_F",
+    "CART_VFAC_F",
+    "NOEU_VFAC_F",
+    "ELEM_VFAC_R",
+    "ELNO_VFAC_R",
+    "ELGA_VFAC_R",
+    "CART_VFAC_R",
+    "NOEU_VFAC_R",
+    "ELEM_CLAC_R",
+    "ELNO_CLAC_R",
+    "ELGA_CLAC_R",
+    "CART_CLAC_R",
+    "NOEU_CLAC_R",
+    "ELEM_THET_R",
+    "ELNO_THET_R",
+    "ELGA_THET_R",
+    "CART_THET_R",
+    "NOEU_THET_R",
+    "ELEM_GRAT_R",
+    "ELNO_GRAT_R",
+    "ELGA_GRAT_R",
+    "CART_GRAT_R",
+    "NOEU_GRAT_R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "f",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "CHAM_NO",
+   "kind": "simple",
+   "path": "CHAM_NO",
+   "status": "f",
+   "type": [
+    "cham_no_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "b_prol_zero",
+   "kind": "bloc",
+   "path": "[b_prol_zero]",
+   "condition": "exists(\"NUME_DDL\") or exists(\"CHAM_NO\") or (exists(\"TYPE_CHAM\") and TYPE_CHAM[0:2] == 'EL')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "PROL_ZERO",
+     "kind": "simple",
+     "path": "PROL_ZERO",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 68
+     }
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "AFFE_SP",
+   "kind": "factor",
+   "path": "AFFE_SP",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "AFFE_SP/CARA_ELEM",
+     "status": "o",
+     "type": [
+      "cara_elem"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "AFFE",
+    "ASSE",
+    "ASSE_DEPL",
+    "EVAL",
+    "EXTR",
+    "DISC",
+    "NORMALE",
+    "R2C",
+    "C2R",
+    "COMB"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "b_norm",
+   "kind": "bloc",
+   "path": "[b_norm]",
+   "condition": "equal_to(\"OPERATION\", 'NORMALE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 89
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_affe",
+   "kind": "bloc",
+   "path": "[b_affe]",
+   "condition": "equal_to(\"OPERATION\", 'AFFE')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MAILLAGE",
+      "MODELE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "AFFE",
+     "kind": "factor",
+     "path": "AFFE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VALE",
+        "VALE_I",
+        "VALE_C",
+        "VALE_F"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 97
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "AFFE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "AFFE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "AFFE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "AFFE/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "AFFE/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "AFFE/VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "VALE_I",
+       "kind": "simple",
+       "path": "AFFE/VALE_I",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 110
+       }
+      },
+      {
+       "name": "VALE_C",
+       "kind": "simple",
+       "path": "AFFE/VALE_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 111
+       }
+      },
+      {
+       "name": "VALE_F",
+       "kind": "simple",
+       "path": "AFFE/VALE_F",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 112
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_asse",
+   "kind": "bloc",
+   "path": "[b_asse]",
+   "condition": "equal_to(\"OPERATION\", 'ASSE')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MAILLAGE",
+      "MODELE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 116
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "ASSE",
+     "kind": "factor",
+     "path": "ASSE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT",
+        "GROUP_MA",
+        "GROUP_NO"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "NOM_CMP_RESU",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 121
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "ASSE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 128
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ASSE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 129
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ASSE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "ASSE/CHAM_GD",
+       "status": "o",
+       "type": [
+        "cham_gd_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 131
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ASSE/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "NOM_CMP_RESU",
+       "kind": "simple",
+       "path": "ASSE/NOM_CMP_RESU",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "CUMUL",
+       "kind": "simple",
+       "path": "ASSE/CUMUL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 134
+       }
+      },
+      {
+       "name": "COEF_R",
+       "kind": "simple",
+       "path": "ASSE/COEF_R",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 135
+       }
+      },
+      {
+       "name": "COEF_C",
+       "kind": "simple",
+       "path": "ASSE/COEF_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 136
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_comb",
+   "kind": "bloc",
+   "path": "[b_comb]",
+   "condition": "equal_to(\"OPERATION\", 'COMB')",
+   "fr": "Pour faire une combinaison linéaire de cham_no ayant meme profil",
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 140
+   },
+   "keywords": [
+    {
+     "name": "COMB",
+     "kind": "factor",
+     "path": "COMB",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 143
+     },
+     "keywords": [
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "COMB/CHAM_GD",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 146
+       }
+      },
+      {
+       "name": "COEF_R",
+       "kind": "simple",
+       "path": "COMB/COEF_R",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 147
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_eval",
+   "kind": "bloc",
+   "path": "[b_eval]",
+   "condition": "equal_to(\"OPERATION\", 'EVAL')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 151
+   },
+   "keywords": [
+    {
+     "name": "CHAM_F",
+     "kind": "simple",
+     "path": "CHAM_F",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 153
+     }
+    },
+    {
+     "name": "CHAM_PARA",
+     "kind": "simple",
+     "path": "CHAM_PARA",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 154
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_xfem",
+   "kind": "bloc",
+   "path": "[b_xfem]",
+   "condition": "equal_to(\"OPERATION\", 'ASSE_DEPL')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 157
+   },
+   "keywords": [
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 161
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_r2c",
+   "kind": "bloc",
+   "path": "[b_r2c]",
+   "condition": "equal_to(\"OPERATION\", 'R2C')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 164
+   },
+   "keywords": [
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 165
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_c2r",
+   "kind": "bloc",
+   "path": "[b_c2r]",
+   "condition": "equal_to(\"OPERATION\", 'C2R')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 168
+   },
+   "keywords": [
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 170
+     }
+    },
+    {
+     "name": "PARTIE",
+     "kind": "simple",
+     "path": "PARTIE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "REEL",
+      "IMAG",
+      "MODULE",
+      "PHASE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 171
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_disc",
+   "kind": "bloc",
+   "path": "[b_disc]",
+   "condition": "equal_to(\"OPERATION\", 'DISC')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 174
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 177
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_extr",
+   "kind": "bloc",
+   "path": "[b_extr]",
+   "condition": "equal_to(\"OPERATION\", 'EXTR')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "MAILLAGE",
+      "FISSURE",
+      "RESULTAT",
+      "TABLE",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "MAILLAGE",
+      "FISSURE",
+      "RESULTAT",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "FISSURE",
+      "MAILLAGE",
+      "RESULTAT",
+      "TABLE",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "RESULTAT",
+      "FISSURE",
+      "MAILLAGE",
+      "TABLE",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "TABLE",
+      "RESULTAT",
+      "FISSURE",
+      "CARA_ELEM",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "CARA_ELEM",
+      "MAILLAGE",
+      "TABLE",
+      "RESULTAT",
+      "FISSURE",
+      "CHARGE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "CHARGE",
+      "MAILLAGE",
+      "TABLE",
+      "RESULTAT",
+      "FISSURE",
+      "CARA_ELEM"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 180
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 191
+     }
+    },
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "FISSURE",
+     "status": "f",
+     "type": [
+      "fiss_xfem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "f",
+     "type": [
+      "resultat_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 193
+     }
+    },
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "TABLE",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 196
+     }
+    },
+    {
+     "name": "b_extr_maillage",
+     "kind": "bloc",
+     "path": "[b_extr_maillage]",
+     "condition": "exists(\"MAILLAGE\") and not exists(\"TABLE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 197
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "GEOMETRIE",
+        "ABSC_CURV"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 199
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_extr_cara_elem",
+     "kind": "bloc",
+     "path": "[b_extr_cara_elem]",
+     "condition": "exists(\"CARA_ELEM\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 203
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        ".CARGENBA",
+        ".CARMASSI",
+        ".CARCABLE",
+        ".CARCOQUE",
+        ".CARGEOBA",
+        ".CARDISCK",
+        ".CARARCPO",
+        ".CARGENPO",
+        ".CARDISCM",
+        ".CARORIEN",
+        ".CARDISCA",
+        ".CVENTCXF",
+        ".CARPOUFL",
+        ".CARGEOPO",
+        ".CARDINFO",
+        ".CAFIBR",
+        ".CANBSP"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 205
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_extr_charge",
+     "kind": "bloc",
+     "path": "[b_extr_charge]",
+     "condition": "exists(\"CHARGE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 230
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        ".CHME.EPSIN",
+        ".CHME.F1D1D",
+        ".CHME.F1D2D",
+        ".CHME.F1D3D",
+        ".CHME.F2D2D",
+        ".CHME.F2D3D",
+        ".CHME.F3D3D",
+        ".CHME.FCO2D",
+        ".CHME.FCO3D",
+        ".CHME.FELEC",
+        ".CHME.FL101",
+        ".CHME.FL102",
+        ".CHME.FLUX",
+        ".CHME.FORNO",
+        ".CHME.IMPE",
+        ".CHME.ONDE",
+        ".CHME.ONDPL",
+        ".CHME.ONDPR",
+        ".CHME.PESAN",
+        ".CHME.PRESS",
+        ".CHME.ROTAT",
+        ".CHME.SIGIN",
+        ".CHME.SIINT",
+        ".CHME.VFACE"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 232
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_extr_fissure",
+     "kind": "bloc",
+     "path": "[b_extr_fissure]",
+     "condition": "exists(\"FISSURE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 264
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "LTNO",
+        "LNNO",
+        "GRLTNO",
+        "GRLNNO",
+        "STNO",
+        "BASLOC",
+        "GRI.LNNO",
+        "GRI.LTNO",
+        "GRI.GRLNNO",
+        "GRI.GRLTNO"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 266
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_extr_table",
+     "kind": "bloc",
+     "path": "[b_extr_table]",
+     "condition": "exists(\"TABLE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 284
+     },
+     "keywords": [
+      {
+       "name": "MODELE",
+       "kind": "simple",
+       "path": "MODELE",
+       "status": "f",
+       "type": [
+        "modele_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 285
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_extr_resultat",
+     "kind": "bloc",
+     "path": "[b_extr_resultat]",
+     "condition": "exists(\"RESULTAT\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/crea_champ.py",
+      "line": 287
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ACCE",
+        "ACCE_ABSOLU",
+        "COEF_H",
+        "COMPORTEMENT",
+        "COMPORTHER",
+        "CONT_ELEM",
+        "CONT_NOEU",
+        "DEGE_ELGA",
+        "DEGE_ELNO",
+        "DEGE_NOEU",
+        "DEPL",
+        "DEPL_ABSOLU",
+        "DEPL_ELGA",
+        "DEPL_VIBR",
+        "DERA_ELGA",
+        "DERA_ELNO",
+        "DERA_NOEU",
+        "DIFF_ELGA",
+        "DIFF_ELNO",
+        "DIFF_NOEU",
+        "DISS_ELEM",
+        "DISS_ELGA",
+        "DISS_ELNO",
+        "DISS_NOEU",
+        "DIVU",
+        "DURT_ELNO",
+        "DURT_NOEU",
+        "ECIN_ELEM",
+        "EFGE_ELGA",
+        "EFGE_ELNO",
+        "EFGE_NOEU",
+        "EGRU_ELNO",
+        "ENDO_ELGA",
+        "ENDO_ELNO",
+        "ENDO_NOEU",
+        "ENEL_ELEM",
+        "ENEL_ELGA",
+        "ENEL_ELNO",
+        "ENEL_NOEU",
+        "ENTR_ELEM",
+        "EPEQ_ELGA",
+        "EPEQ_ELNO",
+        "EPEQ_NOEU",
+        "EPFD_ELGA",
+        "EPFD_ELNO",
+        "EPFD_NOEU",
+        "EPFP_ELGA",
+        "EPFP_ELNO",
+        "EPFP_NOEU",
+        "EPGQ_ELGA",
+        "EPGQ_ELNO",
+        "EPGQ_NOEU",
+        "EPME_ELGA",
+        "EPME_ELNO",
+        "EPME_NOEU",
+        "EPMG_ELGA",
+        "EPMG_ELNO",
+        "EPMG_NOEU",
+        "EPMQ_ELGA",
+        "EPMQ_ELNO",
+        "EPMQ_NOEU",
+        "EPOT_ELEM",
+        "EPSA_ELNO",
+        "EPSA_NOEU",
+        "EPSG_ELGA",
+        "EPSG_ELNO",
+        "EPSG_NOEU",
+        "EPSI_ELGA",
+        "EPSI_ELNO",
+        "EPSI_NOEU",
+        "EPSL_ELGA",
+        "EPSL_ELNO",
+        "EPSL_NOEU",
+        "EPSP_ELGA",
+        "EPSP_ELNO",
+        "EPSP_NOEU",
+        "EPVC_ELGA",
+        "EPVC_ELNO",
+        "EPVC_NOEU",
+        "ERME_ELEM",
+        "ERME_ELNO",
+        "ERME_NOEU",
+        "ERTH_ELEM",
+        "ERTH_ELNO",
+        "ERTH_NOEU",
+        "ERZ1_ELEM",
+        "ERZ2_ELEM",
+        "ETHE_ELEM",
+        "ETOT_ELEM",
+        "ETOT_ELGA",
+        "ETOT_ELNO",
+        "ETOT_NOEU",
+        "FERR_ELEM",
+        "FLHN_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELNO",
+        "FLUX_ELNO",
+        "FLUX_NOEU",
+        "FLUX_NOEU",
+        "FORC_NODA",
+        "FSUR_2D",
+        "FSUR_3D",
+        "FVOL_2D",
+        "FVOL_3D",
+        "GRAT_ELGA",
+        "GRAT_ELGA",
+        "GRAT_ELNO",
+        "GRAT_ELNO",
+        "GRAT_NOEU",
+        "GRAT_NOEU",
+        "HHO_DEPL",
+        "HHO_TEMP",
+        "HHO_VITE",
+        "HYDR_ELGA",
+        "HYDR_ELNO",
+        "HYDR_NOEU",
+        "HYGR_ELGA",
+        "HYGR_ELNO",
+        "HYGR_NOEU",
+        "INDL_ELGA",
+        "INTE_ELNO",
+        "INTE_NOEU",
+        "IRRA",
+        "MARG_ELEM",
+        "MATE_ELEM",
+        "MATE_ELGA",
+        "META_ELNO",
+        "META_NOEU",
+        "MODE_FLAMB",
+        "MODE_STAB",
+        "NEUT",
+        "PDIL_ELGA",
+        "PRAC_ELNO",
+        "PRAC_NOEU",
+        "PRES",
+        "PRES_NOEU",
+        "PRME_ELNO",
+        "PTOT",
+        "QIRE_ELEM",
+        "QIRE_ELNO",
+        "QIRE_NOEU",
+        "QIZ1_ELEM",
+        "QIZ2_ELEM",
+        "REAC_NODA",
+        "RESI_NOEU",
+        "RESI_RELA_NOEU",
+        "ROC1_ELNO",
+        "ROC2_ELNO",
+        "SECH",
+        "SIEF_ELGA",
+        "SIEF_ELNO",
+        "SIEF_NOEU",
+        "SIEQ_ELGA",
+        "SIEQ_ELNO",
+        "SIEQ_NOEU",
+        "SIGM_ELGA",
+        "SIGM_ELNO",
+        "SIGM_NOEU",
+        "SIMY_ELGA",
+        "SING_ELEM",
+        "SING_ELNO",
+        "SIPM_ELNO",
+        "SIPO_ELNO",
+        "SIPO_NOEU",
+        "SIRO_ELEM",
+        "SISE_ELNO",
+        "SIZ1_NOEU",
+        "SIZ2_NOEU",
+        "SOUR_ELGA",
+        "STRX_ELGA",
+        "TEMP",
+        "TEMP_ELGA",
+        "T_EXT",
+        "UT01_CART",
+        "UT01_ELEM",
+        "UT01_ELGA",
+        "UT01_ELNO",
+        "UT01_NOEU",
+        "UT02_CART",
+        "UT02_ELEM",
+        "UT02_ELGA",
+        "UT02_ELNO",
+        "UT02_NOEU",
+        "UT03_CART",
+        "UT03_ELEM",
+        "UT03_ELGA",
+        "UT03_ELNO",
+        "UT03_NOEU",
+        "UT04_CART",
+        "UT04_ELEM",
+        "UT04_ELGA",
+        "UT04_ELNO",
+        "UT04_NOEU",
+        "UT05_CART",
+        "UT05_ELEM",
+        "UT05_ELGA",
+        "UT05_ELNO",
+        "UT05_NOEU",
+        "UT06_CART",
+        "UT06_ELEM",
+        "UT06_ELGA",
+        "UT06_ELNO",
+        "UT06_NOEU",
+        "UT07_CART",
+        "UT07_ELEM",
+        "UT07_ELGA",
+        "UT07_ELNO",
+        "UT07_NOEU",
+        "UT08_CART",
+        "UT08_ELEM",
+        "UT08_ELGA",
+        "UT08_ELNO",
+        "UT08_NOEU",
+        "UT09_CART",
+        "UT09_ELEM",
+        "UT09_ELGA",
+        "UT09_ELNO",
+        "UT09_NOEU",
+        "UT10_CART",
+        "UT10_ELEM",
+        "UT10_ELGA",
+        "UT10_ELNO",
+        "UT10_NOEU",
+        "VARC_ELGA",
+        "VARC_ELNO",
+        "VARC_NOEU",
+        "VARI_ELGA",
+        "VARI_ELNO",
+        "VARI_NOEU",
+        "VITE",
+        "VITE_ABSOLU",
+        "VITE_VENT"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 289
+       }
+      },
+      {
+       "name": "TYPE_MAXI",
+       "kind": "simple",
+       "path": "TYPE_MAXI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MAXI",
+        "MINI",
+        "MAXI_ABS",
+        "MINI_ABS",
+        "NORM_TRAN"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 290
+       }
+      },
+      {
+       "name": "b_type_abs",
+       "kind": "bloc",
+       "path": "[b_type_abs]",
+       "condition": "(equal_to(\"TYPE_MAXI\", 'MAXI_ABS') or equal_to(\"TYPE_MAXI\", 'MINI_ABS'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 294
+       },
+       "keywords": [
+        {
+         "name": "TYPE_RESU",
+         "kind": "simple",
+         "path": "TYPE_RESU",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "VALE",
+         "into": [
+          "VALE",
+          "INST",
+          "VALE_ABS",
+          "NUME_ORDRE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 296
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_type_non_abs",
+       "kind": "bloc",
+       "path": "[b_type_non_abs]",
+       "condition": "(equal_to(\"TYPE_MAXI\", 'MAXI') or equal_to(\"TYPE_MAXI\", 'MINI') or equal_to(\"TYPE_MAXI\", 'NORM_TRAN'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 303
+       },
+       "keywords": [
+        {
+         "name": "TYPE_RESU",
+         "kind": "simple",
+         "path": "TYPE_RESU",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "VALE",
+         "into": [
+          "VALE",
+          "INST",
+          "NUME_ORDRE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 305
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_type_maxi",
+       "kind": "bloc",
+       "path": "[b_type_maxi]",
+       "condition": "exists(\"TYPE_MAXI\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_ORDRE",
+          "LIST_INST",
+          "LIST_FREQ",
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 309
+       },
+       "keywords": [
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 325
+         }
+        },
+        {
+         "name": "LIST_INST",
+         "kind": "simple",
+         "path": "LIST_INST",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 326
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 327
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 328
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 329
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 330
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 331
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 332
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 333
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 334
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_non_type_maxi",
+       "kind": "bloc",
+       "path": "[b_non_type_maxi]",
+       "condition": "not exists(\"TYPE_MAXI\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "NUME_ORDRE",
+          "INST",
+          "FREQ",
+          "NUME_MODE",
+          "NOEUD_CMP",
+          "NOM_CAS",
+          "ANGLE"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 337
+       },
+       "keywords": [
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 344
+         }
+        },
+        {
+         "name": "INST",
+         "kind": "simple",
+         "path": "INST",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 345
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 346
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 347
+         }
+        },
+        {
+         "name": "NOEUD_CMP",
+         "kind": "simple",
+         "path": "NOEUD_CMP",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 348
+         }
+        },
+        {
+         "name": "NOM_CAS",
+         "kind": "simple",
+         "path": "NOM_CAS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 349
+         }
+        },
+        {
+         "name": "ANGLE",
+         "kind": "simple",
+         "path": "ANGLE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 350
+         }
+        },
+        {
+         "name": "b_inst",
+         "kind": "bloc",
+         "path": "[b_inst]",
+         "condition": "exists(\"INST\") ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 351
+         },
+         "keywords": [
+          {
+           "name": "INTERPOL",
+           "kind": "simple",
+           "path": "INTERPOL",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "NON",
+           "into": [
+            "NON",
+            "LIN"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/crea_champ.py",
+            "line": 353
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 356
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 357
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 359
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/crea_champ.py",
+        "line": 361
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/crea_champ.py",
+          "line": 362
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 368
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/crea_champ.py",
+    "line": 369
+   }
+  }
+ ]
+}

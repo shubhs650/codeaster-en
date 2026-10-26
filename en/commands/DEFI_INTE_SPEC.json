@@ -1,0 +1,828 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_INTE_SPEC",
+ "kind": "OPER",
+ "fr": "Définit une matrice interspectrale",
+ "translation_upstream": null,
+ "op": 115,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "PAR_FONCTION",
+    "KANAI_TAJIMI",
+    "CONSTANT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "DIMENSION",
+   "kind": "simple",
+   "path": "DIMENSION",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "PAR_FONCTION",
+   "kind": "factor",
+   "path": "PAR_FONCTION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE_I",
+      "NOEUD_I"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "NOEUD_I",
+     "kind": "simple",
+     "path": "PAR_FONCTION/NOEUD_I",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NUME_ORDRE_I",
+     "kind": "simple",
+     "path": "PAR_FONCTION/NUME_ORDRE_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "b_nume_ordre_i",
+     "kind": "bloc",
+     "path": "PAR_FONCTION/[b_nume_ordre_i]",
+     "condition": "exists(\"NUME_ORDRE_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 40
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_J",
+       "kind": "simple",
+       "path": "PAR_FONCTION/NUME_ORDRE_J",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 41
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_i",
+     "kind": "bloc",
+     "path": "PAR_FONCTION/[b_noeud_i]",
+     "condition": "exists(\"NOEUD_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 43
+     },
+     "keywords": [
+      {
+       "name": "NOEUD_J",
+       "kind": "simple",
+       "path": "PAR_FONCTION/NOEUD_J",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 45
+       }
+      },
+      {
+       "name": "NOM_CMP_I",
+       "kind": "simple",
+       "path": "PAR_FONCTION/NOM_CMP_I",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 46
+       }
+      },
+      {
+       "name": "NOM_CMP_J",
+       "kind": "simple",
+       "path": "PAR_FONCTION/NOM_CMP_J",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 47
+       }
+      }
+     ]
+    },
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "PAR_FONCTION/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 49
+     }
+    }
+   ]
+  },
+  {
+   "name": "KANAI_TAJIMI",
+   "kind": "factor",
+   "path": "KANAI_TAJIMI",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "VALE_R",
+      "VALE_C"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE_I",
+      "NOEUD_I"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "NUME_ORDRE_I",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/NUME_ORDRE_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "NOEUD_I",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/NOEUD_I",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "b_nume_ordre_i",
+     "kind": "bloc",
+     "path": "KANAI_TAJIMI/[b_nume_ordre_i]",
+     "condition": "exists(\"NUME_ORDRE_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 57
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_J",
+       "kind": "simple",
+       "path": "KANAI_TAJIMI/NUME_ORDRE_J",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 58
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_i",
+     "kind": "bloc",
+     "path": "KANAI_TAJIMI/[b_noeud_i]",
+     "condition": "exists(\"NOEUD_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 60
+     },
+     "keywords": [
+      {
+       "name": "NOEUD_J",
+       "kind": "simple",
+       "path": "KANAI_TAJIMI/NOEUD_J",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 62
+       }
+      },
+      {
+       "name": "NOM_CMP_I",
+       "kind": "simple",
+       "path": "KANAI_TAJIMI/NOM_CMP_I",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 63
+       }
+      },
+      {
+       "name": "NOM_CMP_J",
+       "kind": "simple",
+       "path": "KANAI_TAJIMI/NOM_CMP_J",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 64
+       }
+      }
+     ]
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 100.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.6,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "FREQ_MOY",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/FREQ_MOY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 5.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "VALE_R",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/VALE_R",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "VALE_C",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/VALE_C",
+     "status": "f",
+     "type": [
+      "C"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "INTERPOL",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/INTERPOL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "default": "LIN",
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "PROL_DROITE",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/PROL_DROITE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "PROL_GAUCHE",
+     "kind": "simple",
+     "path": "KANAI_TAJIMI/PROL_GAUCHE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "CONSTANT",
+   "kind": "factor",
+   "path": "CONSTANT",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "VALE_R",
+      "VALE_C"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE_I",
+      "NOEUD_I"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "NUME_ORDRE_I",
+     "kind": "simple",
+     "path": "CONSTANT/NUME_ORDRE_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "NOEUD_I",
+     "kind": "simple",
+     "path": "CONSTANT/NOEUD_I",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "b_nume_ordre_i",
+     "kind": "bloc",
+     "path": "CONSTANT/[b_nume_ordre_i]",
+     "condition": "exists(\"NUME_ORDRE_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 87
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_J",
+       "kind": "simple",
+       "path": "CONSTANT/NUME_ORDRE_J",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 88
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_i",
+     "kind": "bloc",
+     "path": "CONSTANT/[b_noeud_i]",
+     "condition": "exists(\"NOEUD_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 90
+     },
+     "keywords": [
+      {
+       "name": "NOEUD_J",
+       "kind": "simple",
+       "path": "CONSTANT/NOEUD_J",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "NOM_CMP_I",
+       "kind": "simple",
+       "path": "CONSTANT/NOM_CMP_I",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "NOM_CMP_J",
+       "kind": "simple",
+       "path": "CONSTANT/NOM_CMP_J",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+        "line": 94
+       }
+      }
+     ]
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "CONSTANT/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "CONSTANT/FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 100.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "CONSTANT/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "VALE_R",
+     "kind": "simple",
+     "path": "CONSTANT/VALE_R",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "VALE_C",
+     "kind": "simple",
+     "path": "CONSTANT/VALE_C",
+     "status": "f",
+     "type": [
+      "C"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "INTERPOL",
+     "kind": "simple",
+     "path": "CONSTANT/INTERPOL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "default": "LIN",
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "PROL_DROITE",
+     "kind": "simple",
+     "path": "CONSTANT/PROL_DROITE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "PROL_GAUCHE",
+     "kind": "simple",
+     "path": "CONSTANT/PROL_GAUCHE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+      "line": 105
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 109
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_inte_spec.py",
+    "line": 110
+   }
+  }
+ ]
+}

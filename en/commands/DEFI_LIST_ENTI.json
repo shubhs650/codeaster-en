@@ -1,0 +1,276 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_list_enti.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_LIST_ENTI",
+ "kind": "OPER",
+ "fr": "Définir une liste d'entiers strictement croissante",
+ "translation_upstream": null,
+ "op": 22,
+ "reentrant": "n",
+ "result_types": [
+  "listis_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_list_enti.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DEFI",
+   "into": [
+    "DEFI",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_enti.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "b_defi",
+   "kind": "bloc",
+   "path": "[b_defi]",
+   "condition": "equal_to(\"OPERATION\", 'DEFI')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VALE",
+      "DEBUT"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "VALE",
+      "INTERVALLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_enti.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "VALE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "DEBUT",
+     "kind": "simple",
+     "path": "DEBUT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "INTERVALLE",
+     "kind": "factor",
+     "path": "INTERVALLE",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NOMBRE",
+        "PAS"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 40
+     },
+     "keywords": [
+      {
+       "name": "JUSQU_A",
+       "kind": "simple",
+       "path": "INTERVALLE/JUSQU_A",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_enti.py",
+        "line": 44
+       }
+      },
+      {
+       "name": "NOMBRE",
+       "kind": "simple",
+       "path": "INTERVALLE/NOMBRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_enti.py",
+        "line": 45
+       }
+      },
+      {
+       "name": "PAS",
+       "kind": "simple",
+       "path": "INTERVALLE/PAS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_enti.py",
+        "line": 46
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_extr",
+   "kind": "bloc",
+   "path": "[b_extr]",
+   "condition": "equal_to(\"OPERATION\", 'NUME_ORDRE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_enti.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "o",
+     "type": [
+      "resultat_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "PARAMETRE",
+     "kind": "simple",
+     "path": "PARAMETRE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "INTERVALLE",
+     "kind": "factor",
+     "path": "INTERVALLE",
+     "status": "o",
+     "max": "**",
+     "fr": "Définition des intervalles de recherche",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_list_enti.py",
+      "line": 55
+     },
+     "keywords": [
+      {
+       "name": "VALE",
+       "kind": "simple",
+       "path": "INTERVALLE/VALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 2,
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_list_enti.py",
+        "line": 59
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_enti.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_list_enti.py",
+    "line": 63
+   }
+  }
+ ]
+}

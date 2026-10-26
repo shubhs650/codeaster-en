@@ -1,0 +1,89 @@
+# solid_static -- cylindrical shell with a radial nozzle under internal pressure.
+# codeaster-en test fixture (task 4.1). Units: mm, N, MPa.
+# Geometry: shell Ri=100 Ro=120 H=300 (axis Z); nozzle ri=25 ro=35 on +X at Z=150, open end at X=220.
+# Base (Z=0) fully fixed; internal pressure P on the shell inner wall and the nozzle bore.
+# Check: the reaction sum at the base balances the applied pressure resultant. With an open
+# nozzle end the resultant is P * (area of the bore opening) along -X; see run.json "checks".
+# Modelled on astest forma01a (LIRE_MAILLAGE MED, ORIE_PEAU, PRES_REP, CALC_CHAMP SIEQ_NOEU)
+# and zzzz341b (POST_RELEVE_T RESULTANTE on REAC_NODA).
+# TODO(4.2): VALE_CALC values below are the hand values, accepted with TOLE_MACHINE = PRECISION.
+# Replace them with the solver's own values from the first run and drop TOLE_MACHINE.
+
+DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
+
+P = 2.0  # internal pressure [MPa]
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(GROUP_MA="BASE"))
+
+MAIL = MODI_MAILLAGE(reuse=MAIL, MAILLAGE=MAIL, ORIE_PEAU=_F(GROUP_MA_PEAU=("P_SHELL", "P_NOZZLE")))
+
+# TOUT="OUI" so the pressure faces (TRIA3 skin cells) get boundary elements, as in forma01a.
+MODE = AFFE_MODELE(MAILLAGE=MAIL, AFFE=_F(TOUT="OUI", PHENOMENE="MECANIQUE", MODELISATION="3D"))
+
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="SOLID", MATER=ACIER))
+
+FIXE = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA="BASE", DX=0.0, DY=0.0, DZ=0.0))
+
+PRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=("P_SHELL", "P_NOZZLE"), PRES=P))
+
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    EXCIT=(_F(CHARGE=FIXE), _F(CHARGE=PRESS)),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+RESU = CALC_CHAMP(
+    reuse=RESU,
+    RESULTAT=RESU,
+    CONTRAINTE=("SIGM_ELNO", "SIGM_NOEU"),
+    CRITERES=("SIEQ_ELNO", "SIEQ_NOEU"),
+    FORCE="REAC_NODA",
+)
+
+REAC = POST_RELEVE_T(
+    ACTION=_F(
+        OPERATION="EXTRACTION",
+        INTITULE="REAC_BASE",
+        RESULTAT=RESU,
+        NOM_CHAM="REAC_NODA",
+        GROUP_NO="BASE",
+        RESULTANTE=("DX", "DY", "DZ"),
+    )
+)
+
+IMPR_TABLE(TABLE=REAC, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=30)
+
+IMPR_RESU(
+    FORMAT="MED",
+    UNITE=80,
+    RESU=_F(RESULTAT=RESU, NOM_CHAM=("DEPL", "SIGM_NOEU", "SIEQ_NOEU", "REAC_NODA")),
+)
+
+# Reaction sum over the whole REAC_NODA field (non-zero only on the fixed base nodes).
+# TYPE_TEST sums the whole field; GROUP_NO is not combined with it (see bibfor/test/trresu.F90).
+# VALE_ABS: the hand value is a magnitude; the sign convention of REAC_NODA is TODO(verify) in 4.2.
+TEST_RESU(
+    RESU=(
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DX",
+            TYPE_TEST="SOMM",
+            VALE_ABS="OUI",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=3891.64,
+            VALE_CALC=3891.64,
+            TOLE_MACHINE=1.0e-3,
+            PRECISION=1.0e-3,
+            LEGENDE="REAC_DX_SUM",
+        ),
+    )
+)
+
+FIN()

@@ -1,0 +1,1494 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_MATER_GC",
+ "kind": "MACRO",
+ "fr": "Définir des lois matériaux spécifique au Génie Civil",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_mater_gc_ops.defi_mater_gc_ops",
+ "reentrant": "n",
+ "result_types": [
+  "mater_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MAZARS",
+    "ACIER",
+    "ENDO_FISS_EXP",
+    "ENDO_LOCA_EXP",
+    "ENDO_LOCA_TC",
+    "BETON_GLRC"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+  "line": 28
+ },
+ "keywords": [
+  {
+   "name": "MAZARS",
+   "kind": "factor",
+   "path": "MAZARS",
+   "status": "f",
+   "max": 1,
+   "fr": "Paramètres matériaux de MAZARS unilatéral à partir des caractéristiques du béton",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "CODIFICATION",
+     "kind": "simple",
+     "path": "MAZARS/CODIFICATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ESSAI",
+      "BAEL91",
+      "EC2"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "b_BAEL91",
+     "kind": "bloc",
+     "path": "MAZARS/[b_BAEL91]",
+     "condition": " equal_to(\"CODIFICATION\", 'BAEL91')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 45
+     },
+     "keywords": [
+      {
+       "name": "UNITE_CONTRAINTE",
+       "kind": "simple",
+       "path": "MAZARS/UNITE_CONTRAINTE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MPa",
+        "Pa"
+       ],
+       "fr": "Unité des contraintes du problème.",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 47
+       }
+      },
+      {
+       "name": "FCJ",
+       "kind": "simple",
+       "path": "MAZARS/FCJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte au pic en compression [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 53
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_EC2",
+     "kind": "bloc",
+     "path": "MAZARS/[b_EC2]",
+     "condition": " equal_to(\"CODIFICATION\", 'EC2')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 60
+     },
+     "keywords": [
+      {
+       "name": "UNITE_CONTRAINTE",
+       "kind": "simple",
+       "path": "MAZARS/UNITE_CONTRAINTE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MPa",
+        "Pa"
+       ],
+       "fr": "Unité des contraintes du problème.",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 62
+       }
+      },
+      {
+       "name": "CLASSE",
+       "kind": "simple",
+       "path": "MAZARS/CLASSE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "C12/15",
+        "C16/20",
+        "C20/25",
+        "C25/30",
+        "C30/37",
+        "C35/45",
+        "C40/50",
+        "C45/55",
+        "C50/60",
+        "C55/67",
+        "C60/75",
+        "C70/85",
+        "C80/95",
+        "C90/105"
+       ],
+       "fr": "Classe de résistance du béton, selon Eurocode 2",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 68
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ESSAI",
+     "kind": "bloc",
+     "path": "MAZARS/[b_ESSAI]",
+     "condition": " equal_to(\"CODIFICATION\", 'ESSAI')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "EPSD0",
+        "EPST0"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 90
+     },
+     "keywords": [
+      {
+       "name": "b_espi",
+       "kind": "bloc",
+       "path": "MAZARS/[b_espi]",
+       "condition": "exists('EPST0')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 93
+       },
+       "keywords": [
+        {
+         "name": "EPSC0",
+         "kind": "simple",
+         "path": "MAZARS/EPSC0",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": "Déformation, seuil d'endommagement en compression",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+          "line": 95
+         }
+        }
+       ]
+      },
+      {
+       "name": "FCJ",
+       "kind": "simple",
+       "path": "MAZARS/FCJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte au pic en compression [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 102
+       }
+      },
+      {
+       "name": "EIJ",
+       "kind": "simple",
+       "path": "MAZARS/EIJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Module d'Young [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "EPSI_C",
+       "kind": "simple",
+       "path": "MAZARS/EPSI_C",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Déformation au pic en compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "FTJ",
+       "kind": "simple",
+       "path": "MAZARS/FTJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte au pic en traction [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "MAZARS/NU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 0.5,
+       "fr": "Coefficient de poisson",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 115
+       }
+      },
+      {
+       "name": "EPSD0",
+       "kind": "simple",
+       "path": "MAZARS/EPSD0",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Déformation, seuil d'endommagement en traction et compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 118
+       }
+      },
+      {
+       "name": "EPST0",
+       "kind": "simple",
+       "path": "MAZARS/EPST0",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Déformation, seuil d'endommagement en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 124
+       }
+      },
+      {
+       "name": "K",
+       "kind": "simple",
+       "path": "MAZARS/K",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Asymptote en cisaillement pur",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "AC",
+       "kind": "simple",
+       "path": "MAZARS/AC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Paramètre de décroissance post-pic en compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 131
+       }
+      },
+      {
+       "name": "BC",
+       "kind": "simple",
+       "path": "MAZARS/BC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Paramètre de décroissance post-pic en compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 137
+       }
+      },
+      {
+       "name": "AT",
+       "kind": "simple",
+       "path": "MAZARS/AT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": "Paramètre de décroissance post-pic en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 143
+       }
+      },
+      {
+       "name": "BT",
+       "kind": "simple",
+       "path": "MAZARS/BT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Paramètre de décroissance post-pic en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 150
+       }
+      },
+      {
+       "name": "SIGM_LIM",
+       "kind": "simple",
+       "path": "MAZARS/SIGM_LIM",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte  limite, post-traitement",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 157
+       }
+      },
+      {
+       "name": "EPSI_LIM",
+       "kind": "simple",
+       "path": "MAZARS/EPSI_LIM",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Déformation limite, post-traitement",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 160
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "BETON_GLRC",
+   "kind": "factor",
+   "path": "BETON_GLRC",
+   "status": "f",
+   "max": 1,
+   "fr": "Paramètres matériaux GLRC du béton",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 166
+   },
+   "keywords": [
+    {
+     "name": "CODIFICATION",
+     "kind": "simple",
+     "path": "BETON_GLRC/CODIFICATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ESSAI",
+      "EC2"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 170
+     }
+    },
+    {
+     "name": "b_EC2",
+     "kind": "bloc",
+     "path": "BETON_GLRC/[b_EC2]",
+     "condition": " equal_to(\"CODIFICATION\", 'EC2')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 171
+     },
+     "keywords": [
+      {
+       "name": "UNITE_CONTRAINTE",
+       "kind": "simple",
+       "path": "BETON_GLRC/UNITE_CONTRAINTE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MPa",
+        "Pa"
+       ],
+       "fr": "Unité des contraintes du problème.",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 173
+       }
+      },
+      {
+       "name": "CLASSE",
+       "kind": "simple",
+       "path": "BETON_GLRC/CLASSE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "C12/15",
+        "C16/20",
+        "C20/25",
+        "C25/30",
+        "C30/37",
+        "C35/45",
+        "C40/50",
+        "C45/55",
+        "C50/60",
+        "C55/67",
+        "C60/75",
+        "C70/85",
+        "C80/95",
+        "C90/105"
+       ],
+       "fr": "Classe de résistance du béton, selon Eurocode 2",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 179
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ESSAI",
+     "kind": "bloc",
+     "path": "BETON_GLRC/[b_ESSAI]",
+     "condition": " equal_to(\"CODIFICATION\", 'ESSAI')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 201
+     },
+     "keywords": [
+      {
+       "name": "FCJ",
+       "kind": "simple",
+       "path": "BETON_GLRC/FCJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte au pic en compression [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 203
+       }
+      },
+      {
+       "name": "EIJ",
+       "kind": "simple",
+       "path": "BETON_GLRC/EIJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Module d'Young [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 209
+       }
+      },
+      {
+       "name": "EPSI_C",
+       "kind": "simple",
+       "path": "BETON_GLRC/EPSI_C",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Déformation au pic en compression",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 210
+       }
+      },
+      {
+       "name": "FTJ",
+       "kind": "simple",
+       "path": "BETON_GLRC/FTJ",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Contrainte au pic en traction [Unité]",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 213
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "BETON_GLRC/NU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 0.5,
+       "default": 0.2,
+       "fr": "Coefficient de poisson",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 216
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ACIER",
+   "kind": "factor",
+   "path": "ACIER",
+   "status": "f",
+   "max": 1,
+   "fr": "Définir les paramètres matériaux de l'acier pour le Génie Civil",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 227
+   },
+   "keywords": [
+    {
+     "name": "E",
+     "kind": "simple",
+     "path": "ACIER/E",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Module d'Young",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 231
+     }
+    },
+    {
+     "name": "SY",
+     "kind": "simple",
+     "path": "ACIER/SY",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Limite élastique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 232
+     }
+    },
+    {
+     "name": "NU",
+     "kind": "simple",
+     "path": "ACIER/NU",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 0.5,
+     "fr": "Coefficient de poisson",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 233
+     }
+    },
+    {
+     "name": "D_SIGM_EPSI",
+     "kind": "simple",
+     "path": "ACIER/D_SIGM_EPSI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Module plastique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 234
+     }
+    },
+    {
+     "name": "SIGM_LIM",
+     "kind": "simple",
+     "path": "ACIER/SIGM_LIM",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Contrainte limite, post-traitement",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "EPSI_LIM",
+     "kind": "simple",
+     "path": "ACIER/EPSI_LIM",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Déformation limite, post-traitement",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 239
+     }
+    }
+   ]
+  },
+  {
+   "name": "ENDO_FISS_EXP",
+   "kind": "factor",
+   "path": "ENDO_FISS_EXP",
+   "status": "f",
+   "max": 1,
+   "fr": "Définir les paramètres matériaux du béton pour la loi ENDO_FISS_EXP",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "P",
+      "G_INIT"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "Q",
+      "Q_REL"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 244
+   },
+   "keywords": [
+    {
+     "name": "E",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/E",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Module d'Young",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 249
+     }
+    },
+    {
+     "name": "NU",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/NU",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 0.5,
+     "fr": "Coefficient de poisson",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 250
+     }
+    },
+    {
+     "name": "FT",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/FT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Limite en traction simple",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 251
+     }
+    },
+    {
+     "name": "FC",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/FC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Limite en compression simple",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 252
+     }
+    },
+    {
+     "name": "GF",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/GF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Energie de fissuration",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 253
+     }
+    },
+    {
+     "name": "P",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/P",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 1.0,
+     "fr": "Paramètre dominant de la loi cohésive asymptotique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 254
+     }
+    },
+    {
+     "name": "G_INIT",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/G_INIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Energie de fissuration initiale de la loi cohésive asymptotique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 260
+     }
+    },
+    {
+     "name": "Q",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/Q",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Paramètre secondaire de la loi cohésive asymptotique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 266
+     }
+    },
+    {
+     "name": "Q_REL",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/Q_REL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "fr": "Paramètre Q exprime de manière relative par rapport a Qmax(P)",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 272
+     }
+    },
+    {
+     "name": "LARG_BANDE",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/LARG_BANDE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Largeur de bande d'endommagement (2*D)",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 279
+     }
+    },
+    {
+     "name": "REST_RIGI_FC",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/REST_RIGI_FC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 0.99,
+     "default": 0.9,
+     "fr": "Restauration de rigidité pour eps=fc/E (0=sans)",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 282
+     }
+    },
+    {
+     "name": "COEF_RIGI_MINI",
+     "kind": "simple",
+     "path": "ENDO_FISS_EXP/COEF_RIGI_MINI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": "Rigidité minimale dans la matrice tangente",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 290
+     }
+    }
+   ]
+  },
+  {
+   "name": "ENDO_LOCA_EXP",
+   "kind": "factor",
+   "path": "ENDO_LOCA_EXP",
+   "status": "f",
+   "max": 1,
+   "fr": "Définir les paramètres matériaux du béton pour la loi ENDO_LOCA_EXP",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 299
+   },
+   "keywords": [
+    {
+     "name": "E",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/E",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Module d'Young",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 303
+     }
+    },
+    {
+     "name": "NU",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/NU",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 0.5,
+     "fr": "Coefficient de poisson",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 304
+     }
+    },
+    {
+     "name": "FT",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/FT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Limite en traction simple",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 305
+     }
+    },
+    {
+     "name": "FC",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/FC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Limite en compression simple",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 306
+     }
+    },
+    {
+     "name": "GF",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/GF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Energie de fissuration",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 307
+     }
+    },
+    {
+     "name": "P",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/P",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 1.0,
+     "fr": "Paramètre de forme de la réponse cohésive",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 308
+     }
+    },
+    {
+     "name": "DIST_FISSURE",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/DIST_FISSURE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Distance moyenne inter-fissures",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 311
+     }
+    },
+    {
+     "name": "REST_RIGI_FC",
+     "kind": "simple",
+     "path": "ENDO_LOCA_EXP/REST_RIGI_FC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "default": 0.95,
+     "fr": "Restauration de rigidité pour eps=fc/E (0=sans)",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 314
+     }
+    }
+   ]
+  },
+  {
+   "name": "ENDO_LOCA_TC",
+   "kind": "factor",
+   "path": "ENDO_LOCA_TC",
+   "status": "f",
+   "max": 1,
+   "fr": "Définir les paramètres matériaux du béton pour la loi ENDO_LOCA_TC",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 324
+   },
+   "keywords": [
+    {
+     "name": "FC",
+     "kind": "simple",
+     "path": "ENDO_LOCA_TC/FC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Résistance moyenne en compression (fcm)  ",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 328
+     }
+    },
+    {
+     "name": "DIST_FISSURE",
+     "kind": "simple",
+     "path": "ENDO_LOCA_TC/DIST_FISSURE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Distance moyenne inter-fissures",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 331
+     }
+    },
+    {
+     "name": "CODIFICATION",
+     "kind": "simple",
+     "path": "ENDO_LOCA_TC/CODIFICATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ESSAI",
+     "into": [
+      "ESSAI",
+      "FIB_MODEL_CODE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 334
+     }
+    },
+    {
+     "name": "b_fib",
+     "kind": "bloc",
+     "path": "ENDO_LOCA_TC/[b_fib]",
+     "condition": " equal_to(\"CODIFICATION\", 'FIB_MODEL_CODE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 335
+     },
+     "keywords": [
+      {
+       "name": "UNITE_CONTRAINTE",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/UNITE_CONTRAINTE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MPa",
+        "Pa"
+       ],
+       "fr": "Unité des contraintes du problème",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 337
+       }
+      },
+      {
+       "name": "UNITE_LONGUEUR",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/UNITE_LONGUEUR",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "m",
+        "mm"
+       ],
+       "fr": "Unité des longueurs du problème",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 343
+       }
+      },
+      {
+       "name": "E",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/E",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Module d'Young",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 346
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/NU",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 0.5,
+       "fr": "Coefficient de poisson",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 347
+       }
+      },
+      {
+       "name": "GF",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/GF",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Energie de fissuration",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 350
+       }
+      },
+      {
+       "name": "FT",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/FT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Résistance en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 351
+       }
+      },
+      {
+       "name": "SIGM_COMP_SEUIL",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/SIGM_COMP_SEUIL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Limite de linéarité en compression simple",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 352
+       }
+      },
+      {
+       "name": "COEF_ECRO_TRAC",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/COEF_ECRO_TRAC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": -0.229317245999773,
+       "fr": "Coefficient d'écrouissage en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 358
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_essai",
+     "kind": "bloc",
+     "path": "ENDO_LOCA_TC/[b_essai]",
+     "condition": " equal_to(\"CODIFICATION\", 'ESSAI')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 365
+     },
+     "keywords": [
+      {
+       "name": "E",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/E",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Module d'Young",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 367
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/NU",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 0.5,
+       "fr": "Coefficient de poisson",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 368
+       }
+      },
+      {
+       "name": "GF",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/GF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Energie de fissuration",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 371
+       }
+      },
+      {
+       "name": "FT",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/FT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Résistance en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 372
+       }
+      },
+      {
+       "name": "SIGM_COMP_SEUIL",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/SIGM_COMP_SEUIL",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "Limite de linéarité en compression simple",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 373
+       }
+      },
+      {
+       "name": "COEF_ECRO_TRAC",
+       "kind": "simple",
+       "path": "ENDO_LOCA_TC/COEF_ECRO_TRAC",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -0.229317245999773,
+       "fr": "Coefficient d'écrouissage en traction",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+        "line": 379
+       }
+      }
+     ]
+    },
+    {
+     "name": "TAU_REGU_VISC",
+     "kind": "simple",
+     "path": "ENDO_LOCA_TC/TAU_REGU_VISC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": "Temps caractéristique de la régularisation visqueuse",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+      "line": 386
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 395
+   }
+  },
+  {
+   "name": "RHO",
+   "kind": "simple",
+   "path": "RHO",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Masse volumique",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 396
+   }
+  },
+  {
+   "name": "ALPHA",
+   "kind": "simple",
+   "path": "ALPHA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "Coefficient de dilatation",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 397
+   }
+  },
+  {
+   "name": "AMOR_ALPHA",
+   "kind": "simple",
+   "path": "AMOR_ALPHA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 398
+   }
+  },
+  {
+   "name": "AMOR_BETA",
+   "kind": "simple",
+   "path": "AMOR_BETA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 399
+   }
+  },
+  {
+   "name": "AMOR_HYST",
+   "kind": "simple",
+   "path": "AMOR_HYST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_mater_gc.py",
+    "line": 400
+   }
+  }
+ ]
+}

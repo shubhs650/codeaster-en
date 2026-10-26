@@ -1,0 +1,1503 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_releve_t.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_RELEVE_T",
+ "kind": "OPER",
+ "fr": "Extraire des valeurs de composantes de champs de grandeurs pour y effectuer des calculs (moyenne,invariants,..) ou pour les exprimer dans d'autres repères",
+ "translation_upstream": null,
+ "op": 51,
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "docu": "U4.81.21",
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_releve_t.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "ACTION",
+   "kind": "factor",
+   "path": "ACTION",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "RESULTAT",
+      "CHAM_GD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_releve_t.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "OPERATION",
+     "kind": "simple",
+     "path": "ACTION/OPERATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "into": [
+      "EXTRACTION",
+      "MOYENNE",
+      "MOYENNE_ARITH",
+      "EXTREMA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "INTITULE",
+     "kind": "simple",
+     "path": "ACTION/INTITULE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "ACTION/CHAM_GD",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "ACTION/RESULTAT",
+     "status": "f",
+     "type": [
+      "resultat_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "b_extrac",
+     "kind": "bloc",
+     "path": "ACTION/[b_extrac]",
+     "condition": "exists(\"RESULTAT\")",
+     "fr": "extraction des résultats",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_ORDRE",
+        "NUME_ORDRE",
+        "LIST_ORDRE",
+        "NUME_MODE",
+        "LIST_MODE",
+        "INST",
+        "LIST_INST",
+        "FREQ",
+        "LIST_FREQ",
+        "NOEUD_CMP",
+        "NOM_CAS"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 50
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "ACTION/NOM_CHAM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ACCE",
+        "ACCE_ABSOLU",
+        "COEF_H",
+        "COMPORTEMENT",
+        "COMPORTHER",
+        "CONT_ELEM",
+        "CONT_NOEU",
+        "DEGE_ELGA",
+        "DEGE_ELNO",
+        "DEGE_NOEU",
+        "DEPL",
+        "DEPL_ABSOLU",
+        "DEPL_ELGA",
+        "DEPL_VIBR",
+        "DERA_ELGA",
+        "DERA_ELNO",
+        "DERA_NOEU",
+        "DIFF_ELGA",
+        "DIFF_ELNO",
+        "DIFF_NOEU",
+        "DISS_ELEM",
+        "DISS_ELGA",
+        "DISS_ELNO",
+        "DISS_NOEU",
+        "DIVU",
+        "DURT_ELNO",
+        "DURT_NOEU",
+        "ECIN_ELEM",
+        "EFGE_ELGA",
+        "EFGE_ELNO",
+        "EFGE_NOEU",
+        "EGRU_ELNO",
+        "ENDO_ELGA",
+        "ENDO_ELNO",
+        "ENDO_NOEU",
+        "ENEL_ELEM",
+        "ENEL_ELGA",
+        "ENEL_ELNO",
+        "ENEL_NOEU",
+        "ENTR_ELEM",
+        "EPEQ_ELGA",
+        "EPEQ_ELNO",
+        "EPEQ_NOEU",
+        "EPFD_ELGA",
+        "EPFD_ELNO",
+        "EPFD_NOEU",
+        "EPFP_ELGA",
+        "EPFP_ELNO",
+        "EPFP_NOEU",
+        "EPGQ_ELGA",
+        "EPGQ_ELNO",
+        "EPGQ_NOEU",
+        "EPME_ELGA",
+        "EPME_ELNO",
+        "EPME_NOEU",
+        "EPMG_ELGA",
+        "EPMG_ELNO",
+        "EPMG_NOEU",
+        "EPMQ_ELGA",
+        "EPMQ_ELNO",
+        "EPMQ_NOEU",
+        "EPOT_ELEM",
+        "EPSA_ELNO",
+        "EPSA_NOEU",
+        "EPSG_ELGA",
+        "EPSG_ELNO",
+        "EPSG_NOEU",
+        "EPSI_ELGA",
+        "EPSI_ELNO",
+        "EPSI_NOEU",
+        "EPSL_ELGA",
+        "EPSL_ELNO",
+        "EPSL_NOEU",
+        "EPSP_ELGA",
+        "EPSP_ELNO",
+        "EPSP_NOEU",
+        "EPVC_ELGA",
+        "EPVC_ELNO",
+        "EPVC_NOEU",
+        "ERME_ELEM",
+        "ERME_ELNO",
+        "ERME_NOEU",
+        "ERTH_ELEM",
+        "ERTH_ELNO",
+        "ERTH_NOEU",
+        "ERZ1_ELEM",
+        "ERZ2_ELEM",
+        "ETHE_ELEM",
+        "ETOT_ELEM",
+        "ETOT_ELGA",
+        "ETOT_ELNO",
+        "ETOT_NOEU",
+        "FERR_ELEM",
+        "FLHN_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELNO",
+        "FLUX_ELNO",
+        "FLUX_NOEU",
+        "FLUX_NOEU",
+        "FORC_NODA",
+        "FSUR_2D",
+        "FSUR_3D",
+        "FVOL_2D",
+        "FVOL_3D",
+        "GRAT_ELGA",
+        "GRAT_ELGA",
+        "GRAT_ELNO",
+        "GRAT_ELNO",
+        "GRAT_NOEU",
+        "GRAT_NOEU",
+        "HHO_DEPL",
+        "HHO_TEMP",
+        "HHO_VITE",
+        "HYDR_ELGA",
+        "HYDR_ELNO",
+        "HYDR_NOEU",
+        "HYGR_ELGA",
+        "HYGR_ELNO",
+        "HYGR_NOEU",
+        "INDL_ELGA",
+        "INTE_ELNO",
+        "INTE_NOEU",
+        "IRRA",
+        "MARG_ELEM",
+        "MATE_ELEM",
+        "MATE_ELGA",
+        "META_ELNO",
+        "META_NOEU",
+        "MODE_FLAMB",
+        "MODE_STAB",
+        "NEUT",
+        "PDIL_ELGA",
+        "PRAC_ELNO",
+        "PRAC_NOEU",
+        "PRES",
+        "PRES_NOEU",
+        "PRME_ELNO",
+        "PTOT",
+        "QIRE_ELEM",
+        "QIRE_ELNO",
+        "QIRE_NOEU",
+        "QIZ1_ELEM",
+        "QIZ2_ELEM",
+        "REAC_NODA",
+        "RESI_NOEU",
+        "RESI_RELA_NOEU",
+        "ROC1_ELNO",
+        "ROC2_ELNO",
+        "SECH",
+        "SIEF_ELGA",
+        "SIEF_ELNO",
+        "SIEF_NOEU",
+        "SIEQ_ELGA",
+        "SIEQ_ELNO",
+        "SIEQ_NOEU",
+        "SIGM_ELGA",
+        "SIGM_ELNO",
+        "SIGM_NOEU",
+        "SIMY_ELGA",
+        "SING_ELEM",
+        "SING_ELNO",
+        "SIPM_ELNO",
+        "SIPO_ELNO",
+        "SIPO_NOEU",
+        "SIRO_ELEM",
+        "SISE_ELNO",
+        "SIZ1_NOEU",
+        "SIZ2_NOEU",
+        "SOUR_ELGA",
+        "STRX_ELGA",
+        "TEMP",
+        "TEMP_ELGA",
+        "T_EXT",
+        "UT01_CART",
+        "UT01_ELEM",
+        "UT01_ELGA",
+        "UT01_ELNO",
+        "UT01_NOEU",
+        "UT02_CART",
+        "UT02_ELEM",
+        "UT02_ELGA",
+        "UT02_ELNO",
+        "UT02_NOEU",
+        "UT03_CART",
+        "UT03_ELEM",
+        "UT03_ELGA",
+        "UT03_ELNO",
+        "UT03_NOEU",
+        "UT04_CART",
+        "UT04_ELEM",
+        "UT04_ELGA",
+        "UT04_ELNO",
+        "UT04_NOEU",
+        "UT05_CART",
+        "UT05_ELEM",
+        "UT05_ELGA",
+        "UT05_ELNO",
+        "UT05_NOEU",
+        "UT06_CART",
+        "UT06_ELEM",
+        "UT06_ELGA",
+        "UT06_ELNO",
+        "UT06_NOEU",
+        "UT07_CART",
+        "UT07_ELEM",
+        "UT07_ELGA",
+        "UT07_ELNO",
+        "UT07_NOEU",
+        "UT08_CART",
+        "UT08_ELEM",
+        "UT08_ELGA",
+        "UT08_ELNO",
+        "UT08_NOEU",
+        "UT09_CART",
+        "UT09_ELEM",
+        "UT09_ELGA",
+        "UT09_ELNO",
+        "UT09_NOEU",
+        "UT10_CART",
+        "UT10_ELEM",
+        "UT10_ELGA",
+        "UT10_ELNO",
+        "UT10_NOEU",
+        "VARC_ELGA",
+        "VARC_ELNO",
+        "VARC_NOEU",
+        "VARI_ELGA",
+        "VARI_ELNO",
+        "VARI_NOEU",
+        "VITE",
+        "VITE_ABSOLU",
+        "VITE_VENT"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 68
+       }
+      },
+      {
+       "name": "TOUT_ORDRE",
+       "kind": "simple",
+       "path": "ACTION/TOUT_ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 69
+       }
+      },
+      {
+       "name": "NUME_ORDRE",
+       "kind": "simple",
+       "path": "ACTION/NUME_ORDRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 70
+       }
+      },
+      {
+       "name": "LIST_ORDRE",
+       "kind": "simple",
+       "path": "ACTION/LIST_ORDRE",
+       "status": "f",
+       "type": [
+        "listis_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "NUME_MODE",
+       "kind": "simple",
+       "path": "ACTION/NUME_MODE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "LIST_MODE",
+       "kind": "simple",
+       "path": "ACTION/LIST_MODE",
+       "status": "f",
+       "type": [
+        "listis_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "NOEUD_CMP",
+       "kind": "simple",
+       "path": "ACTION/NOEUD_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "NOM_CAS",
+       "kind": "simple",
+       "path": "ACTION/NOM_CAS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "ACTION/FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 76
+       }
+      },
+      {
+       "name": "LIST_FREQ",
+       "kind": "simple",
+       "path": "ACTION/LIST_FREQ",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 77
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "ACTION/INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 78
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "ACTION/LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 79
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "ACTION/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 80
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "ACTION/[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 81
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "ACTION/PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_releve_t.py",
+          "line": 83
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "ACTION/[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 85
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "ACTION/PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_releve_t.py",
+          "line": 86
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_extrema",
+     "kind": "bloc",
+     "path": "ACTION/[b_extrema]",
+     "condition": "equal_to('OPERATION', 'EXTREMA')",
+     "fr": "recherche de MIN MAX",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 89
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "ACTION/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ACTION/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "ACTION/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 95
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ACTION/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 96
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "ACTION/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 97
+       }
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "ACTION/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 98
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ACTION/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 99
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_MOYENNE_ARITH",
+     "kind": "bloc",
+     "path": "ACTION/[b_MOYENNE_ARITH]",
+     "condition": "is_in('OPERATION', 'MOYENNE_ARITH')",
+     "fr": "moyenne sur des groupes",
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "ACTION/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ACTION/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "ACTION/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ACTION/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "ACTION/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "ACTION/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 110
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ACTION/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 111
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_autre",
+     "kind": "bloc",
+     "path": "ACTION/[b_autre]",
+     "condition": "not is_in('OPERATION', ('EXTREMA', 'MOYENNE_ARITH'))",
+     "fr": "extraction et moyenne",
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT_CMP",
+        "NOM_CMP",
+        "INVARIANT",
+        "ELEM_PRINCIPAUX",
+        "RESULTANTE"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "TRAC_DIR",
+        "DIRECTION"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "MOMENT",
+        "POINT"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "MOMENT",
+        "RESULTANTE"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "TOUT_CMP",
+        "TRAC_DIR",
+        "TRAC_NOR"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TRAC_DIR",
+        "TRAC_NOR"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "ORIGINE",
+        "AXE_Z"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 113
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "ACTION/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ACTION/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 127
+       }
+      },
+      {
+       "name": "MAILLE",
+       "kind": "simple",
+       "path": "ACTION/MAILLE",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 128
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ACTION/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 129
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "ACTION/NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "TOUT_CMP",
+       "kind": "simple",
+       "path": "ACTION/TOUT_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 131
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ACTION/NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "INVARIANT",
+       "kind": "simple",
+       "path": "ACTION/INVARIANT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "ELEM_PRINCIPAUX",
+       "kind": "simple",
+       "path": "ACTION/ELEM_PRINCIPAUX",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 134
+       }
+      },
+      {
+       "name": "RESULTANTE",
+       "kind": "simple",
+       "path": "ACTION/RESULTANTE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "DX",
+        "DY",
+        "DZ",
+        "NXX",
+        "NYY",
+        "NXY",
+        "PRE1",
+        "PRE2",
+        "TEMP"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 135
+       }
+      },
+      {
+       "name": "MOMENT",
+       "kind": "simple",
+       "path": "ACTION/MOMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "DRX",
+        "DRY",
+        "DRZ",
+        "MXX",
+        "MYY",
+        "MXY"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "ACTION/POINT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 144
+       }
+      },
+      {
+       "name": "REPERE",
+       "kind": "simple",
+       "path": "ACTION/REPERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "GLOBAL",
+       "into": [
+        "GLOBAL",
+        "LOCAL",
+        "POLAIRE",
+        "UTILISATEUR",
+        "CYLINDRIQUE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 145
+       }
+      },
+      {
+       "name": "ANGL_NAUT",
+       "kind": "simple",
+       "path": "ACTION/ANGL_NAUT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 151
+       }
+      },
+      {
+       "name": "ORIGINE",
+       "kind": "simple",
+       "path": "ACTION/ORIGINE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 152
+       }
+      },
+      {
+       "name": "AXE_Z",
+       "kind": "simple",
+       "path": "ACTION/AXE_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 153
+       }
+      },
+      {
+       "name": "TRAC_NOR",
+       "kind": "simple",
+       "path": "ACTION/TRAC_NOR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 154
+       }
+      },
+      {
+       "name": "TRAC_DIR",
+       "kind": "simple",
+       "path": "ACTION/TRAC_DIR",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 155
+       }
+      },
+      {
+       "name": "DIRECTION",
+       "kind": "simple",
+       "path": "ACTION/DIRECTION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 156
+       }
+      },
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "ACTION/VECT_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 157
+       }
+      },
+      {
+       "name": "MOYE_NOEUD",
+       "kind": "simple",
+       "path": "ACTION/MOYE_NOEUD",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_releve_t.py",
+        "line": 158
+       }
+      }
+     ]
+    },
+    {
+     "name": "FORMAT_C",
+     "kind": "simple",
+     "path": "ACTION/FORMAT_C",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MODULE",
+     "into": [
+      "MODULE",
+      "REEL",
+      "IMAG"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_releve_t.py",
+      "line": 160
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_releve_t.py",
+    "line": 162
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_releve_t.py",
+    "line": 163
+   }
+  }
+ ]
+}

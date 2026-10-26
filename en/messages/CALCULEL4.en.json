@@ -1,0 +1,583 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/calculel4.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "CALCULEL4",
+ "source": {
+  "file": "code_aster/Messages/calculel4.py"
+ },
+ "messages": {
+  "1": {
+   "id": "CALCULEL4_1",
+   "fr": "\n Erreur utilisateur :\n   Le CHAM_ELEM %(k1)s a des valeurs indéfinies.\n Conseils :\n   * Si le problème concerne la commande CREA_CHAMP :\n     1) Vous devriez imprimer le contenu du champ créé pour vérifications (INFO=2) ;\n     2) Vous devriez peut-être utiliser le mot clé PROL_ZERO='OUI' .\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 25
+   },
+   "en": null
+  },
+  "2": {
+   "id": "CALCULEL4_2",
+   "fr": "\nCALC_CHAMP :\n Vous demandez le calcul du champ %(k1)s aux noeuds.\n Votre modèle contient des éléments de structure, il est recommandé de donner le CARA_ELEM.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 35
+   },
+   "en": null
+  },
+  "4": {
+   "id": "CALCULEL4_4",
+   "fr": "\nErreur :\n  On cherche à modifier le \"type\" (réel(R), complexe(C), entier(I), fonction(K8)) d'un champ.\n  C'est impossible.\n  Types incriminés : %(k1)s et %(k2)s\nConseils :\n  Il s'agit peut-être d'une erreur de programmation.\n  S'il s'agit de la commande CREA_CHAMP, vérifiez le mot clé TYPE_CHAM.\n\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 42
+   },
+   "en": null
+  },
+  "6": {
+   "id": "CALCULEL4_6",
+   "fr": "\nErreur utilisateur (ou programmeur) :\n On veut imposer la numérotation des ddls du CHAM_NO %(k1)s\n avec le NUME_DDL %(k2)s.\n Mais ces deux structures de données sont incompatibles.\n Par exemple :\n    - ce n'est pas le même maillage sous-jacent\n    - ce n'est pas la même grandeur sous-jacente.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "8": {
+   "id": "CALCULEL4_8",
+   "fr": "\n Le résultat %(k1)s n'existe pas.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 65
+   },
+   "en": null
+  },
+  "9": {
+   "id": "CALCULEL4_9",
+   "fr": "\nProblème lors de la projection d'un champ aux noeuds de la grandeur (%(k1)s) sur un autre maillage.\n Pour le noeud \"2\" %(k2)s (et pour la composante %(k3)s) la somme des coefficients de pondération\n des noeuds de la maille \"1\" en vis à vis est très faible (inférieure à 1.e-3).\n\n Cela peut arriver par exemple quand le champ à projeter ne porte pas la composante sur\n tous les noeuds de la maille \"1\" et que le noeud \"2\"  sur lequel on cherche à projeter\n se trouve tout près d'un noeud \"1\" qui ne porte pas la composante.\n Quand cela arrive, la projection est imprécise sur le noeud.\n\nRisques et conseils :\n Si le champ à projeter a des composantes qui n'existent que sur les noeuds sommets des éléments,\n on peut faire une double projection en passant par un maillage intermédiaire linéaire.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 70
+   },
+   "en": null
+  },
+  "14": {
+   "id": "CALCULEL4_14",
+   "fr": "\n Erreur d'utilisation de la commande CREA_RESU / PREP_VARC :\n    Le CARA_ELEM (%(k1)s) ne contient pas d'éléments à \"couches\"\n Il n'y a aucune raison d'utiliser l'option PREP_VARC\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 86
+   },
+   "en": null
+  },
+  "15": {
+   "id": "CALCULEL4_15",
+   "fr": "\n Erreur d'utilisation (CREA_RESU/PREP_VARC) :\n   Le modèle associé au CARA_ELEM (%(k1)s) est différent de celui fourni à la commande.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 93
+   },
+   "en": null
+  },
+  "16": {
+   "id": "CALCULEL4_16",
+   "fr": "\n Erreur d'utilisation :\n   L'option %(k1)s est nécessaire pour le calcul de l'option %(k2)s.\n   Or %(k1)s est un champ qui ne contient que des sous-points, ce cas n'est pas traité.\n   Vous devez d'abord extraire %(k1)s sur un sous-point avec la commande POST_CHAMP.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 99
+   },
+   "en": null
+  },
+  "17": {
+   "id": "CALCULEL4_17",
+   "fr": "\n Erreur d'utilisation :\n   Le mot-clé VIS_A_VIS de la commande PROJ_CHAMP est interdit si\n   la méthode de projection est 'ECLA_PG'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 107
+   },
+   "en": null
+  },
+  "21": {
+   "id": "CALCULEL4_21",
+   "fr": "\n Erreur utilisateur :\n   La commande CREA_RESU / ASSE concatène des structures de données résultat.\n   Mais il faut que les instants consécutifs soient croissants (en tenant compte de TRANSLATION).\n   Ce n'est pas le cas ici pour les instants : %(r1)f  et %(r2)f\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 114
+   },
+   "en": null
+  },
+  "22": {
+   "id": "CALCULEL4_22",
+   "fr": "\n Information utilisateur :\n   La commande CREA_RESU / ASSE concatène des structures de données résultat.\n   Mais il faut que les instants consécutifs soient croissants (en tenant compte de TRANSLATION).\n   Ici, l'instant %(r1)f  est affecté plusieurs fois.\n   Pour cet instant, les champs sont écrasés.\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 122
+   },
+   "en": null
+  },
+  "23": {
+   "id": "CALCULEL4_23",
+   "fr": "\n Erreur utilisateur :\n   Incohérence du MODELE et du CHAM_MATER :\n     Le MODELE de calcul est associé au maillage %(k1)s\n     Le CHAM_MATER de calcul est associé au maillage %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 131
+   },
+   "en": null
+  },
+  "24": {
+   "id": "CALCULEL4_24",
+   "fr": "\n Alarme utilisateur :\n   IMPR_RESU / CONCEPT / FORMAT='MED'\n     Le format MED n'accepte pas plus de 80 composantes pour un champ.\n     Le champ %(k1)s ayant plus de 80 composantes, on n'imprime\n     que les 80 premières.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 139
+   },
+   "en": null
+  },
+  "27": {
+   "id": "CALCULEL4_27",
+   "fr": "\nEXTR_TABLE ne peut être que des champs réels.\n",
+   "placeholders": [],
+   "source": {
+    "line": 148
+   },
+   "en": null
+  },
+  "43": {
+   "id": "CALCULEL4_43",
+   "fr": "\n le NOM_PARA n'existe pas\n",
+   "placeholders": [],
+   "source": {
+    "line": 153
+   },
+   "en": null
+  },
+  "44": {
+   "id": "CALCULEL4_44",
+   "fr": "\nAucune ligne trouvée pour le NOM_PARA\n",
+   "placeholders": [],
+   "source": {
+    "line": 158
+   },
+   "en": null
+  },
+  "45": {
+   "id": "CALCULEL4_45",
+   "fr": "\n plusieurs lignes trouvées\n",
+   "placeholders": [],
+   "source": {
+    "line": 163
+   },
+   "en": null
+  },
+  "46": {
+   "id": "CALCULEL4_46",
+   "fr": "\n code retour de inconnu\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 168
+   },
+   "en": null
+  },
+  "47": {
+   "id": "CALCULEL4_47",
+   "fr": "\n TYPE_RESU inconnu:  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 175
+   },
+   "en": null
+  },
+  "53": {
+   "id": "CALCULEL4_53",
+   "fr": "\n longueurs des modes locaux incompatibles entre eux.\n",
+   "placeholders": [],
+   "source": {
+    "line": 180
+   },
+   "en": null
+  },
+  "57": {
+   "id": "CALCULEL4_57",
+   "fr": "\n Aucune des mailles du maillage 1 fournies ne permet d'effectuer la projection souhaitée.\n\n Conseil :\n    Vérifiez que les mailles fournies ne sont pas toutes ponctuelles (POI1).\n",
+   "placeholders": [],
+   "source": {
+    "line": 185
+   },
+   "en": null
+  },
+  "58": {
+   "id": "CALCULEL4_58",
+   "fr": "\n les maillages a projeter sont ponctuels.\n",
+   "placeholders": [],
+   "source": {
+    "line": 193
+   },
+   "en": null
+  },
+  "59": {
+   "id": "CALCULEL4_59",
+   "fr": "\nErreur utilisateur :\n Les maillages associés aux concepts sont différents.\n",
+   "placeholders": [],
+   "source": {
+    "line": 198
+   },
+   "en": null
+  },
+  "60": {
+   "id": "CALCULEL4_60",
+   "fr": "\n maillages 2 différents.\n",
+   "placeholders": [],
+   "source": {
+    "line": 204
+   },
+   "en": null
+  },
+  "61": {
+   "id": "CALCULEL4_61",
+   "fr": "\n problème dans l'examen de  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 209
+   },
+   "en": null
+  },
+  "62": {
+   "id": "CALCULEL4_62",
+   "fr": "\n aucun numéro d'ordre dans  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 214
+   },
+   "en": null
+  },
+  "63": {
+   "id": "CALCULEL4_63",
+   "fr": "\n On n'a pas pu projeter le champ %(k1)s de la structure de données RESULTAT %(k2)s\n vers la structure de données RESULTAT %(k3)s pour le numéro d'ordre %(i1)d\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 219
+   },
+   "en": null
+  },
+  "64": {
+   "id": "CALCULEL4_64",
+   "fr": "\n Aucun champ projeté.\n",
+   "placeholders": [],
+   "source": {
+    "line": 225
+   },
+   "en": null
+  },
+  "65": {
+   "id": "CALCULEL4_65",
+   "fr": "\n  maillages non identiques :  %(k1)s  et  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 230
+   },
+   "en": null
+  },
+  "66": {
+   "id": "CALCULEL4_66",
+   "fr": "\n pas de champ de matériau\n",
+   "placeholders": [],
+   "source": {
+    "line": 235
+   },
+   "en": null
+  },
+  "67": {
+   "id": "CALCULEL4_67",
+   "fr": "\n erreur pour le problème primal\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 240
+   },
+   "en": null
+  },
+  "68": {
+   "id": "CALCULEL4_68",
+   "fr": "\n erreur pour le problème dual\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "69": {
+   "id": "CALCULEL4_69",
+   "fr": "\nErreur utilisateur dans la commande CREA_CHAMP :\n Le mot clé NUME_DDL (%(k1)s) est associé au maillage (%(k2)s).\n Il est incompatible avec le mot clé MAILLAGE (%(k3)s).\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 254
+   },
+   "en": null
+  },
+  "70": {
+   "id": "CALCULEL4_70",
+   "fr": "\nErreur utilisateur dans CREA_CHAMP :\n  Vous avez demandé la création d'un champ '%(k1)s' (mot clé TYPE_CHAM)\n  Mais le code a créé un champ '%(k2)s'.\nConseil :\n  Il faut sans doute modifier la valeur de TYPE_CHAM\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 261
+   },
+   "en": null
+  },
+  "71": {
+   "id": "CALCULEL4_71",
+   "fr": "\nErreur utilisateur dans CREA_CHAMP :\n  Vous avez demandé la création d'un champ de %(k1)s (mot clé TYPE_CHAM)\n  Mais le code a créé un champ de %(k2)s.\nConseil :\n  Il faut sans doute modifier la valeur de TYPE_CHAM\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 270
+   },
+   "en": null
+  },
+  "72": {
+   "id": "CALCULEL4_72",
+   "fr": "\nErreur utilisateur dans la commande PROJ_CHAMP :\n Le mot clé MODELE_2 a été utilisé. Le maillage associé à ce modèle (%(k1)s)\n est différent du maillage \"2\" (%(k1)s)  qui a servi à fabriquer la matrice de projection.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 279
+   },
+   "en": null
+  },
+  "73": {
+   "id": "CALCULEL4_73",
+   "fr": "\nErreur utilisateur dans la commande PROJ_CHAMP :\n   On veut projeter des champs aux éléments (CHAM_ELEM), le mot clé MODELE_2\n   est alors obligatoire.\n",
+   "placeholders": [],
+   "source": {
+    "line": 286
+   },
+   "en": null
+  },
+  "74": {
+   "id": "CALCULEL4_74",
+   "fr": "\nAlarme utilisateur dans la commande CALC_CHAMP / REAC_NODA + GROUP_MA:\n   La maille %(k2)s du modèle %(k1)s ne fait pas partie des mailles\n   désignées par le mot clé GROUP_MA.\n   Pourtant, elle semble être une maille de bord de l'une de ces mailles.\n\nRisques et conseils :\n   Le calcul des réactions d'appui est faux si cette maille est affectée\n   par un chargement en \"force\" non nul.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 293
+   },
+   "en": null
+  },
+  "75": {
+   "id": "CALCULEL4_75",
+   "fr": "\nErreur utilisateur dans la commande PROJ_CHAMP :\n  Le programme ne trouve aucun champ à projeter dans %(k1)s.\n\nConseils :\n  Les champs dont vous demandez la projection (mot clé NOM_CHAM)\n  ont-ils été calculés ?\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 305
+   },
+   "en": null
+  },
+  "78": {
+   "id": "CALCULEL4_78",
+   "fr": "\nErreur utilisateur dans CREA_CHAMP :\n  Le maillage associé au champ créé par la commande (%(k1)s) est différent\n  de celui qui est fourni par l'utilisateur via les mots clés MAILLAGE ou MODELE (%(k2)s).\nConseil :\n  Il faut vérifier les mots clés MAILLAGE ou MODELE.\n  Remarque : ces mots clés sont peut être inutiles pour cette utilisation de CREA_CHAMP.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 315
+   },
+   "en": null
+  },
+  "80": {
+   "id": "CALCULEL4_80",
+   "fr": "\n le nom de la grandeur  %(k1)s  ne respecte pas le format XXXX_c\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 325
+   },
+   "en": null
+  },
+  "81": {
+   "id": "CALCULEL4_81",
+   "fr": "\n problème dans le catalogue des grandeurs simples, la grandeur complexe %(k1)s\n ne possède pas le même nombre de composantes que son homologue réelle %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 330
+   },
+   "en": null
+  },
+  "82": {
+   "id": "CALCULEL4_82",
+   "fr": "\n Problème dans le catalogue des grandeurs simples, la grandeur %(k1)s\n ne possède pas les mêmes champs que son homologue réelle %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 336
+   },
+   "en": null
+  },
+  "83": {
+   "id": "CALCULEL4_83",
+   "fr": "\n erreur: le calcul des contraintes ne fonctionne que pour le phénomène mécanique\n",
+   "placeholders": [],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "84": {
+   "id": "CALCULEL4_84",
+   "fr": "\n erreur numéros des noeuds bords\n",
+   "placeholders": [],
+   "source": {
+    "line": 347
+   },
+   "en": null
+  },
+  "85": {
+   "id": "CALCULEL4_85",
+   "fr": "\n erreur: les éléments supportes sont tria3 ou tria6\n",
+   "placeholders": [],
+   "source": {
+    "line": 352
+   },
+   "en": null
+  },
+  "86": {
+   "id": "CALCULEL4_86",
+   "fr": "\n erreur: les éléments supportes sont QUAD4 ou QUAD8 ou QUAD9\n",
+   "placeholders": [],
+   "source": {
+    "line": 357
+   },
+   "en": null
+  },
+  "87": {
+   "id": "CALCULEL4_87",
+   "fr": "\n maillage mixte TRIA-QUAD non supporte pour l estimateur ZZ2\n",
+   "placeholders": [],
+   "source": {
+    "line": 362
+   },
+   "en": null
+  },
+  "88": {
+   "id": "CALCULEL4_88",
+   "fr": "\n erreur: les mailles supportées sont tria ou QUAD\n",
+   "placeholders": [],
+   "source": {
+    "line": 367
+   },
+   "en": null
+  },
+  "89": {
+   "id": "CALCULEL4_89",
+   "fr": "\n Erreur: un élément du maillage possède tous ses sommets sur une frontière.\n Il faut au moins un sommet interne.\n Pour pouvoir utiliser ZZ2 il faut remailler le coin de telle façon que\n tous les triangles aient au moins un sommet intérieur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 372
+   },
+   "en": null
+  },
+  "92": {
+   "id": "CALCULEL4_92",
+   "fr": "\n  relation :  %(k1)s  non implantée sur les poulies\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 380
+   },
+   "en": null
+  },
+  "93": {
+   "id": "CALCULEL4_93",
+   "fr": "\n  déformation :  %(k1)s  non implantée sur les poulies\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 385
+   },
+   "en": null
+  },
+  "98": {
+   "id": "CALCULEL4_98",
+   "fr": "\n on n'a pas pu récupérer le paramètre THETA dans le résultat  %(k1)s\n valeur prise pour THETA: 0.57\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 390
+   },
+   "en": null
+  }
+ }
+}

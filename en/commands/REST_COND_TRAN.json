@@ -1,0 +1,433 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_COND_TRAN",
+ "kind": "OPER",
+ "fr": "Restituer dans la base physique des résultats issus d'un calculnon-lineaire avec projection modale ou d'un calcul transitoire linearavec condensation dynamique",
+ "translation_upstream": null,
+ "op": 78,
+ "reentrant": "f:RESU_FINAL|RESULTAT",
+ "result_types": [
+  "dyna_trans",
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "INST",
+    "LIST_INST",
+    "TOUT_INST"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MACR_ELEM_DYNA",
+    "BASE_MODALE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+  "line": 41
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "evol_noli",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "TYPE_RESU",
+   "kind": "simple",
+   "path": "TYPE_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DYNA_TRANS",
+   "into": [
+    "DYNA_TRANS",
+    "EVOL_NOLI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "BASE_MODALE",
+   "kind": "simple",
+   "path": "BASE_MODALE",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "MACR_ELEM_DYNA",
+   "kind": "simple",
+   "path": "MACR_ELEM_DYNA",
+   "status": "f",
+   "type": [
+    "macr_elem_dyna"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "TOUT_INST",
+   "kind": "simple",
+   "path": "TOUT_INST",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "ABSOLU",
+    "RELATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "b_prec_rela",
+   "kind": "bloc",
+   "path": "[b_prec_rela]",
+   "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+      "line": 69
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_prec_abso",
+   "kind": "bloc",
+   "path": "[b_prec_abso]",
+   "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 71
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "LIN"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "TOUT_CHAM",
+   "kind": "simple",
+   "path": "TOUT_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "b_nom_cham",
+   "kind": "bloc",
+   "path": "[b_nom_cham]",
+   "condition": "not exists(\"TOUT_CHAM\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 3,
+     "default": "ACCE",
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_base_moda",
+   "kind": "bloc",
+   "path": "[b_base_moda]",
+   "condition": "exists(\"BASE_MODALE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+      "line": 90
+     }
+    }
+   ]
+  },
+  {
+   "name": "RESU_FINAL",
+   "kind": "simple",
+   "path": "RESU_FINAL",
+   "status": "f",
+   "type": [
+    "evol_noli",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 92
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_cond_tran.py",
+    "line": 93
+   }
+  }
+ ]
+}

@@ -1,0 +1,276 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FONC_FLUI",
+ "kind": "OPER",
+ "fr": "Définit un profil de vitesse d'écoulement fluide le long d'une poutre",
+ "translation_upstream": null,
+ "op": 142,
+ "reentrant": "n",
+ "result_types": [
+  "fonction_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "NOEUD_INIT",
+    "GROUP_NO_INIT"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "NOEUD_FIN",
+    "GROUP_NO_FIN"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "NOEUD_INIT",
+   "kind": "simple",
+   "path": "NOEUD_INIT",
+   "status": "c",
+   "type": [
+    "no"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "GROUP_NO_INIT",
+   "kind": "simple",
+   "path": "GROUP_NO_INIT",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "NOEUD_FIN",
+   "kind": "simple",
+   "path": "NOEUD_FIN",
+   "status": "c",
+   "type": [
+    "no"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "GROUP_NO_FIN",
+   "kind": "simple",
+   "path": "GROUP_NO_FIN",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "VITE",
+   "kind": "factor",
+   "path": "VITE",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 38
+   },
+   "keywords": [
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "VITE/VALE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "PROFIL",
+     "kind": "simple",
+     "path": "VITE/PROFIL",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "UNIFORME",
+      "LEONARD"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "NB_BAV",
+     "kind": "simple",
+     "path": "VITE/NB_BAV",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "into": [
+      0,
+      2,
+      3
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+      "line": 42
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "default": "LIN",
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonc_flui.py",
+    "line": 48
+   }
+  }
+ ]
+}

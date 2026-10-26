@@ -1,0 +1,264 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/test_fichier.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "TEST_FICHIER",
+ "kind": "MACRO",
+ "fr": "Tester la non régression de fichiers produits par des commandes aster",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.test_fichier_ops.test_fichier_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/test_fichier.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "FICHIER",
+   "kind": "simple",
+   "path": "FICHIER",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "validators": [
+    {
+     "name": "LongStr",
+     "args": [
+      1,
+      255
+     ]
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fichier.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "EXPR_IGNORE",
+   "kind": "simple",
+   "path": "EXPR_IGNORE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": "Liste d'expressions régulières permettant d'ignorer certaines lignes",
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fichier.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "NB_VALE",
+   "kind": "simple",
+   "path": "NB_VALE",
+   "status": "o",
+   "type": [
+    "I"
+   ],
+   "fr": "Nombre de réels",
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fichier.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "NB_VALE_I",
+   "kind": "simple",
+   "path": "NB_VALE_I",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": "Nombre d'entiers si VALE_CALC_I est présent",
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fichier.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fichier.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "b_values",
+   "kind": "bloc",
+   "path": "[b_values]",
+   "condition": "True",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commons/c_test_reference.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "VALE_CALC",
+     "kind": "simple",
+     "path": "VALE_CALC",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "b_ordre_grandeur",
+     "kind": "bloc",
+     "path": "[b_ordre_grandeur]",
+     "condition": "exists(\"VALE_CALC\") and abs(VALE_CALC if type(VALE_CALC) not in (list, tuple) else VALE_CALC[0]) < 1.e-16",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 96
+     },
+     "keywords": [
+      {
+       "name": "ORDRE_GRANDEUR",
+       "kind": "simple",
+       "path": "ORDRE_GRANDEUR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 98
+       }
+      }
+     ]
+    },
+    {
+     "name": "LEGENDE",
+     "kind": "simple",
+     "path": "LEGENDE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "VALE_CALC_I",
+     "kind": "simple",
+     "path": "VALE_CALC_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "VALE_CALC_K",
+     "kind": "simple",
+     "path": "VALE_CALC_K",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "TYPE_TEST",
+     "kind": "simple",
+     "path": "TYPE_TEST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "SOMM_ABS",
+      "SOMM",
+      "MAX",
+      "MIN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "TOLE_MACHINE",
+     "kind": "simple",
+     "path": "TOLE_MACHINE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 72
+     }
+    }
+   ]
+  }
+ ]
+}

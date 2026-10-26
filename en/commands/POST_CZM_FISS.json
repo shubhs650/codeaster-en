@@ -1,0 +1,129 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_CZM_FISS",
+ "kind": "MACRO",
+ "fr": "Post-Traiement scpécifiques aux modèles CZM",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_czm_fiss_ops.post_czm_fiss_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster",
+  "carte_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+  "line": 48
+ },
+ "keywords": [
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "LONGUEUR",
+    "TRIAXIALITE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_noli"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "b_longueur",
+   "kind": "bloc",
+   "path": "[b_longueur]",
+   "condition": "equal_to(\"OPTION\", 'LONGUEUR') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "POINT_ORIG",
+     "kind": "simple",
+     "path": "POINT_ORIG",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "VECT_TANG",
+     "kind": "simple",
+     "path": "VECT_TANG",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_czm_fiss.py",
+      "line": 60
+     }
+    }
+   ]
+  }
+ ]
+}

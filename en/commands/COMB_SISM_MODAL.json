@@ -1,0 +1,2977 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "COMB_SISM_MODAL",
+ "kind": "MACRO",
+ "fr": "Réponse sismique par recombinaison modale par une méthode spectrale",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.comb_sism_modal_ops.comb_sism_modal_ops",
+ "reentrant": "n",
+ "result_types": [
+  "mode_meca"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "AMOR_REDUIT",
+    "LIST_AMOR",
+    "AMOR_GENE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "FREQ",
+    "NUME_MODE",
+    "LIST_FREQ",
+    "LIST_ORDRE"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "AMOR_REDUIT",
+    "LIST_AMOR",
+    "AMOR_GENE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "o",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "LIST_ORDRE",
+   "kind": "simple",
+   "path": "LIST_ORDRE",
+   "status": "f",
+   "type": [
+    "listis_sdaster"
+   ],
+   "default": null,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "b_freq",
+   "kind": "bloc",
+   "path": "[b_freq]",
+   "condition": "exists(\"FREQ\") or exists(\"LIST_FREQ\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 48
+     }
+    }
+   ]
+  },
+  {
+   "name": "AMOR_REDUIT",
+   "kind": "simple",
+   "path": "AMOR_REDUIT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "LIST_AMOR",
+   "kind": "simple",
+   "path": "LIST_AMOR",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "AMOR_GENE",
+   "kind": "simple",
+   "path": "AMOR_GENE",
+   "status": "f",
+   "type": [
+    "matr_asse_gene_r"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "MODE_CORR",
+   "kind": "simple",
+   "path": "MODE_CORR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "b_pseudo_mode",
+   "kind": "bloc",
+   "path": "[b_pseudo_mode]",
+   "condition": "equal_to(\"MODE_CORR\", 'OUI') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "PSEUDO_MODE",
+     "kind": "simple",
+     "path": "PSEUDO_MODE",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "FREQ_COUP",
+     "kind": "simple",
+     "path": "FREQ_COUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "TYPE_ANALYSE",
+   "kind": "simple",
+   "path": "TYPE_ANALYSE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MONO_APPUI",
+   "into": [
+    "MONO_APPUI",
+    "MULT_APPUI",
+    "ENVELOPPE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "b_appui",
+   "kind": "bloc",
+   "path": "[b_appui]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "APPUIS",
+     "kind": "factor",
+     "path": "APPUIS",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 68
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "APPUIS/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "APPUIS/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 72
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_enveloppe_appui",
+   "kind": "bloc",
+   "path": "[b_enveloppe_appui]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 76
+   },
+   "keywords": [
+    {
+     "name": "APPUIS",
+     "kind": "factor",
+     "path": "APPUIS",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 78
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "APPUIS/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 81
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "APPUIS/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 82
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_spectre_mono_appui",
+   "kind": "bloc",
+   "path": "[b_spectre_mono_appui]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MONO_APPUI') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "SPECTRE",
+     "kind": "factor",
+     "path": "SPECTRE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 88
+     },
+     "keywords": [
+      {
+       "name": "LIST_AXE",
+       "kind": "simple",
+       "path": "SPECTRE/LIST_AXE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 3,
+       "into": [
+        "X",
+        "Y",
+        "Z"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 91
+       }
+      },
+      {
+       "name": "SPEC_OSCI",
+       "kind": "simple",
+       "path": "SPECTRE/SPEC_OSCI",
+       "status": "o",
+       "type": [
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "ECHELLE",
+       "kind": "simple",
+       "path": "SPECTRE/ECHELLE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 95
+       }
+      },
+      {
+       "name": "NATURE",
+       "kind": "simple",
+       "path": "SPECTRE/NATURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "ACCE",
+        "VITE",
+        "DEPL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 96
+       }
+      },
+      {
+       "name": "CORR_FREQ",
+       "kind": "simple",
+       "path": "SPECTRE/CORR_FREQ",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 97
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_spectre_multi_appui",
+   "kind": "bloc",
+   "path": "[b_spectre_multi_appui]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 100
+   },
+   "keywords": [
+    {
+     "name": "SPECTRE",
+     "kind": "factor",
+     "path": "SPECTRE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 102
+     },
+     "keywords": [
+      {
+       "name": "LIST_AXE",
+       "kind": "simple",
+       "path": "SPECTRE/LIST_AXE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 3,
+       "into": [
+        "X",
+        "Y",
+        "Z"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "SPEC_OSCI",
+       "kind": "simple",
+       "path": "SPECTRE/SPEC_OSCI",
+       "status": "o",
+       "type": [
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "ECHELLE",
+       "kind": "simple",
+       "path": "SPECTRE/ECHELLE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "NATURE",
+       "kind": "simple",
+       "path": "SPECTRE/NATURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "ACCE",
+        "VITE",
+        "DEPL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 110
+       }
+      },
+      {
+       "name": "CORR_FREQ",
+       "kind": "simple",
+       "path": "SPECTRE/CORR_FREQ",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 111
+       }
+      },
+      {
+       "name": "NOM_APPUI",
+       "kind": "simple",
+       "path": "SPECTRE/NOM_APPUI",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "validators": [
+        {
+         "name": "LongStr",
+         "args": [
+          1,
+          8
+         ]
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 112
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_spectre_enveloppe",
+   "kind": "bloc",
+   "path": "[b_spectre_enveloppe]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 115
+   },
+   "keywords": [
+    {
+     "name": "SPECTRE",
+     "kind": "factor",
+     "path": "SPECTRE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 117
+     },
+     "keywords": [
+      {
+       "name": "LIST_AXE",
+       "kind": "simple",
+       "path": "SPECTRE/LIST_AXE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "min": 1,
+       "max": 3,
+       "into": [
+        "X",
+        "Y",
+        "Z"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 120
+       }
+      },
+      {
+       "name": "SPEC_OSCI",
+       "kind": "simple",
+       "path": "SPECTRE/SPEC_OSCI",
+       "status": "o",
+       "type": [
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "ECHELLE",
+       "kind": "simple",
+       "path": "SPECTRE/ECHELLE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 124
+       }
+      },
+      {
+       "name": "NATURE",
+       "kind": "simple",
+       "path": "SPECTRE/NATURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "ACCE",
+        "VITE",
+        "DEPL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 125
+       }
+      },
+      {
+       "name": "CORR_FREQ",
+       "kind": "simple",
+       "path": "SPECTRE/CORR_FREQ",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "NOM_APPUI",
+       "kind": "simple",
+       "path": "SPECTRE/NOM_APPUI",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "validators": [
+        {
+         "name": "LongStr",
+         "args": [
+          1,
+          8
+         ]
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 127
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DEPL_MULT_APPUI",
+   "kind": "factor",
+   "path": "DEPL_MULT_APPUI",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "DX",
+      "DY",
+      "DZ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 131
+   },
+   "keywords": [
+    {
+     "name": "MODE_STAT",
+     "kind": "simple",
+     "path": "DEPL_MULT_APPUI/MODE_STAT",
+     "status": "o",
+     "type": [
+      "mode_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 135
+     }
+    },
+    {
+     "name": "NOM_APPUI",
+     "kind": "simple",
+     "path": "DEPL_MULT_APPUI/NOM_APPUI",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "validators": [
+      {
+       "name": "LongStr",
+       "args": [
+        1,
+        8
+       ]
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "DEPL_MULT_APPUI/DX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "DEPL_MULT_APPUI/DY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "DEPL_MULT_APPUI/DZ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 139
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMB_MODE",
+   "kind": "factor",
+   "path": "COMB_MODE",
+   "status": "o",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 143
+   },
+   "keywords": [
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "COMB_MODE/TYPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "CQC",
+     "into": [
+      "SRSS",
+      "CQC",
+      "DSC",
+      "ABS",
+      "DPC",
+      "GUPTA",
+      "NRC_GROUPING",
+      "NRC_DSA",
+      "NRC_TEN_PERCENT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 146
+     }
+    },
+    {
+     "name": "b_gupta",
+     "kind": "bloc",
+     "path": "COMB_MODE/[b_gupta]",
+     "condition": "equal_to(\"TYPE\", 'GUPTA') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 162
+     },
+     "keywords": [
+      {
+       "name": "FREQ_1",
+       "kind": "simple",
+       "path": "COMB_MODE/FREQ_1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 164
+       }
+      },
+      {
+       "name": "FREQ_2",
+       "kind": "simple",
+       "path": "COMB_MODE/FREQ_2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 165
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_dsc",
+     "kind": "bloc",
+     "path": "COMB_MODE/[b_dsc]",
+     "condition": "equal_to(\"TYPE\", 'DSC') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 167
+     },
+     "keywords": [
+      {
+       "name": "DUREE",
+       "kind": "simple",
+       "path": "COMB_MODE/DUREE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 167
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_nrc_dsa",
+     "kind": "bloc",
+     "path": "COMB_MODE/[b_nrc_dsa]",
+     "condition": "equal_to(\"TYPE\", 'NRC_DSA') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 168
+     },
+     "keywords": [
+      {
+       "name": "DUREE",
+       "kind": "simple",
+       "path": "COMB_MODE/DUREE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 169
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "COMB_DIRECTION",
+   "kind": "simple",
+   "path": "COMB_DIRECTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NEWMARK",
+   "into": [
+    "ABS",
+    "QUAD",
+    "NEWMARK"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 173
+   }
+  },
+  {
+   "name": "b_group_appui_corr",
+   "kind": "bloc",
+   "path": "[b_group_appui_corr]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 175
+   },
+   "keywords": [
+    {
+     "name": "GROUP_APPUI_CORRELE",
+     "kind": "factor",
+     "path": "GROUP_APPUI_CORRELE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "LIST_APPUI"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 177
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 181
+       }
+      },
+      {
+       "name": "LIST_APPUI",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/LIST_APPUI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 182
+       }
+      },
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 183
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_comb_dds_correle",
+   "kind": "bloc",
+   "path": "[b_comb_dds_correle]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 186
+   },
+   "keywords": [
+    {
+     "name": "COMB_DDS_CORRELE",
+     "kind": "simple",
+     "path": "COMB_DDS_CORRELE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ABS",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 188
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_cumul_intra",
+   "kind": "bloc",
+   "path": "[b_cumul_intra]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 191
+   },
+   "keywords": [
+    {
+     "name": "CUMUL_INTRA",
+     "kind": "simple",
+     "path": "CUMUL_INTRA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LINE",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 193
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_cumul_inter",
+   "kind": "bloc",
+   "path": "[b_cumul_inter]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 196
+   },
+   "keywords": [
+    {
+     "name": "CUMUL_INTER",
+     "kind": "simple",
+     "path": "CUMUL_INTER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "QUAD",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 198
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_group_appui_corr_env",
+   "kind": "bloc",
+   "path": "[b_group_appui_corr_env]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 200
+   },
+   "keywords": [
+    {
+     "name": "GROUP_APPUI_CORRELE",
+     "kind": "factor",
+     "path": "GROUP_APPUI_CORRELE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT",
+        "LIST_APPUI"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 202
+     },
+     "keywords": [
+      {
+       "name": "TOUT",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/TOUT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 206
+       }
+      },
+      {
+       "name": "LIST_APPUI",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/LIST_APPUI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "GROUP_APPUI_CORRELE/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 208
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_comb_dds_correle_env",
+   "kind": "bloc",
+   "path": "[b_comb_dds_correle_env]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 211
+   },
+   "keywords": [
+    {
+     "name": "COMB_DDS_CORRELE",
+     "kind": "simple",
+     "path": "COMB_DDS_CORRELE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ABS",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 213
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_cumul_intra_env",
+   "kind": "bloc",
+   "path": "[b_cumul_intra_env]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 216
+   },
+   "keywords": [
+    {
+     "name": "CUMUL_INTRA",
+     "kind": "simple",
+     "path": "CUMUL_INTRA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LINE",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 218
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_cumul_inter_env",
+   "kind": "bloc",
+   "path": "[b_cumul_inter_env]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 221
+   },
+   "keywords": [
+    {
+     "name": "CUMUL_INTER",
+     "kind": "simple",
+     "path": "CUMUL_INTER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "QUAD",
+     "into": [
+      "QUAD",
+      "LINE",
+      "ABS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 223
+     }
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 10,
+   "into": [
+    "DEPL",
+    "VITE",
+    "ACCE_ABSOLU",
+    "REAC_NODA",
+    "FORC_NODA",
+    "SIGM_ELNO",
+    "SIEF_ELGA",
+    "SIPO_ELNO",
+    "EFGE_ELNO",
+    "EGRU_ELNO",
+    "SIEF_ELNO"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 226
+   }
+  },
+  {
+   "name": "b_type_resu_mono",
+   "kind": "bloc",
+   "path": "[b_type_resu_mono]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MONO_APPUI') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 247
+   },
+   "keywords": [
+    {
+     "name": "TYPE_RESU",
+     "kind": "factor",
+     "path": "TYPE_RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 249
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "TYPE_RESU/TYPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "VALE_TOTA",
+       "into": [
+        "VALE_SPEC",
+        "VALE_QS",
+        "VALE_DIRE",
+        "VALE_DYNA",
+        "VALE_INER",
+        "VALE_TOTA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 252
+       }
+      },
+      {
+       "name": "b_vale_spec",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_spec]",
+       "condition": "equal_to(\"TYPE\", 'VALE_SPEC') ",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "LIST_ORDRE",
+          "NUME_MODE",
+          "FREQ",
+          "LIST_FREQ"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 266
+       },
+       "keywords": [
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 268
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 269
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "default": null,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 270
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 271
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 272
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 273
+         }
+        },
+        {
+         "name": "b_freq",
+         "kind": "bloc",
+         "path": "TYPE_RESU/[b_freq]",
+         "condition": "exists(\"FREQ\") or exists(\"LIST_FREQ\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 274
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "TYPE_RESU/PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.001,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 276
+           }
+          },
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "TYPE_RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 277
+           }
+          }
+         ]
+        },
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 286
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_qs",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_qs]",
+       "condition": "equal_to(\"TYPE\", 'VALE_QS') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 288
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 290
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dire",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dire]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DIRE') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 292
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 294
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_tota",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_tota]",
+       "condition": "equal_to(\"TYPE\", 'VALE_TOTA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 296
+       },
+       "keywords": [
+        {
+         "name": "NEWMARK",
+         "kind": "simple",
+         "path": "TYPE_RESU/NEWMARK",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 298
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dyna",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dyna]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DYNA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 300
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 302
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_iner",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_iner]",
+       "condition": "equal_to(\"TYPE\", 'VALE_INER') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 304
+       },
+       "keywords": [
+        {
+         "name": "NEWMARK",
+         "kind": "simple",
+         "path": "TYPE_RESU/NEWMARK",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 306
+         }
+        },
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 307
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_type_resu_env",
+   "kind": "bloc",
+   "path": "[b_type_resu_env]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'ENVELOPPE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 311
+   },
+   "keywords": [
+    {
+     "name": "TYPE_RESU",
+     "kind": "factor",
+     "path": "TYPE_RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 313
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "TYPE_RESU/TYPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "VALE_TOTA",
+       "into": [
+        "VALE_SPEC",
+        "VALE_QS",
+        "VALE_DIRE",
+        "VALE_DYNA",
+        "VALE_INER",
+        "VALE_TOTA",
+        "VALE_DDS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 316
+       }
+      },
+      {
+       "name": "b_vale_spec",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_spec]",
+       "condition": "equal_to(\"TYPE\", 'VALE_SPEC') ",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "LIST_ORDRE",
+          "NUME_MODE",
+          "FREQ",
+          "LIST_FREQ"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 331
+       },
+       "keywords": [
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 333
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 334
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "default": null,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 335
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 336
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 337
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 338
+         }
+        },
+        {
+         "name": "b_freq",
+         "kind": "bloc",
+         "path": "TYPE_RESU/[b_freq]",
+         "condition": "exists(\"FREQ\") or exists(\"LIST_FREQ\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 339
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "TYPE_RESU/PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.001,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 341
+           }
+          },
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "TYPE_RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 342
+           }
+          }
+         ]
+        },
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 351
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_qs",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_qs]",
+       "condition": "equal_to(\"TYPE\", 'VALE_QS') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 353
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 355
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dire",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dire]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DIRE') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 357
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 359
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_tota",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_tota]",
+       "condition": "equal_to(\"TYPE\", 'VALE_TOTA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 361
+       },
+       "keywords": [
+        {
+         "name": "NEWMARK",
+         "kind": "simple",
+         "path": "TYPE_RESU/NEWMARK",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 363
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dyna",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dyna]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DYNA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 365
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 367
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_iner",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_iner]",
+       "condition": "equal_to(\"TYPE\", 'VALE_INER') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 369
+       },
+       "keywords": [
+        {
+         "name": "NEWMARK",
+         "kind": "simple",
+         "path": "TYPE_RESU/NEWMARK",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 371
+         }
+        },
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 372
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dds",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dds]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DDS') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 375
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 377
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_type_resu_mult",
+   "kind": "bloc",
+   "path": "[b_type_resu_mult]",
+   "condition": "equal_to(\"TYPE_ANALYSE\", 'MULT_APPUI') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 381
+   },
+   "keywords": [
+    {
+     "name": "TYPE_RESU",
+     "kind": "factor",
+     "path": "TYPE_RESU",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+      "line": 383
+     },
+     "keywords": [
+      {
+       "name": "TYPE",
+       "kind": "simple",
+       "path": "TYPE_RESU/TYPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "VALE_TOTA",
+       "into": [
+        "VALE_SPEC",
+        "VALE_QS",
+        "VALE_DIRE",
+        "VALE_DDS",
+        "VALE_DYNA",
+        "VALE_INER",
+        "VALE_TOTA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 386
+       }
+      },
+      {
+       "name": "b_vale_spec",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_spec]",
+       "condition": "equal_to(\"TYPE\", 'VALE_SPEC') ",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "TOUT_ORDRE",
+          "NUME_ORDRE",
+          "LIST_ORDRE",
+          "NUME_MODE",
+          "FREQ",
+          "LIST_FREQ"
+         ]
+        },
+        {
+         "rule": "EXCLUS",
+         "keywords": [
+          "TOUT_APPUI",
+          "LIST_APPUI"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 401
+       },
+       "keywords": [
+        {
+         "name": "TOUT_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/TOUT_ORDRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 403
+         }
+        },
+        {
+         "name": "NUME_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_ORDRE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 404
+         }
+        },
+        {
+         "name": "LIST_ORDRE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_ORDRE",
+         "status": "f",
+         "type": [
+          "listis_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 405
+         }
+        },
+        {
+         "name": "NUME_MODE",
+         "kind": "simple",
+         "path": "TYPE_RESU/NUME_MODE",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 406
+         }
+        },
+        {
+         "name": "FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/FREQ",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 407
+         }
+        },
+        {
+         "name": "LIST_FREQ",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_FREQ",
+         "status": "f",
+         "type": [
+          "listr8_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 408
+         }
+        },
+        {
+         "name": "b_freq",
+         "kind": "bloc",
+         "path": "TYPE_RESU/[b_freq]",
+         "condition": "exists(\"FREQ\") or exists(\"LIST_FREQ\")",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 409
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "TYPE_RESU/PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.001,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 411
+           }
+          },
+          {
+           "name": "CRITERE",
+           "kind": "simple",
+           "path": "TYPE_RESU/CRITERE",
+           "status": "f",
+           "type": [
+            "TXM"
+           ],
+           "default": "RELATIF",
+           "into": [
+            "RELATIF",
+            "ABSOLU"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+            "line": 412
+           }
+          }
+         ]
+        },
+        {
+         "name": "LIST_APPUI",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_APPUI",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 422
+         }
+        },
+        {
+         "name": "TOUT_APPUI",
+         "kind": "simple",
+         "path": "TYPE_RESU/TOUT_APPUI",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 423
+         }
+        },
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 424
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_qs",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_qs]",
+       "condition": "equal_to(\"TYPE\", 'VALE_QS') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 426
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 428
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dds",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dds]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DDS') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 430
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 432
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dire",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dire]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DIRE') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 434
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 436
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_tota",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_tota]",
+       "condition": "equal_to(\"TYPE\", 'VALE_TOTA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 438
+       },
+       "keywords": [
+        {
+         "name": "NEWMARK",
+         "kind": "simple",
+         "path": "TYPE_RESU/NEWMARK",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 440
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_dyna",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_dyna]",
+       "condition": "equal_to(\"TYPE\", 'VALE_DYNA') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 442
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 444
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_vale_iner",
+       "kind": "bloc",
+       "path": "TYPE_RESU/[b_vale_iner]",
+       "condition": "equal_to(\"TYPE\", 'VALE_INER') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+        "line": 446
+       },
+       "keywords": [
+        {
+         "name": "LIST_AXE",
+         "kind": "simple",
+         "path": "TYPE_RESU/LIST_AXE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "max": 3,
+         "into": [
+          "X",
+          "Y",
+          "Z"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+          "line": 448
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 453
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_sism_modal.py",
+    "line": 454
+   }
+  }
+ ]
+}

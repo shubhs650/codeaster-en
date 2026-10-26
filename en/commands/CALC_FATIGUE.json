@@ -1,0 +1,1042 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_fatigue.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_FATIGUE",
+ "kind": "OPER",
+ "fr": "Calculer un champ de dommage de fatigue subit par une structure et déterminer le plan critique dans lequel le cisaillement est maximal.",
+ "translation_upstream": null,
+ "op": 151,
+ "reentrant": "n",
+ "result_types": [
+  "cham_elem",
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_fatigue.py",
+  "line": 42
+ },
+ "keywords": [
+  {
+   "name": "TYPE_CALCUL",
+   "kind": "simple",
+   "path": "TYPE_CALCUL",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CUMUL_DOMMAGE",
+    "FATIGUE_MULTI",
+    "FATIGUE_VIBR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fatigue.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "b_cumul_domma",
+   "kind": "bloc",
+   "path": "[b_cumul_domma]",
+   "condition": "equal_to(\"TYPE_CALCUL\", 'CUMUL_DOMMAGE')",
+   "fr": "Calcul d un champ de dommage subi par une structure.",
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "DOMMAGE",
+      "MATER"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fatigue.py",
+    "line": 54
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DOMA_ELNO_SIGM",
+      "DOMA_ELGA_SIGM",
+      "DOMA_ELNO_EPSI",
+      "DOMA_ELGA_EPSI",
+      "DOMA_ELNO_EPME",
+      "DOMA_ELGA_EPME"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "b_sigm",
+     "kind": "bloc",
+     "path": "[b_sigm]",
+     "condition": "equal_to(\"OPTION\", 'DOMA_ELNO_SIGM') or equal_to(\"OPTION\", 'DOMA_ELGA_SIGM')",
+     "fr": "Calcul a partir d un champ de contraintes.",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 70
+     },
+     "keywords": [
+      {
+       "name": "HISTOIRE",
+       "kind": "factor",
+       "path": "HISTOIRE",
+       "status": "o",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 73
+       },
+       "keywords": [
+        {
+         "name": "RESULTAT",
+         "kind": "simple",
+         "path": "HISTOIRE/RESULTAT",
+         "status": "o",
+         "type": [
+          "evol_elas",
+          "dyna_trans",
+          "evol_noli"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 75
+         }
+        },
+        {
+         "name": "EQUI_GD",
+         "kind": "simple",
+         "path": "HISTOIRE/EQUI_GD",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "VMIS_SG",
+         "into": [
+          "VMIS_SG"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 76
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_epsi",
+     "kind": "bloc",
+     "path": "[b_epsi]",
+     "condition": "not equal_to(\"OPTION\", 'DOMA_ELNO_SIGM') and not equal_to(\"OPTION\", 'DOMA_ELGA_SIGM')",
+     "fr": "Calcul a partir d un champ de déformations.",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 79
+     },
+     "keywords": [
+      {
+       "name": "HISTOIRE",
+       "kind": "factor",
+       "path": "HISTOIRE",
+       "status": "o",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 82
+       },
+       "keywords": [
+        {
+         "name": "RESULTAT",
+         "kind": "simple",
+         "path": "HISTOIRE/RESULTAT",
+         "status": "o",
+         "type": [
+          "evol_elas",
+          "dyna_trans",
+          "evol_noli"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 84
+         }
+        },
+        {
+         "name": "EQUI_GD",
+         "kind": "simple",
+         "path": "HISTOIRE/EQUI_GD",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INVA_2_SG",
+         "into": [
+          "INVA_2_SG"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 85
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "DOMMAGE",
+     "kind": "simple",
+     "path": "DOMMAGE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "WOHLER",
+      "MANSON_COFFIN",
+      "TAHERI_MANSON",
+      "TAHERI_MIXTE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "TAHERI_NAPPE",
+     "kind": "simple",
+     "path": "TAHERI_NAPPE",
+     "status": "f",
+     "type": [
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "TAHERI_FONC",
+     "kind": "simple",
+     "path": "TAHERI_FONC",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 93
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_domma_moda",
+   "kind": "bloc",
+   "path": "[b_domma_moda]",
+   "condition": "equal_to(\"TYPE_CALCUL\", 'FATIGUE_VIBR')",
+   "fr": "Calcul d un champ de dommage en dynamique vibratoire",
+   "rules": [
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "DOMMAGE",
+      "MATER"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fatigue.py",
+    "line": 95
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DOMA_ELNO_SIGM",
+      "DOMA_ELGA_SIGM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "CORR_SIGM_MOYE",
+     "kind": "simple",
+     "path": "CORR_SIGM_MOYE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GOODMAN",
+      "GERBER"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "HISTOIRE",
+     "kind": "factor",
+     "path": "HISTOIRE",
+     "status": "o",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "HISTOIRE/RESULTAT",
+       "status": "o",
+       "type": [
+        "evol_elas",
+        "evol_noli"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 103
+       }
+      },
+      {
+       "name": "MODE_MECA",
+       "kind": "simple",
+       "path": "HISTOIRE/MODE_MECA",
+       "status": "o",
+       "type": [
+        "mode_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 104
+       }
+      },
+      {
+       "name": "NUME_MODE",
+       "kind": "simple",
+       "path": "HISTOIRE/NUME_MODE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "FACT_PARTICI",
+       "kind": "simple",
+       "path": "HISTOIRE/FACT_PARTICI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": "**",
+       "default": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "EQUI_GD",
+       "kind": "simple",
+       "path": "HISTOIRE/EQUI_GD",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "VMIS_SG",
+       "into": [
+        "VMIS_SG"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 107
+       }
+      }
+     ]
+    },
+    {
+     "name": "DOMMAGE",
+     "kind": "simple",
+     "path": "DOMMAGE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "WOHLER"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 110
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_fatigue_multi",
+   "kind": "bloc",
+   "path": "[b_fatigue_multi]",
+   "condition": "equal_to(\"TYPE_CALCUL\", 'FATIGUE_MULTI')",
+   "fr": "Plan critique dans le cas de la fatigue multiaxiale à grand nombre de cycles.",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fatigue.py",
+    "line": 112
+   },
+   "keywords": [
+    {
+     "name": "TYPE_CHARGE",
+     "kind": "simple",
+     "path": "TYPE_CHARGE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "PERIODIQUE",
+      "NON_PERIODIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DOMA_ELGA",
+      "DOMA_NOEUD"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "o",
+     "type": [
+      "evol_elas",
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 117
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 118
+     }
+    },
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "COEF_PREECROU",
+     "kind": "simple",
+     "path": "COEF_PREECROU",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 123
+     }
+    },
+    {
+     "name": "b_period",
+     "kind": "bloc",
+     "path": "[b_period]",
+     "condition": "equal_to(\"TYPE_CHARGE\", 'PERIODIQUE')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "INST_INIT_CYCL",
+        "INST_CRIT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 124
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MATAKE_MODI_AC",
+        "DANG_VAN_MODI_AC",
+        "VMIS_TRESCA",
+        "FORMULE_CRITERE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "b_fati_p",
+       "kind": "bloc",
+       "path": "[b_fati_p]",
+       "condition": "(equal_to(\"CRITERE\", 'MATAKE_MODI_AC') or equal_to(\"CRITERE\", 'DANG_VAN_MODI_AC'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 131
+       },
+       "keywords": [
+        {
+         "name": "METHODE",
+         "kind": "simple",
+         "path": "METHODE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "CERCLE_EXACT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 133
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_fati_pf",
+       "kind": "bloc",
+       "path": "[b_fati_pf]",
+       "condition": "(equal_to(\"CRITERE\", 'FORMULE_CRITERE'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 135
+       },
+       "keywords": [
+        {
+         "name": "FORMULE_GRDEQ",
+         "kind": "simple",
+         "path": "FORMULE_GRDEQ",
+         "status": "o",
+         "type": [
+          "fonction_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 137
+         }
+        },
+        {
+         "name": "COURBE_GRD_VIE",
+         "kind": "simple",
+         "path": "COURBE_GRD_VIE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "WOHLER",
+          "MANSON_COFFIN",
+          "FORM_VIE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 138
+         }
+        },
+        {
+         "name": "FORMULE_CRITIQUE",
+         "kind": "simple",
+         "path": "FORMULE_CRITIQUE",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 141
+         }
+        },
+        {
+         "name": "b_fati_pfvie",
+         "kind": "bloc",
+         "path": "[b_fati_pfvie]",
+         "condition": "(equal_to(\"COURBE_GRD_VIE\", 'FORM_VIE'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 142
+         },
+         "keywords": [
+          {
+           "name": "FORMULE_VIE",
+           "kind": "simple",
+           "path": "FORMULE_VIE",
+           "status": "o",
+           "type": [
+            "fonction_sdaster",
+            "formule"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_fatigue.py",
+            "line": 144
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "INST_INIT_CYCL",
+       "kind": "simple",
+       "path": "INST_INIT_CYCL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 147
+       }
+      },
+      {
+       "name": "INST_CRIT",
+       "kind": "simple",
+       "path": "INST_CRIT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"INST_CRIT\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 150
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 152
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"INST_CRIT\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 154
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 156
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_non_period",
+     "kind": "bloc",
+     "path": "[b_non_period]",
+     "condition": "equal_to(\"TYPE_CHARGE\", 'NON_PERIODIQUE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fatigue.py",
+      "line": 159
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "MATAKE_MODI_AV",
+        "DANG_VAN_MODI_AV",
+        "FATESOCI_MODI_AV",
+        "FORMULE_CRITERE",
+        "VMIS_TRESCA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 161
+       }
+      },
+      {
+       "name": "b_fati_np",
+       "kind": "bloc",
+       "path": "[b_fati_np]",
+       "condition": "(not equal_to(\"CRITERE\", 'VMIS_TRESCA'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 172
+       },
+       "keywords": [
+        {
+         "name": "PROJECTION",
+         "kind": "simple",
+         "path": "PROJECTION",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "UN_AXE",
+          "DEUX_AXES"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 174
+         }
+        },
+        {
+         "name": "DELTA_OSCI",
+         "kind": "simple",
+         "path": "DELTA_OSCI",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 175
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_fati_npf",
+       "kind": "bloc",
+       "path": "[b_fati_npf]",
+       "condition": "(equal_to(\"CRITERE\", 'FORMULE_CRITERE'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fatigue.py",
+        "line": 177
+       },
+       "keywords": [
+        {
+         "name": "FORMULE_GRDEQ",
+         "kind": "simple",
+         "path": "FORMULE_GRDEQ",
+         "status": "o",
+         "type": [
+          "fonction_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 179
+         }
+        },
+        {
+         "name": "COURBE_GRD_VIE",
+         "kind": "simple",
+         "path": "COURBE_GRD_VIE",
+         "status": "o",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "WOHLER",
+          "MANSON_COFFIN",
+          "FORM_VIE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 180
+         }
+        },
+        {
+         "name": "b_fati_npfvie",
+         "kind": "bloc",
+         "path": "[b_fati_npfvie]",
+         "condition": "(equal_to(\"COURBE_GRD_VIE\", 'FORM_VIE'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fatigue.py",
+          "line": 183
+         },
+         "keywords": [
+          {
+           "name": "FORMULE_VIE",
+           "kind": "simple",
+           "path": "FORMULE_VIE",
+           "status": "o",
+           "type": [
+            "fonction_sdaster",
+            "formule"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/calc_fatigue.py",
+            "line": 185
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fatigue.py",
+    "line": 190
+   }
+  }
+ ]
+}

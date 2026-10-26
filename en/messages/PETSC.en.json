@@ -1,0 +1,284 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/petsc.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "PETSC",
+ "source": {
+  "file": "code_aster/Messages/petsc.py"
+ },
+ "messages": {
+  "1": {
+   "id": "PETSC_1",
+   "fr": "\nSolveur PETSc :\n Erreur à l'initialisation de PETSc. Il y a certainement un problème dans l'installation.\n",
+   "placeholders": [],
+   "source": {
+    "line": 25
+   },
+   "en": null
+  },
+  "2": {
+   "id": "PETSC_2",
+   "fr": "\nSolveur PETSc :\n On ne traite que des matrices réelles avec PETSc.\n",
+   "placeholders": [],
+   "source": {
+    "line": 31
+   },
+   "en": null
+  },
+  "3": {
+   "id": "PETSC_3",
+   "fr": "\nSolveur PETSc :\n  Limite atteinte : le solveur PETSc est utilisé par plus de 5 matrices simultanément.\nSolution :\n  Il faut corriger le programme\n  Contactez l'assistance.\n",
+   "placeholders": [],
+   "source": {
+    "line": 37
+   },
+   "en": null
+  },
+  "4": {
+   "id": "PETSC_4",
+   "fr": "\nSolveur PETSc :\n  Le préconditionneur a déjà été calculé, on ne le recalcule pas.\n",
+   "placeholders": [],
+   "source": {
+    "line": 46
+   },
+   "en": null
+  },
+  "5": {
+   "id": "PETSC_5",
+   "fr": "\nSolveur PETSc :\n La résolution du système linéaire a échoué car le critère de convergence n'a pu être satisfait avec le nombre d'itérations autorisées (%(i1)d).\n\n Conseils :\n  * Augmentez le nombre d'itérations autorisées (SOLVEUR/NMAX_ITER).\n  * Vérifiez la nature du problème résolu (symétrique ou non, mixte ou non, etc) et, le cas échéant, changez d'algorithme ou de préconditionneur (SOLVEUR/ALGORITHME ou SOLVEUR/PRE_COND).\n  * Si vous utilisez une commande non-linéaire (STAT_NON_LINE par exemple), diminuez la précision demandée pour la convergence (SOLVEUR/RESI_RELA).\n    Prenez garde cependant car cela peut empêcher la convergence de l'algorithme non-linéaire.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 52
+   },
+   "en": null
+  },
+  "6": {
+   "id": "PETSC_6",
+   "fr": "\nSolveur PETSc :\n  Le résidu a été multiplié par plus de %(i1)d par rapport au résidu initial : on diverge\n  Vous pouvez utiliser un préconditionneur plus précis, voire changer d'algorithme.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 64
+   },
+   "en": null
+  },
+  "7": {
+   "id": "PETSC_7",
+   "fr": "\nSolveur PETSc :\n  On a rencontré un 'breakdown', on ne peut plus agrandir l'espace de Krylov, or on n'a pas encore\n  convergé.\n  Il faut changer de préconditionneur ou d'algorithme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 71
+   },
+   "en": null
+  },
+  "8": {
+   "id": "PETSC_8",
+   "fr": "\nSolveur PETSc :\n  Le solveur a échoué : la norme du résidu est une valeur invalide.\n",
+   "placeholders": [],
+   "source": {
+    "line": 79
+   },
+   "en": null
+  },
+  "9": {
+   "id": "PETSC_9",
+   "fr": "\nSolveur PETSc :\n  La matrice du système est non symétrique, or l'algorithme que vous utilisez requiert\n  la symétrie.\n  Changez d'algorithme ou bien utilisez le mot-clé MATR_RIGI_SYME  ='OUI' sous le mot-clé\n  facteur NEWTON  pour symétriser la matrice.\n",
+   "placeholders": [],
+   "source": {
+    "line": 85
+   },
+   "en": null
+  },
+  "10": {
+   "id": "PETSC_10",
+   "fr": "\nSolveur PETSc :\n  Le préconditionneur construit à partir de la matrice du système n'est défini positif, or l'algorithme\n  que vous utilisez requiert la définie positivité.\n  Changez d'algorithme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 94
+   },
+   "en": null
+  },
+  "11": {
+   "id": "PETSC_11",
+   "fr": "\nSolveur PETSc :\n  La matrice du système n'est pas définie positive, or l'algorithme que vous utilisez requiert\n  la définie positivité.\n  Changez d'algorithme.\n",
+   "placeholders": [],
+   "source": {
+    "line": 102
+   },
+   "en": null
+  },
+  "12": {
+   "id": "PETSC_12",
+   "fr": "\nSolveur PETSc :\n  L'algorithme itératif a rencontré un erreur dont le code retourné par PETSC est : %(i1)d.\n  Consulter le manuel de PETSc pour plus d'informations et prévenez l'assistance.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 110
+   },
+   "en": null
+  },
+  "13": {
+   "id": "PETSC_13",
+   "fr": "\nSolveur PETSc :\n  La résolution a échoué ; consultez le message ci-dessus.\n  Cela peut être dû à une propriété particulière de la matrice du système non supportée par l'algorithme choisi.\n  Par exemple, une matrice avec des zéros sur la diagonale et l'algorithme SOR, qui utilise ces entrées pour réaliser des divisions.\n",
+   "placeholders": [],
+   "source": {
+    "line": 117
+   },
+   "en": null
+  },
+  "14": {
+   "id": "PETSC_14",
+   "fr": "\nSolveur PETSc :\n  La création du préconditionneur a échoué ; consultez le message ci-dessus.\n  Cela peut être dû à une propriété particulière de la matrice du système non supportée par le préconditionneur choisi.\n  Par exemple, une matrice nécessitant des pivotages pour la factoriser ne peut pas utiliser le préconditionneur 'LDLT_INC'.\n\n  Conseil : changez de préconditionneur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 125
+   },
+   "en": null
+  },
+  "15": {
+   "id": "PETSC_15",
+   "fr": "\nSolveur PETSc :\n  La création du préconditionneur 'LDLT_SP' a échoué car on manque de mémoire.\n\n  Conseil : augmentez la valeur du mot clé SOLVEUR/PCENT_PIVOT.\n",
+   "placeholders": [],
+   "source": {
+    "line": 135
+   },
+   "en": null
+  },
+  "16": {
+   "id": "PETSC_16",
+   "fr": "\nSolveur PETSc :\n  La résolution du système linéaire a abouti mais la solution obtenue ne vérifie pas le critère de convergence.\n  Le résidu vaut %(r1)f\n  \n  Cela peut arriver:\n     - si la matrice du système linéaire est mal conditionnée\n     - si vous avez utilisé le préconditionneur 'LDLT_SP' avec ALGORITHME='GMRES'\n\n  Conseils : utilisez le préconditionneur 'LDLT_SP' avec ALGORITHME='FGMRES' ou un solveur direct ('MULT_FRONT' ou 'MUMPS')\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 143
+   },
+   "en": null
+  },
+  "17": {
+   "id": "PETSC_17",
+   "fr": "\nSolveur PETSC : \n   Vous utilisez le préconditionneur LDLT_INC : l'option MATR_DISTRIBUEE='OUI' n'est pas\n   disponible avec ce préconditionneur.\n\nConseils :\n   Utilisez 'MATR_DISTRIBUEE='NON'. Vous pouvez également remplacer le préconditionneur \n   LDLT_INC par LDLT_SP, qui est compatible avec  MATR_DISTRIBUEE='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 156
+   },
+   "en": null
+  },
+  "18": {
+   "id": "PETSC_18",
+   "fr": "\nSolveur PETSc :\n  Les préconditionneurs 'ML', 'BOOMER', 'GAMG' et 'HPDDM' ne doivent pas être utilisés lorsque:\n  - soit le modèle comporte des charges dualisées issues de AFFE_CHAR_MECA,\n  - soit les noeuds du modèle ne portent pas tous les mêmes degrés de liberté.\n\n  Conseils :\n  - ne mélangez pas des modélisations dans votre calcul\n  - remplacez AFFE_CHAR_MECA par AFFE_CHAR_CINE si cela est possible\n  - utilisez le préconditionneur 'LDLT_SP' ou un solveur direct ('MULT_FRONT' ou 'MUMPS').\n",
+   "placeholders": [],
+   "source": {
+    "line": 167
+   },
+   "en": null
+  },
+  "19": {
+   "id": "PETSC_19",
+   "fr": "\nSolveur PETSc :\n  La sélection du préconditionneur '%(k1)s' a échoué.\n  L'installation de PETSc dont vous disposez n'a vraisemblablement pas été compilée avec le support de ce préconditionneur.\n\n  Conseils :\n  - reconstruisez une version de PETSc avec le support des préconditionneurs 'ML', 'BOOMER', 'GAMG' et 'HPDDM'\n  - utilisez un autre préconditionneur (comme 'LDLT_SP' par exemple)\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 180
+   },
+   "en": null
+  },
+  "20": {
+   "id": "PETSC_20",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser le préconditionneur SOLVEUR / PRE_COND='BLOC_LAGR'\n   Il y a plusieurs processeurs actifs.\n Risques & conseils :\n   Il faut utiliser la version MPI avec un seul processeur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 191
+   },
+   "en": null
+  },
+  "21": {
+   "id": "PETSC_21",
+   "fr": "\nSolveur PETSc :\n  Le solveur linéaire n'a pas convergé. La phase de correction a été lancée. Elle a convergé en '%(i1)d' itérations.\n\n  Conseils :\n  - pour accélérer le calcul, la prochaine fois, rendez votre préconditionneur plus robuste:  'LDLT_DP' au lieu de'LDLT_SP'\n    ou augmenter LOW_RANK_SEUIL.\n  - utiliser le solveur linéaire par défaut.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 200
+   },
+   "en": null
+  },
+  "22": {
+   "id": "PETSC_22",
+   "fr": "\nSolveur PETSc :\n  Le solveur linéaire a convergé en '%(i1)d' itérations sans avoir besoin de la procédure de correction.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 211
+   },
+   "en": null
+  },
+  "23": {
+   "id": "PETSC_23",
+   "fr": "\nSolveur PETSc :\n  Le préconditionneur 'HPDDM' ne fonctionne qu'en mode parallèle distribué.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "24": {
+   "id": "PETSC_24",
+   "fr": "\nSolveur PETSc :\n  La résolution du système linéaire précédent s'est effectuée en %(i1)d itérations.\n  ",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 223
+   },
+   "en": null
+  },
+  "25": {
+   "id": "PETSC_25",
+   "fr": "\nSolveur PETSC : \n   Vous utilisez le préconditionneur LDLT_INC : ce préconditionneur n'est pas disponible \n   en mode parallèle distribué.\n\nConseils :\n   Vous pouvez remplacer le préconditionneur LDLT_INC par LDLT_SP, qui est disponible \n   en mode parallèle distribué.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 229
+   },
+   "en": null
+  },
+  "26": {
+   "id": "PETSC_26",
+   "fr": "\nSolveur PETSc :\n  On construit un nouveau préconditionneur de second niveau à partir des éléments de Ritz calculés au cours de la résolution du système linéaire précédent.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 240
+   },
+   "en": null
+  },
+  "27": {
+   "id": "PETSC_27",
+   "fr": "\nSolveur PETSc :\n  On conserve le préconditionneur de second niveau pour les résolutions ultérieures.\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 246
+   },
+   "en": null
+  },
+  "28": {
+   "id": "PETSC_28",
+   "fr": "\nSolveur PETSc :\n  Vous avez demandé à utiliser un préconditionneur de second niveau. C'est seulement possible avec le préconditionneur de premier niveau 'LDLT_SP'.\n  Conseils:\n  Vous pouvez :\n  - soit changer de préconditionneur de premier niveau (choisir PRE_COND='LDLT_SP'),\n  - soit désactiver le préconditionneur de second niveau (en choisissant ALGORITHME='GMRES' ou 'FGMRES' au lieu de 'GMRES_LMP').\n  ",
+   "placeholders": [],
+   "source": {
+    "line": 252
+   },
+   "en": null
+  }
+ }
+}

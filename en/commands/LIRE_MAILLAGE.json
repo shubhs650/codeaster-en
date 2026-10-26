@@ -1,0 +1,269 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/lire_maillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "LIRE_MAILLAGE",
+ "kind": "OPER",
+ "fr": "Crée un maillage par lecture d'un fichier",
+ "translation_upstream": {
+  "LIRE_MAILLAGE": "Read a mesh",
+  "FORMAT": "Mesh file format",
+  "UNITE": "Mesh file location",
+  "VERI_MAIL": "Mesh check",
+  "VERIF": "Check",
+  "APLAT": "Flat criterion"
+ },
+ "op": 1,
+ "reentrant": "n",
+ "result_types": [
+  "maillage_sdaster",
+  "maillage_p"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/lire_maillage.py",
+  "line": 87
+ },
+ "keywords": [
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MED",
+   "into": [
+    "ASTER",
+    "GIBI",
+    "GMSH",
+    "IDEAS",
+    "MED"
+   ],
+   "fr": "Format du fichier : ASTER ou MED.",
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 27
+   }
+  },
+  {
+   "name": "VERI_MAIL",
+   "kind": "factor",
+   "path": "VERI_MAIL",
+   "status": "d",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "VERIF",
+     "kind": "simple",
+     "path": "VERI_MAIL/VERIF",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "APLAT",
+     "kind": "simple",
+     "path": "VERI_MAIL/APLAT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 37
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_autre",
+   "kind": "bloc",
+   "path": "[b_format_autre]",
+   "condition": " ( not equal_to(\"FORMAT\", 'MED') ) ",
+   "fr": "Informations complémentaires pour la lecture ASTER.",
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "val_min": 2,
+     "default": 20,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 42
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_med",
+   "kind": "bloc",
+   "path": "[b_format_med]",
+   "condition": " ( equal_to(\"FORMAT\", 'MED') ) ",
+   "fr": "Informations complémentaires pour la lecture MED.",
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitMed"
+     ],
+     "val_min": 2,
+     "default": 20,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "NOM_MED",
+     "kind": "simple",
+     "path": "NOM_MED",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Nom du maillage dans le fichier MED.",
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "INFO_MED",
+     "kind": "simple",
+     "path": "INFO_MED",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "into": [
+      0,
+      1
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "PARTITIONNEUR",
+     "kind": "simple",
+     "path": "PARTITIONNEUR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SANS",
+     "into": [
+      "SANS",
+      "PTSCOTCH"
+     ],
+     "fr": "Partitionner le maillage pour un calcul parallèle",
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 53
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_format_ideas",
+   "kind": "bloc",
+   "path": "[b_format_ideas]",
+   "condition": " ( equal_to(\"FORMAT\", 'IDEAS') ) ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 61
+   },
+   "keywords": [
+    {
+     "name": "CREA_GROUP_COUL",
+     "kind": "simple",
+     "path": "CREA_GROUP_COUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/lire_maillage.py",
+      "line": 63
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    0,
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/lire_maillage.py",
+    "line": 65
+   }
+  }
+ ]
+}

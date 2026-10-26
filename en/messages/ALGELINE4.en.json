@@ -1,0 +1,600 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/algeline4.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "ALGELINE4",
+ "source": {
+  "file": "code_aster/Messages/algeline4.py"
+ },
+ "messages": {
+  "1": {
+   "id": "ALGELINE4_1",
+   "fr": "\n Seules les méthodes de résolution LDLT, MUMPS et MULT_FRONT sont autorisées.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "ALGELINE4_2",
+   "fr": "\n Solveur modal TRI_DIAG + option de filtrage des modes rigides:\n Le shift utilisé pour poursuivre le calcul modal est quasi-nul: shift=%(r1)g.\n Cela va perturber le calcul modal. Ce problème aurait dû être détecté automatiquement\n et le shift aurait dû être décalé.\n\n Conseils :\n   * Vérifier votre mise  en données concernant les paramètres de décalage (PREC_SHIFT, NMAX_ITER_SHIFT) ou concernant la\n      détection de singularité (SOLVEUR/NPREC).\n   * Vous pouvez aussi décaler manuellement le shift via les valeurs 'CENTRE' ou 'BANDE' du mot-clé OPTION.\n   * Vous pouvez aussi relancer le même calcul en changeant de solveur modal (par exemple avec METHODE='SORENSEN').\n",
+   "placeholders": [
+    "%(r1)g"
+   ],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "ALGELINE4_3",
+   "fr": "\n Solveur GCPC :\n La résolution du système linéaire a échoué car le critère de convergence n'a pu être satisfait avec le nombre d'itérations autorisées.\n   norme du résidu relatif après %(i1)d itérations :  %(r1)f\n   critère de convergence à satisfaire             :  %(r2)f\n\n Conseils :\n  * Augmentez le nombre d'itérations autorisées (SOLVEUR/NMAX_ITER).\n  * Vous pouvez aussi augmenter le niveau de remplissage pour la factorisation incomplète (SOLVEUR/NIVE_REMPLISSAGE).\n  * Si vous utilisez une commande non-linéaire (STAT_NON_LINE par exemple), diminuez la précision demandée pour la convergence (SOLVEUR/RESI_RELA).\n    Prenez garde cependant car cela peut empêcher la convergence de l'algorithme non-linéaire.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 42
+   },
+   "en": null
+  },
+  "4": {
+   "id": "ALGELINE4_4",
+   "fr": "\n  Manque de mémoire :\n     Mémoire disponible = %(i1)d\n     Mémoire nécessaire = %(i2)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 56
+   },
+   "en": null
+  },
+  "5": {
+   "id": "ALGELINE4_5",
+   "fr": "\nErreur utilisateur dans la commande CREA_MAILLAGE :\n  Pour créer le nouveau maillage, il faut créer de nouveaux noeuds.\n  Ici, on cherche à créer le noeud (%(k1)s) mais il existe déjà.\n\n  Le préfixe peut être modifié par l'utilisateur (mots clés XXXX / PREF_NOEUD).\n\nRisques & conseils :\n  Quand on utilise deux fois de suite la commande CREA_MAILLAGE, il est en général nécessaire\n  d'utiliser au moins une fois l'un des mots clés PREF_NOEUD\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 63
+   },
+   "en": null
+  },
+  "6": {
+   "id": "ALGELINE4_6",
+   "fr": "\n Solveur GCPC :\n La résolution du système linéaire a échoué car le critère de convergence n'a pu être satisfait avec le nombre d'itérations autorisées.\n   norme du résidu relatif après %(i1)d itérations :  %(r1)f\n   critère de convergence à satisfaire             :  %(r2)f\n\n Conseils :\n  * Augmentez le nombre d'itérations autorisées (SOLVEUR/NMAX_ITER).\n  * Vous pouvez aussi réactualiser plus souvent le préconditionneur en diminuant la valeur du mot-clé SOLVEUR/REAC_PRECOND.\n  * Si vous utilisez une commande non-linéaire (STAT_NON_LINE par exemple), diminuez la précision demandée pour la convergence (SOLVEUR/RESI_RELA).\n    Prenez garde cependant car cela peut empêcher la convergence de l'algorithme non-linéaire.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 76
+   },
+   "en": null
+  },
+  "9": {
+   "id": "ALGELINE4_9",
+   "fr": "\n Erreur données GROUP_MA déjà existant :  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 90
+   },
+   "en": null
+  },
+  "10": {
+   "id": "ALGELINE4_10",
+   "fr": "\n Votre problème modal n'est pas un problème généralisé à matrices réelles symétriques :\n il comporte des matrices non symétriques et/ou complexes, ou bien il s'agit d'un problème quadratique.\n Son spectre n'est donc pas uniquement restreint à l'axe réel, il représente une zone du plan complexe.\n\n Conseil :\n Il faut donc relancer votre calcul avec le mot-clé TYPE_RESU='MODE_COMPLEXE' et les opérandes associées.\n",
+   "placeholders": [],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "11": {
+   "id": "ALGELINE4_11",
+   "fr": "\n erreur données GROUP_NO déjà existant :  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 105
+   },
+   "en": null
+  },
+  "13": {
+   "id": "ALGELINE4_13",
+   "fr": "\n L'algorithme APM a atteint le nombre maximal de discrétisations du contour,\n c'est à dire %(i1)d, sans convergence du procédé.\n\n Conseils :\n Vous pouvez:\n  - Changer les dimensions du contour de manière à réduire son périmètre,\n  - Changer sa localisation. Il passe peut-être très près de valeurs propres\n    ce qui peut induire des perturbations numériques.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 110
+   },
+   "en": null
+  },
+  "14": {
+   "id": "ALGELINE4_14",
+   "fr": "\n L'algorithme APM a atteint son nombre maximal d'itérations, c'est à dire %(i1)d,\n sans convergence du procédé.\n\n Conseils :\n  Vous pouvez:\n  - Augmenter ce nombre maximal d'itérations via le paramètre NMAX_ITER_CONTOUR,\n  - Augmenter la discrétisation initiale du contour via NBPOINT_CONTOUR,\n  - Changer les dimensions du contour de manière à réduire son périmètre,\n  - Changer sa localisation. Il passe peut-être très près de valeurs propres\n    ce qui peut induire des perturbations numériques.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 122
+   },
+   "en": null
+  },
+  "15": {
+   "id": "ALGELINE4_15",
+   "fr": "\n L'algorithme APM avec le calcul du polynôme caractéristique via une factorisation\n LDLT a un problème numérique: le point de vérification (%(r1)f +i*%(r2)f)\n est très proche d'une valeur propre ou le solveur linéaire a eu un problème.\n\n Conseils :\n Vous pouvez:\n - Augmenter les dimensions du contour pour englober cette valeur propre,\n - Changer la discrétisation du contour (plus risqué).\n - Changer le paramétrage du solveur linéaire, ou le solveur linéaire lui-même (expert).\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 136
+   },
+   "en": null
+  },
+  "19": {
+   "id": "ALGELINE4_19",
+   "fr": "\n Matrice de masse non définie.\n\n Conseil : essayer un autre algorithme de résolution.\n",
+   "placeholders": [],
+   "source": {
+    "line": 149
+   },
+   "en": null
+  },
+  "20": {
+   "id": "ALGELINE4_20",
+   "fr": "\n Pour l'instant, on est obligé de choisir pour un résultat de type 'DYNAMIQUE' ou\n 'FLAMBEMENT', la méthode de comptage 'STURM', et pour 'MODE_COMPLEXE', la méthode\n 'APM'.\n Si vos choix ne respectent pas cette règle, on fait le changement pour vous, en\n se référant au type de problème que vous avez choisi.\n",
+   "placeholders": [],
+   "source": {
+    "line": 156
+   },
+   "en": null
+  },
+  "21": {
+   "id": "ALGELINE4_21",
+   "fr": "\n Manque de place mémoire longueur de bloc insuffisante:  %(i1)d\n le super noeud  %(i2)d\n  nécessite un bloc de %(i3)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 165
+   },
+   "en": null
+  },
+  "22": {
+   "id": "ALGELINE4_22",
+   "fr": "\n L'algorithme APM a convergé sur un nombre de fréquences aberrant !\n\n Conseils:\n Vous pouvez:\n  - Augmenter la discrétisation initiale du contour via NBPOINT_CONTOUR,\n  - Changer les dimensions du contour de manière à réduire son périmètre,\n  - Changer sa localisation. Il passe peut-être très près de valeurs propres\n    ce qui peut induire des perturbations numériques.\n",
+   "placeholders": [],
+   "source": {
+    "line": 172
+   },
+   "en": null
+  },
+  "25": {
+   "id": "ALGELINE4_25",
+   "fr": "\n combinaison non prévue   type résultat :  %(k1)s    type matrice  :  %(k2)s\n    type constante:  %(k3)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 184
+   },
+   "en": null
+  },
+  "27": {
+   "id": "ALGELINE4_27",
+   "fr": "\n combinaison non prévue\n type résultat :  %(k1)s\n type matrice  :  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 190
+   },
+   "en": null
+  },
+  "31": {
+   "id": "ALGELINE4_31",
+   "fr": "\n combinaison non prévue\n type résultat :  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 197
+   },
+   "en": null
+  },
+  "33": {
+   "id": "ALGELINE4_33",
+   "fr": "\n la normalisation doit se faire en place\n il est impossible d'avoir comme concept produit  %(k1)s et %(k2)s comme concept d'entrée.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 203
+   },
+   "en": null
+  },
+  "36": {
+   "id": "ALGELINE4_36",
+   "fr": "\n l'option de normalisation  %(k1)s  n'est pas implantée. %(i1)d\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 209
+   },
+   "en": null
+  },
+  "37": {
+   "id": "ALGELINE4_37",
+   "fr": "\n problème(s) rencontré(s) lors de la factorisation de la matrice : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 214
+   },
+   "en": null
+  },
+  "38": {
+   "id": "ALGELINE4_38",
+   "fr": "\n appel erroné :\n code retour : %(i1)d\n Problème CHAM_NO %(k1)s\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 219
+   },
+   "en": null
+  },
+  "39": {
+   "id": "ALGELINE4_39",
+   "fr": "\n Au moins une des matrices est non symétrique.\n Dans ce cas, l'option 'BANDE' n'est pas utilisable.\n",
+   "placeholders": [],
+   "source": {
+    "line": 228
+   },
+   "en": null
+  },
+  "40": {
+   "id": "ALGELINE4_40",
+   "fr": "\n Au moins une des matrices est non symétrique.\n Dans ce cas, la détection des modes de corps rigide (OPTION='MODE_RIGIDE')\n n'est pas utilisable.\n",
+   "placeholders": [],
+   "source": {
+    "line": 234
+   },
+   "en": null
+  },
+  "41": {
+   "id": "ALGELINE4_41",
+   "fr": "\n Au moins une des matrices est non symétrique.\n Dans ce cas, le calcul de flambement ne peut pas être mené.\n",
+   "placeholders": [],
+   "source": {
+    "line": 241
+   },
+   "en": null
+  },
+  "42": {
+   "id": "ALGELINE4_42",
+   "fr": "\n pas de produit car les valeurs de la MATRICE sont  %(k1)s\n et celles du CHAM_NO sont  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "44": {
+   "id": "ALGELINE4_44",
+   "fr": "\n Le solveur itératif GCPC est interdit avec un maillage parallèle.\n\n Conseils :\n  - Utilisez un autre solveur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 253
+   },
+   "en": null
+  },
+  "55": {
+   "id": "ALGELINE4_55",
+   "fr": "\n pas d'extraction pour  %(k1)s\n pour le numéro d'ordre  %(i1)d\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 261
+   },
+   "en": null
+  },
+  "56": {
+   "id": "ALGELINE4_56",
+   "fr": "\n pas de mode extrait pour  %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 267
+   },
+   "en": null
+  },
+  "57": {
+   "id": "ALGELINE4_57",
+   "fr": "\n NUME_MODE identique pour le %(i1)d\n mode d'ordre  %(i2)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 272
+   },
+   "en": null
+  },
+  "58": {
+   "id": "ALGELINE4_58",
+   "fr": "\n  Problème dans le préconditionnement de la matrice MATAS par LDLT incomplet\n  pivot nul à la ligne %(i1)d correspondant au noeud %(k1)s et à la\n  composante %(k2)s\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 278
+   },
+   "en": null
+  },
+  "60": {
+   "id": "ALGELINE4_60",
+   "fr": "\n  incohérence sans multiplicateurs de Lagrange %(i1)d reconstitués %(i2)d\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 285
+   },
+   "en": null
+  },
+  "61": {
+   "id": "ALGELINE4_61",
+   "fr": "\n pas de mode statique pour le noeud :  %(k1)s  et sa composante :  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 292
+   },
+   "en": null
+  },
+  "62": {
+   "id": "ALGELINE4_62",
+   "fr": "\n pour les modes statiques, on attend un :  %(k1)s\n noeud :  %(k2)s\n composante   :  %(k3)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 297
+   },
+   "en": null
+  },
+  "63": {
+   "id": "ALGELINE4_63",
+   "fr": "\n Solveur GCPC :\n Le préconditionneur LDLT a été mis à jour.\n ",
+   "placeholders": [],
+   "source": {
+    "line": 304
+   },
+   "en": null
+  },
+  "64": {
+   "id": "ALGELINE4_64",
+   "fr": "\n détection d'un terme nul sur la sur diagonale\n valeur de BETA   %(r1)f\n valeur de ALPHA  %(r2)f\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 310
+   },
+   "en": null
+  },
+  "65": {
+   "id": "ALGELINE4_65",
+   "fr": "\n La  %(i1)d -ème valeur propre du système réduit est complexe.\n Partie imaginaire =  %(r1)f\n et partie imaginaire / partie réelle =  %(r2)f\n ",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 317
+   },
+   "en": null
+  },
+  "66": {
+   "id": "ALGELINE4_66",
+   "fr": "\n la valeur propre est :   %(r1)f\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 324
+   },
+   "en": null
+  },
+  "74": {
+   "id": "ALGELINE4_74",
+   "fr": "\n Calcul d'erreur modale :\n une valeur propre réelle est détectée à partir du couple (fréquence, amortissement réduit).\n On ne peut plus la reconstruire.\n Par convention l'erreur modale est fixée à : %(r1)f.\n",
+   "placeholders": [
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 329
+   },
+   "en": null
+  },
+  "76": {
+   "id": "ALGELINE4_76",
+   "fr": "\n la réorthogonalisation diverge après  %(i1)d  itération(s).\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 337
+   },
+   "en": null
+  },
+  "77": {
+   "id": "ALGELINE4_77",
+   "fr": "\n l'option de normalisation  %(k1)s  n'est pas implantée.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "80": {
+   "id": "ALGELINE4_80",
+   "fr": "\n type de valeurs inconnu   %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 347
+   },
+   "en": null
+  },
+  "82": {
+   "id": "ALGELINE4_82",
+   "fr": "\n incohérence de certains paramètres modaux propres à ARPACK\n numéro d'erreur  %(i1)d\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 352
+   },
+   "en": null
+  },
+  "85": {
+   "id": "ALGELINE4_85",
+   "fr": "\n appel erroné mode numéro %(i1)d position modale %(i2)d\n code retour : %(i3)d\n Problème CHAM_NO %(k1)s\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 358
+   },
+   "en": null
+  },
+  "86": {
+   "id": "ALGELINE4_86",
+   "fr": "\n la réorthogonalisation diverge après  %(i1)d  itération(s) %(i2)d\n       vecteur traité :  %(i3)d\n       vecteur testé  :  %(i4)d\n arrêt de la réorthogonalisation %(k1)s\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d",
+    "%(i4)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 367
+   },
+   "en": null
+  },
+  "87": {
+   "id": "ALGELINE4_87",
+   "fr": "\n pour le problème réduit\n valeur(s) propre(s) réelle(s)                  :  %(i1)d\n valeur(s) propre(s) complexe(s) avec conjuguée :  %(i2)d\n valeur(s) propre(s) complexe(s) sans conjuguée :  %(i3)d\n\n Indications et Conseils\n -----------------------\n * Une valeur propre est considérée comme réelle dès que le module de sa partie imaginaire (en pulsation) est < 1.d-7.\n * Deux valeurs propres sont considérées comme conjuguées dès que le module de leur écart (en pulsation)\n est inférieur à (2.pi.SEUIL_FREQ)**2.\n Vous pouvez donc augmenter un peu la valeur par défaut de SEUIL_FREQ si vous pensez que la calcul a filtré, à tort,\n des couples de valeurs propres normalement conjuguées.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 375
+   },
+   "en": null
+  },
+  "88": {
+   "id": "ALGELINE4_88",
+   "fr": "\n votre problème est fortement amorti.\n valeur(s) propre(s) réelle(s)                  :  %(i1)d\n valeur(s) propre(s) complexe(s) avec conjuguée :  %(i2)d\n valeur(s) propre(s) complexe(s) sans conjuguée :  %(i3)d\n\n Indications et Conseils\n -----------------------\n * Une valeur propre est considérée comme réelle dès que le module de sa partie imaginaire (en pulsation) est < 1.d-7.\n * Deux valeurs propres sont considérées comme conjuguées dès que le module de leur écart (en pulsation)\n est inférieur à (2.pi.SEUIL_FREQ)**2.\n Vous pouvez donc augmenter un peu la valeur par défaut de SEUIL_FREQ si vous pensez que la calcul a filtré, à tort,\n des couples de valeurs propres normalement conjuguées.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 391
+   },
+   "en": null
+  },
+  "93": {
+   "id": "ALGELINE4_93",
+   "fr": "\n Problème généralisé complexe.\n",
+   "placeholders": [],
+   "source": {
+    "line": 407
+   },
+   "en": null
+  },
+  "94": {
+   "id": "ALGELINE4_94",
+   "fr": "\n Problème quadratique complexe.\n",
+   "placeholders": [],
+   "source": {
+    "line": 412
+   },
+   "en": null
+  },
+  "95": {
+   "id": "ALGELINE4_95",
+   "fr": "\n Problème quadratique.\n",
+   "placeholders": [],
+   "source": {
+    "line": 417
+   },
+   "en": null
+  },
+  "96": {
+   "id": "ALGELINE4_96",
+   "fr": "\n Amortissement (réduit) de décalage supérieur en valeur absolue à %(r1)f.\n On le ramène à la valeur : %(r2)f.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 422
+   },
+   "en": null
+  }
+ }
+}

@@ -1,0 +1,515 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/affe_materiau.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "AFFE_MATERIAU",
+ "kind": "MACRO",
+ "fr": "Affecter des matériaux à des zones géométriques d'un maillage",
+ "translation_upstream": {
+  "AFFE_MATERIAU": "Assign a material",
+  "AFFE": "Material assignement",
+  "AFFE_COMPOR": "Behaviour assignement",
+  "AFFE_VARC": "External state variable assignement",
+  "NOM_VARC": "External state variable",
+  "NOM_CHAM": "Field name",
+  "TOUT": "Everywhere"
+ },
+ "op": "code_aster.MacroCommands.affe_materiau_ops.affe_materiau_ops",
+ "reentrant": "n",
+ "result_types": [
+  "cham_mater"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "MAILLAGE",
+    "MODELE"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "AFFE",
+    "CHAM_MATER"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/affe_materiau.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster",
+    "maillage_p"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "AFFE",
+   "kind": "factor",
+   "path": "AFFE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 37
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AFFE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "AFFE/MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "max": 30,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 43
+     }
+    }
+   ]
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "AFFE_COMPOR",
+   "kind": "factor",
+   "path": "AFFE_COMPOR",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE_COMPOR/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AFFE_COMPOR/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "COMPOR",
+     "kind": "simple",
+     "path": "AFFE_COMPOR/COMPOR",
+     "status": "o",
+     "type": [
+      "compor_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/affe_materiau.py",
+      "line": 54
+     }
+    }
+   ]
+  },
+  {
+   "name": "AFFE_VARC",
+   "kind": "factor",
+   "path": "AFFE_VARC",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_MA",
+      "TOUT"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "EVOL",
+      "CHAM_GD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commons/c_affe_varc.py",
+    "line": 26
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE_VARC/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 30
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AFFE_VARC/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 31
+     }
+    },
+    {
+     "name": "NOM_VARC",
+     "kind": "simple",
+     "path": "AFFE_VARC/NOM_VARC",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "TEMP",
+      "GEOM",
+      "CORR",
+      "IRRA",
+      "HYDR",
+      "SECH",
+      "EPSA",
+      "M_ACIER",
+      "M_ZIRC",
+      "NEUT1",
+      "NEUT2",
+      "NEUT3",
+      "PTOT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 32
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "AFFE_VARC/CHAM_GD",
+     "status": "f",
+     "type": [
+      "cham_gd_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "EVOL",
+     "kind": "simple",
+     "path": "AFFE_VARC/EVOL",
+     "status": "f",
+     "type": [
+      "evol_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "B_EVOL",
+     "kind": "bloc",
+     "path": "AFFE_VARC/[B_EVOL]",
+     "condition": "exists(\"EVOL\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 53
+     },
+     "keywords": [
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "AFFE_VARC/NOM_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "TEMP",
+        "CORR",
+        "IRRA",
+        "NEUT",
+        "GEOM",
+        "HYDR_ELNO",
+        "HYDR_NOEU",
+        "META_ELNO",
+        "META_NOEU",
+        "EPSA_ELNO",
+        "EPSA_NOEU",
+        "PTOT",
+        "HHO_TEMP",
+        "SECH"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_affe_varc.py",
+        "line": 55
+       }
+      },
+      {
+       "name": "PROL_DROITE",
+       "kind": "simple",
+       "path": "AFFE_VARC/PROL_DROITE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "EXCLU",
+       "into": [
+        "CONSTANT",
+        "LINEAIRE",
+        "EXCLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_affe_varc.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "PROL_GAUCHE",
+       "kind": "simple",
+       "path": "AFFE_VARC/PROL_GAUCHE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "EXCLU",
+       "into": [
+        "CONSTANT",
+        "LINEAIRE",
+        "EXCLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_affe_varc.py",
+        "line": 78
+       }
+      },
+      {
+       "name": "FONC_INST",
+       "kind": "simple",
+       "path": "AFFE_VARC/FONC_INST",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_affe_varc.py",
+        "line": 81
+       }
+      }
+     ]
+    },
+    {
+     "name": "B_VALE_REF",
+     "kind": "bloc",
+     "path": "AFFE_VARC/[B_VALE_REF]",
+     "condition": "is_in(\"NOM_VARC\", ('TEMP','SECH'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commons/c_affe_varc.py",
+      "line": 84
+     },
+     "keywords": [
+      {
+       "name": "VALE_REF",
+       "kind": "simple",
+       "path": "AFFE_VARC/VALE_REF",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_affe_varc.py",
+        "line": 85
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/affe_materiau.py",
+    "line": 59
+   }
+  }
+ ]
+}

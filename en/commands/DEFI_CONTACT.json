@@ -1,0 +1,4906 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_contact.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_CONTACT",
+ "kind": "OPER",
+ "fr": "Définit les zones soumises à des conditions de contact unilatéral avec ou sans frottement",
+ "translation_upstream": null,
+ "op": 30,
+ "reentrant": "n",
+ "result_types": [
+  "char_contact"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_contact.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "FORMULATION",
+   "kind": "simple",
+   "path": "FORMULATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DISCRETE",
+   "into": [
+    "DISCRETE",
+    "CONTINUE",
+    "LIAISON_UNIL"
+   ],
+   "fr": "Choix d'une formulation de contact ou de liaisons unilatérales",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "FROTTEMENT",
+   "kind": "simple",
+   "path": "FROTTEMENT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "SANS",
+   "into": [
+    "COULOMB",
+    "SANS"
+   ],
+   "fr": "Choix d'un modèle de frottement (uniquement pour les formulations de contact)",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "b_contact_mail",
+   "kind": "bloc",
+   "path": "[b_contact_mail]",
+   "condition": "((equal_to(\"FORMULATION\", 'CONTINUE')) or (equal_to(\"FORMULATION\", 'DISCRETE')))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "STOP_INTERP",
+     "kind": "simple",
+     "path": "STOP_INTERP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Arrête le calcul dès qu'une interpénétration est détectée en mode RESOLUTION='NON'",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "LISSAGE",
+     "kind": "simple",
+     "path": "LISSAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Lissage des normales par moyennation aux noeuds",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "VERI_NORM",
+     "kind": "simple",
+     "path": "VERI_NORM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Vérification de l'orientation (sortante) des normales aux surfaces",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 74
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_bouc_geom_maild",
+   "kind": "bloc",
+   "path": "[b_bouc_geom_maild]",
+   "condition": "equal_to(\"FORMULATION\", 'DISCRETE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 84
+   },
+   "keywords": [
+    {
+     "name": "ALGO_RESO_GEOM",
+     "kind": "simple",
+     "path": "ALGO_RESO_GEOM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "POINT_FIXE",
+     "into": [
+      "POINT_FIXE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "REAC_GEOM",
+     "kind": "simple",
+     "path": "REAC_GEOM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTOMATIQUE",
+     "into": [
+      "AUTOMATIQUE",
+      "CONTROLE",
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "b_automatique",
+     "kind": "bloc",
+     "path": "[b_automatique]",
+     "condition": "equal_to(\"REAC_GEOM\", 'AUTOMATIQUE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 90
+     },
+     "keywords": [
+      {
+       "name": "ITER_GEOM_MAXI",
+       "kind": "simple",
+       "path": "ITER_GEOM_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 10,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "RESI_GEOM",
+       "kind": "simple",
+       "path": "RESI_GEOM",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.01,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 93
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_controle",
+     "kind": "bloc",
+     "path": "[b_controle]",
+     "condition": "equal_to(\"REAC_GEOM\", 'CONTROLE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "NB_ITER_GEOM",
+       "kind": "simple",
+       "path": "NB_ITER_GEOM",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 97
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_bouc_geom_mailc",
+   "kind": "bloc",
+   "path": "[b_bouc_geom_mailc]",
+   "condition": "equal_to(\"FORMULATION\", 'CONTINUE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 101
+   },
+   "keywords": [
+    {
+     "name": "ALGO_RESO_GEOM",
+     "kind": "simple",
+     "path": "ALGO_RESO_GEOM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "POINT_FIXE",
+     "into": [
+      "POINT_FIXE",
+      "NEWTON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "CONT_STAT_ELAS",
+     "kind": "simple",
+     "path": "CONT_STAT_ELAS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "b_algo_reso_geomNE",
+     "kind": "bloc",
+     "path": "[b_algo_reso_geomNE]",
+     "condition": "equal_to(\"ALGO_RESO_GEOM\", 'NEWTON')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 107
+     },
+     "keywords": [
+      {
+       "name": "RESI_GEOM",
+       "kind": "simple",
+       "path": "RESI_GEOM",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 109
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_algo_reso_geomPF",
+     "kind": "bloc",
+     "path": "[b_algo_reso_geomPF]",
+     "condition": "equal_to(\"ALGO_RESO_GEOM\", 'POINT_FIXE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 111
+     },
+     "keywords": [
+      {
+       "name": "REAC_GEOM",
+       "kind": "simple",
+       "path": "REAC_GEOM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTOMATIQUE",
+       "into": [
+        "AUTOMATIQUE",
+        "CONTROLE",
+        "SANS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "b_automatique",
+       "kind": "bloc",
+       "path": "[b_automatique]",
+       "condition": "equal_to(\"REAC_GEOM\", 'AUTOMATIQUE') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 119
+       },
+       "keywords": [
+        {
+         "name": "ITER_GEOM_MAXI",
+         "kind": "simple",
+         "path": "ITER_GEOM_MAXI",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 10,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 121
+         }
+        },
+        {
+         "name": "RESI_GEOM",
+         "kind": "simple",
+         "path": "RESI_GEOM",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.01,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 122
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_controle",
+       "kind": "bloc",
+       "path": "[b_controle]",
+       "condition": "equal_to(\"REAC_GEOM\", 'CONTROLE') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 124
+       },
+       "keywords": [
+        {
+         "name": "NB_ITER_GEOM",
+         "kind": "simple",
+         "path": "NB_ITER_GEOM",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 126
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_bouc_cont_disc",
+   "kind": "bloc",
+   "path": "[b_bouc_cont_disc]",
+   "condition": "equal_to(\"FORMULATION\", 'DISCRETE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 131
+   },
+   "keywords": [
+    {
+     "name": "ITER_CONT_MULT",
+     "kind": "simple",
+     "path": "ITER_CONT_MULT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 4,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 133
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_bouc_cont_cont",
+   "kind": "bloc",
+   "path": "[b_bouc_cont_cont]",
+   "condition": "equal_to(\"FORMULATION\", 'CONTINUE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 135
+   },
+   "keywords": [
+    {
+     "name": "ALGO_RESO_CONT",
+     "kind": "simple",
+     "path": "ALGO_RESO_CONT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NEWTON",
+     "into": [
+      "POINT_FIXE",
+      "NEWTON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "RESI_CONT",
+     "kind": "simple",
+     "path": "RESI_CONT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": -1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "b_algo_reso_contPF",
+     "kind": "bloc",
+     "path": "[b_algo_reso_contPF]",
+     "condition": "equal_to(\"ALGO_RESO_CONT\", 'POINT_FIXE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 139
+     },
+     "keywords": [
+      {
+       "name": "ITER_CONT_TYPE",
+       "kind": "simple",
+       "path": "ITER_CONT_TYPE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MAXI",
+       "into": [
+        "MULT",
+        "MAXI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "b_bouc_cont_mult",
+       "kind": "bloc",
+       "path": "[b_bouc_cont_mult]",
+       "condition": "equal_to(\"ITER_CONT_TYPE\", 'MULT')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 142
+       },
+       "keywords": [
+        {
+         "name": "ITER_CONT_MULT",
+         "kind": "simple",
+         "path": "ITER_CONT_MULT",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 4,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 144
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_bouc_cont_maxi",
+       "kind": "bloc",
+       "path": "[b_bouc_cont_maxi]",
+       "condition": "equal_to(\"ITER_CONT_TYPE\", 'MAXI')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 146
+       },
+       "keywords": [
+        {
+         "name": "ITER_CONT_MAXI",
+         "kind": "simple",
+         "path": "ITER_CONT_MAXI",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "default": 30,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 148
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_bouc_frot_cont",
+   "kind": "bloc",
+   "path": "[b_bouc_frot_cont]",
+   "condition": "equal_to(\"FROTTEMENT\", 'COULOMB') and equal_to(\"FORMULATION\", 'CONTINUE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 153
+   },
+   "keywords": [
+    {
+     "name": "ALGO_RESO_FROT",
+     "kind": "simple",
+     "path": "ALGO_RESO_FROT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NEWTON",
+     "into": [
+      "POINT_FIXE",
+      "NEWTON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 155
+     }
+    },
+    {
+     "name": "b_algo_reso_frotPF",
+     "kind": "bloc",
+     "path": "[b_algo_reso_frotPF]",
+     "condition": "equal_to(\"ALGO_RESO_FROT\", 'POINT_FIXE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 156
+     },
+     "keywords": [
+      {
+       "name": "ITER_FROT_MAXI",
+       "kind": "simple",
+       "path": "ITER_FROT_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 10,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 158
+       }
+      },
+      {
+       "name": "RESI_FROT",
+       "kind": "simple",
+       "path": "RESI_FROT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 159
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_algo_reso_frotNE",
+     "kind": "bloc",
+     "path": "[b_algo_reso_frotNE]",
+     "condition": "equal_to(\"ALGO_RESO_FROT\", 'NEWTON')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 161
+     },
+     "keywords": [
+      {
+       "name": "RESI_FROT",
+       "kind": "simple",
+       "path": "RESI_FROT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 163
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_para_discret",
+   "kind": "bloc",
+   "path": "[b_para_discret]",
+   "condition": "equal_to(\"FORMULATION\", 'DISCRETE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 167
+   },
+   "keywords": [
+    {
+     "name": "STOP_SINGULIER",
+     "kind": "simple",
+     "path": "STOP_SINGULIER",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Tient compte de la singularité de la matrice de contact",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 170
+     }
+    },
+    {
+     "name": "NB_RESOL",
+     "kind": "simple",
+     "path": "NB_RESOL",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 10,
+     "fr": "Nombre de résolutions simultanées pour la construction du complément de Schur",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "RESI_ABSO",
+     "kind": "simple",
+     "path": "RESI_ABSO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Critère de convergence (niveau d'interpénétration autorisé pour 'GCP')",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "ITER_GCP_MAXI",
+     "kind": "simple",
+     "path": "ITER_GCP_MAXI",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": "Nombre d'itérations maximal ('GCP')",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "RECH_LINEAIRE",
+     "kind": "simple",
+     "path": "RECH_LINEAIRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ADMISSIBLE",
+     "into": [
+      "ADMISSIBLE",
+      "NON_ADMISSIBLE"
+     ],
+     "fr": "Autorisation de sortie du domaine admissible lors de la recherche linéaire",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 192
+     }
+    },
+    {
+     "name": "PRE_COND",
+     "kind": "simple",
+     "path": "PRE_COND",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SANS",
+     "into": [
+      "DIRICHLET",
+      "SANS"
+     ],
+     "fr": "Choix d'un préconditionneur (accélère la convergence de 'GCP')",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 199
+     }
+    },
+    {
+     "name": "b_dirichlet",
+     "kind": "bloc",
+     "path": "[b_dirichlet]",
+     "condition": "equal_to(\"PRE_COND\", 'DIRICHLET')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 206
+     },
+     "keywords": [
+      {
+       "name": "COEF_RESI",
+       "kind": "simple",
+       "path": "COEF_RESI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": -1.0,
+       "fr": "Activation du préconditionneur quand le résidu a été divisé par COEF_RESI",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 208
+       }
+      },
+      {
+       "name": "ITER_PRE_MAXI",
+       "kind": "simple",
+       "path": "ITER_PRE_MAXI",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 0,
+       "fr": "Nombre d'itérations maximal pour le préconditionneur ('GCP')",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 214
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_affe_unil",
+   "kind": "bloc",
+   "path": "[b_affe_unil]",
+   "condition": "equal_to(\"FORMULATION\", 'LIAISON_UNIL')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 224
+   },
+   "keywords": [
+    {
+     "name": "ZONE",
+     "kind": "factor",
+     "path": "ZONE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "GROUP_MA",
+        "GROUP_NO"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 226
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "ZONE/GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 231
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ZONE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 232
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "ZONE/NOM_CMP",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 234
+       }
+      },
+      {
+       "name": "COEF_IMPO",
+       "kind": "simple",
+       "path": "ZONE/COEF_IMPO",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 235
+       }
+      },
+      {
+       "name": "COEF_MULT",
+       "kind": "simple",
+       "path": "ZONE/COEF_MULT",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 236
+       }
+      },
+      {
+       "name": "SANS_GROUP_NO",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 238
+       }
+      },
+      {
+       "name": "ALGO_CONT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_CONT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONTRAINTE",
+       "into": [
+        "CONTRAINTE",
+        "PENALISATION"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 240
+       }
+      },
+      {
+       "name": "b_cont_pen",
+       "kind": "bloc",
+       "path": "ZONE/[b_cont_pen]",
+       "condition": "equal_to(\"ALGO_CONT\", 'PENALISATION') ",
+       "fr": "Paramètre de la méthode pénalisée",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 243
+       },
+       "keywords": [
+        {
+         "name": "COEF_PENA",
+         "kind": "simple",
+         "path": "ZONE/COEF_PENA",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 246
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_affe_discret",
+   "kind": "bloc",
+   "path": "[b_affe_discret]",
+   "condition": "equal_to(\"FORMULATION\", 'DISCRETE') and equal_to(\"FROTTEMENT\", 'COULOMB')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 251
+   },
+   "keywords": [
+    {
+     "name": "ZONE",
+     "kind": "factor",
+     "path": "ZONE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 253
+     },
+     "keywords": [
+      {
+       "name": "APPARIEMENT",
+       "kind": "simple",
+       "path": "ZONE/APPARIEMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MAIT_ESCL",
+       "into": [
+        "NODAL",
+        "MAIT_ESCL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 257
+       }
+      },
+      {
+       "name": "GROUP_MA_MAIT",
+       "kind": "simple",
+       "path": "ZONE/GROUP_MA_MAIT",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 261
+       }
+      },
+      {
+       "name": "GROUP_MA_ESCL",
+       "kind": "simple",
+       "path": "ZONE/GROUP_MA_ESCL",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 262
+       }
+      },
+      {
+       "name": "NORMALE",
+       "kind": "simple",
+       "path": "ZONE/NORMALE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MAIT",
+       "into": [
+        "MAIT",
+        "MAIT_ESCL",
+        "ESCL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 264
+       }
+      },
+      {
+       "name": "VECT_MAIT",
+       "kind": "simple",
+       "path": "ZONE/VECT_MAIT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "AUTO",
+        "FIXE",
+        "VECT_Y"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 266
+       }
+      },
+      {
+       "name": "b_nmait_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_nmait_fixe]",
+       "condition": "equal_to(\"VECT_MAIT\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 267
+       },
+       "keywords": [
+        {
+         "name": "MAIT_FIXE",
+         "kind": "simple",
+         "path": "ZONE/MAIT_FIXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 269
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_nmait_vecty",
+       "kind": "bloc",
+       "path": "ZONE/[b_nmait_vecty]",
+       "condition": "equal_to(\"VECT_MAIT\", 'VECT_Y')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 271
+       },
+       "keywords": [
+        {
+         "name": "MAIT_VECT_Y",
+         "kind": "simple",
+         "path": "ZONE/MAIT_VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 273
+         }
+        }
+       ]
+      },
+      {
+       "name": "VECT_ESCL",
+       "kind": "simple",
+       "path": "ZONE/VECT_ESCL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "AUTO",
+        "FIXE",
+        "VECT_Y"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 276
+       }
+      },
+      {
+       "name": "b_nescl_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_nescl_fixe]",
+       "condition": "equal_to(\"VECT_ESCL\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 277
+       },
+       "keywords": [
+        {
+         "name": "ESCL_FIXE",
+         "kind": "simple",
+         "path": "ZONE/ESCL_FIXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 279
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_nescl_vecty",
+       "kind": "bloc",
+       "path": "ZONE/[b_nescl_vecty]",
+       "condition": "equal_to(\"VECT_ESCL\", 'VECT_Y')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 281
+       },
+       "keywords": [
+        {
+         "name": "ESCL_VECT_Y",
+         "kind": "simple",
+         "path": "ZONE/ESCL_VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 283
+         }
+        }
+       ]
+      },
+      {
+       "name": "TYPE_PROJECTION",
+       "kind": "simple",
+       "path": "ZONE/TYPE_PROJECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ORTHOGONALE",
+       "into": [
+        "ORTHOGONALE",
+        "FIXE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 286
+       }
+      },
+      {
+       "name": "b_appa_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_appa_fixe]",
+       "condition": "equal_to(\"TYPE_PROJECTION\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 289
+       },
+       "keywords": [
+        {
+         "name": "DIRE_APPA",
+         "kind": "simple",
+         "path": "ZONE/DIRE_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 291
+         }
+        }
+       ]
+      },
+      {
+       "name": "DIST_POUTRE",
+       "kind": "simple",
+       "path": "ZONE/DIST_POUTRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 294
+       }
+      },
+      {
+       "name": "DIST_COQUE",
+       "kind": "simple",
+       "path": "ZONE/DIST_COQUE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 295
+       }
+      },
+      {
+       "name": "b_cara",
+       "kind": "bloc",
+       "path": "ZONE/[b_cara]",
+       "condition": "equal_to(\"DIST_POUTRE\", 'OUI') or equal_to(\"DIST_COQUE\", 'OUI')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 296
+       },
+       "keywords": [
+        {
+         "name": "CARA_ELEM",
+         "kind": "simple",
+         "path": "ZONE/CARA_ELEM",
+         "status": "o",
+         "type": [
+          "cara_elem"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 298
+         }
+        }
+       ]
+      },
+      {
+       "name": "DIST_MAIT",
+       "kind": "simple",
+       "path": "ZONE/DIST_MAIT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 300
+       }
+      },
+      {
+       "name": "DIST_ESCL",
+       "kind": "simple",
+       "path": "ZONE/DIST_ESCL",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 301
+       }
+      },
+      {
+       "name": "DIST_APPA",
+       "kind": "simple",
+       "path": "ZONE/DIST_APPA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": -1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 303
+       }
+      },
+      {
+       "name": "TOLE_PROJ_EXT",
+       "kind": "simple",
+       "path": "ZONE/TOLE_PROJ_EXT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 304
+       }
+      },
+      {
+       "name": "SANS_GROUP_NO",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 306
+       }
+      },
+      {
+       "name": "SANS_GROUP_MA",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 307
+       }
+      },
+      {
+       "name": "RESOLUTION",
+       "kind": "simple",
+       "path": "ZONE/RESOLUTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 309
+       }
+      },
+      {
+       "name": "b_verif",
+       "kind": "bloc",
+       "path": "ZONE/[b_verif]",
+       "condition": "equal_to(\"RESOLUTION\", 'NON') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 310
+       },
+       "keywords": [
+        {
+         "name": "TOLE_INTERP",
+         "kind": "simple",
+         "path": "ZONE/TOLE_INTERP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 312
+         }
+        }
+       ]
+      },
+      {
+       "name": "ALGO_CONT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_CONT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONTRAINTE",
+       "into": [
+        "CONTRAINTE",
+        "PENALISATION",
+        "GCP"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 315
+       }
+      },
+      {
+       "name": "b_active",
+       "kind": "bloc",
+       "path": "ZONE/[b_active]",
+       "condition": "equal_to(\"ALGO_CONT\", 'CONTRAINTE') ",
+       "fr": "Paramètres de la méthode des contraintes actives (contact uniquement)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 321
+       },
+       "keywords": [
+        {
+         "name": "GLISSIERE",
+         "kind": "simple",
+         "path": "ZONE/GLISSIERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 324
+         }
+        },
+        {
+         "name": "b_glissiere",
+         "kind": "bloc",
+         "path": "ZONE/[b_glissiere]",
+         "condition": "equal_to(\"GLISSIERE\", 'OUI') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 325
+         },
+         "keywords": [
+          {
+           "name": "ALARME_JEU",
+           "kind": "simple",
+           "path": "ZONE/ALARME_JEU",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 327
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_penal_contact",
+       "kind": "bloc",
+       "path": "ZONE/[b_penal_contact]",
+       "condition": "equal_to(\"ALGO_CONT\", 'PENALISATION') ",
+       "fr": "Paramètres de la méthode pénalisée (contact)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 331
+       },
+       "keywords": [
+        {
+         "name": "E_N",
+         "kind": "simple",
+         "path": "ZONE/E_N",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 334
+         }
+        }
+       ]
+      },
+      {
+       "name": "COULOMB",
+       "kind": "simple",
+       "path": "ZONE/COULOMB",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 337
+       }
+      },
+      {
+       "name": "COEF_MATR_FROT",
+       "kind": "simple",
+       "path": "ZONE/COEF_MATR_FROT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 338
+       }
+      },
+      {
+       "name": "ALGO_FROT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_FROT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "PENALISATION",
+       "into": [
+        "PENALISATION"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 339
+       }
+      },
+      {
+       "name": "E_T",
+       "kind": "simple",
+       "path": "ZONE/E_T",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 340
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_affe_discret_frot",
+   "kind": "bloc",
+   "path": "[b_affe_discret_frot]",
+   "condition": "equal_to(\"FORMULATION\", 'DISCRETE') and not equal_to(\"FROTTEMENT\", 'COULOMB')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 343
+   },
+   "keywords": [
+    {
+     "name": "ZONE",
+     "kind": "factor",
+     "path": "ZONE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 345
+     },
+     "keywords": [
+      {
+       "name": "APPARIEMENT",
+       "kind": "simple",
+       "path": "ZONE/APPARIEMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MAIT_ESCL",
+       "into": [
+        "NODAL",
+        "MAIT_ESCL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 349
+       }
+      },
+      {
+       "name": "GROUP_MA_MAIT",
+       "kind": "simple",
+       "path": "ZONE/GROUP_MA_MAIT",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 353
+       }
+      },
+      {
+       "name": "GROUP_MA_ESCL",
+       "kind": "simple",
+       "path": "ZONE/GROUP_MA_ESCL",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 354
+       }
+      },
+      {
+       "name": "NORMALE",
+       "kind": "simple",
+       "path": "ZONE/NORMALE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "MAIT",
+       "into": [
+        "MAIT",
+        "MAIT_ESCL",
+        "ESCL"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 356
+       }
+      },
+      {
+       "name": "VECT_MAIT",
+       "kind": "simple",
+       "path": "ZONE/VECT_MAIT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "AUTO",
+        "FIXE",
+        "VECT_Y"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 358
+       }
+      },
+      {
+       "name": "b_nmait_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_nmait_fixe]",
+       "condition": "equal_to(\"VECT_MAIT\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 359
+       },
+       "keywords": [
+        {
+         "name": "MAIT_FIXE",
+         "kind": "simple",
+         "path": "ZONE/MAIT_FIXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 361
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_nmait_vecty",
+       "kind": "bloc",
+       "path": "ZONE/[b_nmait_vecty]",
+       "condition": "equal_to(\"VECT_MAIT\", 'VECT_Y')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 363
+       },
+       "keywords": [
+        {
+         "name": "MAIT_VECT_Y",
+         "kind": "simple",
+         "path": "ZONE/MAIT_VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 365
+         }
+        }
+       ]
+      },
+      {
+       "name": "VECT_ESCL",
+       "kind": "simple",
+       "path": "ZONE/VECT_ESCL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "AUTO",
+        "FIXE",
+        "VECT_Y"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 368
+       }
+      },
+      {
+       "name": "b_nescl_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_nescl_fixe]",
+       "condition": "equal_to(\"VECT_ESCL\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 369
+       },
+       "keywords": [
+        {
+         "name": "ESCL_FIXE",
+         "kind": "simple",
+         "path": "ZONE/ESCL_FIXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 371
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_nescl_vecty",
+       "kind": "bloc",
+       "path": "ZONE/[b_nescl_vecty]",
+       "condition": "equal_to(\"VECT_ESCL\", 'VECT_Y')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 373
+       },
+       "keywords": [
+        {
+         "name": "ESCL_VECT_Y",
+         "kind": "simple",
+         "path": "ZONE/ESCL_VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 375
+         }
+        }
+       ]
+      },
+      {
+       "name": "TYPE_PROJECTION",
+       "kind": "simple",
+       "path": "ZONE/TYPE_PROJECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ORTHOGONALE",
+       "into": [
+        "ORTHOGONALE",
+        "FIXE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 378
+       }
+      },
+      {
+       "name": "b_appa_fixe",
+       "kind": "bloc",
+       "path": "ZONE/[b_appa_fixe]",
+       "condition": "equal_to(\"TYPE_PROJECTION\", 'FIXE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 381
+       },
+       "keywords": [
+        {
+         "name": "DIRE_APPA",
+         "kind": "simple",
+         "path": "ZONE/DIRE_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 383
+         }
+        }
+       ]
+      },
+      {
+       "name": "DIST_POUTRE",
+       "kind": "simple",
+       "path": "ZONE/DIST_POUTRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 386
+       }
+      },
+      {
+       "name": "DIST_COQUE",
+       "kind": "simple",
+       "path": "ZONE/DIST_COQUE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 387
+       }
+      },
+      {
+       "name": "b_cara",
+       "kind": "bloc",
+       "path": "ZONE/[b_cara]",
+       "condition": "equal_to(\"DIST_POUTRE\", 'OUI') or equal_to(\"DIST_COQUE\", 'OUI')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 388
+       },
+       "keywords": [
+        {
+         "name": "CARA_ELEM",
+         "kind": "simple",
+         "path": "ZONE/CARA_ELEM",
+         "status": "o",
+         "type": [
+          "cara_elem"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 390
+         }
+        }
+       ]
+      },
+      {
+       "name": "DIST_MAIT",
+       "kind": "simple",
+       "path": "ZONE/DIST_MAIT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 392
+       }
+      },
+      {
+       "name": "DIST_ESCL",
+       "kind": "simple",
+       "path": "ZONE/DIST_ESCL",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 393
+       }
+      },
+      {
+       "name": "DIST_APPA",
+       "kind": "simple",
+       "path": "ZONE/DIST_APPA",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": -1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 395
+       }
+      },
+      {
+       "name": "TOLE_PROJ_EXT",
+       "kind": "simple",
+       "path": "ZONE/TOLE_PROJ_EXT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 396
+       }
+      },
+      {
+       "name": "SANS_GROUP_NO",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 398
+       }
+      },
+      {
+       "name": "SANS_GROUP_MA",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 399
+       }
+      },
+      {
+       "name": "RESOLUTION",
+       "kind": "simple",
+       "path": "ZONE/RESOLUTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 401
+       }
+      },
+      {
+       "name": "b_verif",
+       "kind": "bloc",
+       "path": "ZONE/[b_verif]",
+       "condition": "equal_to(\"RESOLUTION\", 'NON') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 402
+       },
+       "keywords": [
+        {
+         "name": "TOLE_INTERP",
+         "kind": "simple",
+         "path": "ZONE/TOLE_INTERP",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 404
+         }
+        }
+       ]
+      },
+      {
+       "name": "ALGO_CONT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_CONT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "CONTRAINTE",
+       "into": [
+        "CONTRAINTE",
+        "PENALISATION",
+        "GCP"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 407
+       }
+      },
+      {
+       "name": "b_active",
+       "kind": "bloc",
+       "path": "ZONE/[b_active]",
+       "condition": "equal_to(\"ALGO_CONT\", 'CONTRAINTE') ",
+       "fr": "Paramètres de la méthode des contraintes actives (contact uniquement)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 413
+       },
+       "keywords": [
+        {
+         "name": "GLISSIERE",
+         "kind": "simple",
+         "path": "ZONE/GLISSIERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 416
+         }
+        },
+        {
+         "name": "b_glissiere",
+         "kind": "bloc",
+         "path": "ZONE/[b_glissiere]",
+         "condition": "equal_to(\"GLISSIERE\", 'OUI') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 417
+         },
+         "keywords": [
+          {
+           "name": "ALARME_JEU",
+           "kind": "simple",
+           "path": "ZONE/ALARME_JEU",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 419
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_penal_contact",
+       "kind": "bloc",
+       "path": "ZONE/[b_penal_contact]",
+       "condition": "equal_to(\"ALGO_CONT\", 'PENALISATION') ",
+       "fr": "Paramètres de la méthode pénalisée (contact)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 423
+       },
+       "keywords": [
+        {
+         "name": "E_N",
+         "kind": "simple",
+         "path": "ZONE/E_N",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 426
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_affe_continue_frot",
+   "kind": "bloc",
+   "path": "[b_affe_continue_frot]",
+   "condition": "equal_to(\"FORMULATION\", 'CONTINUE') and equal_to(\"FROTTEMENT\", 'COULOMB')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 431
+   },
+   "keywords": [
+    {
+     "name": "ZONE",
+     "kind": "factor",
+     "path": "ZONE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 433
+     },
+     "keywords": [
+      {
+       "name": "ALGO_CONT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_CONT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "STANDARD",
+       "into": [
+        "STANDARD",
+        "PENALISATION",
+        "LAC"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 437
+       }
+      },
+      {
+       "name": "ALGO_FROT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_FROT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "STANDARD",
+       "into": [
+        "STANDARD",
+        "PENALISATION"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 440
+       }
+      },
+      {
+       "name": "b_frot_std",
+       "kind": "bloc",
+       "path": "ZONE/[b_frot_std]",
+       "condition": "equal_to(\"ALGO_FROT\", 'STANDARD') ",
+       "fr": "Paramètres de la formulation Lagrangienne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 443
+       },
+       "keywords": []
+      },
+      {
+       "name": "b_contpen_frotstd",
+       "kind": "bloc",
+       "path": "ZONE/[b_contpen_frotstd]",
+       "condition": "(equal_to(\"ALGO_CONT\", 'PENALISATION') and equal_to(\"ALGO_FROT\", 'STANDARD') )",
+       "fr": "Adaptation pour STANDARD et PENALISATION",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 447
+       },
+       "keywords": [
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 450
+         }
+        },
+        {
+         "name": "COEF_FROT",
+         "kind": "simple",
+         "path": "ZONE/COEF_FROT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 456
+         }
+        },
+        {
+         "name": "b_cont_pena_noadapt",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_pena_noadapt]",
+         "condition": "(equal_to(\"ADAPTATION\", 'NON') or equal_to(\"ADAPTATION\", 'CYCLAGE') or not exists(\"ADAPTATION\")) ",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 457
+         },
+         "keywords": [
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 460
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_cont_pena_adapt",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_pena_adapt]",
+         "condition": "(equal_to(\"ADAPTATION\", 'ADAPT_COEF') or equal_to(\"ADAPTATION\", 'TOUT'))  ",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 462
+         },
+         "keywords": [
+          {
+           "name": "PENE_MAXI",
+           "kind": "simple",
+           "path": "ZONE/PENE_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 465
+           }
+          },
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 100.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 466
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_contstd_frotstd",
+       "kind": "bloc",
+       "path": "ZONE/[b_contstd_frotstd]",
+       "condition": "(equal_to(\"ALGO_CONT\", 'STANDARD') and equal_to(\"ALGO_FROT\",'STANDARD' ) )",
+       "fr": "Paramètres de la formulation Lagrangienne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 469
+       },
+       "keywords": [
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 472
+         }
+        },
+        {
+         "name": "COEF_CONT",
+         "kind": "simple",
+         "path": "ZONE/COEF_CONT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 478
+         }
+        },
+        {
+         "name": "COEF_FROT",
+         "kind": "simple",
+         "path": "ZONE/COEF_FROT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 479
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_contpen_frotpen",
+       "kind": "bloc",
+       "path": "ZONE/[b_contpen_frotpen]",
+       "condition": "(equal_to(\"ALGO_CONT\", 'PENALISATION') and equal_to(\"ALGO_FROT\", 'PENALISATION'))",
+       "fr": "Adaptation pour STANDARD et PENALISATION",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 481
+       },
+       "keywords": [
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 484
+         }
+        },
+        {
+         "name": "b_cont_pena_noadapt2",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_pena_noadapt2]",
+         "condition": "(equal_to(\"ADAPTATION\", 'NON') or equal_to(\"ADAPTATION\", 'CYCLAGE') or not exists(\"ADAPTATION\")) ",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 490
+         },
+         "keywords": [
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 493
+           }
+          },
+          {
+           "name": "COEF_PENA_FROT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_FROT",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 494
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_cont_pena_adapt2",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_pena_adapt2]",
+         "condition": "(equal_to(\"ADAPTATION\", 'ADAPT_COEF') or equal_to(\"ADAPTATION\", 'TOUT'))  ",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 496
+         },
+         "keywords": [
+          {
+           "name": "PENE_MAXI",
+           "kind": "simple",
+           "path": "ZONE/PENE_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 499
+           }
+          },
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 100.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 500
+           }
+          },
+          {
+           "name": "GLIS_MAXI",
+           "kind": "simple",
+           "path": "ZONE/GLIS_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 501
+           }
+          },
+          {
+           "name": "COEF_PENA_FROT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_FROT",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 10000000.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 502
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_contstd_frotpen",
+       "kind": "bloc",
+       "path": "ZONE/[b_contstd_frotpen]",
+       "condition": "(equal_to(\"ALGO_CONT\", 'STANDARD') and equal_to(\"ALGO_FROT\", 'PENALISATION'))",
+       "fr": "Paramètres de la formulation Lagrangienne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 505
+       },
+       "keywords": [
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 508
+         }
+        },
+        {
+         "name": "COEF_CONT",
+         "kind": "simple",
+         "path": "ZONE/COEF_CONT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 514
+         }
+        },
+        {
+         "name": "b_frot_pena_noadapt",
+         "kind": "bloc",
+         "path": "ZONE/[b_frot_pena_noadapt]",
+         "condition": "(equal_to(\"ADAPTATION\", 'NON') or equal_to(\"ADAPTATION\", 'CYCLAGE'))",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 515
+         },
+         "keywords": [
+          {
+           "name": "COEF_PENA_FROT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_FROT",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 518
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_frot_pena_adapt",
+         "kind": "bloc",
+         "path": "ZONE/[b_frot_pena_adapt]",
+         "condition": "(equal_to(\"ADAPTATION\", 'ADAPT_COEF') or equal_to(\"ADAPTATION\", 'TOUT'))",
+         "fr": "Paramètres de la méthode pénalisée",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 520
+         },
+         "keywords": [
+          {
+           "name": "GLIS_MAXI",
+           "kind": "simple",
+           "path": "ZONE/GLIS_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 523
+           }
+          },
+          {
+           "name": "COEF_PENA_FROT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_FROT",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 10000000.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 524
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_pair_std",
+       "kind": "bloc",
+       "path": "ZONE/[b_pair_std]",
+       "condition": "equal_to(\"ALGO_CONT\", 'STANDARD') or equal_to(\"ALGO_CONT\", 'PENALISATION')",
+       "fr": "Options d'appariement standard ",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 528
+       },
+       "keywords": [
+        {
+         "name": "APPARIEMENT",
+         "kind": "simple",
+         "path": "ZONE/APPARIEMENT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MAIT_ESCL",
+         "into": [
+          "MAIT_ESCL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 531
+         }
+        },
+        {
+         "name": "GROUP_MA_MAIT",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_MAIT",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 532
+         }
+        },
+        {
+         "name": "GROUP_MA_ESCL",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_ESCL",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 533
+         }
+        },
+        {
+         "name": "NORMALE",
+         "kind": "simple",
+         "path": "ZONE/NORMALE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MAIT",
+         "into": [
+          "MAIT",
+          "MAIT_ESCL",
+          "ESCL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 535
+         }
+        },
+        {
+         "name": "VECT_MAIT",
+         "kind": "simple",
+         "path": "ZONE/VECT_MAIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "FIXE",
+          "VECT_Y"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 538
+         }
+        },
+        {
+         "name": "b_nmait_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_nmait_fixe]",
+         "condition": "equal_to(\"VECT_MAIT\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 541
+         },
+         "keywords": [
+          {
+           "name": "MAIT_FIXE",
+           "kind": "simple",
+           "path": "ZONE/MAIT_FIXE",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 543
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_nmait_vecty",
+         "kind": "bloc",
+         "path": "ZONE/[b_nmait_vecty]",
+         "condition": "equal_to(\"VECT_MAIT\", 'VECT_Y')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 545
+         },
+         "keywords": [
+          {
+           "name": "MAIT_VECT_Y",
+           "kind": "simple",
+           "path": "ZONE/MAIT_VECT_Y",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 547
+           }
+          }
+         ]
+        },
+        {
+         "name": "VECT_ESCL",
+         "kind": "simple",
+         "path": "ZONE/VECT_ESCL",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "FIXE",
+          "VECT_Y"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 549
+         }
+        },
+        {
+         "name": "b_nescl_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_nescl_fixe]",
+         "condition": "equal_to(\"VECT_ESCL\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 552
+         },
+         "keywords": [
+          {
+           "name": "ESCL_FIXE",
+           "kind": "simple",
+           "path": "ZONE/ESCL_FIXE",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 554
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_nescl_vecty",
+         "kind": "bloc",
+         "path": "ZONE/[b_nescl_vecty]",
+         "condition": "equal_to(\"VECT_ESCL\", 'VECT_Y')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 556
+         },
+         "keywords": [
+          {
+           "name": "ESCL_VECT_Y",
+           "kind": "simple",
+           "path": "ZONE/ESCL_VECT_Y",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 558
+           }
+          }
+         ]
+        },
+        {
+         "name": "TYPE_PROJECTION",
+         "kind": "simple",
+         "path": "ZONE/TYPE_PROJECTION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "ORTHOGONALE",
+         "into": [
+          "ORTHOGONALE",
+          "FIXE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 561
+         }
+        },
+        {
+         "name": "b_appa_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_appa_fixe]",
+         "condition": "equal_to(\"TYPE_PROJECTION\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 564
+         },
+         "keywords": [
+          {
+           "name": "DIRE_APPA",
+           "kind": "simple",
+           "path": "ZONE/DIRE_APPA",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 566
+           }
+          }
+         ]
+        },
+        {
+         "name": "DIST_APPA",
+         "kind": "simple",
+         "path": "ZONE/DIST_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": -1.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 568
+         }
+        },
+        {
+         "name": "TOLE_PROJ_EXT",
+         "kind": "simple",
+         "path": "ZONE/TOLE_PROJ_EXT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.5,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 569
+         }
+        },
+        {
+         "name": "DIST_POUTRE",
+         "kind": "simple",
+         "path": "ZONE/DIST_POUTRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 571
+         }
+        },
+        {
+         "name": "DIST_COQUE",
+         "kind": "simple",
+         "path": "ZONE/DIST_COQUE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 572
+         }
+        },
+        {
+         "name": "b_cara",
+         "kind": "bloc",
+         "path": "ZONE/[b_cara]",
+         "condition": "equal_to(\"DIST_POUTRE\", 'OUI') or equal_to(\"DIST_COQUE\", 'OUI')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 573
+         },
+         "keywords": [
+          {
+           "name": "CARA_ELEM",
+           "kind": "simple",
+           "path": "ZONE/CARA_ELEM",
+           "status": "o",
+           "type": [
+            "cara_elem"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 575
+           }
+          }
+         ]
+        },
+        {
+         "name": "DIST_MAIT",
+         "kind": "simple",
+         "path": "ZONE/DIST_MAIT",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 577
+         }
+        },
+        {
+         "name": "DIST_ESCL",
+         "kind": "simple",
+         "path": "ZONE/DIST_ESCL",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 578
+         }
+        },
+        {
+         "name": "SANS_GROUP_NO",
+         "kind": "simple",
+         "path": "ZONE/SANS_GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 580
+         }
+        },
+        {
+         "name": "SANS_GROUP_MA",
+         "kind": "simple",
+         "path": "ZONE/SANS_GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 581
+         }
+        },
+        {
+         "name": "INTEGRATION",
+         "kind": "simple",
+         "path": "ZONE/INTEGRATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "GAUSS",
+          "SIMPSON",
+          "NCOTES"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 583
+         }
+        },
+        {
+         "name": "b_gauss",
+         "kind": "bloc",
+         "path": "ZONE/[b_gauss]",
+         "condition": "equal_to(\"INTEGRATION\", 'GAUSS') ",
+         "fr": "Degré du polynôme de Legendre donnant les points de Gauss",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 589
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "val_max": 6,
+           "default": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 592
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_simpson",
+         "kind": "bloc",
+         "path": "ZONE/[b_simpson]",
+         "condition": "equal_to(\"INTEGRATION\", 'SIMPSON') ",
+         "fr": "Nombre de subdivisions du domaine",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 594
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "val_max": 4,
+           "default": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 597
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_ncotes",
+         "kind": "bloc",
+         "path": "ZONE/[b_ncotes]",
+         "condition": "equal_to(\"INTEGRATION\", 'NCOTES') ",
+         "fr": "Degré du polynôme interpolateur",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 599
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 3,
+           "val_max": 8,
+           "default": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 602
+           }
+          }
+         ]
+        },
+        {
+         "name": "RESOLUTION",
+         "kind": "simple",
+         "path": "ZONE/RESOLUTION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 605
+         }
+        },
+        {
+         "name": "b_verif",
+         "kind": "bloc",
+         "path": "ZONE/[b_verif]",
+         "condition": "equal_to(\"RESOLUTION\", 'NON') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 606
+         },
+         "keywords": [
+          {
+           "name": "TOLE_INTERP",
+           "kind": "simple",
+           "path": "ZONE/TOLE_INTERP",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 608
+           }
+          }
+         ]
+        },
+        {
+         "name": "CONTACT_INIT",
+         "kind": "simple",
+         "path": "ZONE/CONTACT_INIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INTERPENETRE",
+         "into": [
+          "OUI",
+          "INTERPENETRE",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 611
+         }
+        },
+        {
+         "name": "b_cont_init_inte",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_init_inte]",
+         "condition": "equal_to(\"CONTACT_INIT\", 'INTERPENETRE') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 617
+         },
+         "keywords": [
+          {
+           "name": "DIST_MAXI",
+           "kind": "simple",
+           "path": "ZONE/DIST_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 619
+           }
+          }
+         ]
+        },
+        {
+         "name": "GLISSIERE",
+         "kind": "simple",
+         "path": "ZONE/GLISSIERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 621
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_pair_mortar",
+       "kind": "bloc",
+       "path": "ZONE/[b_pair_mortar]",
+       "condition": "equal_to(\"ALGO_CONT\", 'LAC') ",
+       "fr": "Options d'appariement standard ",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 624
+       },
+       "keywords": [
+        {
+         "name": "APPARIEMENT",
+         "kind": "simple",
+         "path": "ZONE/APPARIEMENT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MORTAR",
+         "into": [
+          "MORTAR"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 627
+         }
+        },
+        {
+         "name": "TYPE_APPA",
+         "kind": "simple",
+         "path": "ZONE/TYPE_APPA",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RAPIDE",
+         "into": [
+          "ROBUSTE",
+          "RAPIDE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 628
+         }
+        },
+        {
+         "name": "RESI_APPA",
+         "kind": "simple",
+         "path": "ZONE/RESI_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-08,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 629
+         }
+        },
+        {
+         "name": "TYPE_JACOBIEN",
+         "kind": "simple",
+         "path": "ZONE/TYPE_JACOBIEN",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INITIAL",
+         "into": [
+          "INITIAL",
+          "ACTUALISE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 630
+         }
+        },
+        {
+         "name": "INTEGRATION",
+         "kind": "simple",
+         "path": "ZONE/INTEGRATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 633
+         }
+        },
+        {
+         "name": "GROUP_MA_MAIT",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_MAIT",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 634
+         }
+        },
+        {
+         "name": "GROUP_MA_ESCL",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_ESCL",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 635
+         }
+        },
+        {
+         "name": "CONTACT_INIT",
+         "kind": "simple",
+         "path": "ZONE/CONTACT_INIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INTERPENETRE",
+         "into": [
+          "OUI",
+          "INTERPENETRE",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 636
+         }
+        },
+        {
+         "name": "b_cont_init_inte",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_init_inte]",
+         "condition": "equal_to(\"CONTACT_INIT\", 'INTERPENETRE') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 642
+         },
+         "keywords": [
+          {
+           "name": "DIST_MAXI",
+           "kind": "simple",
+           "path": "ZONE/DIST_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 644
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "COULOMB",
+       "kind": "simple",
+       "path": "ZONE/COULOMB",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 648
+       }
+      },
+      {
+       "name": "GRAND_GLIS",
+       "kind": "simple",
+       "path": "ZONE/GRAND_GLIS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 649
+       }
+      },
+      {
+       "name": "SEUIL_INIT",
+       "kind": "simple",
+       "path": "ZONE/SEUIL_INIT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 650
+       }
+      },
+      {
+       "name": "SANS_GROUP_NO_FR",
+       "kind": "simple",
+       "path": "ZONE/SANS_GROUP_NO_FR",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 651
+       }
+      },
+      {
+       "name": "b_sans_group_no_frot",
+       "kind": "bloc",
+       "path": "ZONE/[b_sans_group_no_frot]",
+       "condition": "exists(\"SANS_GROUP_NO_FR\")",
+       "fr": "Direction de frottement à exclure (uniquement dans le cas 3D)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 652
+       },
+       "keywords": [
+        {
+         "name": "DIRE_EXCL_FROT",
+         "kind": "simple",
+         "path": "ZONE/DIRE_EXCL_FROT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 655
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_affe_continue",
+   "kind": "bloc",
+   "path": "[b_affe_continue]",
+   "condition": "equal_to(\"FORMULATION\", 'CONTINUE') and not equal_to(\"FROTTEMENT\", 'COULOMB')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_contact.py",
+    "line": 660
+   },
+   "keywords": [
+    {
+     "name": "ZONE",
+     "kind": "factor",
+     "path": "ZONE",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_contact.py",
+      "line": 662
+     },
+     "keywords": [
+      {
+       "name": "ALGO_CONT",
+       "kind": "simple",
+       "path": "ZONE/ALGO_CONT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "STANDARD",
+       "into": [
+        "STANDARD",
+        "PENALISATION",
+        "LAC"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 666
+       }
+      },
+      {
+       "name": "b_cont_std",
+       "kind": "bloc",
+       "path": "ZONE/[b_cont_std]",
+       "condition": "equal_to(\"ALGO_CONT\", 'STANDARD') ",
+       "fr": "Paramètres de la formulation Lagrangienne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 669
+       },
+       "keywords": [
+        {
+         "name": "COEF_CONT",
+         "kind": "simple",
+         "path": "ZONE/COEF_CONT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 100.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 672
+         }
+        },
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 673
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_cont_pen",
+       "kind": "bloc",
+       "path": "ZONE/[b_cont_pen]",
+       "condition": "equal_to(\"ALGO_CONT\", 'PENALISATION')  ",
+       "fr": "Paramètres de la méthode pénalisée",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 680
+       },
+       "keywords": [
+        {
+         "name": "ADAPTATION",
+         "kind": "simple",
+         "path": "ZONE/ADAPTATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "CYCLAGE",
+         "into": [
+          "ADAPT_COEF",
+          "CYCLAGE",
+          "TOUT",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 685
+         }
+        },
+        {
+         "name": "b_adapt_penal",
+         "kind": "bloc",
+         "path": "ZONE/[b_adapt_penal]",
+         "condition": "(equal_to(\"ADAPTATION\", 'ADAPT_COEF')) or (equal_to(\"ADAPTATION\", 'TOUT'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 692
+         },
+         "keywords": [
+          {
+           "name": "PENE_MAXI",
+           "kind": "simple",
+           "path": "ZONE/PENE_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 694
+           }
+          },
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 100.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 695
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_noadapt_penal",
+         "kind": "bloc",
+         "path": "ZONE/[b_noadapt_penal]",
+         "condition": "(equal_to(\"ADAPTATION\", 'CYCLAGE')) or (equal_to(\"ADAPTATION\", 'NON')) or (not exists(\"ADAPTATION\"))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 697
+         },
+         "keywords": [
+          {
+           "name": "COEF_PENA_CONT",
+           "kind": "simple",
+           "path": "ZONE/COEF_PENA_CONT",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 700
+           }
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "name": "b_pair_std",
+       "kind": "bloc",
+       "path": "ZONE/[b_pair_std]",
+       "condition": "equal_to(\"ALGO_CONT\", 'STANDARD') or equal_to(\"ALGO_CONT\", 'PENALISATION') ",
+       "fr": "Options d'appariement standard ",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 704
+       },
+       "keywords": [
+        {
+         "name": "APPARIEMENT",
+         "kind": "simple",
+         "path": "ZONE/APPARIEMENT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MAIT_ESCL",
+         "into": [
+          "MAIT_ESCL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 707
+         }
+        },
+        {
+         "name": "GROUP_MA_MAIT",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_MAIT",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 708
+         }
+        },
+        {
+         "name": "GROUP_MA_ESCL",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_ESCL",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 709
+         }
+        },
+        {
+         "name": "NORMALE",
+         "kind": "simple",
+         "path": "ZONE/NORMALE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MAIT",
+         "into": [
+          "MAIT",
+          "MAIT_ESCL",
+          "ESCL"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 711
+         }
+        },
+        {
+         "name": "VECT_MAIT",
+         "kind": "simple",
+         "path": "ZONE/VECT_MAIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "FIXE",
+          "VECT_Y"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 714
+         }
+        },
+        {
+         "name": "b_nmait_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_nmait_fixe]",
+         "condition": "equal_to(\"VECT_MAIT\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 717
+         },
+         "keywords": [
+          {
+           "name": "MAIT_FIXE",
+           "kind": "simple",
+           "path": "ZONE/MAIT_FIXE",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 719
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_nmait_vecty",
+         "kind": "bloc",
+         "path": "ZONE/[b_nmait_vecty]",
+         "condition": "equal_to(\"VECT_MAIT\", 'VECT_Y')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 721
+         },
+         "keywords": [
+          {
+           "name": "MAIT_VECT_Y",
+           "kind": "simple",
+           "path": "ZONE/MAIT_VECT_Y",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 723
+           }
+          }
+         ]
+        },
+        {
+         "name": "VECT_ESCL",
+         "kind": "simple",
+         "path": "ZONE/VECT_ESCL",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "FIXE",
+          "VECT_Y"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 725
+         }
+        },
+        {
+         "name": "b_nescl_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_nescl_fixe]",
+         "condition": "equal_to(\"VECT_ESCL\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 728
+         },
+         "keywords": [
+          {
+           "name": "ESCL_FIXE",
+           "kind": "simple",
+           "path": "ZONE/ESCL_FIXE",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 730
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_nescl_vecty",
+         "kind": "bloc",
+         "path": "ZONE/[b_nescl_vecty]",
+         "condition": "equal_to(\"VECT_ESCL\", 'VECT_Y')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 732
+         },
+         "keywords": [
+          {
+           "name": "ESCL_VECT_Y",
+           "kind": "simple",
+           "path": "ZONE/ESCL_VECT_Y",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 734
+           }
+          }
+         ]
+        },
+        {
+         "name": "TYPE_PROJECTION",
+         "kind": "simple",
+         "path": "ZONE/TYPE_PROJECTION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "ORTHOGONALE",
+         "into": [
+          "ORTHOGONALE",
+          "FIXE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 737
+         }
+        },
+        {
+         "name": "b_appa_fixe",
+         "kind": "bloc",
+         "path": "ZONE/[b_appa_fixe]",
+         "condition": "equal_to(\"TYPE_PROJECTION\", 'FIXE')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 740
+         },
+         "keywords": [
+          {
+           "name": "DIRE_APPA",
+           "kind": "simple",
+           "path": "ZONE/DIRE_APPA",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "min": 3,
+           "max": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 742
+           }
+          }
+         ]
+        },
+        {
+         "name": "DIST_APPA",
+         "kind": "simple",
+         "path": "ZONE/DIST_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": -1.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 744
+         }
+        },
+        {
+         "name": "TOLE_PROJ_EXT",
+         "kind": "simple",
+         "path": "ZONE/TOLE_PROJ_EXT",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.5,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 745
+         }
+        },
+        {
+         "name": "DIST_POUTRE",
+         "kind": "simple",
+         "path": "ZONE/DIST_POUTRE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 747
+         }
+        },
+        {
+         "name": "DIST_COQUE",
+         "kind": "simple",
+         "path": "ZONE/DIST_COQUE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 748
+         }
+        },
+        {
+         "name": "b_cara",
+         "kind": "bloc",
+         "path": "ZONE/[b_cara]",
+         "condition": "equal_to(\"DIST_POUTRE\", 'OUI') or equal_to(\"DIST_COQUE\", 'OUI')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 749
+         },
+         "keywords": [
+          {
+           "name": "CARA_ELEM",
+           "kind": "simple",
+           "path": "ZONE/CARA_ELEM",
+           "status": "o",
+           "type": [
+            "cara_elem"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 751
+           }
+          }
+         ]
+        },
+        {
+         "name": "DIST_MAIT",
+         "kind": "simple",
+         "path": "ZONE/DIST_MAIT",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 753
+         }
+        },
+        {
+         "name": "DIST_ESCL",
+         "kind": "simple",
+         "path": "ZONE/DIST_ESCL",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 754
+         }
+        },
+        {
+         "name": "SANS_GROUP_NO",
+         "kind": "simple",
+         "path": "ZONE/SANS_GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 756
+         }
+        },
+        {
+         "name": "SANS_GROUP_MA",
+         "kind": "simple",
+         "path": "ZONE/SANS_GROUP_MA",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 757
+         }
+        },
+        {
+         "name": "INTEGRATION",
+         "kind": "simple",
+         "path": "ZONE/INTEGRATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO",
+          "GAUSS",
+          "SIMPSON",
+          "NCOTES"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 759
+         }
+        },
+        {
+         "name": "b_gauss",
+         "kind": "bloc",
+         "path": "ZONE/[b_gauss]",
+         "condition": "equal_to(\"INTEGRATION\", 'GAUSS') ",
+         "fr": "Degré du polynôme de Legendre donnant les points de Gauss",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 765
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "val_max": 6,
+           "default": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 768
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_simpson",
+         "kind": "bloc",
+         "path": "ZONE/[b_simpson]",
+         "condition": "equal_to(\"INTEGRATION\", 'SIMPSON') ",
+         "fr": "Nombre de subdivisions du domaine",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 770
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 1,
+           "val_max": 4,
+           "default": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 773
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_ncotes",
+         "kind": "bloc",
+         "path": "ZONE/[b_ncotes]",
+         "condition": "equal_to(\"INTEGRATION\", 'NCOTES') ",
+         "fr": "Degré du polynôme interpolateur",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 775
+         },
+         "keywords": [
+          {
+           "name": "ORDRE_INT",
+           "kind": "simple",
+           "path": "ZONE/ORDRE_INT",
+           "status": "f",
+           "type": [
+            "I"
+           ],
+           "val_min": 3,
+           "val_max": 8,
+           "default": 3,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 778
+           }
+          }
+         ]
+        },
+        {
+         "name": "RESOLUTION",
+         "kind": "simple",
+         "path": "ZONE/RESOLUTION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 781
+         }
+        },
+        {
+         "name": "b_verif",
+         "kind": "bloc",
+         "path": "ZONE/[b_verif]",
+         "condition": "equal_to(\"RESOLUTION\", 'NON') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 782
+         },
+         "keywords": [
+          {
+           "name": "TOLE_INTERP",
+           "kind": "simple",
+           "path": "ZONE/TOLE_INTERP",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 784
+           }
+          }
+         ]
+        },
+        {
+         "name": "CONTACT_INIT",
+         "kind": "simple",
+         "path": "ZONE/CONTACT_INIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INTERPENETRE",
+         "into": [
+          "OUI",
+          "INTERPENETRE",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 787
+         }
+        },
+        {
+         "name": "b_cont_init_inte",
+         "kind": "bloc",
+         "path": "ZONE/[b_cont_init_inte]",
+         "condition": "equal_to(\"CONTACT_INIT\", 'INTERPENETRE') ",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 793
+         },
+         "keywords": [
+          {
+           "name": "DIST_MAXI",
+           "kind": "simple",
+           "path": "ZONE/DIST_MAXI",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/defi_contact.py",
+            "line": 795
+           }
+          }
+         ]
+        },
+        {
+         "name": "GLISSIERE",
+         "kind": "simple",
+         "path": "ZONE/GLISSIERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "NON",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 797
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_pair_mortar",
+       "kind": "bloc",
+       "path": "ZONE/[b_pair_mortar]",
+       "condition": "equal_to(\"ALGO_CONT\", 'LAC') ",
+       "fr": "Options d'appariement standard ",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_contact.py",
+        "line": 800
+       },
+       "keywords": [
+        {
+         "name": "APPARIEMENT",
+         "kind": "simple",
+         "path": "ZONE/APPARIEMENT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "MORTAR",
+         "into": [
+          "MORTAR"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 803
+         }
+        },
+        {
+         "name": "TYPE_APPA",
+         "kind": "simple",
+         "path": "ZONE/TYPE_APPA",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RAPIDE",
+         "into": [
+          "ROBUSTE",
+          "RAPIDE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 804
+         }
+        },
+        {
+         "name": "RESI_APPA",
+         "kind": "simple",
+         "path": "ZONE/RESI_APPA",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-08,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 805
+         }
+        },
+        {
+         "name": "TYPE_JACOBIEN",
+         "kind": "simple",
+         "path": "ZONE/TYPE_JACOBIEN",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INITIAL",
+         "into": [
+          "INITIAL",
+          "ACTUALISE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 806
+         }
+        },
+        {
+         "name": "INTEGRATION",
+         "kind": "simple",
+         "path": "ZONE/INTEGRATION",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "AUTO",
+         "into": [
+          "AUTO"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 809
+         }
+        },
+        {
+         "name": "GROUP_MA_MAIT",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_MAIT",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 810
+         }
+        },
+        {
+         "name": "GROUP_MA_ESCL",
+         "kind": "simple",
+         "path": "ZONE/GROUP_MA_ESCL",
+         "status": "o",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 811
+         }
+        },
+        {
+         "name": "CONTACT_INIT",
+         "kind": "simple",
+         "path": "ZONE/CONTACT_INIT",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "INTERPENETRE",
+         "into": [
+          "OUI",
+          "INTERPENETRE",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_contact.py",
+          "line": 812
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

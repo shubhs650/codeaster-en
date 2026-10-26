@@ -1,0 +1,1253 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_glrc.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_GLRC",
+ "kind": "OPER",
+ "fr": "Déterminer les caractéristiques homogenéisées du béton armé à partir des propriétés du béton et des   armatures",
+ "translation_upstream": null,
+ "op": 57,
+ "reentrant": "f:BETON|NAPPE|CABLE_PREC|LINER:MATER",
+ "result_types": [
+  "mater_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_glrc.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "RELATION",
+   "kind": "simple",
+   "path": "RELATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "GLRC_DAMAGE",
+   "into": [
+    "GLRC_DM",
+    "GLRC_DAMAGE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "ALPHA",
+   "kind": "simple",
+   "path": "ALPHA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "fr": "Coef. dilatation thermique",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "b_glrc_dm",
+   "kind": "bloc",
+   "path": "[b_glrc_dm]",
+   "condition": "equal_to(\"RELATION\", 'GLRC_DM')",
+   "fr": "Paramètres de la loi GLRC_DM",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 39
+   },
+   "keywords": [
+    {
+     "name": "BETON",
+     "kind": "factor",
+     "path": "BETON",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 42
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "BETON/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 45
+       }
+      },
+      {
+       "name": "EPAIS",
+       "kind": "simple",
+       "path": "BETON/EPAIS",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 46
+       }
+      }
+     ]
+    },
+    {
+     "name": "NAPPE",
+     "kind": "factor",
+     "path": "NAPPE",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 48
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "NAPPE/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 51
+       }
+      },
+      {
+       "name": "OMY",
+       "kind": "simple",
+       "path": "NAPPE/OMY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 52
+       }
+      },
+      {
+       "name": "OMX",
+       "kind": "simple",
+       "path": "NAPPE/OMX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 53
+       }
+      },
+      {
+       "name": "RY",
+       "kind": "simple",
+       "path": "NAPPE/RY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 54
+       }
+      },
+      {
+       "name": "RX",
+       "kind": "simple",
+       "path": "NAPPE/RX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 55
+       }
+      }
+     ]
+    },
+    {
+     "name": "RHO",
+     "kind": "simple",
+     "path": "RHO",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "AMOR_ALPHA",
+     "kind": "simple",
+     "path": "AMOR_ALPHA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "AMOR_BETA",
+     "kind": "simple",
+     "path": "AMOR_BETA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "AMOR_HYST",
+     "kind": "simple",
+     "path": "AMOR_HYST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "PENTE",
+     "kind": "factor",
+     "path": "PENTE",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 61
+     },
+     "keywords": [
+      {
+       "name": "TRACTION",
+       "kind": "simple",
+       "path": "PENTE/TRACTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RIGI_ACIER",
+       "into": [
+        "PLAS_ACIER",
+        "UTIL",
+        "RIGI_ACIER"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 64
+       }
+      },
+      {
+       "name": "b_trac_util",
+       "kind": "bloc",
+       "path": "PENTE/[b_trac_util]",
+       "condition": "equal_to(\"TRACTION\", 'UTIL')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 70
+       },
+       "keywords": [
+        {
+         "name": "EPSI_MEMB",
+         "kind": "simple",
+         "path": "PENTE/EPSI_MEMB",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_glrc.py",
+          "line": 72
+         }
+        }
+       ]
+      },
+      {
+       "name": "FLEXION",
+       "kind": "simple",
+       "path": "PENTE/FLEXION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RIGI_INIT",
+       "into": [
+        "UTIL",
+        "RIGI_INIT",
+        "RIGI_ACIER",
+        "PLAS_ACIER"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "b_flex_util",
+       "kind": "bloc",
+       "path": "PENTE/[b_flex_util]",
+       "condition": "equal_to(\"FLEXION\", 'UTIL')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 80
+       },
+       "keywords": [
+        {
+         "name": "KAPPA_FLEX",
+         "kind": "simple",
+         "path": "PENTE/KAPPA_FLEX",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_glrc.py",
+          "line": 81
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "CISAIL",
+     "kind": "simple",
+     "path": "CISAIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 84
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_glrc_damage",
+   "kind": "bloc",
+   "path": "[b_glrc_damage]",
+   "condition": "equal_to(\"RELATION\", 'GLRC_DAMAGE')",
+   "fr": "Paramètres de la loi GLRC_DAMAGE",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_glrc.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "CISAIL_NL",
+     "kind": "factor",
+     "path": "CISAIL_NL",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 89
+     },
+     "keywords": [
+      {
+       "name": "BTD1",
+       "kind": "simple",
+       "path": "CISAIL_NL/BTD1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "BTD2",
+       "kind": "simple",
+       "path": "CISAIL_NL/BTD2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "TSD",
+       "kind": "simple",
+       "path": "CISAIL_NL/TSD",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 94
+       }
+      }
+     ]
+    },
+    {
+     "name": "BETON",
+     "kind": "factor",
+     "path": "BETON",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "MP1X",
+        "MP1Y",
+        "MP2X",
+        "MP2Y"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "MP1X_FO",
+        "MP1Y_FO",
+        "MP2X_FO",
+        "MP2Y_FO"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "MP1X",
+        "MP1X_FO",
+        "MP1Y_FO",
+        "MP2X_FO",
+        "MP2Y_FO"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "OMT",
+        "EAT"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "BT1",
+        "BT2"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 96
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "BETON/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "EPAIS",
+       "kind": "simple",
+       "path": "BETON/EPAIS",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "GAMMA",
+       "kind": "simple",
+       "path": "BETON/GAMMA",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "QP1",
+       "kind": "simple",
+       "path": "BETON/QP1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "QP2",
+       "kind": "simple",
+       "path": "BETON/QP2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 110
+       }
+      },
+      {
+       "name": "C1N1",
+       "kind": "simple",
+       "path": "BETON/C1N1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 111
+       }
+      },
+      {
+       "name": "C1N2",
+       "kind": "simple",
+       "path": "BETON/C1N2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "C1N3",
+       "kind": "simple",
+       "path": "BETON/C1N3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "C2N1",
+       "kind": "simple",
+       "path": "BETON/C2N1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 114
+       }
+      },
+      {
+       "name": "C2N2",
+       "kind": "simple",
+       "path": "BETON/C2N2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 115
+       }
+      },
+      {
+       "name": "C2N3",
+       "kind": "simple",
+       "path": "BETON/C2N3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 116
+       }
+      },
+      {
+       "name": "C1M1",
+       "kind": "simple",
+       "path": "BETON/C1M1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "C1M2",
+       "kind": "simple",
+       "path": "BETON/C1M2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 118
+       }
+      },
+      {
+       "name": "C1M3",
+       "kind": "simple",
+       "path": "BETON/C1M3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 119
+       }
+      },
+      {
+       "name": "C2M1",
+       "kind": "simple",
+       "path": "BETON/C2M1",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 120
+       }
+      },
+      {
+       "name": "C2M2",
+       "kind": "simple",
+       "path": "BETON/C2M2",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 121
+       }
+      },
+      {
+       "name": "C2M3",
+       "kind": "simple",
+       "path": "BETON/C2M3",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 122
+       }
+      },
+      {
+       "name": "OMT",
+       "kind": "simple",
+       "path": "BETON/OMT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 123
+       }
+      },
+      {
+       "name": "EAT",
+       "kind": "simple",
+       "path": "BETON/EAT",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 124
+       }
+      },
+      {
+       "name": "BT1",
+       "kind": "simple",
+       "path": "BETON/BT1",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 125
+       }
+      },
+      {
+       "name": "BT2",
+       "kind": "simple",
+       "path": "BETON/BT2",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 126
+       }
+      },
+      {
+       "name": "MP1X",
+       "kind": "simple",
+       "path": "BETON/MP1X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 127
+       }
+      },
+      {
+       "name": "MP2X",
+       "kind": "simple",
+       "path": "BETON/MP2X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 128
+       }
+      },
+      {
+       "name": "MP1Y",
+       "kind": "simple",
+       "path": "BETON/MP1Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 129
+       }
+      },
+      {
+       "name": "MP2Y",
+       "kind": "simple",
+       "path": "BETON/MP2Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "MP1X_FO",
+       "kind": "simple",
+       "path": "BETON/MP1X_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 131
+       }
+      },
+      {
+       "name": "MP2X_FO",
+       "kind": "simple",
+       "path": "BETON/MP2X_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 132
+       }
+      },
+      {
+       "name": "MP1Y_FO",
+       "kind": "simple",
+       "path": "BETON/MP1Y_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 133
+       }
+      },
+      {
+       "name": "MP2Y_FO",
+       "kind": "simple",
+       "path": "BETON/MP2Y_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 134
+       }
+      }
+     ]
+    },
+    {
+     "name": "NAPPE",
+     "kind": "factor",
+     "path": "NAPPE",
+     "status": "o",
+     "max": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 136
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "NAPPE/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 139
+       }
+      },
+      {
+       "name": "OMX",
+       "kind": "simple",
+       "path": "NAPPE/OMX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 140
+       }
+      },
+      {
+       "name": "OMY",
+       "kind": "simple",
+       "path": "NAPPE/OMY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 141
+       }
+      },
+      {
+       "name": "RX",
+       "kind": "simple",
+       "path": "NAPPE/RX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 142
+       }
+      },
+      {
+       "name": "RY",
+       "kind": "simple",
+       "path": "NAPPE/RY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 143
+       }
+      }
+     ]
+    },
+    {
+     "name": "CABLE_PREC",
+     "kind": "factor",
+     "path": "CABLE_PREC",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 145
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "CABLE_PREC/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "OMX",
+       "kind": "simple",
+       "path": "CABLE_PREC/OMX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 149
+       }
+      },
+      {
+       "name": "OMY",
+       "kind": "simple",
+       "path": "CABLE_PREC/OMY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 150
+       }
+      },
+      {
+       "name": "RX",
+       "kind": "simple",
+       "path": "CABLE_PREC/RX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 151
+       }
+      },
+      {
+       "name": "RY",
+       "kind": "simple",
+       "path": "CABLE_PREC/RY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 152
+       }
+      },
+      {
+       "name": "PREX",
+       "kind": "simple",
+       "path": "CABLE_PREC/PREX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 153
+       }
+      },
+      {
+       "name": "PREY",
+       "kind": "simple",
+       "path": "CABLE_PREC/PREY",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 154
+       }
+      }
+     ]
+    },
+    {
+     "name": "LINER",
+     "kind": "factor",
+     "path": "LINER",
+     "status": "f",
+     "max": 10,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_glrc.py",
+      "line": 156
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "LINER/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 159
+       }
+      },
+      {
+       "name": "OML",
+       "kind": "simple",
+       "path": "LINER/OML",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 160
+       }
+      },
+      {
+       "name": "RLR",
+       "kind": "simple",
+       "path": "LINER/RLR",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": -1.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_glrc.py",
+        "line": 161
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

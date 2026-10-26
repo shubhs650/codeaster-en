@@ -1,0 +1,408 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FOND_FISS",
+ "kind": "OPER",
+ "fr": null,
+ "translation_upstream": null,
+ "op": 60,
+ "reentrant": "n",
+ "result_types": [
+  "fond_fissure"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "FOND_FISS",
+   "kind": "factor",
+   "path": "FOND_FISS",
+   "status": "o",
+   "max": 2,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "TYPE_FOND",
+     "kind": "simple",
+     "path": "FOND_FISS/TYPE_FOND",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUVERT",
+     "into": [
+      "OUVERT",
+      "FERME"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "FOND_FISS/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FOND_FISS/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "b_grma",
+     "kind": "bloc",
+     "path": "FOND_FISS/[b_grma]",
+     "condition": "exists(\"GROUP_MA\") and not equal_to(\"TYPE_FOND\", 'FERME')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 42
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "FOND_FISS/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+        "line": 44
+       }
+      },
+      {
+       "name": "b_ordo",
+       "kind": "bloc",
+       "path": "FOND_FISS/[b_ordo]",
+       "condition": "exists(\"GROUP_NO_ORIG\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+        "line": 46
+       },
+       "keywords": [
+        {
+         "name": "GROUP_NO_EXTR",
+         "kind": "simple",
+         "path": "FOND_FISS/GROUP_NO_EXTR",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+          "line": 48
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_grma_ferme",
+     "kind": "bloc",
+     "path": "FOND_FISS/[b_grma_ferme]",
+     "condition": "exists(\"GROUP_MA\") and equal_to(\"TYPE_FOND\", 'FERME')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 52
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO_ORIG",
+       "kind": "simple",
+       "path": "FOND_FISS/GROUP_NO_ORIG",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+        "line": 54
+       }
+      },
+      {
+       "name": "b_ordo_ferme",
+       "kind": "bloc",
+       "path": "FOND_FISS/[b_ordo_ferme]",
+       "condition": "exists(\"GROUP_NO_ORIG\")",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+        "line": 56
+       },
+       "keywords": [
+        {
+         "name": "GROUP_MA_ORIG",
+         "kind": "simple",
+         "path": "FOND_FISS/GROUP_MA_ORIG",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+          "line": 58
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "SYME",
+   "kind": "simple",
+   "path": "SYME",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "LEVRE_SUP",
+   "kind": "factor",
+   "path": "LEVRE_SUP",
+   "status": "o",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "LEVRE_SUP/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 64
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_levre_inf",
+   "kind": "bloc",
+   "path": "[b_levre_inf]",
+   "condition": "exists(\"LEVRE_SUP\") and equal_to(\"SYME\", 'NON')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "LEVRE_INF",
+     "kind": "factor",
+     "path": "LEVRE_INF",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 68
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "LEVRE_INF/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+        "line": 69
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CONFIG_INIT",
+   "kind": "simple",
+   "path": "CONFIG_INIT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "COLLEE",
+   "into": [
+    "COLLEE",
+    "DECOLLEE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "b_decolle",
+   "kind": "bloc",
+   "path": "[b_decolle]",
+   "condition": "equal_to(\"CONFIG_INIT\", 'DECOLLEE')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "NORMALE",
+     "kind": "simple",
+     "path": "NORMALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+      "line": 77
+     }
+    }
+   ]
+  },
+  {
+   "name": "PREC_NORM",
+   "kind": "simple",
+   "path": "PREC_NORM",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fond_fiss.py",
+    "line": 79
+   }
+  }
+ ]
+}

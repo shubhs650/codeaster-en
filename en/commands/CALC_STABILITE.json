@@ -1,0 +1,251 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_stabilite.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_STABILITE",
+ "kind": "MACRO",
+ "fr": "post-traitement modes non-linéaires : filtre resultats et calcul de stabilité",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_stabilite_ops.calc_stabilite_ops",
+ "reentrant": "f:MODE_NON_LINE",
+ "result_types": [
+  "table_container"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_stabilite.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "MODE_NON_LINE",
+   "kind": "simple",
+   "path": "MODE_NON_LINE",
+   "status": "o",
+   "type": [
+    "table_container"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "SCHEMA_TEMPS",
+   "kind": "factor",
+   "path": "SCHEMA_TEMPS",
+   "status": "d",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "SCHEMA",
+     "kind": "simple",
+     "path": "SCHEMA_TEMPS/SCHEMA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NEWMARK",
+     "into": [
+      "NEWMARK"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_stabilite.py",
+      "line": 35
+     }
+    },
+    {
+     "name": "b_newmark",
+     "kind": "bloc",
+     "path": "SCHEMA_TEMPS/[b_newmark]",
+     "condition": "equal_to(\"SCHEMA\", 'NEWMARK')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_stabilite.py",
+      "line": 36
+     },
+     "keywords": [
+      {
+       "name": "NB_INST",
+       "kind": "simple",
+       "path": "SCHEMA_TEMPS/NB_INST",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "default": 1000,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_stabilite.py",
+        "line": 38
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TOLERANCE",
+   "kind": "simple",
+   "path": "TOLERANCE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.01,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "FILTRE",
+   "kind": "factor",
+   "path": "FILTRE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE",
+      "FREQ_MIN"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "FILTRE/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_stabilite.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "FILTRE/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_stabilite.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "b_freq_min",
+     "kind": "bloc",
+     "path": "FILTRE/[b_freq_min]",
+     "condition": "exists(\"FREQ_MIN\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_stabilite.py",
+      "line": 48
+     },
+     "keywords": [
+      {
+       "name": "FREQ_MAX",
+       "kind": "simple",
+       "path": "FILTRE/FREQ_MAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_stabilite.py",
+        "line": 50
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "FILTRE/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_stabilite.py",
+        "line": 51
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_stabilite.py",
+    "line": 54
+   }
+  }
+ ]
+}

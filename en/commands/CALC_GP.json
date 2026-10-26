@@ -1,0 +1,396 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_gp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_GP",
+ "kind": "MACRO",
+ "fr": "calcul du parametre de clivage energetique Gp en 2D et en 3D",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_gp_ops.calc_gp_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster",
+  "cham_elem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TRANCHE_2D",
+    "TRANCHE_3D"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_gp.py",
+  "line": 40
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": "Resultat d'une commande globale STAT_NON_LINE",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "o",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "val_max": 0.001,
+   "default": 1e-06,
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ABSOLU",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "TRANCHE_2D",
+   "kind": "factor",
+   "path": "TRANCHE_2D",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "ZONE_MAIL",
+     "kind": "simple",
+     "path": "TRANCHE_2D/ZONE_MAIL",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "b_cop",
+     "kind": "bloc",
+     "path": "TRANCHE_2D/[b_cop]",
+     "condition": "equal_to(\"ZONE_MAIL\", 'OUI')",
+     "fr": "Les copeaux sont mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 60
+     },
+     "keywords": [
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "TRANCHE_2D/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 63
+       }
+      },
+      {
+       "name": "TAILLE",
+       "kind": "simple",
+       "path": "TRANCHE_2D/TAILLE",
+       "status": "o",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 64
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ss_cop",
+     "kind": "bloc",
+     "path": "TRANCHE_2D/[b_ss_cop]",
+     "condition": "equal_to(\"ZONE_MAIL\", 'NON')",
+     "fr": "Les copeaux ne sont pas mailles",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 66
+     },
+     "keywords": [
+      {
+       "name": "CENTRE",
+       "kind": "simple",
+       "path": "TRANCHE_2D/CENTRE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 2,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 69
+       }
+      },
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "TRANCHE_2D/RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 70
+       }
+      },
+      {
+       "name": "ANGLE",
+       "kind": "simple",
+       "path": "TRANCHE_2D/ANGLE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "TAILLE",
+       "kind": "simple",
+       "path": "TRANCHE_2D/TAILLE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "NB_ZONE",
+       "kind": "simple",
+       "path": "TRANCHE_2D/NB_ZONE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "CHAMP_VISU",
+       "kind": "simple",
+       "path": "TRANCHE_2D/CHAMP_VISU",
+       "status": "f",
+       "type": [
+        "CO"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_gp.py",
+        "line": 74
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TRANCHE_3D",
+   "kind": "factor",
+   "path": "TRANCHE_3D",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "TRANCHE_3D/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_tranche_2d",
+   "kind": "bloc",
+   "path": "[b_tranche_2d]",
+   "condition": "exists(\"TRANCHE_2D\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "SYME",
+     "kind": "simple",
+     "path": "SYME",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": "multiplication par 2 si SYME=OUI",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_tranche_3d",
+   "kind": "bloc",
+   "path": "[b_tranche_3d]",
+   "condition": "exists(\"TRANCHE_3D\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "FOND_FISS",
+     "kind": "simple",
+     "path": "FOND_FISS",
+     "status": "o",
+     "type": [
+      "fond_fissure"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_gp.py",
+      "line": 87
+     }
+    }
+   ]
+  },
+  {
+   "name": "GPMAX",
+   "kind": "simple",
+   "path": "GPMAX",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_gp.py",
+    "line": 89
+   }
+  }
+ ]
+}

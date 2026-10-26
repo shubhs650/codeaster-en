@@ -1,0 +1,145 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/rupture3.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "RUPTURE3",
+ "source": {
+  "file": "code_aster/Messages/rupture3.py"
+ },
+ "messages": {
+  "1": {
+   "id": "RUPTURE3_1",
+   "fr": "\nVérification des paramètres d'entrée\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "RUPTURE3_2",
+   "fr": "\nCalcul du champ thêta\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "RUPTURE3_3",
+   "fr": "\nLes rayons inférieur et supérieur pour le calcul de thêta ne sont pas valables. Ils doivent être positifs et le rayon inférieur doit être strictement plus petit que le rayon supérieur:\n    Rayon inférieur: %(r1)f\n    Rayon supérieur: %(r2)f\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 33
+   },
+   "en": null
+  },
+  "4": {
+   "id": "RUPTURE3_4",
+   "fr": "\nLe nombre de couches d'élément inférieur et supérieur pour le calcul de thêta ne sont pas valables. Ils doivent être positifs et le nombre de couches inférieur doit être strictement plus petit que le nombre de couches supérieur:\n    Nombre de couches inférieur: %(i1)d\n    Nombre de couches supérieur: %(i2)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "5": {
+   "id": "RUPTURE3_5",
+   "fr": "\nLe champ thêta fourni est de type %(k1)s, au lieu de THET_R.\n\nConseil : vérifiez le champ thêta.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 47
+   },
+   "en": null
+  },
+  "6": {
+   "id": "RUPTURE3_6",
+   "fr": "\nLe mot-clé EXCIT n'est pas renseigné alors que la structure de données résultat est de type DYNA_TRANS ou MODE_MECA. Hors, on ne peux pas récupérer les chargements automatiquement.\n\nConseil: vérifiez que cela est normal.\n",
+   "placeholders": [],
+   "source": {
+    "line": 54
+   },
+   "en": null
+  },
+  "7": {
+   "id": "RUPTURE3_7",
+   "fr": "\nDans le cas d'une structure de données résultat de type EVOL_ELAS ou EVOL_NOLI,\nle mot-clé EXCIT est interdit. Le chargement sera directement lu dans las structure de donnée RESULTAT\nVeuillez l'enlever.\n",
+   "placeholders": [],
+   "source": {
+    "line": 61
+   },
+   "en": null
+  },
+  "8": {
+   "id": "RUPTURE3_8",
+   "fr": "\nLa relation suivante n'est pas supportée: %(k1)s. Uniquement les lois basées sur VMIS_ISOT_*** sont prévues pour un calcul élastoplastique,\nà l'exception de VMIS_ISOT_NL.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 68
+   },
+   "en": null
+  },
+  "9": {
+   "id": "RUPTURE3_9",
+   "fr": "\nLa déformation suivante n'est pas supportée: %(k1)s. Uniquement PETIT est prévu.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 74
+   },
+   "en": null
+  },
+  "10": {
+   "id": "RUPTURE3_10",
+   "fr": "\nVous réalisez un calcul de G en post-traitement d'un calcul axisymétrique. \n\nA partir de la V15, il n'est plus nécessaire à l'utilisateur de diviser le résultat \nen sortie de CALC_G par la distance du fond de fissure à l'axe d’axis-symétrie. \n\nCette division est réalisée automatiquement par CALC_G.\n",
+   "placeholders": [],
+   "source": {
+    "line": 79
+   },
+   "en": null
+  },
+  "11": {
+   "id": "RUPTURE3_11",
+   "fr": "\nSeule la relation ELAS du calcul mécanique est supportée avec le mot-clé ETAT_INIT.\n",
+   "placeholders": [],
+   "source": {
+    "line": 89
+   },
+   "en": null
+  },
+  "12": {
+   "id": "RUPTURE3_12",
+   "fr": "\nVous réalisez un calcul de G en grandes transformations (formalisme GREEN_LAGRANGE). \n\nCe calcul n'est valable qu'en petites déformations.\n",
+   "placeholders": [],
+   "source": {
+    "line": 94
+   },
+   "en": null
+  },
+  "13": {
+   "id": "RUPTURE3_13",
+   "fr": "\nVous réalisez un calcul de G en grandes transformations (formalisme GREEN_LAGRANGE). \n\nCe calcul n'est pas compatible avec la discrétisation LEGENDRE. \nVeuillez utiliser la discrétisation LINEAIRE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 101
+   },
+   "en": null
+  }
+ }
+}

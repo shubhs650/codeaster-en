@@ -1,0 +1,814 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/calculel.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "CALCULEL",
+ "source": {
+  "file": "code_aster/Messages/calculel.py"
+ },
+ "messages": {
+  "1": {
+   "id": "CALCULEL_1",
+   "fr": "\n Le champ à tester comporte %(i1)d sous-points.\n Or vous n'avez pas donné de numéro de sous-point à tester.\n Il faut renseigner POINT et SOUS_POINT.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "CALCULEL_2",
+   "fr": "\nErreur Utilisateur :\n Quand on utilise AFFE_CHAR_CINE/EVOL_IMPO, c'est le champ de l'EVOL_XXX correspondant\n au premier instant qui impose sa \"loi\" : tous les ddls de ce champ seront imposés pour tous\n les instants du calcul.\n\n Malheureusement, on ne trouve pas un ddl dans l'EVOL_XXX %(k1)s :\n   instant : %(r1)f  noeud : %(i1)d  composante : %(k2)s\n\nRisques & conseils :\n Assurez-vous que l'évolution imposée %(k1)s concerne les mêmes ddls pour tous les instants.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(r1)f",
+    "%(i1)d",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 30
+   },
+   "en": null
+  },
+  "3": {
+   "id": "CALCULEL_3",
+   "fr": "\n La grandeur :  %(k1)s  n'existe pas dans le catalogue des grandeurs.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 44
+   },
+   "en": null
+  },
+  "5": {
+   "id": "CALCULEL_5",
+   "fr": "\n Erreur de programmation (ou d'utilisation ?) :\n   Le changement de discrétisation : %(k1)s n'est pas encore programmé.\n Risques et conseils :\n   Il y a peut-être une demande d'évolution à émettre ...\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 49
+   },
+   "en": null
+  },
+  "6": {
+   "id": "CALCULEL_6",
+   "fr": "\n Erreur d'utilisation :\n   On n'arrive pas à construire correctement le champ contenant le nombre de sous-points\n   des éléments finis (coques multicouches, tuyaux, poutres multifibres, ...) du modèle %(k1)s.\n\n Risques & conseils :\n   Cette erreur intervient lorsque l'on ne définit pas TOUTES les caractéristiques élémentaires\n   dans le même AFFE_CARA_ELEM.\n   Pour les commandes de calcul, il ne faut qu'un seul MODELE et qu'un seul CARA_ELEM.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "9": {
+   "id": "CALCULEL_9",
+   "fr": "\n Erreur d'utilisation dans AFFE_CHAR_CINE :\n   Aucun des ddls que l'on souhaite bloquer n'appartient au modèle.\n   La charge cinématique produite est donc vide.\n\n Risques & Conseils :\n   Vérifier le nom des ddls portés par les noeuds des éléments de votre modèle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 69
+   },
+   "en": null
+  },
+  "10": {
+   "id": "CALCULEL_10",
+   "fr": "\nErreur de programmation lors de l'assemblage :\n   Les quantités que l'on cherche à assembler (MATR_ELEM ou VECT_ELEM) ont été calculées avec au\n   moins 2 partitions différentes :  %(k1)s et %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 79
+   },
+   "en": null
+  },
+  "15": {
+   "id": "CALCULEL_15",
+   "fr": "\n On cherche à calculer une déformation thermique mais on ne trouve pas toutes les\n quantités nécessaires :\n    - température\n    - température de référence\n    - coefficient de dilatation\n",
+   "placeholders": [],
+   "source": {
+    "line": 86
+   },
+   "en": null
+  },
+  "17": {
+   "id": "CALCULEL_17",
+   "fr": "\n type de champ inconnu\n",
+   "placeholders": [],
+   "source": {
+    "line": 95
+   },
+   "en": null
+  },
+  "19": {
+   "id": "CALCULEL_19",
+   "fr": "\nErreur :\n Le CHAM_ELEM %(k1)s est incohérent :\n   Il possède %(i1)d groupe d'éléments.\n   Il a été calculé avec le LIGREL %(k2)s qui possède %(i2)d groupe d'éléments.\n\nRisques & Conseils :\n Il peut s'agir d'une erreur de programmation.\n Mais ce problème peut aussi se produire si le LIGREL (ou le MODELE)\n a été entre temps détruit et recréé sous le même nom.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(i1)d",
+    "%(k2)s",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 100
+   },
+   "en": null
+  },
+  "20": {
+   "id": "CALCULEL_20",
+   "fr": "\nLe champ de grandeur %(k1)s ne respecte pas le format pour son nom.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 113
+   },
+   "en": null
+  },
+  "21": {
+   "id": "CALCULEL_21",
+   "fr": "\nLes champs réel et imaginaire à assembler ne contiennent pas la même grandeur\n",
+   "placeholders": [],
+   "source": {
+    "line": 118
+   },
+   "en": null
+  },
+  "22": {
+   "id": "CALCULEL_22",
+   "fr": "\n problème dans le catalogue des grandeurs simples\n la grandeur %(k1)s  ne possède pas le même nombre de champs que son homologue complexe %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 123
+   },
+   "en": null
+  },
+  "23": {
+   "id": "CALCULEL_23",
+   "fr": "\n problème dans le catalogue des grandeurs simples\n la grandeur  %(k1)s  ne possède pas les mêmes champs que son homologue complexe  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 129
+   },
+   "en": null
+  },
+  "25": {
+   "id": "CALCULEL_25",
+   "fr": "\nErreur utilisateur :\n Vous utilisez probablement la commande PROJ_SPEC_BASE ou le comportement ENDO_HETEROGENE.\n Seul le parallélisme de type METHODE='CENTRALISE' est autorisé. Modèle concerné : %(k1)s\n\nConseil :\n Dans la commande AFFE_MODELE (ou MODI_MODELE), il faut utiliser METHODE='CENTRALISE'\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 135
+   },
+   "en": null
+  },
+  "26": {
+   "id": "CALCULEL_26",
+   "fr": "\n Le modèle est peut-être trop grossier :\n   Sur la maille %(k1)s et pour la composante %(k2)s de la grandeur %(k3)s,\n   il y a une variation entre les points de la maille de %(r1)f\n   alors que, globalement, les valeurs du champ ne dépassent pas %(r2)f (en valeur absolue).\n   Cela fait une variation sur la maille supérieure à %(r3)f%%.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(r1)f",
+    "%(r2)f",
+    "%(r3)f",
+    "%%"
+   ],
+   "source": {
+    "line": 145
+   },
+   "en": null
+  },
+  "27": {
+   "id": "CALCULEL_27",
+   "fr": "\nErreur d'utilisation (ou de programmation) :\n   On cherche à combiner deux champs par éléments qui n'ont pas la même \"structure\".\n   La programmation ne le permet pas actuellement.\n",
+   "placeholders": [],
+   "source": {
+    "line": 154
+   },
+   "en": null
+  },
+  "28": {
+   "id": "CALCULEL_28",
+   "fr": "\n Problème lors de l'utilisation de la structure de données %(k1)s.\n Cette structure de données est de type \"évolution temporelle\" et l'on n'a pas le droit\n de l'utiliser en dehors de l'intervalle.\n Mais ici, il n'y a qu'un seul instant dans la structure de donnée.\n Dans ce cas, on suppose alors que ce transitoire est \"permanent\" et que l'on peut l'utiliser\n pour toute valeur du temps.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 161
+   },
+   "en": null
+  },
+  "29": {
+   "id": "CALCULEL_29",
+   "fr": "\n Erreur utilisateur :\n   Le programme a besoin d'accéder au champ %(k2)s de la structure de données résultat %(k1)s\n   pour le NUME_ORDRE: %(i1)d\n   Mais ce champ n'existe pas dans la structure de données fournie.\n   On ne peut pas continuer.\n\n Risques & conseils :\n Vérifiez que la structure de données %(k1)s est bien celle qu'il faut utiliser.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s",
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "30": {
+   "id": "CALCULEL_30",
+   "fr": "\nErreur utilisateur :\n  Le programme ne sait pas interpoler entre deux champs de type \"carte\".\n\nRisques et conseils :\n  * Il faut faire en sorte que les champs soient des champs par éléments de type 'ELEM'.\n  * La commande CREA_CHAMP peut produire directement des champs par éléments.\n  * Si on imprime et on relit une structure de données résultat sur un fichier au format MED,\n    les cartes de la structure de données résultat sont transformées en champs par éléments de type 'ELEM'.\n  La structure de donnée \"coupable\" est : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "33": {
+   "id": "CALCULEL_33",
+   "fr": "\nVous utilisez CALC_CHAMP en reuse en surchargeant le mot-clé\n%(k1)s. Or ce paramètre déjà présent dans structure de données résultat sur laquelle\nvous travaillez est différent de celui donné (%(k2)s et %(k3)s).\n\nDans ce cas, le reuse est interdit.\n\nConseil :\n  Relancez le calcul en créant une nouvelle structure de données résultat.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 196
+   },
+   "en": null
+  },
+  "35": {
+   "id": "CALCULEL_35",
+   "fr": "\n Erreur utilisateur :\n  On essaye de fusionner 2 CHAM_ELEM mais ils n'ont pas le même nombre\n  \"points\" (noeuds ou points de Gauss) pour la maille numéro : %(i1)d.\n  Nombres de points :  %(i2)d et %(i3)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 208
+   },
+   "en": null
+  },
+  "36": {
+   "id": "CALCULEL_36",
+   "fr": "\n Erreur utilisateur :\n  On essaye de fusionner 2 CHAM_ELEM mais ils n'ont pas le même nombre\n  de \"sous-points\" (fibres, couches, ...) pour la maille numéro : %(i1)d.\n  Nombres de sous-points :  %(i2)d et %(i3)d\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 216
+   },
+   "en": null
+  },
+  "37": {
+   "id": "CALCULEL_37",
+   "fr": "\n Erreur dans la lecture des CHAR_CINE ou dans les CHAR_CINE\n",
+   "placeholders": [],
+   "source": {
+    "line": 224
+   },
+   "en": null
+  },
+  "38": {
+   "id": "CALCULEL_38",
+   "fr": "\n la carte concerne aussi des mailles tardives qui sont oubliées\n",
+   "placeholders": [],
+   "source": {
+    "line": 229
+   },
+   "en": null
+  },
+  "39": {
+   "id": "CALCULEL_39",
+   "fr": "\nLe chargement (mot clé: EXCIT) fourni par l'utilisateur est différent de celui présent\ndans la structure de données Résultat. Dans ce cas, le reuse est interdit.\n\nConseil :\n  Relancez le calcul en créant une nouvelle structure de données résultat.\n",
+   "placeholders": [],
+   "source": {
+    "line": 234
+   },
+   "en": null
+  },
+  "40": {
+   "id": "CALCULEL_40",
+   "fr": "\n Erreur possible d'utilisation:\n   Vous avez affecté des données sur certaines mailles mais ces données\n   n'ont pas de signification pour les éléments finis portés par ces mailles.\n   Il s'agit peut-être d'une erreur d'affectation.\n\n Champ : '%(k1)s'\n Commentaire sur ce champ : %(k2)s\n Grandeur : %(k3)s   Composante non reconnue : %(k4)s\n\n Ce problème concerne %(i1)d mailles\n Les premières mailles concernées sont imprimées ci-dessous.\n Type de l'élément affecté sur la première maille imprimée : %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(i1)d",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 243
+   },
+   "en": null
+  },
+  "41": {
+   "id": "CALCULEL_41",
+   "fr": "  Maille : %(k1)s. Cette maille appartient aux GROUP_MA : %(k2)s %(k3)s %(k4)s %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 259
+   },
+   "en": null
+  },
+  "42": {
+   "id": "CALCULEL_42",
+   "fr": "\n Utilisation de COEF_RIGI_DRZ en mode rotation plane :\n   Vous avez affecté une valeur négative de COEF_RIGI_DRZ sur des mailles ou groupes de mailles TRIA3 et QUAD4. Ce mode d'utilisation est permis,\n   mais le mode rotation plane ne s'activera pas sur les triangles. Le rotation plane permet d'associer une signification\n   physique à la troisième rotation contrairement aux modèles classiques des plaques minces.\n   Il s'agit peut-être d'une erreur d'affectation.\n Conseils :\n   On conseille que cette valeur soit -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Champ : '%(k1)s'\n Commentaire sur ce champ : %(k2)s\n Grandeur : %(k3)s   Composante non reconnue : %(k4)s\n\n Ce problème concerne %(i1)d mailles\n Les premières mailles concernées sont imprimées ci-dessous.\n Type de l'élément affecté sur la première maille imprimée : %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(i1)d",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 263
+   },
+   "en": null
+  },
+  "43": {
+   "id": "CALCULEL_43",
+   "fr": "\n Utilisation de COEF_RIGI_DRZ en mode rotation plane :\n   Vous avez affecté une valeur négative de COEF_RIGI_DRZ sur des mailles uniquement TRIA3.\n   Le mode d'utilisation n'est pas possible actuellement pour ces types de mailles. Le rotation plane permet d'associer une signification\n   physique à la troisième rotation contrairement aux modèles classiques des plaques minces.\n   Il s'agit peut-être d'une erreur d'affectation.\n Conseils :\n   On conseille que cette valeur soit -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Champ : '%(k1)s'\n Commentaire sur ce champ : %(k2)s\n Grandeur : %(k3)s   Composante non reconnue : %(k4)s\n\n Ce problème concerne %(i1)d mailles\n Les premières mailles concernées sont imprimées ci-dessous.\n Type de l'élément affecté sur la première maille imprimée : %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(i1)d",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 282
+   },
+   "en": null
+  },
+  "44": {
+   "id": "CALCULEL_44",
+   "fr": "\n Utilisation de COEF_RIGI_DRZ en mode rotation plane :\n   Vous avez affecté une valeur négative de COEF_RIGI_DRZ.  Le rotation plane permet d'associer une signification physique à la troisième rotation\n   contrairement aux modèles classiques des plaques minces.\n Conseils :\n   On conseille que cette valeur soit -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Champ : '%(k1)s'\n Commentaire sur ce champ : %(k2)s\n Grandeur : %(k3)s   Composante non reconnue : %(k4)s\n\n Ce problème concerne %(i1)d mailles\n Les premières mailles concernées sont imprimées ci-dessous.\n Type de l'élément affecté sur la première maille imprimée : %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(i1)d",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 301
+   },
+   "en": null
+  },
+  "45": {
+   "id": "CALCULEL_45",
+   "fr": "\nUtilisation de COEF_RIGI_DRZ en mode rotation plane en non-linéaire.\nCette option n'est pas possible actuellement. Il faut prendre une valeur positive pour ce coefficient.\n\n Champ : '%(k1)s'\n Commentaire sur ce champ : %(k2)s\n Grandeur : %(k3)s   Composante non reconnue : %(k4)s\n\n Ce problème concerne %(i1)d mailles\n Les premières mailles concernées sont imprimées ci-dessous.\n Type de l'élément affecté sur la première maille imprimée : %(k5)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s",
+    "%(i1)d",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 318
+   },
+   "en": null
+  },
+  "47": {
+   "id": "CALCULEL_47",
+   "fr": "\n  le CHAM_ELEM:  %(k1)s  n'existe pas.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 332
+   },
+   "en": null
+  },
+  "48": {
+   "id": "CALCULEL_48",
+   "fr": "\n le CHAM_ELEM: %(k1)s  n'a pas le même nombre de composantes dynamiques sur tous ses éléments.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 337
+   },
+   "en": null
+  },
+  "49": {
+   "id": "CALCULEL_49",
+   "fr": "\n le CHAM_ELEM : %(k1)s a des sous-points.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "50": {
+   "id": "CALCULEL_50",
+   "fr": "\n Vous cherchez à projeter un champ inhabituel sur le modèle final.\n Vérifiez que les modélisations que vous utilisez sont compatibles.\n\n Message destiné aux développeurs :\n Le paramètre:  %(k1)s  de l'option:  %(k2)s  n'est pas connu des TYPE_ELEM du LIGREL:  %(k3)s\n Champ : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 347
+   },
+   "en": null
+  },
+  "52": {
+   "id": "CALCULEL_52",
+   "fr": "\n La composante: %(k1)s  n'appartient pas à la grandeur: %(k2)s\n Champ : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 357
+   },
+   "en": null
+  },
+  "53": {
+   "id": "CALCULEL_53",
+   "fr": "\n Option : %(k1)s  inexistante dans les catalogues.\n Champ : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 363
+   },
+   "en": null
+  },
+  "54": {
+   "id": "CALCULEL_54",
+   "fr": "\n Le paramètre:  %(k1)s  de l'option:  %(k2)s  n'est pas connu des TYPE_ELEM du LIGREL:  %(k3)s\n Champ : %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 369
+   },
+   "en": null
+  },
+  "55": {
+   "id": "CALCULEL_55",
+   "fr": "\n Erreur utilisateur :\n   On cherche à créer un CHAM_ELEM mais sur certains points, on ne trouve pas la composante : %(k1)s\n   Champ : %(k4)s\n Risques & conseils :\n   Si la commande que vous exécutez comporte le mot clé PROL_ZERO='OUI', vous devriez peut-être l'utiliser.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 375
+   },
+   "en": null
+  },
+  "56": {
+   "id": "CALCULEL_56",
+   "fr": "\n Le LIGREL contient des mailles tardives\n Champ : %(k4)s\n",
+   "placeholders": [
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 384
+   },
+   "en": null
+  },
+  "57": {
+   "id": "CALCULEL_57",
+   "fr": "\n Erreur Utilisateur :\n   On cherche à transformer un champ simple en CHAM_ELEM.\n   Le nombre de \"points\" (points de Gauss ou noeuds) du champ simple (%(i2)d) est\n   différent du nombre de points attendu pour le CHAM_ELEM (%(i1)d) :\n     - maille              :  %(k1)s\n     - nom du CHAM_ELEM    :  %(k4)s\n     - nom du champ simple :  %(k5)s\n\n",
+   "placeholders": [
+    "%(i2)d",
+    "%(i1)d",
+    "%(k1)s",
+    "%(k4)s",
+    "%(k5)s"
+   ],
+   "source": {
+    "line": 390
+   },
+   "en": null
+  },
+  "58": {
+   "id": "CALCULEL_58",
+   "fr": "\nErreur lors de la fabrication d'un champ par éléments :\n Il manque la composante : %(k1)s  sur la maille : %(k2)s\n Champ : %(k4)s\n\nRisques et conseils :\n Si cette erreur se produit lors de l'exécution de la commande PROJ_CHAMP,\n il est possible de poursuivre le calcul en choisissant PROL_ZERO='OUI'\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 402
+   },
+   "en": null
+  },
+  "67": {
+   "id": "CALCULEL_67",
+   "fr": "\n grandeur:  %(k1)s  inconnue au catalogue.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 413
+   },
+   "en": null
+  },
+  "68": {
+   "id": "CALCULEL_68",
+   "fr": "\n numéro de maille invalide     :  %(k1)s  (<1 ou > nombre de mailles)\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 418
+   },
+   "en": null
+  },
+  "69": {
+   "id": "CALCULEL_69",
+   "fr": "\n numéro de point invalide      :  %(k1)s  (<1 ou > nombre de points)\n pour la maille                :  %(k2)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 423
+   },
+   "en": null
+  },
+  "70": {
+   "id": "CALCULEL_70",
+   "fr": "\n numéro de sous-point invalide :  %(k1)s  (<1 ou > nombre de sous-points)\n pour la maille                :  %(k2)s\n pour le point                 :  %(k3)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 429
+   },
+   "en": null
+  },
+  "71": {
+   "id": "CALCULEL_71",
+   "fr": "\n numéro de composante invalide :  %(k1)s  (<1 ou > nombre de composantes)\n pour la maille                :  %(k2)s\n pour le point                 :  %(k3)s\n pour le sous-point            :  %(k4)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s",
+    "%(k4)s"
+   ],
+   "source": {
+    "line": 436
+   },
+   "en": null
+  },
+  "72": {
+   "id": "CALCULEL_72",
+   "fr": "\n Erreur commande CALC_FERRAILLAGE :\n   On n'a pas réussi à calculer la carte de ferraillage sur un élément.\n   z = 0.9(h-c) est négatif ou nul (l'utilisateur a fourni des valeurs d'enrobage incompatibles avec l'épaisseur de l'élément)\n",
+   "placeholders": [],
+   "source": {
+    "line": 444
+   },
+   "en": null
+  },
+  "74": {
+   "id": "CALCULEL_74",
+   "fr": "\n Erreur utilisateur commande CALC_FERRAILLAGE / TYPE_COMB = ELU :\n   Certains mots-clé de CALC_FERRAILLAGE / AFFE sont obligatoires pour un calcul à l'ELU :\n     pour CODIFICATION = 'BAEL91' : FE, FCJ, GAMMA_S, GAMMA_C, TYPE_DIAGRAMME et EYS\n     pour CODIFICATION = 'EC2' : FYK, FCK, GAMMA_S, GAMMA_C, TYPE_DIAGRAMME et EYS\n",
+   "placeholders": [],
+   "source": {
+    "line": 451
+   },
+   "en": null
+  },
+  "75": {
+   "id": "CALCULEL_75",
+   "fr": "\n Votre modèle ne contient que des éléments 1D. Le lissage global n'est\n possible que pour les éléments 2D ou 3D.\n",
+   "placeholders": [],
+   "source": {
+    "line": 459
+   },
+   "en": null
+  },
+  "76": {
+   "id": "CALCULEL_76",
+   "fr": "\n Votre modèle contient un mélange d'éléments 1D,2D ou 3D.\n Le lissage global n'est possible que pour les éléments 2D soit 3D.\n",
+   "placeholders": [],
+   "source": {
+    "line": 465
+   },
+   "en": null
+  },
+  "77": {
+   "id": "CALCULEL_77",
+   "fr": "\nCommande CALC_FERRAILLAGE :\n   ELS_QP : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   La section est fortement sollicitée et on est incapable de dimensionner un ferraillage\n   qui satisfait le critère de limitation des ouvertures des fissures!\n   Conseil : on suggère soit de changer la classe de béton soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 471
+   },
+   "en": null
+  },
+  "78": {
+   "id": "CALCULEL_78",
+   "fr": "\nCommande CALC_FERRAILLAGE :\n   TYPE_STRUCTURE : On ne peut pas utiliser 'POUTRE' ou 'POTEAU' pour les mailles surfaciques\n   Conseil : Utiliser TYPE_STRUCTURE = '2D'\n   Il est également possible que CALC_FERRAILLAGE a été exécuté sur un maillage\n   qui contient au même temps des mailles surfaciques et linéiques\n",
+   "placeholders": [],
+   "source": {
+    "line": 480
+   },
+   "en": null
+  },
+  "79": {
+   "id": "CALCULEL_79",
+   "fr": "\nCommande CALC_FERRAILLAGE :\n    TYPE_STRUCTURE : On ne peut pas utiliser '2D' pour les mailles linéiques\n    Conseil : Utiliser TYPE_STRUCTURE = '1D'\n    Il est également possible que CALC_FERRAILLAGE a été exécuté sur un maillage\n    qui contient au même temps des mailles surfaciques et linéiques\n",
+   "placeholders": [],
+   "source": {
+    "line": 489
+   },
+   "en": null
+  },
+  "80": {
+   "id": "CALCULEL_80",
+   "fr": "\nCommande CALC_FERRAILLAGE :\n   Le calcul des aciers d'efforts tranchants ne sont pas calculés à l'ELS pour la codifications 'BAEL91'\n",
+   "placeholders": [],
+   "source": {
+    "line": 498
+   },
+   "en": null
+  },
+  "81": {
+   "id": "CALCULEL_81",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELU : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, le béton est trop cisaillé.\n   La densité d'acier d'effort tranchant est fixé à -1 pour l'élément.\n   Conseil : on suggère soit de changer la classe de béton soit de revoir le coffrage.\n\n",
+   "placeholders": [],
+   "source": {
+    "line": 504
+   },
+   "en": null
+  },
+  "82": {
+   "id": "CALCULEL_82",
+   "fr": "\n Erreur utilisateur commande CALC_FERRAILLAGE / TYPE_COMB = ELS :\n   Certains mots-clé de CALC_FERRAILLAGE / AFFE sont obligatoires pour un calcul à l'ELS :\n     pour CODIFICATION = 'BAEL91' : N,SIGS_ELS,SIGC_INF_ELS,SIGC_SUP_ELS,SIGC_INF_Y_ELS,SIGC_SUP_Y_ELS,SIGC_INF_Z_ELS,SIGC_SUP_Z_ELS\n     pour CODIFICATION = 'EC2' : ALPHA_E,SIGS_ELS,SIGC_INF_ELS,SIGC_SUP_ELS,SIGC_INF_Y_ELS,SIGC_SUP_Y_ELS,SIGC_INF_Z_ELS,SIGC_SUP_Z_ELS,FCK\n",
+   "placeholders": [],
+   "source": {
+    "line": 514
+   },
+   "en": null
+  },
+  "83": {
+   "id": "CALCULEL_83",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELU : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, la section est trop comprimée (PIVOT B avec acier de compression ou PIVOT C).\n   ATTENTION : Si vous avez retenu FERR_COMP = 'NON', les aciers en compression ne sont pas calculés !\n   La densité de ferraillage est mise à -1.\n   Conseil : on suggère soit de reprendre le calcul avec FERR_COMP = 'OUI', soit de changer la classe de béton ou soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 522
+   },
+   "en": null
+  },
+  "84": {
+   "id": "CALCULEL_84",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELS : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, la section est trop comprimée (PIVOT B avec acier de compression).\n   ATTENTION : Si vous avez retenu FERR_COMP = 'NON', les aciers en compression ne sont pas calculés !\n   La densité de ferraillage est mise à -1.\n   Conseil : on suggère soit de reprendre le calcul avec FERR_COMP = 'OUI', soit de changer la classe de béton ou soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 532
+   },
+   "en": null
+  },
+  "85": {
+   "id": "CALCULEL_85",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELS_QP : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, la section est trop comprimée (PIVOT B avec acier de compression).\n   ATTENTION : Si vous avez retenu FERR_COMP = 'NON', les aciers en compression ne sont pas calculés !\n   La densité de ferraillage est mise à -1.\n   Conseil : on suggère soit de reprendre le calcul avec FERR_COMP = 'OUI', soit de changer la classe de béton ou soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 542
+   },
+   "en": null
+  },
+  "86": {
+   "id": "CALCULEL_86",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELS : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, le béton est trop cisaillé.\n   La densité d'acier d'effort tranchant est fixé à -1 pour l'élément.\n   Conseil : on suggère soit de changer la classe de béton soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 552
+   },
+   "en": null
+  },
+  "87": {
+   "id": "CALCULEL_87",
+   "fr": "\n Commande CALC_FERRAILLAGE :\n   ELS_QP : On n'a pas réussi à calculer la densité de ferraillage sur l'élément.\n   Pour une des facettes de Capra Maury au moins, le béton est trop cisaillé.\n   La densité d'acier d'effort tranchant est fixé à -1 pour l'élément.\n   Conseil : on suggère soit de changer la classe de béton soit de revoir le coffrage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 561
+   },
+   "en": null
+  },
+  "88": {
+   "id": "CALCULEL_88",
+   "fr": "\n Commande CALC_FERRAILLAGE : ATTENTION un champ de ferraillage existe déjà au numéro d'ordre %(i1)d du résultat %(k1)s\n   Ce champ de ferraillage sera écrasé !\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 570
+   },
+   "en": null
+  },
+  "89": {
+   "id": "CALCULEL_89",
+   "fr": "\n Commande CALC_FERRAILLAGE : ATTENTION la masse volumique des aciers n'est pas renseignée ou est négative !\n   Conséquence : Le calcul de la densité volumique d'armature ne sera pas réalisé.\n   Renseignez le mot-clé RHO_ACIER pour que le calcul de la densité volumique d'armature soit réalisé.\n",
+   "placeholders": [],
+   "source": {
+    "line": 576
+   },
+   "en": null
+  },
+  "90": {
+   "id": "CALCULEL_90",
+   "fr": "\n Le champ %(k2)s ne peut pas être créé à partir de %(k1)s car il est décrit sur des\n mailles n'existant pas dans %(k1)s et il est de type VARI_ELGA.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 583
+   },
+   "en": null
+  },
+  "91": {
+   "id": "CALCULEL_91",
+   "fr": "\n incohérence des familles de points de Gauss pour la maille  %(k1)s\n ( %(k2)s / %(k3)s )\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 589
+   },
+   "en": null
+  },
+  "92": {
+   "id": "CALCULEL_92",
+   "fr": "\n type scalaire du CHAM_NO :  %(k1)s  non réel.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 595
+   },
+   "en": null
+  },
+  "93": {
+   "id": "CALCULEL_93",
+   "fr": "\n type scalaire du NUME_DDL :  %(k1)s  non réel.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 600
+   },
+   "en": null
+  },
+  "99": {
+   "id": "CALCULEL_99",
+   "fr": "\n mélange de CHAM_ELEM_S et CHAM_NO_S\n",
+   "placeholders": [],
+   "source": {
+    "line": 605
+   },
+   "en": null
+  }
+ }
+}

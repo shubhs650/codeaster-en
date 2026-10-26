@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "case": "shell_static",
+  "description": "Simply supported square plate (a 1000 mm, t 10 mm), uniform pressure 0.01 MPa, DKT shell on a 20 x 20 QUAD4 mesh, linear elastic steel.",
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Simply supported square plate, uniform pressure",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-23"
+  },
+  "analysis": "linear_static",
+  "units": {
+    "system": "SI_mm"
+  },
+  "groups": {
+    "PLATE": {
+      "display_name": "Plate",
+      "role": "body",
+      "report": true
+    },
+    "EDGES": {
+      "display_name": "Simply supported edges",
+      "role": "support",
+      "report": true
+    },
+    "CENTER": {
+      "display_name": "Plate centre",
+      "role": "output",
+      "report": true
+    },
+    "CORNER_A": {
+      "display_name": "Corner (0, 0), in-plane restraint",
+      "role": "support"
+    },
+    "CORNER_B": {
+      "display_name": "Corner (1000, 0), in-plane restraint",
+      "role": "support"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "element_properties",
+    "loads_and_bcs",
+    "solution",
+    "displacements",
+    "stresses",
+    "reactions",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "solver": {
+    "linear_solver": "MUMPS",
+    "ncpus": 1,
+    "time_limit_s": 600,
+    "memory_limit_mb": 2048
+  },
+  "checks": [
+    {
+      "legend": "W_CENTER",
+      "quantity": "Deflection at the centre [mm]",
+      "field": "DEPL",
+      "component": "DZ",
+      "group": "CENTER",
+      "reference": -2.11242,
+      "precision": 0.01,
+      "basis": "w = alpha q a^4 / D, alpha = 0.00406235 (nu = 0.3), D = E t^3 / (12 (1 - nu^2)); negative because positive PRES acts against the +Z element normal.",
+      "source": "Timoshenko & Woinowsky-Krieger, Theory of Plates and Shells, 2nd ed., sec. 30, table 8 (Navier series, summed in tests/fixtures/hand_values.py)"
+    },
+    {
+      "legend": "MXX_CENTER",
+      "quantity": "Bending moment per unit length M_x at the centre [N mm/mm]",
+      "field": "EFGE_NOEU",
+      "component": "MXX",
+      "group": "CENTER",
+      "reference": 478.864,
+      "precision": 0.03,
+      "absolute_value": true,
+      "basis": "M_x = beta q a^2, beta = 0.0478864 (nu = 0.3).",
+      "source": "Timoshenko & Woinowsky-Krieger, Theory of Plates and Shells, 2nd ed., sec. 30, table 8"
+    },
+    {
+      "legend": "REAC_DZ_SUM",
+      "quantity": "Sum of Z reactions on the supports [N]",
+      "field": "REAC_NODA",
+      "component": "DZ",
+      "reference": 10000.0,
+      "precision": 0.001,
+      "absolute_value": true,
+      "basis": "Equilibrium: total reaction = q a^2.",
+      "source": "Static equilibrium"
+    }
+  ],
+  "provenance": {
+    "upstream_version": "17.4.26",
+    "modelled_on": [
+      "ssls101n"
+    ],
+    "author": "codeaster-en agent (task 4.1)",
+    "date": "2026-10-23",
+    "notes": "VALE_CALC in run.comm holds the hand value until task 4.2 records the solver's own value."
+  }
+}

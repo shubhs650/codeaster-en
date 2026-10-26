@@ -1,0 +1,1713 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/propa_fiss.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "PROPA_FISS",
+ "kind": "MACRO",
+ "fr": "Propagation de fissure avec X-FEM",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.propa_fiss_ops.propa_fiss_ops",
+ "reentrant": "n",
+ "result_types": [
+  "maillage_sdaster",
+  "fiss_xfem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/propa_fiss.py",
+  "line": 54
+ },
+ "keywords": [
+  {
+   "name": "METHODE_PROPA",
+   "kind": "simple",
+   "path": "METHODE_PROPA",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "SIMPLEXE",
+    "MAILLAGE",
+    "INITIALISATION",
+    "GEOMETRIQUE",
+    "UPWIND"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RIEN",
+   "into": [
+    "RIEN",
+    "DETECT_COHESIF",
+    "PROPA_COHESIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "b_hamilton",
+   "kind": "bloc",
+   "path": "[b_hamilton]",
+   "condition": "(equal_to(\"METHODE_PROPA\", 'SIMPLEXE')) or (equal_to(\"METHODE_PROPA\", 'UPWIND')) or (equal_to(\"METHODE_PROPA\", 'GEOMETRIQUE') and equal_to(\"OPERATION\", 'RIEN')) ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 68
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "TEST_MAIL",
+     "kind": "simple",
+     "path": "TEST_MAIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "DA_MAX",
+     "kind": "simple",
+     "path": "DA_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "RAYON",
+     "kind": "simple",
+     "path": "RAYON",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "ZONE_MAJ",
+     "kind": "simple",
+     "path": "ZONE_MAJ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TORE",
+     "into": [
+      "TOUT",
+      "TORE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "b_tore",
+     "kind": "bloc",
+     "path": "[b_tore]",
+     "condition": "equal_to(\"ZONE_MAJ\", 'TORE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 75
+     },
+     "keywords": [
+      {
+       "name": "RAYON_TORE",
+       "kind": "simple",
+       "path": "RAYON_TORE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 77
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_propagation",
+     "kind": "bloc",
+     "path": "[b_propagation]",
+     "condition": "equal_to(\"TEST_MAIL\", 'NON') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 79
+     },
+     "keywords": [
+      {
+       "name": "FISSURE",
+       "kind": "factor",
+       "path": "FISSURE",
+       "status": "o",
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 81
+       },
+       "keywords": [
+        {
+         "name": "FISS_ACTUELLE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_ACTUELLE",
+         "status": "o",
+         "type": [
+          "fiss_xfem"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 85
+         }
+        },
+        {
+         "name": "FISS_PROPAGEE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_PROPAGEE",
+         "status": "o",
+         "type": [
+          "CO"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 86
+         }
+        },
+        {
+         "name": "NB_POINT_FOND",
+         "kind": "simple",
+         "path": "FISSURE/NB_POINT_FOND",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "val_min": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 87
+         }
+        },
+        {
+         "name": "TABLE",
+         "kind": "simple",
+         "path": "FISSURE/TABLE",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 88
+         }
+        }
+       ]
+      },
+      {
+       "name": "LOI_PROPA",
+       "kind": "factor",
+       "path": "LOI_PROPA",
+       "status": "o",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 90
+       },
+       "keywords": [
+        {
+         "name": "LOI",
+         "kind": "simple",
+         "path": "LOI_PROPA/LOI",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "PARIS",
+         "into": [
+          "PARIS"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 93
+         }
+        },
+        {
+         "name": "b_paris",
+         "kind": "bloc",
+         "path": "LOI_PROPA/[b_paris]",
+         "condition": "equal_to(\"LOI\", 'PARIS')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 94
+         },
+         "keywords": [
+          {
+           "name": "C",
+           "kind": "simple",
+           "path": "LOI_PROPA/C",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/propa_fiss.py",
+            "line": 96
+           }
+          },
+          {
+           "name": "M",
+           "kind": "simple",
+           "path": "LOI_PROPA/M",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/propa_fiss.py",
+            "line": 97
+           }
+          },
+          {
+           "name": "DELTA_K_SEUIL",
+           "kind": "simple",
+           "path": "LOI_PROPA/DELTA_K_SEUIL",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "max": 1,
+           "val_min": 0.0,
+           "default": 0.0,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/propa_fiss.py",
+            "line": 98
+           }
+          }
+         ]
+        },
+        {
+         "name": "MATER",
+         "kind": "simple",
+         "path": "LOI_PROPA/MATER",
+         "status": "o",
+         "type": [
+          "mater_sdaster"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 100
+         }
+        }
+       ]
+      },
+      {
+       "name": "COMP_LINE",
+       "kind": "factor",
+       "path": "COMP_LINE",
+       "status": "o",
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 102
+       },
+       "keywords": [
+        {
+         "name": "COEF_MULT_MINI",
+         "kind": "simple",
+         "path": "COMP_LINE/COEF_MULT_MINI",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 105
+         }
+        },
+        {
+         "name": "COEF_MULT_MAXI",
+         "kind": "simple",
+         "path": "COMP_LINE/COEF_MULT_MAXI",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 106
+         }
+        }
+       ]
+      },
+      {
+       "name": "CRIT_ANGL_BIFURCATION",
+       "kind": "simple",
+       "path": "CRIT_ANGL_BIFURCATION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "SITT_MAX",
+       "into": [
+        "SITT_MAX_DEVER",
+        "SITT_MAX",
+        "K1_MAX",
+        "K2_NUL",
+        "PLAN",
+        "ANGLE_IMPO",
+        "ANGLE_IMPO_GAMMA",
+        "ANGLE_IMPO_BETA_GAMMA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 108
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_test_const",
+     "kind": "bloc",
+     "path": "[b_test_const]",
+     "condition": "equal_to(\"TEST_MAIL\", 'OUI') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 125
+     },
+     "keywords": [
+      {
+       "name": "FISSURE",
+       "kind": "factor",
+       "path": "FISSURE",
+       "status": "o",
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 127
+       },
+       "keywords": [
+        {
+         "name": "FISS_ACTUELLE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_ACTUELLE",
+         "status": "o",
+         "type": [
+          "fiss_xfem"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 131
+         }
+        },
+        {
+         "name": "FISS_PROPAGEE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_PROPAGEE",
+         "status": "o",
+         "type": [
+          "CO"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 132
+         }
+        }
+       ]
+      },
+      {
+       "name": "ITERATIONS",
+       "kind": "simple",
+       "path": "ITERATIONS",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "val_min": 3,
+       "default": 5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 134
+       }
+      },
+      {
+       "name": "TOLERANCE",
+       "kind": "simple",
+       "path": "TOLERANCE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 0.0,
+       "val_max": 100.0,
+       "default": 5.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 135
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_detection",
+   "kind": "bloc",
+   "path": "[b_detection]",
+   "condition": "(equal_to(\"OPERATION\", 'DETECT_COHESIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 138
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 140
+     }
+    },
+    {
+     "name": "TEST_MAIL",
+     "kind": "simple",
+     "path": "TEST_MAIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "o",
+     "type": [
+      "evol_elas",
+      "evol_noli"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "ZONE_MAJ",
+     "kind": "simple",
+     "path": "ZONE_MAJ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TORE",
+     "into": [
+      "TOUT",
+      "TORE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "b_tore",
+     "kind": "bloc",
+     "path": "[b_tore]",
+     "condition": "equal_to(\"ZONE_MAJ\", 'TORE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 144
+     },
+     "keywords": [
+      {
+       "name": "RAYON_TORE",
+       "kind": "simple",
+       "path": "RAYON_TORE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 146
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_propagation",
+     "kind": "bloc",
+     "path": "[b_propagation]",
+     "condition": "equal_to(\"TEST_MAIL\", 'NON') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 148
+     },
+     "keywords": [
+      {
+       "name": "FISSURE",
+       "kind": "factor",
+       "path": "FISSURE",
+       "status": "o",
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 150
+       },
+       "keywords": [
+        {
+         "name": "FISS_ACTUELLE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_ACTUELLE",
+         "status": "o",
+         "type": [
+          "fiss_xfem"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 154
+         }
+        },
+        {
+         "name": "FISS_PROPAGEE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_PROPAGEE",
+         "status": "o",
+         "type": [
+          "CO"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 155
+         }
+        },
+        {
+         "name": "NB_POINT_FOND",
+         "kind": "simple",
+         "path": "FISSURE/NB_POINT_FOND",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 156
+         }
+        },
+        {
+         "name": "TABLE",
+         "kind": "simple",
+         "path": "FISSURE/TABLE",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 157
+         }
+        }
+       ]
+      },
+      {
+       "name": "CRIT_ANGL_BIFURCATION",
+       "kind": "simple",
+       "path": "CRIT_ANGL_BIFURCATION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "SITT_MAX",
+       "into": [
+        "SITT_MAX_DEVER",
+        "SITT_MAX",
+        "K1_MAX",
+        "K2_NUL",
+        "PLAN",
+        "ANGLE_IMPO",
+        "ANGLE_IMPO_GAMMA",
+        "ANGLE_IMPO_BETA_GAMMA"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 159
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_cohesive",
+   "kind": "bloc",
+   "path": "[b_cohesive]",
+   "condition": "(equal_to(\"OPERATION\", 'PROPA_COHESIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 177
+   },
+   "keywords": [
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "MODELE",
+     "status": "o",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 179
+     }
+    },
+    {
+     "name": "DA_MAX",
+     "kind": "simple",
+     "path": "DA_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 180
+     }
+    },
+    {
+     "name": "TEST_MAIL",
+     "kind": "simple",
+     "path": "TEST_MAIL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 181
+     }
+    },
+    {
+     "name": "ZONE_MAJ",
+     "kind": "simple",
+     "path": "ZONE_MAJ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TORE",
+     "into": [
+      "TOUT",
+      "TORE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "b_tore",
+     "kind": "bloc",
+     "path": "[b_tore]",
+     "condition": "equal_to(\"ZONE_MAJ\", 'TORE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 183
+     },
+     "keywords": [
+      {
+       "name": "RAYON_TORE",
+       "kind": "simple",
+       "path": "RAYON_TORE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 185
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_propagation",
+     "kind": "bloc",
+     "path": "[b_propagation]",
+     "condition": "equal_to(\"TEST_MAIL\", 'NON') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 187
+     },
+     "keywords": [
+      {
+       "name": "FISSURE",
+       "kind": "factor",
+       "path": "FISSURE",
+       "status": "o",
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 189
+       },
+       "keywords": [
+        {
+         "name": "FISS_ACTUELLE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_ACTUELLE",
+         "status": "o",
+         "type": [
+          "fiss_xfem"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 193
+         }
+        },
+        {
+         "name": "FISS_PROPAGEE",
+         "kind": "simple",
+         "path": "FISSURE/FISS_PROPAGEE",
+         "status": "o",
+         "type": [
+          "CO"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 194
+         }
+        },
+        {
+         "name": "NB_POINT_FOND",
+         "kind": "simple",
+         "path": "FISSURE/NB_POINT_FOND",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 195
+         }
+        },
+        {
+         "name": "TABLE",
+         "kind": "simple",
+         "path": "FISSURE/TABLE",
+         "status": "o",
+         "type": [
+          "table_sdaster"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 196
+         }
+        }
+       ]
+      },
+      {
+       "name": "CRIT_ANGL_BIFURCATION",
+       "kind": "simple",
+       "path": "CRIT_ANGL_BIFURCATION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "default": "SITT_MAX",
+       "into": [
+        "SITT_MAX",
+        "K1_MAX",
+        "K2_NUL",
+        "PLAN",
+        "ANGLE_IMPO"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 198
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_maillage",
+   "kind": "bloc",
+   "path": "[b_maillage]",
+   "condition": "(equal_to(\"METHODE_PROPA\", 'MAILLAGE'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 207
+   },
+   "keywords": [
+    {
+     "name": "MAIL_STRUC",
+     "kind": "simple",
+     "path": "MAIL_STRUC",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "ITERATION",
+     "kind": "simple",
+     "path": "ITERATION",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "DA_MAX",
+     "kind": "simple",
+     "path": "DA_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 211
+     }
+    },
+    {
+     "name": "FISSURE",
+     "kind": "factor",
+     "path": "FISSURE",
+     "status": "o",
+     "min": 1,
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 212
+     },
+     "keywords": [
+      {
+       "name": "MAIL_ACTUEL",
+       "kind": "simple",
+       "path": "FISSURE/MAIL_ACTUEL",
+       "status": "o",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 216
+       }
+      },
+      {
+       "name": "GROUP_MA_FOND",
+       "kind": "simple",
+       "path": "FISSURE/GROUP_MA_FOND",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "default": "FOND",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 217
+       }
+      },
+      {
+       "name": "GROUP_MA_FISS",
+       "kind": "simple",
+       "path": "FISSURE/GROUP_MA_FISS",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "default": "FISS",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 218
+       }
+      },
+      {
+       "name": "FISS_ACTUELLE",
+       "kind": "simple",
+       "path": "FISSURE/FISS_ACTUELLE",
+       "status": "o",
+       "type": [
+        "fiss_xfem"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 219
+       }
+      },
+      {
+       "name": "MAIL_PROPAGE",
+       "kind": "simple",
+       "path": "FISSURE/MAIL_PROPAGE",
+       "status": "f",
+       "type": [
+        "CO"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 220
+       }
+      },
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "FISSURE/TABLE",
+       "status": "o",
+       "type": [
+        "table_sdaster"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 221
+       }
+      }
+     ]
+    },
+    {
+     "name": "MAIL_TOTAL",
+     "kind": "simple",
+     "path": "MAIL_TOTAL",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 223
+     }
+    },
+    {
+     "name": "LOI_PROPA",
+     "kind": "factor",
+     "path": "LOI_PROPA",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 224
+     },
+     "keywords": [
+      {
+       "name": "LOI",
+       "kind": "simple",
+       "path": "LOI_PROPA/LOI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "PARIS",
+       "into": [
+        "PARIS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 227
+       }
+      },
+      {
+       "name": "b_paris",
+       "kind": "bloc",
+       "path": "LOI_PROPA/[b_paris]",
+       "condition": "equal_to(\"LOI\", 'PARIS')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 228
+       },
+       "keywords": [
+        {
+         "name": "C",
+         "kind": "simple",
+         "path": "LOI_PROPA/C",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 230
+         }
+        },
+        {
+         "name": "M",
+         "kind": "simple",
+         "path": "LOI_PROPA/M",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 231
+         }
+        },
+        {
+         "name": "DELTA_K_SEUIL",
+         "kind": "simple",
+         "path": "LOI_PROPA/DELTA_K_SEUIL",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "val_min": 0.0,
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/propa_fiss.py",
+          "line": 232
+         }
+        }
+       ]
+      },
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "LOI_PROPA/MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 234
+       }
+      }
+     ]
+    },
+    {
+     "name": "COMP_LINE",
+     "kind": "factor",
+     "path": "COMP_LINE",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 236
+     },
+     "keywords": [
+      {
+       "name": "COEF_MULT_MINI",
+       "kind": "simple",
+       "path": "COMP_LINE/COEF_MULT_MINI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 239
+       }
+      },
+      {
+       "name": "COEF_MULT_MAXI",
+       "kind": "simple",
+       "path": "COMP_LINE/COEF_MULT_MAXI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 240
+       }
+      }
+     ]
+    },
+    {
+     "name": "CRIT_ANGL_BIFURCATION",
+     "kind": "simple",
+     "path": "CRIT_ANGL_BIFURCATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SITT_MAX",
+     "into": [
+      "SITT_MAX",
+      "SITT_MAX_DEVER",
+      "K1_MAX",
+      "K2_NUL",
+      "PLAN",
+      "ANGLE_IMPO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 242
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_init",
+   "kind": "bloc",
+   "path": "[b_init]",
+   "condition": "(equal_to(\"METHODE_PROPA\", 'INITIALISATION'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 250
+   },
+   "keywords": [
+    {
+     "name": "MAIL_STRUC",
+     "kind": "simple",
+     "path": "MAIL_STRUC",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 252
+     }
+    },
+    {
+     "name": "FORM_FISS",
+     "kind": "simple",
+     "path": "FORM_FISS",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DEMI_DROITE",
+      "DEMI_PLAN",
+      "ELLIPSE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 253
+     }
+    },
+    {
+     "name": "GROUP_MA_FOND",
+     "kind": "simple",
+     "path": "GROUP_MA_FOND",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "default": "FOND",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 254
+     }
+    },
+    {
+     "name": "GROUP_MA_FISS",
+     "kind": "simple",
+     "path": "GROUP_MA_FISS",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "default": "FISS",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 255
+     }
+    },
+    {
+     "name": "MAIL_TOTAL",
+     "kind": "simple",
+     "path": "MAIL_TOTAL",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 256
+     }
+    },
+    {
+     "name": "MAIL_FISS",
+     "kind": "simple",
+     "path": "MAIL_FISS",
+     "status": "f",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 257
+     }
+    },
+    {
+     "name": "b_droite",
+     "kind": "bloc",
+     "path": "[b_droite]",
+     "condition": "equal_to(\"FORM_FISS\", 'DEMI_DROITE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 258
+     },
+     "keywords": [
+      {
+       "name": "PFON",
+       "kind": "simple",
+       "path": "PFON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 260
+       }
+      },
+      {
+       "name": "DTAN",
+       "kind": "simple",
+       "path": "DTAN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 261
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_plan",
+     "kind": "bloc",
+     "path": "[b_plan]",
+     "condition": "equal_to(\"FORM_FISS\", 'DEMI_PLAN') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 263
+     },
+     "keywords": [
+      {
+       "name": "DTAN",
+       "kind": "simple",
+       "path": "DTAN",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 265
+       }
+      },
+      {
+       "name": "POINT_ORIG",
+       "kind": "simple",
+       "path": "POINT_ORIG",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 266
+       }
+      },
+      {
+       "name": "POINT_EXTR",
+       "kind": "simple",
+       "path": "POINT_EXTR",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 267
+       }
+      },
+      {
+       "name": "NB_POINT_FOND",
+       "kind": "simple",
+       "path": "NB_POINT_FOND",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 268
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_ellipse",
+     "kind": "bloc",
+     "path": "[b_ellipse]",
+     "condition": "equal_to(\"FORM_FISS\", 'ELLIPSE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/propa_fiss.py",
+      "line": 270
+     },
+     "keywords": [
+      {
+       "name": "CENTRE",
+       "kind": "simple",
+       "path": "CENTRE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 272
+       }
+      },
+      {
+       "name": "DEMI_GRAND_AXE",
+       "kind": "simple",
+       "path": "DEMI_GRAND_AXE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 273
+       }
+      },
+      {
+       "name": "DEMI_PETIT_AXE",
+       "kind": "simple",
+       "path": "DEMI_PETIT_AXE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 274
+       }
+      },
+      {
+       "name": "VECT_X",
+       "kind": "simple",
+       "path": "VECT_X",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 275
+       }
+      },
+      {
+       "name": "VECT_Y",
+       "kind": "simple",
+       "path": "VECT_Y",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "min": 3,
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 276
+       }
+      },
+      {
+       "name": "ANGLE_ORIG",
+       "kind": "simple",
+       "path": "ANGLE_ORIG",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 277
+       }
+      },
+      {
+       "name": "ANGLE_EXTR",
+       "kind": "simple",
+       "path": "ANGLE_EXTR",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 278
+       }
+      },
+      {
+       "name": "NB_POINT_FOND",
+       "kind": "simple",
+       "path": "NB_POINT_FOND",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/propa_fiss.py",
+        "line": 279
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    0,
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/propa_fiss.py",
+    "line": 282
+   }
+  }
+ ]
+}

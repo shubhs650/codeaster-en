@@ -1,0 +1,144 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_CHAR_SEISME",
+ "kind": "OPER",
+ "fr": "Calcul du chargement sismique",
+ "translation_upstream": null,
+ "op": 92,
+ "reentrant": "n",
+ "result_types": [
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "MONO_APPUI",
+    "MODE_STAT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+  "line": 36
+ },
+ "keywords": [
+  {
+   "name": "MATR_MASS",
+   "kind": "simple",
+   "path": "MATR_MASS",
+   "status": "o",
+   "type": [
+    "matr_asse_depl_r"
+   ],
+   "fr": "Matrice de masse",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "DIRECTION",
+   "kind": "simple",
+   "path": "DIRECTION",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": 6,
+   "fr": "Directions du séisme imposé",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "MONO_APPUI",
+   "kind": "simple",
+   "path": "MONO_APPUI",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "MODE_STAT",
+   "kind": "simple",
+   "path": "MODE_STAT",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "b_mode_stat",
+   "kind": "bloc",
+   "path": "[b_mode_stat]",
+   "condition": "exists(\"MODE_STAT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+      "line": 49
+     }
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_char_seisme.py",
+    "line": 51
+   }
+  }
+ ]
+}

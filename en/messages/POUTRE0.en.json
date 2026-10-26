@@ -1,0 +1,307 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/poutre0.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "POUTRE0",
+ "source": {
+  "file": "code_aster/Messages/poutre0.py"
+ },
+ "messages": {
+  "1": {
+   "id": "POUTRE0_1",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nGROUP_MA et GROUP_MA_BORD doivent avoir le même nombre de groupes de mailles.\nÀ un GROUP_MA doit correspondre un GROUP_MA_BORD.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "3": {
+   "id": "POUTRE0_3",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nVous avez renseigné NOEUD ou GROUP_NO avec GROUP_MA_BORD.\nIl faut que NOEUD ou GROUP_NO contienne un noeud unique.\n\nSi vous avez des groupes de mailles disjoints, il faut également renseigner GROUP_MA.\nEt dans ce cas à un NOEUD doit correspondre un GROUP_MA et un GROUP_MA_BORD.\n",
+   "placeholders": [],
+   "source": {
+    "line": 31
+   },
+   "en": null
+  },
+  "4": {
+   "id": "POUTRE0_4",
+   "fr": "\nPoutre circulaire à variation de section homothétique.\n\nLe rapport d'homothétie est assez différent entre les rayons et les épaisseurs :\n    - rayon 1 = %(r1)16.9g\n    - rayon 2 = %(r2)16.9g\n        `- rapport d'homothétie = %(r5)16.9g\n\n    - épaisseur 1 = %(r3)16.9g\n    - épaisseur 2 = %(r4)16.9g\n        `- rapport d'homothétie = %(r6)16.9g\n\nLa différence entre les rapports d'homothétie est supérieure à 1%%.\nLes hypothèses du modèle de poutre à variation homothétique ne sont donc pas\nrespectées (consultez la documentation de référence des éléments poutre).\n\n\nRisques et conseil:\n    - Les calculs seront inexacts.\n    - Raffiner le maillage permet de minimiser les écarts.\n",
+   "placeholders": [
+    "%(r1)16.9g",
+    "%(r2)16.9g",
+    "%(r5)16.9g",
+    "%(r3)16.9g",
+    "%(r4)16.9g",
+    "%(r6)16.9g",
+    "%%"
+   ],
+   "source": {
+    "line": 42
+   },
+   "en": null
+  },
+  "5": {
+   "id": "POUTRE0_5",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nVous avez renseigné GROUP_NO avec GROUP_MA et GROUP_MA_BORD.\nLe nombre de noeud dans GROUP_NO doit être identique au nombre de groupe de mailles\ndonné sous GROUP_MA et GROUP_MA_BORD.\n",
+   "placeholders": [],
+   "source": {
+    "line": 65
+   },
+   "en": null
+  },
+  "6": {
+   "id": "POUTRE0_6",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nVous avez renseigné GROUP_MA et GROUP_MA_BORD avec plusieurs groupes de mailles.\nVous devez renseigner 'LONGUEUR' 'MATERIAU' 'LIAISON', pour que l'on puisse calculer les\ncaractéristiques de torsion en prenant en compte les facteurs de participation de chaque\ngroupe de mailles.\n",
+   "placeholders": [],
+   "source": {
+    "line": 74
+   },
+   "en": null
+  },
+  "7": {
+   "id": "POUTRE0_7",
+   "fr": "\nVous avez renseigné GROUP_MA et GROUP_MA_BORD avec un seul groupe de mailles par\nmot clef.\nVous avez également renseigné 'LONGUEUR' 'MATERIAU' 'LIAISON', cela est inutile.\nLes valeurs sont ignorées.\n",
+   "placeholders": [],
+   "source": {
+    "line": 84
+   },
+   "en": null
+  },
+  "8": {
+   "id": "POUTRE0_8",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nVous avez renseigné GROUP_NO. Le GROUP_NO %(k1)s n'existe pas dans le maillage.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 92
+   },
+   "en": null
+  },
+  "10": {
+   "id": "POUTRE0_10",
+   "fr": "La caractéristique %(k1)8s est négative ou nulle %(r1)e\n",
+   "placeholders": [
+    "%(k1)8s",
+    "%(r1)e"
+   ],
+   "source": {
+    "line": 99
+   },
+   "en": null
+  },
+  "11": {
+   "id": "POUTRE0_11",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nLa section présente des caractéristiques mécaniques négatives.\n\nVous avez renseigné l'option TABLE_CARA='OUI'. Si vous utilisez les résultats dans la commande\nAFFE_CARA_ELEM / POUTRE avec TABLE_CARA, vous risquez d'avoir des résultats faux.\n\nConseil : La discrétisation de la section a un impact sur la qualité des résultats.\n          Raffiner le maillage devrait permettre de lever cette erreur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "12": {
+   "id": "POUTRE0_12",
+   "fr": "\nLes coordonnées du centre de gravité de la section sont G=(%(r1)e, %(r2)e)\n\nSi vous utilisez des MULTIFIBRES et que le maillage de description des fibres est le même que\ncelui utilisé dans cette commande, il faut dans la commande DEFI_GEOM_FIBRE renseigner soit\nle mot clef COOR_AXE_POUTRE soit le mot clef TABLE_CARA et NOM_SEC de façon à faire\ncorrespondre le centre de gravité des fibres à l'axe neutre de la poutre :\n    COOR_AXE_POUTRE = (%(r1)e, %(r2)e)\nou\n    TABLE_CARA = %(k1)s, NOM_SEC = \"%(k2)s\",\n\nVous avez renseigné l'option TABLE_CARA='OUI'. Si vous utilisez les résultats dans la\ncommande : AFFE_CARA_ELEM / POUTRE avec TABLE_CARA et NOM_SEC,\n                           / GEOM_FIBRE\n                           / MULTIFIBRE\n\nVous risquez d'avoir des résultats inattendus, si vous ne renseignez pas :\n    COOR_AXE_POUTRE ou TABLE_CARA et NOM_SEC\n",
+   "placeholders": [
+    "%(r1)e",
+    "%(r2)e",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 116
+   },
+   "en": null
+  },
+  "13": {
+   "id": "POUTRE0_13",
+   "fr": "\nLe repère principal d'inertie est tourné d'un angle de %(r1)f° par rapport aux axes du maillage.\n\nSi vous utilisez des MULTIFIBRES et que le maillage de description des fibres est le même que\ncelui utilisé dans cette commande, il faut dans la commande DEFI_GEOM_FIBRE renseigner soit\nle mot clef ANGLE soit le mot clef TABLE_CARA et NOM_SEC de façon à faire correspondre le\nrepère principal d'inertie aux axes du maillage de la section :\n    ANGLE = %(r2)e\nou\n    TABLE_CARA = %(k1)s, NOM_SEC = \"%(k2)s\",\n\nVous avez renseigné l'option TABLE_CARA='OUI'. Si vous utilisez les résultats dans la commande\nAFFE_CARA_ELEM / POUTRE avec TABLE_CARA, il est peut-être nécessaire dans la commande\nAFFE_CARA_ELEM de renseigner le mot clef ORIENTATION de façon à définir la position du repère\nprincipal d'inertie par rapport au repère global.\n\nORIENTATION=(\n    _F(GROUP_MA='....', CARA='ANGL_VRIL', VALE= ??? )\n)\nPar défaut ANGL_VRIL= 0\n\nVous risquez d'avoir des résultats inattendus, si vous ne renseignez ni :\n - ANGLE ou  TABLE_CARA et NOM_SEC dans DEFI_GEOM_FIBRE\n - ORIENTATION dans AFFE_CARA_ELEM\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)e",
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "14": {
+   "id": "POUTRE0_14",
+   "fr": "Vous utilisez un élément de type multifibre. Il faut que sous COMPORTEMENT le mot clef RELATION soit 'MULTIFIBRE'.",
+   "placeholders": [],
+   "source": {
+    "line": 164
+   },
+   "en": null
+  },
+  "16": {
+   "id": "POUTRE0_16",
+   "fr": "Vous utilisez un élément de type multifibre avec DEFORMATION='%(k1)s'. L'option RIGI_GEOM='OUI' n'est pas autorisée dans ce cas.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 167
+   },
+   "en": null
+  },
+  "17": {
+   "id": "POUTRE0_17",
+   "fr": "L'élément n'est utilisable qu'en élasticité.",
+   "placeholders": [],
+   "source": {
+    "line": 170
+   },
+   "en": null
+  },
+  "20": {
+   "id": "POUTRE0_20",
+   "fr": "\nProblème lors de l'utilisation de MACR_CARA_POUTRE\n\nVous avez renseigné %(k2)s. Le GROUP_MA %(k1)s n'existe pas dans le maillage.\n",
+   "placeholders": [
+    "%(k2)s",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 171
+   },
+   "en": null
+  },
+  "40": {
+   "id": "POUTRE0_40",
+   "fr": "Les éléments de poutre ne peuvent pas utiliser une déformation de type %(k1)s.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 178
+   },
+   "en": null
+  },
+  "41": {
+   "id": "POUTRE0_41",
+   "fr": "Ces éléments de poutre ne peuvent être utilisés qu'en grandes transformations (GROT_GDEP).",
+   "placeholders": [],
+   "source": {
+    "line": 179
+   },
+   "en": null
+  },
+  "42": {
+   "id": "POUTRE0_42",
+   "fr": "Il manque la masse volumique RHO qui est nécessaire en dynamique.",
+   "placeholders": [],
+   "source": {
+    "line": 182
+   },
+   "en": null
+  },
+  "43": {
+   "id": "POUTRE0_43",
+   "fr": "La matrice sécante n'est pas disponible avec le comportement %(k1)s sur les éléments barre.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 183
+   },
+   "en": null
+  },
+  "49": {
+   "id": "POUTRE0_49",
+   "fr": "La méthode IMPLEX ne peut pas être utilisée avec la loi de comportement %(k1)s sur les éléments barre.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 186
+   },
+   "en": null
+  },
+  "50": {
+   "id": "POUTRE0_50",
+   "fr": "On ne trouve pas de comportement élastique sur la poutre. C'est nécessaire pour récupérer la masse volumique.",
+   "placeholders": [],
+   "source": {
+    "line": 189
+   },
+   "en": null
+  },
+  "59": {
+   "id": "POUTRE0_59",
+   "fr": "Le coefficient de poisson n'est pas constant. Les éléments de poutre n'en tiennent pas compte.",
+   "placeholders": [],
+   "source": {
+    "line": 192
+   },
+   "en": null
+  },
+  "61": {
+   "id": "POUTRE0_61",
+   "fr": "La loi de comportement %(k1)s n'est pas disponible pour les poutres classiques. Utilisez les poutres multifibres.",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 195
+   },
+   "en": null
+  },
+  "62": {
+   "id": "POUTRE0_62",
+   "fr": "Les noeuds sont confondus pour un élément de barre.",
+   "placeholders": [],
+   "source": {
+    "line": 198
+   },
+   "en": null
+  },
+  "64": {
+   "id": "POUTRE0_64",
+   "fr": "Avec l'option GROT_GDEP, les coefficients de flexibilité ne sont pas pris en compte dans la matrice de raideur géométrique.\n   Coefficient de flexibilité suivant y : %(r1)f\n   Coefficient de flexibilité suivant z : %(r2)f",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 199
+   },
+   "en": null
+  },
+  "81": {
+   "id": "POUTRE0_81",
+   "fr": "\nPour les éléments de poutre à section variable affine : seule une section rectangle plein est possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 204
+   },
+   "en": null
+  },
+  "82": {
+   "id": "POUTRE0_82",
+   "fr": "\nPour les éléments de poutre à section variable homothétique : l'aire initiale est nulle.\n",
+   "placeholders": [],
+   "source": {
+    "line": 209
+   },
+   "en": null
+  },
+  "90": {
+   "id": "POUTRE0_90",
+   "fr": "Le seul comportement élastique valide est ELAS pour les éléments de poutre squelette.",
+   "placeholders": [],
+   "source": {
+    "line": 214
+   },
+   "en": null
+  }
+ }
+}

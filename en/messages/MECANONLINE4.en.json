@@ -1,0 +1,88 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/mecanonline4.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MECANONLINE4",
+ "source": {
+  "file": "code_aster/Messages/mecanonline4.py"
+ },
+ "messages": {
+  "3": {
+   "id": "MECANONLINE4_3",
+   "fr": "\n Calcul des valeurs propres en grandes déformations\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MECANONLINE4_4",
+   "fr": "Le calcul d'un critère de stabilité ou d'un mode vibratoire n'est pas possible avec des éléments de type POU_D_EM.",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MECANONLINE4_14",
+   "fr": "\n Vous utilisez la méthode CONTINUE pour le traitement du contact et faites une reprise de calcul (mot-clé reuse). De plus, vous n'avez pas activé\n l'initialisation automatique des statuts de contact. L'état initial de contact sera donc non contactant.\n Cela peut entraîner des difficultés de convergence en présence de fortes non-linéarités. En présence de frottement, la solution peut bifurquer\n différemment.\n\n Conseils :\n   - si vous le pouvez, faites votre calcul en une seule fois.\n   - activez la détection automatique du contact initial sur toutes les zones (CONTACT_INIT='INTERPENETRE' dans DEFI_CONTACT).\n",
+   "placeholders": [],
+   "source": {
+    "line": 31
+   },
+   "en": null
+  },
+  "15": {
+   "id": "MECANONLINE4_15",
+   "fr": "\n Vous utilisez la méthode CONTINUE pour le traitement du contact et définissez un état initial via le mot-clé ETAT_INIT.  De plus, vous n'avez pas activé\n l'initialisation automatique des statuts de contact. L'état initial de contact sera donc non contactant.\n\n Il est conseillé d'activer la détection automatique du contact initial sur toutes les zones (CONTACT_INIT='INTERPENETRE' dans DEFI_CONTACT).\n",
+   "placeholders": [],
+   "source": {
+    "line": 43
+   },
+   "en": null
+  },
+  "22": {
+   "id": "MECANONLINE4_22",
+   "fr": "\n On suppose qu'on part d'un état a vitesses nulles\n",
+   "placeholders": [],
+   "source": {
+    "line": 51
+   },
+   "en": null
+  },
+  "23": {
+   "id": "MECANONLINE4_23",
+   "fr": "\n On estime une accélération initiale.\n",
+   "placeholders": [],
+   "source": {
+    "line": 56
+   },
+   "en": null
+  },
+  "47": {
+   "id": "MECANONLINE4_47",
+   "fr": "\n Vous faites une reprise de calcul avec PILOTAGE en longueur d'arc et avec l'option ANGL_INCR_DEPL mais il n'y pas assez d'informations dans\n la structure de données résultat. Il vous faut en effet au moins les deux derniers champs déplacements solutions.\n Changer l'option de PILOTAGE (utilisez NORM_INCR_DEPL) ou refaites le premier calcul pour enrichir la structure de données résultat (modifiez vos options du mot-clé ARCHIVAGE).\n",
+   "placeholders": [],
+   "source": {
+    "line": 61
+   },
+   "en": null
+  },
+  "50": {
+   "id": "MECANONLINE4_50",
+   "fr": "\nLa spécification d'un champ de contrainte initial (via le mot-clé SIGM) \ndans le cas d'un schéma multi-pas est fortement déconseillée. En effet, \nl'accélération initiale sera calculée sans tenir compte de ce champ de contrainte \ninitial, ce qui peut conduire à des résultats faux ! \nIl est donc recommandé de spécifier un état initial via le mot-clé EVOL_NOLI.\n",
+   "placeholders": [],
+   "source": {
+    "line": 68
+   },
+   "en": null
+  }
+ }
+}

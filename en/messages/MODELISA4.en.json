@@ -1,0 +1,609 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/modelisa4.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MODELISA4",
+ "source": {
+  "file": "code_aster/Messages/modelisa4.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MODELISA4_1",
+   "fr": "\nPrésence de mailles dégénérées : modifier le maillage du béton.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MODELISA4_6",
+   "fr": "\n  -> Phase de vérification du maillage : présence de noeuds orphelins.\n     Les noeuds orphelins sont des noeuds qui n'appartiennent à aucune maille.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MODELISA4_7",
+   "fr": "\n certains noeuds connectent plus de 200 mailles. ces mailles ne sont pas vérifiées.\n",
+   "placeholders": [],
+   "source": {
+    "line": 34
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MODELISA4_8",
+   "fr": "\n  -> Phase de vérification du maillage : présence de mailles doubles (ou triples, ...)\n     Les mailles multiples sont des mailles de noms différents qui ont la même connectivité\n     (elles s'appuient sur les mêmes noeuds).\n\n  -> Risque & Conseil :\n     Le risque est de modéliser 2 fois (ou plus) l'espace. On peut par exemple avoir\n     un modèle 2 fois trop lourd ou 2 fois trop rigide.\n     Remarque : les mailles concernées sont imprimées dans le fichier \"message\".\n     Sur ce maillage, il est imprudent d'affecter des quantités avec le mot clé TOUT='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 39
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MODELISA4_9",
+   "fr": "\n  -> Phase de vérification du maillage : présence de mailles dégénérées.\n     Le rapport entre la plus petite arête sur la plus grande est inférieur à %(r1).3e\n\n  -> Risque & Conseil :\n     Vérifiez votre maillage. La présence de telles mailles peut conduire à des\n     problèmes de convergence et nuire à la qualité des résultats.\n",
+   "placeholders": [
+    "%(r1).3e"
+   ],
+   "source": {
+    "line": 52
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MODELISA4_10",
+   "fr": "\nPhase de vérification du maillage - mailles dégénérées\n\n  -> Risque & Conseil :\n     Vérifiez votre maillage. La présence de telles mailles peut conduire à des\n     problèmes de convergence et nuire à la qualité des résultats.\n\n     Pour détecter les mailles problématiques, il est possible de désactiver\n     la vérification. Puis de convertir le maillage en linéaire, afin de trouver\n     facilement les arêtes ou faces doubles.\n",
+   "placeholders": [],
+   "source": {
+    "line": 62
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MODELISA4_11",
+   "fr": "\nDeux arêtes partagent les mêmes noeuds sommets (%(i1)d, %(i2)d)\nmais présentent des noeuds milieux différents (%(i3)d vs %(i4)d).\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d",
+    "%(i4)d"
+   ],
+   "source": {
+    "line": 75
+   },
+   "en": null
+  },
+  "12": {
+   "id": "MODELISA4_12",
+   "fr": "\nDeux faces partagent les mêmes noeuds sommets (%(i1)d, %(i2)d, %(i3)d, %(i4)d)\nmais présentent des noeuds milieux différents. Elles sont en général à l'interface de\ndeux mailles volumiques.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d",
+    "%(i4)d"
+   ],
+   "source": {
+    "line": 81
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MODELISA4_13",
+   "fr": "\n seule la grandeur NEUT_F est traitée actuellement.\n",
+   "placeholders": [],
+   "source": {
+    "line": 88
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MODELISA4_14",
+   "fr": "\n les champs de CHAM_F et CHAM_PARA n'ont pas la même discrétisation NOEU/CART/ELGA/ELNO/ELEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 93
+   },
+   "en": null
+  },
+  "16": {
+   "id": "MODELISA4_16",
+   "fr": "\n avec \"NOEUD_CMP\", il faut donner un nom et une composante.\n",
+   "placeholders": [],
+   "source": {
+    "line": 98
+   },
+   "en": null
+  },
+  "17": {
+   "id": "MODELISA4_17",
+   "fr": "\n pour récupérer le champ de géométrie (ou d'abscisse curviligne),\n il faut utiliser le mot clé maillage\n",
+   "placeholders": [],
+   "source": {
+    "line": 103
+   },
+   "en": null
+  },
+  "18": {
+   "id": "MODELISA4_18",
+   "fr": "\n le mot-clé type_champ =  %(k1)s n'est pas cohérent avec le type\n du champ extrait :  %(k2)s_%(k3)s\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 109
+   },
+   "en": null
+  },
+  "19": {
+   "id": "MODELISA4_19",
+   "fr": "\nOn ne peut pas extraire le champ avec l'accès donné pour la structure de données RESULTAT.\nMerci de vérifier si un seul numéro d'ordre est spécifié,\nou si l'instant spécifié existe.\n",
+   "placeholders": [],
+   "source": {
+    "line": 115
+   },
+   "en": null
+  },
+  "24": {
+   "id": "MODELISA4_24",
+   "fr": "\n arrêt sur erreur(s), normale non sortante\n",
+   "placeholders": [],
+   "source": {
+    "line": 122
+   },
+   "en": null
+  },
+  "28": {
+   "id": "MODELISA4_28",
+   "fr": "\nLe numéro de corrélation et/ou le type de réseau passes dans le fichier de commande ne  sont pas cohérents avec le fichier .70\n",
+   "placeholders": [],
+   "source": {
+    "line": 127
+   },
+   "en": null
+  },
+  "29": {
+   "id": "MODELISA4_29",
+   "fr": "\nLe numéro de corrélation et/ou le type de réseau passes dans le fichier de commande ne  sont pas cohérents avec le fichier .70\n",
+   "placeholders": [],
+   "source": {
+    "line": 132
+   },
+   "en": null
+  },
+  "30": {
+   "id": "MODELISA4_30",
+   "fr": "\nCe type de réseau n est pas encore implante dans le code\n",
+   "placeholders": [],
+   "source": {
+    "line": 137
+   },
+   "en": null
+  },
+  "31": {
+   "id": "MODELISA4_31",
+   "fr": "\nLe numéro de corrélation et/ou le type de réseau passes dans le fichier de commande ne  sont pas cohérents avec le fichier .71\n",
+   "placeholders": [],
+   "source": {
+    "line": 142
+   },
+   "en": null
+  },
+  "32": {
+   "id": "MODELISA4_32",
+   "fr": "\nCe type de réseau n'est pas encore implanté dans le code\n",
+   "placeholders": [],
+   "source": {
+    "line": 147
+   },
+   "en": null
+  },
+  "33": {
+   "id": "MODELISA4_33",
+   "fr": "\nLe numéro de corrélation et/ou le type de réseau passes dans le fichier de commande ne  sont pas cohérents avec le fichier .71\n",
+   "placeholders": [],
+   "source": {
+    "line": 152
+   },
+   "en": null
+  },
+  "35": {
+   "id": "MODELISA4_35",
+   "fr": "\n jacobien négatif\n",
+   "placeholders": [],
+   "source": {
+    "line": 157
+   },
+   "en": null
+  },
+  "36": {
+   "id": "MODELISA4_36",
+   "fr": "\n La normale de la maille %(k1)s est nulle\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 162
+   },
+   "en": null
+  },
+  "39": {
+   "id": "MODELISA4_39",
+   "fr": "\n problème rencontré lors de l interpolation d une des déformées modales\n",
+   "placeholders": [],
+   "source": {
+    "line": 167
+   },
+   "en": null
+  },
+  "40": {
+   "id": "MODELISA4_40",
+   "fr": "\n problème rencontré lors de l interpolation d une des fonctions\n",
+   "placeholders": [],
+   "source": {
+    "line": 172
+   },
+   "en": null
+  },
+  "50": {
+   "id": "MODELISA4_50",
+   "fr": "\n la maille :  %(k1)s  n'est pas affectée par un élément fini.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 177
+   },
+   "en": null
+  },
+  "51": {
+   "id": "MODELISA4_51",
+   "fr": "\nAucune des mailles sélectionnées n'est affectée par un élément fini.\n",
+   "placeholders": [],
+   "source": {
+    "line": 182
+   },
+   "en": null
+  },
+  "53": {
+   "id": "MODELISA4_53",
+   "fr": "\n le noeud d application de l excitation n est pas un noeud du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 187
+   },
+   "en": null
+  },
+  "54": {
+   "id": "MODELISA4_54",
+   "fr": "\n le noeud d application de l excitation ne doit pas être situe au bord du domaine de définition du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 192
+   },
+   "en": null
+  },
+  "55": {
+   "id": "MODELISA4_55",
+   "fr": "\n la fenêtre excitée déborde du domaine de définition du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 197
+   },
+   "en": null
+  },
+  "56": {
+   "id": "MODELISA4_56",
+   "fr": "\n la demi fenêtre excitée en amont du noeud central d'application n'est pas définie.\n",
+   "placeholders": [],
+   "source": {
+    "line": 202
+   },
+   "en": null
+  },
+  "57": {
+   "id": "MODELISA4_57",
+   "fr": "\n la demi fenêtre excitée en amont du noeud central d'application déborde du domaine de définition du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 207
+   },
+   "en": null
+  },
+  "58": {
+   "id": "MODELISA4_58",
+   "fr": "\n les demi fenêtres excitées en aval et en amont du noeud central d'application ne sont pas raccordées.\n",
+   "placeholders": [],
+   "source": {
+    "line": 212
+   },
+   "en": null
+  },
+  "59": {
+   "id": "MODELISA4_59",
+   "fr": "\n la demi fenêtre excitée en aval du noeud central d'application n'est pas définie.\n",
+   "placeholders": [],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "60": {
+   "id": "MODELISA4_60",
+   "fr": "\n la demi fenêtre excitée en aval du noeud central d'application déborde du domaine de définition du maillage.\n",
+   "placeholders": [],
+   "source": {
+    "line": 222
+   },
+   "en": null
+  },
+  "61": {
+   "id": "MODELISA4_61",
+   "fr": "\n les fonctions interprétées doivent être tabulées auparavant\n",
+   "placeholders": [],
+   "source": {
+    "line": 227
+   },
+   "en": null
+  },
+  "62": {
+   "id": "MODELISA4_62",
+   "fr": "\n nappe interdite pour définir le flux\n",
+   "placeholders": [],
+   "source": {
+    "line": 232
+   },
+   "en": null
+  },
+  "63": {
+   "id": "MODELISA4_63",
+   "fr": "\n  on déborde a gauche\n",
+   "placeholders": [],
+   "source": {
+    "line": 237
+   },
+   "en": null
+  },
+  "64": {
+   "id": "MODELISA4_64",
+   "fr": "\n prolongement gauche inconnu\n",
+   "placeholders": [],
+   "source": {
+    "line": 242
+   },
+   "en": null
+  },
+  "65": {
+   "id": "MODELISA4_65",
+   "fr": "\n  on déborde a droite\n",
+   "placeholders": [],
+   "source": {
+    "line": 247
+   },
+   "en": null
+  },
+  "66": {
+   "id": "MODELISA4_66",
+   "fr": "\n prolongement droite inconnu\n",
+   "placeholders": [],
+   "source": {
+    "line": 252
+   },
+   "en": null
+  },
+  "67": {
+   "id": "MODELISA4_67",
+   "fr": "\n  on est en dehors des bornes\n",
+   "placeholders": [],
+   "source": {
+    "line": 257
+   },
+   "en": null
+  },
+  "68": {
+   "id": "MODELISA4_68",
+   "fr": "\n les mailles de type  %(k1)s ne sont pas traitées pour la sélection des noeuds\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 262
+   },
+   "en": null
+  },
+  "69": {
+   "id": "MODELISA4_69",
+   "fr": "\n Erreur d'utilisation :\n   On cherche à nommer un objet en y insérant un numéro.\n   Le numéro %(i1)d est trop grand vis à vis de la chaîne de caractère.\n\n Risque et Conseil :\n   Vous avez atteint la limite de ce que sait faire le code\n   (trop de poursuites, de pas de temps, de pas d'archivage, ...)\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 267
+   },
+   "en": null
+  },
+  "70": {
+   "id": "MODELISA4_70",
+   "fr": "\n erreur : deux noeuds du câble sont confondus on ne peut pas définir le cylindre.\n",
+   "placeholders": [],
+   "source": {
+    "line": 278
+   },
+   "en": null
+  },
+  "71": {
+   "id": "MODELISA4_71",
+   "fr": "\n immersion du câble no %(k1)s  dans la structure béton : le noeud  %(k2)s  se trouve à l'extérieur de la structure\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 283
+   },
+   "en": null
+  },
+  "72": {
+   "id": "MODELISA4_72",
+   "fr": "\n maille dégénérée\n",
+   "placeholders": [],
+   "source": {
+    "line": 288
+   },
+   "en": null
+  },
+  "76": {
+   "id": "MODELISA4_76",
+   "fr": "\n le vecteur normal est dans le plan tangent\n",
+   "placeholders": [],
+   "source": {
+    "line": 293
+   },
+   "en": null
+  },
+  "77": {
+   "id": "MODELISA4_77",
+   "fr": "\n  %(k1)s  mot clé lu \" %(k2)s \" incompatible avec \" %(k3)s \"\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(k3)s"
+   ],
+   "source": {
+    "line": 298
+   },
+   "en": null
+  },
+  "78": {
+   "id": "MODELISA4_78",
+   "fr": "\nerreur de lecture pour %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 303
+   },
+   "en": null
+  },
+  "79": {
+   "id": "MODELISA4_79",
+   "fr": "\nitem > 24 car  %(k1)s\nCe message est un message d'erreur développeur.\nContactez le support technique.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 308
+   },
+   "en": null
+  },
+  "80": {
+   "id": "MODELISA4_80",
+   "fr": "\n  %(k1)s  le groupe  %(k2)s  est vide. On l'ignore.\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 315
+   },
+   "en": null
+  },
+  "83": {
+   "id": "MODELISA4_83",
+   "fr": "\n  le vecteur est perpendiculaire à la poutre.\n",
+   "placeholders": [],
+   "source": {
+    "line": 320
+   },
+   "en": null
+  },
+  "84": {
+   "id": "MODELISA4_84",
+   "fr": "\n  La poutre présente une ou plusieurs branches: cas non permis.\n  Essayez de créer des groupes de mailles différents pour\n  chaque branche et de les orienter indépendemment.\n",
+   "placeholders": [],
+   "source": {
+    "line": 325
+   },
+   "en": null
+  },
+  "89": {
+   "id": "MODELISA4_89",
+   "fr": "\n mot clé WOHLER non trouvé\n",
+   "placeholders": [],
+   "source": {
+    "line": 332
+   },
+   "en": null
+  },
+  "91": {
+   "id": "MODELISA4_91",
+   "fr": "\n mot clé MANSON_COFFIN non trouvé\n",
+   "placeholders": [],
+   "source": {
+    "line": 337
+   },
+   "en": null
+  },
+  "92": {
+   "id": "MODELISA4_92",
+   "fr": "\n lecture 1 : ligne lue trop longue : %(k1)s\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 342
+   },
+   "en": null
+  },
+  "93": {
+   "id": "MODELISA4_93",
+   "fr": "\n  Problème lors de la lecture du fichier maillage\n  numéro de la dernière ligne traitée : %(i1)d\n\n  -> Risque & Conseil :\n  Vérifiez que le maillage est au format Aster (.mail).\n  Vérifiez que le mot clé FIN est présent à la fin du fichier de maillage.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 347
+   },
+   "en": null
+  },
+  "94": {
+   "id": "MODELISA4_94",
+   "fr": "\n  Problème lors de la lecture du fichier maillage\n  Le fichier à lire est vide.\n\n  -> Risque & Conseil :\n  Vérifiez la valeur mise derrière le mot clé UNITE et\n  que cette valeur par défaut correspond au type \"mail\" dans ASTK\n",
+   "placeholders": [],
+   "source": {
+    "line": 357
+   },
+   "en": null
+  },
+  "97": {
+   "id": "MODELISA4_97",
+   "fr": "\n le nom du groupe  %(k1)s  est tronque a 8 caractères\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 367
+   },
+   "en": null
+  },
+  "98": {
+   "id": "MODELISA4_98",
+   "fr": "\n il faut un nom après \"nom=\"\n",
+   "placeholders": [],
+   "source": {
+    "line": 372
+   },
+   "en": null
+  }
+ }
+}

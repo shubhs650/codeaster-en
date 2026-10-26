@@ -1,0 +1,621 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_GENE_PHYS",
+ "kind": "OPER",
+ "fr": "Restituer dans la base physique des résultats en coordonnées généralisées",
+ "translation_upstream": null,
+ "op": 75,
+ "reentrant": "n",
+ "result_types": [
+  "dyna_trans",
+  "mode_meca",
+  "dyna_harmo"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "INST",
+    "LIST_INST",
+    "TOUT_INST",
+    "TOUT_ORDRE",
+    "NUME_ORDRE",
+    "NUME_MODE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "FREQ",
+    "LIST_FREQ"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MULT_APPUI",
+    "CORR_STAT"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MULT_APPUI",
+    "ACCE_MONO_APPUI"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MULT_APPUI",
+    "NOEUD",
+    "GROUP_NO",
+    "MAILLE",
+    "GROUP_MA"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "CORR_STAT",
+    "NOEUD",
+    "GROUP_NO",
+    "MAILLE",
+    "GROUP_MA"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "NOEUD",
+    "GROUP_NO"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "ACCE_MONO_APPUI",
+    "DIRECTION"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+  "line": 42
+ },
+ "keywords": [
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "o",
+   "type": [
+    "tran_gene",
+    "mode_gene",
+    "harm_gene",
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "MODE_MECA",
+   "kind": "simple",
+   "path": "MODE_MECA",
+   "status": "f",
+   "type": [
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "f",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "TOUT_INST",
+   "kind": "simple",
+   "path": "TOUT_INST",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "TOUT_ORDRE",
+   "kind": "simple",
+   "path": "TOUT_ORDRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "NUME_ORDRE",
+   "kind": "simple",
+   "path": "NUME_ORDRE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "NUME_MODE",
+   "kind": "simple",
+   "path": "NUME_MODE",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "ABSOLU",
+    "RELATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "b_prec_rela",
+   "kind": "bloc",
+   "path": "[b_prec_rela]",
+   "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 70
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1e-06,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+      "line": 72
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_prec_abso",
+   "kind": "bloc",
+   "path": "[b_prec_abso]",
+   "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+      "line": 75
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_exict_resu_gene",
+   "kind": "bloc",
+   "path": "[b_exict_resu_gene]",
+   "condition": "exists(\"RESU_GENE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "ENVELOPPE",
+     "kind": "simple",
+     "path": "ENVELOPPE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NORME_MOMENT",
+      "VALE_ABS"
+     ],
+     "fr": null,
+     "other": {
+      "default": "VALE_ABS"
+     },
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+      "line": 79
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "NON",
+    "LIN"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 83
+   }
+  },
+  {
+   "name": "MULT_APPUI",
+   "kind": "simple",
+   "path": "MULT_APPUI",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 84
+   }
+  },
+  {
+   "name": "CORR_STAT",
+   "kind": "simple",
+   "path": "CORR_STAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "TOUT_CHAM",
+   "kind": "simple",
+   "path": "TOUT_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 86
+   }
+  },
+  {
+   "name": "b_nom_cham",
+   "kind": "bloc",
+   "path": "[b_nom_cham]",
+   "condition": "not exists(\"TOUT_CHAM\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 8,
+     "default": "ACCE",
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE",
+      "ACCE_ABSOLU",
+      "EFGE_ELNO",
+      "SIPO_ELNO",
+      "SIGM_ELNO",
+      "FORC_NODA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+      "line": 89
+     }
+    }
+   ]
+  },
+  {
+   "name": "GROUP_NO",
+   "kind": "simple",
+   "path": "GROUP_NO",
+   "status": "f",
+   "type": [
+    "grno"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 107
+   }
+  },
+  {
+   "name": "NOEUD",
+   "kind": "simple",
+   "path": "NOEUD",
+   "status": "c",
+   "type": [
+    "no"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 108
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 109
+   }
+  },
+  {
+   "name": "ACCE_MONO_APPUI",
+   "kind": "simple",
+   "path": "ACCE_MONO_APPUI",
+   "status": "f",
+   "type": [
+    "fonction_sdaster",
+    "nappe_sdaster",
+    "formule"
+   ],
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 110
+   }
+  },
+  {
+   "name": "DIRECTION",
+   "kind": "simple",
+   "path": "DIRECTION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 3,
+   "max": 9,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 111
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_gene_phys.py",
+    "line": 112
+   }
+  }
+ ]
+}

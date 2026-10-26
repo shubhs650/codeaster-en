@@ -1,0 +1,1799 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FISS_XFEM",
+ "kind": "OPER",
+ "fr": "Définition des caratéristiques d'une fissure ou d'une interface avec X-FEM",
+ "translation_upstream": null,
+ "op": 41,
+ "reentrant": "n",
+ "result_types": [
+  "fiss_xfem"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "MAILLAGE_GRILLE",
+    "FISS_GRILLE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "TYPE_DISCONTINUITE",
+   "kind": "simple",
+   "path": "TYPE_DISCONTINUITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "FISSURE",
+   "into": [
+    "FISSURE",
+    "INTERFACE",
+    "COHESIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "MAILLAGE_GRILLE",
+   "kind": "simple",
+   "path": "MAILLAGE_GRILLE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "FISS_GRILLE",
+   "kind": "simple",
+   "path": "FISS_GRILLE",
+   "status": "f",
+   "type": [
+    "fiss_xfem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "b_cohesif",
+   "kind": "bloc",
+   "path": "[b_cohesif]",
+   "condition": "equal_to(\"TYPE_DISCONTINUITE\", 'COHESIF')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "DEFI_FISS",
+     "kind": "factor",
+     "path": "DEFI_FISS",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 53
+     },
+     "keywords": [
+      {
+       "name": "FONC_LT",
+       "kind": "simple",
+       "path": "DEFI_FISS/FONC_LT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "FONC_LN",
+       "kind": "simple",
+       "path": "DEFI_FISS/FONC_LN",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "GROUP_MA_BORD",
+       "kind": "simple",
+       "path": "DEFI_FISS/GROUP_MA_BORD",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 59
+       }
+      },
+      {
+       "name": "FORM_FISS",
+       "kind": "simple",
+       "path": "DEFI_FISS/FORM_FISS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ELLIPSE",
+        "RECTANGLE",
+        "CYLINDRE",
+        "DEMI_PLAN",
+        "SEGMENT",
+        "DEMI_DROITE",
+        "DROITE",
+        "ENTAILLE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 60
+       }
+      },
+      {
+       "name": "b_ellipse",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_ellipse]",
+       "condition": "equal_to(\"FORM_FISS\", 'ELLIPSE') ",
+       "fr": "Paramètres de la fissure/interface elliptique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 74
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 77
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 78
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 79
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 80
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 81
+         }
+        },
+        {
+         "name": "COTE_FISS",
+         "kind": "simple",
+         "path": "DEFI_FISS/COTE_FISS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "IN",
+         "into": [
+          "IN",
+          "OUT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 82
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_rectangle",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_rectangle]",
+       "condition": "equal_to(\"FORM_FISS\", 'RECTANGLE') ",
+       "fr": "Paramètres de la fissure/interface rectangulaire",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 84
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 87
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 88
+         }
+        },
+        {
+         "name": "RAYON_CONGE",
+         "kind": "simple",
+         "path": "DEFI_FISS/RAYON_CONGE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 89
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 90
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 91
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 92
+         }
+        },
+        {
+         "name": "COTE_FISS",
+         "kind": "simple",
+         "path": "DEFI_FISS/COTE_FISS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "IN",
+         "into": [
+          "IN",
+          "OUT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 93
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_entaille",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_entaille]",
+       "condition": "equal_to(\"FORM_FISS\", 'ENTAILLE') ",
+       "fr": "Paramètres de l'interface entaille",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 95
+       },
+       "keywords": [
+        {
+         "name": "DEMI_LONGUEUR",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_LONGUEUR",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 98
+         }
+        },
+        {
+         "name": "RAYON_CONGE",
+         "kind": "simple",
+         "path": "DEFI_FISS/RAYON_CONGE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 99
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 100
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 101
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 102
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_cylindre",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_cylindre]",
+       "condition": "equal_to(\"FORM_FISS\", 'CYLINDRE') ",
+       "fr": "Paramètres de la fissure cylindrique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 104
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 107
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 108
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 109
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 110
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 111
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_demiplan",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_demiplan]",
+       "condition": "equal_to(\"FORM_FISS\", 'DEMI_PLAN') ",
+       "fr": "Paramètres de la fissure plane à front droit",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 113
+       },
+       "keywords": [
+        {
+         "name": "PFON",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 116
+         }
+        },
+        {
+         "name": "NORMALE",
+         "kind": "simple",
+         "path": "DEFI_FISS/NORMALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 117
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 118
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_segment",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_segment]",
+       "condition": "equal_to(\"FORM_FISS\", 'SEGMENT') ",
+       "fr": "Paramètres de la fissure 2D segment",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 120
+       },
+       "keywords": [
+        {
+         "name": "PFON_ORIG",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON_ORIG",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 123
+         }
+        },
+        {
+         "name": "PFON_EXTR",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON_EXTR",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 124
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_demidroite",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_demidroite]",
+       "condition": "equal_to(\"FORM_FISS\", 'DEMI_DROITE') ",
+       "fr": "Paramètres de la fissure 2D demi-droite",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 126
+       },
+       "keywords": [
+        {
+         "name": "PFON",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 129
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 130
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_droite",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_droite]",
+       "condition": "equal_to(\"FORM_FISS\", 'DROITE') ",
+       "fr": "Paramètres de l'interface 2D (fissure traversante)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 132
+       },
+       "keywords": [
+        {
+         "name": "POINT",
+         "kind": "simple",
+         "path": "DEFI_FISS/POINT",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 135
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 136
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_sans_cohesif",
+   "kind": "bloc",
+   "path": "[b_sans_cohesif]",
+   "condition": "not equal_to(\"TYPE_DISCONTINUITE\", 'COHESIF')",
+   "fr": "Options pas ouvertes avec le cohesif",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 140
+   },
+   "keywords": [
+    {
+     "name": "DEFI_FISS",
+     "kind": "factor",
+     "path": "DEFI_FISS",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 143
+     },
+     "keywords": [
+      {
+       "name": "FONC_LT",
+       "kind": "simple",
+       "path": "DEFI_FISS/FONC_LT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 146
+       }
+      },
+      {
+       "name": "FONC_LN",
+       "kind": "simple",
+       "path": "DEFI_FISS/FONC_LN",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 147
+       }
+      },
+      {
+       "name": "CHAM_NO_LSN",
+       "kind": "simple",
+       "path": "DEFI_FISS/CHAM_NO_LSN",
+       "status": "f",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 149
+       }
+      },
+      {
+       "name": "CHAM_NO_LST",
+       "kind": "simple",
+       "path": "DEFI_FISS/CHAM_NO_LST",
+       "status": "f",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 150
+       }
+      },
+      {
+       "name": "GROUP_MA_FISS",
+       "kind": "simple",
+       "path": "DEFI_FISS/GROUP_MA_FISS",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 151
+       }
+      },
+      {
+       "name": "GROUP_MA_FOND",
+       "kind": "simple",
+       "path": "DEFI_FISS/GROUP_MA_FOND",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "min": 1,
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 152
+       }
+      },
+      {
+       "name": "FORM_FISS",
+       "kind": "simple",
+       "path": "DEFI_FISS/FORM_FISS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ELLIPSE",
+        "RECTANGLE",
+        "CYLINDRE",
+        "DEMI_PLAN",
+        "SEGMENT",
+        "DEMI_DROITE",
+        "DROITE",
+        "ENTAILLE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 153
+       }
+      },
+      {
+       "name": "b_ellipse",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_ellipse]",
+       "condition": "equal_to(\"FORM_FISS\", 'ELLIPSE') ",
+       "fr": "Paramètres de la fissure/interface elliptique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 167
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 170
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 171
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 172
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 173
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 174
+         }
+        },
+        {
+         "name": "COTE_FISS",
+         "kind": "simple",
+         "path": "DEFI_FISS/COTE_FISS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "IN",
+         "into": [
+          "IN",
+          "OUT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 175
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_rectangle",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_rectangle]",
+       "condition": "equal_to(\"FORM_FISS\", 'RECTANGLE') ",
+       "fr": "Paramètres de la fissure/interface rectangulaire",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 177
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 180
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 181
+         }
+        },
+        {
+         "name": "RAYON_CONGE",
+         "kind": "simple",
+         "path": "DEFI_FISS/RAYON_CONGE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "default": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 182
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 183
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 184
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 185
+         }
+        },
+        {
+         "name": "COTE_FISS",
+         "kind": "simple",
+         "path": "DEFI_FISS/COTE_FISS",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "IN",
+         "into": [
+          "IN",
+          "OUT"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 186
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_entaille",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_entaille]",
+       "condition": "equal_to(\"FORM_FISS\", 'ENTAILLE') ",
+       "fr": "Paramètres de l'interface entaille",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 188
+       },
+       "keywords": [
+        {
+         "name": "DEMI_LONGUEUR",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_LONGUEUR",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 191
+         }
+        },
+        {
+         "name": "RAYON_CONGE",
+         "kind": "simple",
+         "path": "DEFI_FISS/RAYON_CONGE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 192
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 193
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 194
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 195
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_cylindre",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_cylindre]",
+       "condition": "equal_to(\"FORM_FISS\", 'CYLINDRE') ",
+       "fr": "Paramètres de la fissure cylindrique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 197
+       },
+       "keywords": [
+        {
+         "name": "DEMI_GRAND_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_GRAND_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 200
+         }
+        },
+        {
+         "name": "DEMI_PETIT_AXE",
+         "kind": "simple",
+         "path": "DEFI_FISS/DEMI_PETIT_AXE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0.0,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 201
+         }
+        },
+        {
+         "name": "CENTRE",
+         "kind": "simple",
+         "path": "DEFI_FISS/CENTRE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 202
+         }
+        },
+        {
+         "name": "VECT_X",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_X",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 203
+         }
+        },
+        {
+         "name": "VECT_Y",
+         "kind": "simple",
+         "path": "DEFI_FISS/VECT_Y",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 204
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_demiplan",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_demiplan]",
+       "condition": "equal_to(\"FORM_FISS\", 'DEMI_PLAN') ",
+       "fr": "Paramètres de la fissure plane à front droit",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 206
+       },
+       "keywords": [
+        {
+         "name": "PFON",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 209
+         }
+        },
+        {
+         "name": "NORMALE",
+         "kind": "simple",
+         "path": "DEFI_FISS/NORMALE",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 210
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 211
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_segment",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_segment]",
+       "condition": "equal_to(\"FORM_FISS\", 'SEGMENT') ",
+       "fr": "Paramètres de la fissure 2D segment",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 213
+       },
+       "keywords": [
+        {
+         "name": "PFON_ORIG",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON_ORIG",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 216
+         }
+        },
+        {
+         "name": "PFON_EXTR",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON_EXTR",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 217
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_demidroite",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_demidroite]",
+       "condition": "equal_to(\"FORM_FISS\", 'DEMI_DROITE') ",
+       "fr": "Paramètres de la fissure 2D demi-droite",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 219
+       },
+       "keywords": [
+        {
+         "name": "PFON",
+         "kind": "simple",
+         "path": "DEFI_FISS/PFON",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 222
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 223
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_droite",
+       "kind": "bloc",
+       "path": "DEFI_FISS/[b_droite]",
+       "condition": "equal_to(\"FORM_FISS\", 'DROITE') ",
+       "fr": "Paramètres de l'interface 2D (fissure traversante)",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 225
+       },
+       "keywords": [
+        {
+         "name": "POINT",
+         "kind": "simple",
+         "path": "DEFI_FISS/POINT",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 228
+         }
+        },
+        {
+         "name": "DTAN",
+         "kind": "simple",
+         "path": "DEFI_FISS/DTAN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "min": 3,
+         "max": 3,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 229
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "GROUP_MA_ENRI",
+   "kind": "simple",
+   "path": "GROUP_MA_ENRI",
+   "status": "f",
+   "type": [
+    "grma"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 236
+   }
+  },
+  {
+   "name": "b_enri_inte",
+   "kind": "bloc",
+   "path": "[b_enri_inte]",
+   "condition": "equal_to(\"TYPE_DISCONTINUITE\", 'INTERFACE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 240
+   },
+   "keywords": [
+    {
+     "name": "CHAM_DISCONTINUITE",
+     "kind": "simple",
+     "path": "CHAM_DISCONTINUITE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DEPL",
+     "into": [
+      "DEPL",
+      "SIGM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 242
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_enri_fiss",
+   "kind": "bloc",
+   "path": "[b_enri_fiss]",
+   "condition": "equal_to(\"TYPE_DISCONTINUITE\", 'FISSURE') ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 244
+   },
+   "keywords": [
+    {
+     "name": "CHAM_DISCONTINUITE",
+     "kind": "simple",
+     "path": "CHAM_DISCONTINUITE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DEPL",
+     "into": [
+      "DEPL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 246
+     }
+    },
+    {
+     "name": "TYPE_ENRI_FOND",
+     "kind": "simple",
+     "path": "TYPE_ENRI_FOND",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GEOMETRIQUE",
+     "into": [
+      "TOPOLOGIQUE",
+      "GEOMETRIQUE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 247
+     }
+    },
+    {
+     "name": "b_enri_geom",
+     "kind": "bloc",
+     "path": "[b_enri_geom]",
+     "condition": "equal_to(\"TYPE_ENRI_FOND\", 'GEOMETRIQUE') ",
+     "fr": "Paramètres de l enrichissement geometrique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 250
+     },
+     "keywords": [
+      {
+       "name": "RAYON_ENRI",
+       "kind": "simple",
+       "path": "RAYON_ENRI",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 253
+       }
+      },
+      {
+       "name": "b_enri_couches",
+       "kind": "bloc",
+       "path": "[b_enri_couches]",
+       "condition": "(not exists(\"RAYON_ENRI\")) ",
+       "fr": "Paramètres de l enrichissement à n couches",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 254
+       },
+       "keywords": [
+        {
+         "name": "NB_COUCHES",
+         "kind": "simple",
+         "path": "NB_COUCHES",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "val_min": 1,
+         "default": 2,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+          "line": 257
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_jonction",
+   "kind": "bloc",
+   "path": "[b_jonction]",
+   "condition": "(not exists(\"MAILLAGE_GRILLE\")) and (not exists(\"FISS_GRILLE\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 264
+   },
+   "keywords": [
+    {
+     "name": "JONCTION",
+     "kind": "factor",
+     "path": "JONCTION",
+     "status": "f",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+      "line": 266
+     },
+     "keywords": [
+      {
+       "name": "FISSURE",
+       "kind": "simple",
+       "path": "JONCTION/FISSURE",
+       "status": "o",
+       "type": [
+        "fiss_xfem"
+       ],
+       "min": 1,
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 269
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "JONCTION/POINT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+        "line": 270
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2,
+    3
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fiss_xfem.py",
+    "line": 276
+   }
+  }
+ ]
+}

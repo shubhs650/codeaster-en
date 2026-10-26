@@ -1,0 +1,341 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/liss_spectre.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "LISS_SPECTRE",
+ "kind": "MACRO",
+ "fr": "Lissage de spectre, post-traitement de séisme",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.liss_spectre_ops.liss_spectre_ops",
+ "reentrant": "n",
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/liss_spectre.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "SPECTRE",
+   "kind": "factor",
+   "path": "SPECTRE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TABLE",
+      "NAPPE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "SPECTRE/TABLE",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/liss_spectre.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "NAPPE",
+     "kind": "simple",
+     "path": "SPECTRE/NAPPE",
+     "status": "f",
+     "type": [
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/liss_spectre.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "ELARG",
+     "kind": "simple",
+     "path": "SPECTRE/ELARG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/liss_spectre.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "b_nappe",
+     "kind": "bloc",
+     "path": "SPECTRE/[b_nappe]",
+     "condition": "exists(\"NAPPE\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/liss_spectre.py",
+      "line": 39
+     },
+     "keywords": [
+      {
+       "name": "DIRECTION",
+       "kind": "simple",
+       "path": "SPECTRE/DIRECTION",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "X",
+        "Y",
+        "Z",
+        "H"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/liss_spectre.py",
+        "line": 41
+       }
+      },
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "SPECTRE/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/liss_spectre.py",
+        "line": 42
+       }
+      },
+      {
+       "name": "BATIMENT",
+       "kind": "simple",
+       "path": "SPECTRE/BATIMENT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/liss_spectre.py",
+        "line": 43
+       }
+      },
+      {
+       "name": "COMMENTAIRE",
+       "kind": "simple",
+       "path": "SPECTRE/COMMENTAIRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/liss_spectre.py",
+        "line": 44
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "VERIFICATION",
+    "CONCEPTION"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "FREQ_MIN",
+   "kind": "simple",
+   "path": "FREQ_MIN",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "FREQ_MAX",
+   "kind": "simple",
+   "path": "FREQ_MAX",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "NB_FREQ_LISS",
+   "kind": "simple",
+   "path": "NB_FREQ_LISS",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": 2,
+   "val_min": 1,
+   "default": 10,
+   "fr": "Nb de points pour le lissage ",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "ZPA",
+   "kind": "simple",
+   "path": "ZPA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "BORNE_X",
+   "kind": "simple",
+   "path": "BORNE_X",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": 2,
+   "fr": "Intervalles de variation des abscisses",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 55
+   }
+  },
+  {
+   "name": "BORNE_Y",
+   "kind": "simple",
+   "path": "BORNE_Y",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": 2,
+   "fr": "Intervalles de variation des ordonnées",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "ECHELLE_X",
+   "kind": "simple",
+   "path": "ECHELLE_X",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "LIN",
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": "Type d'échelle pour les abscisses",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "ECHELLE_Y",
+   "kind": "simple",
+   "path": "ECHELLE_Y",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "LIN",
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": "Type d'échelle pour les ordonnées",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "LEGENDE_X",
+   "kind": "simple",
+   "path": "LEGENDE_X",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Légende associée à l'axe des abscisses",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "LEGENDE_Y",
+   "kind": "simple",
+   "path": "LEGENDE_Y",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Légende associée à l'axe des ordonnées",
+   "source": {
+    "file": "code_aster/Cata/Commands/liss_spectre.py",
+    "line": 76
+   }
+  }
+ ]
+}

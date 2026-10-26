@@ -1,0 +1,876 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/modi_maillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MODI_MAILLAGE",
+ "kind": "OPER",
+ "fr": "Effectuer des modifications sur un maillage existant: réorienter des mailles servant, à l'application d'une pression, à la modélisation du contact,...",
+ "translation_upstream": {
+  "MODI_MAILLAGE": "Modify a mesh"
+ },
+ "op": 154,
+ "reentrant": "o:MAILLAGE",
+ "result_types": [
+  "maillage_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": true,
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_PEAU",
+    "ORIE_NORM_COQUE",
+    "MODI_MAILLE",
+    "TRANSLATION",
+    "ROTATION",
+    "MODI_BASE",
+    "ECHELLE",
+    "SYMETRIE",
+    "ORIE_LIGNE",
+    "ABSC_CURV"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_PEAU",
+    "ORIE_NORM_COQUE",
+    "MODI_MAILLE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "DEFORME",
+    "ORIE_FISSURE",
+    "ORIE_PEAU",
+    "ORIE_NORM_COQUE",
+    "MODI_MAILLE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "ORIE_PEAU",
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_NORM_COQUE",
+    "MODI_MAILLE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "ORIE_NORM_COQUE",
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_PEAU",
+    "MODI_MAILLE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_PEAU",
+    "ORIE_NORM_COQUE",
+    "MODI_MAILLE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "PRESENT_ABSENT",
+   "keywords": [
+    "MODI_MAILLE",
+    "ORIE_FISSURE",
+    "DEFORME",
+    "ORIE_PEAU",
+    "ORIE_NORM_COQUE",
+    "ORIE_LIGNE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "ROTATION",
+    "MODI_BASE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYMETRIE",
+    "ROTATION"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYMETRIE",
+    "TRANSLATION"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYMETRIE",
+    "MODI_BASE"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "SYMETRIE",
+    "ECHELLE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/modi_maillage.py",
+  "line": 51
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 100
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 101
+   }
+  },
+  {
+   "name": "ORIE_FISSURE",
+   "kind": "factor",
+   "path": "ORIE_FISSURE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 102
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ORIE_FISSURE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 103
+     }
+    }
+   ]
+  },
+  {
+   "name": "DEFORME",
+   "kind": "factor",
+   "path": "DEFORME",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "DEPL",
+      "ALEA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 105
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "DEFORME/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "TRAN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "DEPL",
+     "kind": "simple",
+     "path": "DEFORME/DEPL",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "ALEA",
+     "kind": "simple",
+     "path": "DEFORME/ALEA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 110
+     }
+    }
+   ]
+  },
+  {
+   "name": "ORIE_PEAU",
+   "kind": "factor",
+   "path": "ORIE_PEAU",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 112
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_PEAU",
+     "kind": "simple",
+     "path": "ORIE_PEAU/GROUP_MA_PEAU",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 115
+     }
+    },
+    {
+     "name": "GROUP_MA_INTERNE",
+     "kind": "simple",
+     "path": "ORIE_PEAU/GROUP_MA_INTERNE",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 116
+     }
+    }
+   ]
+  },
+  {
+   "name": "ORIE_NORM_COQUE",
+   "kind": "factor",
+   "path": "ORIE_NORM_COQUE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 118
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ORIE_NORM_COQUE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "VECT_NORM",
+     "kind": "simple",
+     "path": "ORIE_NORM_COQUE/VECT_NORM",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "b_vect_norm",
+     "kind": "bloc",
+     "path": "ORIE_NORM_COQUE/[b_vect_norm]",
+     "condition": "exists(\"VECT_NORM\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 123
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ORIE_NORM_COQUE/GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_maillage.py",
+        "line": 123
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ORIE_LIGNE",
+   "kind": "factor",
+   "path": "ORIE_LIGNE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 125
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ORIE_LIGNE/GROUP_MA",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "VECT_TANG",
+     "kind": "simple",
+     "path": "ORIE_LIGNE/VECT_TANG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "b_vect_tang",
+     "kind": "bloc",
+     "path": "ORIE_LIGNE/[b_vect_tang]",
+     "condition": "exists(\"VECT_TANG\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 130
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "ORIE_LIGNE/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/modi_maillage.py",
+        "line": 130
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MODI_MAILLE",
+   "kind": "factor",
+   "path": "MODI_MAILLE",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA_FOND",
+      "GROUP_NO_FOND"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 132
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "MODI_MAILLE/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NOEUD_QUART"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "GROUP_MA_FOND",
+     "kind": "simple",
+     "path": "MODI_MAILLE/GROUP_MA_FOND",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "GROUP_NO_FOND",
+     "kind": "simple",
+     "path": "MODI_MAILLE/GROUP_NO_FOND",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 138
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODI_BASE",
+   "kind": "factor",
+   "path": "MODI_BASE",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 140
+   },
+   "keywords": [
+    {
+     "name": "VECT_X",
+     "kind": "simple",
+     "path": "MODI_BASE/VECT_X",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "VECT_Y",
+     "kind": "simple",
+     "path": "MODI_BASE/VECT_Y",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 143
+     }
+    }
+   ]
+  },
+  {
+   "name": "ECHELLE",
+   "kind": "simple",
+   "path": "ECHELLE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 145
+   }
+  },
+  {
+   "name": "TRANSLATION",
+   "kind": "simple",
+   "path": "TRANSLATION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 146
+   }
+  },
+  {
+   "name": "ROTATION",
+   "kind": "factor",
+   "path": "ROTATION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "DIR",
+      "POIN_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 147
+   },
+   "keywords": [
+    {
+     "name": "POIN_1",
+     "kind": "simple",
+     "path": "ROTATION/POIN_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "ANGLE",
+     "kind": "simple",
+     "path": "ROTATION/ANGLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "POIN_2",
+     "kind": "simple",
+     "path": "ROTATION/POIN_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 153
+     }
+    },
+    {
+     "name": "DIR",
+     "kind": "simple",
+     "path": "ROTATION/DIR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 154
+     }
+    }
+   ]
+  },
+  {
+   "name": "SYMETRIE",
+   "kind": "factor",
+   "path": "SYMETRIE",
+   "status": "f",
+   "max": 1,
+   "fr": "Symétrie du maillage par rapport à un plan en 3D ou à une droite en 2D.",
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 156
+   },
+   "keywords": [
+    {
+     "name": "POINT",
+     "kind": "simple",
+     "path": "SYMETRIE/POINT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": "Point appartenant à la droite ou au plan.",
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "AXE_1",
+     "kind": "simple",
+     "path": "SYMETRIE/AXE_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 3,
+     "fr": "Vecteur directeur de la droite ou 1er vecteur appartenant au plan.",
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 163
+     }
+    },
+    {
+     "name": "AXE_2",
+     "kind": "simple",
+     "path": "SYMETRIE/AXE_2",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 3,
+     "max": 3,
+     "fr": "2nd vecteur appartenant du plan.",
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 170
+     }
+    }
+   ]
+  },
+  {
+   "name": "ABSC_CURV",
+   "kind": "factor",
+   "path": "ABSC_CURV",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 172
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ABSC_CURV/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ABSC_CURV/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "GROUP_NO_ORIG",
+     "kind": "simple",
+     "path": "ABSC_CURV/GROUP_NO_ORIG",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/modi_maillage.py",
+      "line": 178
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/modi_maillage.py",
+    "line": 180
+   }
+  }
+ ]
+}

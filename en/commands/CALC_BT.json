@@ -1,0 +1,489 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_bt.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_BT",
+ "kind": "MACRO",
+ "fr": "Modéle Bielles-Tirants à partir d'un modéle 2D",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_bt_ops.calc_bt_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster",
+  "evol_elas"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_bt.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "RESU_BT",
+   "kind": "simple",
+   "path": "RESU_BT",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "DDL_IMPO",
+   "kind": "factor",
+   "path": "DDL_IMPO",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "DDL_IMPO/GROUP_NO",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Groupe de noeuds associé aux blocages",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "DDL_IMPO/DY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "DDL_IMPO/DX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 53
+     }
+    }
+   ]
+  },
+  {
+   "name": "FORCE_NODALE",
+   "kind": "factor",
+   "path": "FORCE_NODALE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 55
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "FORCE_NODALE/GROUP_NO",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": "Groupe de noeuds associé aux forces imposees",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "FY",
+     "kind": "simple",
+     "path": "FORCE_NODALE/FY",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "FX",
+     "kind": "simple",
+     "path": "FORCE_NODALE/FX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_bt.py",
+      "line": 60
+     }
+    }
+   ]
+  },
+  {
+   "name": "BETON",
+   "kind": "simple",
+   "path": "BETON",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "ACIER",
+   "kind": "simple",
+   "path": "ACIER",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "GROUP_MA_EXT",
+   "kind": "simple",
+   "path": "GROUP_MA_EXT",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Groupe de mailles definisant le contour",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "GROUP_MA_INT",
+   "kind": "simple",
+   "path": "GROUP_MA_INT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "fr": "Groupe de mailles definisant le contour",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "SCHEMA",
+   "kind": "simple",
+   "path": "SCHEMA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "SECTION",
+   "into": [
+    "SECTION",
+    "TOPO"
+   ],
+   "fr": "Schema d'optimisation",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "SIGMA_C",
+   "kind": "simple",
+   "path": "SIGMA_C",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "val_min": 0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "SIGMA_Y",
+   "kind": "simple",
+   "path": "SIGMA_Y",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "val_min": 0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "PAS_X",
+   "kind": "simple",
+   "path": "PAS_X",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "fr": "Paramètre de l'interpolation des pics de contraint. Pas selon la direction X.",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "PAS_Y",
+   "kind": "simple",
+   "path": "PAS_Y",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "fr": "Paramètre de l'interpolation des pics de contraint. Pas selon la direction Y.",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 85
+   }
+  },
+  {
+   "name": "TOLE_BASE",
+   "kind": "simple",
+   "path": "TOLE_BASE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "default": 0.01,
+   "fr": "Distance tolerée pour l'interpolation de pics de contrainte.",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 92
+   }
+  },
+  {
+   "name": "TOLE_BT",
+   "kind": "simple",
+   "path": "TOLE_BT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "fr": "Distance tolerée pour la fusion des noeuds du treillis.",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 100
+   }
+  },
+  {
+   "name": "NMAX_ITER",
+   "kind": "simple",
+   "path": "NMAX_ITER",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "max": 1,
+   "val_min": 1,
+   "default": 150,
+   "fr": "Nombre maximum d'iterations",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 107
+   }
+  },
+  {
+   "name": "RESI_RELA_TOPO",
+   "kind": "simple",
+   "path": "RESI_RELA_TOPO",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "default": 1e-06,
+   "fr": "Précision de convergence de la procédure d'optimisation de section",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 110
+   }
+  },
+  {
+   "name": "RESI_RELA_SECTION",
+   "kind": "simple",
+   "path": "RESI_RELA_SECTION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "default": 1e-05,
+   "fr": "Précision de convergence de la procédure d'optimisation de topologique",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 118
+   }
+  },
+  {
+   "name": "CRIT_SECTION",
+   "kind": "simple",
+   "path": "CRIT_SECTION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "default": 0.5,
+   "fr": "Taux d'évolution maximale des sections",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 126
+   }
+  },
+  {
+   "name": "CRIT_ELIM",
+   "kind": "simple",
+   "path": "CRIT_ELIM",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "default": 0.5,
+   "fr": "Taux maximale d'élimination  des éléments",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 134
+   }
+  },
+  {
+   "name": "SECTION_MINI",
+   "kind": "simple",
+   "path": "SECTION_MINI",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "val_min": 0,
+   "fr": "Sections minimale",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 142
+   }
+  },
+  {
+   "name": "LONGUEUR_MAX",
+   "kind": "simple",
+   "path": "LONGUEUR_MAX",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "val_min": 0,
+   "fr": "Longueur maximale",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 143
+   }
+  },
+  {
+   "name": "INIT_ALEA",
+   "kind": "simple",
+   "path": "INIT_ALEA",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "fr": "Germ of the random field",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_bt.py",
+    "line": 144
+   }
+  }
+ ]
+}

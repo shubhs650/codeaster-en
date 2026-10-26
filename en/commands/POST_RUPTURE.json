@@ -1,0 +1,711 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_rupture.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_RUPTURE",
+ "kind": "MACRO",
+ "fr": "post-traitements en Rupture",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_rupture_ops.post_rupture_ops",
+ "reentrant": "f:TABLE",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_rupture.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "OPERATION",
+   "kind": "simple",
+   "path": "OPERATION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ABSC_CURV_NORM",
+    "ANGLE_BIFURCATION",
+    "K_EQ",
+    "DELTA_K_EQ",
+    "COMPTAGE_CYCLES",
+    "LOI_PROPA",
+    "CUMUL_CYCLES",
+    "PILO_PROPA",
+    "K1_NEGATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "b_absc",
+   "kind": "bloc",
+   "path": "[b_absc]",
+   "condition": "equal_to(\"OPERATION\", 'ABSC_CURV_NORM')",
+   "fr": "normalise l'abscisse curviligne",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 52
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "ABSC_CURV_NORM",
+     "fr": "Nom de la nouvelle colonne",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_angle",
+   "kind": "bloc",
+   "path": "[b_angle]",
+   "condition": "equal_to(\"OPERATION\", 'ANGLE_BIFURCATION')  ",
+   "fr": "Angle de bifurcation",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 66
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "BETA",
+     "fr": "Nom de la nouvelle colonne",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SITT_MAX",
+     "into": [
+      "SITT_MAX",
+      "SITT_MAX_DEVER",
+      "K1_MAX",
+      "K2_NUL",
+      "PLAN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "f",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 79
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_Keq",
+   "kind": "bloc",
+   "path": "[b_Keq]",
+   "condition": "equal_to(\"OPERATION\", 'K_EQ')  ",
+   "fr": "Cumul sur les modes : calcul du K equivalent",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 87
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "K_EQ",
+     "fr": "Nom de la nouvelle colonne",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "CUMUL",
+     "kind": "simple",
+     "path": "CUMUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "CUMUL_G",
+     "into": [
+      "LINEAIRE",
+      "QUADRATIQUE",
+      "CUMUL_G",
+      "MODE_I"
+     ],
+     "fr": "Formule de cumul des modes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "b_mater",
+     "kind": "bloc",
+     "path": "[b_mater]",
+     "condition": "is_in(\"CUMUL\", ('QUADRATIQUE','CUMUL_G'))",
+     "fr": "materiau du fond de fissure",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 104
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_DeltaKeq",
+   "kind": "bloc",
+   "path": "[b_DeltaKeq]",
+   "condition": "equal_to(\"OPERATION\", 'DELTA_K_EQ')  ",
+   "fr": "Cumul sur les modes : calcul du DeltaK equivalent",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 110
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "DELTA_K_EQ",
+     "fr": "Nom de la nouvelle colonne",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "CUMUL",
+     "kind": "simple",
+     "path": "CUMUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "CUMUL_G",
+     "into": [
+      "QUADRATIQUE",
+      "CUMUL_G",
+      "MODE_I"
+     ],
+     "fr": "Formule de cumul des modes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 116
+     }
+    },
+    {
+     "name": "b_mater",
+     "kind": "bloc",
+     "path": "[b_mater]",
+     "condition": "is_in(\"CUMUL\", ('QUADRATIQUE','CUMUL_G'))",
+     "fr": "materiau du fond de fissure",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 124
+     },
+     "keywords": [
+      {
+       "name": "MATER",
+       "kind": "simple",
+       "path": "MATER",
+       "status": "o",
+       "type": [
+        "mater_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 127
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_Comptage",
+   "kind": "bloc",
+   "path": "[b_Comptage]",
+   "condition": "equal_to(\"OPERATION\", 'COMPTAGE_CYCLES')  ",
+   "fr": "Comptage des cycles",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 133
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Nom des quantités sur lesquelles s'effectuent le comptage",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "COMPTAGE",
+     "kind": "simple",
+     "path": "COMPTAGE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "RAINFLOW",
+      "RCCM",
+      "NATUREL",
+      "UNITAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "DELTA_OSCI",
+     "kind": "simple",
+     "path": "DELTA_OSCI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "b_Comptage_Unitaire",
+     "kind": "bloc",
+     "path": "[b_Comptage_Unitaire]",
+     "condition": "equal_to(\"COMPTAGE\", 'UNITAIRE')",
+     "fr": "comptage unitaire pour les amplitudes constantes",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 145
+     },
+     "keywords": [
+      {
+       "name": "COEF_MULT_MINI",
+       "kind": "simple",
+       "path": "COEF_MULT_MINI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "COEF_MULT_MAXI",
+       "kind": "simple",
+       "path": "COEF_MULT_MAXI",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 149
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_Loi_Propa",
+   "kind": "bloc",
+   "path": "[b_Loi_Propa]",
+   "condition": "equal_to(\"OPERATION\", 'LOI_PROPA')  ",
+   "fr": "calcul de l'incrément d'avancée de fissure par cycle",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 155
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "DELTA_A",
+     "fr": "Nom de la nouvelle colonne",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "NOM_DELTA_K_EQ",
+     "kind": "simple",
+     "path": "NOM_DELTA_K_EQ",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "DELTA_K_EQ",
+     "fr": "Nom de la quantité correspondant au Delta_K_eq",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 161
+     }
+    },
+    {
+     "name": "LOI",
+     "kind": "simple",
+     "path": "LOI",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "PARIS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 168
+     }
+    },
+    {
+     "name": "b_paris",
+     "kind": "bloc",
+     "path": "[b_paris]",
+     "condition": "equal_to(\"LOI\", 'PARIS')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 169
+     },
+     "keywords": [
+      {
+       "name": "C",
+       "kind": "simple",
+       "path": "C",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 171
+       }
+      },
+      {
+       "name": "M",
+       "kind": "simple",
+       "path": "M",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 172
+       }
+      },
+      {
+       "name": "DELTA_K_SEUIL",
+       "kind": "simple",
+       "path": "DELTA_K_SEUIL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "val_min": 0.0,
+       "default": 0.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_rupture.py",
+        "line": 173
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_cumul",
+   "kind": "bloc",
+   "path": "[b_cumul]",
+   "condition": "equal_to(\"OPERATION\", 'CUMUL_CYCLES')  ",
+   "fr": "Cumul sur les cycles",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 179
+   },
+   "keywords": [
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "DELTA_A",
+     "fr": "Nom de la colonne à traiter",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 182
+     }
+    },
+    {
+     "name": "CUMUL",
+     "kind": "simple",
+     "path": "CUMUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "LINEAIRE",
+     "into": [
+      "LINEAIRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 185
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_pilo_propa",
+   "kind": "bloc",
+   "path": "[b_pilo_propa]",
+   "condition": "equal_to(\"OPERATION\", 'PILO_PROPA')  ",
+   "fr": "Pilotage de la propagation",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "DELTA_A_MAX",
+      "DELTA_N"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 190
+   },
+   "keywords": [
+    {
+     "name": "DELTA_A_MAX",
+     "kind": "simple",
+     "path": "DELTA_A_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 0.0,
+     "fr": "Pilotage en incrément d'avancée max",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 194
+     }
+    },
+    {
+     "name": "DELTA_N",
+     "kind": "simple",
+     "path": "DELTA_N",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "val_min": 1,
+     "fr": "Pilotage en incrément de nombre de blocs",
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 197
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_k1_neg",
+   "kind": "bloc",
+   "path": "[b_k1_neg]",
+   "condition": "equal_to(\"OPERATION\", 'K1_NEGATIF')  ",
+   "fr": "Mise a zero des valeurs negatives de K1",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_rupture.py",
+    "line": 204
+   },
+   "keywords": [
+    {
+     "name": "MODELISATION",
+     "kind": "simple",
+     "path": "MODELISATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "C_PLAN",
+      "D_PLAN",
+      "3D",
+      "AXIS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 207
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_rupture.py",
+      "line": 208
+     }
+    }
+   ]
+  }
+ ]
+}
