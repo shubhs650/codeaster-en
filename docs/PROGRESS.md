@@ -23,15 +23,15 @@ Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) write
 "Likely" message families; messages that reference Tier 1/2 commands (family-name and
 mention heuristics); top 50 commands across astest. §8 (hand-written) lists 8 proposals for the
 COMMAND-SET revision. `tests/test_inventory.py` (9 tests) fails when §7 is stale.
-Open: owner to decide the §8 proposals (COMMAND-SET.md not edited). This branch contains PR #2
-(0.4), because 1.5 extends the `docs/INVENTORY.md` that #2 creates; merge #2 first.
+Open: owner to decide the §8 proposals (COMMAND-SET.md not edited). Built on PR #2 (0.4),
+which creates `docs/INVENTORY.md`. CI pin check fixed separately in PR #9 (`ls-remote`).
 Decisions: none (no ADR). Choices: commands ranked by number of test cases, then calls.
 COMMAND-SET rows are parsed by backtick spans; a key keyword is "found" if it is a keyword
 name, an `into=` value, or a command of the row.
 Needs owner: §8 — `CALC_MODES` has no `MODELE` form in 17.4.26; `FONC_MULT` belongs to
 `MECA_STATIQUE/EXCIT`, not the hydrostatic load; `CALC_EUROPLEXUS` and family `MECASTATIQUE`
 do not exist; candidates to add: `FORMULE`, `TEST_TABLE`, `DEFI_LIST_REEL` (Tier 1),
-`CALC_TABLE`, `CREA_TABLE` (Tier 2). With 1.5, every Phase 1 task is done once #2 merges.
+`CALC_TABLE`, `CREA_TABLE` (Tier 2). With 1.5, every Phase 1 task is done.
 
 ## 2026-10-23 — 1.4 astest index — agent
 Done: `caen extract astest-index` (`tools/codeaster_en/extract/astest.py`) writes
