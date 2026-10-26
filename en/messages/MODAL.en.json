@@ -1,0 +1,303 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/modal.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MODAL",
+ "source": {
+  "file": "code_aster/Messages/modal.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MODAL_1",
+   "fr": "\nArrêt du calcul des modes : pas de mode propre dans la bande de fréquence demandée.\n",
+   "placeholders": [],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MODAL_2",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes\nPas de test de Sturm demandé (VERI_MODE=_F(STURM='NON')).\nDonc, à l'issu de chaque calcul modal sur une sous-bande, on vérifie seulement que:\n   - la norme de l'erreur est bien valide (via le paramètre VERI_MODE/SEUIL),\n   - chaque fréquence est bien incluse dans la bande spécifiée (VERI_MODE/PREC_SHIFT).\nPas de test de Sturm local ou global.\n",
+   "placeholders": [],
+   "source": {
+    "line": 28
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MODAL_3",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes\nTest de Sturm local demandé (VERI_MODE=_F(STURM='LOCAL')).\nDonc, à l'issu de chaque calcul modal sur une sous-bande, on vérifie que:\n    - la norme de l'erreur est bien valide (via le paramètre VERI_MODE/SEUIL),\n    - chaque fréquence est bien incluse dans la bande spécifiée (VERI_MODE/PREC_SHIFT),\n    - le test de Sturm est valide.\n",
+   "placeholders": [],
+   "source": {
+    "line": 38
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MODAL_4",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes\nTest de Sturm global demandé (VERI_MODE=_F(STURM='GLOBAL')).\nDonc, à l'issu de chaque calcul modal sur une sous-bande, on vérifie que:\n    - la norme de l'erreur est bien valide (via le paramètre VERI_MODE/SEUIL),\n    - chaque fréquence est bien incluse dans la bande spécifiée (VERI_MODE/PREC_SHIFT),\n    - pas de test de Sturm local.\nPuis, on réunit les fréquences calculées sur toutes les sous-bandes et on fait un test\nde Sturm global:\n  Dans l'intervalle (%(r1)f,%(r2)f), il y a théoriquement %(i1)d fréquence(s) et on\n  en a bien calculé %(i2)d.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f",
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 48
+   },
+   "en": null
+  },
+  "5": {
+   "id": "MODAL_5",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes, test de Sturm global:\n  Dans l'intervalle (%(r1)f,%(r2)f), il y a théoriquement %(i1)d fréquence(s) et on\n  en a calculé %(i2)d.\n  On a décalé la bande de calcul des modes de PREC_SHIFT=%(r3)f %%.\n\n  Conseils:\n    * La bande retenue pour le test de Sturm englobe la bande de calcul. Elle est peut-être\n      trop grande et donc elle englobe d'autres modes. Vous pouvez la réduire en diminuant la\n      valeur de VERI_MODE/PREC_SHIFT.\n    * Vous pouvez relancer le calcul en demandant à faire le test de Sturm de post-vérification\n      sur chaque sous-bande (VERI_MODE=_F(STURM='LOCAL')). Cela peut aider à trouver le problème:\n      mode multiple sauté, borne trop proche d'un mode multiple, mode de corps rigide...\n    * Vous pouvez aussi relancez un INFO_MODE et/ou des CALC_MODES sur une sous-partie pour\n      corroborer (ou non) les résultats précédent.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f",
+    "%(i1)d",
+    "%(i2)d",
+    "%(r3)f",
+    "%%"
+   ],
+   "source": {
+    "line": 62
+   },
+   "en": null
+  },
+  "6": {
+   "id": "MODAL_6",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes,\nla sous-bande n %(i1)d est vide, on passe à la suivante.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 80
+   },
+   "en": null
+  },
+  "7": {
+   "id": "MODAL_7",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes: Test de Sturm global.\n  On n'a pas pu faire ce test car la bande de fréquence demandée (%(r1)f,%(r2)f) est vide !\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 86
+   },
+   "en": null
+  },
+  "8": {
+   "id": "MODAL_8",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes:\n  Pas de mode propre dans la bande de fréquence demandée (%(r1)f,%(r2)f) !\n  Le concept résultat sera vide.\n",
+   "placeholders": [
+    "%(r1)f",
+    "%(r2)f"
+   ],
+   "source": {
+    "line": 92
+   },
+   "en": null
+  },
+  "9": {
+   "id": "MODAL_9",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes, en mode parallèle:\n  Le nombre de processeurs, %(i1)d, et le nombre de sous-bandes fréquentielles non vides, %(i2)d,\n  sont incompatibles !\n  Avec le solveur linéaire MUMPS, ce nombre de processeurs peut être supérieur ou égale\n  (idéalement proportionnel) au nombre de sous-bandes.\n  Avec les autres solveurs linéaires ces deux paramètres doivent être rigoureusement égaux.\n  Ici le solveur linéaire utilisé est %(k1)s.\n\n  Conseils:\n    * Ajuster le nombre de processeurs et/ou la distribution des sous-bandes et/ou le solveur linéaire\n      en conséquence.\n    * Sans toucher aux nombres de processeurs et de sous-bandes, vous pouvez profiter quand même du parallélisme.\n      Il suffit de le limiter au seul solveur linéaire. Pour cela paramétrer le mot-clé NIVEAU_PARALLELISME à\n      'PARTIEL' et choisissez le solveur linéaire MUMPS.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 99
+   },
+   "en": null
+  },
+  "10": {
+   "id": "MODAL_10",
+   "fr": "\nOpérateurs INFO_MODE ou CALC_MODES sur plusieurs sous-bandes, en mode parallèle:\n  Le nombre de processeurs, %(i1)d, et le nombre de sous-bandes fréquentielles, %(i2)d, sont incompatibles !\n  Avec le solveur linéaire MUMPS, ce nombre de processeurs peut être supérieur ou égale\n  (idéalement proportionnel) au nombre de sous-bandes.\n  Avec les autres solveurs linéaires ces deux paramètres doivent être rigoureusement égaux.\n  Ici le solveur linéaire utilisé est %(k1)s.\n\n  Conseils:\n    * Ajuster le nombre de processeurs et/ou la distribution des sous-bandes et/ou\n      le solveur linéaire en conséquence.\n    * Sans toucher aux nombres de processeurs et de sous-bandes, vous pouvez profiter quand même du parallélisme.\n      Il suffit de le limiter au seul solveur linéaire. Pour cela paramétrer le mot-clé NIVEAU_PARALLELISME à\n      'PARTIEL' et choisissez le solveur linéaire MUMPS.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 117
+   },
+   "en": null
+  },
+  "11": {
+   "id": "MODAL_11",
+   "fr": "\nOpérateurs INFO_MODE ou CALC_MODES sur plusieurs sous-bandes, en mode parallèle:\n  Chacune des %(i1)d fréquences (autre que l'initiale) utilise le solveur linéaire\n  MUMPS sur son propre paquet de processeurs.\n  Cependant ces occurrences MUMPS sont parallélisées sur un nombre de processeurs\n  différent, %(i2)d ou %(i3)d, d'où un potentiel déséquilibre de charge.\n  Le temps d'exécution du calcul n'est alors probablement pas optimal !\n\n  Conseil:\n    * Ajuster le nombre de processeurs et/ou la distribution des sous-bandes\n      en conséquence. Par exemple, un nombre de processeurs = %(i1)d  x 2, 4 ou 8.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 134
+   },
+   "en": null
+  },
+  "12": {
+   "id": "MODAL_12",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes en mode parallèle:\n  Chacune des %(i1)d sous-bandes fréquentielles non vides utilise, indépendamment des autres,\n  le solveur linéaire parallèle MUMPS.\n  Cependant ces occurrences de solveur linéaires sont parallélisées sur un nombre de processeurs\n  différent, %(i2)d ou %(i3)d, d'où un potentiel déséquilibre de charge.\n  Le temps d'exécution du calcul n'est alors probablement pas optimal !\n\n  Conseil:\n    * Ajuster le nombre de processeurs et/ou la distribution des sous-bandes\n      en conséquence. Par exemple, un nombre de processeurs = %(i1)d  x 2, 4 ou 8.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d"
+   ],
+   "source": {
+    "line": 148
+   },
+   "en": null
+  },
+  "13": {
+   "id": "MODAL_13",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes en mode parallèle:\n  Chacune des 2 fréquences du test de Sturm de post-vérification utilise le solveur linéaire\n  MUMPS sur son propre paquet de processeurs.\n  Cependant ces occurrences MUMPS sont parallélisées sur un nombre de processeurs\n  différent, %(i1)d ou %(i2)d, d'où un potentiel déséquilibre de charge.\n  Le temps d'exécution du calcul n'est alors probablement pas optimal !\n\n  Conseil:\n    * Idéalement, le nombre de processeurs devrait être pair.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 162
+   },
+   "en": null
+  },
+  "14": {
+   "id": "MODAL_14",
+   "fr": "\nOpérateurs INFO_MODE ou CALC_MODES sur plusieurs sous-bandes, en mode parallèle:\n  Vous avez demandé la parallélisation, sur %(i1)d processeurs, de la partie solveur linéaire\n   de votre calcul. Mais vous avez paramétré un solveur linéaire séquentiel: %(k1)s !\n\n  Conseils:\n    * Lancez votre calcul en séquentiel,\n    * Changez votre solveur linéaire pour MUMPS (mot-clé facteur SOLVEUR + METHODE='MUMPS' +\n       plus pour de meilleures performances en modal GESTION_MEMOIRE='IN_CORE' + RENUM='QAMD'),\n    * Changez le niveau de parallélisme (mot-clé NIVEAU_PARALLELISME='COMPLET').\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 175
+   },
+   "en": null
+  },
+  "15": {
+   "id": "MODAL_15",
+   "fr": "\nL'amélioration des modes propres ne peut pas être effectuée,\ncar au moins une des matrices d'entrée est non symétrique,\nce qui est incompatible avec l'algorithme des puissances inverses utilisé pour l'amélioration.\n",
+   "placeholders": [],
+   "source": {
+    "line": 188
+   },
+   "en": null
+  },
+  "16": {
+   "id": "MODAL_16",
+   "fr": "\nL'amélioration des modes propres ne peut pas être effectuée,\ncar la matrice renseignée sous %(k1)s est complexe,\nce qui est incompatible avec l'algorithme des puissances inverses utilisé pour l'amélioration.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 195
+   },
+   "en": null
+  },
+  "17": {
+   "id": "MODAL_17",
+   "fr": "\nL'amélioration des modes propres ne peut pas être effectuée,\ncar des valeurs propres très proches ont été détectées dans le concept %(k1)s\n(modes multiples ou plusieurs modes de corps rigide),\nce qui est incompatible avec l'algorithme des puissances inverses utilisé pour l'amélioration.\n\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 202
+   },
+   "en": null
+  },
+  "18": {
+   "id": "MODAL_18",
+   "fr": "\nL'utilisation du parallélisme dans CALC_MODES avec OPTION='BANDES' et des matrices\ngénéralisées n'est pas possible.\n",
+   "placeholders": [],
+   "source": {
+    "line": 211
+   },
+   "en": null
+  },
+  "19": {
+   "id": "MODAL_19",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes:\n  Votre calcul semble déséquilibré: la sous-bande n°%(i1)d comporte %(i2)d mode(s) propre(s) alors\n  que la n°%(i3)d en comporte %(i4)d !\n  Cela risque de produire des modes de qualité très différentes et d'impacter la robustesse et\n  les performances globales du calcul.\n  Idéalement, un calcul multi-bande devrait comporter entre 20 et 60 modes par sous-bande avec\n  un déséquilibre maximum de X3 entre les sous-bandes.\n\n  Conseil:\n    * Il est intéressant de calibrer un tel calcul modal en utilisant l'opérateur INFO_MODE\n      dans un pré-calcul séparé. C'est généralement très rapide (surtout en parallèle) et cela\n      fournit des informations concrètes pour proposer un découpage homogène et réaliste.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d",
+    "%(i3)d",
+    "%(i4)d"
+   ],
+   "source": {
+    "line": 217
+   },
+   "en": null
+  },
+  "20": {
+   "id": "MODAL_20",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes:\n  La sous-bande n°%(i1)d comporte %(i2)d mode(s) propre(s). Ce n'est pas assez !\n  Vous pouvez sans doute optimiser les performances de votre calcul en la groupant avec une\n  deux sous-bandes contiguës.\n  Idéalement, un calcul multi-bande devrait comporter entre 20 et 60 modes par sous-bande avec\n  un déséquilibre maximum de X3 entre les sous-bandes.\n\n  Conseil:\n    * Il est intéressant de calibrer un tel calcul modal en utilisant l'opérateur INFO_MODE\n      dans un pré-calcul séparé. C'est généralement très rapide (surtout en parallèle) et cela\n      fournit des informations concrètes pour proposer un découpage homogène et réaliste.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 233
+   },
+   "en": null
+  },
+  "21": {
+   "id": "MODAL_21",
+   "fr": "\nOpérateur CALC_MODES sur plusieurs sous-bandes:\n  La sous-bande n°%(i1)d comporte %(i2)d modes propres. C'est un peu trop !\n  Vous pouvez sans doute optimiser les performances et la robustesse de votre calcul ainsi que\n  la qualité des modes obtenus, en découpant à nouveau cette sous-bande.\n  Idéalement, un calcul multi-bande devrait comporter entre 20 et 60 modes par sous-bande avec\n  un déséquilibre maximum de X3 entre les sous-bandes.\n\n  Conseil:\n    * Il est intéressant de calibrer un tel calcul modal en utilisant l'opérateur INFO_MODE\n      dans un pré-calcul séparé. C'est généralement très rapide (surtout en parallèle) et cela\n      fournit des informations concrètes pour proposer un découpage homogène et réaliste.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 248
+   },
+   "en": null
+  },
+  "22": {
+   "id": "MODAL_22",
+   "fr": "\nOpérateur CALC_MODES:\n  Votre calcul cherche à déterminer %(i1)d modes propres à la fois. C'est un peu trop !\n  Vous pouvez sans doute optimiser les performances, la robustesse de votre calcul ainsi que\n  la qualité des modes obtenus, en découpant à nouveau votre calcul en plusieurs paquets.\n  Idéalement, un calcul modal devrait chercher:\n      - entre 20 et 60 modes à la fois (avec les options 'CENTRE', 'BANDE' ou 'PLUS_PETITE/GRANDE'),\n      - au maximum une dizaine (avec 'PROCHE', 'SEPARE' ou 'AJUSTE').\n\n  Conseils:\n    * Pour faciliter un calcul par paquets de modes vous pouvez utilisez l'option 'BANDE'.\n    * Sur un problème modal généralisé standard, il peut être aussi intéressant de calibrer la\n      charge en utilisant l'opérateur INFO_MODE dans un pré-calcul séparé.\n      C'est généralement très rapide (surtout en parallèle) et cela fournit des informations\n      concrètes pour ensuite paramétrer un découpage homogène et réaliste.\n",
+   "placeholders": [
+    "%(i1)d"
+   ],
+   "source": {
+    "line": 263
+   },
+   "en": null
+  },
+  "23": {
+   "id": "MODAL_23",
+   "fr": "\nOpérateurs CALC_MODES ou NORM_MODES:\n  La norme calculée pour le mode %(i1)d est nulle ou presque nulle.\n  Valeur calculée :  %(r1)f\n\n  Conseils:\n  Vous avez certainement choisi un type de norme qui prend uniquement en compte les\n  valeurs des degrés de liberté de translation alors que celles-ci sont toutes nulles\n  ou presque nulles.\n\n  Modifiez le type de norme choisi par le type correspondant prenant en compte les rotations :\n    TRAN      -> TRAN_ROTA\n    EUCL_TRAN -> EUCL\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f"
+   ],
+   "source": {
+    "line": 281
+   },
+   "en": null
+  },
+  "24": {
+   "id": "MODAL_24",
+   "fr": "\nOpérateur DYNA_ALEA_MODAL :\n  On ne parvient pas à trouver l'objet CARA_ELEM utiliser pour le calcul.\n  Vous avez certainement oublié de fournir le mot-clé CARA_ELEM à la commande de laquelle\n  est issu le MODE_MECA de BASE_MODALE que vous avez fourni.\n\n  Cette commande est CALC_MODES dans la plupart des cas. Il suffit de lui fournir le mot-clé CARA_ELEM.\n",
+   "placeholders": [],
+   "source": {
+    "line": 297
+   },
+   "en": null
+  },
+  "25": {
+   "id": "MODAL_25",
+   "fr": "\nOpérateur POST_MODE :\n  On ne parvient pas à trouver le champ de matériaux associé à l'objet mode_meca fourni.\n  Vous avez certainement oublié de fournir le mot-clé CHAM_MATER à la commande CALC_MODES de laquelle\n  est issu l'objet fourni au mot-clé MODE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 307
+   },
+   "en": null
+  }
+ }
+}

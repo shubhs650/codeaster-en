@@ -1,0 +1,613 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_SPECTRE_IPM",
+ "kind": "MACRO",
+ "fr": "Calcul de spectre, post-traitement de séisme",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_spectre_ipm_ops.calc_spectre_ipm_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "b_maillage",
+   "kind": "bloc",
+   "path": "[b_maillage]",
+   "condition": "exists(\"MAILLAGE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 31
+   },
+   "keywords": [
+    {
+     "name": "EQUIPEMENT",
+     "kind": "factor",
+     "path": "EQUIPEMENT",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+      "line": 33
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "EQUIPEMENT/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 36
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "EQUIPEMENT/GROUP_NO",
+       "status": "o",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 37
+       }
+      },
+      {
+       "name": "RAPPORT_MASSE_TOTALE",
+       "kind": "simple",
+       "path": "EQUIPEMENT/RAPPORT_MASSE_TOTALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 38
+       }
+      },
+      {
+       "name": "COEF_MASS_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/COEF_MASS_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 39
+       }
+      },
+      {
+       "name": "FREQ_SUPPORT",
+       "kind": "simple",
+       "path": "EQUIPEMENT/FREQ_SUPPORT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 40
+       }
+      },
+      {
+       "name": "AMOR_SUPPORT",
+       "kind": "simple",
+       "path": "EQUIPEMENT/AMOR_SUPPORT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 41
+       }
+      },
+      {
+       "name": "AMOR_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/AMOR_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 42
+       }
+      },
+      {
+       "name": "FREQ_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/FREQ_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 43
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_no_maillage",
+   "kind": "bloc",
+   "path": "[b_no_maillage]",
+   "condition": "not exists(\"MAILLAGE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 46
+   },
+   "keywords": [
+    {
+     "name": "EQUIPEMENT",
+     "kind": "factor",
+     "path": "EQUIPEMENT",
+     "status": "o",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+      "line": 48
+     },
+     "keywords": [
+      {
+       "name": "NOM",
+       "kind": "simple",
+       "path": "EQUIPEMENT/NOM",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 51
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "EQUIPEMENT/NOEUD",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 52
+       }
+      },
+      {
+       "name": "RAPPORT_MASSE_TOTALE",
+       "kind": "simple",
+       "path": "EQUIPEMENT/RAPPORT_MASSE_TOTALE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 53
+       }
+      },
+      {
+       "name": "COEF_MASS_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/COEF_MASS_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 54
+       }
+      },
+      {
+       "name": "FREQ_SUPPORT",
+       "kind": "simple",
+       "path": "EQUIPEMENT/FREQ_SUPPORT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 55
+       }
+      },
+      {
+       "name": "AMOR_SUPPORT",
+       "kind": "simple",
+       "path": "EQUIPEMENT/AMOR_SUPPORT",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "AMOR_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/AMOR_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "FREQ_EQUIP",
+       "kind": "simple",
+       "path": "EQUIPEMENT/FREQ_EQUIP",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 58
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CALCUL",
+   "kind": "simple",
+   "path": "CALCUL",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "ABSOLU",
+    "RELATIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "AMOR_SPEC",
+   "kind": "simple",
+   "path": "AMOR_SPEC",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "LIST_INST",
+   "kind": "simple",
+   "path": "LIST_INST",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "NORME",
+   "kind": "simple",
+   "path": "NORME",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "b_rela",
+   "kind": "bloc",
+   "path": "[b_rela]",
+   "condition": "equal_to(\"CALCUL\", 'RELATIF')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TABLE",
+        "FONCTION"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+      "line": 69
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 73
+       }
+      },
+      {
+       "name": "FONCTION",
+       "kind": "simple",
+       "path": "RESU/FONCTION",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "ACCE_Z",
+       "kind": "simple",
+       "path": "RESU/ACCE_Z",
+       "status": "o",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 75
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_abso",
+   "kind": "bloc",
+   "path": "[b_abso]",
+   "condition": "equal_to(\"CALCUL\", 'ABSOLU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 78
+   },
+   "keywords": [
+    {
+     "name": "RESU",
+     "kind": "factor",
+     "path": "RESU",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TABLE",
+        "FONCTION"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+      "line": 80
+     },
+     "keywords": [
+      {
+       "name": "TABLE",
+       "kind": "simple",
+       "path": "RESU/TABLE",
+       "status": "f",
+       "type": [
+        "table_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 84
+       }
+      },
+      {
+       "name": "FONCTION",
+       "kind": "simple",
+       "path": "RESU/FONCTION",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+        "line": 85
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TOLE_INIT",
+   "kind": "simple",
+   "path": "TOLE_INIT",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "default": 0.001,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 88
+   }
+  },
+  {
+   "name": "CORR_INIT",
+   "kind": "simple",
+   "path": "CORR_INIT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_spectre_ipm.py",
+    "line": 89
+   }
+  }
+ ]
+}

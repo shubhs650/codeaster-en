@@ -1,0 +1,637 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_MAC3COEUR",
+ "kind": "MACRO",
+ "fr": null,
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.Mac3Coeur.mac3coeur_calcul.calc_mac3coeur_ops",
+ "reentrant": null,
+ "result_types": [
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+  "line": 36
+ },
+ "keywords": [
+  {
+   "name": "TYPE_COEUR",
+   "kind": "simple",
+   "path": "TYPE_COEUR",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MONO",
+    "MONO_FROID",
+    "TEST",
+    "900",
+    "1300",
+    "N4",
+    "EPR",
+    "LIGNE900",
+    "LIGNE1300",
+    "LIGNEN4",
+    "LIGNEEPR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "b_type_ligne",
+   "kind": "bloc",
+   "path": "[b_type_ligne]",
+   "condition": "is_in(\"TYPE_COEUR\", (\"LIGNE900\",\"LIGNE1300\",\"LIGNEN4\",\"LIGNEEPR\"))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 57
+   },
+   "keywords": [
+    {
+     "name": "NB_ASSEMBLAGE",
+     "kind": "simple",
+     "path": "NB_ASSEMBLAGE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 59
+     }
+    }
+   ]
+  },
+  {
+   "name": "TABLE_N",
+   "kind": "simple",
+   "path": "TABLE_N",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "MAILLAGE_N",
+   "kind": "simple",
+   "path": "MAILLAGE_N",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "RESU_DEF",
+   "kind": "simple",
+   "path": "RESU_DEF",
+   "status": "f",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 63
+   }
+  },
+  {
+   "name": "FLUENCE_CYCLE",
+   "kind": "simple",
+   "path": "FLUENCE_CYCLE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": 1,
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 64
+   }
+  },
+  {
+   "name": "TYPE_DEFORMATION",
+   "kind": "simple",
+   "path": "TYPE_DEFORMATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RIGI_GEOM",
+   "into": [
+    "RIGI_GEOM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "ROTATION_GRILLE",
+   "kind": "simple",
+   "path": "ROTATION_GRILLE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "ETAT_INITIAL",
+   "kind": "factor",
+   "path": "ETAT_INITIAL",
+   "status": "f",
+   "max": 1,
+   "fr": "Estimation d'un etat initial a partir d un DAMAC",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "UNITE_THYC",
+     "kind": "simple",
+     "path": "ETAT_INITIAL/UNITE_THYC",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "max": 1,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "NIVE_FLUENCE",
+     "kind": "simple",
+     "path": "ETAT_INITIAL/NIVE_FLUENCE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "TYPE_MAINTIEN",
+     "kind": "simple",
+     "path": "ETAT_INITIAL/TYPE_MAINTIEN",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DEPL_PSC",
+     "into": [
+      "DEPL_PSC"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "MAINTIEN_GRILLE",
+     "kind": "simple",
+     "path": "ETAT_INITIAL/MAINTIEN_GRILLE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "ARCHIMEDE",
+     "kind": "simple",
+     "path": "ETAT_INITIAL/ARCHIMEDE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 75
+     }
+    }
+   ]
+  },
+  {
+   "name": "LAME",
+   "kind": "factor",
+   "path": "LAME",
+   "status": "f",
+   "max": 1,
+   "fr": "Estimation des lames d'eau entre AC",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "UNITE_THYC",
+     "kind": "simple",
+     "path": "LAME/UNITE_THYC",
+     "status": "o",
+     "type": [
+      "UnitDefault"
+     ],
+     "max": 1,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "COEF_MULT_THV",
+     "kind": "simple",
+     "path": "LAME/COEF_MULT_THV",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "COEF_MULT_THT",
+     "kind": "simple",
+     "path": "LAME/COEF_MULT_THT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "default": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 83
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_maintien_mono",
+   "kind": "bloc",
+   "path": "[b_maintien_mono]",
+   "condition": "exists(\"TYPE_COEUR\") and TYPE_COEUR.startswith('MONO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 86
+   },
+   "keywords": [
+    {
+     "name": "DEFORMATION",
+     "kind": "factor",
+     "path": "DEFORMATION",
+     "status": "f",
+     "max": 1,
+     "fr": "Estimation des deformations des AC",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 88
+     },
+     "keywords": [
+      {
+       "name": "RESU_INIT",
+       "kind": "simple",
+       "path": "DEFORMATION/RESU_INIT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 92
+       }
+      },
+      {
+       "name": "NIVE_FLUENCE",
+       "kind": "simple",
+       "path": "DEFORMATION/NIVE_FLUENCE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 93
+       }
+      },
+      {
+       "name": "UNITE_THYC",
+       "kind": "simple",
+       "path": "DEFORMATION/UNITE_THYC",
+       "status": "o",
+       "type": [
+        "UnitDefault"
+       ],
+       "max": 1,
+       "inout": "in",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "MAINTIEN_GRILLE",
+       "kind": "simple",
+       "path": "DEFORMATION/MAINTIEN_GRILLE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 95
+       }
+      },
+      {
+       "name": "TYPE_MAINTIEN",
+       "kind": "simple",
+       "path": "DEFORMATION/TYPE_MAINTIEN",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "FORCE",
+        "DEPL_PSC"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 96
+       }
+      },
+      {
+       "name": "b_maintien_mono_force",
+       "kind": "bloc",
+       "path": "DEFORMATION/[b_maintien_mono_force]",
+       "condition": "equal_to(\"TYPE_MAINTIEN\", 'FORCE')",
+       "fr": "valeur de l'effort de maintien imposée",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 97
+       },
+       "keywords": [
+        {
+         "name": "FORCE_MAINTIEN",
+         "kind": "simple",
+         "path": "DEFORMATION/FORCE_MAINTIEN",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "max": 1,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+          "line": 100
+         }
+        }
+       ]
+      },
+      {
+       "name": "ARCHIMEDE",
+       "kind": "simple",
+       "path": "DEFORMATION/ARCHIMEDE",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 102
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_maintien_coeur",
+   "kind": "bloc",
+   "path": "[b_maintien_coeur]",
+   "condition": "exists(\"TYPE_COEUR\") and not TYPE_COEUR.startswith('MONO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "DEFORMATION",
+     "kind": "factor",
+     "path": "DEFORMATION",
+     "status": "f",
+     "max": 1,
+     "fr": "Estimation des deformations des AC",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+      "line": 108
+     },
+     "keywords": [
+      {
+       "name": "RESU_INIT",
+       "kind": "simple",
+       "path": "DEFORMATION/RESU_INIT",
+       "status": "f",
+       "type": [
+        "resultat_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 112
+       }
+      },
+      {
+       "name": "TEMP_IMPO",
+       "kind": "simple",
+       "path": "DEFORMATION/TEMP_IMPO",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 113
+       }
+      },
+      {
+       "name": "NIVE_FLUENCE",
+       "kind": "simple",
+       "path": "DEFORMATION/NIVE_FLUENCE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 114
+       }
+      },
+      {
+       "name": "UNITE_THYC",
+       "kind": "simple",
+       "path": "DEFORMATION/UNITE_THYC",
+       "status": "o",
+       "type": [
+        "UnitDefault"
+       ],
+       "max": 1,
+       "inout": "in",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 115
+       }
+      },
+      {
+       "name": "MAINTIEN_GRILLE",
+       "kind": "simple",
+       "path": "DEFORMATION/MAINTIEN_GRILLE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 116
+       }
+      },
+      {
+       "name": "TYPE_MAINTIEN",
+       "kind": "simple",
+       "path": "DEFORMATION/TYPE_MAINTIEN",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "DEPL_PSC",
+       "into": [
+        "DEPL_PSC"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "ARCHIMEDE",
+       "kind": "simple",
+       "path": "DEFORMATION/ARCHIMEDE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_mac3coeur.py",
+        "line": 118
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

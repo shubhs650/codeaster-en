@@ -1,0 +1,208 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_REDUIT_COMPLET",
+ "kind": "OPER",
+ "fr": null,
+ "translation_upstream": null,
+ "op": 54,
+ "reentrant": "n",
+ "result_types": [
+  "evol_noli",
+  "evol_ther"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "CHAM_GD",
+   "kind": "factor",
+   "path": "CHAM_GD",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "CHAM_GD/NOM_CHAM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DEPL",
+      "TEMP",
+      "SIEF_NOEU",
+      "FLUX_NOEU",
+      "SIEF_ELGA",
+      "VARI_ELGA"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "BASE",
+     "kind": "simple",
+     "path": "CHAM_GD/BASE",
+     "status": "o",
+     "type": [
+      "mode_empi"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "OPERATION",
+     "kind": "simple",
+     "path": "CHAM_GD/OPERATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "GAPPY_POD",
+      "COMB"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "b_gappy",
+     "kind": "bloc",
+     "path": "CHAM_GD/[b_gappy]",
+     "condition": "equal_to(\"OPERATION\", 'GAPPY_POD')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+      "line": 51
+     },
+     "keywords": [
+      {
+       "name": "GROUP_NO_INTERF",
+       "kind": "simple",
+       "path": "CHAM_GD/GROUP_NO_INTERF",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+        "line": 53
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 56
+   }
+  },
+  {
+   "name": "RESULTAT_REDUIT",
+   "kind": "simple",
+   "path": "RESULTAT_REDUIT",
+   "status": "o",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 58
+   }
+  },
+  {
+   "name": "TABL_COOR_REDUIT",
+   "kind": "simple",
+   "path": "TABL_COOR_REDUIT",
+   "status": "f",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_reduit_complet.py",
+    "line": 60
+   }
+  }
+ ]
+}

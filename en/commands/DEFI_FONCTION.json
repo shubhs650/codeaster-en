@@ -1,0 +1,412 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_fonction.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FONCTION",
+ "kind": "OPER",
+ "fr": "Définit une fonction réelle ou complexe d'une variable réelle",
+ "translation_upstream": {
+  "DEFI_FONCTION": "Define function",
+  "VERIF": "Check order",
+  "VALE_PARA": "List of X-coordinate",
+  "VALE_FONC": "List of Y-coordinate",
+  "NOEUD_PARA": "Nodes as X-coordinate",
+  "VALE_Y": "Y-coordinates",
+  "INTERPOL": "Interpolations",
+  "VALE": "Coordinates",
+  "VALE_C": "Complex coordinates"
+ },
+ "op": 3,
+ "reentrant": "n",
+ "result_types": [
+  "fonction_sdaster",
+  "fonction_c"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "VALE",
+    "VALE_C",
+    "VALE_PARA",
+    "NOEUD_PARA",
+    "ABSCISSE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_fonction.py",
+  "line": 43
+ },
+ "keywords": [
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "NOM_RESU",
+   "kind": "simple",
+   "path": "NOM_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TOUTRESU",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "VALE",
+   "kind": "simple",
+   "path": "VALE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": "**",
+   "fr": "Fonction réelle définie par une liste de couples (abscisse,ordonnée)",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "ABSCISSE",
+   "kind": "simple",
+   "path": "ABSCISSE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": "**",
+   "fr": "Liste d abscisses d une fonction réelle",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "VALE_C",
+   "kind": "simple",
+   "path": "VALE_C",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "min": 2,
+   "max": "**",
+   "fr": "Fonction complexe définie par une liste de triplets (absc, partie réelle, partie imaginaire)",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "VALE_PARA",
+   "kind": "simple",
+   "path": "VALE_PARA",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": "Fonction réelle définie par deux concepts de type listr8",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "b_vale_para",
+   "kind": "bloc",
+   "path": "[b_vale_para]",
+   "condition": "exists(\"VALE_PARA\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "VALE_FONC",
+     "kind": "simple",
+     "path": "VALE_FONC",
+     "status": "o",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonction.py",
+      "line": 78
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_abscisse",
+   "kind": "bloc",
+   "path": "[b_abscisse]",
+   "condition": "exists(\"ABSCISSE\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 80
+   },
+   "keywords": [
+    {
+     "name": "ORDONNEE",
+     "kind": "simple",
+     "path": "ORDONNEE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": "**",
+     "fr": "Liste d ordonnées d une fonction réelle",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonction.py",
+      "line": 82
+     }
+    }
+   ]
+  },
+  {
+   "name": "NOEUD_PARA",
+   "kind": "simple",
+   "path": "NOEUD_PARA",
+   "status": "f",
+   "type": [
+    "no"
+   ],
+   "max": "**",
+   "fr": "Fonction réelle définie par une liste de noeuds et un maillage",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 86
+   }
+  },
+  {
+   "name": "b_noeud_para",
+   "kind": "bloc",
+   "path": "[b_noeud_para]",
+   "condition": "exists(\"NOEUD_PARA\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 92
+   },
+   "keywords": [
+    {
+     "name": "MAILLAGE",
+     "kind": "simple",
+     "path": "MAILLAGE",
+     "status": "o",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonction.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "VALE_Y",
+     "kind": "simple",
+     "path": "VALE_Y",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_fonction.py",
+      "line": 95
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "default": "LIN",
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 97
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 98
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 99
+   }
+  },
+  {
+   "name": "VERIF",
+   "kind": "simple",
+   "path": "VERIF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "CROISSANT",
+   "into": [
+    "CROISSANT",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 100
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 101
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_fonction.py",
+    "line": 102
+   }
+  }
+ ]
+}

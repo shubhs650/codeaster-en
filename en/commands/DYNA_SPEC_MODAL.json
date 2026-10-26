@@ -1,0 +1,131 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DYNA_SPEC_MODAL",
+ "kind": "OPER",
+ "fr": "Calcul de la réponse par recombinaison modale d'une structure linéaire pour une excitation aléatoire",
+ "translation_upstream": null,
+ "op": 147,
+ "reentrant": "n",
+ "result_types": [
+  "interspectre"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "BASE_ELAS_FLUI",
+   "kind": "simple",
+   "path": "BASE_ELAS_FLUI",
+   "status": "o",
+   "type": [
+    "melasflu_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "VITE_FLUI",
+   "kind": "simple",
+   "path": "VITE_FLUI",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.001,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "EXCIT",
+   "kind": "factor",
+   "path": "EXCIT",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 37
+   },
+   "keywords": [
+    {
+     "name": "INTE_SPEC_GENE",
+     "kind": "simple",
+     "path": "EXCIT/INTE_SPEC_GENE",
+     "status": "o",
+     "type": [
+      "interspectre"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+      "line": 37
+     }
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TOUT",
+   "into": [
+    "TOUT",
+    "DIAG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/dyna_spec_modal.py",
+    "line": 39
+   }
+  }
+ ]
+}

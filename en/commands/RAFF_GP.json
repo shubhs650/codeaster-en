@@ -1,0 +1,145 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/raff_gp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "RAFF_GP",
+ "kind": "MACRO",
+ "fr": "Preparation du maillage pour calcul du Gp en 2D",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.raff_gp_ops.raff_gp_ops",
+ "reentrant": "n",
+ "result_types": [
+  "maillage_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/raff_gp.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MAILLAGE_N",
+   "kind": "simple",
+   "path": "MAILLAGE_N",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Maillage avant adaptation",
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_gp.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "TRANCHE_2D",
+   "kind": "factor",
+   "path": "TRANCHE_2D",
+   "status": "o",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_gp.py",
+    "line": 33
+   },
+   "keywords": [
+    {
+     "name": "CENTRE",
+     "kind": "simple",
+     "path": "TRANCHE_2D/CENTRE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_gp.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "RAYON",
+     "kind": "simple",
+     "path": "TRANCHE_2D/RAYON",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_gp.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "ANGLE",
+     "kind": "simple",
+     "path": "TRANCHE_2D/ANGLE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_gp.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "TAILLE",
+     "kind": "simple",
+     "path": "TRANCHE_2D/TAILLE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_gp.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "NB_ZONE",
+     "kind": "simple",
+     "path": "TRANCHE_2D/NB_ZONE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/raff_gp.py",
+      "line": 40
+     }
+    }
+   ]
+  },
+  {
+   "name": "NB_RAFF",
+   "kind": "simple",
+   "path": "NB_RAFF",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 4,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/raff_gp.py",
+    "line": 42
+   }
+  }
+ ]
+}

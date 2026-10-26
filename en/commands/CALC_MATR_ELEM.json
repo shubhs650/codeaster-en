@@ -1,0 +1,1449 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_MATR_ELEM",
+ "kind": "MACRO",
+ "fr": "Calcul des matrices élémentaires",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_matr_elem_ops.calc_matr_elem_ops",
+ "reentrant": "n",
+ "result_types": [
+  "matr_elem_depl_r",
+  "matr_elem_depl_c",
+  "matr_elem_temp_r",
+  "matr_elem_pres_c"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+  "line": 68
+ },
+ "keywords": [
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "RIGI_MECA",
+    "MASS_MECA",
+    "RIGI_GEOM",
+    "MASS_THER",
+    "AMOR_MECA",
+    "RIGI_THER",
+    "IMPE_MECA",
+    "ONDE_FLUI",
+    "MASS_FLUI_STRU",
+    "RIGI_FLUI_STRU",
+    "RIGI_ROTA",
+    "MECA_GYRO",
+    "RIGI_GYRO",
+    "MASS_MECA_DIAG",
+    "RIGI_ACOU",
+    "MASS_ACOU",
+    "AMOR_ACOU",
+    "RIGI_MECA_HYST"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 99
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 101
+   }
+  },
+  {
+   "name": "b_rigi_meca",
+   "kind": "bloc",
+   "path": "[b_rigi_meca]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_MECA')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 102
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 104
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 105
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "MODE_FOURIER",
+     "kind": "simple",
+     "path": "MODE_FOURIER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "CALC_ELEM_MODELE",
+     "kind": "simple",
+     "path": "CALC_ELEM_MODELE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": "Calcul de la matrice de rigidité hors modèle",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 109
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mass_meca",
+   "kind": "bloc",
+   "path": "[b_mass_meca]",
+   "condition": "(equal_to(\"OPTION\", 'MASS_MECA')) or (equal_to(\"OPTION\", 'MASS_MECA_DIAG'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 117
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 122
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_geom",
+   "kind": "bloc",
+   "path": "[b_rigi_geom]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_GEOM')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 124
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "SIEF_ELGA",
+     "kind": "simple",
+     "path": "SIEF_ELGA",
+     "status": "o",
+     "type": [
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "STRX_ELGA",
+     "kind": "simple",
+     "path": "STRX_ELGA",
+     "status": "f",
+     "type": [
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "DEPL",
+     "kind": "simple",
+     "path": "DEPL",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 131
+     }
+    },
+    {
+     "name": "MODE_FOURIER",
+     "kind": "simple",
+     "path": "MODE_FOURIER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 132
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_rota",
+   "kind": "bloc",
+   "path": "[b_rigi_rota]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_ROTA')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 134
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 136
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 137
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "o",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 138
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_meca_gyro",
+   "kind": "bloc",
+   "path": "[b_meca_gyro]",
+   "condition": "equal_to(\"OPTION\", 'MECA_GYRO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 140
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 142
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 143
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 144
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 145
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_gyro",
+   "kind": "bloc",
+   "path": "[b_rigi_gyro]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_GYRO')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 147
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 150
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 152
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_amor_meca",
+   "kind": "bloc",
+   "path": "[b_amor_meca]",
+   "condition": "equal_to(\"OPTION\", 'AMOR_MECA')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 154
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 157
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 158
+     }
+    },
+    {
+     "name": "RIGI_MECA",
+     "kind": "simple",
+     "path": "RIGI_MECA",
+     "status": "f",
+     "type": [
+      "matr_elem_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 159
+     }
+    },
+    {
+     "name": "MASS_MECA",
+     "kind": "simple",
+     "path": "MASS_MECA",
+     "status": "f",
+     "type": [
+      "matr_elem_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 161
+     }
+    },
+    {
+     "name": "AMOR_FLUI",
+     "kind": "simple",
+     "path": "AMOR_FLUI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 162
+     }
+    },
+    {
+     "name": "VNOR",
+     "kind": "simple",
+     "path": "VNOR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 1.0,
+     "into": [
+      1.0,
+      -1.0
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 163
+     }
+    },
+    {
+     "name": "TYPE_AMOR",
+     "kind": "simple",
+     "path": "TYPE_AMOR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "min": 1,
+     "max": 1,
+     "default": "TOUT",
+     "into": [
+      "TOUT",
+      "ABSO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 164
+     }
+    },
+    {
+     "name": "b_amor_tout",
+     "kind": "bloc",
+     "path": "[b_amor_tout]",
+     "condition": "equal_to(\"TYPE_AMOR\", ('TOUT'))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CARA_ELEM",
+        "RIGI_MECA"
+       ]
+      },
+      {
+       "rule": "ENSEMBLE",
+       "keywords": [
+        "RIGI_MECA",
+        "CHAM_MATER"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 165
+     },
+     "keywords": []
+    },
+    {
+     "name": "b_amor_flui",
+     "kind": "bloc",
+     "path": "[b_amor_flui]",
+     "condition": "equal_to(\"TYPE_AMOR\", 'ABSO')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "CHAM_MATER"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 169
+     },
+     "keywords": []
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_hyst",
+   "kind": "bloc",
+   "path": "[b_rigi_hyst]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_MECA_HYST')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 173
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 175
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 178
+     }
+    },
+    {
+     "name": "RIGI_MECA",
+     "kind": "simple",
+     "path": "RIGI_MECA",
+     "status": "o",
+     "type": [
+      "matr_elem_depl_r"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 179
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_ther",
+   "kind": "bloc",
+   "path": "[b_rigi_ther]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_THER')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 181
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 183
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 184
+     }
+    },
+    {
+     "name": "MODE_FOURIER",
+     "kind": "simple",
+     "path": "MODE_FOURIER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_ther"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 186
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mass_ther",
+   "kind": "bloc",
+   "path": "[b_mass_ther]",
+   "condition": "equal_to(\"OPTION\", 'MASS_THER')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 188
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 190
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 191
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_acou",
+   "kind": "bloc",
+   "path": "[b_rigi_acou]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_ACOU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 193
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 195
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_acou"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 196
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mass_acou",
+   "kind": "bloc",
+   "path": "[b_mass_acou]",
+   "condition": "(equal_to(\"OPTION\", 'MASS_ACOU')) or (equal_to(\"OPTION\", 'AMOR_ACOU'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 198
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 200
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_acou"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 201
+     }
+    },
+    {
+     "name": "b_direction_ac",
+     "kind": "bloc",
+     "path": "[b_direction_ac]",
+     "condition": "(equal_to(\"OPTION\", 'AMOR_ACOU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 202
+     },
+     "keywords": [
+      {
+       "name": "VNOR",
+       "kind": "simple",
+       "path": "VNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "into": [
+        1.0,
+        -1.0
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+        "line": 204
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_rigi_flui",
+   "kind": "bloc",
+   "path": "[b_rigi_flui]",
+   "condition": "equal_to(\"OPTION\", 'RIGI_FLUI_STRU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 207
+   },
+   "keywords": [
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "o",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 210
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "o",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 211
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mass_flui",
+   "kind": "bloc",
+   "path": "[b_mass_flui]",
+   "condition": "equal_to(\"OPTION\", 'MASS_FLUI_STRU')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 213
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "CARA_ELEM",
+     "status": "o",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 216
+     }
+    },
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 217
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "o",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 218
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_impe_meca",
+   "kind": "bloc",
+   "path": "[b_impe_meca]",
+   "condition": "(equal_to(\"OPTION\", 'IMPE_MECA')) or (equal_to(\"OPTION\", 'ONDE_FLUI'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+    "line": 220
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 222
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 223
+     }
+    },
+    {
+     "name": "CHARGE",
+     "kind": "simple",
+     "path": "CHARGE",
+     "status": "f",
+     "type": [
+      "char_meca"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 224
+     }
+    },
+    {
+     "name": "b_direction_me",
+     "kind": "bloc",
+     "path": "[b_direction_me]",
+     "condition": "(equal_to(\"OPTION\", 'IMPE_MECA'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+      "line": 225
+     },
+     "keywords": [
+      {
+       "name": "VNOR",
+       "kind": "simple",
+       "path": "VNOR",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1.0,
+       "into": [
+        1.0,
+        -1.0
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_matr_elem.py",
+        "line": 227
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

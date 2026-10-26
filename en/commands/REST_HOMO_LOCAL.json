@@ -1,0 +1,478 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_homo_local.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_HOMO_LOCAL",
+ "kind": "MACRO",
+ "fr": "Calcul des champs locaux à partir de la solution homogénéisée.",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.MateHomo.rest_homo_ops.rest_homo_ops",
+ "reentrant": "n",
+ "result_types": [
+  "evol_elas",
+  "evol_ther"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "docu": "UX.YZ.AB",
+ "rules": [
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "CORR_MECA",
+    "CORR_THER"
+   ]
+  },
+  {
+   "rule": "AU_MOINS_UN",
+   "keywords": [
+    "EVOL_ELAS",
+    "EVOL_THER"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "EVOL_THER",
+    "CORR_THER"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "RESU_THER",
+    "CORR_THER",
+    "EVOL_THER"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "TOUT_INST",
+    "INST"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_homo_local.py",
+  "line": 37
+ },
+ "keywords": [
+  {
+   "name": "TYPE_HOMO",
+   "kind": "simple",
+   "path": "TYPE_HOMO",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "MASSIF"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "POSITION",
+   "kind": "simple",
+   "path": "POSITION",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "min": 3,
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "CORR_MECA",
+   "kind": "simple",
+   "path": "CORR_MECA",
+   "status": "f",
+   "type": [
+    "evol_elas_dict"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "CORR_THER",
+   "kind": "simple",
+   "path": "CORR_THER",
+   "status": "f",
+   "type": [
+    "evol_ther_dict"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "PRESSION",
+   "kind": "simple",
+   "path": "PRESSION",
+   "status": "f",
+   "type": [
+    "fonction_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "EVOL_ELAS",
+   "kind": "simple",
+   "path": "EVOL_ELAS",
+   "status": "f",
+   "type": [
+    "evol_elas"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "EVOL_THER",
+   "kind": "simple",
+   "path": "EVOL_THER",
+   "status": "f",
+   "type": [
+    "evol_ther"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "TOUT_INST",
+   "kind": "simple",
+   "path": "TOUT_INST",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "CRITERE",
+   "kind": "simple",
+   "path": "CRITERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "PRECISION",
+   "kind": "simple",
+   "path": "PRECISION",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "val_min": 0.0,
+   "default": 1e-06,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "AFFE",
+   "kind": "factor",
+   "path": "AFFE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 62
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "AFFE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "AFFE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "MATER",
+     "kind": "simple",
+     "path": "AFFE/MATER",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 68
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMPLET",
+   "kind": "simple",
+   "path": "COMPLET",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "TRANSLATION",
+   "kind": "simple",
+   "path": "TRANSLATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "b_onlyther",
+   "kind": "bloc",
+   "path": "[b_onlyther]",
+   "condition": "exists(\"CORR_THER\") and not exists(\"CORR_MECA\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 73
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SANS",
+     "into": [
+      "FLUX_ELGA",
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 75
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_onlymeca",
+   "kind": "bloc",
+   "path": "[b_onlymeca]",
+   "condition": "exists(\"CORR_MECA\") and not exists(\"CORR_THER\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 77
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 1,
+     "default": "SANS",
+     "into": [
+      "SIEF_ELGA",
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 79
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_therandmeca",
+   "kind": "bloc",
+   "path": "[b_therandmeca]",
+   "condition": "exists(\"CORR_MECA\") and exists(\"CORR_THER\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_homo_local.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "default": "SANS",
+     "into": [
+      "SIEF_ELGA",
+      "FLUX_ELGA",
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_homo_local.py",
+      "line": 83
+     }
+    }
+   ]
+  }
+ ]
+}

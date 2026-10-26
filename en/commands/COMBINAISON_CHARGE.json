@@ -1,0 +1,764 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/combinaison_charge.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "COMBINAISON_CHARGE",
+ "kind": "MACRO",
+ "fr": "Combinaison des calculs avec des chargements mécaniques et thermiques ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.combinaison_charge_ops.combinaison_charge_ops",
+ "reentrant": null,
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/combinaison_charge.py",
+  "line": 35
+ },
+ "keywords": [
+  {
+   "name": "MODELE_MECA",
+   "kind": "simple",
+   "path": "MODELE_MECA",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "MODELE_THER",
+   "kind": "simple",
+   "path": "MODELE_THER",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "CHAM_MATER_MECA",
+   "kind": "simple",
+   "path": "CHAM_MATER_MECA",
+   "status": "o",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "CARA_ELEM_MECA",
+   "kind": "simple",
+   "path": "CARA_ELEM_MECA",
+   "status": "o",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "CARA_ELEM_THER",
+   "kind": "simple",
+   "path": "CARA_ELEM_THER",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "BLOC",
+   "kind": "simple",
+   "path": "BLOC",
+   "status": "o",
+   "type": [
+    "char_meca",
+    "char_cine_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "BLOC_THER",
+   "kind": "simple",
+   "path": "BLOC_THER",
+   "status": "f",
+   "type": [
+    "char_meca",
+    "char_cine_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "EXCIT_MECA",
+   "kind": "factor",
+   "path": "EXCIT_MECA",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "CHAR_MECA",
+     "kind": "simple",
+     "path": "EXCIT_MECA/CHAR_MECA",
+     "status": "o",
+     "type": [
+      "char_meca",
+      "char_cine_meca"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "NOM_CHAR",
+     "kind": "simple",
+     "path": "EXCIT_MECA/NOM_CHAR",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 51
+     }
+    }
+   ]
+  },
+  {
+   "name": "EXCIT_THER",
+   "kind": "factor",
+   "path": "EXCIT_THER",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 53
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER_THER",
+     "kind": "simple",
+     "path": "EXCIT_THER/CHAM_MATER_THER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "NOM_CHAR",
+     "kind": "simple",
+     "path": "EXCIT_THER/NOM_CHAR",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 57
+     }
+    }
+   ]
+  },
+  {
+   "name": "LIST_INST_THER",
+   "kind": "simple",
+   "path": "LIST_INST_THER",
+   "status": "f",
+   "type": [
+    "listr8_sdaster",
+    "list_inst"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 59
+   }
+  },
+  {
+   "name": "COMPORTEMENT",
+   "kind": "factor",
+   "path": "COMPORTEMENT",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 60
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "COMPORTEMENT/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COMPORTEMENT/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "RELATION",
+     "kind": "simple",
+     "path": "COMPORTEMENT/RELATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "ELAS",
+     "into": [
+      "ELAS",
+      "MULTIFIBRE",
+      "CABLE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 66
+     }
+    }
+   ]
+  },
+  {
+   "name": "TABLE_COEF",
+   "kind": "simple",
+   "path": "TABLE_COEF",
+   "status": "o",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "CHAM_RESU",
+   "kind": "factor",
+   "path": "CHAM_RESU",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 69
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "CHAM_RESU/NOM_CHAM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "CHAM_RESU/NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 73
+     }
+    }
+   ]
+  },
+  {
+   "name": "TABLE_RESU",
+   "kind": "factor",
+   "path": "TABLE_RESU",
+   "status": "o",
+   "max": 3,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 75
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "TABLE_RESU/UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 78
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "TABLE_RESU/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "COEF_COMB",
+      "CALC_COMB",
+      "EXTREMA"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 79
+     }
+    },
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "TABLE_RESU/TABLE",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 80
+     }
+    },
+    {
+     "name": "b_extrema",
+     "kind": "bloc",
+     "path": "TABLE_RESU/[b_extrema]",
+     "condition": "equal_to(\"OPTION\", 'EXTREMA')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 81
+     },
+     "keywords": [
+      {
+       "name": "CRIT_COMP",
+       "kind": "simple",
+       "path": "TABLE_RESU/CRIT_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "default": "TOUT",
+       "into": [
+        "TOUT",
+        "MAXI",
+        "MAXI_ABS",
+        "MINI",
+        "MINI_ABS"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/combinaison_charge.py",
+        "line": 83
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "IMPRESSION",
+   "kind": "simple",
+   "path": "IMPRESSION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 93
+   }
+  },
+  {
+   "name": "b_impression",
+   "kind": "bloc",
+   "path": "[b_impression]",
+   "condition": "equal_to(\"IMPRESSION\", 'OUI')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/combinaison_charge.py",
+    "line": 94
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "o",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/combinaison_charge.py",
+      "line": 96
+     }
+    }
+   ]
+  }
+ ]
+}

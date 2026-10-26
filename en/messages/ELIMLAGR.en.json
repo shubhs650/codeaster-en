@@ -1,0 +1,126 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/elimlagr.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "ELIMLAGR",
+ "source": {
+  "file": "code_aster/Messages/elimlagr.py"
+ },
+ "messages": {
+  "1": {
+   "id": "ELIMLAGR_1",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Mais la version du programme ne dispose pas du solveur PETSC\n   qui est nécessaire à cette fonctionnalité.\n\n Risques & conseils :\n   Il faut utiliser la version MPI avec un seul processeur.\n",
+   "placeholders": [],
+   "source": {
+    "line": 26
+   },
+   "en": null
+  },
+  "2": {
+   "id": "ELIMLAGR_2",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Il y a plusieurs processeurs actifs. Mais les données du modèle doivent\n   être centralisées.\n Risques & conseils :\n   Il faut utiliser DISTRIBUTION='CENTRALISE' dans la commande AFFE_MODELE.\n",
+   "placeholders": [],
+   "source": {
+    "line": 37
+   },
+   "en": null
+  },
+  "3": {
+   "id": "ELIMLAGR_3",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   La matrice n'est pas réelle (mais sans doute complexe).\n   C'est interdit pour l'instant.\n Risques & conseils :\n   Il faut ne faut pas utiliser SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 47
+   },
+   "en": null
+  },
+  "4": {
+   "id": "ELIMLAGR_4",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Certaines conditions aux limites sont réalisées par AFFE_CHAR_CINE.\n   C'est interdit pour l'instant.\n Risques & conseils :\n   Il faut remplacer AFFE_CHAR_CINE par AFFE_CHAR_MECA..\n",
+   "placeholders": [],
+   "source": {
+    "line": 57
+   },
+   "en": null
+  },
+  "6": {
+   "id": "ELIMLAGR_6",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Mais la matrice est une matrice généralisée.\n   C'est interdit.\n Risques & conseils :\n   Il ne faut pas utiliser SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 67
+   },
+   "en": null
+  },
+  "7": {
+   "id": "ELIMLAGR_7",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Mais la matrice \"réduite\" est de taille nulle.\n   (tous les ddls sont imposés)\n   C'est interdit pour l'instant.\n Risques & conseils :\n   Il ne faut pas utiliser SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 77
+   },
+   "en": null
+  },
+  "8": {
+   "id": "ELIMLAGR_8",
+   "fr": "\n Erreur d'utilisation :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Mais une étape du calcul a échoué (calcul du noyau de la matrice des contraintes).\n Risques & conseils :\n   Il ne faut pas utiliser SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "placeholders": [],
+   "source": {
+    "line": 88
+   },
+   "en": null
+  },
+  "10": {
+   "id": "ELIMLAGR_10",
+   "fr": "\n Erreur :\n   On veut utiliser la fonctionnalité SOLVEUR / ELIM_LAGR='OUI'\n   Mais les coefficients des relations linéaires sont tous nuls\n   dans la matrice %(k1)s .\n Risques & conseils :\n   Par exemple, il ne faut pas utiliser SOLVEUR / ELIM_LAGR='OUI' avec\n   une matrice de masse.\n",
+   "placeholders": [
+    "%(k1)s"
+   ],
+   "source": {
+    "line": 97
+   },
+   "en": null
+  },
+  "11": {
+   "id": "ELIMLAGR_11",
+   "fr": "\n Erreur utilisateur :\n   On veut utiliser la commande ELIM_LAGR pour éliminer les équations\n   de Lagrange dans une matrice qui n'est pas une matrice de rigidité.\n   Il faut d'abord utiliser la commande ELIM_LAGR sur la matrice\n   de rigidité.\n\n Risques & conseils :\n   La séquence d'appel doit ressembler à :\n      K2=ELIM_LAGR(MATR_RIGI=K1, )\n      M2=ELIM_LAGR(MATR_RIGI=K1, MATR_ASSE=M1)\n",
+   "placeholders": [],
+   "source": {
+    "line": 108
+   },
+   "en": null
+  },
+  "12": {
+   "id": "ELIMLAGR_12",
+   "fr": "\n    La matrice a %(i1)d  colonnes (au total).\n    Parmi ces colonnes %(i2)d sont linéairement indépendantes.\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(i2)d"
+   ],
+   "source": {
+    "line": 122
+   },
+   "en": null
+  },
+  "13": {
+   "id": "ELIMLAGR_13",
+   "fr": "\n    Le noyau de la matrice est un espace de dimension %(i1)d. On a construit une base de cet espace.\n    Norme de la matrice           : %(r1)f\n    Norme de la base              : %(r2)f\n    Norme du produit matrice-base : %(r3)f\n    Temps écoulé (secondes)       : %(r4)f\n",
+   "placeholders": [
+    "%(i1)d",
+    "%(r1)f",
+    "%(r2)f",
+    "%(r3)f",
+    "%(r4)f"
+   ],
+   "source": {
+    "line": 128
+   },
+   "en": null
+  }
+ }
+}

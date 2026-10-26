@@ -1,0 +1,1105 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_FLUI_STRU",
+ "kind": "OPER",
+ "fr": "Définit les caractéristiques nécessaires à l'étude dynamique d'une structure sous écoulement",
+ "translation_upstream": null,
+ "op": 143,
+ "reentrant": "n",
+ "result_types": [
+  "type_flui_stru"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FAISCEAU_TRANS",
+    "GRAPPE",
+    "FAISCEAU_AXIAL",
+    "COQUE_COAX"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "FAISCEAU_TRANS",
+   "kind": "factor",
+   "path": "FAISCEAU_TRANS",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "CSTE_CONNORS",
+      "NB_CONNORS",
+      "RHO_TUBE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "COUPLAGE",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/COUPLAGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "PROF_VITE_FLUI",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/PROF_VITE_FLUI",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "PROF_RHO_F_INT",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/PROF_RHO_F_INT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "PROF_RHO_F_EXT",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/PROF_RHO_F_EXT",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DX",
+      "DY",
+      "DZ"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "COEF_MASS_AJOU",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/COEF_MASS_AJOU",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "TYPE_PAS",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/TYPE_PAS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CARRE_LIGN",
+      "TRIA_LIGN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "TYPE_RESEAU",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/TYPE_RESEAU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "UNITE_CD",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/UNITE_CD",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 70,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "UNITE_CK",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/UNITE_CK",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 71,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "PAS",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "CSTE_CONNORS",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/CSTE_CONNORS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "NB_CONNORS",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/NB_CONNORS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "RHO_TUBE",
+     "kind": "simple",
+     "path": "FAISCEAU_TRANS/RHO_TUBE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 53
+     }
+    }
+   ]
+  },
+  {
+   "name": "GRAPPE",
+   "kind": "factor",
+   "path": "GRAPPE",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "GRAPPE_2",
+      "CARA_ELEM",
+      "MODELE",
+      "RHO_FLUI"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "COEF_MASS_AJOU",
+      "GRAPPE_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+    "line": 55
+   },
+   "keywords": [
+    {
+     "name": "COUPLAGE",
+     "kind": "simple",
+     "path": "GRAPPE/COUPLAGE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 62
+     }
+    },
+    {
+     "name": "GRAPPE_2",
+     "kind": "simple",
+     "path": "GRAPPE/GRAPPE_2",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ASC_CEN",
+      "ASC_EXC",
+      "DES_CEN",
+      "DES_EXC"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GRAPPE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 64
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "GRAPPE/CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 65
+     }
+    },
+    {
+     "name": "MODELE",
+     "kind": "simple",
+     "path": "GRAPPE/MODELE",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "COEF_MASS_AJOU",
+     "kind": "simple",
+     "path": "GRAPPE/COEF_MASS_AJOU",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "RHO_FLUI",
+     "kind": "simple",
+     "path": "GRAPPE/RHO_FLUI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "UNITE_CA",
+     "kind": "simple",
+     "path": "GRAPPE/UNITE_CA",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 70,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "UNITE_KA",
+     "kind": "simple",
+     "path": "GRAPPE/UNITE_KA",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 71,
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 70
+     }
+    }
+   ]
+  },
+  {
+   "name": "FAISCEAU_AXIAL",
+   "kind": "factor",
+   "path": "FAISCEAU_AXIAL",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_MA",
+      "TRI_GROUP_MA"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "CARA_ELEM",
+      "RAYON_TUBE"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "RAYON_TUBE",
+      "COOR_TUBE"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "RAYON_TUBE",
+      "TRI_GROUP_MA"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "CARA_PAROI",
+      "VALE_PAROI"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "LONG_TYPG",
+      "LARG_TYPG",
+      "EPAI_TYPG",
+      "RUGO_TYPG",
+      "COEF_TRAI_TYPG",
+      "COEF_DPOR_TYPG",
+      "COOR_GRILLE",
+      "TYPE_GRILLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+    "line": 72
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "TRI_GROUP_MA",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/TRI_GROUP_MA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "VECT_X",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/VECT_X",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 95
+     }
+    },
+    {
+     "name": "PROF_RHO_FLUI",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/PROF_RHO_FLUI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 96
+     }
+    },
+    {
+     "name": "PROF_VISC_CINE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/PROF_VISC_CINE",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/CARA_ELEM",
+     "status": "f",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "RAYON_TUBE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/RAYON_TUBE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "COOR_TUBE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/COOR_TUBE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "PESANTEUR",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/PESANTEUR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 4,
+     "max": 4,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "RUGO_TUBE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/RUGO_TUBE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "CARA_PAROI",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/CARA_PAROI",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 5,
+     "into": [
+      "YC",
+      "ZC",
+      "R",
+      "HY",
+      "HZ"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 103
+     }
+    },
+    {
+     "name": "VALE_PAROI",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/VALE_PAROI",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 5,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 106
+     }
+    },
+    {
+     "name": "ANGL_VRIL",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/ANGL_VRIL",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 107
+     }
+    },
+    {
+     "name": "LONG_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/LONG_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 108
+     }
+    },
+    {
+     "name": "LARG_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/LARG_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 109
+     }
+    },
+    {
+     "name": "EPAI_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/EPAI_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 110
+     }
+    },
+    {
+     "name": "RUGO_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/RUGO_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "COEF_TRAI_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/COEF_TRAI_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "COEF_DPOR_TYPG",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/COEF_DPOR_TYPG",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 113
+     }
+    },
+    {
+     "name": "COOR_GRILLE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/COOR_GRILLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 114
+     }
+    },
+    {
+     "name": "TYPE_GRILLE",
+     "kind": "simple",
+     "path": "FAISCEAU_AXIAL/TYPE_GRILLE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 115
+     }
+    }
+   ]
+  },
+  {
+   "name": "COQUE_COAX",
+   "kind": "factor",
+   "path": "COQUE_COAX",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+    "line": 117
+   },
+   "keywords": [
+    {
+     "name": "MASS_AJOU",
+     "kind": "simple",
+     "path": "COQUE_COAX/MASS_AJOU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 119
+     }
+    },
+    {
+     "name": "GROUP_MA_INT",
+     "kind": "simple",
+     "path": "COQUE_COAX/GROUP_MA_INT",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 120
+     }
+    },
+    {
+     "name": "GROUP_MA_EXT",
+     "kind": "simple",
+     "path": "COQUE_COAX/GROUP_MA_EXT",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 121
+     }
+    },
+    {
+     "name": "VECT_X",
+     "kind": "simple",
+     "path": "COQUE_COAX/VECT_X",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 122
+     }
+    },
+    {
+     "name": "CARA_ELEM",
+     "kind": "simple",
+     "path": "COQUE_COAX/CARA_ELEM",
+     "status": "o",
+     "type": [
+      "cara_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 123
+     }
+    },
+    {
+     "name": "MATER_INT",
+     "kind": "simple",
+     "path": "COQUE_COAX/MATER_INT",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 124
+     }
+    },
+    {
+     "name": "MATER_EXT",
+     "kind": "simple",
+     "path": "COQUE_COAX/MATER_EXT",
+     "status": "o",
+     "type": [
+      "mater_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 125
+     }
+    },
+    {
+     "name": "RHO_FLUI",
+     "kind": "simple",
+     "path": "COQUE_COAX/RHO_FLUI",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 126
+     }
+    },
+    {
+     "name": "VISC_CINE",
+     "kind": "simple",
+     "path": "COQUE_COAX/VISC_CINE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 127
+     }
+    },
+    {
+     "name": "RUGOSITE",
+     "kind": "simple",
+     "path": "COQUE_COAX/RUGOSITE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 128
+     }
+    },
+    {
+     "name": "PDC_MOY_1",
+     "kind": "simple",
+     "path": "COQUE_COAX/PDC_MOY_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 129
+     }
+    },
+    {
+     "name": "PDC_DYN_1",
+     "kind": "simple",
+     "path": "COQUE_COAX/PDC_DYN_1",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "PDC_MOY_2",
+     "kind": "simple",
+     "path": "COQUE_COAX/PDC_MOY_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 131
+     }
+    },
+    {
+     "name": "PDC_DYN_2",
+     "kind": "simple",
+     "path": "COQUE_COAX/PDC_DYN_2",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+      "line": 132
+     }
+    }
+   ]
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_flui_stru.py",
+    "line": 134
+   }
+  }
+ ]
+}

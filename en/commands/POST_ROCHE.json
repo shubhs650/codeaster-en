@@ -1,0 +1,724 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_roche.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_ROCHE",
+ "kind": "MACRO",
+ "fr": "Méthode Roche de représentation du comportement élasto-plastique des lignes de tuyauteries",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_roche_ops.post_roche_ops",
+ "reentrant": "n",
+ "result_types": [
+  "evol_noli"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_roche.py",
+  "line": 27
+ },
+ "keywords": [
+  {
+   "name": "VARIANTE",
+   "kind": "simple",
+   "path": "VARIANTE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RCC_MRX",
+   "into": [
+    "RCC_MRX",
+    "ASNR"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 35
+   }
+  },
+  {
+   "name": "b_rccmrx",
+   "kind": "bloc",
+   "path": "[b_rccmrx]",
+   "condition": "equal_to(\"VARIANTE\", \"RCC_MRX\") ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 36
+   },
+   "keywords": [
+    {
+     "name": "SIGM_LIM",
+     "kind": "simple",
+     "path": "SIGM_LIM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "SIGM_ABAT",
+     "kind": "simple",
+     "path": "SIGM_ABAT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "CODE",
+     "into": [
+      "CODE",
+      "REFE_ELAS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "b_no_sigm_lim",
+     "kind": "bloc",
+     "path": "[b_no_sigm_lim]",
+     "condition": "equal_to(\"SIGM_LIM\", \"NON\") ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 40
+     },
+     "keywords": [
+      {
+       "name": "TRAC_EPSI",
+       "kind": "simple",
+       "path": "TRAC_EPSI",
+       "status": "f",
+       "type": [
+        "fonction_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 42
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_asnr",
+   "kind": "bloc",
+   "path": "[b_asnr]",
+   "condition": "equal_to(\"VARIANTE\", \"ASNR\") ",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 45
+   },
+   "keywords": [
+    {
+     "name": "TRAC_EPSI",
+     "kind": "simple",
+     "path": "TRAC_EPSI",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "ZONE_ANALYSE",
+   "kind": "factor",
+   "path": "ZONE_ANALYSE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 49
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "ZONE_ANALYSE/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "ZONE_ANALYSE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "GROUP_NO_ORIG",
+     "kind": "simple",
+     "path": "ZONE_ANALYSE/GROUP_NO_ORIG",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "min": 1,
+     "max": 1,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 55
+     }
+    }
+   ]
+  },
+  {
+   "name": "COUDE",
+   "kind": "factor",
+   "path": "COUDE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 57
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "COUDE/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "ANGLE",
+     "kind": "simple",
+     "path": "COUDE/ANGLE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "RCOURB",
+     "kind": "simple",
+     "path": "COUDE/RCOURB",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 62
+     }
+    }
+   ]
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "f",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 65
+   }
+  },
+  {
+   "name": "CARA_ELEM",
+   "kind": "simple",
+   "path": "CARA_ELEM",
+   "status": "f",
+   "type": [
+    "cara_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 67
+   }
+  },
+  {
+   "name": "CHAM_MATER",
+   "kind": "simple",
+   "path": "CHAM_MATER",
+   "status": "f",
+   "type": [
+    "cham_mater"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "INST_TEMP",
+   "kind": "simple",
+   "path": "INST_TEMP",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "RESU_MECA",
+   "kind": "factor",
+   "path": "RESU_MECA",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 70
+   },
+   "keywords": [
+    {
+     "name": "TYPE_CHAR",
+     "kind": "simple",
+     "path": "RESU_MECA/TYPE_CHAR",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "SISM_INER_SPEC",
+      "DDS",
+      "DILAT_THERM",
+      "POIDS",
+      "DINS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "b_sism_iner_spec",
+     "kind": "bloc",
+     "path": "RESU_MECA/[b_sism_iner_spec]",
+     "condition": "equal_to(\"TYPE_CHAR\", 'SISM_INER_SPEC') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 76
+     },
+     "keywords": [
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU_MECA/RESULTAT",
+       "status": "o",
+       "type": [
+        "mult_elas",
+        "mode_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 79
+       }
+      },
+      {
+       "name": "DIRECTION",
+       "kind": "simple",
+       "path": "RESU_MECA/DIRECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "COMBI",
+       "into": [
+        "COMBI",
+        "X",
+        "Y",
+        "Z"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 80
+       }
+      },
+      {
+       "name": "TYPE_RESU",
+       "kind": "simple",
+       "path": "RESU_MECA/TYPE_RESU",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "DYN",
+        "QS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 81
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_autre",
+     "kind": "bloc",
+     "path": "RESU_MECA/[b_autre]",
+     "condition": "not equal_to(\"TYPE_CHAR\", 'SISM_INER_SPEC') ",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "CHAM_GD",
+        "RESULTAT"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "CHAM_GD",
+        "NUME_ORDRE",
+        "INST"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 83
+     },
+     "keywords": [
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "RESU_MECA/CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 86
+       }
+      },
+      {
+       "name": "RESULTAT",
+       "kind": "simple",
+       "path": "RESU_MECA/RESULTAT",
+       "status": "f",
+       "type": [
+        "evol_elas"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 87
+       }
+      },
+      {
+       "name": "NUME_ORDRE",
+       "kind": "simple",
+       "path": "RESU_MECA/NUME_ORDRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 88
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "RESU_MECA/INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 89
+       }
+      },
+      {
+       "name": "b_inst",
+       "kind": "bloc",
+       "path": "RESU_MECA/[b_inst]",
+       "condition": "exists(\"INST\") ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/post_roche.py",
+        "line": 90
+       },
+       "keywords": [
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "RESU_MECA/CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_roche.py",
+          "line": 92
+         }
+        },
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "RESU_MECA/PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/post_roche.py",
+          "line": 93
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PRESSION",
+   "kind": "factor",
+   "path": "PRESSION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "GROUP_MA"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 97
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "PRESSION/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 101
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "PRESSION/GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 102
+     }
+    },
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "PRESSION/VALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 103
+     }
+    }
+   ]
+  },
+  {
+   "name": "TOUT_CHAM",
+   "kind": "simple",
+   "path": "TOUT_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 105
+   }
+  },
+  {
+   "name": "b_nom_cham",
+   "kind": "bloc",
+   "path": "[b_nom_cham]",
+   "condition": "not exists(\"TOUT_CHAM\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_roche.py",
+    "line": 106
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "default": "ROC1_ELNO",
+     "into": [
+      "ROC1_ELNO",
+      "ROC2_ELNO"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_roche.py",
+      "line": 108
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,352 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_erreur.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_ERREUR",
+ "kind": "MACRO",
+ "fr": null,
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.post_erreur_ops.post_erreur_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_erreur.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DEPL_RELA",
+    "ENER_RELA",
+    "LAGR_RELA"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "MODELE",
+   "kind": "simple",
+   "path": "MODELE",
+   "status": "o",
+   "type": [
+    "modele_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "GROUP_MA",
+   "kind": "simple",
+   "path": "GROUP_MA",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_depl",
+   "kind": "bloc",
+   "path": "[b_depl]",
+   "condition": "equal_to(\"OPTION\", 'DEPL_RELA') ",
+   "fr": "Paramètres pour l'erreur en deplacement en norme l2",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 34
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "f",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "DX",
+     "kind": "simple",
+     "path": "DX",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "DY",
+     "kind": "simple",
+     "path": "DY",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "DZ",
+     "kind": "simple",
+     "path": "DZ",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 41
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_ener",
+   "kind": "bloc",
+   "path": "[b_ener]",
+   "condition": "equal_to(\"OPTION\", 'ENER_RELA') ",
+   "fr": "Paramètres pour l'erreur en energie elastique",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "CHAM_MATER",
+     "kind": "simple",
+     "path": "CHAM_MATER",
+     "status": "o",
+     "type": [
+      "cham_mater"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "DEFORMATION",
+     "kind": "simple",
+     "path": "DEFORMATION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "PETIT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "SIXX",
+     "kind": "simple",
+     "path": "SIXX",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "SIYY",
+     "kind": "simple",
+     "path": "SIYY",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "SIZZ",
+     "kind": "simple",
+     "path": "SIZZ",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "SIXY",
+     "kind": "simple",
+     "path": "SIXY",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "SIXZ",
+     "kind": "simple",
+     "path": "SIXZ",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "SIYZ",
+     "kind": "simple",
+     "path": "SIYZ",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 54
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_lag",
+   "kind": "bloc",
+   "path": "[b_lag]",
+   "condition": "equal_to(\"OPTION\", 'LAGR_RELA') ",
+   "fr": "Paramètres pour l'erreur en pression en norme l2",
+   "source": {
+    "file": "code_aster/Cata/Commands/post_erreur.py",
+    "line": 56
+   },
+   "keywords": [
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "o",
+     "type": [
+      "cham_no_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "LAGS_C",
+     "kind": "simple",
+     "path": "LAGS_C",
+     "status": "f",
+     "type": [
+      "formule"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/post_erreur.py",
+      "line": 60
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,226 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/engendre_test.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "ENGENDRE_TEST",
+ "kind": "PROC",
+ "fr": "Engendre des tests pour la non régression du code (pour développeurs)",
+ "translation_upstream": null,
+ "op": 178,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/engendre_test.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "UNITE",
+   "kind": "simple",
+   "path": "UNITE",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 8,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "ASTER",
+   "into": [
+    "ASTER",
+    "OBJET"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "FORMAT_R",
+   "kind": "simple",
+   "path": "FORMAT_R",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "1PE20.13",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "PREC_R",
+   "kind": "simple",
+   "path": "PREC_R",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "1.E-10",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "b_aster",
+   "kind": "bloc",
+   "path": "[b_aster]",
+   "condition": "equal_to(\"FORMAT\", 'ASTER')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 35
+   },
+   "keywords": [
+    {
+     "name": "CO",
+     "kind": "simple",
+     "path": "CO",
+     "status": "o",
+     "type": [
+      "cham_gd_sdaster",
+      "resultat_sdaster",
+      "table_sdaster"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/engendre_test.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "TYPE_TEST",
+     "kind": "simple",
+     "path": "TYPE_TEST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SOMM_ABS",
+     "into": [
+      "SOMME",
+      "SOMM_ABS",
+      "MAX",
+      "MIN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/engendre_test.py",
+      "line": 43
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_objet",
+   "kind": "bloc",
+   "path": "[b_objet]",
+   "condition": "equal_to(\"FORMAT\", 'OBJET')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "CO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/engendre_test.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/engendre_test.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "CO",
+     "kind": "simple",
+     "path": "CO",
+     "status": "f",
+     "type": [
+      "DataStructure"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/engendre_test.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "TYPE_TEST",
+     "kind": "simple",
+     "path": "TYPE_TEST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SOMME",
+     "into": [
+      "SOMME"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/engendre_test.py",
+      "line": 53
+     }
+    }
+   ]
+  }
+ ]
+}

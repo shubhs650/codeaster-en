@@ -1,0 +1,215 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "REST_SPEC_TEMP",
+ "kind": "OPER",
+ "fr": "Transformee de Fourier d un resultat",
+ "translation_upstream": null,
+ "op": 181,
+ "reentrant": "n",
+ "result_types": [
+  "dyna_trans",
+  "tran_gene",
+  "dyna_harmo",
+  "harm_gene"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "RESU_GENE",
+    "RESULTAT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+  "line": 41
+ },
+ "keywords": [
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "f",
+   "type": [
+    "harm_gene",
+    "tran_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "dyna_harmo",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 50
+   }
+  },
+  {
+   "name": "METHODE",
+   "kind": "simple",
+   "path": "METHODE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "PROL_ZERO",
+   "into": [
+    "PROL_ZERO",
+    "TRONCATURE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 51
+   }
+  },
+  {
+   "name": "SYMETRIE",
+   "kind": "simple",
+   "path": "SYMETRIE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 52
+   }
+  },
+  {
+   "name": "TOUT_CHAM",
+   "kind": "simple",
+   "path": "TOUT_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "OUI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 53
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 3,
+   "into": [
+    "DEPL",
+    "VITE",
+    "ACCE"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 54
+   }
+  },
+  {
+   "name": "ACCELERATION_MPI",
+   "kind": "simple",
+   "path": "ACCELERATION_MPI",
+   "status": "c",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 57
+   }
+  },
+  {
+   "name": "prol_puissance_sup",
+   "kind": "bloc",
+   "path": "[prol_puissance_sup]",
+   "condition": "equal_to(\"METHODE\",'PROL_ZERO' )",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+    "line": 58
+   },
+   "keywords": [
+    {
+     "name": "N_PUIS",
+     "kind": "simple",
+     "path": "N_PUIS",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/rest_spec_temp.py",
+      "line": 59
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,205 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/recu_gene.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "RECU_GENE",
+ "kind": "OPER",
+ "fr": "Extraire d'un champ de grandeur (déplacements, vitesses ou accélérations) à partir de résultats en coordonnées généralisées",
+ "translation_upstream": null,
+ "op": 76,
+ "reentrant": "n",
+ "result_types": [
+  "vect_asse_gene"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FREQ",
+    "INST"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/recu_gene.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "o",
+   "type": [
+    "tran_gene",
+    "harm_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_gene.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "INST",
+   "kind": "simple",
+   "path": "INST",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_gene.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_gene.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "DEPL",
+   "into": [
+    "DEPL",
+    "VITE",
+    "ACCE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_gene.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "b_interp_temp",
+   "kind": "bloc",
+   "path": "[b_interp_temp]",
+   "condition": "exists(\"INST\") and not exists(\"FREQ\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_gene.py",
+    "line": 40
+   },
+   "keywords": [
+    {
+     "name": "INTERPOL",
+     "kind": "simple",
+     "path": "INTERPOL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "NON",
+      "LIN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_gene.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_gene.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "b_prec_rela",
+     "kind": "bloc",
+     "path": "[b_prec_rela]",
+     "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_gene.py",
+      "line": 44
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_gene.py",
+        "line": 46
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_prec_abso",
+     "kind": "bloc",
+     "path": "[b_prec_abso]",
+     "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_gene.py",
+      "line": 48
+     },
+     "keywords": [
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "PRECISION",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_gene.py",
+        "line": 49
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

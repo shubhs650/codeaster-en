@@ -1,0 +1,379 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/extr_mode.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "EXTR_MODE",
+ "kind": "OPER",
+ "fr": "Extraire séléctivement des modes des structures de données modales",
+ "translation_upstream": null,
+ "op": 168,
+ "reentrant": "n",
+ "result_types": [
+  "mode_meca",
+  "mode_meca_c",
+  "mode_gene"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/extr_mode.py",
+  "line": 41
+ },
+ "keywords": [
+  {
+   "name": "FILTRE_MODE",
+   "kind": "factor",
+   "path": "FILTRE_MODE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT_ORDRE",
+      "NUME_ORDRE",
+      "NUME_MODE",
+      "NUME_MODE_EXCLU",
+      "FREQ_MIN",
+      "CRIT_EXTR"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_mode.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "MODE",
+     "kind": "simple",
+     "path": "FILTRE_MODE/MODE",
+     "status": "o",
+     "type": [
+      "mode_meca",
+      "mode_meca_c",
+      "mode_gene"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "FILTRE_MODE/TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "FILTRE_MODE/NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 57
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "FILTRE_MODE/NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "NUME_MODE_EXCLU",
+     "kind": "simple",
+     "path": "FILTRE_MODE/NUME_MODE_EXCLU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 59
+     }
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "FILTRE_MODE/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 60
+     }
+    },
+    {
+     "name": "CRIT_EXTR",
+     "kind": "simple",
+     "path": "FILTRE_MODE/CRIT_EXTR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "MASS_EFFE_UN",
+      "MASS_GENE",
+      "MASS_EFFE",
+      "INER_EFFE_UN",
+      "INER_EFFE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 61
+     }
+    },
+    {
+     "name": "b_freq_min",
+     "kind": "bloc",
+     "path": "FILTRE_MODE/[b_freq_min]",
+     "condition": "exists(\"FREQ_MIN\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 66
+     },
+     "keywords": [
+      {
+       "name": "FREQ_MAX",
+       "kind": "simple",
+       "path": "FILTRE_MODE/FREQ_MAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 68
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "FILTRE_MODE/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 69
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_crit_extr",
+     "kind": "bloc",
+     "path": "FILTRE_MODE/[b_crit_extr]",
+     "condition": "exists(\"CRIT_EXTR\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "SEUIL",
+        "SEUIL_X",
+        "SEUIL_Y",
+        "SEUIL_Z"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 71
+     },
+     "keywords": [
+      {
+       "name": "SEUIL",
+       "kind": "simple",
+       "path": "FILTRE_MODE/SEUIL",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 74
+       }
+      },
+      {
+       "name": "SEUIL_X",
+       "kind": "simple",
+       "path": "FILTRE_MODE/SEUIL_X",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 75
+       }
+      },
+      {
+       "name": "SEUIL_Y",
+       "kind": "simple",
+       "path": "FILTRE_MODE/SEUIL_Y",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 76
+       }
+      },
+      {
+       "name": "SEUIL_Z",
+       "kind": "simple",
+       "path": "FILTRE_MODE/SEUIL_Z",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/extr_mode.py",
+        "line": 77
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_mode.py",
+    "line": 80
+   }
+  },
+  {
+   "name": "IMPRESSION",
+   "kind": "factor",
+   "path": "IMPRESSION",
+   "status": "f",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/extr_mode.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "CUMUL",
+     "kind": "simple",
+     "path": "IMPRESSION/CUMUL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "CRIT_EXTR",
+     "kind": "simple",
+     "path": "IMPRESSION/CRIT_EXTR",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "MASS_EFFE_UN",
+     "into": [
+      "MASS_EFFE_UN",
+      "MASS_GENE",
+      "MASS_EFFE",
+      "INER_EFFE_UN",
+      "INER_EFFE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/extr_mode.py",
+      "line": 84
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,59 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Messages/maillage1.py",
+  "extractor": "codeaster_en.extract.messages",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "family": "MAILLAGE1",
+ "source": {
+  "file": "code_aster/Messages/maillage1.py"
+ },
+ "messages": {
+  "1": {
+   "id": "MAILLAGE1_1",
+   "fr": "\n Erreur de maillage :\n   La maille %(k1)s de type %(k2)s est trop distordue.\n   Le jacobien de la transformation géométrique n'a pas le même signe sur tous les\n   points de Gauss.\n\n Risques & conseils :\n   Le maillage a-t-il été produit par un mailleur ?\n   La connectivité respecte-t-elle bien la convention Aster ?\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s"
+   ],
+   "source": {
+    "line": 23
+   },
+   "en": null
+  },
+  "2": {
+   "id": "MAILLAGE1_2",
+   "fr": "\nPour le noeud %(k1)s de la maille %(k2)s, la coordonnée X est négative (x=%(r1)G).\n",
+   "placeholders": [
+    "%(k1)s",
+    "%(k2)s",
+    "%(r1)G"
+   ],
+   "source": {
+    "line": 35
+   },
+   "en": null
+  },
+  "3": {
+   "id": "MAILLAGE1_3",
+   "fr": "\nPour une modélisation axisymétrique, la coordonnée X doit être positive, nulle ou\ntrès faiblement négative ( > -1.d-6 * X_MAX)\n\n Conseils :\n  * Vérifiez votre maillage.\n  * Vous pouvez utiliser MODI_MAILLAGE / DEFORME pour repositionner votre maillage\n    dans le demi espace  X >= 0\n",
+   "placeholders": [],
+   "source": {
+    "line": 40
+   },
+   "en": null
+  },
+  "4": {
+   "id": "MAILLAGE1_4",
+   "fr": "\nIl y a des noeuds doubles à l'interface de deux sous-domaines.\nIl n'est pas possible de créer les joints avec.\n\n Conseils :\n  * Supprimer les noeuds doubles.\n  * Utiliser un nombre différents de processus MPI pour ne plus avoir de noeuds doubles\n  à une interface.\n",
+   "placeholders": [],
+   "source": {
+    "line": 51
+   },
+   "en": null
+  }
+ }
+}

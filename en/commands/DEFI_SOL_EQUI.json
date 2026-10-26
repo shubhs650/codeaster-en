@@ -1,0 +1,1506 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_SOL_EQUI",
+ "kind": "MACRO",
+ "fr": "Définition des données de sol pour Miss",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.defi_sol_equi_ops.defi_sol_equi_ops",
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "TABLE_MATER_ELAS",
+    "TABLE_GEQUI_GMAX",
+    "TABLE_AMOR_EQUI"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "GROUP_MA_DROITE",
+    "GROUP_MA_GAUCHE"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "LIEU_SIGNAL",
+   "kind": "simple",
+   "path": "LIEU_SIGNAL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "AFFLEURANT",
+   "into": [
+    "AFFLEURANT",
+    "CHAMP_LIBRE"
+   ],
+   "fr": "lieu d'imposition du signal",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 34
+   }
+  },
+  {
+   "name": "CHARGEMENT",
+   "kind": "simple",
+   "path": "CHARGEMENT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "MONO_APPUI",
+   "into": [
+    "MONO_APPUI",
+    "ONDE_PLANE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "b_ONDE",
+   "kind": "bloc",
+   "path": "[b_ONDE]",
+   "condition": "equal_to(\"CHARGEMENT\", 'ONDE_PLANE')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "FONC_SIGNAL",
+      "UNITE_TRAN_INIT",
+      "FONC_SIGNAL_X"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "FONC_SIGNAL_X",
+      "FONC_SIGNAL_Y",
+      "FONC_SIGNAL_Z",
+      "GROUP_MA_ARRETE_1",
+      "GROUP_MA_ARRETE_2"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "FONC_SIGNAL_X",
+      "LIAISON"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "FONC_SIGNAL",
+     "kind": "simple",
+     "path": "FONC_SIGNAL",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero horizontal",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_X",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction X",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 58
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_Y",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction Y",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 63
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_Z",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction Z",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "TOUT_CHAM",
+     "kind": "simple",
+     "path": "TOUT_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "TOUT_ACCE",
+     "kind": "simple",
+     "path": "TOUT_ACCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 74
+     }
+    },
+    {
+     "name": "b_TOUTACCE",
+     "kind": "bloc",
+     "path": "[b_TOUTACCE]",
+     "condition": "equal_to(\"TOUT_ACCE\", 'NON')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 75
+     },
+     "keywords": [
+      {
+       "name": "LIST_COUCHE_ACCE",
+       "kind": "simple",
+       "path": "LIST_COUCHE_ACCE",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "liste des couches pour obtention du signal en accélération",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 77
+       }
+      }
+     ]
+    },
+    {
+     "name": "UNITE_TRAN_INIT",
+     "kind": "simple",
+     "path": "UNITE_TRAN_INIT",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "LIAISON",
+     "kind": "simple",
+     "path": "LIAISON",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "PERIODIQUE",
+      "SANS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "MASS_PENA",
+     "kind": "simple",
+     "path": "MASS_PENA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "valeur ponctuelle de masse penalisee",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "LONG_CARA",
+     "kind": "simple",
+     "path": "LONG_CARA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "valeur de longueur caracteristique",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DX",
+     "into": [
+      "DX",
+      "DY"
+     ],
+     "fr": "sollicitation horizontale",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "GROUP_MA_ARRETE_1",
+     "kind": "simple",
+     "path": "GROUP_MA_ARRETE_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "GROUP_MA_ARRETE_2",
+     "kind": "simple",
+     "path": "GROUP_MA_ARRETE_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "b_MAIL3D",
+     "kind": "bloc",
+     "path": "[b_MAIL3D]",
+     "condition": "exists(\"FONC_SIGNAL_X\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 99
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "MAILLAGE",
+       "status": "o",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 100
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_MAIL2D",
+     "kind": "bloc",
+     "path": "[b_MAIL2D]",
+     "condition": "not exists(\"FONC_SIGNAL_X\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 102
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 104
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_BYRNE",
+     "kind": "bloc",
+     "path": "[b_BYRNE]",
+     "condition": "not exists(\"GROUP_MA_ARRETE_1\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 106
+     },
+     "keywords": [
+      {
+       "name": "CORRECTION",
+       "kind": "simple",
+       "path": "CORRECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "SANS",
+       "into": [
+        "BYRNE",
+        "SANS"
+       ],
+       "fr": "utilisation formulation Byrne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "b_CORRECTION",
+       "kind": "bloc",
+       "path": "[b_CORRECTION]",
+       "condition": "equal_to(\"CORRECTION\", 'BYRNE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 115
+       },
+       "keywords": [
+        {
+         "name": "COEF_KSI",
+         "kind": "simple",
+         "path": "COEF_KSI",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.666666667,
+         "fr": "facteur Ksi_max par couche pour modele Byrne",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+          "line": 117
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_MONO",
+   "kind": "bloc",
+   "path": "[b_MONO]",
+   "condition": "equal_to(\"CHARGEMENT\", 'MONO_APPUI')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "FONC_SIGNAL",
+      "DSP",
+      "FONC_SIGNAL_X"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "FONC_SIGNAL_X",
+      "FONC_SIGNAL_Y",
+      "FONC_SIGNAL_Z",
+      "GROUP_MA_ARRETE_1",
+      "GROUP_MA_ARRETE_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 126
+   },
+   "keywords": [
+    {
+     "name": "FONC_SIGNAL",
+     "kind": "simple",
+     "path": "FONC_SIGNAL",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero horizontal",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 138
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_X",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_X",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction X",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 141
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_Y",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_Y",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction Y",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 146
+     }
+    },
+    {
+     "name": "FONC_SIGNAL_Z",
+     "kind": "simple",
+     "path": "FONC_SIGNAL_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Signal impose d'accelero dans la direction Z",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 151
+     }
+    },
+    {
+     "name": "DSP",
+     "kind": "simple",
+     "path": "DSP",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "DSP Signal impose d'accelero horizontal",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 156
+     }
+    },
+    {
+     "name": "b_type_dsp",
+     "kind": "bloc",
+     "path": "[b_type_dsp]",
+     "condition": "exists('DSP')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 159
+     },
+     "keywords": [
+      {
+       "name": "DUREE",
+       "kind": "simple",
+       "path": "DUREE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "durée de la phase forte pour facteur de pic",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 161
+       }
+      },
+      {
+       "name": "UNITE_RESU_DSP",
+       "kind": "simple",
+       "path": "UNITE_RESU_DSP",
+       "status": "o",
+       "type": [
+        "UnitDefault"
+       ],
+       "inout": "out",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 167
+       }
+      }
+     ]
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DX",
+     "into": [
+      "DX",
+      "DY"
+     ],
+     "fr": "sollicitation horizontale",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 169
+     }
+    },
+    {
+     "name": "TOUT_CHAM",
+     "kind": "simple",
+     "path": "TOUT_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NON",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 176
+     }
+    },
+    {
+     "name": "TOUT_ACCE",
+     "kind": "simple",
+     "path": "TOUT_ACCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 177
+     }
+    },
+    {
+     "name": "b_TOUTACCE",
+     "kind": "bloc",
+     "path": "[b_TOUTACCE]",
+     "condition": "equal_to(\"TOUT_ACCE\", 'NON')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 178
+     },
+     "keywords": [
+      {
+       "name": "LIST_COUCHE_ACCE",
+       "kind": "simple",
+       "path": "LIST_COUCHE_ACCE",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": "liste des couches pour obtention du signal en accélération",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 180
+       }
+      }
+     ]
+    },
+    {
+     "name": "GROUP_MA_ARRETE_1",
+     "kind": "simple",
+     "path": "GROUP_MA_ARRETE_1",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 188
+     }
+    },
+    {
+     "name": "GROUP_MA_ARRETE_2",
+     "kind": "simple",
+     "path": "GROUP_MA_ARRETE_2",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 189
+     }
+    },
+    {
+     "name": "b_MAIL3D",
+     "kind": "bloc",
+     "path": "[b_MAIL3D]",
+     "condition": "exists(\"FONC_SIGNAL_X\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 190
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "MAILLAGE",
+       "status": "o",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 191
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_MAIL2D",
+     "kind": "bloc",
+     "path": "[b_MAIL2D]",
+     "condition": "not exists(\"FONC_SIGNAL_X\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 193
+     },
+     "keywords": [
+      {
+       "name": "MAILLAGE",
+       "kind": "simple",
+       "path": "MAILLAGE",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 195
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_BYRNE",
+     "kind": "bloc",
+     "path": "[b_BYRNE]",
+     "condition": "not exists(\"GROUP_MA_ARRETE_1\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 197
+     },
+     "keywords": [
+      {
+       "name": "CORRECTION",
+       "kind": "simple",
+       "path": "CORRECTION",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "SANS",
+       "into": [
+        "BYRNE",
+        "SANS"
+       ],
+       "fr": "utilisation formulation Byrne",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 199
+       }
+      },
+      {
+       "name": "b_CORRECTION",
+       "kind": "bloc",
+       "path": "[b_CORRECTION]",
+       "condition": "equal_to(\"CORRECTION\", 'BYRNE')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 206
+       },
+       "keywords": [
+        {
+         "name": "COEF_KSI",
+         "kind": "simple",
+         "path": "COEF_KSI",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.666666667,
+         "fr": "facteur Ksi_max par couche pour modele Byrne",
+         "source": {
+          "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+          "line": 208
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "CORR_AMOR",
+   "kind": "simple",
+   "path": "CORR_AMOR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "formulation d'amortissement",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 217
+   }
+  },
+  {
+   "name": "LIST_FREQ_SPEC_OSCI",
+   "kind": "simple",
+   "path": "LIST_FREQ_SPEC_OSCI",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": "liste de frequences de spectre d oscillateur",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 224
+   }
+  },
+  {
+   "name": "LIST_FREQ",
+   "kind": "simple",
+   "path": "LIST_FREQ",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": "liste de frequences de calcul",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 227
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 228
+   }
+  },
+  {
+   "name": "GROUP_MA_DROITE",
+   "kind": "simple",
+   "path": "GROUP_MA_DROITE",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 229
+   }
+  },
+  {
+   "name": "GROUP_MA_GAUCHE",
+   "kind": "simple",
+   "path": "GROUP_MA_GAUCHE",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 230
+   }
+  },
+  {
+   "name": "GROUP_MA_SUBSTR",
+   "kind": "simple",
+   "path": "GROUP_MA_SUBSTR",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 231
+   }
+  },
+  {
+   "name": "GROUP_MA_COL",
+   "kind": "simple",
+   "path": "GROUP_MA_COL",
+   "status": "o",
+   "type": [
+    "grma"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 232
+   }
+  },
+  {
+   "name": "COEF_VARI_MATE",
+   "kind": "simple",
+   "path": "COEF_VARI_MATE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": "facteur de variation des modules",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 233
+   }
+  },
+  {
+   "name": "COEF_AMPL_ACCE",
+   "kind": "simple",
+   "path": "COEF_AMPL_ACCE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": "facteur sur l'amplitude d'accelero",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 234
+   }
+  },
+  {
+   "name": "COEF_GAMMA",
+   "kind": "simple",
+   "path": "COEF_GAMMA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.65,
+   "fr": "facteur Gamma_max par couche",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 237
+   }
+  },
+  {
+   "name": "NMAX_ITER",
+   "kind": "simple",
+   "path": "NMAX_ITER",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "val_min": 1,
+   "default": 10,
+   "fr": "nombre d'iterations maximum",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 238
+   }
+  },
+  {
+   "name": "RESI_RELA",
+   "kind": "simple",
+   "path": "RESI_RELA",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.05,
+   "fr": "tolerance d'arret des iterations",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 239
+   }
+  },
+  {
+   "name": "FREQ_COUP",
+   "kind": "simple",
+   "path": "FREQ_COUP",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": "frequence de coupure de filtrage du signal",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 240
+   }
+  },
+  {
+   "name": "FREQ_FILTRE",
+   "kind": "simple",
+   "path": "FREQ_FILTRE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 0.0,
+   "fr": "frequence filtrage du signal",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 241
+   }
+  },
+  {
+   "name": "INTEGRATION",
+   "kind": "simple",
+   "path": "INTEGRATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TEMPS",
+   "into": [
+    "TEMPS",
+    "FREQUENCE"
+   ],
+   "fr": "methode integration du signal",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 242
+   }
+  },
+  {
+   "name": "SURF",
+   "kind": "simple",
+   "path": "SURF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 249
+   }
+  },
+  {
+   "name": "b_SURF",
+   "kind": "bloc",
+   "path": "[b_SURF]",
+   "condition": "equal_to(\"SURF\", 'NON')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 250
+   },
+   "keywords": [
+    {
+     "name": "NIVE_COUCH_ENFO",
+     "kind": "simple",
+     "path": "NIVE_COUCH_ENFO",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 253
+     }
+    },
+    {
+     "name": "NB_RECEPTEUR",
+     "kind": "simple",
+     "path": "NB_RECEPTEUR",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 2,
+     "into": [
+      2,
+      4
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 255
+     }
+    }
+   ]
+  },
+  {
+   "name": "UNITE_TABLE_RESU",
+   "kind": "simple",
+   "path": "UNITE_TABLE_RESU",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 258
+   }
+  },
+  {
+   "name": "UNITE_RESU_TRAN",
+   "kind": "simple",
+   "path": "UNITE_RESU_TRAN",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 40,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 259
+   }
+  },
+  {
+   "name": "UNITE_RESU_SPEC",
+   "kind": "simple",
+   "path": "UNITE_RESU_SPEC",
+   "status": "f",
+   "type": [
+    "UnitDefault"
+   ],
+   "default": 55,
+   "inout": "out",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 260
+   }
+  },
+  {
+   "name": "TABLE_MATER_ELAS",
+   "kind": "simple",
+   "path": "TABLE_MATER_ELAS",
+   "status": "f",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 261
+   }
+  },
+  {
+   "name": "TABLE_GEQUI_GMAX",
+   "kind": "simple",
+   "path": "TABLE_GEQUI_GMAX",
+   "status": "f",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 262
+   }
+  },
+  {
+   "name": "TABLE_AMOR_EQUI",
+   "kind": "simple",
+   "path": "TABLE_AMOR_EQUI",
+   "status": "f",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 263
+   }
+  },
+  {
+   "name": "SEPARATEUR",
+   "kind": "simple",
+   "path": "SEPARATEUR",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": " ",
+   "fr": "Séparateur des colonnes du tableau (ex : ' ', ';'...)",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 264
+   }
+  },
+  {
+   "name": "LIST_EPSI",
+   "kind": "simple",
+   "path": "LIST_EPSI",
+   "status": "f",
+   "type": [
+    "listr8_sdaster"
+   ],
+   "fr": "liste d'abscisses de distorsion de référence",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 270
+   }
+  },
+  {
+   "name": "b_ntabl_mater",
+   "kind": "bloc",
+   "path": "[b_ntabl_mater]",
+   "condition": "not exists(\"TABLE_MATER_ELAS\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 273
+   },
+   "keywords": [
+    {
+     "name": "MATERIAU",
+     "kind": "factor",
+     "path": "MATERIAU",
+     "status": "f",
+     "max": "**",
+     "fr": "Définition des matériaux",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 275
+     },
+     "keywords": [
+      {
+       "name": "GAMMA",
+       "kind": "simple",
+       "path": "MATERIAU/GAMMA",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": "Abscisses de distorsion",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 279
+       }
+      },
+      {
+       "name": "G_GMAX",
+       "kind": "simple",
+       "path": "MATERIAU/G_GMAX",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": "Valeurs de reduction de module G",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 280
+       }
+      },
+      {
+       "name": "D",
+       "kind": "simple",
+       "path": "MATERIAU/D",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": "Valeurs de coefficient d'amortissement",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 281
+       }
+      }
+     ]
+    },
+    {
+     "name": "COUCHE",
+     "kind": "factor",
+     "path": "COUCHE",
+     "status": "f",
+     "max": "**",
+     "fr": "Définition des couches",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+      "line": 283
+     },
+     "keywords": [
+      {
+       "name": "EPAIS",
+       "kind": "simple",
+       "path": "COUCHE/EPAIS",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Epaisseur de la couche",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 287
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "COUCHE/GROUP_MA",
+       "status": "o",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 288
+       }
+      },
+      {
+       "name": "E",
+       "kind": "simple",
+       "path": "COUCHE/E",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Module d'Young",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 289
+       }
+      },
+      {
+       "name": "NU",
+       "kind": "simple",
+       "path": "COUCHE/NU",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient de Poisson",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 290
+       }
+      },
+      {
+       "name": "RHO",
+       "kind": "simple",
+       "path": "COUCHE/RHO",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Masse volumique",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 291
+       }
+      },
+      {
+       "name": "AMOR_HYST",
+       "kind": "simple",
+       "path": "COUCHE/AMOR_HYST",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": "Coefficient d'amortissement",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 292
+       }
+      },
+      {
+       "name": "NUME_MATE",
+       "kind": "simple",
+       "path": "COUCHE/NUME_MATE",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "fr": "Numéro du matériau",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 293
+       }
+      },
+      {
+       "name": "N1",
+       "kind": "simple",
+       "path": "COUCHE/N1",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Valeur essai SPT",
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+        "line": 294
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Titre de la table produite",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 297
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_sol_equi.py",
+    "line": 298
+   }
+  }
+ ]
+}

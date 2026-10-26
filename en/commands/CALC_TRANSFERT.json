@@ -1,0 +1,340 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_transfert.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_TRANSFERT",
+ "kind": "MACRO",
+ "fr": "Calcul des fonctions de transfert et des signaux deconvolues ",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_transfert_ops.calc_transfert_ops",
+ "reentrant": null,
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_transfert.py",
+  "line": 41
+ },
+ "keywords": [
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 1,
+   "into": [
+    "DEPL",
+    "VITE",
+    "ACCE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "ENTREE",
+   "kind": "factor",
+   "path": "ENTREE",
+   "status": "o",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "ENTREE/GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 47
+     }
+    }
+   ]
+  },
+  {
+   "name": "SORTIE",
+   "kind": "factor",
+   "path": "SORTIE",
+   "status": "o",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 48
+   },
+   "keywords": [
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "SORTIE/GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 48
+     }
+    }
+   ]
+  },
+  {
+   "name": "REPERE",
+   "kind": "simple",
+   "path": "REPERE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "RELATIF",
+   "into": [
+    "RELATIF",
+    "ABSOLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 49
+   }
+  },
+  {
+   "name": "b_repere",
+   "kind": "bloc",
+   "path": "[b_repere]",
+   "condition": "equal_to(\"REPERE\", 'RELATIF')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 50
+   },
+   "keywords": [
+    {
+     "name": "ENTRAINEMENT",
+     "kind": "factor",
+     "path": "ENTRAINEMENT",
+     "status": "o",
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 52
+     },
+     "keywords": [
+      {
+       "name": "DX",
+       "kind": "simple",
+       "path": "ENTRAINEMENT/DX",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "fonction_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_transfert.py",
+        "line": 55
+       }
+      },
+      {
+       "name": "DY",
+       "kind": "simple",
+       "path": "ENTRAINEMENT/DY",
+       "status": "o",
+       "type": [
+        "fonction_sdaster",
+        "fonction_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_transfert.py",
+        "line": 56
+       }
+      },
+      {
+       "name": "DZ",
+       "kind": "simple",
+       "path": "ENTRAINEMENT/DZ",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "fonction_c"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_transfert.py",
+        "line": 57
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "RESULTAT_X",
+   "kind": "simple",
+   "path": "RESULTAT_X",
+   "status": "o",
+   "type": [
+    "harm_gene",
+    "tran_gene",
+    "dyna_harmo",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 60
+   }
+  },
+  {
+   "name": "RESULTAT_Y",
+   "kind": "simple",
+   "path": "RESULTAT_Y",
+   "status": "o",
+   "type": [
+    "harm_gene",
+    "tran_gene",
+    "dyna_harmo",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "RESULTAT_Z",
+   "kind": "simple",
+   "path": "RESULTAT_Z",
+   "status": "f",
+   "type": [
+    "harm_gene",
+    "tran_gene",
+    "dyna_harmo",
+    "dyna_trans"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 62
+   }
+  },
+  {
+   "name": "SIGNAL",
+   "kind": "factor",
+   "path": "SIGNAL",
+   "status": "f",
+   "max": 1,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_transfert.py",
+    "line": 63
+   },
+   "keywords": [
+    {
+     "name": "MESURE_X",
+     "kind": "simple",
+     "path": "SIGNAL/MESURE_X",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 66
+     }
+    },
+    {
+     "name": "MESURE_Y",
+     "kind": "simple",
+     "path": "SIGNAL/MESURE_Y",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "MESURE_Z",
+     "kind": "simple",
+     "path": "SIGNAL/MESURE_Z",
+     "status": "f",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 68
+     }
+    },
+    {
+     "name": "TABLE_RESU",
+     "kind": "simple",
+     "path": "SIGNAL/TABLE_RESU",
+     "status": "o",
+     "type": [
+      "CO"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "TYPE_RESU",
+     "kind": "simple",
+     "path": "SIGNAL/TYPE_RESU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "HARMONIQUE",
+     "into": [
+      "HARMONIQUE",
+      "TEMPOREL"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_transfert.py",
+      "line": 70
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,988 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_g.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_G",
+ "kind": "OPER",
+ "fr": "Nouvel opérateur de calcul du taux de restitution d'énergie par la méthode theta en thermo-élasticité et des facteurs d'intensité de contraintes.",
+ "translation_upstream": null,
+ "op": 27,
+ "reentrant": "n",
+ "result_types": [
+  "table_container",
+  "cham_no_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_g.py",
+  "line": 37
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "evol_elas",
+    "evol_noli",
+    "dyna_trans",
+    "mode_meca"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "b_ordre",
+   "kind": "bloc",
+   "path": "[b_ordre]",
+   "condition": "is_type(\"RESULTAT\") in (evol_elas,evol_noli,dyna_trans,)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TOUT_ORDRE",
+      "NUME_ORDRE",
+      "LIST_ORDRE",
+      "INST",
+      "LIST_INST"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 47
+   },
+   "keywords": [
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 53
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 55
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 58
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_g.py",
+          "line": 60
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 62
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_g.py",
+          "line": 63
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_mode",
+   "kind": "bloc",
+   "path": "[b_mode]",
+   "condition": "is_type(\"RESULTAT\") in (mode_meca,)",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "TOUT_MODE",
+      "NUME_MODE",
+      "LIST_MODE",
+      "FREQ",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 67
+   },
+   "keywords": [
+    {
+     "name": "TOUT_MODE",
+     "kind": "simple",
+     "path": "TOUT_MODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 69
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 70
+     }
+    },
+    {
+     "name": "LIST_MODE",
+     "kind": "simple",
+     "path": "LIST_MODE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 71
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "b_acce_reel",
+     "kind": "bloc",
+     "path": "[b_acce_reel]",
+     "condition": "(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 75
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 77
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 78
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_g.py",
+          "line": 80
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 82
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_g.py",
+          "line": 83
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "THETA",
+   "kind": "factor",
+   "path": "THETA",
+   "status": "o",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 88
+   },
+   "keywords": [
+    {
+     "name": "FISSURE",
+     "kind": "simple",
+     "path": "THETA/FISSURE",
+     "status": "o",
+     "type": [
+      "fond_fissure"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "CHAM_THETA",
+     "kind": "simple",
+     "path": "THETA/CHAM_THETA",
+     "status": "f",
+     "type": [
+      "CO",
+      "cham_no_sdaster"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "DISCRETISATION",
+     "kind": "simple",
+     "path": "THETA/DISCRETISATION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "LINEAIRE",
+     "into": [
+      "LINEAIRE",
+      "LEGENDRE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "b_nb_lin",
+     "kind": "bloc",
+     "path": "THETA/[b_nb_lin]",
+     "condition": "(equal_to(\"DISCRETISATION\", 'LINEAIRE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "NB_POINT_FOND",
+       "kind": "simple",
+       "path": "THETA/NB_POINT_FOND",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 97
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_nb_leg",
+     "kind": "bloc",
+     "path": "THETA/[b_nb_leg]",
+     "condition": "(equal_to(\"DISCRETISATION\", 'LEGENDRE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 99
+     },
+     "keywords": [
+      {
+       "name": "DEGRE",
+       "kind": "simple",
+       "path": "THETA/DEGRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 0,
+       "max": 7,
+       "default": 5,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 101
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_theta_cham",
+     "kind": "bloc",
+     "path": "THETA/[b_theta_cham]",
+     "condition": "( (not exists(\"CHAM_THETA\")) or (is_type(\"CHAM_THETA\") != cham_no_sdaster) )",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "R_INF",
+        "R_SUP"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "R_INF_FO",
+        "R_SUP_FO"
+       ]
+      },
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "NB_COUCHE_INF",
+        "NB_COUCHE_SUP"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_INF",
+        "NB_COUCHE_INF"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_SUP",
+        "NB_COUCHE_INF"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_SUP",
+        "NB_COUCHE_SUP"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_INF",
+        "NB_COUCHE_SUP"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_INF",
+        "R_INF_FO"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "R_INF_FO",
+        "NB_COUCHE_INF"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 103
+     },
+     "keywords": [
+      {
+       "name": "R_INF",
+       "kind": "simple",
+       "path": "THETA/R_INF",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 105
+       }
+      },
+      {
+       "name": "R_SUP",
+       "kind": "simple",
+       "path": "THETA/R_SUP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "min": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 106
+       }
+      },
+      {
+       "name": "R_INF_FO",
+       "kind": "simple",
+       "path": "THETA/R_INF_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 107
+       }
+      },
+      {
+       "name": "R_SUP_FO",
+       "kind": "simple",
+       "path": "THETA/R_SUP_FO",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 108
+       }
+      },
+      {
+       "name": "NB_COUCHE_INF",
+       "kind": "simple",
+       "path": "THETA/NB_COUCHE_INF",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "NB_COUCHE_SUP",
+       "kind": "simple",
+       "path": "THETA/NB_COUCHE_SUP",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 110
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_excit",
+   "kind": "bloc",
+   "path": "[b_excit]",
+   "condition": "is_type(\"RESULTAT\") in (mode_meca, dyna_trans,)",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 125
+   },
+   "keywords": [
+    {
+     "name": "EXCIT",
+     "kind": "factor",
+     "path": "EXCIT",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 127
+     },
+     "keywords": [
+      {
+       "name": "CHARGE",
+       "kind": "simple",
+       "path": "EXCIT/CHARGE",
+       "status": "o",
+       "type": [
+        "char_meca",
+        "char_cine_meca"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 130
+       }
+      },
+      {
+       "name": "FONC_MULT",
+       "kind": "simple",
+       "path": "EXCIT/FONC_MULT",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 131
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "OPTION",
+   "kind": "simple",
+   "path": "OPTION",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": "**",
+   "into": [
+    "G",
+    "G_EPSI",
+    "K",
+    "KJ",
+    "KJ_EPSI"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 134
+   }
+  },
+  {
+   "name": "b_option",
+   "kind": "bloc",
+   "path": "[b_option]",
+   "condition": "(not equal_to(\"OPTION\", 'G_EPSI') )",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 135
+   },
+   "keywords": [
+    {
+     "name": "ETAT_INIT",
+     "kind": "factor",
+     "path": "ETAT_INIT",
+     "status": "f",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 137
+     },
+     "keywords": [
+      {
+       "name": "SIGM",
+       "kind": "simple",
+       "path": "ETAT_INIT/SIGM",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster",
+        "cham_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 139
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_courbure",
+   "kind": "bloc",
+   "path": "[b_courbure]",
+   "condition": "(equal_to(\"OPTION\", 'K'))",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 143
+   },
+   "keywords": [
+    {
+     "name": "FORM_FISS",
+     "kind": "simple",
+     "path": "FORM_FISS",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ELLIPSE",
+      "CERCLE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 145
+     }
+    },
+    {
+     "name": "b_defaut_eli",
+     "kind": "bloc",
+     "path": "[b_defaut_eli]",
+     "condition": "(equal_to(\"FORM_FISS\", 'ELLIPSE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 146
+     },
+     "keywords": [
+      {
+       "name": "DEMI_GRAND_AXE",
+       "kind": "simple",
+       "path": "DEMI_GRAND_AXE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 148
+       }
+      },
+      {
+       "name": "DEMI_PETIT_AXE",
+       "kind": "simple",
+       "path": "DEMI_PETIT_AXE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 149
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_defaut_cercle",
+     "kind": "bloc",
+     "path": "[b_defaut_cercle]",
+     "condition": "(equal_to(\"FORM_FISS\", 'CERCLE'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_g.py",
+      "line": 151
+     },
+     "keywords": [
+      {
+       "name": "RAYON",
+       "kind": "simple",
+       "path": "RAYON",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_g.py",
+        "line": 152
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 155
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_g.py",
+    "line": 156
+   }
+  }
+ ]
+}

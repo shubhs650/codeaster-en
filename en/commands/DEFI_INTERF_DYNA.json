@@ -1,0 +1,191 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_INTERF_DYNA",
+ "kind": "OPER",
+ "fr": "Définir les interfaces d'une structure et leur affecter un type",
+ "translation_upstream": null,
+ "op": 98,
+ "reentrant": "n",
+ "result_types": [
+  "interf_dyna_clas"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "NUME_DDL",
+   "kind": "simple",
+   "path": "NUME_DDL",
+   "status": "o",
+   "type": [
+    "nume_ddl_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "INTERFACE",
+   "kind": "factor",
+   "path": "INTERFACE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "NOM",
+      "TYPE"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+    "line": 33
+   },
+   "keywords": [
+    {
+     "name": "NOM",
+     "kind": "simple",
+     "path": "INTERFACE/NOM",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "TYPE",
+     "kind": "simple",
+     "path": "INTERFACE/TYPE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "MNEAL",
+      "CRAIGB",
+      "CB_HARMO",
+      "AUCUN"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "INTERFACE/NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "INTERFACE/GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "MASQUE",
+     "kind": "simple",
+     "path": "INTERFACE/MASQUE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+      "line": 46
+     }
+    }
+   ]
+  },
+  {
+   "name": "FREQ",
+   "kind": "simple",
+   "path": "FREQ",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+    "line": 48
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_interf_dyna.py",
+    "line": 49
+   }
+  }
+ ]
+}

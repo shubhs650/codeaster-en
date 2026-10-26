@@ -1,0 +1,130 @@
+# shell_static -- simply supported square plate under uniform pressure (DKT, QUAD4 -> DKQ).
+# codeaster-en test fixture (task 4.1). Units: mm, N, MPa.
+# Plate a=1000, thickness t=10, E=210000, NU=0.3, pressure q=0.01 on the whole plate.
+# Edges: DZ=0 (hard simple support, rotations free); two corners restrain in-plane rigid motion.
+# Reference: Navier double series (Timoshenko & Woinowsky-Krieger, Theory of Plates and
+# Shells, 2nd ed., sec. 30 and table 8): w_max = alpha q a^4 / D, M_x = beta q a^2 at the centre.
+# Modelled on astest ssls101n (DKT, ORIE_NORM_COQUE, PRES_REP, TEST_RESU on DEPL DZ).
+# TODO(4.2): VALE_CALC values below are the hand values, accepted with TOLE_MACHINE = PRECISION.
+# Replace them with the solver's own values from the first run and drop TOLE_MACHINE.
+
+DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
+
+Q = 0.01  # uniform pressure [MPa]
+T = 10.0  # thickness [mm]
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA="OUI"))
+
+# Mesh normals already point to +Z; this makes the orientation explicit and checked.
+MAIL = MODI_MAILLAGE(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    ORIE_NORM_COQUE=_F(GROUP_MA="PLATE", GROUP_NO="CENTER", VECT_NORM=(0.0, 0.0, 1.0)),
+)
+
+MODE = AFFE_MODELE(
+    MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", PHENOMENE="MECANIQUE", MODELISATION="DKT")
+)
+
+CARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA="PLATE", EPAIS=T, ANGL_REP=(0.0, 0.0)))
+
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", MATER=ACIER))
+
+APPUI = AFFE_CHAR_MECA(
+    MODELE=MODE,
+    DDL_IMPO=(
+        _F(GROUP_MA="EDGES", DZ=0.0),
+        _F(GROUP_NO="CORNER_A", DX=0.0, DY=0.0),
+        _F(GROUP_NO="CORNER_B", DY=0.0),
+    ),
+)
+
+# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).
+PRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA="PLATE", PRES=Q))
+
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    CARA_ELEM=CARA,
+    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+RESU = CALC_CHAMP(
+    reuse=RESU, RESULTAT=RESU, CONTRAINTE=("EFGE_ELNO", "EFGE_NOEU"), FORCE="REAC_NODA"
+)
+
+REAC = POST_RELEVE_T(
+    ACTION=_F(
+        OPERATION="EXTRACTION",
+        INTITULE="REAC_EDGES",
+        RESULTAT=RESU,
+        NOM_CHAM="REAC_NODA",
+        GROUP_NO="EDGES",
+        RESULTANTE=("DX", "DY", "DZ"),
+    )
+)
+
+IMPR_TABLE(TABLE=REAC, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=30)
+
+IMPR_RESU(
+    FORMAT="MED",
+    UNITE=80,
+    RESU=_F(RESULTAT=RESU, CARA_ELEM=CARA, NOM_CHAM=("DEPL", "EFGE_NOEU", "REAC_NODA")),
+)
+
+TEST_RESU(
+    RESU=(
+        # Centre deflection: w = alpha q a^4 / D, alpha = 0.00406235 (NU=0.3), D = E t^3/(12(1-NU^2)).
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="DEPL",
+            GROUP_NO="CENTER",
+            NOM_CMP="DZ",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=-2.11242,
+            VALE_CALC=-2.11242,
+            TOLE_MACHINE=1.0e-2,
+            PRECISION=1.0e-2,
+            LEGENDE="W_CENTER",
+        ),
+        # Centre bending moment per unit length: M_x = beta q a^2, beta = 0.0478864 (NU=0.3).
+        # VALE_ABS: the hand value is a magnitude; the EFGE sign convention is TODO(verify) in 4.2.
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="EFGE_NOEU",
+            GROUP_NO="CENTER",
+            NOM_CMP="MXX",
+            VALE_ABS="OUI",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=478.864,
+            VALE_CALC=478.864,
+            TOLE_MACHINE=3.0e-2,
+            PRECISION=3.0e-2,
+            LEGENDE="MXX_CENTER",
+        ),
+        # Reaction sum = q a^2 (whole REAC_NODA field; only supported nodes carry reactions).
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DZ",
+            TYPE_TEST="SOMM",
+            VALE_ABS="OUI",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=10000.0,
+            VALE_CALC=10000.0,
+            TOLE_MACHINE=1.0e-3,
+            PRECISION=1.0e-3,
+            LEGENDE="REAC_DZ_SUM",
+        ),
+    )
+)
+
+FIN()

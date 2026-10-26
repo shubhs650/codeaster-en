@@ -1,0 +1,201 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/post_fati_alea.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "POST_FATI_ALEA",
+ "kind": "OPER",
+ "fr": "Calculer le dommage de fatigue subi par une structure soumise à une sollicitation de type aléatoire",
+ "translation_upstream": null,
+ "op": 170,
+ "reentrant": "n",
+ "result_types": [
+  "table_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "MOMENT_SPEC_0",
+    "MOMENT_SPEC_2"
+   ]
+  },
+  {
+   "rule": "PRESENT_PRESENT",
+   "keywords": [
+    "MOMENT_SPEC_4",
+    "MOMENT_SPEC_0"
+   ]
+  },
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "TABL_POST_ALEA",
+    "MOMENT_SPEC_0"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/post_fati_alea.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MOMENT_SPEC_0",
+   "kind": "simple",
+   "path": "MOMENT_SPEC_0",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "MOMENT_SPEC_2",
+   "kind": "simple",
+   "path": "MOMENT_SPEC_2",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "MOMENT_SPEC_4",
+   "kind": "simple",
+   "path": "MOMENT_SPEC_4",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "TABL_POST_ALEA",
+   "kind": "simple",
+   "path": "TABL_POST_ALEA",
+   "status": "f",
+   "type": [
+    "table_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 42
+   }
+  },
+  {
+   "name": "COMPTAGE",
+   "kind": "simple",
+   "path": "COMPTAGE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "PIC",
+    "NIVEAU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 43
+   }
+  },
+  {
+   "name": "DUREE",
+   "kind": "simple",
+   "path": "DUREE",
+   "status": "f",
+   "type": [
+    "R"
+   ],
+   "default": 1.0,
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 44
+   }
+  },
+  {
+   "name": "CORR_KE",
+   "kind": "simple",
+   "path": "CORR_KE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "RCCM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 45
+   }
+  },
+  {
+   "name": "DOMMAGE",
+   "kind": "simple",
+   "path": "DOMMAGE",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "WOHLER"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 46
+   }
+  },
+  {
+   "name": "MATER",
+   "kind": "simple",
+   "path": "MATER",
+   "status": "o",
+   "type": [
+    "mater_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 47
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/post_fati_alea.py",
+    "line": 48
+   }
+  }
+ ]
+}

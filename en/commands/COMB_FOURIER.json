@@ -1,0 +1,88 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/comb_fourier.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "COMB_FOURIER",
+ "kind": "OPER",
+ "fr": "Recombiner les modes de Fourier d'une SD Résultat dans des directions particulières",
+ "translation_upstream": null,
+ "op": 161,
+ "reentrant": "n",
+ "result_types": [
+  "comb_fourier"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/comb_fourier.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "o",
+   "type": [
+    "fourier_elas",
+    "fourier_ther"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_fourier.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "ANGLE",
+   "kind": "simple",
+   "path": "ANGLE",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_fourier.py",
+    "line": 33
+   }
+  },
+  {
+   "name": "NOM_CHAM",
+   "kind": "simple",
+   "path": "NOM_CHAM",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "max": 6,
+   "into": [
+    "DEPL",
+    "REAC_NODA",
+    "SIEF_ELGA",
+    "EPSI_ELNO",
+    "SIGM_ELNO",
+    "TEMP",
+    "FLUX_ELNO"
+   ],
+   "validators": [
+    {
+     "name": "NoRepeat",
+     "args": []
+    }
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/comb_fourier.py",
+    "line": 34
+   }
+  }
+ ]
+}

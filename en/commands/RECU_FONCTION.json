@@ -1,0 +1,2944 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/recu_fonction.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "RECU_FONCTION",
+ "kind": "OPER",
+ "fr": "Extraire sous forme d'une fonction, l'évolution d'une grandeur en fonction d'une autre",
+ "translation_upstream": null,
+ "op": 90,
+ "reentrant": "n",
+ "result_types": [
+  "fonction_c",
+  "fonction_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "CHAM_GD",
+    "RESULTAT",
+    "RESU_GENE",
+    "TABLE",
+    "BASE_ELAS_FLUI",
+    "NAPPE",
+    "INTE_SPEC"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/recu_fonction.py",
+  "line": 62
+ },
+ "keywords": [
+  {
+   "name": "CHAM_GD",
+   "kind": "simple",
+   "path": "CHAM_GD",
+   "status": "f",
+   "type": [
+    "cham_no_sdaster",
+    "cham_elem"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 73
+   }
+  },
+  {
+   "name": "RESULTAT",
+   "kind": "simple",
+   "path": "RESULTAT",
+   "status": "f",
+   "type": [
+    "resultat_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 74
+   }
+  },
+  {
+   "name": "RESU_GENE",
+   "kind": "simple",
+   "path": "RESU_GENE",
+   "status": "f",
+   "type": [
+    "tran_gene",
+    "mode_gene",
+    "harm_gene"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 75
+   }
+  },
+  {
+   "name": "TABLE",
+   "kind": "simple",
+   "path": "TABLE",
+   "status": "f",
+   "type": [
+    "table_sdaster",
+    "table_fonction"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 76
+   }
+  },
+  {
+   "name": "BASE_ELAS_FLUI",
+   "kind": "simple",
+   "path": "BASE_ELAS_FLUI",
+   "status": "f",
+   "type": [
+    "melasflu_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 77
+   }
+  },
+  {
+   "name": "NAPPE",
+   "kind": "simple",
+   "path": "NAPPE",
+   "status": "f",
+   "type": [
+    "nappe_sdaster"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 78
+   }
+  },
+  {
+   "name": "INTE_SPEC",
+   "kind": "simple",
+   "path": "INTE_SPEC",
+   "status": "f",
+   "type": [
+    "interspectre"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 79
+   }
+  },
+  {
+   "name": "b_acces",
+   "kind": "bloc",
+   "path": "[b_acces]",
+   "condition": "(exists(\"RESULTAT\")) or (exists(\"RESU_GENE\"))",
+   "fr": "acces a une SD résultat",
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 81
+   },
+   "keywords": [
+    {
+     "name": "TOUT_ORDRE",
+     "kind": "simple",
+     "path": "TOUT_ORDRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 85
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 86
+     }
+    },
+    {
+     "name": "LIST_ORDRE",
+     "kind": "simple",
+     "path": "LIST_ORDRE",
+     "status": "f",
+     "type": [
+      "listis_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 87
+     }
+    },
+    {
+     "name": "TOUT_INST",
+     "kind": "simple",
+     "path": "TOUT_INST",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 88
+     }
+    },
+    {
+     "name": "INST",
+     "kind": "simple",
+     "path": "INST",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "LIST_INST",
+     "kind": "simple",
+     "path": "LIST_INST",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 93
+     }
+    },
+    {
+     "name": "b_prec",
+     "kind": "bloc",
+     "path": "[b_prec]",
+     "condition": "(exists(\"INST\")) or (exists(\"LIST_INST\")) or (exists(\"FREQ\")) or (exists(\"LIST_FREQ\"))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 94
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 96
+       }
+      },
+      {
+       "name": "b_prec_rela",
+       "kind": "bloc",
+       "path": "[b_prec_rela]",
+       "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 97
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 1e-06,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 99
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_prec_abso",
+       "kind": "bloc",
+       "path": "[b_prec_abso]",
+       "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 101
+       },
+       "keywords": [
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "PRECISION",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 102
+         }
+        }
+       ]
+      },
+      {
+       "name": "INTERP_NUME",
+       "kind": "simple",
+       "path": "INTERP_NUME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "NON",
+        "LIN"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 104
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_base_elas_flui",
+   "kind": "bloc",
+   "path": "[b_base_elas_flui]",
+   "condition": "exists(\"BASE_ELAS_FLUI\")",
+   "fr": "Récupération de la fonction à partir d un concept melasflu",
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 108
+   },
+   "keywords": [
+    {
+     "name": "NUME_MODE",
+     "kind": "simple",
+     "path": "NUME_MODE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 111
+     }
+    },
+    {
+     "name": "PARA_X",
+     "kind": "simple",
+     "path": "PARA_X",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "VITE_FLU",
+      "NB_CONNORS"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 112
+     }
+    },
+    {
+     "name": "b_connors",
+     "kind": "bloc",
+     "path": "[b_connors]",
+     "condition": "equal_to(\"PARA_X\", 'NB_CONNORS')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 113
+     },
+     "keywords": [
+      {
+       "name": "PARA_Y",
+       "kind": "simple",
+       "path": "PARA_Y",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "VITE_CRIT",
+        "INSTAB_EDF",
+        "INSTAB_TOUT_CMP"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 115
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_cdck",
+     "kind": "bloc",
+     "path": "[b_cdck]",
+     "condition": "equal_to(\"PARA_X\", 'VITE_FLU')",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "TOUT_ORDRE",
+        "NUME_ORDRE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 117
+     },
+     "keywords": [
+      {
+       "name": "TOUT_ORDRE",
+       "kind": "simple",
+       "path": "TOUT_ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 120
+       }
+      },
+      {
+       "name": "NUME_ORDRE",
+       "kind": "simple",
+       "path": "NUME_ORDRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 121
+       }
+      },
+      {
+       "name": "PARA_Y",
+       "kind": "simple",
+       "path": "PARA_Y",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "FREQ",
+        "AMOR"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 122
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_inte_spec",
+   "kind": "bloc",
+   "path": "[b_inte_spec]",
+   "condition": "exists(\"INTE_SPEC\")",
+   "fr": "Récupération de fonction dans un concept interspectre",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NUME_ORDRE_I",
+      "NOEUD_I",
+      "NUME_ORDRE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 126
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 130
+     }
+    },
+    {
+     "name": "NUME_ORDRE",
+     "kind": "simple",
+     "path": "NUME_ORDRE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 131
+     }
+    },
+    {
+     "name": "NOEUD_I",
+     "kind": "simple",
+     "path": "NOEUD_I",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 132
+     }
+    },
+    {
+     "name": "NUME_ORDRE_I",
+     "kind": "simple",
+     "path": "NUME_ORDRE_I",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 133
+     }
+    },
+    {
+     "name": "b_nume_ordre_i",
+     "kind": "bloc",
+     "path": "[b_nume_ordre_i]",
+     "condition": "exists(\"NUME_ORDRE_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 134
+     },
+     "keywords": [
+      {
+       "name": "NUME_ORDRE_J",
+       "kind": "simple",
+       "path": "NUME_ORDRE_J",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 135
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_i",
+     "kind": "bloc",
+     "path": "[b_noeud_i]",
+     "condition": "exists(\"NOEUD_I\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 137
+     },
+     "keywords": [
+      {
+       "name": "NOEUD_J",
+       "kind": "simple",
+       "path": "NOEUD_J",
+       "status": "f",
+       "type": [
+        "no"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 139
+       }
+      },
+      {
+       "name": "NOM_CMP_I",
+       "kind": "simple",
+       "path": "NOM_CMP_I",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 140
+       }
+      },
+      {
+       "name": "NOM_CMP_J",
+       "kind": "simple",
+       "path": "NOM_CMP_J",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 141
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_table",
+   "kind": "bloc",
+   "path": "[b_table]",
+   "condition": "exists(\"TABLE\")",
+   "fr": "Récupération de la fonction à partir d un concept table",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "PARA_X",
+      "NOM_PARA_TABL"
+     ]
+    },
+    {
+     "rule": "PRESENT_PRESENT",
+     "keywords": [
+      "PARA_X",
+      "PARA_Y"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 145
+   },
+   "keywords": [
+    {
+     "name": "PARA_X",
+     "kind": "simple",
+     "path": "PARA_X",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "1ère colonne de la table qui définit la fonction à récupérer",
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 149
+     }
+    },
+    {
+     "name": "PARA_Y",
+     "kind": "simple",
+     "path": "PARA_Y",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": "2ème colonne de la table qui définit la fonction à récupérer",
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 154
+     }
+    },
+    {
+     "name": "NOM_PARA_TABL",
+     "kind": "simple",
+     "path": "NOM_PARA_TABL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FONCTION",
+      "FONCTION_C"
+     ],
+     "fr": "Nom du paramètre de la table contenant la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 160
+     }
+    },
+    {
+     "name": "FILTRE",
+     "kind": "factor",
+     "path": "FILTRE",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 167
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "FILTRE/NOM_PARA",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 170
+       }
+      },
+      {
+       "name": "CRIT_COMP",
+       "kind": "simple",
+       "path": "FILTRE/CRIT_COMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "EQ",
+       "into": [
+        "EQ",
+        "LT",
+        "GT",
+        "NE",
+        "LE",
+        "GE",
+        "VIDE",
+        "NON_VIDE",
+        "MAXI",
+        "MAXI_ABS",
+        "MINI",
+        "MINI_ABS"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 171
+       }
+      },
+      {
+       "name": "b_vale",
+       "kind": "bloc",
+       "path": "FILTRE/[b_vale]",
+       "condition": "(is_in(\"CRIT_COMP\", ('EQ','NE','GT','LT','GE','LE')))",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "VALE",
+          "VALE_I",
+          "VALE_K",
+          "VALE_C"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 190
+       },
+       "keywords": [
+        {
+         "name": "VALE",
+         "kind": "simple",
+         "path": "FILTRE/VALE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 193
+         }
+        },
+        {
+         "name": "VALE_I",
+         "kind": "simple",
+         "path": "FILTRE/VALE_I",
+         "status": "f",
+         "type": [
+          "I"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 194
+         }
+        },
+        {
+         "name": "VALE_C",
+         "kind": "simple",
+         "path": "FILTRE/VALE_C",
+         "status": "f",
+         "type": [
+          "C"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 195
+         }
+        },
+        {
+         "name": "VALE_K",
+         "kind": "simple",
+         "path": "FILTRE/VALE_K",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 196
+         }
+        }
+       ]
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "FILTRE/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 198
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "FILTRE/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 199
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_resu",
+   "kind": "bloc",
+   "path": "[b_resu]",
+   "condition": "exists(\"RESULTAT\")",
+   "fr": "Opérandes en cas de RESULTAT",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOM_CHAM",
+      "NOM_PARA_RESU"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 203
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 207
+     }
+    },
+    {
+     "name": "NOM_PARA_RESU",
+     "kind": "simple",
+     "path": "NOM_PARA_RESU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 208
+     }
+    },
+    {
+     "name": "b_cham",
+     "kind": "bloc",
+     "path": "[b_cham]",
+     "condition": "exists(\"NOM_CHAM\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "GROUP_MA",
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "POINT",
+        "NOEUD",
+        "GROUP_NO"
+       ]
+      },
+      {
+       "rule": "PRESENT_ABSENT",
+       "keywords": [
+        "SOUS_POINT",
+        "NOEUD",
+        "GROUP_NO"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "GROUP_NO",
+        "NOEUD"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NOM_CMP",
+        "NOM_VARI"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 209
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 218
+       }
+      },
+      {
+       "name": "NOM_VARI",
+       "kind": "simple",
+       "path": "NOM_VARI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 219
+       }
+      },
+      {
+       "name": "GROUP_MA",
+       "kind": "simple",
+       "path": "GROUP_MA",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 220
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 221
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 222
+       }
+      },
+      {
+       "name": "POINT",
+       "kind": "simple",
+       "path": "POINT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 223
+       }
+      },
+      {
+       "name": "SOUS_POINT",
+       "kind": "simple",
+       "path": "SOUS_POINT",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 224
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_tran_gene",
+   "kind": "bloc",
+   "path": "[b_tran_gene]",
+   "condition": "is_type(\"RESU_GENE\") == tran_gene",
+   "fr": "Récupération d'une fonction à partir d un concept TRAN_GENE",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOM_CHAM",
+      "NOEUD_CHOC",
+      "GROUP_NO_CHOC"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 228
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE",
+      "PTEM"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 232
+     }
+    },
+    {
+     "name": "NOEUD_CHOC",
+     "kind": "simple",
+     "path": "NOEUD_CHOC",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 235
+     }
+    },
+    {
+     "name": "GROUP_NO_CHOC",
+     "kind": "simple",
+     "path": "GROUP_NO_CHOC",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 236
+     }
+    },
+    {
+     "name": "b_cham",
+     "kind": "bloc",
+     "path": "[b_cham]",
+     "condition": "(equal_to(\"NOM_CHAM\", 'DEPL')) or (equal_to(\"NOM_CHAM\", 'VITE')) or (equal_to(\"NOM_CHAM\", 'ACCE'))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "GROUP_NO",
+        "NOEUD",
+        "NUME_CMP_GENE"
+       ]
+      },
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NOM_CMP",
+        "NUME_CMP_GENE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "MULT_APPUI",
+        "CORR_STAT"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 237
+     },
+     "keywords": [
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 244
+       }
+      },
+      {
+       "name": "NUME_CMP_GENE",
+       "kind": "simple",
+       "path": "NUME_CMP_GENE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 245
+       }
+      },
+      {
+       "name": "NOEUD",
+       "kind": "simple",
+       "path": "NOEUD",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 246
+       }
+      },
+      {
+       "name": "GROUP_NO",
+       "kind": "simple",
+       "path": "GROUP_NO",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 247
+       }
+      },
+      {
+       "name": "MULT_APPUI",
+       "kind": "simple",
+       "path": "MULT_APPUI",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 248
+       }
+      },
+      {
+       "name": "CORR_STAT",
+       "kind": "simple",
+       "path": "CORR_STAT",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 249
+       }
+      },
+      {
+       "name": "ACCE_MONO_APPUI",
+       "kind": "simple",
+       "path": "ACCE_MONO_APPUI",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "formule"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 250
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_choc",
+     "kind": "bloc",
+     "path": "[b_choc]",
+     "condition": "(exists(\"NOEUD_CHOC\")) or (exists(\"GROUP_NO_CHOC\"))",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "PRESENT_PRESENT",
+       "keywords": [
+        "SOUS_STRUC",
+        "INTITULE"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 252
+     },
+     "keywords": [
+      {
+       "name": "PARA_X",
+       "kind": "simple",
+       "path": "PARA_X",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "INST",
+        "FN",
+        "FT1",
+        "FT2",
+        "VN",
+        "VT1",
+        "VT2",
+        "DXLOC",
+        "DYLOC",
+        "DZLOC",
+        "VINT1",
+        "VINT2",
+        "VINT3",
+        "VINT4",
+        "VINT5",
+        "VINT6",
+        "VINT7",
+        "VINT8",
+        "VINT9",
+        "VINT10",
+        "VINT11",
+        "VINT12",
+        "VINT13",
+        "VINT14",
+        "VINT15",
+        "VINT16",
+        "VINT17",
+        "VINT18",
+        "VINT19",
+        "VINT20"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 255
+       }
+      },
+      {
+       "name": "PARA_Y",
+       "kind": "simple",
+       "path": "PARA_Y",
+       "status": "o",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "INST",
+        "FN",
+        "FT1",
+        "FT2",
+        "VN",
+        "VT1",
+        "VT2",
+        "DXLOC",
+        "DYLOC",
+        "DZLOC",
+        "VINT1",
+        "VINT2",
+        "VINT3",
+        "VINT4",
+        "VINT5",
+        "VINT6",
+        "VINT7",
+        "VINT8",
+        "VINT9",
+        "VINT10",
+        "VINT11",
+        "VINT12",
+        "VINT13",
+        "VINT14",
+        "VINT15",
+        "VINT16",
+        "VINT17",
+        "VINT18",
+        "VINT19",
+        "VINT20"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 263
+       }
+      },
+      {
+       "name": "LIST_PARA",
+       "kind": "simple",
+       "path": "LIST_PARA",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 271
+       }
+      },
+      {
+       "name": "INTITULE",
+       "kind": "simple",
+       "path": "INTITULE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 272
+       }
+      },
+      {
+       "name": "SOUS_STRUC",
+       "kind": "simple",
+       "path": "SOUS_STRUC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 273
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_harm_gene",
+   "kind": "bloc",
+   "path": "[b_harm_gene]",
+   "condition": "is_type(\"RESU_GENE\")==harm_gene",
+   "fr": "Récupération d'une fonction à partir d un concept HARM_GENE",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOM_CMP",
+      "NUME_CMP_GENE"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "GROUP_NO",
+      "NOEUD",
+      "NUME_CMP_GENE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 276
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "DEPL",
+      "VITE",
+      "ACCE"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 283
+     }
+    },
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 284
+     }
+    },
+    {
+     "name": "NUME_CMP_GENE",
+     "kind": "simple",
+     "path": "NUME_CMP_GENE",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 285
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 286
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 287
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_mode_gene",
+   "kind": "bloc",
+   "path": "[b_mode_gene]",
+   "condition": "is_type(\"RESU_GENE\")==mode_gene",
+   "fr": "Récupération d'une fonction à partir d un concept MODE_GENE",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NOM_CHAM",
+      "NOM_PARA_RESU"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 305
+   },
+   "keywords": [
+    {
+     "name": "NOM_CHAM",
+     "kind": "simple",
+     "path": "NOM_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ACCE",
+      "ACCE_ABSOLU",
+      "COEF_H",
+      "COMPORTEMENT",
+      "COMPORTHER",
+      "CONT_ELEM",
+      "CONT_NOEU",
+      "DEGE_ELGA",
+      "DEGE_ELNO",
+      "DEGE_NOEU",
+      "DEPL",
+      "DEPL_ABSOLU",
+      "DEPL_ELGA",
+      "DEPL_VIBR",
+      "DERA_ELGA",
+      "DERA_ELNO",
+      "DERA_NOEU",
+      "DIFF_ELGA",
+      "DIFF_ELNO",
+      "DIFF_NOEU",
+      "DISS_ELEM",
+      "DISS_ELGA",
+      "DISS_ELNO",
+      "DISS_NOEU",
+      "DIVU",
+      "DURT_ELNO",
+      "DURT_NOEU",
+      "ECIN_ELEM",
+      "EFGE_ELGA",
+      "EFGE_ELNO",
+      "EFGE_NOEU",
+      "EGRU_ELNO",
+      "ENDO_ELGA",
+      "ENDO_ELNO",
+      "ENDO_NOEU",
+      "ENEL_ELEM",
+      "ENEL_ELGA",
+      "ENEL_ELNO",
+      "ENEL_NOEU",
+      "ENTR_ELEM",
+      "EPEQ_ELGA",
+      "EPEQ_ELNO",
+      "EPEQ_NOEU",
+      "EPFD_ELGA",
+      "EPFD_ELNO",
+      "EPFD_NOEU",
+      "EPFP_ELGA",
+      "EPFP_ELNO",
+      "EPFP_NOEU",
+      "EPGQ_ELGA",
+      "EPGQ_ELNO",
+      "EPGQ_NOEU",
+      "EPME_ELGA",
+      "EPME_ELNO",
+      "EPME_NOEU",
+      "EPMG_ELGA",
+      "EPMG_ELNO",
+      "EPMG_NOEU",
+      "EPMQ_ELGA",
+      "EPMQ_ELNO",
+      "EPMQ_NOEU",
+      "EPOT_ELEM",
+      "EPSA_ELNO",
+      "EPSA_NOEU",
+      "EPSG_ELGA",
+      "EPSG_ELNO",
+      "EPSG_NOEU",
+      "EPSI_ELGA",
+      "EPSI_ELNO",
+      "EPSI_NOEU",
+      "EPSL_ELGA",
+      "EPSL_ELNO",
+      "EPSL_NOEU",
+      "EPSP_ELGA",
+      "EPSP_ELNO",
+      "EPSP_NOEU",
+      "EPVC_ELGA",
+      "EPVC_ELNO",
+      "EPVC_NOEU",
+      "ERME_ELEM",
+      "ERME_ELNO",
+      "ERME_NOEU",
+      "ERTH_ELEM",
+      "ERTH_ELNO",
+      "ERTH_NOEU",
+      "ERZ1_ELEM",
+      "ERZ2_ELEM",
+      "ETHE_ELEM",
+      "ETOT_ELEM",
+      "ETOT_ELGA",
+      "ETOT_ELNO",
+      "ETOT_NOEU",
+      "FERR_ELEM",
+      "FLHN_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELGA",
+      "FLUX_ELNO",
+      "FLUX_ELNO",
+      "FLUX_NOEU",
+      "FLUX_NOEU",
+      "FORC_NODA",
+      "FSUR_2D",
+      "FSUR_3D",
+      "FVOL_2D",
+      "FVOL_3D",
+      "GRAT_ELGA",
+      "GRAT_ELGA",
+      "GRAT_ELNO",
+      "GRAT_ELNO",
+      "GRAT_NOEU",
+      "GRAT_NOEU",
+      "HHO_DEPL",
+      "HHO_TEMP",
+      "HHO_VITE",
+      "HYDR_ELGA",
+      "HYDR_ELNO",
+      "HYDR_NOEU",
+      "HYGR_ELGA",
+      "HYGR_ELNO",
+      "HYGR_NOEU",
+      "INDL_ELGA",
+      "INTE_ELNO",
+      "INTE_NOEU",
+      "IRRA",
+      "MARG_ELEM",
+      "MATE_ELEM",
+      "MATE_ELGA",
+      "META_ELNO",
+      "META_NOEU",
+      "MODE_FLAMB",
+      "MODE_STAB",
+      "NEUT",
+      "PDIL_ELGA",
+      "PRAC_ELNO",
+      "PRAC_NOEU",
+      "PRES",
+      "PRES_NOEU",
+      "PRME_ELNO",
+      "PTOT",
+      "QIRE_ELEM",
+      "QIRE_ELNO",
+      "QIRE_NOEU",
+      "QIZ1_ELEM",
+      "QIZ2_ELEM",
+      "REAC_NODA",
+      "RESI_NOEU",
+      "RESI_RELA_NOEU",
+      "ROC1_ELNO",
+      "ROC2_ELNO",
+      "SECH",
+      "SIEF_ELGA",
+      "SIEF_ELNO",
+      "SIEF_NOEU",
+      "SIEQ_ELGA",
+      "SIEQ_ELNO",
+      "SIEQ_NOEU",
+      "SIGM_ELGA",
+      "SIGM_ELNO",
+      "SIGM_NOEU",
+      "SIMY_ELGA",
+      "SING_ELEM",
+      "SING_ELNO",
+      "SIPM_ELNO",
+      "SIPO_ELNO",
+      "SIPO_NOEU",
+      "SIRO_ELEM",
+      "SISE_ELNO",
+      "SIZ1_NOEU",
+      "SIZ2_NOEU",
+      "SOUR_ELGA",
+      "STRX_ELGA",
+      "TEMP",
+      "TEMP_ELGA",
+      "T_EXT",
+      "UT01_CART",
+      "UT01_ELEM",
+      "UT01_ELGA",
+      "UT01_ELNO",
+      "UT01_NOEU",
+      "UT02_CART",
+      "UT02_ELEM",
+      "UT02_ELGA",
+      "UT02_ELNO",
+      "UT02_NOEU",
+      "UT03_CART",
+      "UT03_ELEM",
+      "UT03_ELGA",
+      "UT03_ELNO",
+      "UT03_NOEU",
+      "UT04_CART",
+      "UT04_ELEM",
+      "UT04_ELGA",
+      "UT04_ELNO",
+      "UT04_NOEU",
+      "UT05_CART",
+      "UT05_ELEM",
+      "UT05_ELGA",
+      "UT05_ELNO",
+      "UT05_NOEU",
+      "UT06_CART",
+      "UT06_ELEM",
+      "UT06_ELGA",
+      "UT06_ELNO",
+      "UT06_NOEU",
+      "UT07_CART",
+      "UT07_ELEM",
+      "UT07_ELGA",
+      "UT07_ELNO",
+      "UT07_NOEU",
+      "UT08_CART",
+      "UT08_ELEM",
+      "UT08_ELGA",
+      "UT08_ELNO",
+      "UT08_NOEU",
+      "UT09_CART",
+      "UT09_ELEM",
+      "UT09_ELGA",
+      "UT09_ELNO",
+      "UT09_NOEU",
+      "UT10_CART",
+      "UT10_ELEM",
+      "UT10_ELGA",
+      "UT10_ELNO",
+      "UT10_NOEU",
+      "VARC_ELGA",
+      "VARC_ELNO",
+      "VARC_NOEU",
+      "VARI_ELGA",
+      "VARI_ELNO",
+      "VARI_NOEU",
+      "VITE",
+      "VITE_ABSOLU",
+      "VITE_VENT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 309
+     }
+    },
+    {
+     "name": "NOM_PARA_RESU",
+     "kind": "simple",
+     "path": "NOM_PARA_RESU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 310
+     }
+    },
+    {
+     "name": "b_cham",
+     "kind": "bloc",
+     "path": "[b_cham]",
+     "condition": "exists(\"NOM_CHAM\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "NUME_CMP_GENE",
+        "NOM_CMP"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 311
+     },
+     "keywords": [
+      {
+       "name": "NUME_CMP_GENE",
+       "kind": "simple",
+       "path": "NUME_CMP_GENE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "val_min": 1,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 314
+       }
+      },
+      {
+       "name": "NOM_CMP",
+       "kind": "simple",
+       "path": "NOM_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 315
+       }
+      },
+      {
+       "name": "b_cmp",
+       "kind": "bloc",
+       "path": "[b_cmp]",
+       "condition": "exists(\"NOM_CMP\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "NOEUD",
+          "GROUP_NO"
+         ]
+        },
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "SQUELETTE",
+          "SOUS_STRUC"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/recu_fonction.py",
+        "line": 316
+       },
+       "keywords": [
+        {
+         "name": "NOEUD",
+         "kind": "simple",
+         "path": "NOEUD",
+         "status": "c",
+         "type": [
+          "no"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 319
+         }
+        },
+        {
+         "name": "GROUP_NO",
+         "kind": "simple",
+         "path": "GROUP_NO",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 320
+         }
+        },
+        {
+         "name": "SQUELETTE",
+         "kind": "simple",
+         "path": "SQUELETTE",
+         "status": "f",
+         "type": [
+          "squelette"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 321
+         }
+        },
+        {
+         "name": "SOUS_STRUC",
+         "kind": "simple",
+         "path": "SOUS_STRUC",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/recu_fonction.py",
+          "line": 322
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_cham_gd",
+   "kind": "bloc",
+   "path": "[b_cham_gd]",
+   "condition": "(exists(\"CHAM_GD\"))",
+   "fr": "Opérandes en cas de CHAM_GD",
+   "rules": [
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "GROUP_MA",
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "POINT",
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "PRESENT_ABSENT",
+     "keywords": [
+      "SOUS_POINT",
+      "NOEUD",
+      "GROUP_NO"
+     ]
+    },
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "GROUP_NO",
+      "NOEUD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 327
+   },
+   "keywords": [
+    {
+     "name": "NOM_CMP",
+     "kind": "simple",
+     "path": "NOM_CMP",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 336
+     }
+    },
+    {
+     "name": "GROUP_MA",
+     "kind": "simple",
+     "path": "GROUP_MA",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 337
+     }
+    },
+    {
+     "name": "NOEUD",
+     "kind": "simple",
+     "path": "NOEUD",
+     "status": "c",
+     "type": [
+      "no"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 338
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "GROUP_NO",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 339
+     }
+    },
+    {
+     "name": "POINT",
+     "kind": "simple",
+     "path": "POINT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 340
+     }
+    },
+    {
+     "name": "SOUS_POINT",
+     "kind": "simple",
+     "path": "SOUS_POINT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 341
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_nappe",
+   "kind": "bloc",
+   "path": "[b_nappe]",
+   "condition": "(exists(\"NAPPE\"))",
+   "fr": "Opérandes en cas de NAPPE",
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 344
+   },
+   "keywords": [
+    {
+     "name": "VALE_PARA_FONC",
+     "kind": "simple",
+     "path": "VALE_PARA_FONC",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 347
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 348
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/recu_fonction.py",
+      "line": 349
+     }
+    }
+   ]
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 352
+   }
+  },
+  {
+   "name": "NOM_RESU",
+   "kind": "simple",
+   "path": "NOM_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 353
+   }
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 354
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 355
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 356
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 357
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/recu_fonction.py",
+    "line": 358
+   }
+  }
+ ]
+}

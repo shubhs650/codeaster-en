@@ -1,0 +1,3521 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/proj_champ.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "PROJ_CHAMP",
+ "kind": "OPER",
+ "fr": "Projeter des champs d'un maillage sur un autre",
+ "translation_upstream": null,
+ "op": 166,
+ "reentrant": "f:RESULTAT",
+ "result_types": [
+  "corresp_2_mailla",
+  "resultat_sdaster",
+  "cham_no_sdaster",
+  "cham_elem"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": true,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/proj_champ.py",
+  "line": 59
+ },
+ "keywords": [
+  {
+   "name": "reuse",
+   "kind": "simple",
+   "path": "reuse",
+   "status": "c",
+   "type": [
+    "CO"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 66
+   }
+  },
+  {
+   "name": "PROJECTION",
+   "kind": "simple",
+   "path": "PROJECTION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 68
+   }
+  },
+  {
+   "name": "MATR_PROJECTION",
+   "kind": "simple",
+   "path": "MATR_PROJECTION",
+   "status": "f",
+   "type": [
+    "corresp_2_mailla"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "b_1_et_2",
+   "kind": "bloc",
+   "path": "[b_1_et_2]",
+   "condition": "equal_to(\"PROJECTION\", 'OUI') and not exists(\"MATR_PROJECTION\") and not exists(\"DISTRIBUTION\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "RESULTAT",
+      "CHAM_GD"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MODELE_1",
+      "MAILLAGE_1"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MODELE_2",
+      "MAILLAGE_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 74
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "f",
+     "type": [
+      "resultat_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 81
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 82
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "AUTO",
+     "into": [
+      "NUAGE_DEG_0",
+      "NUAGE_DEG_1",
+      "AUTO",
+      "COLLOCATION",
+      "ECLA_PG",
+      "SOUS_POINT"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 83
+     }
+    },
+    {
+     "name": "MODELE_1",
+     "kind": "simple",
+     "path": "MODELE_1",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 89
+     }
+    },
+    {
+     "name": "MAILLAGE_1",
+     "kind": "simple",
+     "path": "MAILLAGE_1",
+     "status": "f",
+     "type": [
+      "maillage_sdaster",
+      "squelette"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 90
+     }
+    },
+    {
+     "name": "MODELE_2",
+     "kind": "simple",
+     "path": "MODELE_2",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 91
+     }
+    },
+    {
+     "name": "MAILLAGE_2",
+     "kind": "simple",
+     "path": "MAILLAGE_2",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 92
+     }
+    },
+    {
+     "name": "b_nuage",
+     "kind": "bloc",
+     "path": "[b_nuage]",
+     "condition": "is_in(\"METHODE\", ('NUAGE_DEG_0','NUAGE_DEG_1'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 95
+     },
+     "keywords": [
+      {
+       "name": "CHAM_NO_REFE",
+       "kind": "simple",
+       "path": "CHAM_NO_REFE",
+       "status": "o",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 97
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_elem",
+     "kind": "bloc",
+     "path": "[b_elem]",
+     "condition": "is_in(\"METHODE\", ('COLLOCATION','ECLA_PG','AUTO'))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 101
+     },
+     "keywords": [
+      {
+       "name": "CAS_FIGURE",
+       "kind": "simple",
+       "path": "CAS_FIGURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "2D",
+        "3D",
+        "2.5D",
+        "1.5D"
+       ],
+       "fr": "Pour indiquer au programme le type de projection souhaité",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 103
+       }
+      },
+      {
+       "name": "DISTANCE_MAX",
+       "kind": "simple",
+       "path": "DISTANCE_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 109
+       }
+      },
+      {
+       "name": "DISTANCE_ALARME",
+       "kind": "simple",
+       "path": "DISTANCE_ALARME",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 117
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_1",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 118
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_2",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 128
+       }
+      },
+      {
+       "name": "ALARME",
+       "kind": "simple",
+       "path": "ALARME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 138
+       }
+      },
+      {
+       "name": "TYPE_CHAM",
+       "kind": "simple",
+       "path": "TYPE_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "NOEU"
+       ],
+       "fr": "Pour forcer le type des champs projetés. NOEU -> CHAM_NO",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 139
+       }
+      },
+      {
+       "name": "PROL_VALE",
+       "kind": "simple",
+       "path": "PROL_VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Pour prolonger les champs là ou la projection ne donne pas de valeurs.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 145
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_sous_point",
+     "kind": "bloc",
+     "path": "[b_sous_point]",
+     "condition": "equal_to(\"METHODE\", 'SOUS_POINT')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 153
+     },
+     "keywords": [
+      {
+       "name": "CARA_ELEM",
+       "kind": "simple",
+       "path": "CARA_ELEM",
+       "status": "o",
+       "type": [
+        "cara_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 155
+       }
+      },
+      {
+       "name": "PROL_VALE",
+       "kind": "simple",
+       "path": "PROL_VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Pour prolonger les champs là ou la projection ne donne pas de valeurs.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 156
+       }
+      },
+      {
+       "name": "DISTANCE_MAX",
+       "kind": "simple",
+       "path": "DISTANCE_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 161
+       }
+      },
+      {
+       "name": "DISTANCE_ALARME",
+       "kind": "simple",
+       "path": "DISTANCE_ALARME",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 169
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_1",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 170
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_2",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 180
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_resultat",
+     "kind": "bloc",
+     "path": "[b_resultat]",
+     "condition": "exists(\"RESULTAT\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_ORDRE",
+        "NUME_ORDRE",
+        "INST",
+        "FREQ",
+        "LIST_INST",
+        "LIST_FREQ",
+        "LIST_ORDRE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CHAM",
+        "NOM_CHAM"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 193
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "NOM_PARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 207
+       }
+      },
+      {
+       "name": "TOUT_CHAM",
+       "kind": "simple",
+       "path": "TOUT_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 208
+       }
+      },
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "ACCE",
+        "ACCE_ABSOLU",
+        "COEF_H",
+        "COMPORTEMENT",
+        "COMPORTHER",
+        "CONT_ELEM",
+        "CONT_NOEU",
+        "DEGE_ELGA",
+        "DEGE_ELNO",
+        "DEGE_NOEU",
+        "DEPL",
+        "DEPL_ABSOLU",
+        "DEPL_ELGA",
+        "DEPL_VIBR",
+        "DERA_ELGA",
+        "DERA_ELNO",
+        "DERA_NOEU",
+        "DIFF_ELGA",
+        "DIFF_ELNO",
+        "DIFF_NOEU",
+        "DISS_ELEM",
+        "DISS_ELGA",
+        "DISS_ELNO",
+        "DISS_NOEU",
+        "DIVU",
+        "DURT_ELNO",
+        "DURT_NOEU",
+        "ECIN_ELEM",
+        "EFGE_ELGA",
+        "EFGE_ELNO",
+        "EFGE_NOEU",
+        "EGRU_ELNO",
+        "ENDO_ELGA",
+        "ENDO_ELNO",
+        "ENDO_NOEU",
+        "ENEL_ELEM",
+        "ENEL_ELGA",
+        "ENEL_ELNO",
+        "ENEL_NOEU",
+        "ENTR_ELEM",
+        "EPEQ_ELGA",
+        "EPEQ_ELNO",
+        "EPEQ_NOEU",
+        "EPFD_ELGA",
+        "EPFD_ELNO",
+        "EPFD_NOEU",
+        "EPFP_ELGA",
+        "EPFP_ELNO",
+        "EPFP_NOEU",
+        "EPGQ_ELGA",
+        "EPGQ_ELNO",
+        "EPGQ_NOEU",
+        "EPME_ELGA",
+        "EPME_ELNO",
+        "EPME_NOEU",
+        "EPMG_ELGA",
+        "EPMG_ELNO",
+        "EPMG_NOEU",
+        "EPMQ_ELGA",
+        "EPMQ_ELNO",
+        "EPMQ_NOEU",
+        "EPOT_ELEM",
+        "EPSA_ELNO",
+        "EPSA_NOEU",
+        "EPSG_ELGA",
+        "EPSG_ELNO",
+        "EPSG_NOEU",
+        "EPSI_ELGA",
+        "EPSI_ELNO",
+        "EPSI_NOEU",
+        "EPSL_ELGA",
+        "EPSL_ELNO",
+        "EPSL_NOEU",
+        "EPSP_ELGA",
+        "EPSP_ELNO",
+        "EPSP_NOEU",
+        "EPVC_ELGA",
+        "EPVC_ELNO",
+        "EPVC_NOEU",
+        "ERME_ELEM",
+        "ERME_ELNO",
+        "ERME_NOEU",
+        "ERTH_ELEM",
+        "ERTH_ELNO",
+        "ERTH_NOEU",
+        "ERZ1_ELEM",
+        "ERZ2_ELEM",
+        "ETHE_ELEM",
+        "ETOT_ELEM",
+        "ETOT_ELGA",
+        "ETOT_ELNO",
+        "ETOT_NOEU",
+        "FERR_ELEM",
+        "FLHN_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELNO",
+        "FLUX_ELNO",
+        "FLUX_NOEU",
+        "FLUX_NOEU",
+        "FORC_NODA",
+        "FSUR_2D",
+        "FSUR_3D",
+        "FVOL_2D",
+        "FVOL_3D",
+        "GRAT_ELGA",
+        "GRAT_ELGA",
+        "GRAT_ELNO",
+        "GRAT_ELNO",
+        "GRAT_NOEU",
+        "GRAT_NOEU",
+        "HHO_DEPL",
+        "HHO_TEMP",
+        "HHO_VITE",
+        "HYDR_ELGA",
+        "HYDR_ELNO",
+        "HYDR_NOEU",
+        "HYGR_ELGA",
+        "HYGR_ELNO",
+        "HYGR_NOEU",
+        "INDL_ELGA",
+        "INTE_ELNO",
+        "INTE_NOEU",
+        "IRRA",
+        "MARG_ELEM",
+        "MATE_ELEM",
+        "MATE_ELGA",
+        "META_ELNO",
+        "META_NOEU",
+        "MODE_FLAMB",
+        "MODE_STAB",
+        "NEUT",
+        "PDIL_ELGA",
+        "PRAC_ELNO",
+        "PRAC_NOEU",
+        "PRES",
+        "PRES_NOEU",
+        "PRME_ELNO",
+        "PTOT",
+        "QIRE_ELEM",
+        "QIRE_ELNO",
+        "QIRE_NOEU",
+        "QIZ1_ELEM",
+        "QIZ2_ELEM",
+        "REAC_NODA",
+        "RESI_NOEU",
+        "RESI_RELA_NOEU",
+        "ROC1_ELNO",
+        "ROC2_ELNO",
+        "SECH",
+        "SIEF_ELGA",
+        "SIEF_ELNO",
+        "SIEF_NOEU",
+        "SIEQ_ELGA",
+        "SIEQ_ELNO",
+        "SIEQ_NOEU",
+        "SIGM_ELGA",
+        "SIGM_ELNO",
+        "SIGM_NOEU",
+        "SIMY_ELGA",
+        "SING_ELEM",
+        "SING_ELNO",
+        "SIPM_ELNO",
+        "SIPO_ELNO",
+        "SIPO_NOEU",
+        "SIRO_ELEM",
+        "SISE_ELNO",
+        "SIZ1_NOEU",
+        "SIZ2_NOEU",
+        "SOUR_ELGA",
+        "STRX_ELGA",
+        "TEMP",
+        "TEMP_ELGA",
+        "T_EXT",
+        "UT01_CART",
+        "UT01_ELEM",
+        "UT01_ELGA",
+        "UT01_ELNO",
+        "UT01_NOEU",
+        "UT02_CART",
+        "UT02_ELEM",
+        "UT02_ELGA",
+        "UT02_ELNO",
+        "UT02_NOEU",
+        "UT03_CART",
+        "UT03_ELEM",
+        "UT03_ELGA",
+        "UT03_ELNO",
+        "UT03_NOEU",
+        "UT04_CART",
+        "UT04_ELEM",
+        "UT04_ELGA",
+        "UT04_ELNO",
+        "UT04_NOEU",
+        "UT05_CART",
+        "UT05_ELEM",
+        "UT05_ELGA",
+        "UT05_ELNO",
+        "UT05_NOEU",
+        "UT06_CART",
+        "UT06_ELEM",
+        "UT06_ELGA",
+        "UT06_ELNO",
+        "UT06_NOEU",
+        "UT07_CART",
+        "UT07_ELEM",
+        "UT07_ELGA",
+        "UT07_ELNO",
+        "UT07_NOEU",
+        "UT08_CART",
+        "UT08_ELEM",
+        "UT08_ELGA",
+        "UT08_ELNO",
+        "UT08_NOEU",
+        "UT09_CART",
+        "UT09_ELEM",
+        "UT09_ELGA",
+        "UT09_ELNO",
+        "UT09_NOEU",
+        "UT10_CART",
+        "UT10_ELEM",
+        "UT10_ELGA",
+        "UT10_ELNO",
+        "UT10_NOEU",
+        "VARC_ELGA",
+        "VARC_ELNO",
+        "VARC_NOEU",
+        "VARI_ELGA",
+        "VARI_ELNO",
+        "VARI_NOEU",
+        "VITE",
+        "VITE_ABSOLU",
+        "VITE_VENT"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 209
+       }
+      },
+      {
+       "name": "NUME_DDL",
+       "kind": "simple",
+       "path": "NUME_DDL",
+       "status": "f",
+       "type": [
+        "nume_ddl_sdaster"
+       ],
+       "fr": "Utile en dynamique pour pouvoir imposer la numérotation des CHAM_NO.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 212
+       }
+      },
+      {
+       "name": "TOUT_ORDRE",
+       "kind": "simple",
+       "path": "TOUT_ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 217
+       }
+      },
+      {
+       "name": "NUME_ORDRE",
+       "kind": "simple",
+       "path": "NUME_ORDRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 218
+       }
+      },
+      {
+       "name": "LIST_ORDRE",
+       "kind": "simple",
+       "path": "LIST_ORDRE",
+       "status": "f",
+       "type": [
+        "listis_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 219
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 220
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 221
+       }
+      },
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 222
+       }
+      },
+      {
+       "name": "LIST_FREQ",
+       "kind": "simple",
+       "path": "LIST_FREQ",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 223
+       }
+      },
+      {
+       "name": "NUME_MODE",
+       "kind": "simple",
+       "path": "NUME_MODE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 224
+       }
+      },
+      {
+       "name": "NOEUD_CMP",
+       "kind": "simple",
+       "path": "NOEUD_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 225
+       }
+      },
+      {
+       "name": "b_acce_reel",
+       "kind": "bloc",
+       "path": "[b_acce_reel]",
+       "condition": "(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 226
+       },
+       "keywords": [
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 228
+         }
+        },
+        {
+         "name": "b_prec_rela",
+         "kind": "bloc",
+         "path": "[b_prec_rela]",
+         "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 229
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 1e-06,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/proj_champ.py",
+            "line": 231
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_prec_abso",
+         "kind": "bloc",
+         "path": "[b_prec_abso]",
+         "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 233
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "PRECISION",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/proj_champ.py",
+            "line": 235
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "VIS_A_VIS",
+     "kind": "factor",
+     "path": "VIS_A_VIS",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT_1",
+        "GROUP_MA_1",
+        "MAILLE_1",
+        "GROUP_NO_1"
+       ]
+      },
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT_2",
+        "GROUP_MA_2",
+        "GROUP_NO_2",
+        "NOEUD_2"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 239
+     },
+     "keywords": [
+      {
+       "name": "TOUT_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TOUT_1",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 246
+       }
+      },
+      {
+       "name": "GROUP_MA_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_MA_1",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 247
+       }
+      },
+      {
+       "name": "MAILLE_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/MAILLE_1",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 248
+       }
+      },
+      {
+       "name": "GROUP_NO_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_NO_1",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 249
+       }
+      },
+      {
+       "name": "TOUT_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TOUT_2",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 250
+       }
+      },
+      {
+       "name": "GROUP_MA_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_MA_2",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 251
+       }
+      },
+      {
+       "name": "GROUP_NO_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_NO_2",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 252
+       }
+      },
+      {
+       "name": "NOEUD_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/NOEUD_2",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 253
+       }
+      },
+      {
+       "name": "CAS_FIGURE",
+       "kind": "simple",
+       "path": "VIS_A_VIS/CAS_FIGURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "2D",
+        "3D",
+        "2.5D",
+        "1.5D",
+        "0D"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 256
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TRANSF_GEOM_1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 257
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TRANSF_GEOM_2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 267
+       }
+      },
+      {
+       "name": "b_0D",
+       "kind": "bloc",
+       "path": "VIS_A_VIS/[b_0D]",
+       "condition": "equal_to(\"CAS_FIGURE\",'0D')",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 277
+       },
+       "keywords": [
+        {
+         "name": "DISTANCE_0D",
+         "kind": "simple",
+         "path": "VIS_A_VIS/DISTANCE_0D",
+         "status": "o",
+         "type": [
+          "R"
+         ],
+         "val_min": 0,
+         "fr": "Distance maximale entre un noeud et le noeud sur lequel il est projeté.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 279
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_1",
+   "kind": "bloc",
+   "path": "[b_1]",
+   "condition": "equal_to(\"PROJECTION\", 'NON') and not exists(\"DISTRIBUTION\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MODELE_1",
+      "MAILLAGE_1"
+     ]
+    },
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "MODELE_2",
+      "MAILLAGE_2"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 293
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "COLLOCATION",
+     "into": [
+      "COLLOCATION",
+      "COUPLAGE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 295
+     }
+    },
+    {
+     "name": "MODELE_1",
+     "kind": "simple",
+     "path": "MODELE_1",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 297
+     }
+    },
+    {
+     "name": "MAILLAGE_1",
+     "kind": "simple",
+     "path": "MAILLAGE_1",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 298
+     }
+    },
+    {
+     "name": "MODELE_2",
+     "kind": "simple",
+     "path": "MODELE_2",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 299
+     }
+    },
+    {
+     "name": "MAILLAGE_2",
+     "kind": "simple",
+     "path": "MAILLAGE_2",
+     "status": "f",
+     "type": [
+      "maillage_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 300
+     }
+    },
+    {
+     "name": "b_elem",
+     "kind": "bloc",
+     "path": "[b_elem]",
+     "condition": "is_in(\"METHODE\", ('COLLOCATION',))",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 303
+     },
+     "keywords": [
+      {
+       "name": "CAS_FIGURE",
+       "kind": "simple",
+       "path": "CAS_FIGURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "2D",
+        "3D",
+        "2.5D",
+        "1.5D"
+       ],
+       "fr": "Pour indiquer au programme le type de projection souhaité",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 305
+       }
+      },
+      {
+       "name": "DISTANCE_MAX",
+       "kind": "simple",
+       "path": "DISTANCE_MAX",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 311
+       }
+      },
+      {
+       "name": "DISTANCE_ALARME",
+       "kind": "simple",
+       "path": "DISTANCE_ALARME",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 319
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_1",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 320
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_2",
+       "kind": "simple",
+       "path": "TRANSF_GEOM_2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 330
+       }
+      },
+      {
+       "name": "ALARME",
+       "kind": "simple",
+       "path": "ALARME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 340
+       }
+      }
+     ]
+    },
+    {
+     "name": "VIS_A_VIS",
+     "kind": "factor",
+     "path": "VIS_A_VIS",
+     "status": "f",
+     "max": "**",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT_1",
+        "GROUP_MA_1",
+        "MAILLE_1",
+        "GROUP_NO_1",
+        "NOEUD_1"
+       ]
+      },
+      {
+       "rule": "AU_MOINS_UN",
+       "keywords": [
+        "TOUT_2",
+        "GROUP_MA_2",
+        "GROUP_NO_2",
+        "NOEUD_2"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 342
+     },
+     "keywords": [
+      {
+       "name": "TOUT_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TOUT_1",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 349
+       }
+      },
+      {
+       "name": "GROUP_MA_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_MA_1",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 350
+       }
+      },
+      {
+       "name": "MAILLE_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/MAILLE_1",
+       "status": "c",
+       "type": [
+        "ma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 351
+       }
+      },
+      {
+       "name": "GROUP_NO_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_NO_1",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 352
+       }
+      },
+      {
+       "name": "NOEUD_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/NOEUD_1",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 353
+       }
+      },
+      {
+       "name": "TOUT_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TOUT_2",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 354
+       }
+      },
+      {
+       "name": "GROUP_MA_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_MA_2",
+       "status": "f",
+       "type": [
+        "grma"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 355
+       }
+      },
+      {
+       "name": "GROUP_NO_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/GROUP_NO_2",
+       "status": "f",
+       "type": [
+        "grno"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 356
+       }
+      },
+      {
+       "name": "NOEUD_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/NOEUD_2",
+       "status": "c",
+       "type": [
+        "no"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 357
+       }
+      },
+      {
+       "name": "CAS_FIGURE",
+       "kind": "simple",
+       "path": "VIS_A_VIS/CAS_FIGURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "2D",
+        "3D",
+        "2.5D",
+        "1.5D",
+        "0D"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 360
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_1",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TRANSF_GEOM_1",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 361
+       }
+      },
+      {
+       "name": "TRANSF_GEOM_2",
+       "kind": "simple",
+       "path": "VIS_A_VIS/TRANSF_GEOM_2",
+       "status": "f",
+       "type": [
+        "fonction_sdaster",
+        "nappe_sdaster",
+        "formule"
+       ],
+       "min": 2,
+       "max": 3,
+       "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 371
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_2",
+   "kind": "bloc",
+   "path": "[b_2]",
+   "condition": "exists(\"MATR_PROJECTION\") and not exists(\"DISTRIBUTION\")",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "RESULTAT",
+      "CHAM_GD"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 386
+   },
+   "keywords": [
+    {
+     "name": "RESULTAT",
+     "kind": "simple",
+     "path": "RESULTAT",
+     "status": "f",
+     "type": [
+      "resultat_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 389
+     }
+    },
+    {
+     "name": "CHAM_GD",
+     "kind": "simple",
+     "path": "CHAM_GD",
+     "status": "f",
+     "type": [
+      "cham_no_sdaster",
+      "cham_elem"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 390
+     }
+    },
+    {
+     "name": "TYPE_CHAM",
+     "kind": "simple",
+     "path": "TYPE_CHAM",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NOEU"
+     ],
+     "fr": "Pour forcer le type des champs projetés. NOEU -> cham_no",
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 391
+     }
+    },
+    {
+     "name": "NUME_DDL",
+     "kind": "simple",
+     "path": "NUME_DDL",
+     "status": "f",
+     "type": [
+      "nume_ddl_sdaster"
+     ],
+     "fr": "Parfois utile en dynamique pour pouvoir imposer la numérotation des cham_no.",
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 397
+     }
+    },
+    {
+     "name": "MODELE_2",
+     "kind": "simple",
+     "path": "MODELE_2",
+     "status": "f",
+     "type": [
+      "modele_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 403
+     }
+    },
+    {
+     "name": "PROL_VALE",
+     "kind": "simple",
+     "path": "PROL_VALE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Pour prolonger les champs là ou la projection ne donne pas de valeurs.",
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 404
+     }
+    },
+    {
+     "name": "b_resultat",
+     "kind": "bloc",
+     "path": "[b_resultat]",
+     "condition": "exists(\"RESULTAT\")",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_ORDRE",
+        "NUME_ORDRE",
+        "INST",
+        "FREQ",
+        "LIST_INST",
+        "LIST_FREQ",
+        "LIST_ORDRE"
+       ]
+      },
+      {
+       "rule": "EXCLUS",
+       "keywords": [
+        "TOUT_CHAM",
+        "NOM_CHAM"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 411
+     },
+     "keywords": [
+      {
+       "name": "NOM_PARA",
+       "kind": "simple",
+       "path": "NOM_PARA",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 425
+       }
+      },
+      {
+       "name": "TOUT_CHAM",
+       "kind": "simple",
+       "path": "TOUT_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 426
+       }
+      },
+      {
+       "name": "NOM_CHAM",
+       "kind": "simple",
+       "path": "NOM_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "into": [
+        "ACCE",
+        "ACCE_ABSOLU",
+        "COEF_H",
+        "COMPORTEMENT",
+        "COMPORTHER",
+        "CONT_ELEM",
+        "CONT_NOEU",
+        "DEGE_ELGA",
+        "DEGE_ELNO",
+        "DEGE_NOEU",
+        "DEPL",
+        "DEPL_ABSOLU",
+        "DEPL_ELGA",
+        "DEPL_VIBR",
+        "DERA_ELGA",
+        "DERA_ELNO",
+        "DERA_NOEU",
+        "DIFF_ELGA",
+        "DIFF_ELNO",
+        "DIFF_NOEU",
+        "DISS_ELEM",
+        "DISS_ELGA",
+        "DISS_ELNO",
+        "DISS_NOEU",
+        "DIVU",
+        "DURT_ELNO",
+        "DURT_NOEU",
+        "ECIN_ELEM",
+        "EFGE_ELGA",
+        "EFGE_ELNO",
+        "EFGE_NOEU",
+        "EGRU_ELNO",
+        "ENDO_ELGA",
+        "ENDO_ELNO",
+        "ENDO_NOEU",
+        "ENEL_ELEM",
+        "ENEL_ELGA",
+        "ENEL_ELNO",
+        "ENEL_NOEU",
+        "ENTR_ELEM",
+        "EPEQ_ELGA",
+        "EPEQ_ELNO",
+        "EPEQ_NOEU",
+        "EPFD_ELGA",
+        "EPFD_ELNO",
+        "EPFD_NOEU",
+        "EPFP_ELGA",
+        "EPFP_ELNO",
+        "EPFP_NOEU",
+        "EPGQ_ELGA",
+        "EPGQ_ELNO",
+        "EPGQ_NOEU",
+        "EPME_ELGA",
+        "EPME_ELNO",
+        "EPME_NOEU",
+        "EPMG_ELGA",
+        "EPMG_ELNO",
+        "EPMG_NOEU",
+        "EPMQ_ELGA",
+        "EPMQ_ELNO",
+        "EPMQ_NOEU",
+        "EPOT_ELEM",
+        "EPSA_ELNO",
+        "EPSA_NOEU",
+        "EPSG_ELGA",
+        "EPSG_ELNO",
+        "EPSG_NOEU",
+        "EPSI_ELGA",
+        "EPSI_ELNO",
+        "EPSI_NOEU",
+        "EPSL_ELGA",
+        "EPSL_ELNO",
+        "EPSL_NOEU",
+        "EPSP_ELGA",
+        "EPSP_ELNO",
+        "EPSP_NOEU",
+        "EPVC_ELGA",
+        "EPVC_ELNO",
+        "EPVC_NOEU",
+        "ERME_ELEM",
+        "ERME_ELNO",
+        "ERME_NOEU",
+        "ERTH_ELEM",
+        "ERTH_ELNO",
+        "ERTH_NOEU",
+        "ERZ1_ELEM",
+        "ERZ2_ELEM",
+        "ETHE_ELEM",
+        "ETOT_ELEM",
+        "ETOT_ELGA",
+        "ETOT_ELNO",
+        "ETOT_NOEU",
+        "FERR_ELEM",
+        "FLHN_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELGA",
+        "FLUX_ELNO",
+        "FLUX_ELNO",
+        "FLUX_NOEU",
+        "FLUX_NOEU",
+        "FORC_NODA",
+        "FSUR_2D",
+        "FSUR_3D",
+        "FVOL_2D",
+        "FVOL_3D",
+        "GRAT_ELGA",
+        "GRAT_ELGA",
+        "GRAT_ELNO",
+        "GRAT_ELNO",
+        "GRAT_NOEU",
+        "GRAT_NOEU",
+        "HHO_DEPL",
+        "HHO_TEMP",
+        "HHO_VITE",
+        "HYDR_ELGA",
+        "HYDR_ELNO",
+        "HYDR_NOEU",
+        "HYGR_ELGA",
+        "HYGR_ELNO",
+        "HYGR_NOEU",
+        "INDL_ELGA",
+        "INTE_ELNO",
+        "INTE_NOEU",
+        "IRRA",
+        "MARG_ELEM",
+        "MATE_ELEM",
+        "MATE_ELGA",
+        "META_ELNO",
+        "META_NOEU",
+        "MODE_FLAMB",
+        "MODE_STAB",
+        "NEUT",
+        "PDIL_ELGA",
+        "PRAC_ELNO",
+        "PRAC_NOEU",
+        "PRES",
+        "PRES_NOEU",
+        "PRME_ELNO",
+        "PTOT",
+        "QIRE_ELEM",
+        "QIRE_ELNO",
+        "QIRE_NOEU",
+        "QIZ1_ELEM",
+        "QIZ2_ELEM",
+        "REAC_NODA",
+        "RESI_NOEU",
+        "RESI_RELA_NOEU",
+        "ROC1_ELNO",
+        "ROC2_ELNO",
+        "SECH",
+        "SIEF_ELGA",
+        "SIEF_ELNO",
+        "SIEF_NOEU",
+        "SIEQ_ELGA",
+        "SIEQ_ELNO",
+        "SIEQ_NOEU",
+        "SIGM_ELGA",
+        "SIGM_ELNO",
+        "SIGM_NOEU",
+        "SIMY_ELGA",
+        "SING_ELEM",
+        "SING_ELNO",
+        "SIPM_ELNO",
+        "SIPO_ELNO",
+        "SIPO_NOEU",
+        "SIRO_ELEM",
+        "SISE_ELNO",
+        "SIZ1_NOEU",
+        "SIZ2_NOEU",
+        "SOUR_ELGA",
+        "STRX_ELGA",
+        "TEMP",
+        "TEMP_ELGA",
+        "T_EXT",
+        "UT01_CART",
+        "UT01_ELEM",
+        "UT01_ELGA",
+        "UT01_ELNO",
+        "UT01_NOEU",
+        "UT02_CART",
+        "UT02_ELEM",
+        "UT02_ELGA",
+        "UT02_ELNO",
+        "UT02_NOEU",
+        "UT03_CART",
+        "UT03_ELEM",
+        "UT03_ELGA",
+        "UT03_ELNO",
+        "UT03_NOEU",
+        "UT04_CART",
+        "UT04_ELEM",
+        "UT04_ELGA",
+        "UT04_ELNO",
+        "UT04_NOEU",
+        "UT05_CART",
+        "UT05_ELEM",
+        "UT05_ELGA",
+        "UT05_ELNO",
+        "UT05_NOEU",
+        "UT06_CART",
+        "UT06_ELEM",
+        "UT06_ELGA",
+        "UT06_ELNO",
+        "UT06_NOEU",
+        "UT07_CART",
+        "UT07_ELEM",
+        "UT07_ELGA",
+        "UT07_ELNO",
+        "UT07_NOEU",
+        "UT08_CART",
+        "UT08_ELEM",
+        "UT08_ELGA",
+        "UT08_ELNO",
+        "UT08_NOEU",
+        "UT09_CART",
+        "UT09_ELEM",
+        "UT09_ELGA",
+        "UT09_ELNO",
+        "UT09_NOEU",
+        "UT10_CART",
+        "UT10_ELEM",
+        "UT10_ELGA",
+        "UT10_ELNO",
+        "UT10_NOEU",
+        "VARC_ELGA",
+        "VARC_ELNO",
+        "VARC_NOEU",
+        "VARI_ELGA",
+        "VARI_ELNO",
+        "VARI_NOEU",
+        "VITE",
+        "VITE_ABSOLU",
+        "VITE_VENT"
+       ],
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 427
+       }
+      },
+      {
+       "name": "TOUT_ORDRE",
+       "kind": "simple",
+       "path": "TOUT_ORDRE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "OUI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 430
+       }
+      },
+      {
+       "name": "NUME_ORDRE",
+       "kind": "simple",
+       "path": "NUME_ORDRE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 431
+       }
+      },
+      {
+       "name": "LIST_ORDRE",
+       "kind": "simple",
+       "path": "LIST_ORDRE",
+       "status": "f",
+       "type": [
+        "listis_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 432
+       }
+      },
+      {
+       "name": "INST",
+       "kind": "simple",
+       "path": "INST",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 433
+       }
+      },
+      {
+       "name": "LIST_INST",
+       "kind": "simple",
+       "path": "LIST_INST",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 434
+       }
+      },
+      {
+       "name": "FREQ",
+       "kind": "simple",
+       "path": "FREQ",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 435
+       }
+      },
+      {
+       "name": "LIST_FREQ",
+       "kind": "simple",
+       "path": "LIST_FREQ",
+       "status": "f",
+       "type": [
+        "listr8_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 436
+       }
+      },
+      {
+       "name": "NUME_MODE",
+       "kind": "simple",
+       "path": "NUME_MODE",
+       "status": "f",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 437
+       }
+      },
+      {
+       "name": "NOEUD_CMP",
+       "kind": "simple",
+       "path": "NOEUD_CMP",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "max": "**",
+       "validators": [
+        {
+         "name": "NoRepeat",
+         "args": []
+        }
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 438
+       }
+      },
+      {
+       "name": "b_acce_reel",
+       "kind": "bloc",
+       "path": "[b_acce_reel]",
+       "condition": "(exists(\"FREQ\"))or(exists(\"LIST_FREQ\"))or(exists(\"INST\"))or(exists(\"LIST_INST\"))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 439
+       },
+       "keywords": [
+        {
+         "name": "CRITERE",
+         "kind": "simple",
+         "path": "CRITERE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "RELATIF",
+         "into": [
+          "RELATIF",
+          "ABSOLU"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 441
+         }
+        },
+        {
+         "name": "b_prec_rela",
+         "kind": "bloc",
+         "path": "[b_prec_rela]",
+         "condition": "(equal_to(\"CRITERE\", 'RELATIF'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 442
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "PRECISION",
+           "status": "f",
+           "type": [
+            "R"
+           ],
+           "default": 1e-06,
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/proj_champ.py",
+            "line": 444
+           }
+          }
+         ]
+        },
+        {
+         "name": "b_prec_abso",
+         "kind": "bloc",
+         "path": "[b_prec_abso]",
+         "condition": "(equal_to(\"CRITERE\", 'ABSOLU'))",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 446
+         },
+         "keywords": [
+          {
+           "name": "PRECISION",
+           "kind": "simple",
+           "path": "PRECISION",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "fr": null,
+           "source": {
+            "file": "code_aster/Cata/Commands/proj_champ.py",
+            "line": 448
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "b_distribue",
+   "kind": "bloc",
+   "path": "[b_distribue]",
+   "condition": "exists(\"MAILLAGE_1\") and AsType(MAILLAGE_1)==maillage_p or exists(\"MAILLAGE_2\") and AsType(MAILLAGE_2)==maillage_p",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 455
+   },
+   "keywords": [
+    {
+     "name": "DISTRIBUTION",
+     "kind": "simple",
+     "path": "DISTRIBUTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 457
+     }
+    },
+    {
+     "name": "b_1_et_2",
+     "kind": "bloc",
+     "path": "[b_1_et_2]",
+     "condition": "equal_to(\"PROJECTION\", 'OUI') and not exists(\"MATR_PROJECTION\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 461
+     },
+     "keywords": [
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_no_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 463
+       }
+      },
+      {
+       "name": "METHODE",
+       "kind": "simple",
+       "path": "METHODE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "AUTO",
+       "into": [
+        "AUTO",
+        "COLLOCATION"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 464
+       }
+      },
+      {
+       "name": "MAILLAGE_1",
+       "kind": "simple",
+       "path": "MAILLAGE_1",
+       "status": "f",
+       "type": [
+        "maillage_sdaster",
+        "squelette"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 465
+       }
+      },
+      {
+       "name": "MAILLAGE_2",
+       "kind": "simple",
+       "path": "MAILLAGE_2",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 466
+       }
+      },
+      {
+       "name": "b_elem",
+       "kind": "bloc",
+       "path": "[b_elem]",
+       "condition": "is_in(\"METHODE\", ('COLLOCATION','AUTO'))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 469
+       },
+       "keywords": [
+        {
+         "name": "CAS_FIGURE",
+         "kind": "simple",
+         "path": "CAS_FIGURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "2D",
+          "3D",
+          "2.5D",
+          "1.5D"
+         ],
+         "fr": "Pour indiquer au programme le type de projection souhaité",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 471
+         }
+        },
+        {
+         "name": "DISTANCE_MAX",
+         "kind": "simple",
+         "path": "DISTANCE_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 477
+         }
+        },
+        {
+         "name": "DISTANCE_ALARME",
+         "kind": "simple",
+         "path": "DISTANCE_ALARME",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 485
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_1",
+         "kind": "simple",
+         "path": "TRANSF_GEOM_1",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 486
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_2",
+         "kind": "simple",
+         "path": "TRANSF_GEOM_2",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 496
+         }
+        },
+        {
+         "name": "ALARME",
+         "kind": "simple",
+         "path": "ALARME",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 506
+         }
+        },
+        {
+         "name": "TYPE_CHAM",
+         "kind": "simple",
+         "path": "TYPE_CHAM",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "NOEU"
+         ],
+         "fr": "Pour forcer le type des champs projetés. NOEU -> CHAM_NO",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 507
+         }
+        },
+        {
+         "name": "PROL_VALE",
+         "kind": "simple",
+         "path": "PROL_VALE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Pour prolonger les champs là ou la projection ne donne pas de valeurs.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 513
+         }
+        }
+       ]
+      },
+      {
+       "name": "VIS_A_VIS",
+       "kind": "factor",
+       "path": "VIS_A_VIS",
+       "status": "f",
+       "max": "**",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "TOUT_1",
+          "GROUP_MA_1",
+          "GROUP_NO_1"
+         ]
+        },
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "TOUT_2",
+          "GROUP_MA_2",
+          "GROUP_NO_2"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 519
+       },
+       "keywords": [
+        {
+         "name": "TOUT_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TOUT_1",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 526
+         }
+        },
+        {
+         "name": "GROUP_MA_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_MA_1",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 527
+         }
+        },
+        {
+         "name": "GROUP_NO_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_NO_1",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 528
+         }
+        },
+        {
+         "name": "TOUT_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TOUT_2",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 529
+         }
+        },
+        {
+         "name": "GROUP_MA_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_MA_2",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 530
+         }
+        },
+        {
+         "name": "GROUP_NO_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_NO_2",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 531
+         }
+        },
+        {
+         "name": "CAS_FIGURE",
+         "kind": "simple",
+         "path": "VIS_A_VIS/CAS_FIGURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "2D",
+          "3D",
+          "2.5D",
+          "1.5D",
+          "0D"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 534
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TRANSF_GEOM_1",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 535
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TRANSF_GEOM_2",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 545
+         }
+        },
+        {
+         "name": "b_0D",
+         "kind": "bloc",
+         "path": "VIS_A_VIS/[b_0D]",
+         "condition": "equal_to(\"CAS_FIGURE\",'0D')",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 555
+         },
+         "keywords": [
+          {
+           "name": "DISTANCE_0D",
+           "kind": "simple",
+           "path": "VIS_A_VIS/DISTANCE_0D",
+           "status": "o",
+           "type": [
+            "R"
+           ],
+           "val_min": 0,
+           "fr": "Distance maximale entre un noeud et le noeud sur lequel il est projeté.",
+           "source": {
+            "file": "code_aster/Cata/Commands/proj_champ.py",
+            "line": 557
+           }
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_1",
+     "kind": "bloc",
+     "path": "[b_1]",
+     "condition": "equal_to(\"PROJECTION\", 'NON')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 571
+     },
+     "keywords": [
+      {
+       "name": "METHODE",
+       "kind": "simple",
+       "path": "METHODE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "COLLOCATION",
+       "into": [
+        "COLLOCATION",
+        "COUPLAGE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 573
+       }
+      },
+      {
+       "name": "MAILLAGE_1",
+       "kind": "simple",
+       "path": "MAILLAGE_1",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 576
+       }
+      },
+      {
+       "name": "MAILLAGE_2",
+       "kind": "simple",
+       "path": "MAILLAGE_2",
+       "status": "f",
+       "type": [
+        "maillage_sdaster"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 577
+       }
+      },
+      {
+       "name": "b_elem",
+       "kind": "bloc",
+       "path": "[b_elem]",
+       "condition": "is_in(\"METHODE\", ('COLLOCATION',))",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 580
+       },
+       "keywords": [
+        {
+         "name": "CAS_FIGURE",
+         "kind": "simple",
+         "path": "CAS_FIGURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "2D",
+          "3D",
+          "2.5D",
+          "1.5D"
+         ],
+         "fr": "Pour indiquer au programme le type de projection souhaité",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 582
+         }
+        },
+        {
+         "name": "DISTANCE_MAX",
+         "kind": "simple",
+         "path": "DISTANCE_MAX",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": "Distance maximale entre le noeud et l'élément le plus proche, lorsque le noeud n'est dans aucun élément.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 588
+         }
+        },
+        {
+         "name": "DISTANCE_ALARME",
+         "kind": "simple",
+         "path": "DISTANCE_ALARME",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 596
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_1",
+         "kind": "simple",
+         "path": "TRANSF_GEOM_1",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 597
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_2",
+         "kind": "simple",
+         "path": "TRANSF_GEOM_2",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 607
+         }
+        },
+        {
+         "name": "ALARME",
+         "kind": "simple",
+         "path": "ALARME",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "OUI",
+         "into": [
+          "OUI",
+          "NON"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 617
+         }
+        }
+       ]
+      },
+      {
+       "name": "VIS_A_VIS",
+       "kind": "factor",
+       "path": "VIS_A_VIS",
+       "status": "f",
+       "max": "**",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "TOUT_1",
+          "GROUP_MA_1",
+          "GROUP_NO_1"
+         ]
+        },
+        {
+         "rule": "AU_MOINS_UN",
+         "keywords": [
+          "TOUT_2",
+          "GROUP_MA_2",
+          "GROUP_NO_2"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 619
+       },
+       "keywords": [
+        {
+         "name": "TOUT_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TOUT_1",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 626
+         }
+        },
+        {
+         "name": "GROUP_MA_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_MA_1",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 627
+         }
+        },
+        {
+         "name": "GROUP_NO_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_NO_1",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 628
+         }
+        },
+        {
+         "name": "TOUT_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TOUT_2",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "OUI"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 629
+         }
+        },
+        {
+         "name": "GROUP_MA_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_MA_2",
+         "status": "f",
+         "type": [
+          "grma"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 630
+         }
+        },
+        {
+         "name": "GROUP_NO_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/GROUP_NO_2",
+         "status": "f",
+         "type": [
+          "grno"
+         ],
+         "max": "**",
+         "validators": [
+          {
+           "name": "NoRepeat",
+           "args": []
+          }
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 631
+         }
+        },
+        {
+         "name": "CAS_FIGURE",
+         "kind": "simple",
+         "path": "VIS_A_VIS/CAS_FIGURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "into": [
+          "2D",
+          "3D",
+          "2.5D",
+          "1.5D",
+          "0D"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 634
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_1",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TRANSF_GEOM_1",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_1 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 635
+         }
+        },
+        {
+         "name": "TRANSF_GEOM_2",
+         "kind": "simple",
+         "path": "VIS_A_VIS/TRANSF_GEOM_2",
+         "status": "f",
+         "type": [
+          "fonction_sdaster",
+          "nappe_sdaster",
+          "formule"
+         ],
+         "min": 2,
+         "max": 3,
+         "fr": "2 (ou 3) fonctions fx,fy,fz définissant la transformation géométrique à appliquer aux noeuds du MODELE_2 avant la projection.",
+         "source": {
+          "file": "code_aster/Cata/Commands/proj_champ.py",
+          "line": 645
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "b_2",
+     "kind": "bloc",
+     "path": "[b_2]",
+     "condition": "exists(\"MATR_PROJECTION\") and not exists(\"DISTRIBUTION\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/proj_champ.py",
+      "line": 660
+     },
+     "keywords": [
+      {
+       "name": "CHAM_GD",
+       "kind": "simple",
+       "path": "CHAM_GD",
+       "status": "f",
+       "type": [
+        "cham_no_sdaster",
+        "cham_elem"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 662
+       }
+      },
+      {
+       "name": "TYPE_CHAM",
+       "kind": "simple",
+       "path": "TYPE_CHAM",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "NOEU"
+       ],
+       "fr": "Pour forcer le type des champs projetés. NOEU -> cham_no",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 663
+       }
+      },
+      {
+       "name": "NUME_DDL",
+       "kind": "simple",
+       "path": "NUME_DDL",
+       "status": "f",
+       "type": [
+        "nume_ddl_sdaster"
+       ],
+       "fr": "Parfois utile en dynamique pour pouvoir imposer la numérotation des cham_no.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 669
+       }
+      },
+      {
+       "name": "PROL_VALE",
+       "kind": "simple",
+       "path": "PROL_VALE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "fr": "Pour prolonger les champs là ou la projection ne donne pas de valeurs.",
+       "source": {
+        "file": "code_aster/Cata/Commands/proj_champ.py",
+        "line": 676
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 683
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/proj_champ.py",
+    "line": 684
+   }
+  }
+ ]
+}

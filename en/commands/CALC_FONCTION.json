@@ -1,0 +1,2329 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/calc_fonction.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "CALC_FONCTION",
+ "kind": "MACRO",
+ "fr": "Effectue des opérations mathématiques sur des concepts de type fonction",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.calc_fonction_ops.calc_fonction_ops",
+ "reentrant": "n",
+ "result_types": [
+  "fonction_sdaster",
+  "fonction_c",
+  "nappe_sdaster"
+ ],
+ "result_type_depends_on_keywords": true,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "DERIVE",
+    "INTEGRE",
+    "SPEC_OSCI",
+    "DSP",
+    "FFT",
+    "CORR_ACCE",
+    "COMB",
+    "COMB_C",
+    "MULT",
+    "ASSE",
+    "INVERSE",
+    "ABS",
+    "ENVELOPPE",
+    "COMPOSE",
+    "EXTRACTION",
+    "PUISSANCE",
+    "PROL_SPEC_OSCI",
+    "INTEGRE_FREQ",
+    "DERIVE_FREQ",
+    "LISS_ENVELOP",
+    "FRACTILE",
+    "REGR_POLYNOMIALE",
+    "MOYENNE",
+    "COHERENCE",
+    "INTERPOL_FFT"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/calc_fonction.py",
+  "line": 147
+ },
+ "keywords": [
+  {
+   "name": "FFT",
+   "kind": "factor",
+   "path": "FFT",
+   "status": "f",
+   "fr": "Transformée de Fourier ou de son inverse",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 182
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "FFT/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 185
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "FFT/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "PROL_ZERO",
+     "into": [
+      "PROL_ZERO",
+      "TRONCATURE",
+      "COMPLET"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 186
+     }
+    },
+    {
+     "name": "b_syme",
+     "kind": "bloc",
+     "path": "FFT/[b_syme]",
+     "condition": " is_type(\"FONCTION\")==fonction_c ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 189
+     },
+     "keywords": [
+      {
+       "name": "SYME",
+       "kind": "simple",
+       "path": "FFT/SYME",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 191
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL_FFT",
+   "kind": "factor",
+   "path": "INTERPOL_FFT",
+   "status": "f",
+   "fr": "Interpolation d'un accélérogramme par zero padding",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 194
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "INTERPOL_FFT/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 197
+     }
+    },
+    {
+     "name": "PAS_INST",
+     "kind": "simple",
+     "path": "INTERPOL_FFT/PAS_INST",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Nouveau pas d'échantillonnage souhaité",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 198
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "INTERPOL_FFT/PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.01,
+     "fr": "Ecart maximum entre le pas souhaité et le pas calculé",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 199
+     }
+    }
+   ]
+  },
+  {
+   "name": "DERIVE",
+   "kind": "factor",
+   "path": "DERIVE",
+   "status": "f",
+   "fr": "Dérivée d une fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 206
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "DERIVE/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DIFF_CENTREE",
+     "into": [
+      "DIFF_CENTREE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 209
+     }
+    },
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "DERIVE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 210
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTEGRE",
+   "kind": "factor",
+   "path": "INTEGRE",
+   "status": "f",
+   "fr": "Intégrale d'une fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 212
+   },
+   "keywords": [
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "INTEGRE/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TRAPEZE",
+     "into": [
+      "SIMPSON",
+      "TRAPEZE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 215
+     }
+    },
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "INTEGRE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 216
+     }
+    },
+    {
+     "name": "COEF",
+     "kind": "simple",
+     "path": "INTEGRE/COEF",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.0,
+     "fr": "Valeur de la constante d intégration",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 217
+     }
+    }
+   ]
+  },
+  {
+   "name": "LISS_ENVELOP",
+   "kind": "factor",
+   "path": "LISS_ENVELOP",
+   "status": "f",
+   "fr": "Lissage d une enveloppe",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "NAPPE",
+      "FONCTION",
+      "TABLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 219
+   },
+   "keywords": [
+    {
+     "name": "NAPPE",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/NAPPE",
+     "status": "f",
+     "type": [
+      "nappe_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 223
+     }
+    },
+    {
+     "name": "TABLE",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/TABLE",
+     "status": "f",
+     "type": [
+      "table_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 224
+     }
+    },
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/FONCTION",
+     "status": "f",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "min": 1,
+     "max": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 225
+     }
+    },
+    {
+     "name": "LIST_AMOR",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/LIST_AMOR",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 226
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/OPTION",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "CONCEPTION",
+      "VERIFICATION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 227
+     }
+    },
+    {
+     "name": "b_verif",
+     "kind": "bloc",
+     "path": "LISS_ENVELOP/[b_verif]",
+     "condition": "equal_to(\"OPTION\", 'VERIFICATION') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 228
+     },
+     "keywords": [
+      {
+       "name": "ELARG",
+       "kind": "simple",
+       "path": "LISS_ENVELOP/ELARG",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "val_min": 0.0,
+       "val_max": 1.0,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 230
+       }
+      }
+     ]
+    },
+    {
+     "name": "FREQ_MIN",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/FREQ_MIN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 232
+     }
+    },
+    {
+     "name": "FREQ_MAX",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/FREQ_MAX",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 233
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 234
+     }
+    },
+    {
+     "name": "NB_FREQ_LISS",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/NB_FREQ_LISS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": 2,
+     "val_min": 1,
+     "default": [
+      10
+     ],
+     "fr": "Nb de points pour le lissage ",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 235
+     }
+    },
+    {
+     "name": "ZPA",
+     "kind": "simple",
+     "path": "LISS_ENVELOP/ZPA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 243
+     }
+    }
+   ]
+  },
+  {
+   "name": "REGR_POLYNOMIALE",
+   "kind": "factor",
+   "path": "REGR_POLYNOMIALE",
+   "status": "f",
+   "fr": "Régression polynomiale d'une fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 245
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "REGR_POLYNOMIALE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 248
+     }
+    },
+    {
+     "name": "DEGRE",
+     "kind": "simple",
+     "path": "REGR_POLYNOMIALE/DEGRE",
+     "status": "o",
+     "type": [
+      "I"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 249
+     }
+    }
+   ]
+  },
+  {
+   "name": "PROL_SPEC_OSCI",
+   "kind": "factor",
+   "path": "PROL_SPEC_OSCI",
+   "status": "f",
+   "fr": "Prolonger un Spectre d'oscillateur par DEPL_MAX",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 251
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "PROL_SPEC_OSCI/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": "Spectre d'oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 254
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "PROL_SPEC_OSCI/NORME",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Valeur de la norme du spectre d oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 255
+     }
+    },
+    {
+     "name": "DEPL_MAX",
+     "kind": "simple",
+     "path": "PROL_SPEC_OSCI/DEPL_MAX",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "Deplacement maximal pour la prolongation",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 256
+     }
+    }
+   ]
+  },
+  {
+   "name": "SPEC_OSCI",
+   "kind": "factor",
+   "path": "SPEC_OSCI",
+   "status": "f",
+   "fr": "Spectre d'oscillateur",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 260
+   },
+   "keywords": [
+    {
+     "name": "TYPE_RESU",
+     "kind": "simple",
+     "path": "SPEC_OSCI/TYPE_RESU",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NAPPE",
+     "into": [
+      "NAPPE",
+      "FONCTION"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 263
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "SPEC_OSCI/METHODE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "NIGAM",
+     "into": [
+      "NIGAM",
+      "HARMO",
+      "RICE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 264
+     }
+    },
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "SPEC_OSCI/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 265
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "SPEC_OSCI/AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 266
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "SPEC_OSCI/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 267
+     }
+    },
+    {
+     "name": "FREQ",
+     "kind": "simple",
+     "path": "SPEC_OSCI/FREQ",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 268
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "SPEC_OSCI/NORME",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Valeur de la norme du spectre d oscillateur",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 269
+     }
+    },
+    {
+     "name": "b_nigam",
+     "kind": "bloc",
+     "path": "SPEC_OSCI/[b_nigam]",
+     "condition": "equal_to(\"METHODE\", 'NIGAM') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 270
+     },
+     "keywords": [
+      {
+       "name": "NATURE_FONC",
+       "kind": "simple",
+       "path": "SPEC_OSCI/NATURE_FONC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "ACCE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 272
+       }
+      },
+      {
+       "name": "NATURE",
+       "kind": "simple",
+       "path": "SPEC_OSCI/NATURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "DEPL",
+        "VITE",
+        "ACCE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 273
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_rice",
+     "kind": "bloc",
+     "path": "SPEC_OSCI/[b_rice]",
+     "condition": "equal_to(\"METHODE\", 'RICE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 275
+     },
+     "keywords": [
+      {
+       "name": "DUREE",
+       "kind": "simple",
+       "path": "SPEC_OSCI/DUREE",
+       "status": "o",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "fr": "durée de la phase forte pour facteur de pic",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 277
+       }
+      },
+      {
+       "name": "NATURE_FONC",
+       "kind": "simple",
+       "path": "SPEC_OSCI/NATURE_FONC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "DSP",
+       "into": [
+        "DSP"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 283
+       }
+      },
+      {
+       "name": "NATURE",
+       "kind": "simple",
+       "path": "SPEC_OSCI/NATURE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "DEPL",
+        "VITE",
+        "ACCE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 284
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_harmo",
+     "kind": "bloc",
+     "path": "SPEC_OSCI/[b_harmo]",
+     "condition": "equal_to(\"METHODE\", 'HARMO') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 286
+     },
+     "keywords": [
+      {
+       "name": "PSEUDO",
+       "kind": "simple",
+       "path": "SPEC_OSCI/PSEUDO",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "OUI",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": "type de sro: pseudo ou direct",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 288
+       }
+      },
+      {
+       "name": "NATURE_FONC",
+       "kind": "simple",
+       "path": "SPEC_OSCI/NATURE_FONC",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "ACCE",
+       "into": [
+        "ACCE"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 295
+       }
+      },
+      {
+       "name": "b_type_abso",
+       "kind": "bloc",
+       "path": "SPEC_OSCI/[b_type_abso]",
+       "condition": "equal_to(\"PSEUDO\", 'NON') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 296
+       },
+       "keywords": [
+        {
+         "name": "NATURE",
+         "kind": "simple",
+         "path": "SPEC_OSCI/NATURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "ACCE",
+         "into": [
+          "DEPL",
+          "VITE",
+          "ACCE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fonction.py",
+          "line": 298
+         }
+        }
+       ]
+      },
+      {
+       "name": "b_type_pseudo",
+       "kind": "bloc",
+       "path": "SPEC_OSCI/[b_type_pseudo]",
+       "condition": "equal_to(\"PSEUDO\", 'OUI') ",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 300
+       },
+       "keywords": [
+        {
+         "name": "NATURE",
+         "kind": "simple",
+         "path": "SPEC_OSCI/NATURE",
+         "status": "f",
+         "type": [
+          "TXM"
+         ],
+         "default": "ACCE",
+         "into": [
+          "DEPL",
+          "VITE",
+          "ACCE"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commands/calc_fonction.py",
+          "line": 302
+         }
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DSP",
+   "kind": "factor",
+   "path": "DSP",
+   "status": "f",
+   "fr": "Densité spectrale",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "FREQ_PAS",
+      "LIST_FREQ"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 306
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "DSP/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 309
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "DSP/AMOR_REDUIT",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 310
+     }
+    },
+    {
+     "name": "NORME",
+     "kind": "simple",
+     "path": "DSP/NORME",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 311
+     }
+    },
+    {
+     "name": "LIST_FREQ",
+     "kind": "simple",
+     "path": "DSP/LIST_FREQ",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 312
+     }
+    },
+    {
+     "name": "NB_ITER",
+     "kind": "simple",
+     "path": "DSP/NB_ITER",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "val_min": 0,
+     "default": 10,
+     "fr": "nombre d'iterations pour fitter le spectre",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 313
+     }
+    },
+    {
+     "name": "FREQ_FILTRE_ZPA",
+     "kind": "simple",
+     "path": "DSP/FREQ_FILTRE_ZPA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": "frequence du filtre Butterworth passe-bas",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 320
+     }
+    },
+    {
+     "name": "NB_FREQ_LISS",
+     "kind": "simple",
+     "path": "DSP/NB_FREQ_LISS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 0,
+     "fr": "Nb de points pour le lissage par fenêtre de Hamming",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 327
+     }
+    },
+    {
+     "name": "FREQ_PAS",
+     "kind": "simple",
+     "path": "DSP/FREQ_PAS",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 333
+     }
+    },
+    {
+     "name": "FREQ_COUP",
+     "kind": "simple",
+     "path": "DSP/FREQ_COUP",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "fréquence de coupure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 335
+     }
+    },
+    {
+     "name": "DUREE",
+     "kind": "simple",
+     "path": "DSP/DUREE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "durée de la phase forte pour facteur de peak",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 336
+     }
+    },
+    {
+     "name": "FRACT",
+     "kind": "simple",
+     "path": "DSP/FRACT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "default": 0.5,
+     "fr": "fractile",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 339
+     }
+    }
+   ]
+  },
+  {
+   "name": "ABS",
+   "kind": "factor",
+   "path": "ABS",
+   "status": "f",
+   "fr": "Valeur absolue d'une fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 341
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "ABS/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 344
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMB",
+   "kind": "factor",
+   "path": "COMB",
+   "status": "f",
+   "max": "**",
+   "fr": "Combinaison linéaire réelle de fonctions",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 346
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "COMB/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 350
+     }
+    },
+    {
+     "name": "COEF",
+     "kind": "simple",
+     "path": "COMB/COEF",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "fr": "Coefficient réel de la combinaison linéaire associée à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 351
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMB_C",
+   "kind": "factor",
+   "path": "COMB_C",
+   "status": "f",
+   "max": "**",
+   "fr": "Combinaison linéaire complexe de fonctions",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "COEF_R",
+      "COEF_C"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 357
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "COMB_C/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c",
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 362
+     }
+    },
+    {
+     "name": "COEF_R",
+     "kind": "simple",
+     "path": "COMB_C/COEF_R",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "Coefficient réel de la combinaison linéaire associée à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 363
+     }
+    },
+    {
+     "name": "COEF_C",
+     "kind": "simple",
+     "path": "COMB_C/COEF_C",
+     "status": "f",
+     "type": [
+      "C"
+     ],
+     "fr": "Coefficient complexe de la combinaison linéaire associée à la fonction",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 368
+     }
+    }
+   ]
+  },
+  {
+   "name": "MULT",
+   "kind": "factor",
+   "path": "MULT",
+   "status": "f",
+   "max": "**",
+   "fr": "Produit de fonctions réelles",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 374
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "MULT/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c",
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 378
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_comb",
+   "kind": "bloc",
+   "path": "[b_comb]",
+   "condition": "exists(\"COMB\") or exists(\"COMB_C\") or exists(\"REGR_POLYNOMIALE\") or exists(\"MULT\")",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 380
+   },
+   "keywords": [
+    {
+     "name": "LIST_PARA",
+     "kind": "simple",
+     "path": "LIST_PARA",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 382
+     }
+    }
+   ]
+  },
+  {
+   "name": "COMPOSE",
+   "kind": "factor",
+   "path": "COMPOSE",
+   "status": "f",
+   "fr": "Composition de deux fonctions FONC_RESU(FONC_PARA)",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 384
+   },
+   "keywords": [
+    {
+     "name": "FONC_RESU",
+     "kind": "simple",
+     "path": "COMPOSE/FONC_RESU",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 387
+     }
+    },
+    {
+     "name": "FONC_PARA",
+     "kind": "simple",
+     "path": "COMPOSE/FONC_PARA",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 388
+     }
+    }
+   ]
+  },
+  {
+   "name": "EXTRACTION",
+   "kind": "factor",
+   "path": "EXTRACTION",
+   "status": "f",
+   "fr": "Extraction sur une fonction complexe",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 390
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "EXTRACTION/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_c"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 393
+     }
+    },
+    {
+     "name": "PARTIE",
+     "kind": "simple",
+     "path": "EXTRACTION/PARTIE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "REEL",
+      "IMAG",
+      "MODULE",
+      "PHASE"
+     ],
+     "fr": "Partie à extraire",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 394
+     }
+    }
+   ]
+  },
+  {
+   "name": "ENVELOPPE",
+   "kind": "factor",
+   "path": "ENVELOPPE",
+   "status": "f",
+   "fr": "Enveloppe d une famille de fonctions",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 401
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "ENVELOPPE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 404
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "ENVELOPPE/CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "SUP",
+     "into": [
+      "SUP",
+      "INF"
+     ],
+     "fr": "Type de l enveloppe",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 405
+     }
+    }
+   ]
+  },
+  {
+   "name": "FRACTILE",
+   "kind": "factor",
+   "path": "FRACTILE",
+   "status": "f",
+   "fr": "Fractile d une famille de fonctions ou de nappes",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 409
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "FRACTILE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 412
+     }
+    },
+    {
+     "name": "FRACT",
+     "kind": "simple",
+     "path": "FRACTILE/FRACT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "val_max": 1.0,
+     "default": 1.0,
+     "fr": "Valeur du fractile",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 413
+     }
+    }
+   ]
+  },
+  {
+   "name": "MOYENNE",
+   "kind": "factor",
+   "path": "MOYENNE",
+   "status": "f",
+   "fr": "Moyenne d une famille de fonctions ou de nappes",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 417
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "MOYENNE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 420
+     }
+    }
+   ]
+  },
+  {
+   "name": "COHERENCE",
+   "kind": "factor",
+   "path": "COHERENCE",
+   "status": "f",
+   "fr": "Fonction de coherence",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 422
+   },
+   "keywords": [
+    {
+     "name": "NAPPE_1",
+     "kind": "simple",
+     "path": "COHERENCE/NAPPE_1",
+     "status": "o",
+     "type": [
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 425
+     }
+    },
+    {
+     "name": "NAPPE_2",
+     "kind": "simple",
+     "path": "COHERENCE/NAPPE_2",
+     "status": "o",
+     "type": [
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 426
+     }
+    },
+    {
+     "name": "FREQ_COUP",
+     "kind": "simple",
+     "path": "COHERENCE/FREQ_COUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": "fréquence de coupure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 427
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "COHERENCE/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "TOUT",
+     "into": [
+      "DUREE_PHASE_FORTE",
+      "TOUT"
+     ],
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 428
+     }
+    },
+    {
+     "name": "b_option_f",
+     "kind": "bloc",
+     "path": "COHERENCE/[b_option_f]",
+     "condition": "equal_to(\"OPTION\", 'DUREE_PHASE_FORTE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 435
+     },
+     "keywords": [
+      {
+       "name": "BORNE_INF",
+       "kind": "simple",
+       "path": "COHERENCE/BORNE_INF",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "val_max": 0.5,
+       "default": 0.05,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 437
+       }
+      },
+      {
+       "name": "BORNE_SUP",
+       "kind": "simple",
+       "path": "COHERENCE/BORNE_SUP",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.5,
+       "val_max": 1.0,
+       "default": 0.95,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 438
+       }
+      }
+     ]
+    },
+    {
+     "name": "NB_FREQ_LISS",
+     "kind": "simple",
+     "path": "COHERENCE/NB_FREQ_LISS",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 12,
+     "fr": "Nb de points pour le lissage par fenêtre de Hamming",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 440
+     }
+    }
+   ]
+  },
+  {
+   "name": "ASSE",
+   "kind": "factor",
+   "path": "ASSE",
+   "status": "f",
+   "fr": "Concatenation de fonctions",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 447
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "ASSE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "min": 2,
+     "max": 2,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 450
+     }
+    },
+    {
+     "name": "SURCHARGE",
+     "kind": "simple",
+     "path": "ASSE/SURCHARGE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "DROITE",
+     "into": [
+      "DROITE",
+      "GAUCHE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 451
+     }
+    }
+   ]
+  },
+  {
+   "name": "CORR_ACCE",
+   "kind": "factor",
+   "path": "CORR_ACCE",
+   "status": "f",
+   "fr": "Correction d un accelerogramme reel",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 453
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "CORR_ACCE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 456
+     }
+    },
+    {
+     "name": "METHODE",
+     "kind": "simple",
+     "path": "CORR_ACCE/METHODE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "FILTRAGE",
+      "POLYNOME"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 457
+     }
+    },
+    {
+     "name": "b_corr1",
+     "kind": "bloc",
+     "path": "CORR_ACCE/[b_corr1]",
+     "condition": "equal_to(\"METHODE\", 'FILTRAGE') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 458
+     },
+     "keywords": [
+      {
+       "name": "FREQ_FILTRE",
+       "kind": "simple",
+       "path": "CORR_ACCE/FREQ_FILTRE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "val_min": 0.0,
+       "default": 0.05,
+       "fr": "frequence du filtre temporel",
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 460
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_corr2",
+     "kind": "bloc",
+     "path": "CORR_ACCE/[b_corr2]",
+     "condition": "equal_to(\"METHODE\", 'POLYNOME') ",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 464
+     },
+     "keywords": [
+      {
+       "name": "CORR_DEPL",
+       "kind": "simple",
+       "path": "CORR_ACCE/CORR_DEPL",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/calc_fonction.py",
+        "line": 466
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "PUISSANCE",
+   "kind": "factor",
+   "path": "PUISSANCE",
+   "status": "f",
+   "fr": "Fonction élevée à une puissance",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 469
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "PUISSANCE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "nappe_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 472
+     }
+    },
+    {
+     "name": "EXPOSANT",
+     "kind": "simple",
+     "path": "PUISSANCE/EXPOSANT",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 1,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 473
+     }
+    }
+   ]
+  },
+  {
+   "name": "INVERSE",
+   "kind": "factor",
+   "path": "INVERSE",
+   "status": "f",
+   "fr": "Inverse d'une fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 475
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "INVERSE/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 476
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTEGRE_FREQ",
+   "kind": "factor",
+   "path": "INTEGRE_FREQ",
+   "status": "f",
+   "fr": "Integration frequentielle d un accelerogramme reel",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 478
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "INTEGRE_FREQ/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 481
+     }
+    },
+    {
+     "name": "NIVEAU",
+     "kind": "simple",
+     "path": "INTEGRE_FREQ/NIVEAU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 2,
+     "into": [
+      1,
+      2
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 482
+     }
+    },
+    {
+     "name": "FREQ_FILTRE",
+     "kind": "simple",
+     "path": "INTEGRE_FREQ/FREQ_FILTRE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 0.0,
+     "fr": "frequence du filtre temporel",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 483
+     }
+    },
+    {
+     "name": "FREQ_COUP",
+     "kind": "simple",
+     "path": "INTEGRE_FREQ/FREQ_COUP",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "fr": "frequence de coupure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 486
+     }
+    }
+   ]
+  },
+  {
+   "name": "DERIVE_FREQ",
+   "kind": "factor",
+   "path": "DERIVE_FREQ",
+   "status": "f",
+   "fr": "Integration frequentielle d un accelerogramme reel",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 488
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "DERIVE_FREQ/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 491
+     }
+    },
+    {
+     "name": "NIVEAU",
+     "kind": "simple",
+     "path": "DERIVE_FREQ/NIVEAU",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 2,
+     "into": [
+      1,
+      2
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 492
+     }
+    },
+    {
+     "name": "FREQ_COUP",
+     "kind": "simple",
+     "path": "DERIVE_FREQ/FREQ_COUP",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "val_min": 0.0,
+     "default": 50.0,
+     "fr": "frequence de coupure",
+     "source": {
+      "file": "code_aster/Cata/Commands/calc_fonction.py",
+      "line": 493
+     }
+    }
+   ]
+  },
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 497
+   }
+  },
+  {
+   "name": "NOM_RESU",
+   "kind": "simple",
+   "path": "NOM_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 498
+   }
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": "Type d'interpolation pour les abscisses et les ordonnées de la fonction ou bien pour le paramètre de la nappe.",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 499
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 509
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 510
+   }
+  },
+  {
+   "name": "NOM_PARA_FONC",
+   "kind": "simple",
+   "path": "NOM_PARA_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 511
+   }
+  },
+  {
+   "name": "INTERPOL_FONC",
+   "kind": "simple",
+   "path": "INTERPOL_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": "Type d'interpolation pour les abscisses et les ordonnées de la fonction",
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 512
+   }
+  },
+  {
+   "name": "PROL_DROITE_FONC",
+   "kind": "simple",
+   "path": "PROL_DROITE_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 519
+   }
+  },
+  {
+   "name": "PROL_GAUCHE_FONC",
+   "kind": "simple",
+   "path": "PROL_GAUCHE_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 520
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/calc_fonction.py",
+    "line": 521
+   }
+  }
+ ]
+}

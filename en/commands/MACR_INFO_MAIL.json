@@ -1,0 +1,345 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/macr_info_mail.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "MACR_INFO_MAIL",
+ "kind": "MACRO",
+ "fr": "Donner des informations sur un maillage.",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.macr_adap_mail_ops.macr_adap_mail_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "docu": "U7.03.02",
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/macr_info_mail.py",
+  "line": 24
+ },
+ "keywords": [
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 32
+   }
+  },
+  {
+   "name": "MAILLAGE",
+   "kind": "simple",
+   "path": "MAILLAGE",
+   "status": "o",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Maillage à analyser.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 36
+   }
+  },
+  {
+   "name": "MAILLAGE_FRONTIERE",
+   "kind": "simple",
+   "path": "MAILLAGE_FRONTIERE",
+   "status": "f",
+   "type": [
+    "maillage_sdaster"
+   ],
+   "fr": "Maillage de la frontiere à suivre",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "b_frontiere",
+   "kind": "bloc",
+   "path": "[b_frontiere]",
+   "condition": " exists(\"MAILLAGE_FRONTIERE\") ",
+   "fr": "Information complémentaire sur la frontière",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "GROUP_MA_FRONT",
+     "kind": "simple",
+     "path": "GROUP_MA_FRONT",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": "Groupes de mailles définissant la frontière",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_info_mail.py",
+      "line": 48
+     }
+    }
+   ]
+  },
+  {
+   "name": "NOMBRE",
+   "kind": "simple",
+   "path": "NOMBRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Nombre de noeuds et de mailles du maillage",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "QUALITE",
+   "kind": "simple",
+   "path": "QUALITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Qualité des mailles du maillage.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "CONNEXITE",
+   "kind": "simple",
+   "path": "CONNEXITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Connexité du maillage.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 81
+   }
+  },
+  {
+   "name": "TAILLE",
+   "kind": "simple",
+   "path": "TAILLE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Tailles des sous-domaines du maillage.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 87
+   }
+  },
+  {
+   "name": "INTERPENETRATION",
+   "kind": "simple",
+   "path": "INTERPENETRATION",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "NON",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Controle de la non interpénétration des mailles.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 97
+   }
+  },
+  {
+   "name": "PROP_CALCUL",
+   "kind": "simple",
+   "path": "PROP_CALCUL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Propriétés du maillage de calcul.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 107
+   }
+  },
+  {
+   "name": "DIAMETRE",
+   "kind": "simple",
+   "path": "DIAMETRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "OUI",
+   "into": [
+    "OUI",
+    "NON"
+   ],
+   "fr": "Diamètre des mailles du maillage.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 117
+   }
+  },
+  {
+   "name": "LANGUE",
+   "kind": "simple",
+   "path": "LANGUE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "FRANCAIS",
+   "into": [
+    "FRANCAIS",
+    "FRENCH",
+    "ANGLAIS",
+    "ENGLISH"
+   ],
+   "fr": "Langue des messages issus de HOMARD.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 128
+   }
+  },
+  {
+   "name": "ELEMENTS_ACCEPTES",
+   "kind": "simple",
+   "path": "ELEMENTS_ACCEPTES",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "HOMARD",
+   "into": [
+    "HOMARD",
+    "IGNORE_PYRA"
+   ],
+   "fr": "Acceptation des mailles dans le maillage initial",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 140
+   }
+  },
+  {
+   "name": "VERSION_HOMARD",
+   "kind": "simple",
+   "path": "VERSION_HOMARD",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "V11_10",
+   "into": [
+    "V11_10",
+    "V11_N",
+    "V11_N_PERSO"
+   ],
+   "fr": "Version de HOMARD",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 150
+   }
+  },
+  {
+   "name": "LOGICIEL",
+   "kind": "simple",
+   "path": "LOGICIEL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": "Logiciel pilotant HOMARD",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 160
+   }
+  },
+  {
+   "name": "b_unite",
+   "kind": "bloc",
+   "path": "[b_unite]",
+   "condition": "is_in(\"VERSION_HOMARD\", ('V11_N','V11_N_PERSO'))",
+   "fr": "Fichier supplementaire.",
+   "source": {
+    "file": "code_aster/Cata/Commands/macr_info_mail.py",
+    "line": 164
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "inout": "in",
+     "fr": "Unite logique a ajouter a HOMARD.Configuration",
+     "source": {
+      "file": "code_aster/Cata/Commands/macr_info_mail.py",
+      "line": 168
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,592 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_maillage.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_MAILLAGE",
+ "kind": "OPER",
+ "fr": "Définition d'un nouveau maillage à partir de macro-éléments",
+ "translation_upstream": null,
+ "op": 88,
+ "reentrant": "n",
+ "result_types": [
+  "super_mesh"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_maillage.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "DEFI_SUPER_MAILLE",
+   "kind": "factor",
+   "path": "DEFI_SUPER_MAILLE",
+   "status": "o",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_maillage.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "MACR_ELEM",
+     "kind": "simple",
+     "path": "DEFI_SUPER_MAILLE/MACR_ELEM",
+     "status": "o",
+     "type": [
+      "macr_elem_stat",
+      "macr_elem_dyna"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 35
+     }
+    },
+    {
+     "name": "SUPER_MAILLE",
+     "kind": "simple",
+     "path": "DEFI_SUPER_MAILLE/SUPER_MAILLE",
+     "status": "f",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 36
+     }
+    },
+    {
+     "name": "TRAN",
+     "kind": "simple",
+     "path": "DEFI_SUPER_MAILLE/TRAN",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 37
+     }
+    },
+    {
+     "name": "ANGL_NAUT",
+     "kind": "simple",
+     "path": "DEFI_SUPER_MAILLE/ANGL_NAUT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 3,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "b_angl_naut",
+     "kind": "bloc",
+     "path": "DEFI_SUPER_MAILLE/[b_angl_naut]",
+     "condition": "exists(\"ANGL_NAUT\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 39
+     },
+     "keywords": [
+      {
+       "name": "CENTRE",
+       "kind": "simple",
+       "path": "DEFI_SUPER_MAILLE/CENTRE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": 3,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 40
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "RECO_GLOBAL",
+   "kind": "factor",
+   "path": "RECO_GLOBAL",
+   "status": "f",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "SUPER_MAILLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_maillage.py",
+    "line": 43
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "RECO_GLOBAL/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "SUPER_MAILLE",
+     "kind": "simple",
+     "path": "RECO_GLOBAL/SUPER_MAILLE",
+     "status": "f",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "CRITERE",
+     "kind": "simple",
+     "path": "RECO_GLOBAL/CRITERE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "PRECISION",
+     "kind": "simple",
+     "path": "RECO_GLOBAL/PRECISION",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 49
+     }
+    }
+   ]
+  },
+  {
+   "name": "RECO_SUPER_MAILLE",
+   "kind": "factor",
+   "path": "RECO_SUPER_MAILLE",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_maillage.py",
+    "line": 51
+   },
+   "keywords": [
+    {
+     "name": "SUPER_MAILLE",
+     "kind": "simple",
+     "path": "RECO_SUPER_MAILLE/SUPER_MAILLE",
+     "status": "o",
+     "type": [
+      "ma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "GROUP_NO",
+     "kind": "simple",
+     "path": "RECO_SUPER_MAILLE/GROUP_NO",
+     "status": "o",
+     "type": [
+      "grno"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 55
+     }
+    },
+    {
+     "name": "OPTION",
+     "kind": "simple",
+     "path": "RECO_SUPER_MAILLE/OPTION",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "GEOMETRIQUE",
+     "into": [
+      "GEOMETRIQUE",
+      "NOEUD_A_NOEUD",
+      "INVERSE"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 56
+     }
+    },
+    {
+     "name": "geometrique",
+     "kind": "bloc",
+     "path": "RECO_SUPER_MAILLE/[geometrique]",
+     "condition": "equal_to(\"OPTION\", 'GEOMETRIQUE')",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 62
+     },
+     "keywords": [
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "RECO_SUPER_MAILLE/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 64
+       }
+      },
+      {
+       "name": "PRECISION",
+       "kind": "simple",
+       "path": "RECO_SUPER_MAILLE/PRECISION",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 0.001,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 65
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DEFI_NOEUD",
+   "kind": "factor",
+   "path": "DEFI_NOEUD",
+   "status": "c",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "NOEUD_INIT"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_maillage.py",
+    "line": 68
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "DEFI_NOEUD/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": "Renommage de tous les noeuds",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 72
+     }
+    },
+    {
+     "name": "NOEUD_INIT",
+     "kind": "simple",
+     "path": "DEFI_NOEUD/NOEUD_INIT",
+     "status": "f",
+     "type": [
+      "no"
+     ],
+     "fr": "Renommage d un seul noeud",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 73
+     }
+    },
+    {
+     "name": "b_tout",
+     "kind": "bloc",
+     "path": "DEFI_NOEUD/[b_tout]",
+     "condition": "exists(\"TOUT\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 74
+     },
+     "keywords": [
+      {
+       "name": "PREFIXE",
+       "kind": "simple",
+       "path": "DEFI_NOEUD/PREFIXE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 76
+       }
+      },
+      {
+       "name": "INDEX",
+       "kind": "simple",
+       "path": "DEFI_NOEUD/INDEX",
+       "status": "o",
+       "type": [
+        "I"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 77
+       }
+      }
+     ]
+    },
+    {
+     "name": "b_noeud_init",
+     "kind": "bloc",
+     "path": "DEFI_NOEUD/[b_noeud_init]",
+     "condition": "exists(\"NOEUD_INIT\")",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 79
+     },
+     "keywords": [
+      {
+       "name": "SUPER_MAILLE",
+       "kind": "simple",
+       "path": "DEFI_NOEUD/SUPER_MAILLE",
+       "status": "o",
+       "type": [
+        "ma"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 81
+       }
+      },
+      {
+       "name": "NOEUD_FIN",
+       "kind": "simple",
+       "path": "DEFI_NOEUD/NOEUD_FIN",
+       "status": "o",
+       "type": [
+        "no"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commands/defi_maillage.py",
+        "line": 82
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "DEFI_GROUP_NO",
+   "kind": "factor",
+   "path": "DEFI_GROUP_NO",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "TOUT",
+      "SUPER_MAILLE"
+     ]
+    },
+    {
+     "rule": "AU_MOINS_UN",
+     "keywords": [
+      "INDEX",
+      "GROUP_NO_FIN"
+     ]
+    },
+    {
+     "rule": "ENSEMBLE",
+     "keywords": [
+      "GROUP_NO_INIT",
+      "GROUP_NO_FIN"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_maillage.py",
+    "line": 85
+   },
+   "keywords": [
+    {
+     "name": "TOUT",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/TOUT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "OUI"
+     ],
+     "fr": "Création de plusieurs groupes de noeuds",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 94
+     }
+    },
+    {
+     "name": "SUPER_MAILLE",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/SUPER_MAILLE",
+     "status": "f",
+     "type": [
+      "ma"
+     ],
+     "fr": "Création de plusieurs groupes de noeuds",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 97
+     }
+    },
+    {
+     "name": "GROUP_NO_INIT",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/GROUP_NO_INIT",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": "Création d un seul groupe de noeuds",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 98
+     }
+    },
+    {
+     "name": "PREFIXE",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/PREFIXE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 99
+     }
+    },
+    {
+     "name": "INDEX",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/INDEX",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 100
+     }
+    },
+    {
+     "name": "GROUP_NO_FIN",
+     "kind": "simple",
+     "path": "DEFI_GROUP_NO/GROUP_NO_FIN",
+     "status": "f",
+     "type": [
+      "grno"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_maillage.py",
+      "line": 101
+     }
+    }
+   ]
+  }
+ ]
+}

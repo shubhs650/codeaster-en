@@ -1,0 +1,319 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "IMPR_MACR_ELEM",
+ "kind": "PROC",
+ "fr": "Impression d'une structure de données MACR_ELEM_DYNA au format IDEAS MISS3D",
+ "translation_upstream": null,
+ "op": 160,
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "MACR_ELEM_DYNA",
+   "kind": "simple",
+   "path": "MACR_ELEM_DYNA",
+   "status": "o",
+   "type": [
+    "macr_elem_dyna"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+    "line": 30
+   }
+  },
+  {
+   "name": "FORMAT",
+   "kind": "simple",
+   "path": "FORMAT",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "IDEAS",
+   "into": [
+    "MISS_3D",
+    "IDEAS"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+    "line": 31
+   }
+  },
+  {
+   "name": "b_ideas",
+   "kind": "bloc",
+   "path": "[b_ideas]",
+   "condition": "equal_to(\"FORMAT\", 'IDEAS')",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+    "line": 32
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 30,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 34
+     }
+    },
+    {
+     "name": "VERSION",
+     "kind": "simple",
+     "path": "VERSION",
+     "status": "f",
+     "type": [
+      "I"
+     ],
+     "default": 5,
+     "into": [
+      5
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 35
+     }
+    }
+   ]
+  },
+  {
+   "name": "b_miss_3d",
+   "kind": "bloc",
+   "path": "[b_miss_3d]",
+   "condition": "equal_to(\"FORMAT\", 'MISS_3D')",
+   "fr": null,
+   "rules": [
+    {
+     "rule": "EXCLUS",
+     "keywords": [
+      "AMOR_REDUIT",
+      "LIST_AMOR"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+    "line": 37
+   },
+   "keywords": [
+    {
+     "name": "UNITE",
+     "kind": "simple",
+     "path": "UNITE",
+     "status": "f",
+     "type": [
+      "UnitDefault"
+     ],
+     "default": 26,
+     "inout": "out",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "SOUS_TITRE",
+     "kind": "simple",
+     "path": "SOUS_TITRE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "AMOR_REDUIT",
+     "kind": "simple",
+     "path": "AMOR_REDUIT",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 42
+     }
+    },
+    {
+     "name": "LIST_AMOR",
+     "kind": "simple",
+     "path": "LIST_AMOR",
+     "status": "f",
+     "type": [
+      "listr8_sdaster"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 43
+     }
+    },
+    {
+     "name": "GROUP_MA_INTERF",
+     "kind": "simple",
+     "path": "GROUP_MA_INTERF",
+     "status": "o",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 44
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_STR",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_STR",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "GROUP_MA_FLU_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_FLU_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "GROUP_MA_SOL_SOL",
+     "kind": "simple",
+     "path": "GROUP_MA_SOL_SOL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 47
+     }
+    },
+    {
+     "name": "GROUP_MA_CONTROL",
+     "kind": "simple",
+     "path": "GROUP_MA_CONTROL",
+     "status": "f",
+     "type": [
+      "grma"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "FORMAT_R",
+     "kind": "simple",
+     "path": "FORMAT_R",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "1PE12.5",
+     "into": [
+      "1PE12.5",
+      "1PE16.9"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "IMPR_MODE_MECA",
+     "kind": "simple",
+     "path": "IMPR_MODE_MECA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "IMPR_MODE_STAT",
+     "kind": "simple",
+     "path": "IMPR_MODE_STAT",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "OUI",
+     "into": [
+      "OUI",
+      "NON"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/impr_macr_elem.py",
+      "line": 51
+     }
+    }
+   ]
+  }
+ ]
+}

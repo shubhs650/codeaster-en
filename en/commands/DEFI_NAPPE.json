@@ -1,0 +1,414 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/defi_nappe.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "DEFI_NAPPE",
+ "kind": "OPER",
+ "fr": "Définir une fonction réelle de deux variables réelles",
+ "translation_upstream": null,
+ "op": 4,
+ "reentrant": "n",
+ "result_types": [
+  "nappe_sdaster"
+ ],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [
+  {
+   "rule": "UN_PARMI",
+   "keywords": [
+    "FONCTION",
+    "DEFI_FONCTION"
+   ]
+  },
+  {
+   "rule": "EXCLUS",
+   "keywords": [
+    "FONCTION",
+    "NOM_PARA_FONC"
+   ]
+  },
+  {
+   "rule": "ENSEMBLE",
+   "keywords": [
+    "NOM_PARA_FONC",
+    "DEFI_FONCTION"
+   ]
+  }
+ ],
+ "source": {
+  "file": "code_aster/Cata/Commands/defi_nappe.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "NOM_PARA",
+   "kind": "simple",
+   "path": "NOM_PARA",
+   "status": "o",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 37
+   }
+  },
+  {
+   "name": "NOM_RESU",
+   "kind": "simple",
+   "path": "NOM_RESU",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "TOUTRESU",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 38
+   }
+  },
+  {
+   "name": "PARA",
+   "kind": "simple",
+   "path": "PARA",
+   "status": "o",
+   "type": [
+    "R"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 39
+   }
+  },
+  {
+   "name": "FONCTION",
+   "kind": "simple",
+   "path": "FONCTION",
+   "status": "f",
+   "type": [
+    "fonction_sdaster"
+   ],
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 40
+   }
+  },
+  {
+   "name": "NOM_PARA_FONC",
+   "kind": "simple",
+   "path": "NOM_PARA_FONC",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "DX",
+    "DY",
+    "DZ",
+    "DRX",
+    "DRY",
+    "DRZ",
+    "DTAN",
+    "TEMP",
+    "TSEC",
+    "INST",
+    "X",
+    "Y",
+    "Z",
+    "EPSI",
+    "META",
+    "FREQ",
+    "PULS",
+    "DSP",
+    "AMOR",
+    "ABSC",
+    "SIGM",
+    "HYDR",
+    "SECH",
+    "PORO",
+    "SAT",
+    "IRRA",
+    "PGAZ",
+    "PCAP",
+    "PLIQ",
+    "PVAP",
+    "PAD",
+    "VITE",
+    "ENDO",
+    "NORM",
+    "EPAIS",
+    "EXCENT",
+    "NEUT1",
+    "NEUT2",
+    "NEUT3",
+    "NEUT4",
+    "XF",
+    "YF",
+    "ZF",
+    "NUME_ORDRE"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 41
+   }
+  },
+  {
+   "name": "DEFI_FONCTION",
+   "kind": "factor",
+   "path": "DEFI_FONCTION",
+   "status": "f",
+   "max": "**",
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 42
+   },
+   "keywords": [
+    {
+     "name": "VALE",
+     "kind": "simple",
+     "path": "DEFI_FONCTION/VALE",
+     "status": "o",
+     "type": [
+      "R"
+     ],
+     "max": "**",
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_nappe.py",
+      "line": 45
+     }
+    },
+    {
+     "name": "INTERPOL",
+     "kind": "simple",
+     "path": "DEFI_FONCTION/INTERPOL",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "default": "LIN",
+     "into": [
+      "LIN",
+      "LOG"
+     ],
+     "fr": "Type d'interpolation pour les abscisses et les ordonnées de la fonction.",
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_nappe.py",
+      "line": 46
+     }
+    },
+    {
+     "name": "PROL_DROITE",
+     "kind": "simple",
+     "path": "DEFI_FONCTION/PROL_DROITE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_nappe.py",
+      "line": 54
+     }
+    },
+    {
+     "name": "PROL_GAUCHE",
+     "kind": "simple",
+     "path": "DEFI_FONCTION/PROL_GAUCHE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "EXCLU",
+     "into": [
+      "CONSTANT",
+      "LINEAIRE",
+      "EXCLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/defi_nappe.py",
+      "line": 57
+     }
+    }
+   ]
+  },
+  {
+   "name": "INTERPOL",
+   "kind": "simple",
+   "path": "INTERPOL",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "max": 2,
+   "default": "LIN",
+   "into": [
+    "LIN",
+    "LOG"
+   ],
+   "fr": "Type d'interpolation pour le paramètre de la nappe",
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 61
+   }
+  },
+  {
+   "name": "PROL_DROITE",
+   "kind": "simple",
+   "path": "PROL_DROITE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 69
+   }
+  },
+  {
+   "name": "PROL_GAUCHE",
+   "kind": "simple",
+   "path": "PROL_GAUCHE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "default": "EXCLU",
+   "into": [
+    "CONSTANT",
+    "LINEAIRE",
+    "EXCLU"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 70
+   }
+  },
+  {
+   "name": "INFO",
+   "kind": "simple",
+   "path": "INFO",
+   "status": "f",
+   "type": [
+    "I"
+   ],
+   "default": 1,
+   "into": [
+    1,
+    2
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 71
+   }
+  },
+  {
+   "name": "VERIF",
+   "kind": "simple",
+   "path": "VERIF",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "into": [
+    "CROISSANT"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 72
+   }
+  },
+  {
+   "name": "TITRE",
+   "kind": "simple",
+   "path": "TITRE",
+   "status": "f",
+   "type": [
+    "TXM"
+   ],
+   "fr": null,
+   "source": {
+    "file": "code_aster/Cata/Commands/defi_nappe.py",
+    "line": 73
+   }
+  }
+ ]
+}

@@ -1,0 +1,520 @@
+{
+ "_generated_from": {
+  "upstream": "17.4.26",
+  "upstream_commit": "5d2a06d2a4afe589468f96617080e7aabac3e4f2",
+  "file": "code_aster/Cata/Commands/test_fonction.py",
+  "extractor": "codeaster_en.extract.catalog",
+  "extractor_version": "1"
+ },
+ "schema_version": 1,
+ "command": "TEST_FONCTION",
+ "kind": "MACRO",
+ "fr": "Extraction d'une valeur numérique ou d'un attribut de fonction pour comparaison à une valeur de référence",
+ "translation_upstream": null,
+ "op": "code_aster.MacroCommands.test_fonction_ops.test_fonction_ops",
+ "reentrant": null,
+ "result_types": [],
+ "result_type_depends_on_keywords": false,
+ "has_compat_syntax": false,
+ "rules": [],
+ "source": {
+  "file": "code_aster/Cata/Commands/test_fonction.py",
+  "line": 26
+ },
+ "keywords": [
+  {
+   "name": "VALEUR",
+   "kind": "factor",
+   "path": "VALEUR",
+   "status": "f",
+   "max": "**",
+   "fr": "Tester la valeur d une fonction ou d une nappe",
+   "rules": [
+    {
+     "rule": "UN_PARMI",
+     "keywords": [
+      "VALE_PARA",
+      "INTERVALLE"
+     ]
+    }
+   ],
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fonction.py",
+    "line": 33
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "VALEUR/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 38
+     }
+    },
+    {
+     "name": "NOM_PARA",
+     "kind": "simple",
+     "path": "VALEUR/NOM_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "max": 2,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 39
+     }
+    },
+    {
+     "name": "VALE_PARA",
+     "kind": "simple",
+     "path": "VALEUR/VALE_PARA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "max": 2,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 40
+     }
+    },
+    {
+     "name": "INTERVALLE",
+     "kind": "simple",
+     "path": "VALEUR/INTERVALLE",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "min": 2,
+     "max": 2,
+     "validators": [
+      {
+       "name": "NoRepeat",
+       "args": []
+      }
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 41
+     }
+    },
+    {
+     "name": "b_values",
+     "kind": "bloc",
+     "path": "VALEUR/[b_values]",
+     "condition": "True",
+     "fr": null,
+     "rules": [
+      {
+       "rule": "UN_PARMI",
+       "keywords": [
+        "VALE_CALC",
+        "VALE_CALC_C"
+       ]
+      }
+     ],
+     "source": {
+      "file": "code_aster/Cata/Commons/c_test_reference.py",
+      "line": 92
+     },
+     "keywords": [
+      {
+       "name": "VALE_CALC",
+       "kind": "simple",
+       "path": "VALEUR/VALE_CALC",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 94
+       }
+      },
+      {
+       "name": "b_ordre_grandeur",
+       "kind": "bloc",
+       "path": "VALEUR/[b_ordre_grandeur]",
+       "condition": "exists(\"VALE_CALC\") and abs(VALE_CALC if type(VALE_CALC) not in (list, tuple) else VALE_CALC[0]) < 1.e-16",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 96
+       },
+       "keywords": [
+        {
+         "name": "ORDRE_GRANDEUR",
+         "kind": "simple",
+         "path": "VALEUR/ORDRE_GRANDEUR",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_test_reference.py",
+          "line": 98
+         }
+        }
+       ]
+      },
+      {
+       "name": "LEGENDE",
+       "kind": "simple",
+       "path": "VALEUR/LEGENDE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 100
+       }
+      },
+      {
+       "name": "VALE_CALC_C",
+       "kind": "simple",
+       "path": "VALEUR/VALE_CALC_C",
+       "status": "f",
+       "type": [
+        "C"
+       ],
+       "max": "**",
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 57
+       }
+      },
+      {
+       "name": "VALE_ABS",
+       "kind": "simple",
+       "path": "VALEUR/VALE_ABS",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "NON",
+       "into": [
+        "OUI",
+        "NON"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 67
+       }
+      },
+      {
+       "name": "TYPE_TEST",
+       "kind": "simple",
+       "path": "VALEUR/TYPE_TEST",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "SOMM_ABS",
+        "SOMM",
+        "MAX",
+        "MIN"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 69
+       }
+      },
+      {
+       "name": "TOLE_MACHINE",
+       "kind": "simple",
+       "path": "VALEUR/TOLE_MACHINE",
+       "status": "f",
+       "type": [
+        "R"
+       ],
+       "default": 1e-06,
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 71
+       }
+      },
+      {
+       "name": "CRITERE",
+       "kind": "simple",
+       "path": "VALEUR/CRITERE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "default": "RELATIF",
+       "into": [
+        "RELATIF",
+        "ABSOLU"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 72
+       }
+      },
+      {
+       "name": "b_reference",
+       "kind": "bloc",
+       "path": "VALEUR/[b_reference]",
+       "condition": "exists(\"REFERENCE\")",
+       "fr": null,
+       "rules": [
+        {
+         "rule": "UN_PARMI",
+         "keywords": [
+          "VALE_REFE",
+          "VALE_REFE_C"
+         ]
+        }
+       ],
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 80
+       },
+       "keywords": [
+        {
+         "name": "VALE_REFE",
+         "kind": "simple",
+         "path": "VALEUR/VALE_REFE",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_test_reference.py",
+          "line": 82
+         }
+        },
+        {
+         "name": "PRECISION",
+         "kind": "simple",
+         "path": "VALEUR/PRECISION",
+         "status": "f",
+         "type": [
+          "R"
+         ],
+         "default": 0.001,
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_test_reference.py",
+          "line": 83
+         }
+        },
+        {
+         "name": "VALE_REFE_C",
+         "kind": "simple",
+         "path": "VALEUR/VALE_REFE_C",
+         "status": "f",
+         "type": [
+          "C"
+         ],
+         "max": "**",
+         "fr": null,
+         "source": {
+          "file": "code_aster/Cata/Commons/c_test_reference.py",
+          "line": 58
+         }
+        }
+       ]
+      },
+      {
+       "name": "REFERENCE",
+       "kind": "simple",
+       "path": "VALEUR/REFERENCE",
+       "status": "f",
+       "type": [
+        "TXM"
+       ],
+       "into": [
+        "ANALYTIQUE",
+        "SOURCE_EXTERNE",
+        "AUTRE_ASTER",
+        "NON_DEFINI"
+       ],
+       "fr": null,
+       "source": {
+        "file": "code_aster/Cata/Commons/c_test_reference.py",
+        "line": 86
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "ATTRIBUT",
+   "kind": "factor",
+   "path": "ATTRIBUT",
+   "status": "f",
+   "max": "**",
+   "fr": "Tester la valeur d un attribut d une fonction ou d''une nappe",
+   "source": {
+    "file": "code_aster/Cata/Commands/test_fonction.py",
+    "line": 44
+   },
+   "keywords": [
+    {
+     "name": "FONCTION",
+     "kind": "simple",
+     "path": "ATTRIBUT/FONCTION",
+     "status": "o",
+     "type": [
+      "fonction_sdaster",
+      "fonction_c",
+      "nappe_sdaster",
+      "formule"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 48
+     }
+    },
+    {
+     "name": "PARA",
+     "kind": "simple",
+     "path": "ATTRIBUT/PARA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 49
+     }
+    },
+    {
+     "name": "CRIT_PARA",
+     "kind": "simple",
+     "path": "ATTRIBUT/CRIT_PARA",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "default": "RELATIF",
+     "into": [
+      "RELATIF",
+      "ABSOLU"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 50
+     }
+    },
+    {
+     "name": "PREC_PARA",
+     "kind": "simple",
+     "path": "ATTRIBUT/PREC_PARA",
+     "status": "f",
+     "type": [
+      "R"
+     ],
+     "default": 0.001,
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 51
+     }
+    },
+    {
+     "name": "ATTR",
+     "kind": "simple",
+     "path": "ATTRIBUT/ATTR",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "NOM_PARA",
+      "NOM_RESU",
+      "PROL_DROITE",
+      "PROL_GAUCHE",
+      "INTERPOL",
+      "PROL_GAUCHE_FONC",
+      "PROL_DROITE_FONC",
+      "INTERPOL_FONC",
+      "NOM_PARA_FONC"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 52
+     }
+    },
+    {
+     "name": "ATTR_REFE",
+     "kind": "simple",
+     "path": "ATTRIBUT/ATTR_REFE",
+     "status": "o",
+     "type": [
+      "TXM"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 67
+     }
+    },
+    {
+     "name": "REFERENCE",
+     "kind": "simple",
+     "path": "ATTRIBUT/REFERENCE",
+     "status": "f",
+     "type": [
+      "TXM"
+     ],
+     "into": [
+      "ANALYTIQUE",
+      "SOURCE_EXTERNE",
+      "AUTRE_ASTER"
+     ],
+     "fr": null,
+     "source": {
+      "file": "code_aster/Cata/Commands/test_fonction.py",
+      "line": 68
+     }
+    }
+   ]
+  }
+ ]
+}
