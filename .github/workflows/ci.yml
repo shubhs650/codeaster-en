@@ -21,8 +21,12 @@ jobs:
         run: |
           want="$(grep -v '^#' UPSTREAM_VERSION | head -1 | tr -d '[:space:]')"
           have="$(git -C upstream rev-parse HEAD)"
-          git -C upstream fetch --depth 1 origin "refs/tags/${want}:refs/tags/${want}"
-          tag="$(git -C upstream rev-parse "${want}^{commit}")"
+          # ls-remote, not a shallow fetch: fetching into the shallow submodule
+          # failed with "shallow file has changed since we read it".
+          # "^{}" is the commit an annotated tag points to; fall back for a lightweight tag.
+          tag="$(git -C upstream ls-remote origin "refs/tags/${want}^{}" | cut -f1)"
+          [ -n "${tag}" ] || tag="$(git -C upstream ls-remote origin "refs/tags/${want}" | cut -f1)"
+          [ -n "${tag}" ] || { echo "tag ${want} not found in upstream remote"; exit 1; }
           echo "UPSTREAM_VERSION=${want} -> ${tag}; submodule at ${have}"
           test "${have}" = "${tag}"
 
