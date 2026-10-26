@@ -14,25 +14,28 @@ Needs owner: …
 
 ---
 
-## 2026-10-23 — 0.6 glossary seed (partial: GLOBAL_DICT pending) — agent
-Done: `en/glossary.yaml` 250 → 320 entries, all `proposed`. Added every Tier 1/2 identifier in
-`docs/COMMAND-SET.md` that had no entry (5 commands, 51 keywords, 13 values, 1 concept), each with
-a `source` (upstream catalog file:line at 17.4.26) and English drafted from the catalog `fr=`
-strings and allowed values; uncertain wording marked TODO(verify). `BANDE` broadened from
-"frequency band" to "band" (it is also a DEFI_GROUP geometric option). New
-`tests/test_glossary_coverage.py`: Tier 1/2 identifiers all have entries; `source` lines resolve.
-Optional `source` field documented in ARCHITECTURE §4.1. Narrowed aliases_en that are everyday
-English words (reference, frame, link, connection, filename, affect, loading, criteria,
-excitation, characteristics, instant) to phrases, so the forbidden-synonym scan (PR #6) does
-not flag correct prose.
-Open: AsterStudy `GLOBAL_DICT` merge — file not attached, gitlab.com unreachable. Acceptance
-count (≥ 150) already met without it.
-Decisions: none. Message-family names and the out-of-scope items in COMMAND-SET (CALC_G,
-MISS3D, HHO, …) deliberately not added. Findings vs COMMAND-SET: `SPHERE`/`BANDE` are values
-of `CREA_GROUP_MA/NO` `OPTION`, not keywords; `MASS_EFFE_UN` is a `CRIT_EXTR` value.
-Needs owner: attach AsterStudy GLOBAL_DICT; engineer review of new English (PR labelled
-`needs-engineer-review`), esp. AFFE_VARC/NOM_VARC ("external state variable" vs upstream's
-"command variable"), PM_PB, K_T_D_N.
+## 2026-10-26 — 0.6 glossary seed — agent
+Done: `en/glossary.yaml` 250 → 353 entries, all `proposed`. (1) Every Tier 1/2 identifier in
+`docs/COMMAND-SET.md` that had no entry (70: 5 commands, 51 keywords, 13 values, 1 concept), each
+with `source` (upstream catalog file:line at 17.4.26), English drafted from the catalog `fr=`
+strings and allowed values; uncertain wording marked TODO(verify). (2) AsterStudy `GLOBAL_DICT`
+(82 keys; Copyright 2016 EDF R&D, GPL-3; copy from github.com/simvia-tech/vs-code-aster, fetched
+2026-10-26, sha256 in the glossary section header): 49 keys already had entries — our `en` kept,
+AsterStudy's English recorded verbatim in a new `asterstudy` field; 33 new entries added, English
+normalized to CLAUDE.md §5 style. `BANDE` broadened from "frequency band" to "band" (also a
+DEFI_GROUP geometric option). Narrowed aliases_en that are everyday English words (reference,
+frame, link, connection, filename, affect, loading, criteria, excitation, characteristics,
+instant) so the forbidden-synonym scan does not flag correct prose. New
+`tests/test_glossary_coverage.py` (Tier 1/2 coverage; `source` lines resolve). `source` and
+`asterstudy` fields documented in ARCHITECTURE §4.1.
+Open: none for 0.6.
+Decisions: none. Not added: message-family names (task 1.3) and COMMAND-SET's out-of-scope items.
+Findings: `SPHERE`/`BANDE` are values of `CREA_GROUP_MA/NO` `OPTION`; `MASS_EFFE_UN` is a
+`CRIT_EXTR` value; GLOBAL_DICT's `SANS_MAILLE`/`SANS_NOEUD` are absent from 17.4.26; the owner's
+upload was a corporate-proxy block page, so the file was fetched from the URL it named.
+Needs owner: engineer review (PR labelled `needs-engineer-review`): AFFE_VARC/NOM_VARC ("external
+state variable" vs upstream's "command variable"), PM_PB, K_T_D_N, VITESSE, CRITERE, and the
+GLOBAL_DICT disagreements (UNITE "Filename" vs our "logical unit", PESANTEUR, PRECISION, INST).
 
 ## 2026-10-23 — 1.5 inventory report — agent
 Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) writes §7 of

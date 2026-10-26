@@ -74,6 +74,7 @@ The controlled vocabulary. One entry per French identifier or term:
 ```
 
 Optional `source` records provenance as `<path under upstream/>:<line>` where the identifier is defined in the pinned catalog (added from task 0.6 on; `tests/test_glossary_coverage.py` checks it resolves).
+Optional `asterstudy` holds AsterStudy's `GLOBAL_DICT` English verbatim for entries it also defines (traceability only; `en` is authoritative).
 
 Rules: a `fr` key appears once; `en` is the only permitted translation; `aliases_en` are forbidden synonyms. Seeded from AsterStudy's dictionary plus the terms in `docs/COMMAND-SET.md`; grows by PR. The validator greps every English artefact for forbidden synonyms and for French terms that have no entry.
 

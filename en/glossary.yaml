@@ -4,8 +4,9 @@
 # kind: command | keyword | value | concept | term | abbrev
 # status: proposed | machine | reviewed
 #
-# Seeded 2026-10-22 from engineering usage. To be merged with AsterStudy's GLOBAL_DICT
-# (Copyright 2016 EDF R&D, GPL-3; gitlab.com/salomemeca/modules/salome-asterstudy) in task 0.6.
+# Seeded 2026-10-22 from engineering usage; merged with AsterStudy's GLOBAL_DICT in task 0.6
+# (Copyright 2016 EDF R&D, GPL-3; see the GLOBAL_DICT section below). Entries GLOBAL_DICT also
+# defines carry `asterstudy:` with its English verbatim; our `en` stays authoritative.
 # Everything here is `proposed` until an engineer reviews it.
 
 # ---------- abbreviations that appear inside keyword names ----------
@@ -26,12 +27,12 @@
 - {fr: ELNO,  en: at element nodes,   kind: abbrev, note: "élément, noeuds: extrapolated to nodes, not averaged between elements.", status: proposed}
 - {fr: NOEU,  en: at nodes (averaged), kind: abbrev, note: "noeuds: nodal field averaged across adjoining elements.", status: proposed}
 - {fr: MECA,  en: mechanical,         kind: abbrev, note: "mécanique.", status: proposed}
-- {fr: THER,  en: thermal,            kind: abbrev, note: "thermique.", status: proposed}
-- {fr: RESU,  en: result,             kind: abbrev, note: "résultat. IMPR_RESU, TEST_RESU, RESULTAT keyword.", status: proposed}
+- {fr: THER,  en: thermal,            kind: abbrev, note: "thermique.", asterstudy: "Thermic", status: proposed}
+- {fr: RESU,  en: result,             kind: abbrev, note: "résultat. IMPR_RESU, TEST_RESU, RESULTAT keyword.", asterstudy: "Results", status: proposed}
 - {fr: IMPR,  en: write (print),      kind: abbrev, note: "imprimer: write to file. IMPR_RESU, IMPR_TABLE.", aliases_en: [impress], status: proposed}
 - {fr: LIRE,  en: read,               kind: abbrev, note: "lire. LIRE_MAILLAGE.", status: proposed}
 - {fr: DEFI,  en: define,             kind: abbrev, note: "définir. DEFI_MATERIAU, DEFI_FONCTION, DEFI_GROUP.", status: proposed}
-- {fr: AFFE,  en: assign,             kind: abbrev, note: "affecter. AFFE_MODELE, AFFE_MATERIAU, AFFE keyword block.", aliases_en: [affectation], status: proposed}
+- {fr: AFFE,  en: assign,             kind: abbrev, note: "affecter. AFFE_MODELE, AFFE_MATERIAU, AFFE keyword block.", aliases_en: [affectation], asterstudy: "Assignement", status: proposed}
 - {fr: CALC,  en: compute,            kind: abbrev, note: "calculer. CALC_CHAMP, CALC_MODES.", status: proposed}
 - {fr: POST,  en: post-process,       kind: abbrev, note: "POST_RELEVE_T, POST_ELEM.", status: proposed}
 - {fr: CREA,  en: create,             kind: abbrev, note: "créer. CREA_CHAMP, CREA_MAILLAGE.", status: proposed}
@@ -131,35 +132,35 @@
 - {fr: DEFI_CONTACT,     en: define contact,                   kind: command, status: proposed}
 
 # ---------- keywords (most frequent) ----------
-- {fr: MAILLAGE,      en: mesh,                      kind: keyword, status: proposed}
-- {fr: MODELE,        en: model,                     kind: keyword, status: proposed}
-- {fr: MATER,         en: material,                  kind: keyword, status: proposed}
-- {fr: CHAM_MATER,    en: material field,            kind: keyword, status: proposed}
-- {fr: CARA_ELEM,     en: element properties,        kind: keyword, status: proposed}
-- {fr: CHARGE,        en: load,                      kind: keyword, status: proposed}
-- {fr: EXCIT,         en: applied loads,             kind: keyword, note: "List of (CHARGE, FONC_MULT) pairs in a solve command.", aliases_en: [excitation list], status: proposed}
-- {fr: FONC_MULT,     en: load multiplier function,  kind: keyword, status: proposed}
-- {fr: RESULTAT,      en: result,                    kind: keyword, status: proposed}
+- {fr: MAILLAGE,      en: mesh,                      kind: keyword, asterstudy: "Mesh", status: proposed}
+- {fr: MODELE,        en: model,                     kind: keyword, asterstudy: "Model", status: proposed}
+- {fr: MATER,         en: material,                  kind: keyword, asterstudy: "Material", status: proposed}
+- {fr: CHAM_MATER,    en: material field,            kind: keyword, asterstudy: "Material field", status: proposed}
+- {fr: CARA_ELEM,     en: element properties,        kind: keyword, asterstudy: "Structural element characteristic", status: proposed}
+- {fr: CHARGE,        en: load,                      kind: keyword, asterstudy: "Load", status: proposed}
+- {fr: EXCIT,         en: applied loads,             kind: keyword, note: "List of (CHARGE, FONC_MULT) pairs in a solve command.", aliases_en: [excitation list], asterstudy: "Loads", status: proposed}
+- {fr: FONC_MULT,     en: load multiplier function,  kind: keyword, asterstudy: "Multiplier function", status: proposed}
+- {fr: RESULTAT,      en: result,                    kind: keyword, asterstudy: "Result", status: proposed}
 - {fr: NOM_CHAM,      en: field name,                kind: keyword, status: proposed}
 - {fr: NOM_CMP,       en: component name,            kind: keyword, status: proposed}
-- {fr: TOUT,          en: all (entire mesh),         kind: keyword, status: proposed}
-- {fr: GROUP_MA,      en: element group,             kind: keyword, aliases_en: [cell group], status: proposed}
-- {fr: GROUP_NO,      en: node group,                kind: keyword, status: proposed}
-- {fr: PHENOMENE,     en: physics,                   kind: keyword, status: proposed}
-- {fr: MODELISATION,  en: modeling type,             kind: keyword, status: proposed}
+- {fr: TOUT,          en: all (entire mesh),         kind: keyword, asterstudy: "All", status: proposed}
+- {fr: GROUP_MA,      en: element group,             kind: keyword, aliases_en: [cell group], asterstudy: "Group of element", status: proposed}
+- {fr: GROUP_NO,      en: node group,                kind: keyword, asterstudy: "Group of node", status: proposed}
+- {fr: PHENOMENE,     en: physics,                   kind: keyword, asterstudy: "Phenomenon", status: proposed}
+- {fr: MODELISATION,  en: modeling type,             kind: keyword, asterstudy: "Modelisation", status: proposed}
 - {fr: EPAIS,         en: thickness,                 kind: keyword, status: proposed}
 - {fr: COQUE_NCOU,    en: number of shell layers,    kind: keyword, status: proposed}
 - {fr: ANGL_REP,      en: local-axis angles,         kind: keyword, status: proposed}
 - {fr: VECTEUR,       en: reference vector (local x), kind: keyword, status: proposed}
-- {fr: DDL_IMPO,      en: imposed DOF,               kind: keyword, status: proposed}
+- {fr: DDL_IMPO,      en: imposed DOF,               kind: keyword, asterstudy: "Enforce DOF", status: proposed}
 - {fr: MECA_IMPO,     en: imposed DOF (kinematic),   kind: keyword, status: proposed}
 - {fr: FACE_IMPO,     en: imposed DOF on faces,      kind: keyword, status: proposed}
 - {fr: PRES_REP,      en: distributed pressure,      kind: keyword, note: "Pression répartie. Positive = pushing on the face (requires outward normals).", status: proposed}
 - {fr: FORCE_FACE,    en: force per unit area on faces, kind: keyword, status: proposed}
 - {fr: FORCE_ARETE,   en: force per unit length on edges, kind: keyword, status: proposed}
 - {fr: FORCE_NODALE,  en: nodal force,               kind: keyword, status: proposed}
-- {fr: PESANTEUR,     en: gravity,                   kind: keyword, status: proposed}
-- {fr: ROTATION,      en: rotation (centrifugal load), kind: keyword, status: proposed}
+- {fr: PESANTEUR,     en: gravity,                   kind: keyword, asterstudy: "Gravitational acceleration", status: proposed}
+- {fr: ROTATION,      en: rotation (centrifugal load), kind: keyword, asterstudy: "Rotation", status: proposed}
 - {fr: LIAISON_DDL,   en: linear DOF relation,       kind: keyword, status: proposed}
 - {fr: LIAISON_UNIF,  en: uniform DOF coupling,      kind: keyword, status: proposed}
 - {fr: LIAISON_SOLIDE, en: rigid-body coupling,      kind: keyword, status: proposed}
@@ -167,9 +168,9 @@
 - {fr: LIAISON_RBE3,  en: RBE3 distributed coupling, kind: keyword, status: proposed}
 - {fr: ORIE_PEAU,     en: orient boundary elements outward, kind: keyword, status: proposed}
 - {fr: ORIE_NORM_COQUE, en: orient shell normals,    kind: keyword, status: proposed}
-- {fr: SOLVEUR,       en: linear solver,             kind: keyword, status: proposed}
-- {fr: METHODE,       en: method,                    kind: keyword, status: proposed}
-- {fr: OPTION,        en: option,                    kind: keyword, status: proposed}
+- {fr: SOLVEUR,       en: linear solver,             kind: keyword, asterstudy: "Solver", status: proposed}
+- {fr: METHODE,       en: method,                    kind: keyword, asterstudy: "Method", status: proposed}
+- {fr: OPTION,        en: option,                    kind: keyword, asterstudy: "Option", status: proposed}
 - {fr: CONTRAINTE,    en: stress fields,             kind: keyword, note: "In CALC_CHAMP: which stress fields to derive.", status: proposed}
 - {fr: CRITERES,      en: equivalent-stress fields,  kind: keyword, note: "In CALC_CHAMP: SIEQ_* (von Mises, Tresca, principals).", aliases_en: [criteria fields], status: proposed}
 - {fr: DEFORMATION,   en: strain fields,             kind: keyword, status: proposed}
@@ -180,37 +181,37 @@
 - {fr: RESULTANTE,    en: resultant components,      kind: keyword, status: proposed}
 - {fr: MOMENT,        en: moment components,         kind: keyword, status: proposed}
 - {fr: POINT,         en: reference point,           kind: keyword, status: proposed}
-- {fr: UNITE,         en: logical unit,              kind: keyword, aliases_en: [unit number], status: proposed}
-- {fr: FORMAT,        en: file format,               kind: keyword, status: proposed}
-- {fr: INFO,          en: verbosity,                 kind: keyword, status: proposed}
-- {fr: TITRE,         en: title,                     kind: keyword, status: proposed}
-- {fr: VALE,          en: value(s),                  kind: keyword, status: proposed}
+- {fr: UNITE,         en: logical unit,              kind: keyword, aliases_en: [unit number], asterstudy: "Filename", status: proposed}
+- {fr: FORMAT,        en: file format,               kind: keyword, asterstudy: "Format", status: proposed}
+- {fr: INFO,          en: verbosity,                 kind: keyword, asterstudy: "Verbosity", status: proposed}
+- {fr: TITRE,         en: title,                     kind: keyword, asterstudy: "Title", status: proposed}
+- {fr: VALE,          en: value(s),                  kind: keyword, asterstudy: "Value", status: proposed}
 - {fr: VALE_CALC,     en: computed value (regression), kind: keyword, status: proposed}
 - {fr: VALE_REFE,     en: reference value,           kind: keyword, status: proposed}
-- {fr: PRECISION,     en: tolerance,                 kind: keyword, status: proposed}
+- {fr: PRECISION,     en: tolerance,                 kind: keyword, asterstudy: "Precision", status: proposed}
 - {fr: REFERENCE,     en: reference type,            kind: keyword, note: "'ANALYTIQUE' | 'SOURCE_EXTERNE' | 'NON_DEFINI' | 'AUTRE_ASTER'.", status: proposed}
-- {fr: NOM_PARA,      en: parameter name,            kind: keyword, status: proposed}
-- {fr: PROL_DROITE,   en: right extrapolation,       kind: keyword, status: proposed}
-- {fr: PROL_GAUCHE,   en: left extrapolation,        kind: keyword, status: proposed}
-- {fr: INTERPOL,      en: interpolation,             kind: keyword, status: proposed}
+- {fr: NOM_PARA,      en: parameter name,            kind: keyword, asterstudy: "Parameter name", status: proposed}
+- {fr: PROL_DROITE,   en: right extrapolation,       kind: keyword, asterstudy: "Right extension", status: proposed}
+- {fr: PROL_GAUCHE,   en: left extrapolation,        kind: keyword, asterstudy: "Left extension", status: proposed}
+- {fr: INTERPOL,      en: interpolation,             kind: keyword, asterstudy: "Interpolation", status: proposed}
 - {fr: CALC_FREQ,     en: frequency search settings, kind: keyword, status: proposed}
 - {fr: NMAX_FREQ,     en: number of frequencies,     kind: keyword, status: proposed}
 - {fr: FREQ,          en: frequency,                 kind: keyword, status: proposed}
 - {fr: MATR_RIGI,     en: stiffness matrix,          kind: keyword, status: proposed}
 - {fr: MATR_MASS,     en: mass matrix,               kind: keyword, status: proposed}
 - {fr: NUME_DDL,      en: DOF numbering,             kind: keyword, status: proposed}
-- {fr: INST,          en: time step (pseudo-time),   kind: keyword, status: proposed}
+- {fr: INST,          en: time step (pseudo-time),   kind: keyword, asterstudy: "Time", status: proposed}
 - {fr: NUME_ORDRE,    en: step index,                kind: keyword, status: proposed}
 - {fr: TYPE_CHAM,     en: field type,                kind: keyword, status: proposed}
 - {fr: TYPE_RESU,     en: result type,               kind: keyword, status: proposed}
 - {fr: VERI_MAIL,     en: mesh checks,               kind: keyword, status: proposed}
 
 # ---------- values ----------
-- {fr: OUI,         en: yes,                     kind: value, status: proposed}
-- {fr: NON,         en: no,                      kind: value, status: proposed}
-- {fr: MECANIQUE,   en: mechanical,              kind: value, status: proposed}
-- {fr: THERMIQUE,   en: thermal,                 kind: value, status: proposed}
-- {fr: ELAS,        en: linear elastic,          kind: value, note: "Material law keyword in DEFI_MATERIAU.", status: proposed}
+- {fr: OUI,         en: yes,                     kind: value, asterstudy: "Yes", status: proposed}
+- {fr: NON,         en: no,                      kind: value, asterstudy: "No", status: proposed}
+- {fr: MECANIQUE,   en: mechanical,              kind: value, asterstudy: "Mechanic", status: proposed}
+- {fr: THERMIQUE,   en: thermal,                 kind: value, asterstudy: "Thermic", status: proposed}
+- {fr: ELAS,        en: linear elastic,          kind: value, note: "Material law keyword in DEFI_MATERIAU.", asterstudy: "Elastic", status: proposed}
 - {fr: ELAS_FO,     en: linear elastic (temperature-dependent), kind: value, status: proposed}
 - {fr: 3D,          en: 3D solid,                kind: value, status: proposed}
 - {fr: 3D_SI,       en: 3D solid (selective integration), kind: value, note: "Under-integrated hexahedra to limit locking.", status: proposed}
@@ -226,8 +227,8 @@
 - {fr: DIS_TR,      en: translational+rotational discrete element, kind: value, status: proposed}
 - {fr: MUMPS,       en: MUMPS direct solver,     kind: value, status: proposed}
 - {fr: MULT_FRONT,  en: multifrontal direct solver, kind: value, status: proposed}
-- {fr: MED,         en: MED file format,         kind: value, status: proposed}
-- {fr: ASTER,       en: Aster native format,     kind: value, status: proposed}
+- {fr: MED,         en: MED file format,         kind: value, asterstudy: "Med", status: proposed}
+- {fr: ASTER,       en: Aster native format,     kind: value, asterstudy: "Aster", status: proposed}
 - {fr: TABLEAU,     en: tabular (CSV-like),      kind: value, status: proposed}
 - {fr: EXTRACTION,  en: extraction,              kind: value, status: proposed}
 - {fr: GLOBAL,      en: global axes,             kind: value, status: proposed}
@@ -245,7 +246,7 @@
 
 # ---------- result objects and field/component names (never renamed; labelled) ----------
 - {fr: EVOL_ELAS,   en: linear static result,     kind: concept, status: proposed}
-- {fr: EVOL_NOLI,   en: nonlinear result,         kind: concept, status: proposed}
+- {fr: EVOL_NOLI,   en: nonlinear result,         kind: concept, asterstudy: "Non linear transient", status: proposed}
 - {fr: EVOL_THER,   en: thermal result,           kind: concept, status: proposed}
 - {fr: MODE_MECA,   en: modal result,             kind: concept, status: proposed}
 - {fr: DEPL,        en: displacement,             kind: concept, note: "Components DX DY DZ DRX DRY DRZ.", status: proposed}
@@ -296,14 +297,14 @@
 - {fr: COQU_VOLU, en: solid elements from shell surfaces, kind: keyword, note: "CREA_MAILLAGE. fr: 'Creation de mailles volumiques à partir de mailles surfaciques'.", source: "code_aster/Cata/Commands/crea_maillage.py:97", status: proposed}
 - {fr: LINE_QUAD, en: linear to quadratic, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage linéaire -> quadratique'.", source: "code_aster/Cata/Commands/crea_maillage.py:139", status: proposed}
 - {fr: QUAD_LINE, en: quadratic to linear, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage quadratique -> linéaire'.", source: "code_aster/Cata/Commands/crea_maillage.py:172", status: proposed}
-- {fr: E, en: "Young's modulus", kind: keyword, note: "ELAS. fr: 'Module d'Young'.", source: "code_aster/Cata/Commands/defi_materiau.py:410", status: proposed}
-- {fr: NU, en: "Poisson's ratio", kind: keyword, note: "ELAS. fr: 'Coefficient de Poisson'.", source: "code_aster/Cata/Commands/defi_materiau.py:411", status: proposed}
-- {fr: RHO, en: density, kind: keyword, note: "ELAS. fr: 'Masse volumique' (mass density).", source: "code_aster/Cata/Commands/defi_materiau.py:416", status: proposed}
+- {fr: E, en: "Young's modulus", kind: keyword, note: "ELAS. fr: 'Module d'Young'.", source: "code_aster/Cata/Commands/defi_materiau.py:410", asterstudy: "Young's modulus", status: proposed}
+- {fr: NU, en: "Poisson's ratio", kind: keyword, note: "ELAS. fr: 'Coefficient de Poisson'.", source: "code_aster/Cata/Commands/defi_materiau.py:411", asterstudy: "Poisson's ratio", status: proposed}
+- {fr: RHO, en: density, kind: keyword, note: "ELAS. fr: 'Masse volumique' (mass density).", source: "code_aster/Cata/Commands/defi_materiau.py:416", asterstudy: "Density", status: proposed}
 - {fr: ALPHA, en: thermal expansion coefficient, kind: keyword, note: "In ELAS: fr 'Coefficient de dilatation'. Other material laws reuse the name ALPHA for unrelated parameters (e.g. hardening); check the enclosing block.", source: "code_aster/Cata/Commands/defi_materiau.py:417", status: proposed}
 - {fr: AFFE_VARC, en: external state variable assignment, kind: keyword, note: "AFFE_MATERIAU. VARC = variable de commande ('command variable' in upstream English docs): temperature, irradiation, etc., imposed on the material.", aliases_en: [command variable assignment], source: "code_aster/Cata/Commands/affe_materiau.py:58", status: proposed}
 - {fr: NOM_VARC, en: external state variable name, kind: keyword, note: "In AFFE_VARC: 'TEMP', 'HYDR', 'SECH', ...", source: "code_aster/Cata/Commons/c_affe_varc.py:32", status: proposed}
-- {fr: CHAM_GD, en: field (physical quantity), kind: keyword, note: "champ de grandeur: a field of one physical quantity. In AFFE_VARC, the field that supplies the state variable.", source: "code_aster/Cata/Commons/c_affe_varc.py:51", status: proposed}
-- {fr: VALE_REF, en: reference state value, kind: keyword, note: "In AFFE_VARC, required when NOM_VARC is 'TEMP' or 'SECH'; for TEMP, the reference temperature. TODO(verify) wording against U4.43.03. Distinct from VALE_REFE (TEST_RESU).", source: "code_aster/Cata/Commons/c_affe_varc.py:85", status: proposed}
+- {fr: CHAM_GD, en: field (physical quantity), kind: keyword, note: "champ de grandeur: a field of one physical quantity. In AFFE_VARC, the field that supplies the state variable.", source: "code_aster/Cata/Commons/c_affe_varc.py:51", asterstudy: "Field", status: proposed}
+- {fr: VALE_REF, en: reference state value, kind: keyword, note: "In AFFE_VARC, required when NOM_VARC is 'TEMP' or 'SECH'; for TEMP, the reference temperature. TODO(verify) wording against U4.43.03. Distinct from VALE_REFE (TEST_RESU).", source: "code_aster/Cata/Commons/c_affe_varc.py:85", asterstudy: "Reference value", status: proposed}
 - {fr: COQUE, en: shell properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword (EPAIS, VECTEUR, ANGL_REP, COQUE_NCOU). 'COQUE' is also a value of TYPE_RACCORD (shell side).", source: "code_aster/Cata/Commands/affe_cara_elem.py:768", status: proposed}
 - {fr: DISCRET, en: discrete element properties, kind: keyword, note: "AFFE_CARA_ELEM factor keyword: stiffness/mass/damping of DIS_T / DIS_TR elements (springs).", source: "code_aster/Cata/Commands/affe_cara_elem.py:812", status: proposed}
 - {fr: REPERE, en: coordinate system, kind: keyword, note: "e.g. DISCRET: 'LOCAL' | 'GLOBAL'.", aliases_en: [reference frame], source: "code_aster/Cata/Commands/affe_cara_elem.py:815", status: proposed}
@@ -314,7 +315,7 @@
 - {fr: DDL_MAIT, en: main-node DOFs, kind: keyword, note: "LIAISON_RBE3: DOFs of the main node (DX..DRZ).", aliases_en: [master DOFs], source: "code_aster/Cata/Commands/affe_char_meca.py:665", status: proposed}
 - {fr: COEF_ESCL, en: secondary-node weights, kind: keyword, note: "LIAISON_RBE3: weighting coefficients of the secondary nodes (default 1.0).", aliases_en: [slave coefficients], source: "code_aster/Cata/Commands/affe_char_meca.py:664", status: proposed}
 - {fr: TYPE_RACCORD, en: tie type, kind: keyword, note: "LIAISON_MAIL: 'MASSIF' | 'COQUE' | 'COQUE_MASSIF' | 'MASSIF_COQUE'.", source: "code_aster/Cata/Commands/affe_char_meca.py:569", status: proposed}
-- {fr: TEMP_IMPO, en: imposed temperature, kind: keyword, note: "AFFE_CHAR_THER factor keyword.", source: "code_aster/Cata/Commands/affe_char_ther.py:59", status: proposed}
+- {fr: TEMP_IMPO, en: imposed temperature, kind: keyword, note: "AFFE_CHAR_THER factor keyword.", source: "code_aster/Cata/Commands/affe_char_ther.py:59", asterstudy: "Enforce Temperature", status: proposed}
 - {fr: FLUX_REP, en: distributed heat flux, kind: keyword, note: "AFFE_CHAR_THER factor keyword (flux réparti).", source: "code_aster/Cata/Commands/affe_char_ther.py:76", status: proposed}
 - {fr: ECHANGE, en: convective heat exchange, kind: keyword, note: "AFFE_CHAR_THER: film coefficient COEF_H and external temperature TEMP_EXT.", source: "code_aster/Cata/Commands/affe_char_ther.py:102", status: proposed}
 - {fr: SOURCE, en: heat source, kind: keyword, note: "AFFE_CHAR_THER: volumetric source SOUR. Other commands (DEFI_SOL_MISS) use SOURCE differently.", source: "code_aster/Cata/Commands/affe_char_ther.py:121", status: proposed}
@@ -348,6 +349,46 @@
 - {fr: X, en: X coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:36", status: proposed}
 - {fr: Y, en: Y coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:37", status: proposed}
 - {fr: Z, en: Z coordinate, kind: value, note: "NOM_PARA of a DEFI_FONCTION: function of a global coordinate (e.g. hydrostatic pressure in Z).", source: "code_aster/Cata/Commons/c_para_fonction.py:38", status: proposed}
-- {fr: TEMP, en: temperature, kind: value, note: "NOM_VARC value and thermal DOF / field name.", source: "code_aster/Cata/Commons/c_affe_varc.py:36", status: proposed}
+- {fr: TEMP, en: temperature, kind: value, note: "NOM_VARC value and thermal DOF / field name.", source: "code_aster/Cata/Commons/c_affe_varc.py:36", asterstudy: "Temperature", status: proposed}
 # concepts
 - {fr: SIEF_ELNO, en: stress at element nodes (from SIEF), kind: concept, note: "SIEF_ELGA extrapolated to element nodes; for shells/beams holds generalized forces.", source: "code_aster/Cata/Commons/c_nom_cham_into.py:87", status: proposed}
+
+# ---------- added in task 0.6: AsterStudy GLOBAL_DICT keys not already above ----------
+# Provenance: GLOBAL_DICT, Copyright 2016 EDF R&D, GPL-3.0 (asterstudy/datamodel/global_dict.py),
+# copy from github.com/simvia-tech/vs-code-aster (main), fetched 2026-10-26,
+# sha256 0794575b205805c3fe07b081bb1a598aba8186a296dbf16d8c87a26730b0f32a.
+# `asterstudy` = its English verbatim, kept for traceability only. Where it disagrees with our
+# style or the catalog, `en` follows CLAUDE.md §5 (lowercase, American, "element" not "cell").
+- {fr: COMPOR, en: behavior, kind: keyword, note: "AFFE_MATERIAU: behavior object from DEFI_COMPOR (multifiber beams). Not the STAT_NON_LINE COMPORTEMENT keyword.", source: "code_aster/Cata/Commands/affe_materiau.py:54", asterstudy: "Behavior", status: proposed}
+- {fr: MAILLE, en: element, kind: keyword, note: "Element names. Declared with statut='c' (hidden) in 17.4.26; use GROUP_MA.", source: "code_aster/Cata/Commands/impr_resu.py:193", asterstudy: "Element", status: proposed}
+- {fr: NOEUD, en: node, kind: keyword, note: "Node names. Declared with statut='c' (hidden) in 17.4.26; use GROUP_NO.", source: "code_aster/Cata/Commands/affe_char_meca.py:141", asterstudy: "Node", status: proposed}
+- {fr: SANS_GROUP_MA, en: excluded element groups, kind: keyword, source: "code_aster/Cata/Commands/affe_char_meca.py:129", asterstudy: "Exclude group of element", status: proposed}
+- {fr: SANS_GROUP_NO, en: excluded node groups, kind: keyword, source: "code_aster/Cata/Commands/affe_char_meca.py:261", asterstudy: "Exclude group of node", status: proposed}
+- {fr: SANS_MAILLE, en: excluded elements, kind: keyword, note: "Not in the 17.4.26 catalog; kept from GLOBAL_DICT for older command files.", asterstudy: "Exclude element", status: proposed}
+- {fr: SANS_NOEUD, en: excluded nodes, kind: keyword, note: "Not in the 17.4.26 catalog; kept from GLOBAL_DICT for older command files.", asterstudy: "Exclude Node", status: proposed}
+- {fr: EVOL, en: time-dependent result, kind: keyword, note: "AFFE_VARC: result (evol_sdaster) supplying the state variable over time.", source: "code_aster/Cata/Commons/c_affe_varc.py:29", asterstudy: "Transient value", status: proposed}
+- {fr: LONG_CARA, en: characteristic length, kind: keyword, source: "code_aster/Cata/Commands/defi_materiau.py:423", asterstudy: "Characteristic length", status: proposed}
+- {fr: COEF_AMOR, en: damping coefficient, kind: keyword, source: "code_aster/Cata/Commands/defi_materiau.py:424", asterstudy: "Damping coeficient", status: proposed}
+- {fr: GRANDEUR_CARA, en: characteristic quantities, kind: keyword, note: "AFFE_MODELE. fr: characteristic quantities for nondimensionalizing the HM error indicators.", source: "code_aster/Cata/Commands/affe_modele.py:40", asterstudy: "Characteristic value", status: proposed}
+- {fr: LONGUEUR, en: length, kind: keyword, note: "In GRANDEUR_CARA: characteristic length. Other commands use it for other lengths.", source: "code_aster/Cata/Commands/affe_modele.py:45", asterstudy: "Length", status: proposed}
+- {fr: PRESSION, en: pressure, kind: keyword, note: "In GRANDEUR_CARA: characteristic pressure.", source: "code_aster/Cata/Commands/affe_modele.py:46", asterstudy: "Pressure", status: proposed}
+- {fr: TEMPERATURE, en: temperature, kind: keyword, note: "In GRANDEUR_CARA: characteristic temperature.", source: "code_aster/Cata/Commands/affe_modele.py:47", asterstudy: "Temperature", status: proposed}
+- {fr: ACOUSTIQUE, en: acoustic, kind: value, note: "PHENOMENE value.", source: "code_aster/Cata/Commands/affe_modele.py:63", asterstudy: "Acoustic", status: proposed}
+- {fr: TYPE_CHARGE, en: load type, kind: keyword, note: "Allowed values depend on the command (e.g. 'FORCE' | 'VENT').", source: "code_aster/Cata/Commands/affe_char_meca.py:982", asterstudy: "Load type", status: proposed}
+- {fr: LIST_INST, en: time-step list, kind: keyword, note: "List of time steps (listr8 or from DEFI_LIST_INST).", source: "code_aster/Cata/Commands/stat_non_line.py:360", asterstudy: "Time step list", status: proposed}
+- {fr: INST_FIN, en: end time, kind: keyword, source: "code_aster/Cata/Commands/meca_statique.py:87", asterstudy: "End time step", status: proposed}
+- {fr: INCREMENT, en: time stepping, kind: keyword, source: "code_aster/Cata/Commands/stat_non_line.py:72", asterstudy: "Timestepping", status: proposed}
+- {fr: ETAT_INIT, en: initial state, kind: keyword, source: "code_aster/Cata/Commands/stat_non_line.py:70", asterstudy: "Initial condition", status: proposed}
+- {fr: ARCHIVAGE, en: result storage, kind: keyword, note: "Which time steps are stored in the result (archivage = archiving).", source: "code_aster/Cata/Commands/stat_non_line.py:127", asterstudy: "Storing", status: proposed}
+- {fr: DDL_POUTRE, en: imposed beam DOF, kind: keyword, source: "code_aster/Cata/Commands/affe_char_meca.py:63", asterstudy: "Enforce beam's DOF", status: proposed}
+- {fr: GRAVITE, en: gravitational acceleration, kind: keyword, note: "PESANTEUR: magnitude of g; DIRECTION gives its direction.", source: "code_aster/Cata/Commands/affe_char_meca.py:121", asterstudy: "Gravitational constant", status: proposed}
+- {fr: DIRECTION, en: direction, kind: keyword, source: "code_aster/Cata/Commands/affe_char_meca.py:122", asterstudy: "Direction", status: proposed}
+- {fr: VITESSE, en: rotational speed, kind: keyword, note: "ROTATION: speed of rotation about AXE. Other commands use VITESSE for other speeds. TODO(verify) units against U4.44.01.", aliases_en: [celerity], source: "code_aster/Cata/Commands/affe_char_meca.py:130", asterstudy: "Celerity", status: proposed}
+- {fr: ABSCISSE, en: abscissas, kind: keyword, note: "DEFI_FONCTION: list of x values of the function (not a coordinate).", source: "code_aster/Cata/Commands/defi_fonction.py:49", asterstudy: "X-coordinate", status: proposed}
+- {fr: ORDONNEE, en: ordinates, kind: keyword, note: "DEFI_FONCTION: list of y values of the function.", source: "code_aster/Cata/Commands/defi_fonction.py:82", asterstudy: "Y-coordinate", status: proposed}
+- {fr: VALE_C, en: complex values, kind: keyword, source: "code_aster/Cata/Commands/defi_fonction.py:49", asterstudy: "Complex Value", status: proposed}
+- {fr: VERIF, en: check, kind: keyword, note: "DEFI_FONCTION: 'CROISSANT' (abscissas must increase) | 'NON'.", source: "code_aster/Cata/Commands/defi_fonction.py:100", asterstudy: "Check", status: proposed}
+- {fr: NOM_RESU, en: result name, kind: keyword, source: "code_aster/Cata/Commands/defi_fonction.py:51", asterstudy: "Resu_name", status: proposed}
+- {fr: CRITERE, en: tolerance type, kind: keyword, note: "'RELATIF' | 'ABSOLU': how PRECISION is applied when matching INST values.", source: "code_aster/Cata/Commands/stat_non_line.py:364", asterstudy: "Criterion", status: proposed}
+- {fr: CONCEPT, en: result object, kind: keyword, source: "code_aster/Cata/Commands/copier.py:56", asterstudy: "Concept", status: proposed}
+- {fr: SOUS_TITRE, en: subtitle, kind: keyword, source: "code_aster/Cata/Commands/impr_resu.py:195", asterstudy: "Subtitle", status: proposed}
