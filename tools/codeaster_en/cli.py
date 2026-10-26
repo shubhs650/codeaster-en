@@ -1,8 +1,8 @@
 """``caen`` command-line interface.
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands) and
-``caen extract catalog|messages|astest-index``. The other groups are stubs that name the PLAN.md
-task which will fill them in.
+``caen extract catalog|messages|astest-index|inventory``. The other groups are stubs that name
+the PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
@@ -15,6 +15,7 @@ import typer
 from codeaster_en import __version__
 from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
+from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
@@ -122,6 +123,23 @@ def extract_astest_index(
         f"{summary['command_files']} command file(s), "
         f"{summary['commands_used']}/{summary['known_commands']} command(s) used"
     )
+
+
+@extract_app.command("inventory")
+def extract_inventory(
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Inventory file to update (default: docs/INVENTORY.md)."),
+    ] = None,
+) -> None:
+    """Rewrite the generated block of docs/INVENTORY.md (tier coverage, astest top 50)."""
+    root = _repo_root()
+    try:
+        path = inventory_extractor.write(root, out)
+    except (FileNotFoundError, KeyError, ValueError) as exc:
+        typer.echo(f"extract inventory: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo(f"extract inventory: updated {path}")
 
 
 app.add_typer(
