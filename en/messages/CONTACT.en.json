@@ -19,7 +19,10 @@
    "source": {
     "line": 24
    },
-   "en": null
+   "en": "\nContact, discrete methods.\n -> Discrete contact methods assume that the assembled matrix is symmetric.\n\nYou can force the matrix to be symmetric with MATR_RIGI_SYME='OUI' under factor keyword NEWTON, or use the CONTINUE contact formulation or the penalty method ALGO_CONT='PENALISATION'.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "CONTACT_3",
@@ -66,7 +69,10 @@
    "source": {
     "line": 48
    },
-   "en": null
+   "en": "\nDiscrete contact formulation.\n -> There are QUAD8 elements on the contact surfaces. These elements cannot satisfy the contact condition exactly.\n    To prevent spurious penetration of the surfaces, kinematic constraints (LIAISON_DDL) were added between the mid-side nodes and the corner nodes, on both surfaces (main and secondary).\n\n Risks and advice:\n   - These extra constraints may conflict with the boundary conditions, especially with symmetries, which shows up as a singular matrix.\n     In that case, you can apply the boundary conditions concerned to the corner nodes only (use DEFI_GROUP to create the appropriate node group).\n   - It is however better to use QUAD9 elements on the contact surfaces. To do so, convert HEXA20 volume elements to HEXA27, or PENTA15 to PENTA18 (for example with CREA_MAILLAGE).\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "CONTACT_9",
@@ -89,7 +95,10 @@
    "source": {
     "line": 66
    },
-   "en": null
+   "en": "\nThe normal you predefined (VECT_* = 'FIXE') at node %(k1)s is collinear with the tangent to the element.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "14": {
    "id": "CONTACT_14",
@@ -100,7 +109,10 @@
    "source": {
     "line": 71
    },
-   "en": null
+   "en": "\nThe normal you predefined (VECT_* = 'FIXE') on element %(k1)s is collinear with the tangent to the element.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "15": {
    "id": "CONTACT_15",
@@ -137,7 +149,10 @@
    "source": {
     "line": 86
    },
-   "en": null
+   "en": "\nThe block size is %(i1)d, which is less than the maximum height %(i2)d.\nChange the profile TAILLE_BLOC (in DEBUT). Use at least: %(i3)d.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "CONTACT_20",
@@ -158,7 +173,10 @@
    "source": {
     "line": 98
    },
-   "en": null
+   "en": "\nDEFI_CONTACT cannot be used with a distributed mesh.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "60": {
    "id": "CONTACT_60",
@@ -195,7 +213,10 @@
    "source": {
     "line": 119
    },
-   "en": null
+   "en": "You are defining contact on a model that is not mechanical; this is not possible.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "84": {
    "id": "CONTACT_84",
@@ -204,7 +225,10 @@
    "source": {
     "line": 122
    },
-   "en": null
+   "en": "\nThe model mixes elements with modeling types of different dimensions (2D with 3D, or macro-elements).\nAt this point in the command file, it cannot be told whether this mix will be compatible with contact.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "85": {
    "id": "CONTACT_85",
@@ -213,7 +237,10 @@
    "source": {
     "line": 128
    },
-   "en": null
+   "en": "\nThe model mixes elements with modeling types of different dimensions (2D with 3D, or macro-elements).\nContact surfaces must not mix elements assigned a plane modeling type (D_PLAN, C_PLAN or AXIS)\nwith elements assigned a 3D modeling type.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "CONTACT_88",
@@ -236,7 +263,10 @@
    "source": {
     "line": 140
    },
-   "en": null
+   "en": "\nContact, method without resolution.\n -> Interpenetration of the surfaces. %(i1)d nodes interpenetrate.\n\n -> Risk & advice:\n    Check whether the level of surface interpenetration is acceptable for\n    your problem.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "94": {
    "id": "CONTACT_94",
@@ -245,7 +275,10 @@
    "source": {
     "line": 150
    },
-   "en": null
+   "en": "\nModeling type COQUE_3D is not yet compatible with the CONTINUE formulation.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "95": {
    "id": "CONTACT_95",
@@ -254,7 +287,10 @@
    "source": {
     "line": 155
    },
-   "en": null
+   "en": "The contact ADAPTATION option is not available for the LAC method.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "96": {
    "id": "CONTACT_96",

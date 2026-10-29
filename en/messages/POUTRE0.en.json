@@ -19,7 +19,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nGROUP_MA and GROUP_MA_BORD must have the same number of element groups.\nEach GROUP_MA must have a matching GROUP_MA_BORD.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "POUTRE0_3",
@@ -28,7 +31,10 @@
    "source": {
     "line": 31
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nYou gave NOEUD or GROUP_NO with GROUP_MA_BORD.\nNOEUD or GROUP_NO must contain a single node.\n\nIf you have disjoint element groups, you must also give GROUP_MA.\nIn that case, each NOEUD must have a matching GROUP_MA and GROUP_MA_BORD.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "POUTRE0_4",
@@ -45,7 +51,10 @@
    "source": {
     "line": 42
    },
-   "en": null
+   "en": "\nCircular beam with homothetic section variation.\n\nThe homothety ratio differs noticeably between the radii and the thicknesses:\n    - radius 1 = %(r1)16.9g\n    - radius 2 = %(r2)16.9g\n        `- homothety ratio = %(r5)16.9g\n\n    - thickness 1 = %(r3)16.9g\n    - thickness 2 = %(r4)16.9g\n        `- homothety ratio = %(r6)16.9g\n\nThe difference between the homothety ratios exceeds 1%%.\nThe assumptions of the homothetic-variation beam model are therefore not\nmet (see the reference documentation of beam elements).\n\n\nRisks and advice:\n    - The computations will be inaccurate.\n    - Refining the mesh reduces the discrepancies.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "5": {
    "id": "POUTRE0_5",
@@ -54,7 +63,10 @@
    "source": {
     "line": 65
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nYou gave GROUP_NO with GROUP_MA and GROUP_MA_BORD.\nThe number of nodes in GROUP_NO must equal the number of element groups\ngiven under GROUP_MA and GROUP_MA_BORD.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "POUTRE0_6",
@@ -63,7 +75,10 @@
    "source": {
     "line": 74
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nYou gave GROUP_MA and GROUP_MA_BORD with several element groups.\nYou must give 'LONGUEUR' 'MATERIAU' 'LIAISON' so that the torsion properties can be\ncomputed taking into account the participation factors of each\nelement group.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "7": {
    "id": "POUTRE0_7",
@@ -72,7 +87,10 @@
    "source": {
     "line": 84
    },
-   "en": null
+   "en": "\nYou gave GROUP_MA and GROUP_MA_BORD with a single element group per\nkeyword.\nYou also gave 'LONGUEUR' 'MATERIAU' 'LIAISON', which is unnecessary.\nThese values are ignored.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "POUTRE0_8",
@@ -83,7 +101,10 @@
    "source": {
     "line": 92
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nYou gave GROUP_NO. GROUP_NO %(k1)s does not exist in the mesh.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "POUTRE0_10",
@@ -95,7 +116,10 @@
    "source": {
     "line": 99
    },
-   "en": null
+   "en": "Property %(k1)8s is negative or zero %(r1)e\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "POUTRE0_11",
@@ -104,7 +128,10 @@
    "source": {
     "line": 103
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nThe section has negative mechanical properties.\n\nYou set TABLE_CARA='OUI'. If you use the results in\nAFFE_CARA_ELEM / POUTRE with TABLE_CARA, results may be wrong.\n\nAdvice: the discretization of the section affects the quality of the results.\n          Refining the mesh should remove this error.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "12": {
    "id": "POUTRE0_12",
@@ -118,7 +145,10 @@
    "source": {
     "line": 116
    },
-   "en": null
+   "en": "\nThe coordinates of the section centroid are G=(%(r1)e, %(r2)e)\n\nIf you use MULTIFIBRES and the mesh describing the fibers is the same as\nthe one used in this command, give in DEFI_GEOM_FIBRE either\nkeyword COOR_AXE_POUTRE or keywords TABLE_CARA and NOM_SEC so that\nthe fiber centroid matches the neutral axis of the beam:\n    COOR_AXE_POUTRE = (%(r1)e, %(r2)e)\nor\n    TABLE_CARA = %(k1)s, NOM_SEC = \"%(k2)s\",\n\nYou set TABLE_CARA='OUI'. If you use the results in\n: AFFE_CARA_ELEM / POUTRE with TABLE_CARA and NOM_SEC,\n                           / GEOM_FIBRE\n                           / MULTIFIBRE\n\nyou may get unexpected results if you do not give:\n    COOR_AXE_POUTRE or TABLE_CARA and NOM_SEC\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "POUTRE0_13",
@@ -132,7 +162,10 @@
    "source": {
     "line": 137
    },
-   "en": null
+   "en": "\nThe principal axes of inertia are rotated by %(r1)f° with respect to the mesh axes.\n\nIf you use MULTIFIBRES and the mesh describing the fibers is the same as\nthe one used in this command, give in DEFI_GEOM_FIBRE either\nkeyword ANGLE or keywords TABLE_CARA and NOM_SEC so that the\nprincipal axes of inertia match the axes of the section mesh:\n    ANGLE = %(r2)e\nor\n    TABLE_CARA = %(k1)s, NOM_SEC = \"%(k2)s\",\n\nYou set TABLE_CARA='OUI'. If you use the results in\nAFFE_CARA_ELEM / POUTRE with TABLE_CARA, you may need to give keyword ORIENTATION\nin AFFE_CARA_ELEM to define the position of the principal axes\nof inertia with respect to the global coordinate system.\n\nORIENTATION=(\n    _F(GROUP_MA='....', CARA='ANGL_VRIL', VALE= ??? )\n)\nBy default ANGL_VRIL= 0\n\nYou may get unexpected results if you give neither:\n - ANGLE or TABLE_CARA and NOM_SEC in DEFI_GEOM_FIBRE\n - nor ORIENTATION in AFFE_CARA_ELEM\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "14": {
    "id": "POUTRE0_14",
@@ -141,7 +174,10 @@
    "source": {
     "line": 164
    },
-   "en": null
+   "en": "You are using a multifiber element. Under COMPORTEMENT, keyword RELATION must be 'MULTIFIBRE'.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "16": {
    "id": "POUTRE0_16",
@@ -152,7 +188,10 @@
    "source": {
     "line": 167
    },
-   "en": null
+   "en": "You are using a multifiber element with DEFORMATION='%(k1)s'. Option RIGI_GEOM='OUI' is not allowed in this case.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "POUTRE0_17",
@@ -161,7 +200,10 @@
    "source": {
     "line": 170
    },
-   "en": null
+   "en": "This element can only be used in elasticity.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "POUTRE0_20",
@@ -173,7 +215,10 @@
    "source": {
     "line": 171
    },
-   "en": null
+   "en": "\nProblem using MACR_CARA_POUTRE\n\nYou gave %(k2)s. GROUP_MA %(k1)s does not exist in the mesh.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "40": {
    "id": "POUTRE0_40",
@@ -184,7 +229,10 @@
    "source": {
     "line": 178
    },
-   "en": null
+   "en": "Beam elements cannot use a strain of type %(k1)s.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "41": {
    "id": "POUTRE0_41",
@@ -193,7 +241,10 @@
    "source": {
     "line": 179
    },
-   "en": null
+   "en": "These beam elements can only be used with large transformations (GROT_GDEP).",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "POUTRE0_42",
@@ -202,7 +253,10 @@
    "source": {
     "line": 182
    },
-   "en": null
+   "en": "The density RHO, needed in dynamics, is missing.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "43": {
    "id": "POUTRE0_43",
@@ -213,7 +267,10 @@
    "source": {
     "line": 183
    },
-   "en": null
+   "en": "The secant matrix is not available with behavior %(k1)s on bar elements.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "49": {
    "id": "POUTRE0_49",
@@ -224,7 +281,10 @@
    "source": {
     "line": 186
    },
-   "en": null
+   "en": "The IMPLEX method cannot be used with constitutive law %(k1)s on bar elements.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "50": {
    "id": "POUTRE0_50",
@@ -233,7 +293,10 @@
    "source": {
     "line": 189
    },
-   "en": null
+   "en": "No elastic behavior found on the beam. It is needed to get the density.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "59": {
    "id": "POUTRE0_59",
@@ -242,7 +305,10 @@
    "source": {
     "line": 192
    },
-   "en": null
+   "en": "Poisson's ratio is not constant. Beam elements do not take this into account.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "61": {
    "id": "POUTRE0_61",
@@ -253,7 +319,10 @@
    "source": {
     "line": 195
    },
-   "en": null
+   "en": "Constitutive law %(k1)s is not available for classic beams. Use multifiber beams.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "62": {
    "id": "POUTRE0_62",
@@ -262,7 +331,10 @@
    "source": {
     "line": 198
    },
-   "en": null
+   "en": "The nodes of a bar element coincide.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "64": {
    "id": "POUTRE0_64",
@@ -274,7 +346,10 @@
    "source": {
     "line": 199
    },
-   "en": null
+   "en": "With option GROT_GDEP, the flexibility coefficients are not taken into account in the geometric stiffness matrix.\n   Flexibility coefficient along y: %(r1)f\n   Flexibility coefficient along z: %(r2)f",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "81": {
    "id": "POUTRE0_81",
@@ -283,7 +358,10 @@
    "source": {
     "line": 204
    },
-   "en": null
+   "en": "\nFor beam elements with affine section variation, only a solid rectangular section is possible.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "82": {
    "id": "POUTRE0_82",
@@ -292,7 +370,10 @@
    "source": {
     "line": 209
    },
-   "en": null
+   "en": "\nFor beam elements with homothetic section variation, the initial area is zero.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "90": {
    "id": "POUTRE0_90",
@@ -301,7 +382,10 @@
    "source": {
     "line": 214
    },
-   "en": null
+   "en": "For skeleton beam elements, the only valid elastic behavior is ELAS.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

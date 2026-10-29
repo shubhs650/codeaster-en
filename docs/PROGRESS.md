@@ -20,9 +20,13 @@ Done: 3.2a (PR #26): free upstream seed, 3,113 messages from upstream's 2016
 (`method: assisted`, `translation_source: session:task-3.2`, same `check()` as 3.1) for the
 priority families: SUPERVIS*, UTILITAI*, MODELISA*, CALCULEL*, MECANONLINE*, ALGELINE*,
 FACTOR*, POSTRELE. 3.2c: 634 more in session for CHARGES*, ELEMENTS*, ELEMENT, MATERIAL*,
-MESH*, MED*, RESULT*, CHAMPS, COMPOR*. 4,838 of 6,890 messages have English. No API calls,
-no token cost.
-Open: the remaining 2,052 messages (3.2d onward).
+MESH*, MED*, RESULT*, CHAMPS, COMPOR*. 3.2d: 801 more for CALCUL*, CALCCHAMP*, ASSEMBLA,
+CONTACT*, DISCRETS, POUTRE0, PLATE1, SHELL1, MEMBRANE, PIPE1, SOLIDSHELL1, DYNAMIQUE*,
+DYNALINE*, DYNAPOST, DYNAVISCO, MODAL, SEISME, MISS0, DAMPING*, DEFIBASEMODALE1, MODESTAT1,
+SPECTRAL0, XFEM*, RUPTURE*, THM*, POST0, POSTRCCM, POSTROCHE; earlier session entries now say
+"step index" (glossary: *numéro d'ordre*) and "mode shape" (glossary: *mode propre*).
+5,639 of 6,890 messages have English. No API calls, no token cost.
+Open: the remaining 1,251 messages (3.2e onward).
 Decisions: none. Wording choices: "Ce message est un message d'erreur développeur. Contactez
 le support technique." = "This is a developer error message. Contact technical support.";
 *noeud sommet* = "corner node" (the glossary forbids "vertex"); *variable de commande* =

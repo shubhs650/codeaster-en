@@ -21,7 +21,10 @@
    "source": {
     "line": 24
    },
-   "en": null
+   "en": "\n  -> When defining material field %(k1)s, you gave keyword\n     EVOL of AFFE_MATERIAU / AFFE_VARC with an X-FEM thermal result.\n     This feature is not compatible with POST_K1_K2_K3 when the\n     material depends on temperature.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "2": {
    "id": "XFEM_2",
@@ -58,7 +61,10 @@
    "source": {
     "line": 49
    },
-   "en": null
+   "en": "\n  -> Warning: you defined a geometric enrichment over %(i1)d\n     layers of elements around the crack front.\n  -> Risk:\n     Beyond 7 layers, zero pivots may occur during the\n     solution in STAT_NON_LINE.\n  -> Advice:\n     To avoid these zero pivots, do not\n     exceed NB_COUCHES = 7.\n     You can also keep NB_COUCHES = %(i1)d, but you may need\n     to increase the maximum number of lost decimal digits in\n     STAT_NON_LINE (keyword NPREC of SOLVEUR for methods LDLT or MULT_FRONT)\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "XFEM_6",
@@ -96,7 +102,10 @@
    "source": {
     "line": 75
    },
-   "en": null
+   "en": "\n     The number of X-FEM %(k1)s is limited to 2.10E9\n     Risk & advice:\n     Reduce the size of the mesh.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "XFEM_9",
@@ -105,7 +114,10 @@
    "source": {
     "line": 82
    },
-   "en": null
+   "en": "\n     The element group given to define the crack contains\n     elements that are not connected to the others. This prevents\n     the normal to the crack surface from being oriented correctly.\n\n     Risk & advice:\n       Check that the input elements are all\n       connected to each other, that is, that they form a group of\n       contiguous elements.\n       Otherwise, define a crack for each of the\n       disconnected groups.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "XFEM_10",
@@ -140,7 +152,10 @@
    "source": {
     "line": 123
    },
-   "en": null
+   "en": "\n  The gradient of the tangential level set is zero at node %(k1)s.\n  This is probably due to a singular point in the definition of the level set.\n  Make sure this singular point is not inside the integration ring\n  of the theta field.\n  Advice: reduce the size of the theta field ring\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "XFEM_13",
@@ -161,7 +176,10 @@
    "source": {
     "line": 142
    },
-   "en": null
+   "en": "\nComputing the L2 norm of the contact pressure on an XFEM crack is not available.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "15": {
    "id": "XFEM_15",
@@ -244,7 +262,10 @@
    "source": {
     "line": 183
    },
-   "en": null
+   "en": "\n     You defined at least one open front and one closed front in a single call to\n     DEFI_FISS_XFEM.\n     Advice:\n     Define each front in a separate DEFI_FISS_XFEM.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "22": {
    "id": "XFEM_22",
@@ -255,7 +276,10 @@
    "source": {
     "line": 191
    },
-   "en": null
+   "en": "\n     A kinematic relation is imposed at node %(k1)s, through which a\n     crack passes, and this relation is imposed on both sides of the crack.\n     Two relations are therefore imposed, which blocks the associated Heaviside DOF.\n     If you also imposed a kinematic relation on the associated Heaviside degree\n     of freedom of node %(k1)s, the matrix cannot be factorized.\n     Advice:\n     You can exclude node %(k1)s from the group concerned by\n     this second relation, for example with operand DIFFE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "23": {
    "id": "XFEM_23",
@@ -320,7 +344,10 @@
    "source": {
     "line": 237
    },
-   "en": null
+   "en": "\n     The auxiliary grid cannot be used with the SIMPLEXE method.\n     Use the UPWIND method or run the computation on the physical mesh.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "28": {
    "id": "XFEM_28",
@@ -329,7 +356,10 @@
    "source": {
     "line": 243
    },
-   "en": null
+   "en": "\n     Fluid fluxes in fractures are only allowed for HM-XFEM modeling types.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "29": {
    "id": "XFEM_29",
@@ -466,7 +496,10 @@
    "source": {
     "line": 293
    },
-   "en": null
+   "en": "\n     User error: keywords FISSURE and MODELE_IN are inconsistent.\n     The crack(s) under keyword FISSURE must all be defined from\n     the same mesh.\n     However:\n     - crack %(k1)s is defined from mesh %(k2)s\n     - the model given under MODELE_IN is defined from mesh %(k3)s.\n     Advice:\n     Review the definition of crack %(k1)s or change MODELE_IN.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "40": {
    "id": "XFEM_40",
@@ -491,7 +524,10 @@
    "source": {
     "line": 314
    },
-   "en": null
+   "en": "\n      Element %(k1)s is quadratic and connected to 2 cracks;\n      multi-Heaviside has only been extended to quadratic elements for HM modeling types.\n      To avoid activating multi-Heaviside, the cracks must be at least 2 elements\n      apart. Refine the mesh between the cracks (or move the cracks apart).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "XFEM_42",
@@ -516,7 +552,10 @@
    "source": {
     "line": 335
    },
-   "en": null
+   "en": "\n      Contact other than P1P1 is active and element %(k1)s is connected to 2 cracks;\n      except for HM-XFEM modeling types, multi-Heaviside cannot be taken\n      into account when contact other than P1P1 is used.\n      To avoid activating multi-Heaviside, the cracks must be at least 2 elements\n      apart. Refine the mesh between the cracks (or move the cracks apart).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "44": {
    "id": "XFEM_44",
@@ -539,7 +578,10 @@
    "source": {
     "line": 353
    },
-   "en": null
+   "en": "\n      X-FEM junction and contact\n\n      An XFEM contact facet must be cut again. This is not implemented yet.\n      Contact forces will not be taken into account on this facet.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "46": {
    "id": "XFEM_46",
@@ -579,7 +621,10 @@
    "source": {
     "line": 381
    },
-   "en": null
+   "en": "\n      Fluxes for PRE2 and TEMP are not allowed for\n      HM-XFEM elements.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "50": {
    "id": "XFEM_50",
@@ -590,7 +635,10 @@
    "source": {
     "line": 387
    },
-   "en": null
+   "en": "\n     The X-FEM method is not available with %(k1)s.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "51": {
    "id": "XFEM_51",
@@ -614,7 +662,10 @@
    "source": {
     "line": 397
    },
-   "en": null
+   "en": "\n     One or more elements containing more than 2 crack front points were detected.\n     The front cannot be oriented in that case. So the curvilinear abscissas\n     of the front cannot be computed and multiple fronts cannot be detected.\n     Consequently, post-processing with CALC_G_XFEM is not possible.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "54": {
    "id": "XFEM_54",
@@ -623,7 +674,10 @@
    "source": {
     "line": 405
    },
-   "en": null
+   "en": "\n     Warning: two crack junctions are present in the same element. The contact facets\n     obtained in this element may not conform to each junction.\n  -> Advice:\n     Refine the mesh so that there is only one crack junction per element.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "55": {
    "id": "XFEM_55",
@@ -636,7 +690,10 @@
    "source": {
     "line": 413
    },
-   "en": null
+   "en": "\n     Cutting the XFEM contact facets ran out of memory space\n     while writing local mode %(k1)s.\n     The length of the local mode in the catalog is %(i1)d, but it was computed that\n     %(i2)d would be needed.\n     The computation stops to prevent a memory overflow.\n  -> Advice:\n     - You can increase the size of local mode %(k1)s.\n     - Please also contact the development team to report the cutting configuration\n     so that the catalog can be improved.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "56": {
    "id": "XFEM_56",
@@ -650,7 +707,10 @@
    "source": {
     "line": 426
    },
-   "en": null
+   "en": "\n  -> X-FEM element of type %(k1)s on mesh element %(k2)s does not\n     have enough Gauss points to store the\n     Gauss point data of its sub-elements. The number\n     of Gauss points of the XFEM family for this element is %(i1)d,\n     but %(i2)d Gauss points are needed.\n  -> Advice:\n     You can try refining the mesh to obtain a\n     cut involving fewer sub-elements.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "57": {
    "id": "XFEM_57",
@@ -671,7 +731,10 @@
    "source": {
     "line": 448
    },
-   "en": null
+   "en": "\n  -> No crack front point was found!\n     This means the crack front lies outside the structure.\n\n  -> Risk & advice:\n     - If you meant to define an interface, choose TYPE_DISCONTINUITE = 'INTERFACE'\n        to stop this message.\n     -  If you meant to define a crack, there must be an error in the definition\n        of the tangential level set. Check the level-set definitions.\n     -  In a propagation computation, this means the crack has broken through and crosses\n        the whole structure (risk of a zero pivot in the next mechanical computation because\n        of unconstrained rigid body modes).\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "59": {
    "id": "XFEM_59",
@@ -692,7 +755,10 @@
    "source": {
     "line": 469
    },
-   "en": null
+   "en": "\n     -> For the closed front, an extra front point was added.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "63": {
    "id": "XFEM_63",
@@ -703,7 +769,10 @@
    "source": {
     "line": 475
    },
-   "en": null
+   "en": "\n      -> --- Quadratic XFEM elements ---\n    The crack geometry was adjusted, because edges of the uncracked mesh are\n    cut several times by the zero isovalue of the level set.\n    Number of adjustments made: %(i1)d.\n    This correction slightly affects the location of the crack.\n  -> Advice:\n    Check in post-processing with POST_MAIL_XFEM that the new\n    crack geometry matches the geometry imposed in DEFI_FISS_XFEM.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "64": {
    "id": "XFEM_64",
@@ -724,7 +793,10 @@
    "source": {
     "line": 496
    },
-   "en": null
+   "en": "\n  -> --- 2D quadratic XFEM elements ---\n     Computing the curvilinear abscissa on a quadratic edge is not yet supported for\n     curved edges.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "66": {
    "id": "XFEM_66",
@@ -769,7 +841,10 @@
    "source": {
     "line": 527
    },
-   "en": null
+   "en": "\n  -> The crack to propagate was defined by DEFI_FISS_XFEM by giving the two\n     level-set fields directly (keywords CHAMP_NO_LSN and CHAMP_NO_LST).\n     No auxiliary grid was associated with this crack.\n\n  -> Risk & advice:\n     If the two level-set fields were obtained from a crack propagated by\n     PROPA_FISS, the information on domain localization (keyword ZONE_MAJ) and on\n     the use of an auxiliary grid has been lost, so the crack propagation\n     computation could give wrong results.\n\n     You may ignore this warning only if the two level-set fields given in\n     DEFI_FISS_XFEM:\n     - were not computed by PROPA_FISS, that is, they were not extracted\n       from a crack propagated by PROPA_FISS\n     - were extracted from a crack propagated by PROPA_FISS with no associated auxiliary grid,\n       and the level sets were updated on all nodes of the mesh\n       (keyword ZONE_MAJ='TOUT' in PROPA_FISS)\n\n     In all other cases, to avoid wrong results, you must associate\n     an auxiliary grid with the crack to propagate, inherited from the crack from which\n     the two level sets were extracted (keyword FISS_GRILLE of DEFI_FISS_XFEM).\n\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "70": {
    "id": "XFEM_70",
@@ -794,7 +869,10 @@
    "source": {
     "line": 562
    },
-   "en": null
+   "en": "\n     Crack junction is only available for mechanical and\n     hydro-mechanical modeling types. But model %(k1)s is a\n     thermal model.\n  -> Advice:\n     Review the definition of your model, or of the crack(s).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "72": {
    "id": "XFEM_72",
@@ -805,7 +883,10 @@
    "source": {
     "line": 571
    },
-   "en": null
+   "en": "\n  -> You are using keyword FISSURE, but model %(k1)s, which you gave\n     for keyword MODELE, is not an X-FEM model.\n  -> Advice:\n     Use another keyword or review the definition of your model.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "73": {
    "id": "XFEM_73",
@@ -817,7 +898,10 @@
    "source": {
     "line": 579
    },
-   "en": null
+   "en": "\n  -> You gave %(k1)s for keyword FISSURE, but this crack is not in\n     model %(k2)s, which you gave for keyword MODELE.\n  -> Advice:\n     Make sure keyword FISSURE lists cracks that are\n     present in the model, or review the definition of your model.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "74": {
    "id": "XFEM_74",
@@ -852,7 +936,10 @@
    "source": {
     "line": 598
    },
-   "en": null
+   "en": "\n  -> Extra POI1 elements may be created\n     when assignments are made on nodes or node\n     groups. These elements are not accessible to the user. This has created a late element.\n\n  -> Risk & advice:\n     See document [U4.41.01], section 4: it is strongly recommended\n     to use CREA_MAILLAGE [U4.23.02] to create POI1 elements that can be used in the command\n     file (for STAT_NON_LINE, for example).\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "78": {
    "id": "XFEM_78",
@@ -863,7 +950,10 @@
    "source": {
     "line": 611
    },
-   "en": null
+   "en": "\n  -> Error: for modeling type %(k1)s, cracks cannot be introduced into the model.\n\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "79": {
    "id": "XFEM_79",
@@ -874,7 +964,10 @@
    "source": {
     "line": 617
    },
-   "en": null
+   "en": "\n  -> You must give keyword MODELE_IN an uncracked model (produced by\n     AFFE_MODELE), but you gave this keyword %(k1)s,\n     which is an X-FEM model (produced by MODI_MODELE_XFEM)\n  -> Advice:\n     Review the definition of this model\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "80": {
    "id": "XFEM_80",
@@ -885,7 +978,10 @@
    "source": {
     "line": 626
    },
-   "en": null
+   "en": "\n  -> With keyword MODELE_THER, you must give keyword MODELE_IN\n     a mechanical model. But model %(k1)s is not a mechanical model.\n  -> Advice:\n     Review the definition of this model.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "81": {
    "id": "XFEM_81",
@@ -896,7 +992,10 @@
    "source": {
     "line": 634
    },
-   "en": null
+   "en": "\n  -> You must give keyword MODELE_THER an X-FEM model (produced by\n     MODI_MODELE_XFEM), but you gave this keyword %(k1)s,\n     which is an uncracked model (produced by AFFE_MODELE)\n  -> Advice:\n     Review the definition of this model\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "82": {
    "id": "XFEM_82",
@@ -907,7 +1006,10 @@
    "source": {
     "line": 643
    },
-   "en": null
+   "en": "\n  -> You must give keyword MODELE_THER a thermal model.\n     But model %(k1)s is not a thermal model.\n  -> Advice:\n     Review the definition of this model\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "83": {
    "id": "XFEM_83",
@@ -921,7 +1023,10 @@
    "source": {
     "line": 651
    },
-   "en": null
+   "en": "\n  -> Models %(k1)s and %(k2)s must have been created from\n     the same mesh. But %(k1)s and %(k2)s were defined from\n     meshes %(k3)s and %(k4)s respectively.\n  -> Advice:\n     Review the definition of these models.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "84": {
    "id": "XFEM_84",
@@ -930,7 +1035,10 @@
    "source": {
     "line": 660
    },
-   "en": null
+   "en": "\n  An X-FEM model with contact cannot be created when keyword MODELE_THER is present.\n  -> Advice:\n     Give CONTACT='NON' so that contact is not activated.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "85": {
    "id": "XFEM_85",
@@ -943,7 +1051,10 @@
    "source": {
     "line": 667
    },
-   "en": null
+   "en": "\n  Element %(k1)s is assigned a thermal finite element in the enriched thermal model %(k2)s,\n  but this element is assigned no finite element in the uncracked mechanical model %(k3)s.\n  -> Advice:\n     Review the definition of these two models.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "86": {
    "id": "XFEM_86",
@@ -952,7 +1063,10 @@
    "source": {
     "line": 675
    },
-   "en": null
+   "en": "\nThe CHAM_GD used by operation ASSE_DEPL of CREA_CHAMP must be a nodal field.\"\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "87": {
    "id": "XFEM_87",
@@ -961,7 +1075,10 @@
    "source": {
     "line": 680
    },
-   "en": null
+   "en": "\nThe CHAM_GD used by operation ASSE_DEPL of CREA_CHAMP must be of type DEPL_R.\"\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "XFEM_88",
@@ -970,7 +1087,10 @@
    "source": {
     "line": 685
    },
-   "en": null
+   "en": "\nOperation ASSE_DEPL of CREA_CHAMP must not be used if the model has no X-FEM elements.\"\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "89": {
    "id": "XFEM_89",
@@ -979,7 +1099,10 @@
    "source": {
     "line": 690
    },
-   "en": null
+   "en": "\nOperation ASSE_DEPL of CREA_CHAMP does not support HM elements.\"\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "95": {
    "id": "XFEM_95",
@@ -990,7 +1113,10 @@
    "source": {
     "line": 695
    },
-   "en": null
+   "en": "\n  -> Keyword CRITERE of PROPA_FISS is 'ANGLE_IMPO_GAMMA' or 'ANGLE_IMPO_BETA_GAMMA', and the table\n     of stress intensity factors of crack %(k1)s has\n     no 'GAMMA' column.\n  -> Risk & advice:\n     If you want to impose the values of the twist angle at the\n     crack front points, give CRITERE='ANGLE_IMPO_GAMMA' or 'ANGLE_IMPO_BETA_GAMMA' and add\n     a 'GAMMA' column to the stress intensity factor table manually.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "96": {
    "id": "XFEM_96",
@@ -999,7 +1125,10 @@
    "source": {
     "line": 706
    },
-   "en": null
+   "en": "\n  -> You gave keyword EVOL of AFFE_MATERIAU / AFFE_VARC with an X-FEM thermal result.\n     In that case, you can define only one occurrence of factor keyword AFFE_VARC.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "97": {
    "id": "XFEM_97",
@@ -1008,7 +1137,10 @@
    "source": {
     "line": 712
    },
-   "en": null
+   "en": "\n  -> You gave keyword EVOL of AFFE_MATERIAU / AFFE_VARC with an X-FEM thermal result.\n     In that case, keyword MODELE of AFFE_MATERIAU becomes required.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "98": {
    "id": "XFEM_98",
@@ -1017,7 +1149,10 @@
    "source": {
     "line": 718
    },
-   "en": null
+   "en": "\n  -> FORCE_FACE loads are not handled when computing option CALC_G_XFEM on X-FEM boundary elements.\n     Only PRES_REP loads can be taken into account.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "99": {
    "id": "XFEM_99",
@@ -1026,7 +1161,10 @@
    "source": {
     "line": 724
    },
-   "en": null
+   "en": "\n  -> CALC_G_XFEM cannot handle a pressure that is a function of one or more parameters applied\n     to the lips of an X-FEM crack. Only a pressure constant in space and time is supported.\n     Use POST_K1_K2_K3.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "100": {
    "id": "XFEM_100",
@@ -1036,7 +1174,10 @@
     "line": 731
    },
    "reachable": false,
-   "en": null
+   "en": "\n  -> The material field is missing from the argument list of\n     POST_ERREUR, for an XFEM crack with a crack front. The X-FEM displacement\n     field cannot be assembled.\n  -> Advice:\n     Add CHAM_MATER to the input of POST_ERREUR.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   }
  }
 }

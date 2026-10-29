@@ -19,7 +19,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "\n  Usage error:\n    The GCPC iterative method cannot be used yet\n    with a non-symmetric matrix.\n\n  Advice: change the solver\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "2": {
    "id": "ASSEMBLA_2",
@@ -28,7 +31,10 @@
    "source": {
     "line": 32
    },
-   "en": null
+   "en": "The numbering cannot be created from the elementary matrices because the model is not the same.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "ASSEMBLA_3",
@@ -51,7 +57,10 @@
    "source": {
     "line": 41
    },
-   "en": null
+   "en": "\n MATR_DISTRIBUEE='OUI' requires each processor to be assigned\n at least 1 degree of freedom.\n Here, processor %(i1)d was assigned no DOF.\n\n Advice: change the element partitioning of your model in\n           AFFE_MODELE/DISTRIBUTION/METHODE or reduce the number of processors.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "5": {
    "id": "ASSEMBLA_5",
@@ -72,7 +81,10 @@
    "source": {
     "line": 56
    },
-   "en": null
+   "en": "\n Simple and double Lagrange cannot be mixed.\n\n Advice: check the DOUBLE_LAGRANGE keyword of your loads from AFFE_CHAR_MECA.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "7": {
    "id": "ASSEMBLA_7",
@@ -84,7 +96,10 @@
    "source": {
     "line": 63
    },
-   "en": null
+   "en": "\n Mismatched models: %(k1)s vs %(k2)s.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "ASSEMBLA_8",
@@ -95,7 +110,10 @@
    "source": {
     "line": 68
    },
-   "en": null
+   "en": "\n Keyword %(k1)s is incorrect.\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "ASSEMBLA_9",
@@ -104,7 +122,10 @@
    "source": {
     "line": 75
    },
-   "en": null
+   "en": "\nAfter creating the numbering, no owning processor could be found\nfor every degree of freedom of the problem.\n\nAdvice: if you are manipulating fields, check the consistency of the node\nand element groups.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "ASSEMBLA_11",
@@ -125,7 +146,10 @@
    "source": {
     "line": 89
    },
-   "en": null
+   "en": "\n Developer error in assembly.\n The elementary vectors or elementary matrices are inconsistent: they are not based on the same model\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "19": {
    "id": "ASSEMBLA_19",
@@ -146,7 +170,10 @@
    "source": {
     "line": 101
    },
-   "en": null
+   "en": "\n  Programmer error:\n    during an assembly, no elementary result was found in the list of MATR_ELEM (or VECT_ELEM)\n    to be assembled\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "ASSEMBLA_21",
@@ -249,7 +276,10 @@
    "source": {
     "line": 146
    },
-   "en": null
+   "en": "\n Node %(i1)d of %(k1)s of VECT_ELEM: %(k2)s has no address in: %(k3)s\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "ASSEMBLA_42",
@@ -264,7 +294,10 @@
    "source": {
     "line": 153
    },
-   "en": null
+   "en": "\n Node: %(i1)d of %(k1)s of VECT_ELEM: %(k2)s\n   has an address: %(i2)d greater than the number of equations: %(i3)d\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "43": {
    "id": "ASSEMBLA_43",
@@ -273,7 +306,10 @@
    "source": {
     "line": 161
    },
-   "en": null
+   "en": "\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "45": {
    "id": "ASSEMBLA_45",
@@ -282,7 +318,10 @@
    "source": {
     "line": 167
    },
-   "en": null
+   "en": "Error during assembly.\nIf you are using MACRO_ELAS_MULT:\n   If a load contains Lagrange-multiplier boundary conditions (DDL_IMPO, ...),\n   are you sure you gave this load under keyword CHAR_MECA_GLOBAL?\n   ALL Lagrange-multiplier loads must be given under CHAR_MECA_GLOBAL.\nIf you are using ASSE_VECTEUR or DYNA_VIBRA directly:\n   If a load contains Lagrange-multiplier boundary conditions (DDL_IMPO, ...),\n   are you sure you gave this load to NUME_DDL?\n      - Either with keyword CHARGE (together with MODELE) of NUME_DDL,\n      - Or with keyword MATR_RIGI (of NUME_DDL) and an elementary matrix\n      from CALC_MATR_ELEM/OPTION='RIGI_MECA' to which you gave\n      this load with keyword CHARGE",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "63": {
    "id": "ASSEMBLA_63",
