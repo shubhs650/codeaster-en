@@ -14,6 +14,27 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 3.4 English messages as gettext — agent
+Done: `caen translate gettext` (`tools/codeaster_en/translate/gettext_po.py`) generates
+`en/messages/codeaster_en.po` (6,813 entries, committed) and, with `--mo DIR`,
+`DIR/en/LC_MESSAGES/aster_messages.mo` (own GNU `.mo` writer; `msgfmt --check` clean, including
+format checks). `caen validate` gains `gettext` (the `.po` must match `en/messages`).
+`FIXTURE_LANG=EN scripts/run-fixture.sh` runs a fixture with `DEBUT(LANG="EN")` and the `.mo`
+mounted at the install's `share/locale/aster`; `solid_static`, `shell_static`, `modal`,
+`broken_missing_group` ran in session (17.4.22 image), outputs in `tests/fixtures/*/output_en/`:
+English diagnostics and footers, identical `TEST_RESU` values and exit codes.
+`solver-fixtures.yml` has an optional `english` job (PR verify; commit on dispatch). The `.mess`
+parser and renderer now read English footers, the English modal table and English box bodies
+(`already_english`). Five same-French message pairs with different English were aligned (one
+`msgid` each). `docs/ENGLISH-LOCALE.md` says how to install the `.mo` and switch a run.
+Open: `SUPERVIS` (and `SUPERVIS2` when `DEBUT` prints first) stays French because it is imported
+before `LANG` is applied (ADR-004 point 3, upstream proposal). 3.3 (owner review) still open;
+after it, rerun the `english` job so `output_en/` matches the new `.po`.
+Decisions: ADR-018 (generated `.po`, own `.mo` writer, `KEEP_FRENCH` for `SUPERVIS2_99` — the
+`<I> <FIN> ARRET NORMAL` line `run_aster` counts — and the stage lines `SUPERVIS2_71–75/80`).
+Needs owner: nothing blocking; review-queue entry added.
+Branch is `claude/project-thread-1mj5vz` (session-assigned).
+
 ## 2026-10-29 — 3.2 bulk message translation — agent
 Done: every one of the 6,890 messages in 277 families has English (`en` non-null); `caen validate`
 green. Token cost: zero (no API calls; the owner's API key was never needed).
