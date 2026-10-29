@@ -14,6 +14,15 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 3.2a upstream seed applied — agent
+Done: `caen translate messages --all --seed-po --seed-only`: 3,113 messages filled verbatim from
+upstream's 2016 `i18n/en-US/aster_messages.po` (`method: machine`, same placeholder and glossary
+checks as 3.1). 3,212 of 6,890 messages now have English; 3,678 remain for the in-session passes
+(3.2b onward). No API calls.
+Open: the in-session translation of the remaining families.
+Decisions: none.
+Needs owner: nothing.
+
 ## 2026-10-29 — 4.7 report images — agent
 Done: `codeaster_en.report.images` (pyvista off-screen): deformed shape colored by displacement
 magnitude over the undeformed edges (largest displacement drawn at 10 % of the model diagonal,
