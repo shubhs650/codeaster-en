@@ -161,6 +161,19 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-013 — Default modeling types for ClearFEA body kinds
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29)
+
+**Context.** PLAN.md task 2.4 asks when ClearFEA should pick each `MODELISATION`. The Phase 6 builder (`codeaster_en.comm`, `docs/CLEARFEA-INTEGRATION.md` §2: `b.model(mesh, solids=[...], shells={...})`) needs one default per body kind, and the mesh order ClearFEA asks Gmsh for depends on it.
+
+**Decision.** Defaults, documented in `en/guide/modelisations.md` ("How ClearFEA should choose"): solid → `3D` (second-order mesh preferred); thin shell → `DKT`; thick shell → `DST`; curved quadratic shell → `COQUE_3D` (with `CREA_MAILLAGE` `QUAD8_9` / `TRIA6_7`); beam → `POU_D_T` (not `POU_D_E`); plane stress → `C_PLAN`; plane strain → `D_PLAN`; axisymmetric → `AXIS`. `3D_SI` is never a default. One modeling family per model (plus discrete elements) until `LIAISON_ELEM` is in COMMAND-SET. Beams are offered only after COMMAND-SET adds `AFFE_CARA_ELEM` `POUTRE` / `ORIENTATION` and `AFFE_CHAR_MECA` `FORCE_POUTRE`.
+
+**Why.** Each default accepts the element types an automatic mesher produces for that body kind (element catalog `phenomenons_modelisations.py`) and makes the weaker kinematic assumption where the cost is the same: `POU_D_T` reduces to `POU_D_E` for slender members (`ptka01.F90`), `DKT` is validated by our `shell_static` fixture against the Navier solution (0.007 %). `3D_SI` skips `TETRA4`/`PENTA`/`PYRAM`, so on an automatic mesh it silently drops elements (`MODELE1_70` is only a warning). A shell or beam node on a solid face shares translations only; without `LIAISON_ELEM` the joint is a hinge.
+
+**Consequences.** The span/thickness thresholds (about 20 and 5) and the beam span/depth threshold (about 10) are textbook rules of thumb, marked `TODO(verify)` until the U3 modeling notes are available. The builder must refuse a mixed solid/shell/beam model rather than produce a hinge silently.
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>

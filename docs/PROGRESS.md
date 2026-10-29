@@ -14,6 +14,26 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.4 modelisations guide — agent
+Done: `en/guide/modelisations.md` (`status: assisted`), the first file in `en/guide/`. Covers
+`3D`, `3D_SI`, `DKT`, `DST`, `COQUE_3D`, `C_PLAN`, `D_PLAN`, `AXIS`, `POU_D_T` (+ `POU_D_E`,
+`DIS_T`/`DIS_TR` as alternatives): summary table (element types, DOFs, `AFFE_CARA_ELEM` data,
+outputs, catalog line), a ClearFEA selection procedure and builder defaults, one section per
+modeling with "pick it when" and pitfalls, and mixing modeling types (`LIAISON_ELEM`).
+Evidence: `phenomenons_modelisations.py`, element catalogs (`DDL_MECA` of each), `porigi.F90` /
+`ptka01.F90` (Timoshenko vs Euler: shear coefficients zeroed), `dmatmc.F90` (plane stress vs
+plane strain Hooke matrix), `dstb.F90`, `aceaor.F90`, messages, astest, our three fixtures.
+New `tests/test_guide.py`: every cited `path:line` exists, summary table values are real
+`MODELISATION` values and its line numbers point at the catalog entries. Glossary: 5 new
+`proposed` entries (`POUTRE`, `FORCE_POUTRE`, `FORCE_COQUE`, `FORCE_CONTOUR`, `LIAISON_ELEM`);
+drafts regenerated, none changed. Self-review: citations re-printed; 9 `TODO(verify)`.
+Open: owner review (PLAN acceptance); 2.5 fields guide is next.
+Decisions: ADR-013 (default modeling type per ClearFEA body kind; beams and mixed models wait
+for COMMAND-SET scope). Findings: beams (`AFFE_CARA_ELEM` `POUTRE`/`ORIENTATION`,
+`FORCE_POUTRE`) and `LIAISON_ELEM` are not in COMMAND-SET Tier 1/2 although PLAN 2.4 names
+`POU_D_T`; queued. `AXIS` reactions are per radian (`ssna111a.comm:94`).
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 2.3d solver and post-processing references (MECA_STATIQUE, CALC_CHAMP, POST_RELEVE_T, POST_ELEM, CREA_CHAMP, IMPR_RESU, IMPR_TABLE, DEBUT/FIN, TEST_RESU) — agent
 Done: the ten 2.2 drafts rewritten as full references, `status: assisted`, batch (a)-(c)
 format: purpose paragraph, every keyword row with meaning and "when to use", patterns from
