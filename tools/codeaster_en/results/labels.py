@@ -12,9 +12,10 @@ from __future__ import annotations
 from functools import cache
 from pathlib import Path
 
+from codeaster_en import data
 from codeaster_en.validate.glossary import load as load_glossary
 
-DEFAULT_GLOSSARY = Path(__file__).resolve().parents[3] / "en" / "glossary.yaml"
+DEFAULT_GLOSSARY = data.glossary_path()
 
 # Kinds that hold names of solver quantities. `abbrev` is kept out: SIGM alone means "stress",
 # but as a label for a bare token like NO ("node") it would mislead.

@@ -8,7 +8,7 @@
 | Date | 2026-10-23 |
 | Solver | code_aster 17.4.22 |
 | English overlay pinned to | code_aster 17.4.26 |
-| Report generator | codeaster-en 0.1.0 |
+| Report generator | codeaster-en 17.4.26.1 |
 | Units | SI-mm (mm, N, MPa, t, s) |
 
 Cylindrical shell (Ri 100, Ro 120, H 300 mm) with a radial nozzle (ri 25, ro 35 mm, open end at X = 220 mm), base fixed, 2 MPa internal pressure. Linear tetrahedra, linear elastic steel.

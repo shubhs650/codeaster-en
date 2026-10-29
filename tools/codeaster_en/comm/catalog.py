@@ -29,9 +29,10 @@ from functools import cache
 from pathlib import Path
 from typing import Any
 
+from codeaster_en import data
 from codeaster_en.comm.syntax import Commented, Concept, Number, Param
 
-DEFAULT_COMMANDS_DIR = Path(__file__).resolve().parents[3] / "en" / "commands"
+DEFAULT_COMMANDS_DIR = data.commands_dir()
 
 # Parent class of each data structure the builder produces or consumes, as declared in
 # upstream code_aster/Cata/Language/DataStructure.py (tests/test_comm.py checks every pair).

@@ -3,10 +3,21 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "codeaster_en"
-version = "0.1.0"
-description = "English overlay tooling for the code_aster finite element solver"
+name = "codeaster-en"
+# <upstream tag>.<overlay serial>, single-sourced in codeaster_en/__init__.py (ADR-020).
+dynamic = ["version"]
+description = "English overlay for the code_aster finite element solver: catalog, messages, logs, results, reports"
+readme = "README.md"
 license = "GPL-3.0-or-later"
+authors = [{ name = "codeaster-en contributors" }]
+keywords = ["code_aster", "finite element", "FEA", "translation", "gettext"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
 requires-python = ">=3.11"
 dependencies = [
     "typer>=0.12",
@@ -49,6 +60,10 @@ llm = [
     "anthropic>=2.3",
 ]
 
+[project.urls]
+Repository = "https://github.com/shubhs650/codeaster-en"
+Issues = "https://github.com/shubhs650/codeaster-en/issues"
+
 [project.scripts]
 caen = "codeaster_en.cli:app"
 
@@ -56,6 +71,12 @@ caen = "codeaster_en.cli:app"
 where = ["."]
 include = ["codeaster_en*"]
 
+[tool.setuptools.dynamic]
+version = { attr = "codeaster_en.__version__" }
+
+# en/ data is staged into codeaster_en/_data by setup.py (ADR-020); the glob picks it up again
+# when a wheel is built from the sdist.
 [tool.setuptools.package-data]
+"codeaster_en" = ["_data/**/*"]
 "codeaster_en.translate" = ["templates/*.j2"]
 "codeaster_en.report" = ["templates/*.j2", "templates/*.css"]

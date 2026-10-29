@@ -38,13 +38,13 @@ from __future__ import annotations
 import ast
 import json
 import shutil
-import struct
 import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
 from codeaster_en.extract.messages import SUFFIX
 from codeaster_en.mess.render import FOOTERS_EN
+from codeaster_en.translate import mo
 
 GENERATOR = "codeaster_en.translate.gettext_po"
 GENERATOR_VERSION = "1"
@@ -229,27 +229,7 @@ def render_po(entries: list[Entry], provenance: dict[str, str]) -> str:
 
 def render_mo(entries: list[Entry], provenance: dict[str, str]) -> bytes:
     """GNU ``.mo`` (little endian, no hash table), the format ``gettext.GNUTranslations`` reads."""
-    pairs = sorted(
-        [("", header(provenance))] + [(e.msgid, e.msgstr) for e in entries],
-        key=lambda p: p[0].encode("utf-8"),
-    )
-    ids = [k.encode("utf-8") for k, _ in pairs]
-    strs = [v.encode("utf-8") for _, v in pairs]
-    count = len(pairs)
-    start = 7 * 4 + 2 * 8 * count  # magic..hash offset, then the two tables
-    id_blob = b"".join(i + b"\0" for i in ids)
-    str_blob = b"".join(s + b"\0" for s in strs)
-    table: list[int] = []
-    offset = start
-    for i in ids:
-        table += [len(i), offset]
-        offset += len(i) + 1
-    offset = start + len(id_blob)
-    for s in strs:
-        table += [len(s), offset]
-        offset += len(s) + 1
-    head = struct.pack("<7I", 0x950412DE, 0, count, 28, 28 + 8 * count, 0, start)
-    return head + struct.pack(f"<{len(table)}I", *table) + id_blob + str_blob
+    return mo.write([("", header(provenance))] + [(e.msgid, e.msgstr) for e in entries])
 
 
 def load(repo: Path, upstream: Path | None = None) -> tuple[list[Entry], dict[str, str]]:

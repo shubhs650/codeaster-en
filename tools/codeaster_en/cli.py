@@ -665,12 +665,12 @@ def report(
         typer.Option(
             "--images/--no-images",
             help="Add deformed-shape, von Mises and mode-shape images (needs pyvista: "
-            "pip install codeaster_en[images], and off-screen OpenGL).",
+            "extra 'images' of codeaster-en, and off-screen OpenGL).",
         ),
     ] = False,
 ) -> None:
     """Write an English engineering report of a run: report.md, report.html, report.pdf
-    (needs WeasyPrint: pip install codeaster_en[report]) and run_model.json."""
+    (needs WeasyPrint: extra 'report' of codeaster-en) and run_model.json."""
     if not job.is_dir():
         typer.echo(f"report: no such directory: {job}", err=True)
         raise typer.Exit(code=1)

@@ -4,7 +4,7 @@
 | --- | --- |
 | Solver | code_aster 17.4.22 |
 | English overlay pinned to | code_aster 17.4.26 |
-| Report generator | codeaster-en 0.1.0 |
+| Report generator | codeaster-en 17.4.26.1 |
 | Units | model units |
 
 *This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code.*

@@ -53,3 +53,27 @@ jobs:
 
       - name: caen validate
         run: caen validate
+
+  # Task 6.2 (ADR-020): build the sdist and wheel, install the wheel in a clean venv and use it
+  # from outside the checkout. The wheel is kept as a run artifact; nothing is published.
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # no submodule: the wheel must not need upstream/
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build, install in a clean venv, smoke test
+        run: |
+          pip install build
+          scripts/check-wheel.sh dist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: codeaster-en-dist
+          path: dist/
+          retention-days: 14

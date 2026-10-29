@@ -8,7 +8,7 @@
 | Date | 2026-10-23 |
 | Solver | code_aster 17.4.22 |
 | English overlay pinned to | code_aster 17.4.26 |
-| Report generator | codeaster-en 0.1.0 |
+| Report generator | codeaster-en 17.4.26.1 |
 | Units | SI-mm (mm, N, MPa, t, s) |
 
 Simply supported square plate (a 1000 mm, t 10 mm), uniform pressure 0.01 MPa, DKT shell on a 20 x 20 QUAD4 mesh, linear elastic steel.
