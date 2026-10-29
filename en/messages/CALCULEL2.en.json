@@ -247,7 +247,10 @@
    "source": {
     "line": 141
    },
-   "en": null
+   "en": "\nUser error in command POST_RCCM / MOMENT_EQUIVALENT:\nThe computed field is empty for step index %(i1)d .\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "19": {
    "id": "CALCULEL2_19",
@@ -328,7 +331,10 @@
    "source": {
     "line": 175
    },
-   "en": null
+   "en": "\nUser error in command MACR_ECLA_PG\n  The location of the Gauss points of CHAM_ELEM (ELGA) %(k1)s is unknown.\n  This happens for example for fields such as\n  NOM_CHAM= ('VARI_ELGA', 'UT01_ELGA',...)\n  because there is no computation option for these NOM_CHAM.\n\nAdvice:\n  To post-process this CHAM_ELEM, pair it with\n  a field that causes no problem and has the same Gauss point\n  locations.\n  For example, to post-process VARI_ELGA, use:\n  MACR_ECLA_PG(... NOM_CHAM=('SIEF_ELGA', 'VARI_ELGA'),\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "26": {
    "id": "CALCULEL2_26",
@@ -340,7 +346,10 @@
    "source": {
     "line": 191
    },
-   "en": null
+   "en": "\nField %(k1)s is not found for step index %(i1)d in\nthe given result object.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "27": {
    "id": "CALCULEL2_27",
@@ -349,7 +358,10 @@
    "source": {
     "line": 197
    },
-   "en": null
+   "en": "\nThe field cannot be transferred to the new support because the model is missing.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "31": {
    "id": "CALCULEL2_31",
@@ -358,7 +370,10 @@
    "source": {
     "line": 202
    },
-   "en": null
+   "en": "\n  A non-zero offset was assigned (keyword COQUE / EXCENTREMENT)\n  to an element that cannot handle offsets.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "32": {
    "id": "CALCULEL2_32",
@@ -369,7 +384,10 @@
    "source": {
     "line": 208
    },
-   "en": null
+   "en": "\nUser error:\n  The program is trying to find on which side an element lies\n  with respect to a \"boundary\" element.\n  But this element seems degenerate (no thickness),\n  so the question cannot be answered.\n  The \"culprit\" element is: %(k1)s\n\nRisks and advice:\n  If the problem concerns keyword ORIE_PEAU of command MODI_MAILLAGE,\n  you can use keyword GROUP_MA_INTERNE to leave out\n  some elements.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "33": {
    "id": "CALCULEL2_33",
@@ -458,7 +476,10 @@
    "source": {
     "line": 257
    },
-   "en": null
+   "en": "\n%(k1)s  does not have the number of Gauss points declared in the routine\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "43": {
    "id": "CALCULEL2_43",
@@ -491,7 +512,10 @@
    "source": {
     "line": 274
    },
-   "en": null
+   "en": "\n   The CARA_ELEM was not found. The computation is not possible.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "46": {
    "id": "CALCULEL2_46",
@@ -578,7 +602,10 @@
    "source": {
     "line": 305
    },
-   "en": null
+   "en": "\n  Method ECLA_PG of PROJ_CHAMP cannot handle fields with more than %(i1)d components.\n  The field to process has %(i2)d.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "52": {
    "id": "CALCULEL2_52",
@@ -591,7 +618,10 @@
    "source": {
     "line": 311
    },
-   "en": null
+   "en": "\nFor field %(k1)s\nYou are using command CREA_TABLE on an incomplete field from elements with sub-points:\n    multifiber beams, multilayer plates, pipes, ...\nThis field may have been created by POST_CHAMP/EXTR_**\n\nThe extracted field has %(i1)4d sub-point(s).\nThe support element has %(i2)4d sub-point(s).\n\nAdvice: do not change the number of components of a field and then\n          reuse it in another command.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "57": {
    "id": "CALCULEL2_57",
@@ -600,7 +630,10 @@
    "source": {
     "line": 325
    },
-   "en": null
+   "en": "\n  User error in command CREA_CHAMP:\n    The field is to be assigned on sub-points but it already has sub-points.\n\n  Advice:\n    Do not use keyword AFFE_SP in this command.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "58": {
    "id": "CALCULEL2_58",
@@ -611,7 +644,10 @@
    "source": {
     "line": 334
    },
-   "en": null
+   "en": "\nUser error:\n  You use keyword PILOTAGE and your computation uses\n  time-dependent external state variables (keyword AFFE_VARC / EVOL).\n  This is not allowed.\n  Material field: %(k1)s\nAdvice:\n  With keyword PILOTAGE, the external state variables must not\n  depend on time.\n  Use keyword AFFE_VARC / CHAM_GD\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "62": {
    "id": "CALCULEL2_62",
@@ -636,7 +672,10 @@
    "source": {
     "line": 353
    },
-   "en": null
+   "en": "\nUsage error:\n  -> Model %(k1)s has no element that can compute stiffness.\n\n  -> Risk & advice:\n     This model cannot be used for computations.\n     Check the model definition (AFFE_MODELE) and make sure that the\n     element types of the mesh (SEG2, TRIA3, QUAD4, ...) are compatible with your\n     modeling type.\n     Examples of errors:\n       * assigning a \"3D\" modeling type to a mesh made of facets.\n       * assigning a modeling type that cannot handle all the element types of the mesh\n         (for example 'PLAN_DIAG' in thermal, 'AXIS_SI' in mechanical)\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "66": {
    "id": "CALCULEL2_66",
@@ -743,7 +782,10 @@
    "source": {
     "line": 424
    },
-   "en": null
+   "en": "\n The COMPORTEMENT map is missing.\n Your result may have been produced by LIRE_RESU or CREA_RESU.\n If your result was produced by LIRE_RESU, give keyword COMPORTEMENT.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "CALCULEL2_88",
@@ -768,7 +810,10 @@
    "source": {
     "line": 437
    },
-   "en": null
+   "en": "\n User warning:\n   Field  %(k1)s  could not be computed.\n\n Risks & advice:\n   * If the field is an element field, the elementary computation is not available\n     for the finite elements used. This can be because the\n     computation is not implemented yet, or because it is meaningless.\n     For example, field EFGE_ELNO is meaningless for elements of modeling type '3D'.\n   * If the field is a nodal field (XXXX_NOEU), field XXXX_ELNO\n     does not exist on the given elements.\n     For example, SIGM_NOEU cannot be computed on boundary elements.\n\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "90": {
    "id": "CALCULEL2_90",

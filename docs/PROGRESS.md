@@ -14,13 +14,19 @@ Needs owner: …
 
 ---
 
-## 2026-10-29 — 3.2a upstream seed applied — agent
-Done: `caen translate messages --all --seed-po --seed-only`: 3,113 messages filled verbatim from
-upstream's 2016 `i18n/en-US/aster_messages.po` (`method: machine`, same placeholder and glossary
-checks as 3.1). 3,212 of 6,890 messages now have English; 3,678 remain for the in-session passes
-(3.2b onward). No API calls.
-Open: the in-session translation of the remaining families.
-Decisions: none.
+## 2026-10-29 — 3.2 bulk message translation (in progress) — agent
+Done: 3.2a (PR #26): free upstream seed, 3,113 messages from upstream's 2016
+`i18n/en-US/aster_messages.po` (`method: machine`). 3.2b: 992 messages translated in session
+(`method: assisted`, `translation_source: session:task-3.2`, same `check()` as 3.1) for the
+priority families: SUPERVIS*, UTILITAI*, MODELISA*, CALCULEL*, MECANONLINE*, ALGELINE*,
+FACTOR*, POSTRELE. 4,204 of 6,890 messages have English. No API calls, no token cost.
+Open: the remaining 2,686 messages (3.2c onward).
+Decisions: none. Wording choices: "Ce message est un message d'erreur développeur. Contactez
+le support technique." = "This is a developer error message. Contact technical support.";
+*noeud sommet* = "corner node" (the glossary forbids "vertex"); *variable de commande* =
+"external state variable" (as AFFE_VARC); *pilotage* = "continuation control"; *instant de
+calcul* = "time step"; grid *cellules* in PROJ_CHAMP = "grid boxes" (the glossary forbids
+"cell").
 Needs owner: nothing.
 
 ## 2026-10-29 — 4.7 report images — agent

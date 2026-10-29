@@ -57,7 +57,10 @@
    "source": {
     "line": 35
    },
-   "en": null
+   "en": "\nWarning: the singularity detection criterion (parameter SOLVEUR/NPREC) is too loose: %(i1)d.\n\nWith this value, some input problems (badly fixed degree of freedom, redundant boundary condition...)\nare not detected. You may therefore solve a different problem from the one intended.\n\nAlso, some algorithms can then give incorrect results if no other algorithmic safeguards\nexist or if they are turned off. These safeguards include, for example, the parameters:\n    * RESI_RELA of the SOLVEUR block if METHODE='MUMPS' (for all operators),\n    * RESI_GLOB_RELA of the CONVERGENCE block (for operators STAT/DYNA_NON_LINE)...\nAdvice:\n   * Check your input (boundary conditions, material coefficients...) or your mesh (stretched elements)\n     to make sure that it is valid and matches what you intend.\n   * Make sure that at least one other stopping criterion is still active (with a reasonable value!) to ensure a\n     minimum quality of the solution.\n\nNote:\n   * For more information on this subject, see document U2.08.03 on linear solvers.\n\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "FACTOR_10",
@@ -70,7 +73,10 @@
    "source": {
     "line": 57
    },
-   "en": null
+   "en": "\nProblem: the matrix is singular or nearly singular:\n  During factorization of the matrix, a problem occurred\n  (zero or nearly zero pivot) at row %(i1)d, which corresponds to the degree of freedom given above.\n  The number of \"lost\" decimal digits for this row is: %(i2)d.\n  This number of lost digits reflects the degree of singularity of the matrix.\n  The larger it is, the more singular the system.\n  When more than 8 digits are lost, 50%% of the precision\n  of the real numbers (which have about 15 digits) is considered lost.\n\nRisks and advice:\n   * If the row is a physical degree of freedom, it is probably a badly fixed\n     rigid body motion.\n     Check the boundary conditions.\n     With contact, the structure must not be held by contact alone.\n     Also check the material properties (Young's modulus, ...).\n\n   * If the row is a Lagrange degree of freedom, it is most likely a redundant boundary\n     condition.\n     In particular, the redundant linear relation may come from the contact conditions.\n     You may need to exclude some nodes from the contact conditions\n     (keywords SANS_NOEUD and SANS_GROUP_NO).\n\n   * If the solver used is LDLT or MULT_FRONT, you can use the MUMPS solver\n     because it is the only one that can factorize matrices that are not positive definite.\n\n   * Sometimes, in parallel, the MUMPS singularity detection criterion is too pessimistic! It is still often\n     possible to complete the computation by relaxing this criterion (increase keyword NPREC by 1 or 2),\n     by turning it off (keyword NPREC=-1), or by running the computation again on fewer processors.\n\n   * This behavior can also be entirely normal with X-FEM if the crack passes\n     very close to a node.\n     If the number of lost digits is not too large (10 digits at most),\n     you can run the computation again with a larger allowed number of lost digits:\n     keyword NPREC of factor keyword SOLVEUR.\n     Otherwise, contact the development team.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "FACTOR_11",
@@ -93,7 +99,10 @@
    "source": {
     "line": 132
    },
-   "en": null
+   "en": "\nProblem during factorization of the matrix:\n    The matrix is singular and the factorization could not complete.\n    The singularity of the matrix cannot be attributed to a row of the matrix.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "FACTOR_13",
@@ -102,7 +111,10 @@
    "source": {
     "line": 139
    },
-   "en": null
+   "en": "\nProblem during factorization of the matrix.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "41": {
    "id": "FACTOR_41",
@@ -111,7 +123,10 @@
    "source": {
     "line": 144
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  The matrix passed to MUMPS is detected as empty.\n\nAdvice:\n  - check your input or its settings;\n  - to test, you can change the linear solver (SOLVEUR=_F(METHODE='MULT_FRONT'). Note that it is slower,\n    not parallel, and probably subject to the same data problem;\n  - if in doubt, contact the development team.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "FACTOR_42",
@@ -120,7 +135,10 @@
    "source": {
     "line": 156
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  The matrix cannot be factorized. It is detected as singular.\n\nAdvice:\n  - this is most likely an input problem; check your boundary conditions (missing or redundant fixity);\n  - if the computation is nonlinear, restore singularity detection (parameter NPREC at its default value) to allow\ntime step subdivision.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "47": {
    "id": "FACTOR_47",
@@ -129,7 +147,10 @@
    "source": {
     "line": 167
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Invalid REDUCTION_MPI value because it does not divide the number of MPI processes. This option is therefore turned off.\n  Your computation may just be slower.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "48": {
    "id": "FACTOR_48",
@@ -140,7 +161,10 @@
    "source": {
     "line": 174
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  An acceleration option not available with this version of MUMPS was turned on.\n  To continue the computation anyway, option %(k1)s was used instead.\n  Your computation may just be slower.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "49": {
    "id": "FACTOR_49",
@@ -149,7 +173,10 @@
    "source": {
     "line": 182
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Option REDUCTION_MPI is not available with this version of MUMPS. It is therefore turned off.\n  Your computation may just be slower.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "50": {
    "id": "FACTOR_50",
@@ -160,7 +187,10 @@
    "source": {
     "line": 189
    },
-   "en": null
+   "en": "\nMUMPS solver:\n   You requested the renumbering tool RENUM = '%(k1)s', but MUMPS used another one.\n\nAdvice:\n   Your version of MUMPS may not have been compiled with support for this renumbering tool.\n   If in doubt, RENUM='AUTO' lets MUMPS make the best choice.\n ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "51": {
    "id": "FACTOR_51",
@@ -201,7 +231,10 @@
    "source": {
     "line": 222
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  MUMPS ran out of memory while factorizing the matrix because of pivoting.\n  The extra space required by pivoting is hard to predict a priori.\n  It is controlled by parameter SOLVEUR/PCENT_PIVOT.\n  MUMPS tried several values of this parameter without success:\n                 from %(i2)d %% up to %(i3)d %%.\nAdvice:\n  - Increase keyword SOLVEUR/PCENT_PIVOT. Values above 100 are allowed\n    (especially for small systems),\n  - Switch to automatic memory management (GESTION_MEMOIRE='AUTO'),\n  - As a last resort, increase the memory given to the computation or the number of processors (if the computation is parallel).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "54": {
    "id": "FACTOR_54",
@@ -224,7 +257,10 @@
    "source": {
     "line": 248
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Problem or warning in the MUMPS solver.\n  The MUMPS return code is: %(i1)d\n\nAdvice:\n  See the MUMPS user manual.\n  Notify the Code_Aster development team.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "56": {
    "id": "FACTOR_56",
@@ -268,7 +304,10 @@
    "source": {
     "line": 280
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  MUMPS is running out of memory while factorizing the matrix because of pivoting.\n  The extra space required by pivoting is hard to predict a priori.\n  MUMPS has just failed with this extra space set to:\n                               SOLVEUR/PCENT_PIVOT=%(i1)d %%.\n  It will try again with a larger value: %(i2)d %%.\n  Next time, run your computation with these new settings.\n  This is factorization attempt no. %(i3)d!\n\nWarning:\n  This automatic correction is limited to %(i4)d attempts!\n  This new value of SOLVEUR/PCENT_PIVOT becomes the default for\n  later linear system solutions with MUMPS in this operator.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "60": {
    "id": "FACTOR_60",
@@ -279,7 +318,10 @@
    "source": {
     "line": 297
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Limit reached: the MUMPS solver is used by more than %(i1)d matrices at the same time.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "61": {
    "id": "FACTOR_61",
@@ -288,7 +330,10 @@
    "source": {
     "line": 303
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  The MUMPS instance associated with the working matrix was not found.\n  This is probably a programming error; contact the development team.\n\nAdvice:\n  Meanwhile, if you use MUMPS as a PETSc preconditioner you can\n  probably change option and use it as a direct solver:\n  Keyword: SOLVEUR=_F(METHODE='MUMPS') instead of SOLVEUR=_F(METHODE='PETSC'...)\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "62": {
    "id": "FACTOR_62",
@@ -376,7 +421,10 @@
    "source": {
     "line": 377
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  To try to fit in memory, as many JEVEUX objects as possible had to be offloaded to disk.\n  This offloading may have slowed the computation. But it was not enough, because MUMPS needs,\n  depending on its memory management mode (set by keyword SOLVEUR/GESTION_MEMOIRE),\n  at least:\n     - IN_CORE    : %(i3)d MB,\n     - OUT_OF_CORE: %(i4)d MB.\n\n  The computation may therefore slow down or stop for this reason.\n\n  For information: memory already preallocated by MUMPS (executable, matrix...)= %(i5)d MB,\n                   number of linear systems factorized at the same time      = %(i6)d.\n\nAdvice:\n  Next time, run again with more global memory or with a more\n  economical computation option:\n   - If the computation is parallel, reduce MUMPS consumption by increasing the number of processors, or\n     reduce JEVEUX consumption by turning on option MATR_DISTRIBUEE.\n  Or, more radically:\n   - Use a solver that needs less memory (for example: SOLVEUR/METHODE='PETSC' + PRECOND='LDLT_SP').\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "70": {
    "id": "FACTOR_70",
@@ -387,7 +435,10 @@
    "source": {
     "line": 401
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You turned on a development-mode option (MUMPS calling interface). The solution\n  of the current linear system runs normally, but in addition\n  its matrix and right-hand side are written to the file of logical unit\n  %(i1)d. You can retrieve it (on processor 0) with ASTK.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "71": {
    "id": "FACTOR_71",
@@ -398,7 +449,10 @@
    "source": {
     "line": 410
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You turned on a development-mode option (MUMPS calling interface). The current\n  linear system is therefore not solved, but its matrix and\n  right-hand side are written to the file of logical unit %(i1)d.\n  After this write, the Aster run stops with ERREUR_FATALE so that you\n  can retrieve your file sooner.\n  You can retrieve it (on processor 0) with ASTK.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "73": {
    "id": "FACTOR_73",
@@ -407,7 +461,10 @@
    "source": {
     "line": 421
    },
-   "en": null
+   "en": "\nMUMPS solver:\n   During its factorization step, MUMPS met an abnormally high number of numerical\n   difficulties. This can affect the quality of the result and the computation performance.\n\nAdvice:\n   Check that option SOLVEUR/PRETRAITEMENTS is turned on.\n   Check the quality control parameters: SOLVEUR/POSTTRAITEMENTS and SOLVEUR/RESI_RELA.\n   If the model has many boundary conditions and constraints, set SOLVEUR/ELIM_LAGR='NON'.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "74": {
    "id": "FACTOR_74",
@@ -421,7 +478,10 @@
    "source": {
     "line": 433
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Warning: you requested an IN_CORE computation, but MUMPS estimates that it needs at least\n  %(i1)d MB for it while only %(i2)d MB are available on this processor!\n  The computation may therefore slow down or stop for this reason.\n\n  For information: memory already preallocated by MUMPS (executable, matrix...)= %(i3)d MB,\n                   number of linear systems factorized at the same time      = %(i4)d.\n\nAdvice:\n  Next time, run again with more global memory or with a more economical computation option\n  (in decreasing order of effectiveness):\n    - If the computation is parallel, reduce MUMPS consumption by increasing the number of processors,\n    - In all cases, reduce MUMPS consumption by turning on option OUT_OF_CORE (SOLVEUR/GESTION_MEMOIRE='OUT_OF_CORE')\n      or switch to automatic mode (SOLVEUR/GESTION_MEMOIRE='AUTO'),\n    - If the computation is parallel, reduce Aster consumption by turning on option SOLVEUR/MATR_DISTRIBUEE.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "75": {
    "id": "FACTOR_75",
@@ -435,7 +495,10 @@
    "source": {
     "line": 452
    },
-   "en": null
+   "en": "\n  Warning: you requested an OUT_OF_CORE computation, but MUMPS estimates that it needs at least\n  %(i1)d MB for it while only %(i2)d MB are available on this processor!\n  The computation may therefore slow down or stop for this reason.\n\n  For information: memory already preallocated by MUMPS (executable, matrix...)= %(i3)d MB,\n                   number of linear systems factorized at the same time      = %(i4)d.\n\nAdvice:\n  Next time, run again with more global memory or with a more economical computation option\n  (in decreasing order of effectiveness):\n   - If the computation is parallel, reduce MUMPS consumption by increasing the number of processors,\n   - If the computation is parallel, reduce Aster consumption by turning on option SOLVEUR/MATR_DISTRIBUEE,\n  Or, more radically:\n   - Use a solver that needs less memory (for example: SOLVEUR/METHODE='PETSC' + PRECOND='LDLT_SP').\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "76": {
    "id": "FACTOR_76",
@@ -451,7 +514,10 @@
    "source": {
     "line": 470
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  To try to fit in memory, as many JEVEUX objects as possible had to be offloaded to disk.\n  This offloading may have slowed the computation.\n  The available memory thus went from %(i1)d MB to %(i2)d MB. But this was not enough because\n  MUMPS needs, depending on its memory management mode (set by keyword SOLVEUR/GESTION_MEMOIRE),\n  at least:\n     - IN_CORE    : %(i3)d MB,\n     - OUT_OF_CORE: %(i4)d MB.\n\n  The computation may therefore slow down or stop for this reason.\n\n  For information: memory already preallocated by MUMPS (executable, matrix...)= %(i5)d MB,\n                   number of linear systems factorized at the same time      = %(i6)d.\n\nAdvice:\n  Next time, run again with more global memory or with a more\n  economical computation option (in decreasing order of effectiveness):\n   - If the computation is parallel, reduce MUMPS consumption by increasing the number of processors, or\n     reduce JEVEUX consumption by turning on option MATR_DISTRIBUEE.\n  Or, more radically:\n   - Use a solver that needs less memory (for example: SOLVEUR/METHODE='PETSC' + PRECOND='LDLT_SP').\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "77": {
    "id": "FACTOR_77",
@@ -491,7 +557,10 @@
    "source": {
     "line": 511
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  Overflow of term no. %(i1)d of the right-hand side. Its absolute value is %(r1)g while the\n  limit is set to %(r2)g.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "80": {
    "id": "FACTOR_80",
@@ -500,7 +569,10 @@
    "source": {
     "line": 518
    },
-   "en": null
+   "en": "\nMUMPS solver:\n\n  Warning: you set up the linear solver to solve a real symmetric positive definite\n  linear system: keyword SOLVEUR/TYPE_RESOL='SYMDEF'. But your linear\n  system has complex values. This is contradictory.\n\nAdvice:\n  Use the MUMPS linear solver with TYPE_RESOL='AUTO'.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "81": {
    "id": "FACTOR_81",
@@ -518,7 +590,10 @@
    "source": {
     "line": 530
    },
-   "en": null
+   "en": "\n\n- Size of the linear system: %(i1)d\n- Number of linear systems factorized at the same time: %(i8)d.\n\n- Minimum memory used by Code_Aster (JEVEUX, Supervisor, Python...)       : %(i2)d MB\n- Estimated MUMPS memory with GESTION_MEMOIRE='IN_CORE'                     : %(i3)d MB\n- Estimated MUMPS memory with GESTION_MEMOIRE='OUT_OF_CORE'                 : %(i4)d MB\n- Estimated disk space for MUMPS with GESTION_MEMOIRE='OUT_OF_CORE'         : %(i5)d MB\n\n  > This computation therefore needs at least\n        - %(i6)d MB if GESTION_MEMOIRE='IN_CORE',\n        - %(i7)d MB if GESTION_MEMOIRE='OUT_OF_CORE'.\n  If in doubt, use GESTION_MEMOIRE='AUTO'.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "82": {
    "id": "FACTOR_82",
@@ -527,7 +602,10 @@
    "source": {
     "line": 548
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  The information on available memory cannot be used.\n  If you chose mode GESTION_MEMOIRE='AUTO', the mode is switched to OUT_OF_CORE as a precaution.\n  If you chose mode GESTION_MEMOIRE='EVAL', only the estimates of MUMPS consumption\n     are meaningful; ignore the other figures.\n  If you chose another mode, the memory consumption checks are turned off.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "83": {
    "id": "FACTOR_83",
@@ -536,7 +614,10 @@
    "source": {
     "line": 558
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  The MUMPS consumption forecasts cannot be used.\n  If you chose mode GESTION_MEMOIRE='AUTO', the mode is switched to OUT_OF_CORE as a precaution.\n  If you chose mode GESTION_MEMOIRE='EVAL', only the estimates of Aster consumption\n     are meaningful; ignore the other figures.\n  If you chose another mode, the memory consumption checks are turned off.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "84": {
    "id": "FACTOR_84",
@@ -545,7 +626,10 @@
    "source": {
     "line": 568
    },
-   "en": null
+   "en": "\nMUMPS solver:\n\n  Warning: you set up the MUMPS linear solver to solve a real symmetric positive definite\n  linear system: keyword SOLVEUR/TYPE_RESOL='SYMDEF'. But your\n  matrix has negative or zero terms on its diagonal. This is contradictory.\n\nAdvice:\n  If this is a test, you have been warned; otherwise use the MUMPS linear solver\n  with TYPE_RESOL='AUTO'.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "85": {
    "id": "FACTOR_85",
@@ -556,7 +640,10 @@
    "source": {
     "line": 581
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  MUMPS is trying to allocate %(i1)d MB of memory but fails. It relies\n  on an estimate of the available memory, which is probably wrong. This can\n   happen, for example, on old system kernels.\n\n  > As a precaution, it will try again leaving full control to MUMPS and switching to\n    OUT_OF_CORE memory management (SOLVEUR/GESTION_MEMOIRE='OUT_OF_CORE'). The computation may\n    be slower, but this removes the problems of prior memory estimates while\n    keeping MUMPS memory consumption as low as possible.\n\nAdvice:\n  Contact the development team.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "86": {
    "id": "FACTOR_86",
@@ -565,7 +652,10 @@
    "source": {
     "line": 598
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  On WINDOWS, 'IN_CORE' is forced with complex matrices because of an I/O problem.\n\nAdvice:\n  Switch explicitly to IN_CORE memory management (SOLVEUR/GESTION_MEMOIRE='IN_CORE').\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "FACTOR_88",
@@ -574,7 +664,10 @@
    "source": {
     "line": 607
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  An operator asked MUMPS to compute a determinant. So as not to distort this computation,\n  option SOLVEUR/ELIM_LAGR was turned off automatically: 'LAGR2' -> 'NON'\nWarning:\n  This new value of SOLVEUR/ELIM_LAGR becomes the default for\n  later linear system solutions with MUMPS in this operator.\n\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "89": {
    "id": "FACTOR_89",
@@ -583,7 +676,10 @@
    "source": {
     "line": 618
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You set up the MUMPS linear solver with renumbering tool 'PTSCOTCH'. But it\n  works only in parallel mode. So as not to stop the computation, its sequential version SCOTCH was used instead.\n\n  Next time:\n    - Run the computation again with the MPI version on several processors,\n    - Change the renumbering tool or leave parameter RENUM at 'AUTO'.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "90": {
    "id": "FACTOR_90",
@@ -592,7 +688,10 @@
    "source": {
     "line": 630
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You set up the MUMPS linear solver with renumbering tool 'PARMETIS'. But it\n  works only in parallel mode. So as not to stop the computation, its sequential version METIS was used instead.\n\n  Next time:\n    - Run the computation again with the MPI version on several processors,\n    - Change the renumbering tool or leave parameter RENUM at 'AUTO'.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "91": {
    "id": "FACTOR_91",
@@ -601,7 +700,10 @@
    "source": {
     "line": 642
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You set up the MUMPS linear solver with a parallel renumbering tool: RENUM='PARMETIS' or 'PTSCOTCH'. But they\n  are not installed in this version of Code_Aster.\n\n  Advice:\n    - Make sure you use a parallel version of Code_Aster that includes these external products,\n    - Change the renumbering tool or leave parameter RENUM at 'AUTO'.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "92": {
    "id": "FACTOR_92",
@@ -610,7 +712,10 @@
    "source": {
     "line": 654
    },
-   "en": null
+   "en": "\nMUMPS solver:\n  You use the MUMPS linear solver with a 32-bit renumbering tool, but your finite element model requires a 64-bit one.\n  This model generates linear systems too large for 32-bit storage.\n\n  Advice:\n    - Make sure you use a version of code_aster built on 64-bit renumbering tools and run the computation again with one of them explicitly turned on\n     (SOLVEUR/RENUM='METIS'/'PARMETIS'/'SCOTCH'/'PTSCOTCH'/'PORD') or with the default choice (SOLVEUR/RENUM='AUTO').\n    - Otherwise, use a linear solver that does not need MUMPS (SOLVEUR/METHODE='PETSC' + PRE_COND other than 'LDLT_SP').\n    - or, if possible, reduce the size of the model (< 5 to 10 million DOFs).\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "93": {
    "id": "FACTOR_93",
@@ -619,7 +724,10 @@
    "source": {
     "line": 668
    },
-   "en": null
+   "en": "\nSolvers LDLT and MULT_FRONT are not allowed for high-performance computing.\n\nAdvice:\n- Use MUMPS or PETSC\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

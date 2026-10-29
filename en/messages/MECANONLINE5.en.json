@@ -31,7 +31,10 @@
    "source": {
     "line": 28
    },
-   "en": null
+   "en": "\nBecause of the previous errors, the code stops.\n  You want to \"continue\" a nonlinear computation.\n  For this, you give an initial state (keyword ETAT_INIT).\n  For the first time step, the internal variable field at the start of the step is taken\n  from the given EVOL_NOLI result object or from field VARI_ELGA.\n  It was compared with the internal variable field created by keyword COMPORTEMENT; they are inconsistent.\n  Check the consistency between the behavior and the internal variable field given in the initial state.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "MECANONLINE5_3",
@@ -52,7 +55,10 @@
    "source": {
     "line": 46
    },
-   "en": null
+   "en": "\n You use a contact method (continuous or XFEM) that requires the tangent matrix to be updated\n at every iteration. The update is therefore forced (REAC_ITER = 1).\n\n  -> Risk & advice:\n   - You can remove this warning by\n     setting REAC_ITER=1 under factor keyword NEWTON.\n\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "5": {
    "id": "MECANONLINE5_5",
@@ -61,7 +67,10 @@
    "source": {
     "line": 57
    },
-   "en": null
+   "en": "\n You use a contact method (discrete or unilateral contact with penalty, or DIS_CHOC element)\n  that contributes to the tangent matrix at every iteration. The update is therefore forced (REAC_ITER=1), even if you use the\n 'ELASTIQUE' matrix.\n\n  -> Risk & advice:\n   - You can remove this warning when you use a 'TANGENTE' matrix: to do so,\n     set REAC_ITER=1 under factor keyword NEWTON.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "MECANONLINE5_6",
@@ -166,7 +175,10 @@
    "source": {
     "line": 115
    },
-   "en": null
+   "en": "\n Energy computation is not available with contact in continuous or XFEM formulation.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "16": {
    "id": "MECANONLINE5_16",
@@ -175,7 +187,10 @@
    "source": {
     "line": 120
    },
-   "en": null
+   "en": "\n THMS modeling types are not allowed in dynamics.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "MECANONLINE5_17",
@@ -184,7 +199,10 @@
    "source": {
     "line": 125
    },
-   "en": null
+   "en": "\n For the full HHT scheme, ALPHA cannot be -1.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "MECANONLINE5_20",
@@ -267,7 +285,10 @@
    "source": {
     "line": 170
    },
-   "en": null
+   "en": "You excluded the acceleration fields from storage while keeping the stresses. The nodal reactions (REAC_NODA) computed in CALC_CHAMP will be wrong.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "28": {
    "id": "MECANONLINE5_28",
@@ -316,7 +337,10 @@
    "source": {
     "line": 194
    },
-   "en": null
+   "en": "\nYou use option RESI_REFE_RELA with both beam and shell\nelements present. This is not recommended because the dimensions of the values given to keywords\nFORCE_REFE and MOMENT_REFE differ for these two element types.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "33": {
    "id": "MECANONLINE5_33",
@@ -385,7 +409,10 @@
    "source": {
     "line": 228
    },
-   "en": null
+   "en": "\nLine search is incompatible with follower Dirichlet loads.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "40": {
    "id": "MECANONLINE5_40",
@@ -394,7 +421,10 @@
    "source": {
     "line": 233
    },
-   "en": null
+   "en": "\nDynamics with follower Dirichlet loads.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "41": {
    "id": "MECANONLINE5_41",
@@ -403,7 +433,10 @@
    "source": {
     "line": 238
    },
-   "en": null
+   "en": "\nFollower Dirichlet loads require the matrix to be updated, REAC_ITER=1.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "MECANONLINE5_42",
@@ -412,7 +445,10 @@
    "source": {
     "line": 243
    },
-   "en": null
+   "en": "\nContinuation control is incompatible with follower Dirichlet loads.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "43": {
    "id": "MECANONLINE5_43",
@@ -493,7 +529,10 @@
    "source": {
     "line": 287
    },
-   "en": null
+   "en": "\nLine search is skipped for this iteration: the residual is orthogonal\nto the descent direction. The Newton step is kept.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "50": {
    "id": "MECANONLINE5_50",
@@ -528,7 +567,10 @@
    "source": {
     "line": 305
    },
-   "en": null
+   "en": "\nThe model has no displacement degree of freedom.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "53": {
    "id": "MECANONLINE5_53",
@@ -549,7 +591,10 @@
    "source": {
     "line": 315
    },
-   "en": null
+   "en": "Using ARRET='NON' with contact requires REAC_GEOM = 'SANS'",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "55": {
    "id": "MECANONLINE5_55",
@@ -561,7 +606,10 @@
    "source": {
     "line": 316
    },
-   "en": null
+   "en": "\n  You use convergence indicator RESI_REFE_RELA and modeling type %(k1)s.\n  You must give reference value %(k2)s in CONVERGENCE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "56": {
    "id": "MECANONLINE5_56",
@@ -570,7 +618,10 @@
    "source": {
     "line": 322
    },
-   "en": null
+   "en": "\n  Vibration modes (MODE_VIBR) cannot be computed at present\n  on a model with at least one non-symmetric assembled matrix (mass or stiffness).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "59": {
    "id": "MECANONLINE5_59",
@@ -582,7 +633,10 @@
    "source": {
     "line": 328
    },
-   "en": null
+   "en": "\n  You use convergence criterion RESI_REFE_RELA and modeling type %(k1)s.\n  The residual computed from %(k2)s in CONVERGENCE gives zero values,\n  which can happen if elements of this type are flat.\n\n  Advice:\n  Use another convergence criterion.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "60": {
    "id": "MECANONLINE5_60",
@@ -591,7 +645,10 @@
    "source": {
     "line": 338
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with contact.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "61": {
    "id": "MECANONLINE5_61",
@@ -600,7 +657,10 @@
    "source": {
     "line": 339
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with unilateral constraints.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "62": {
    "id": "MECANONLINE5_62",
@@ -609,7 +669,10 @@
    "source": {
     "line": 340
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with continuation control.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "63": {
    "id": "MECANONLINE5_63",
@@ -618,7 +681,10 @@
    "source": {
     "line": 341
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with line search.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "65": {
    "id": "MECANONLINE5_65",
@@ -627,7 +693,10 @@
    "source": {
     "line": 342
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with model reduction.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "66": {
    "id": "MECANONLINE5_66",
@@ -636,7 +705,10 @@
    "source": {
     "line": 343
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with XFEM.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "67": {
    "id": "MECANONLINE5_67",
@@ -645,7 +717,10 @@
    "source": {
     "line": 344
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with macro-elements.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "68": {
    "id": "MECANONLINE5_68",
@@ -654,7 +729,10 @@
    "source": {
     "line": 345
    },
-   "en": null
+   "en": " Buckling modes (CRIT_FLAMB) or vibration modes (MODE_VIBR) cannot be computed at present with the HHO formulation.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "69": {
    "id": "MECANONLINE5_69",
@@ -663,7 +741,10 @@
    "source": {
     "line": 348
    },
-   "en": null
+   "en": "The HHO formulation is incompatible with follower loads.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "73": {
    "id": "MECANONLINE5_73",
@@ -672,7 +753,10 @@
    "source": {
     "line": 349
    },
-   "en": null
+   "en": "Option RESI_COMP_RELA is not available for HHO methods. Use another convergence criterion.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "74": {
    "id": "MECANONLINE5_74",
@@ -681,7 +765,10 @@
    "source": {
     "line": 352
    },
-   "en": null
+   "en": "\n  You want to \"continue\" a nonlinear computation. The model underlying CARA_ELEM differs from the computation model.\nThe computation may stop later if some information is inconsistent.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "75": {
    "id": "MECANONLINE5_75",
@@ -690,7 +777,10 @@
    "source": {
     "line": 358
    },
-   "en": null
+   "en": "\n  You want to \"continue\" a nonlinear computation. The mesh underlying CARA_ELEM differs from the computation mesh.\nThe computation may stop later if some information is inconsistent.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "80": {
    "id": "MECANONLINE5_80",
@@ -701,7 +791,10 @@
    "source": {
     "line": 364
    },
-   "en": null
+   "en": "\nYou want to continue a nonlinear computation and you give an initial state (keyword ETAT_INIT).\nField %(k1)s given as the initial state has an underlying model that differs from the computation model.\nIt was padded with zeros.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "81": {
    "id": "MECANONLINE5_81",
@@ -710,7 +803,10 @@
    "source": {
     "line": 371
    },
-   "en": null
+   "en": "\nYou want to continue a nonlinear computation and you give an initial state (keyword ETAT_INIT).\nThe stress field given as the initial state has an underlying model that differs from the computation model.\nIt was padded with zeros.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "82": {
    "id": "MECANONLINE5_82",
@@ -719,7 +815,10 @@
    "source": {
     "line": 378
    },
-   "en": null
+   "en": "\nYou want to continue a nonlinear computation and you give an initial state (keyword ETAT_INIT).\nThe internal variable field given as the initial state is inconsistent with the internal variable field created by keyword COMPORTEMENT.\nCheck the consistency between the behavior and the internal variable field given in the initial state.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }
