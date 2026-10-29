@@ -1,4 +1,5 @@
-"""Glossary coverage: Tier 1/2 identifiers of docs/COMMAND-SET.md have entries (task 0.6)."""
+"""Glossary coverage: Tier 1/2 identifiers of docs/COMMAND-SET.md have entries (task 0.6);
+every entry except values has a note (task 2.1)."""
 
 from __future__ import annotations
 
@@ -48,3 +49,11 @@ def test_source_fields_point_into_upstream() -> None:
         if entry["fr"] not in path.read_text(encoding="utf-8").splitlines()[int(line) - 1]:
             bad.append(entry["fr"])
     assert bad == []
+
+
+def test_entries_have_notes_except_values() -> None:
+    # PLAN.md task 2.1: opaque abbreviations and identifiers are explained once, in `note`.
+    missing = [
+        e["fr"] for e in glossary.load(GLOSSARY) if e["kind"] != "value" and not e.get("note")
+    ]
+    assert missing == []

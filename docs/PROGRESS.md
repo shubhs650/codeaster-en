@@ -14,6 +14,23 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.1 glossary pass 1 — agent
+Done: every non-value entry of `en/glossary.yaml` now has a `note` (164 added: 23 terms, 36
+commands, 81 keywords, 24 concepts), drafted from the catalog `fr=` strings, allowed values and
+defaults in `en/commands/*.json`, and, for result components, the comments in
+`upstream/catalo/cataelem/Commons/physical_quantities.py` (VMIS_SG) and
+`code_aster/MacroCommands/Modal/post_mode_ops.py` (MASS_EFFE_UN). All 353 entries moved from
+`proposed` to `machine`. New test `test_entries_have_notes_except_values` keeps the note rule.
+Self-review: each claim about a keyword's sub-keywords, values or defaults was re-checked against
+the catalog JSON; no `en` value changed.
+Open: 12 entries carry `TODO(verify)` that needs the U4 docs (not in the sandbox): DIFFE,
+VALE_REF, RESI_RELA, VOLUMOGRAMME, PM_PB, VITESSE (from 0.6) and VERI_MAIL (APLAT), REAC_NODA
+(exact definition), PRIN_1/PRIN_3 (ordering), LONG_CARA, COEF_AMOR (new). Listed in the owner
+review queue.
+Decisions: none (no ADR). Status `machine` is used for agent-drafted entries as PLAN.md 2.1
+asks; entries added later still start as `proposed`.
+Needs owner: nothing blocking.
+
 ## 2026-10-29 — 4.2 run fixtures, commit outputs, solver-fixtures Action — agent
 Done: ran all three fixtures in-session with Docker and committed `tests/fixtures/*/output/`
 (`run.mess`, `run.rmed`, `run.resu` (empty), `tables/*.csv`, `exit_code`, `run_aster.stdout`,
