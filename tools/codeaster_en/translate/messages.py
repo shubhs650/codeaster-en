@@ -530,7 +530,7 @@ def _store(msg: dict[str, Any], en: str, method: str, source: str) -> None:
 
 def check(msg: dict[str, Any], en: str, terms: list[Term]) -> list[str]:
     """Why ``en`` is not acceptable for ``msg`` (empty list = accepted)."""
-    if not en.strip():
+    if not en.strip() and msg["fr"].strip():
         return ["empty translation"]
     return placeholders.compare(msg["fr"], en) + glossary_problems(msg["fr"], en, terms)
 

@@ -47,7 +47,8 @@ def check_family(doc: Any, family: str) -> list[str]:
         en = msg.get("en")
         if en is None:
             continue
-        if not isinstance(en, str) or not en.strip():
+        # An empty French message (e.g. VIDE_1) translates to an empty English one.
+        if not isinstance(en, str) or (not en.strip() and msg["fr"].strip()):
             issues.append(f"{where}: 'en' must be null or a non-empty string")
             continue
         issues.extend(f"{where}: {p}" for p in placeholders.compare(msg["fr"], en))
