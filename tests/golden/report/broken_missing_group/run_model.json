@@ -1,0 +1,888 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "broken_missing_group",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": null,
+      "mess": "output/run.mess",
+      "rmed": null,
+      "mesh": "input/mesh.med",
+      "tables": [],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "element_properties",
+    "loads_and_bcs",
+    "solution",
+    "diagnostics"
+  ],
+  "sections_omitted": {
+    "displacements": "the run failed (REPORT-SPEC §5)",
+    "stresses": "the run failed (REPORT-SPEC §5)",
+    "reactions": "the run failed (REPORT-SPEC §5)",
+    "modal": "the run failed (REPORT-SPEC §5)",
+    "verification": "the run failed (REPORT-SPEC §5)",
+    "appendix_command_file": "the run failed (REPORT-SPEC §5)",
+    "appendix_run_parameters": "the run failed (REPORT-SPEC §5)"
+  },
+  "title_block": {
+    "project": null,
+    "title": "code_aster run broken_missing_group",
+    "revision": null,
+    "author": null,
+    "date": null,
+    "description": null,
+    "logo": null,
+    "solver_version": "17.4.22",
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": null,
+    "name": "model units",
+    "declared": false,
+    "guess": "SI_mm",
+    "units": {},
+    "note": "No unit system is declared (run.json units); values are in model units. Young's modulus E = 210000 suggests SI-mm (mm, N, MPa, t, s); this is an assumption, so units are not printed."
+  },
+  "outcome": {
+    "status": "failed",
+    "diagnostic_job": "<S>_ERROR",
+    "exit_code": 1,
+    "classification": {
+      "failure_class": "user-model",
+      "reason": "a group named in the command file does not exist in the mesh",
+      "message_id": "MODELISA7_77",
+      "diagnostic_job": "<S>_ERROR",
+      "evidence": "tests/fixtures/broken_missing_group"
+    },
+    "failed_command": "AFFE_CHAR_MECA",
+    "failed_comm_line": 33,
+    "fatal_message": "GROUP_MA  EDGE  is not part of mesh:  00000001",
+    "fatal_message_id": "MODELISA7_77",
+    "fatal_message_english": true,
+    "last_lines": [
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 516, in exec_",
+      "    self._call_oper(syntax)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 282, in _call_oper",
+      "    return libaster.call_oper(syntax, 0)",
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "libaster.AsterError: ",
+      " ╔================================================================================================╗",
+      " ║ <EXCEPTION> <MODELISA7_77>                                                                     ║",
+      " ║                                                                                                ║",
+      " ║  GROUP_MA  EDGE  is not part of mesh:  00000001                                                ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║        MODELISA8_14  issued    3 times                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[14 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <S>_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "analysis": {
+    "type": "linear_static",
+    "solve_command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "solve_comm_line": 46,
+    "result": "RESU"
+  },
+  "summary": {
+    "analysis_type": "linear_static",
+    "nodes": 441,
+    "elements": 483,
+    "outcome": "failed",
+    "elapsed_s": null,
+    "cpu_s": 0.23,
+    "peak_memory_mb": 769.31,
+    "warnings": {
+      "MODELISA8_14": 3
+    },
+    "ignored_warnings": [],
+    "headline": []
+  },
+  "model": {
+    "modelings": [
+      {
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": null
+          }
+        ],
+        "physics": {
+          "fr": "MECANIQUE",
+          "en": "mechanical"
+        },
+        "modeling": {
+          "fr": "DKT",
+          "en": "thin shell (DKT)"
+        },
+        "comm_line": 23
+      }
+    ],
+    "mesh_source": "input/mesh.med",
+    "nodes": 441,
+    "elements": [
+      {
+        "type": "POI1",
+        "label": "point element (1 node)",
+        "count": 3
+      },
+      {
+        "type": "QUAD4",
+        "label": "4-node quadrangle",
+        "count": 400
+      },
+      {
+        "type": "SEG2",
+        "label": "2-node segment",
+        "count": 80
+      }
+    ],
+    "element_total": 483,
+    "bounding_box": {
+      "X": [
+        0.0,
+        1000.0
+      ],
+      "Y": [
+        0.0,
+        1000.0
+      ],
+      "Z": [
+        0.0,
+        0.0
+      ]
+    },
+    "groups": null
+  },
+  "materials": [
+    {
+      "name": "ACIER",
+      "laws": [
+        {
+          "law": "ELAS",
+          "label": "linear elastic",
+          "properties": [
+            {
+              "keyword": "E",
+              "label": "Young's modulus",
+              "value": 210000.0,
+              "quantity": "stress"
+            },
+            {
+              "keyword": "NU",
+              "label": "Poisson's ratio",
+              "value": 0.3,
+              "quantity": null
+            }
+          ]
+        }
+      ],
+      "assigned_to": [
+        {
+          "name": "PLATE",
+          "display_name": null
+        }
+      ],
+      "comm_line": 29
+    }
+  ],
+  "element_properties": [
+    {
+      "keyword": "COQUE",
+      "label": "shell properties",
+      "targets": [
+        {
+          "name": "PLATE",
+          "display_name": null
+        }
+      ],
+      "values": [
+        {
+          "keyword": "EPAIS",
+          "label": "thickness",
+          "value": 10.0
+        },
+        {
+          "keyword": "ANGL_REP",
+          "label": "local-axis angles",
+          "value": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "comm_line": 27
+    }
+  ],
+  "loads_and_bcs": {
+    "solve_command": "MECA_STATIQUE",
+    "load_case": [
+      "APPUI",
+      "PRESS"
+    ],
+    "rows": [
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "EDGE",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DZ",
+            "label": "Z translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 33
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_A",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DX",
+            "label": "X translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 33
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_B",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 33
+      },
+      {
+        "load": "PRESS",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "PRES_REP",
+        "label": "distributed pressure",
+        "kind": "load",
+        "enforcement": null,
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "PRES",
+            "label": null,
+            "value": 0.01
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 44
+      }
+    ]
+  },
+  "solution": {
+    "command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "settings_source": "command file",
+    "linear_solver": {
+      "fr": "MUMPS",
+      "en": "MUMPS direct solver"
+    },
+    "renumbering": null,
+    "lagrange_elimination": null,
+    "dofs": {
+      "total": null,
+      "physical": null,
+      "nodes": null,
+      "lagrange": null,
+      "relations": null,
+      "source": "solver log message FACTOR_1"
+    },
+    "cpu_s": null,
+    "elapsed_s": null
+  },
+  "displacements": null,
+  "stresses": null,
+  "reactions": null,
+  "modal": null,
+  "diagnostics": {
+    "items": [
+      {
+        "message_id": "MODELISA7_77",
+        "severity": "error",
+        "count": 1,
+        "english": true,
+        "status": "english",
+        "text": " GROUP_MA  EDGE  is not part of mesh:  00000001",
+        "commands": [
+          "AFFE_CHAR_MECA"
+        ],
+        "log_lines": [
+          297
+        ]
+      },
+      {
+        "message_id": "MODELISA8_14",
+        "severity": "warning",
+        "count": 3,
+        "english": true,
+        "status": "english",
+        "text": "POI1 element 1 is included in another element.",
+        "commands": [
+          "LIRE_MAILLAGE"
+        ],
+        "log_lines": [
+          119,
+          130,
+          141
+        ]
+      }
+    ],
+    "ignored_warnings": [],
+    "coverage": {
+      "diagnostics": 5,
+      "diagnostics_english": 5,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [],
+    "non_regression": {
+      "count": 0,
+      "ok": 0
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# broken_missing_group -- deliberately broken run (task 4.3): GROUP_MA 'EDGE' does not\n# exist in the mesh (typo for 'EDGES').\n# codeaster-en test fixture. Copy of shell_static (same mesh, units mm, N, MPa) cut after\n# MECA_STATIQUE, with one fault injected. DEBUT() without CODE, as a user's study would run.\n# The .mess this produces is a parser and classifier test input; the run is expected to fail.\n\nDEBUT()\n\nQ = 0.01  # uniform pressure [MPa]\nT = 10.0  # thickness [mm]\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA=\"OUI\"))\n\n# Mesh normals already point to +Z; this makes the orientation explicit and checked.\nMAIL = MODI_MAILLAGE(\n    reuse=MAIL,\n    MAILLAGE=MAIL,\n    ORIE_NORM_COQUE=_F(GROUP_MA=\"PLATE\", GROUP_NO=\"CENTER\", VECT_NORM=(0.0, 0.0, 1.0)),\n)\n\nMODE = AFFE_MODELE(\n    MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"DKT\")\n)\n\nCARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA=\"PLATE\", EPAIS=T, ANGL_REP=(0.0, 0.0)))\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", MATER=ACIER))\n\nAPPUI = AFFE_CHAR_MECA(\n    MODELE=MODE,\n    DDL_IMPO=(\n        # fault: no such group\n        _F(GROUP_MA=\"EDGE\", DZ=0.0),\n        _F(GROUP_NO=\"CORNER_A\", DX=0.0, DY=0.0),\n        _F(GROUP_NO=\"CORNER_B\", DY=0.0),\n    ),\n)\n\n# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).\nPRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=\"PLATE\", PRES=Q))\n\nRESU = MECA_STATIQUE(\n    MODELE=MODE,\n    CHAM_MATER=MATE,\n    CARA_ELEM=CARA,\n    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),\n    SOLVEUR=_F(METHODE=\"MUMPS\"),\n)\n\n\nFIN()\n",
+    "comm_syntax_error": null,
+    "comm_skipped_lines": [],
+    "command_purposes": {
+      "7": {
+        "command": "DEBUT",
+        "purpose": "begin study"
+      },
+      "12": {
+        "command": "LIRE_MAILLAGE",
+        "purpose": "read mesh"
+      },
+      "14": {
+        "command": "DEFI_GROUP",
+        "purpose": "define groups"
+      },
+      "17": {
+        "command": "MODI_MAILLAGE",
+        "purpose": "modify mesh"
+      },
+      "23": {
+        "command": "AFFE_MODELE",
+        "purpose": "assign model"
+      },
+      "27": {
+        "command": "AFFE_CARA_ELEM",
+        "purpose": "assign element properties"
+      },
+      "29": {
+        "command": "DEFI_MATERIAU",
+        "purpose": "define material"
+      },
+      "31": {
+        "command": "AFFE_MATERIAU",
+        "purpose": "assign material"
+      },
+      "33": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "44": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "46": {
+        "command": "MECA_STATIQUE",
+        "purpose": "linear static analysis"
+      },
+      "55": {
+        "command": "FIN",
+        "purpose": "end study"
+      }
+    },
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/reactions.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "  Opening file for writing: ./vola.1",
+      "",
+      " <INFO> Starting the run.",
+      "",
+      "            -- CODE_ASTER -- VERSION: CORRECTIVE AVANT STABILISATION (stable-updates) --",
+      "                               Version 17.4.22 modified on 30/06/2026",
+      "                              revision spack-local - branch 'v17.4.22'",
+      "                                   Copyright EDF R&D 1991 - 2026",
+      "",
+      "                                  Run on: Thu Oct 29 05:50:16 2026",
+      "                                      Host name: 05b5a7cf52e6",
+      "                                        Architecture: 64bit",
+      "                                       Processor type: x86_64",
+      "                   Operating system: Linux-6.18.44-fc-v185-x86_64-with-glibc2.36",
+      "                                    Message language: en (UTF-8)",
+      "                                      Python version: 3.11.14",
+      "                                       NumPy version: 1.26.4",
+      "                                        MPI parallelism: on",
+      "                                  Rank of the current processor: 0",
+      "                                  Number of MPI processors used: 1",
+      "                                       OpenMP parallelism: on",
+      "                                  Number of OpenMP threads used: 1",
+      "                                    HDF5 library version: 1.10.7",
+      "                                     MED library version: 4.2.0",
+      "                                   MFront library version: 5.0.0",
+      "                                    MUMPS library version: 5.6.2",
+      "                                  PETSc library version: 3.24.0p0",
+      "                                   SCOTCH library version: 7.0.10",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  Initial value of the maximum CPU time =   600 seconds",
+      "  Maximum CPU time given to the commands =   540 seconds",
+      "  Planned CPU reserve = 60 seconds",
+      "",
+      "  Opening file for writing: ./glob.1",
+      "",
+      "  Opening file for writing: ./vola.1",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Created with version                    :  17.04.22",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Total number of read accesses           :  65",
+      "     Volume read                             :         50.78 MB.",
+      "     Total number of write accesses          :  0",
+      "     Volume written                          :          0.00 MB.",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Element catalogs read again.",
+      "",
+      "  End of reading (duration  0.248825  s.)",
+      "",
+      "                          Memory limit for dynamic allocation: 2410.05 MB",
+      "                             added at process initialization: 648.00 MB",
+      "                              Target limit of the process: 3058.06 MB",
+      "                              Size limit of the swap files: 2048.00 GB",
+      "# Memory (MB):   648.00 /   639.86 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0001   user+syst:        0.05s (syst:        1.63s, elaps:        1.70s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0002 from run.comm.changed.py, line 24",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "MED name of the mesh: mesh",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Checking the mesh.",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 1 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 2 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 3 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "# Result of command #0002 (LIRE_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   648.00 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0002   user+syst:        0.01s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0003 from run.comm.changed.py, line 26",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0003 (DEFI_GROUP): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   648.00 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0003   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0004 from run.comm.changed.py, line 29",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Processing GROUP_MA PLATE with 400 elements.",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0004 (MODI_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   648.00 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0004   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0005 from run.comm.changed.py, line 35",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Of the 483 elements of mesh 00000001, assignment was requested for 400 and 400 could be assigned.",
+      " Modeling type    Formulation      Element type Finite element   Number",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0005 (AFFE_MODELE): MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.31 /   769.31 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0005   user+syst:        0.01s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0006 from run.comm.changed.py, line 39",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0006 (AFFE_CARA_ELEM): CARA ('<00000003>') of type <ElementaryCharacteristics>",
+      "# Depends on:",
+      "# - MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.31 /   769.31 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0006   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0007 from run.comm.changed.py, line 41",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0007 (DEFI_MATERIAU): ACIER ('<00000004>') of type <Material>",
+      "# Memory (MB):   769.31 /   769.31 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0007   user+syst:        0.07s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0008 from run.comm.changed.py, line 43",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0008 (AFFE_MATERIAU): MATE ('<00000005>') of type <MaterialField>",
+      "# Memory (MB):   769.31 /   769.31 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0008   user+syst:        0.06s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0009 from run.comm.changed.py, line 45",
+      "[13 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <EXCEPTION> <MODELISA7_77>                                                                     ║",
+      " ║                                                                                                ║",
+      " ║  GROUP_MA  EDGE  is not part of mesh:  00000001                                                ║",
+      " ╚================================================================================================╝",
+      "",
+      "  Result object '00000006' deleted after the previous error.",
+      "",
+      "# Result of command #0009 (AFFE_CHAR_MECA): APPUI ('<00000006>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   769.31 /   769.31 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0009   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "Traceback (most recent call last):",
+      "  File \"<frozen runpy>\", line 198, in _run_module_as_main",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/__main__.py\", line 7, in <module>",
+      "    main()",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 230, in main",
+      "    run_command_line(args)",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 47, in run_command_line",
+      "    run_path(sys.argv[0], run_name='__main__')",
+      "  File \"<frozen runpy>\", line 291, in run_path",
+      "  File \"<frozen runpy>\", line 98, in _run_module_code",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"run.comm.changed.py\", line 45, in <module>",
+      "    APPUI = AFFE_CHAR_MECA(",
+      "            ^^^^^^^^^^^^^^^",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 183, in run",
+      "    return cmd.run_(**kwargs)",
+      "           ^^^^^^^^^^^^^^^^^^",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 226, in run_",
+      "    self.exec_(keywords)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/CodeCommands/affe_char_meca.py\", line 133, in exec_",
+      "    super(MechanicalLoadDefinition, self).exec_(keywords)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 516, in exec_",
+      "    self._call_oper(syntax)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 282, in _call_oper",
+      "    return libaster.call_oper(syntax, 0)",
+      "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "libaster.AsterError: ",
+      " ╔================================================================================================╗",
+      " ║ <EXCEPTION> <MODELISA7_77>                                                                     ║",
+      " ║                                                                                                ║",
+      " ║  GROUP_MA  EDGE  is not part of mesh:  00000001                                                ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║        MODELISA8_14  issued    3 times                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[14 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <S>_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": []
+}

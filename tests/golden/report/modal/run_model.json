@@ -1,0 +1,1117 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "modal",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": "input/run.json",
+      "mess": "output/run.mess",
+      "rmed": "output/run.rmed",
+      "mesh": "input/mesh.med",
+      "tables": [
+        "output/tables/mass_inertia.csv",
+        "output/tables/modal_parameters.csv"
+      ],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "loads_and_bcs",
+    "solution",
+    "modal",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "sections_omitted": {},
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Cantilever beam, natural frequencies",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-23",
+    "description": "Cantilever beam L 400 mm, section 20 mm (Y) x 10 mm (Z), clamped at X = 0, first six natural frequencies (five bending, one torsion). HEXA20 mesh, linear elastic steel.",
+    "logo": null,
+    "solver_version": "17.4.22",
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": "SI_mm",
+    "name": "SI-mm (mm, N, MPa, t, s)",
+    "declared": true,
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "mass": "t",
+      "time": "s",
+      "density": "t/mm³",
+      "moment": "N·mm",
+      "force_per_length": "N/mm",
+      "moment_per_length": "N·mm/mm",
+      "angle": "rad",
+      "frequency": "Hz",
+      "expansion": "1/K"
+    },
+    "note": null
+  },
+  "outcome": {
+    "status": "completed",
+    "diagnostic_job": "OK",
+    "exit_code": 0,
+    "classification": {
+      "failure_class": null,
+      "reason": "the run ended normally",
+      "message_id": null,
+      "diagnostic_job": "OK",
+      "evidence": null
+    },
+    "failed_command": null,
+    "failed_comm_line": null,
+    "fatal_message": null,
+    "fatal_message_id": null,
+    "fatal_message_english": null,
+    "last_lines": []
+  },
+  "analysis": {
+    "type": "modal",
+    "solve_command": {
+      "fr": "CALC_MODES",
+      "en": "compute natural modes"
+    },
+    "solve_comm_line": 43,
+    "result": "MODES"
+  },
+  "summary": {
+    "analysis_type": "modal",
+    "nodes": 4197,
+    "elements": 656,
+    "outcome": "completed",
+    "elapsed_s": 4.91,
+    "cpu_s": 1.77,
+    "peak_memory_mb": 907.83,
+    "warnings": {},
+    "ignored_warnings": [],
+    "headline": [
+      {
+        "key": "first_frequency",
+        "value": 52.3396441683678
+      }
+    ]
+  },
+  "model": {
+    "modelings": [
+      {
+        "targets": [
+          {
+            "name": "BEAM",
+            "display_name": "Beam"
+          }
+        ],
+        "physics": {
+          "fr": "MECANIQUE",
+          "en": "mechanical"
+        },
+        "modeling": {
+          "fr": "3D",
+          "en": "3D solid"
+        },
+        "comm_line": 18
+      }
+    ],
+    "mesh_source": "output/run.rmed",
+    "nodes": 4197,
+    "elements": [
+      {
+        "type": "HEXA20",
+        "label": "20-node hexahedron",
+        "count": 640
+      },
+      {
+        "type": "QUAD8",
+        "label": "8-node quadrangle",
+        "count": 16
+      }
+    ],
+    "element_total": 656,
+    "bounding_box": {
+      "X": [
+        0.0,
+        400.0
+      ],
+      "Y": [
+        0.0,
+        20.0
+      ],
+      "Z": [
+        0.0,
+        10.0
+      ]
+    },
+    "groups": {
+      "node": [],
+      "element": [
+        "BEAM",
+        "CLAMP",
+        "TIP"
+      ]
+    }
+  },
+  "materials": [
+    {
+      "name": "ACIER",
+      "laws": [
+        {
+          "law": "ELAS",
+          "label": "linear elastic",
+          "properties": [
+            {
+              "keyword": "E",
+              "label": "Young's modulus",
+              "value": 210000.0,
+              "quantity": "stress"
+            },
+            {
+              "keyword": "NU",
+              "label": "Poisson's ratio",
+              "value": 0.3,
+              "quantity": null
+            },
+            {
+              "keyword": "RHO",
+              "label": "density",
+              "value": 7.85e-09,
+              "quantity": "density"
+            }
+          ]
+        }
+      ],
+      "assigned_to": [
+        {
+          "name": "BEAM",
+          "display_name": "Beam"
+        }
+      ],
+      "comm_line": 22
+    }
+  ],
+  "element_properties": [],
+  "loads_and_bcs": {
+    "solve_command": "CALC_MODES",
+    "load_case": [],
+    "rows": [
+      {
+        "load": "ENCAS",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CLAMP",
+            "display_name": "Clamped end (X = 0)"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DX",
+            "label": "X translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DZ",
+            "label": "Z translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": false,
+        "multiplier": null,
+        "comm_line": 26
+      }
+    ]
+  },
+  "solution": {
+    "command": {
+      "fr": "CALC_MODES",
+      "en": "compute natural modes"
+    },
+    "settings_source": "command echo in the solver log (defaults filled in)",
+    "linear_solver": {
+      "fr": "MUMPS",
+      "en": "MUMPS direct solver"
+    },
+    "renumbering": "AUTO",
+    "lagrange_elimination": "LAGR2",
+    "dofs": {
+      "total": 12813,
+      "lagrange": 222,
+      "active": 12480,
+      "source": "solver log message ALGELINE7_17"
+    },
+    "eigen": {
+      "method": {
+        "fr": "SORENSEN",
+        "en": "Sorensen eigensolver (ARPACK)"
+      },
+      "option": {
+        "fr": "PLUS_PETITE",
+        "en": "smallest (frequencies)"
+      },
+      "modes_requested": 6,
+      "band": null,
+      "shift_hz": 0.0
+    },
+    "cpu_s": 0.91,
+    "elapsed_s": 1.37
+  },
+  "displacements": null,
+  "stresses": null,
+  "reactions": null,
+  "modal": {
+    "result": "MODES",
+    "modes": [
+      {
+        "nume_ordre": 1,
+        "frequency_hz": 52.3396441683678,
+        "period_s": 0.019105976280296613,
+        "generalized_mass": 0.000156876,
+        "effective_mass": {
+          "DX": 1.65306e-32,
+          "DY": 1.15871e-25,
+          "DZ": 0.000384501
+        },
+        "effective_mass_fraction": {
+          "DX": 2.63227e-29,
+          "DY": 1.84507e-22,
+          "DZ": 0.612263
+        },
+        "cumulative_fraction": {
+          "DX": 2.63227e-29,
+          "DY": 1.84507e-22,
+          "DZ": 0.612263
+        }
+      },
+      {
+        "nume_ordre": 2,
+        "frequency_hz": 104.42992528937033,
+        "period_s": 0.009575799247476697,
+        "generalized_mass": 0.000157223,
+        "effective_mass": {
+          "DX": 2.08976e-34,
+          "DY": 0.000384683,
+          "DZ": 1.10994e-25
+        },
+        "effective_mass_fraction": {
+          "DX": 3.32764e-31,
+          "DY": 0.612552,
+          "DZ": 1.76743e-22
+        },
+        "cumulative_fraction": {
+          "DX": 2.6655464e-29,
+          "DY": 0.612552,
+          "DZ": 0.612263
+        }
+      },
+      {
+        "nume_ordre": 3,
+        "frequency_hz": 327.0652475459293,
+        "period_s": 0.003057493902220753,
+        "generalized_mass": 0.000157498,
+        "effective_mass": {
+          "DX": 2.48857e-31,
+          "DY": 7.03422e-28,
+          "DZ": 0.000118302
+        },
+        "effective_mass_fraction": {
+          "DX": 3.96269e-28,
+          "DY": 1.1201e-24,
+          "DZ": 0.18838
+        },
+        "cumulative_fraction": {
+          "DX": 4.22924464e-28,
+          "DY": 0.612552,
+          "DZ": 0.800643
+        }
+      },
+      {
+        "nume_ordre": 4,
+        "frequency_hz": 646.9886423229167,
+        "period_s": 0.0015456221865188366,
+        "generalized_mass": 0.000159704,
+        "effective_mass": {
+          "DX": 3.0358e-30,
+          "DY": 0.000118877,
+          "DZ": 1.07087e-28
+        },
+        "effective_mass_fraction": {
+          "DX": 4.83408e-27,
+          "DY": 0.189294,
+          "DZ": 1.7052e-25
+        },
+        "cumulative_fraction": {
+          "DX": 5.257004464e-27,
+          "DY": 0.801846,
+          "DZ": 0.800643
+        }
+      },
+      {
+        "nume_ordre": 5,
+        "frequency_hz": 911.6795505473701,
+        "period_s": 0.0010968766376295296,
+        "generalized_mass": 0.000158511,
+        "effective_mass": {
+          "DX": 1.35012e-33,
+          "DY": 1.40384e-27,
+          "DZ": 4.07588e-05
+        },
+        "effective_mass_fraction": {
+          "DX": 2.14988e-30,
+          "DY": 2.23541e-24,
+          "DZ": 0.0649026
+        },
+        "cumulative_fraction": {
+          "DX": 5.259154344e-27,
+          "DY": 0.801846,
+          "DZ": 0.8655456
+        }
+      },
+      {
+        "nume_ordre": 6,
+        "frequency_hz": 1497.0292704690783,
+        "period_s": 0.0006679896109757831,
+        "generalized_mass": 0.000130041,
+        "effective_mass": {
+          "DX": 2.04982e-32,
+          "DY": 1.35077e-27,
+          "DZ": 2.41315e-28
+        },
+        "effective_mass_fraction": {
+          "DX": 3.26404e-29,
+          "DY": 2.1509e-24,
+          "DZ": 3.8426e-25
+        },
+        "cumulative_fraction": {
+          "DX": 5.291794744e-27,
+          "DY": 0.801846,
+          "DZ": 0.8655456
+        }
+      }
+    ],
+    "total_mass": 0.000628,
+    "sources": [
+      "table:mass_inertia.csv:MASSE",
+      "table:modal_parameters.csv",
+      "rmed:MODES___DEPL step values (frequencies)"
+    ],
+    "labels": {
+      "NUME_ORDRE": "step index",
+      "FREQ": "frequency",
+      "MASS_GENE": "generalized mass",
+      "MASSE": "mass",
+      "MASS_EFFE_DX": "effective modal mass (X)",
+      "MASS_EFFE_DY": "effective modal mass (Y)",
+      "MASS_EFFE_DZ": "effective modal mass (Z)",
+      "MASS_EFFE_UN_DX": "effective mass fraction (X)",
+      "MASS_EFFE_UN_DY": "effective mass fraction (Y)",
+      "MASS_EFFE_UN_DZ": "effective mass fraction (Z)"
+    },
+    "notes": []
+  },
+  "diagnostics": {
+    "items": [],
+    "ignored_warnings": [],
+    "coverage": {
+      "diagnostics": 2,
+      "diagnostics_english": 2,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [
+      {
+        "legend": "F1_BENDING_Z1",
+        "quantity": "Natural frequency of mode 1 [Hz], bending in Z, n = 1",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "1",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 52.2198,
+        "computed": 52.3396441683678,
+        "error": "2.294995E-01%",
+        "tolerance": "2.0%",
+        "passed": true
+      },
+      {
+        "legend": "F2_BENDING_Y1",
+        "quantity": "Natural frequency of mode 2 [Hz], bending in Y, n = 1",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "2",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 104.44,
+        "computed": 104.42992528937033,
+        "error": "9.646410E-03%",
+        "tolerance": "2.0%",
+        "passed": true
+      },
+      {
+        "legend": "F3_BENDING_Z2",
+        "quantity": "Natural frequency of mode 3 [Hz], bending in Z, n = 2",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "3",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 327.256,
+        "computed": 327.0652475459293,
+        "error": "5.828845E-02%",
+        "tolerance": "2.0%",
+        "passed": true
+      },
+      {
+        "legend": "F4_BENDING_Y2",
+        "quantity": "Natural frequency of mode 4 [Hz], bending in Y, n = 2",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "4",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 654.512,
+        "computed": 646.9886423229167,
+        "error": "1.149461E+00%",
+        "tolerance": "2.0%",
+        "passed": true
+      },
+      {
+        "legend": "F5_BENDING_Z3",
+        "quantity": "Natural frequency of mode 5 [Hz], bending in Z, n = 3",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "5",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 916.326,
+        "computed": 911.6795505473701,
+        "error": "5.070738E-01%",
+        "tolerance": "3.0%",
+        "passed": true
+      },
+      {
+        "legend": "F6_TORSION_1",
+        "quantity": "Natural frequency of mode 6 [Hz], first torsion mode",
+        "context": {
+          "RESULTAT": "00000018",
+          "NUME_ORDRE": "6",
+          "PARA": "FREQ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 1485.22,
+        "computed": 1497.0292704690783,
+        "error": "7.951193E-01%",
+        "tolerance": "3.0%",
+        "passed": true
+      }
+    ],
+    "non_regression": {
+      "count": 6,
+      "ok": 6
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# modal -- 3D cantilever beam, first 6 natural frequencies (HEXA20).\n# codeaster-en test fixture (task 4.1). Units: mm, N, MPa, tonne, s (density in t/mm3).\n# Beam L=400 along X, section b=20 (Y) x h=10 (Z), steel E=210000, NU=0.3, RHO=7.85e-9.\n# Face X=0 clamped. Reference: Euler-Bernoulli cantilever,\n#   f_n = lambda_n^2 / (2 pi L^2) * sqrt(E I / (RHO A)),\n#   lambda_n = 1.8751, 4.6941, 7.8548, 10.9955; I = b h^3/12 (bending in Z) or h b^3/12 (in Y).\n# Mode 6 is the first torsion mode, f = 1/(4L) sqrt(G J / (RHO Ip)), Saint-Venant J (warping\n# ignored). Expected order: Z1, Y1, Z2, Y2, Z3, T1 (Z4 ~ 1.80 kHz and axial ~ 3.2 kHz are higher).\n# Modelled on astest sdlv100a (CALC_MATR_ELEM/NUME_DDL/ASSE_MATRICE, POST_ELEM MASS_INER,\n# TEST_RESU on PARA=\"FREQ\") and sdll05a (CALC_MODES OPTION=\"PLUS_PETITE\", NMAX_FREQ).\n# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster\n# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.\n\nDEBUT(CODE=\"OUI\", ERREUR=_F(ALARME=\"EXCEPTION\"))\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMODE = AFFE_MODELE(\n    MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"BEAM\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"3D\")\n)\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3, RHO=7.85e-9))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"BEAM\", MATER=ACIER))\n\nENCAS = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA=\"CLAMP\", DX=0.0, DY=0.0, DZ=0.0))\n\n# Mass and inertia of the model: mass = RHO * b * h * L = 6.28e-4 t.\nMASSE = POST_ELEM(MODELE=MODE, CHAM_MATER=MATE, MASS_INER=_F(TOUT=\"OUI\"))\n\nIMPR_TABLE(TABLE=MASSE, FORMAT=\"TABLEAU\", SEPARATEUR=\",\", UNITE=30)\n\nRIGI_EL = CALC_MATR_ELEM(MODELE=MODE, CHAM_MATER=MATE, CHARGE=ENCAS, OPTION=\"RIGI_MECA\")\n\nMASS_EL = CALC_MATR_ELEM(MODELE=MODE, CHAM_MATER=MATE, CHARGE=ENCAS, OPTION=\"MASS_MECA\")\n\nNUME = NUME_DDL(MATR_RIGI=RIGI_EL)\n\nRIGI = ASSE_MATRICE(MATR_ELEM=RIGI_EL, NUME_DDL=NUME)\n\nMASS = ASSE_MATRICE(MATR_ELEM=MASS_EL, NUME_DDL=NUME)\n\nMODES = CALC_MODES(\n    MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION=\"PLUS_PETITE\", CALC_FREQ=_F(NMAX_FREQ=6)\n)\n\nIMPR_RESU(FORMAT=\"MED\", UNITE=80, RESU=_F(RESULTAT=MODES, NOM_CHAM=\"DEPL\"))\n\n# Modal parameters stored by CALC_MODES (bibfor/algeline/vpstor.F90), printed for the modal\n# table of the results reader and the report (task 4.5): frequency, generalized mass and the\n# effective masses per direction. RECU_TABLE with NOM_PARA as in astest zzzz399a.\nPARA = RECU_TABLE(\n    CO=MODES,\n    NOM_PARA=(\n        \"FREQ\",\n        \"MASS_GENE\",\n        \"MASS_EFFE_DX\",\n        \"MASS_EFFE_DY\",\n        \"MASS_EFFE_DZ\",\n        \"MASS_EFFE_UN_DX\",\n        \"MASS_EFFE_UN_DY\",\n        \"MASS_EFFE_UN_DZ\",\n    ),\n)\n\nIMPR_TABLE(TABLE=PARA, FORMAT=\"TABLEAU\", SEPARATEUR=\",\", UNITE=31)\n\nTEST_RESU(\n    RESU=(\n        _F(\n            NUME_ORDRE=1,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=52.2198,\n            VALE_CALC=52.3396441683678,\n            PRECISION=2.0e-2,\n            LEGENDE=\"F1_BENDING_Z1\",\n        ),\n        _F(\n            NUME_ORDRE=2,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=104.440,\n            VALE_CALC=104.42992528937033,\n            PRECISION=2.0e-2,\n            LEGENDE=\"F2_BENDING_Y1\",\n        ),\n        _F(\n            NUME_ORDRE=3,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=327.256,\n            VALE_CALC=327.0652475459293,\n            PRECISION=2.0e-2,\n            LEGENDE=\"F3_BENDING_Z2\",\n        ),\n        _F(\n            NUME_ORDRE=4,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=654.512,\n            VALE_CALC=646.9886423229167,\n            PRECISION=2.0e-2,\n            LEGENDE=\"F4_BENDING_Y2\",\n        ),\n        _F(\n            NUME_ORDRE=5,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=916.326,\n            VALE_CALC=911.6795505473701,\n            PRECISION=3.0e-2,\n            LEGENDE=\"F5_BENDING_Z3\",\n        ),\n        _F(\n            NUME_ORDRE=6,\n            PARA=\"FREQ\",\n            RESULTAT=MODES,\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=1485.22,\n            VALE_CALC=1497.0292704690783,\n            PRECISION=3.0e-2,\n            LEGENDE=\"F6_TORSION_1\",\n        ),\n    )\n)\n\nFIN()\n",
+    "comm_syntax_error": null,
+    "comm_skipped_lines": [],
+    "command_purposes": {
+      "14": {
+        "command": "DEBUT",
+        "purpose": "begin study"
+      },
+      "16": {
+        "command": "LIRE_MAILLAGE",
+        "purpose": "read mesh"
+      },
+      "18": {
+        "command": "AFFE_MODELE",
+        "purpose": "assign model"
+      },
+      "22": {
+        "command": "DEFI_MATERIAU",
+        "purpose": "define material"
+      },
+      "24": {
+        "command": "AFFE_MATERIAU",
+        "purpose": "assign material"
+      },
+      "26": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "29": {
+        "command": "POST_ELEM",
+        "purpose": "element-based post-processing"
+      },
+      "31": {
+        "command": "IMPR_TABLE",
+        "purpose": "write table"
+      },
+      "33": {
+        "command": "CALC_MATR_ELEM",
+        "purpose": "compute element matrices"
+      },
+      "35": {
+        "command": "CALC_MATR_ELEM",
+        "purpose": "compute element matrices"
+      },
+      "37": {
+        "command": "NUME_DDL",
+        "purpose": null
+      },
+      "39": {
+        "command": "ASSE_MATRICE",
+        "purpose": "assemble matrix"
+      },
+      "41": {
+        "command": "ASSE_MATRICE",
+        "purpose": "assemble matrix"
+      },
+      "43": {
+        "command": "CALC_MODES",
+        "purpose": "compute natural modes"
+      },
+      "47": {
+        "command": "IMPR_RESU",
+        "purpose": "write results"
+      },
+      "52": {
+        "command": "RECU_TABLE",
+        "purpose": null
+      },
+      "66": {
+        "command": "IMPR_TABLE",
+        "purpose": "write table"
+      },
+      "68": {
+        "command": "TEST_RESU",
+        "purpose": "test result value"
+      },
+      "133": {
+        "command": "FIN",
+        "purpose": "end study"
+      }
+    },
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/mass_inertia.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/modal_parameters.csv",
+          "direction": "output",
+          "unit": 31
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "  Opening file for writing: ./vola.1",
+      "",
+      " <INFO> Starting the run.",
+      "",
+      "            -- CODE_ASTER -- VERSION: CORRECTIVE AVANT STABILISATION (stable-updates) --",
+      "                               Version 17.4.22 modified on 30/06/2026",
+      "                              revision spack-local - branch 'v17.4.22'",
+      "                                   Copyright EDF R&D 1991 - 2026",
+      "",
+      "                                  Run on: Thu Oct 29 06:29:14 2026",
+      "                                      Host name: e7cc1116fa69",
+      "                                        Architecture: 64bit",
+      "                                       Processor type: x86_64",
+      "                   Operating system: Linux-6.18.44-fc-v185-x86_64-with-glibc2.36",
+      "                                    Message language: en (UTF-8)",
+      "                                      Python version: 3.11.14",
+      "                                       NumPy version: 1.26.4",
+      "                                        MPI parallelism: on",
+      "                                  Rank of the current processor: 0",
+      "                                  Number of MPI processors used: 1",
+      "                                       OpenMP parallelism: on",
+      "                                  Number of OpenMP threads used: 1",
+      "                                    HDF5 library version: 1.10.7",
+      "                                     MED library version: 4.2.0",
+      "                                   MFront library version: 5.0.0",
+      "                                    MUMPS library version: 5.6.2",
+      "                                  PETSc library version: 3.24.0p0",
+      "                                   SCOTCH library version: 7.0.10",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <SUPERVIS_22>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║ The CODE and DEBUG keywords of DEBUT/POURSUITE are reserved for test cases.                    ║",
+      " ║ The same applies to the option \"--test\" of CA.init().                                          ║",
+      " ║ Do not use them in studies: they change some default values                                    ║",
+      " ║ of the DEBUT/POURSUITE commands, which affects the behavior                                    ║",
+      " ║ when an error occurs and the performance.                                                      ║",
+      " ╚================================================================================================╝",
+      "",
+      "  Initial value of the maximum CPU time =   600 seconds",
+      "  Maximum CPU time given to the commands =   590 seconds",
+      "  Planned CPU reserve = 10 seconds",
+      "",
+      "  Opening file for writing: ./glob.1",
+      "",
+      "  Opening file for writing: ./vola.1",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Created with version                    :  17.04.22",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Total number of read accesses           :  65",
+      "     Volume read                             :         50.78 MB.",
+      "     Total number of write accesses          :  0",
+      "     Volume written                          :          0.00 MB.",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Element catalogs read again.",
+      "",
+      "  End of reading (duration  0.290140  s.)",
+      "",
+      "                          Memory limit for dynamic allocation: 2410.01 MB",
+      "                             added at process initialization: 648.02 MB",
+      "                              Target limit of the process: 3058.03 MB",
+      "                              Size limit of the swap files: 2048.00 GB",
+      "# Memory (MB):   648.02 /   639.88 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0001   user+syst:        0.04s (syst:        2.34s, elaps:        2.40s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0002 from run.comm.changed.py, line 28",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "MED name of the mesh: mesh",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Checking the mesh.",
+      "",
+      "# Result of command #0002 (LIRE_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   648.02 /   640.59 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0002   user+syst:        0.02s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0003 from run.comm.changed.py, line 30",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Of the 656 elements of mesh 00000001, assignment was requested for 640 and 640 could be assigned.",
+      " Modeling type    Formulation      Element type Finite element   Number",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0003 (AFFE_MODELE): MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   770.29 /   769.68 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0003   user+syst:        0.00s (syst:        0.01s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0004 from run.comm.changed.py, line 34",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0004 (DEFI_MATERIAU): ACIER ('<00000003>') of type <Material>",
+      "# Memory (MB):   770.29 /   769.68 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0004   user+syst:        0.06s (syst:        0.00s, elaps:        0.06s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0005 from run.comm.changed.py, line 36",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0005 (AFFE_MATERIAU): MATE ('<00000004>') of type <MaterialField>",
+      "# Memory (MB):   770.29 /   769.68 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0005   user+syst:        0.05s (syst:        0.00s, elaps:        0.05s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0006 from run.comm.changed.py, line 38",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0006 (AFFE_CHAR_MECA): ENCAS ('<00000005>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   770.29 /   770.03 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0006   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0007 from run.comm.changed.py, line 41",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0007 (POST_ELEM): MASSE ('<00000006>') of type <Table>",
+      "# Memory (MB):   770.64 /   770.03 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0007   user+syst:        0.03s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0008 from run.comm.changed.py, line 43",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   770.64 /   770.03 /   207.82 /   198.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0008   user+syst:        0.06s (syst:        0.00s, elaps:        0.06s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0009 from run.comm.changed.py, line 45",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0009 (CALC_MATR_ELEM): RIGI_EL ('<00000008>') de type",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   788.52 /   778.97 /   219.22 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0009   user+syst:        0.12s (syst:        0.07s, elaps:        0.20s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0010 from run.comm.changed.py, line 47",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0010 (CALC_MATR_ELEM): MASS_EL ('<00000010>') de type",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   797.45 /   787.91 /   228.16 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0010   user+syst:        0.07s (syst:        0.06s, elaps:        0.13s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0011 from run.comm.changed.py, line 49",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 12813 degrees of freedom:",
+      "   - 12591 are physical degrees of freedom",
+      "     (carried by 4197 nodes of the mesh)",
+      "   - 222 are the pairs of Lagrange multipliers associated",
+      "     with the 111 dualized linear relations.",
+      "  The matrix has 12813 equations.",
+      "  It has 787527 nonzero terms if it is symmetric and 1562241 nonzero terms if it is not symmetric.",
+      "  That is a fill ratio of   0.952 %.",
+      "# Result of command #0011 (NUME_DDL): NUME ('<00000014>') of type <DOFNumbering>",
+      "# Memory (MB):   797.45 /   796.51 /   228.16 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0011   user+syst:        0.08s (syst:        0.01s, elaps:        0.09s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0012 from run.comm.changed.py, line 51",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0012 (ASSE_MATRICE): RIGI ('<00000016>') de type",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   802.52 /   802.52 /   228.82 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0012   user+syst:        0.09s (syst:        0.03s, elaps:        0.12s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0013 from run.comm.changed.py, line 53",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0013 (ASSE_MATRICE): MASS ('<00000017>') de type",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   808.54 /   808.54 /   234.86 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0013   user+syst:        0.08s (syst:        0.04s, elaps:        0.13s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0014 from run.comm.changed.py, line 55",
+      "[33 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  Total number of DOFs             :      12813",
+      "  Number of Lagrange DOFs          :        222",
+      "  Number of active DOFs            :      12480",
+      "",
+      "  The chosen option is: PLUS_PETITE",
+      "",
+      "  The frequency shift value is:  0.00000E+00",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "  The dimension of the reduced space is: 0",
+      "",
+      "  It is smaller than the number of modes, so it is set to: 12",
+      "",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  The computed frequencies lie between:",
+      "      Lower frequency:  5.23396E+01",
+      "      Upper frequency:  1.49703E+03",
+      "",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[14 line(s) printed by the solver outside the message catalog]",
+      "  Mean error norm   :  5.36480E-09",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "         A posteriori check of the modes",
+      "",
+      "",
+      "  In the interval ( 5.22086E+01 , 1.50077E+03 ) there are indeed 6 frequency(ies).",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0014 (CALC_MODES): MODES ('<00000018>') of type <ModeResult>",
+      "# Memory (MB):   907.83 /   805.53 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0014   user+syst:        0.91s (syst:        0.45s, elaps:        1.37s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0016 from run.comm.changed.py, line 59",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Creating the file in MED format 3.3.1.",
+      "",
+      "# Memory (MB):   907.83 /   805.53 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0016   user+syst:        0.02s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0017 from run.comm.changed.py, line 64",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0017 (RECU_TABLE): PARA ('<00000019>') of type <Table>",
+      "# Memory (MB):   907.83 /   805.53 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0017   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0018 from run.comm.changed.py, line 78",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   907.83 /   805.53 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0018   user+syst:        0.06s (syst:        0.00s, elaps:        0.06s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0019 from run.comm.changed.py, line 80",
+      "[54 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[37 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   907.83 /   805.53 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0019   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║            no warnings                                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[28 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   907.83 /   815.22 /   245.76 /   215.69 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0020   user+syst:        0.07s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : OK",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": []
+}

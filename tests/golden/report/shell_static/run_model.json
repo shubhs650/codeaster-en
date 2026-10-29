@@ -1,0 +1,3507 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "shell_static",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": "input/run.json",
+      "mess": "output/run.mess",
+      "rmed": "output/run.rmed",
+      "mesh": "input/mesh.med",
+      "tables": [
+        "output/tables/reactions.csv"
+      ],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "element_properties",
+    "loads_and_bcs",
+    "solution",
+    "displacements",
+    "stresses",
+    "reactions",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "sections_omitted": {},
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Simply supported square plate, uniform pressure",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-23",
+    "description": "Simply supported square plate (a 1000 mm, t 10 mm), uniform pressure 0.01 MPa, DKT shell on a 20 x 20 QUAD4 mesh, linear elastic steel.",
+    "logo": null,
+    "solver_version": "17.4.22",
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": "SI_mm",
+    "name": "SI-mm (mm, N, MPa, t, s)",
+    "declared": true,
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "mass": "t",
+      "time": "s",
+      "density": "t/mm³",
+      "moment": "N·mm",
+      "force_per_length": "N/mm",
+      "moment_per_length": "N·mm/mm",
+      "angle": "rad",
+      "frequency": "Hz",
+      "expansion": "1/K"
+    },
+    "note": null
+  },
+  "outcome": {
+    "status": "completed",
+    "diagnostic_job": "OK",
+    "exit_code": 0,
+    "classification": {
+      "failure_class": null,
+      "reason": "the run ended normally",
+      "message_id": null,
+      "diagnostic_job": "OK",
+      "evidence": null
+    },
+    "failed_command": null,
+    "failed_comm_line": null,
+    "fatal_message": null,
+    "fatal_message_id": null,
+    "fatal_message_english": null,
+    "last_lines": []
+  },
+  "analysis": {
+    "type": "linear_static",
+    "solve_command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "solve_comm_line": 55,
+    "result": "RESU"
+  },
+  "summary": {
+    "analysis_type": "linear_static",
+    "nodes": 441,
+    "elements": 483,
+    "outcome": "completed",
+    "elapsed_s": 2.35,
+    "cpu_s": 0.7,
+    "peak_memory_mb": 780.34,
+    "warnings": {},
+    "ignored_warnings": [
+      "MODELISA8_14"
+    ],
+    "headline": [
+      {
+        "key": "max_displacement",
+        "extremum": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "quantity": "length"
+      },
+      {
+        "key": "balance",
+        "balance": {
+          "reaction": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": 9999.999999999998
+          },
+          "reaction_source": "rmed:RESU____REAC_NODA (sum of all nodes)",
+          "applied": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": -10000.000000000005
+          },
+          "residual": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": -7.275957614183426e-12
+          },
+          "error_percent": 7.275957614183422e-14,
+          "complete": true,
+          "notes": []
+        }
+      }
+    ]
+  },
+  "model": {
+    "modelings": [
+      {
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": "Plate"
+          }
+        ],
+        "physics": {
+          "fr": "MECANIQUE",
+          "en": "mechanical"
+        },
+        "modeling": {
+          "fr": "DKT",
+          "en": "thin shell (DKT)"
+        },
+        "comm_line": 33
+      }
+    ],
+    "mesh_source": "output/run.rmed",
+    "nodes": 441,
+    "elements": [
+      {
+        "type": "POI1",
+        "label": "point element (1 node)",
+        "count": 3
+      },
+      {
+        "type": "QUAD4",
+        "label": "4-node quadrangle",
+        "count": 400
+      },
+      {
+        "type": "SEG2",
+        "label": "2-node segment",
+        "count": 80
+      }
+    ],
+    "element_total": 483,
+    "bounding_box": {
+      "X": [
+        0.0,
+        1000.0
+      ],
+      "Y": [
+        0.0,
+        1000.0
+      ],
+      "Z": [
+        0.0,
+        0.0
+      ]
+    },
+    "groups": {
+      "node": [
+        "CENTER",
+        "CORNER_A",
+        "CORNER_B",
+        "EDGES",
+        "PLATE"
+      ],
+      "element": [
+        "CENTER",
+        "CORNER_A",
+        "CORNER_B",
+        "EDGES",
+        "PLATE"
+      ]
+    }
+  },
+  "materials": [
+    {
+      "name": "ACIER",
+      "laws": [
+        {
+          "law": "ELAS",
+          "label": "linear elastic",
+          "properties": [
+            {
+              "keyword": "E",
+              "label": "Young's modulus",
+              "value": 210000.0,
+              "quantity": "stress"
+            },
+            {
+              "keyword": "NU",
+              "label": "Poisson's ratio",
+              "value": 0.3,
+              "quantity": null
+            }
+          ]
+        }
+      ],
+      "assigned_to": [
+        {
+          "name": "PLATE",
+          "display_name": "Plate"
+        }
+      ],
+      "comm_line": 39
+    }
+  ],
+  "element_properties": [
+    {
+      "keyword": "COQUE",
+      "label": "shell properties",
+      "targets": [
+        {
+          "name": "PLATE",
+          "display_name": "Plate"
+        }
+      ],
+      "values": [
+        {
+          "keyword": "EPAIS",
+          "label": "thickness",
+          "value": 10.0
+        },
+        {
+          "keyword": "ANGL_REP",
+          "label": "local-axis angles",
+          "value": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "comm_line": 37
+    }
+  ],
+  "loads_and_bcs": {
+    "solve_command": "MECA_STATIQUE",
+    "load_case": [
+      "APPUI",
+      "PRESS"
+    ],
+    "rows": [
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "EDGES",
+            "display_name": "Simply supported edges"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DZ",
+            "label": "Z translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 43
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_A",
+            "display_name": "Corner (0, 0), in-plane restraint"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DX",
+            "label": "X translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 43
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_B",
+            "display_name": "Corner (1000, 0), in-plane restraint"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 43
+      },
+      {
+        "load": "PRESS",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "PRES_REP",
+        "label": "distributed pressure",
+        "kind": "load",
+        "enforcement": null,
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": "Plate"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "PRES",
+            "label": null,
+            "value": 0.01
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 53
+      }
+    ]
+  },
+  "solution": {
+    "command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "settings_source": "command echo in the solver log (defaults filled in)",
+    "linear_solver": {
+      "fr": "MUMPS",
+      "en": "MUMPS direct solver"
+    },
+    "renumbering": "AUTO",
+    "lagrange_elimination": "LAGR2",
+    "dofs": {
+      "total": 2812,
+      "physical": 2646,
+      "nodes": 441,
+      "lagrange": 166,
+      "relations": 83,
+      "source": "solver log message FACTOR_1"
+    },
+    "cpu_s": 0.22,
+    "elapsed_s": 0.24
+  },
+  "displacements": {
+    "field": "DEPL",
+    "med_name": "RESU____DEPL",
+    "label": "displacement",
+    "quantity": "length",
+    "magnitude": [
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": null,
+        "nume_ordre": 1,
+        "count": 441,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 1,
+          "xyz": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      },
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": {
+          "name": "PLATE",
+          "display_name": "Plate"
+        },
+        "nume_ordre": 1,
+        "count": 441,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 1,
+          "xyz": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      },
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": {
+          "name": "EDGES",
+          "display_name": "Simply supported edges"
+        },
+        "nume_ordre": 1,
+        "count": 80,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 1,
+          "xyz": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 1,
+          "xyz": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 1,
+          "xyz": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      },
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": {
+          "name": "CENTER",
+          "display_name": "Plate centre"
+        },
+        "nume_ordre": 1,
+        "count": 1,
+        "min": {
+          "kind": "min",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 2.112263828055923,
+          "entity": "node",
+          "entity_id": 5,
+          "xyz": [
+            500.0,
+            500.0,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      }
+    ],
+    "components": [
+      {
+        "component": "DX",
+        "label": "X translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DX",
+          "label": "X translation (DX)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "X translation"
+        }
+      },
+      {
+        "component": "DY",
+        "label": "Y translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DY",
+          "label": "Y translation (DY)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "Y translation"
+        }
+      },
+      {
+        "component": "DZ",
+        "label": "Z translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DZ",
+          "label": "Z translation (DZ)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": -2.112263828055923,
+            "entity": "node",
+            "entity_id": 5,
+            "xyz": [
+              500.0,
+              500.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -2.112263828055923,
+            "entity": "node",
+            "entity_id": 5,
+            "xyz": [
+              500.0,
+              500.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "Z translation"
+        }
+      },
+      {
+        "component": "DRX",
+        "label": "rotation about X",
+        "quantity": "angle",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DRX",
+          "label": "rotation about X (DRX)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": -0.007000017649802119,
+            "entity": "node",
+            "entity_id": 2,
+            "xyz": [
+              500.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.007000017649801261,
+            "entity": "node",
+            "entity_id": 8,
+            "xyz": [
+              500.0,
+              1000.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -0.007000017649802119,
+            "entity": "node",
+            "entity_id": 2,
+            "xyz": [
+              500.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "rotation about X"
+        }
+      },
+      {
+        "component": "DRY",
+        "label": "rotation about Y",
+        "quantity": "angle",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DRY",
+          "label": "rotation about Y (DRY)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": -0.007000017649801758,
+            "entity": "node",
+            "entity_id": 6,
+            "xyz": [
+              1000.0,
+              500.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0070000176498015605,
+            "entity": "node",
+            "entity_id": 4,
+            "xyz": [
+              0.0,
+              500.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -0.007000017649801758,
+            "entity": "node",
+            "entity_id": 6,
+            "xyz": [
+              1000.0,
+              500.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "rotation about Y"
+        }
+      },
+      {
+        "component": "DRZ",
+        "label": "rotation about Z",
+        "quantity": "angle",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DRZ",
+          "label": "rotation about Z (DRZ)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 441,
+          "min": {
+            "kind": "min",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "max",
+            "value": 0.0,
+            "entity": "node",
+            "entity_id": 1,
+            "xyz": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "rotation about Z"
+        }
+      }
+    ],
+    "groups": [
+      {
+        "name": "PLATE",
+        "display_name": "Plate"
+      },
+      {
+        "name": "EDGES",
+        "display_name": "Simply supported edges"
+      },
+      {
+        "name": "CENTER",
+        "display_name": "Plate centre"
+      }
+    ]
+  },
+  "stresses": {
+    "tables": [
+      {
+        "kind": "shell_forces",
+        "field": "EFGE_NOEU",
+        "med_name": "RESU____EFGE_NOEU",
+        "label": "shell/beam resultants (nodal average)",
+        "averaging": "nodal average (values of adjoining elements averaged at each node)",
+        "rows": [
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXX",
+            "label": "membrane force XX (NXX)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force XX",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXX",
+            "label": "membrane force XX (NXX)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force XX",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXX",
+            "label": "membrane force XX (NXX)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force XX",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXX",
+            "label": "membrane force XX (NXX)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force XX",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NYY",
+            "label": "membrane force YY (NYY)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force YY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NYY",
+            "label": "membrane force YY (NYY)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force YY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NYY",
+            "label": "membrane force YY (NYY)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force YY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NYY",
+            "label": "membrane force YY (NYY)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane force YY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXY",
+            "label": "membrane shear force XY (NXY)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane shear force XY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXY",
+            "label": "membrane shear force XY (NXY)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane shear force XY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXY",
+            "label": "membrane shear force XY (NXY)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane shear force XY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "NXY",
+            "label": "membrane shear force XY (NXY)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 0.0,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "membrane shear force XY",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXX",
+            "label": "bending moment XX (MXX)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.3661418296405109,
+              "entity": "node",
+              "entity_id": 45,
+              "xyz": [
+                1000.0,
+                950.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment XX",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXX",
+            "label": "bending moment XX (MXX)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.3661418296405109,
+              "entity": "node",
+              "entity_id": 45,
+              "xyz": [
+                1000.0,
+                950.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment XX",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXX",
+            "label": "bending moment XX (MXX)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": -1.283480978042536,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                1000.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.3661418296405109,
+              "entity": "node",
+              "entity_id": 45,
+              "xyz": [
+                1000.0,
+                950.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -1.283480978042536,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                1000.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment XX",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXX",
+            "label": "bending moment XX (MXX)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": -479.645314641979,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment XX",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MYY",
+            "label": "bending moment YY (MYY)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.36614182963972364,
+              "entity": "node",
+              "entity_id": 10,
+              "xyz": [
+                49.99999999998268,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment YY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MYY",
+            "label": "bending moment YY (MYY)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.36614182963972364,
+              "entity": "node",
+              "entity_id": 10,
+              "xyz": [
+                49.99999999998268,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment YY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MYY",
+            "label": "bending moment YY (MYY)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": -1.2834809780426302,
+              "entity": "node",
+              "entity_id": 7,
+              "xyz": [
+                0.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 0.36614182963972364,
+              "entity": "node",
+              "entity_id": 10,
+              "xyz": [
+                49.99999999998268,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -1.2834809780426302,
+              "entity": "node",
+              "entity_id": 7,
+              "xyz": [
+                0.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment YY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MYY",
+            "label": "bending moment YY (MYY)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": -479.64531464196386,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "bending moment YY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXY",
+            "label": "twisting moment XY (MXY)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 319.8998642909368,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "twisting moment XY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXY",
+            "label": "twisting moment XY (MXY)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 319.8998642909368,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "twisting moment XY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXY",
+            "label": "twisting moment XY (MXY)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 319.8998642909368,
+              "entity": "node",
+              "entity_id": 1,
+              "xyz": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -319.8998642909497,
+              "entity": "node",
+              "entity_id": 3,
+              "xyz": [
+                1000.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "twisting moment XY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "MXY",
+            "label": "twisting moment XY (MXY)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": 1.4603018550348087e-11,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 1.4603018550348087e-11,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 1.4603018550348087e-11,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "twisting moment XY",
+            "quantity": "moment_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QX",
+            "label": "transverse shear force X (QX)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.726779120107869,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                1000.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force X",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QX",
+            "label": "transverse shear force X (QX)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.726779120107869,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                1000.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force X",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QX",
+            "label": "transverse shear force X (QX)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.726779120107869,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                1000.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201082545,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                0.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force X",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QX",
+            "label": "transverse shear force X (QX)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": -6.495290416630439e-13,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": -6.495290416630439e-13,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": -6.495290416630439e-13,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force X",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QY",
+            "label": "transverse shear force Y (QY)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.7267791201076115,
+              "entity": "node",
+              "entity_id": 8,
+              "xyz": [
+                500.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force Y",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QY",
+            "label": "transverse shear force Y (QY)",
+            "group": {
+              "name": "PLATE",
+              "display_name": "Plate"
+            },
+            "nume_ordre": 1,
+            "count": 441,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.7267791201076115,
+              "entity": "node",
+              "entity_id": 8,
+              "xyz": [
+                500.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force Y",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QY",
+            "label": "transverse shear force Y (QY)",
+            "group": {
+              "name": "EDGES",
+              "display_name": "Simply supported edges"
+            },
+            "nume_ordre": 1,
+            "count": 80,
+            "min": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.7267791201076115,
+              "entity": "node",
+              "entity_id": 8,
+              "xyz": [
+                500.0,
+                1000.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -2.7267791201083336,
+              "entity": "node",
+              "entity_id": 2,
+              "xyz": [
+                500.0,
+                0.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force Y",
+            "quantity": "force_per_length"
+          },
+          {
+            "field": "EFGE_NOEU",
+            "component": "QY",
+            "label": "transverse shear force Y (QY)",
+            "group": {
+              "name": "CENTER",
+              "display_name": "Plate centre"
+            },
+            "nume_ordre": 1,
+            "count": 1,
+            "min": {
+              "kind": "min",
+              "value": 1.9415059837601945e-12,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 1.9415059837601945e-12,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 1.9415059837601945e-12,
+              "entity": "node",
+              "entity_id": 5,
+              "xyz": [
+                500.0,
+                500.0,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "transverse shear force Y",
+            "quantity": "force_per_length"
+          }
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "name": "PLATE",
+        "display_name": "Plate"
+      },
+      {
+        "name": "EDGES",
+        "display_name": "Simply supported edges"
+      },
+      {
+        "name": "CENTER",
+        "display_name": "Plate centre"
+      }
+    ],
+    "shell_note": "Shell results are reported as stress resultants per unit length (force and moment), in the element local axes; no through-thickness stress field was written, so no layer position applies."
+  },
+  "reactions": {
+    "summary": {
+      "field": "RESU____REAC_NODA",
+      "per_group": [
+        {
+          "group": "EDGES",
+          "source": "rmed:RESU____REAC_NODA",
+          "nume_ordre": 1,
+          "nodes": 80,
+          "components": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": 9999.999999999402,
+            "DRX": -1.1191430269385384e-09,
+            "DRY": -8.096845665373856e-10,
+            "DRZ": 0.0
+          }
+        },
+        {
+          "group": "CORNER_A",
+          "source": "rmed:RESU____REAC_NODA",
+          "nume_ordre": 1,
+          "nodes": 1,
+          "components": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": -620.2975071297466,
+            "DRX": 5.911715561523929e-12,
+            "DRY": -7.50333128962674e-12,
+            "DRZ": 0.0
+          }
+        },
+        {
+          "group": "CORNER_B",
+          "source": "rmed:RESU____REAC_NODA",
+          "nume_ordre": 1,
+          "nodes": 1,
+          "components": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": -620.2975071297695,
+            "DRX": -5.229594535194338e-12,
+            "DRY": -7.73070496506989e-12,
+            "DRZ": 0.0
+          }
+        }
+      ],
+      "from_tables": [
+        {
+          "group": null,
+          "source": "table:reactions.csv:REAC_EDGES",
+          "nume_ordre": 1,
+          "nodes": null,
+          "components": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": 10000.0
+          }
+        }
+      ],
+      "total": {
+        "DX": 0.0,
+        "DY": 0.0,
+        "DZ": 9999.999999999998,
+        "DRX": 2.1885755165718804e-09,
+        "DRY": 4.300311415373812e-09,
+        "DRZ": 0.0
+      },
+      "labels": {
+        "DX": "X translation",
+        "DY": "Y translation",
+        "DZ": "Z translation",
+        "DRX": "rotation about X",
+        "DRY": "rotation about Y",
+        "DRZ": "rotation about Z"
+      },
+      "notes": []
+    },
+    "per_group_display": {
+      "EDGES": {
+        "name": "EDGES",
+        "display_name": "Simply supported edges"
+      },
+      "CORNER_A": {
+        "name": "CORNER_A",
+        "display_name": "Corner (0, 0), in-plane restraint"
+      },
+      "CORNER_B": {
+        "name": "CORNER_B",
+        "display_name": "Corner (1000, 0), in-plane restraint"
+      }
+    },
+    "keyword_labels": {
+      "DDL_IMPO": "imposed DOF",
+      "PRES_REP": "distributed pressure"
+    },
+    "target_display": {
+      "CORNER_A": {
+        "name": "CORNER_A",
+        "display_name": "Corner (0, 0), in-plane restraint"
+      },
+      "CORNER_B": {
+        "name": "CORNER_B",
+        "display_name": "Corner (1000, 0), in-plane restraint"
+      },
+      "EDGES": {
+        "name": "EDGES",
+        "display_name": "Simply supported edges"
+      },
+      "PLATE": {
+        "name": "PLATE",
+        "display_name": "Plate"
+      }
+    },
+    "applied": {
+      "solve_command": "MECA_STATIQUE",
+      "loads": [
+        "APPUI",
+        "PRESS"
+      ],
+      "items": [
+        {
+          "load": "APPUI",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "DDL_IMPO",
+          "occurrence": 1,
+          "status": "kinematic",
+          "targets": [
+            "EDGES"
+          ],
+          "values": {
+            "DZ": 0.0
+          },
+          "resultant": null,
+          "basis": null,
+          "comm_line": 43
+        },
+        {
+          "load": "APPUI",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "DDL_IMPO",
+          "occurrence": 2,
+          "status": "kinematic",
+          "targets": [
+            "CORNER_A"
+          ],
+          "values": {
+            "DX": 0.0,
+            "DY": 0.0
+          },
+          "resultant": null,
+          "basis": null,
+          "comm_line": 43
+        },
+        {
+          "load": "APPUI",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "DDL_IMPO",
+          "occurrence": 3,
+          "status": "kinematic",
+          "targets": [
+            "CORNER_B"
+          ],
+          "values": {
+            "DY": 0.0
+          },
+          "resultant": null,
+          "basis": null,
+          "comm_line": 43
+        },
+        {
+          "load": "PRESS",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "PRES_REP",
+          "occurrence": 1,
+          "status": "evaluated",
+          "targets": [
+            "PLATE"
+          ],
+          "values": {
+            "PRES": 0.01
+          },
+          "resultant": {
+            "DX": -0.0,
+            "DY": -0.0,
+            "DZ": -10000.000000000005
+          },
+          "basis": "-PRES × vector area of 400 faces",
+          "comm_line": 53
+        }
+      ],
+      "total": {
+        "DX": 0.0,
+        "DY": 0.0,
+        "DZ": -10000.000000000005
+      },
+      "complete": true,
+      "mesh_source": "output/run.rmed",
+      "notes": []
+    },
+    "balance": {
+      "reaction": {
+        "DX": 0.0,
+        "DY": 0.0,
+        "DZ": 9999.999999999998
+      },
+      "reaction_source": "rmed:RESU____REAC_NODA (sum of all nodes)",
+      "applied": {
+        "DX": 0.0,
+        "DY": 0.0,
+        "DZ": -10000.000000000005
+      },
+      "residual": {
+        "DX": 0.0,
+        "DY": 0.0,
+        "DZ": -7.275957614183426e-12
+      },
+      "error_percent": 7.275957614183422e-14,
+      "complete": true,
+      "notes": []
+    },
+    "snippet": null
+  },
+  "modal": null,
+  "diagnostics": {
+    "items": [],
+    "ignored_warnings": [
+      "MODELISA8_14"
+    ],
+    "coverage": {
+      "diagnostics": 2,
+      "diagnostics_english": 2,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [
+      {
+        "legend": "W_CENTER",
+        "quantity": "Deflection at the centre [mm]",
+        "context": {
+          "RESULTAT": "00000008",
+          "NUME_ORDRE": "1",
+          "NOM_CHAM": "DEPL",
+          "NOM_CMP": "DZ",
+          "GROUP_NO": "CENTER"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": -2.11242,
+        "computed": -2.112263828055923,
+        "error": "7.393035E-03%",
+        "tolerance": "1.0%",
+        "passed": true
+      },
+      {
+        "legend": "MXX_CENTER",
+        "quantity": "Bending moment per unit length M_x at the centre [N mm/mm]",
+        "context": {
+          "RESULTAT": "00000008",
+          "NUME_ORDRE": "1",
+          "NOM_CHAM": "EFGE_NOEU",
+          "NOM_CMP": "MXX",
+          "GROUP_NO": "CENTER"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": -478.864,
+        "computed": -479.645314641979,
+        "error": "1.631600E-01%",
+        "tolerance": "3.0%",
+        "passed": true
+      },
+      {
+        "legend": "REAC_DZ_SUM",
+        "quantity": "Sum of Z reactions on the supports [N]",
+        "context": {
+          "RESULTAT": "00000008",
+          "NUME_ORDRE": "1",
+          "NOM_CHAM": "REAC_NODA",
+          "TYPE_TEST": "SOMM",
+          "NOM_CMP": "DZ"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 10000.0,
+        "computed": 9999.999999999982,
+        "error": "1.818989E-13%",
+        "tolerance": "0.1%",
+        "passed": true
+      }
+    ],
+    "non_regression": {
+      "count": 3,
+      "ok": 3
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# shell_static -- simply supported square plate under uniform pressure (DKT, QUAD4 -> DKQ).\n# codeaster-en test fixture (task 4.1). Units: mm, N, MPa.\n# Plate a=1000, thickness t=10, E=210000, NU=0.3, pressure q=0.01 on the whole plate.\n# Edges: DZ=0 (hard simple support, rotations free); two corners restrain in-plane rigid motion.\n# Reference: Navier double series (Timoshenko & Woinowsky-Krieger, Theory of Plates and\n# Shells, 2nd ed., sec. 30 and table 8): w_max = alpha q a^4 / D, M_x = beta q a^2 at the centre.\n# Modelled on astest ssls101n (DKT, ORIE_NORM_COQUE, PRES_REP, TEST_RESU on DEPL DZ).\n# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster\n# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.\n\n# The Gmsh mesh stores the point groups (CENTER, CORNER_A, CORNER_B) as POI1 cells on plate\n# nodes, which the LIRE_MAILLAGE mesh check reports as alarm MODELISA8_14 (\"POI1 cell included\n# in another\"). That is intended, so the alarm is ignored. ERREUR=_F(ALARME=\"EXCEPTION\") cannot\n# be kept with it: Utmess.py turns the alarm into an error before IGNORE_ALARM is consulted\n# (seen in the first run, task 4.2). Any other alarm still shows in run.mess as <A> and makes\n# the job diagnostic <A>_ALARM instead of OK, which tests/test_fixture_outputs.py rejects.\nDEBUT(CODE=\"OUI\", IGNORE_ALARM=(\"MODELISA8_14\",))\n\nQ = 0.01  # uniform pressure [MPa]\nT = 10.0  # thickness [mm]\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA=\"OUI\"))\n\n# Mesh normals already point to +Z; this makes the orientation explicit and checked.\nMAIL = MODI_MAILLAGE(\n    reuse=MAIL,\n    MAILLAGE=MAIL,\n    ORIE_NORM_COQUE=_F(GROUP_MA=\"PLATE\", GROUP_NO=\"CENTER\", VECT_NORM=(0.0, 0.0, 1.0)),\n)\n\nMODE = AFFE_MODELE(\n    MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"DKT\")\n)\n\nCARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA=\"PLATE\", EPAIS=T, ANGL_REP=(0.0, 0.0)))\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", MATER=ACIER))\n\nAPPUI = AFFE_CHAR_MECA(\n    MODELE=MODE,\n    DDL_IMPO=(\n        _F(GROUP_MA=\"EDGES\", DZ=0.0),\n        _F(GROUP_NO=\"CORNER_A\", DX=0.0, DY=0.0),\n        _F(GROUP_NO=\"CORNER_B\", DY=0.0),\n    ),\n)\n\n# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).\nPRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=\"PLATE\", PRES=Q))\n\nRESU = MECA_STATIQUE(\n    MODELE=MODE,\n    CHAM_MATER=MATE,\n    CARA_ELEM=CARA,\n    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),\n    SOLVEUR=_F(METHODE=\"MUMPS\"),\n)\n\nRESU = CALC_CHAMP(\n    reuse=RESU, RESULTAT=RESU, CONTRAINTE=(\"EFGE_ELNO\", \"EFGE_NOEU\"), FORCE=\"REAC_NODA\"\n)\n\nREAC = POST_RELEVE_T(\n    ACTION=_F(\n        OPERATION=\"EXTRACTION\",\n        INTITULE=\"REAC_EDGES\",\n        RESULTAT=RESU,\n        NOM_CHAM=\"REAC_NODA\",\n        GROUP_NO=\"EDGES\",\n        RESULTANTE=(\"DX\", \"DY\", \"DZ\"),\n    )\n)\n\nIMPR_TABLE(TABLE=REAC, FORMAT=\"TABLEAU\", SEPARATEUR=\",\", UNITE=30)\n\nIMPR_RESU(\n    FORMAT=\"MED\",\n    UNITE=80,\n    RESU=_F(RESULTAT=RESU, CARA_ELEM=CARA, NOM_CHAM=(\"DEPL\", \"EFGE_NOEU\", \"REAC_NODA\")),\n)\n\nTEST_RESU(\n    RESU=(\n        # Centre deflection: w = alpha q a^4 / D, alpha = 0.00406235 (NU=0.3), D = E t^3/(12(1-NU^2)).\n        _F(\n            NUME_ORDRE=1,\n            RESULTAT=RESU,\n            NOM_CHAM=\"DEPL\",\n            GROUP_NO=\"CENTER\",\n            NOM_CMP=\"DZ\",\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=-2.11242,\n            VALE_CALC=-2.112263828055923,\n            PRECISION=1.0e-2,\n            LEGENDE=\"W_CENTER\",\n        ),\n        # Centre bending moment per unit length: M_x = -beta q a^2, beta = 0.0478864 (NU=0.3).\n        # Negative: in the first run (task 4.2) EFGE_NOEU MXX = MYY < 0 at the centre while the\n        # plate sags (DZ < 0), so the sagging moment is negative in code_aster's convention.\n        _F(\n            NUME_ORDRE=1,\n            RESULTAT=RESU,\n            NOM_CHAM=\"EFGE_NOEU\",\n            GROUP_NO=\"CENTER\",\n            NOM_CMP=\"MXX\",\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=-478.864,\n            VALE_CALC=-479.645314641979,\n            PRECISION=3.0e-2,\n            LEGENDE=\"MXX_CENTER\",\n        ),\n        # Reaction sum = +q a^2 (whole REAC_NODA field; only supported nodes carry reactions).\n        # Positive: REAC_NODA is the support reaction, opposite to the -Z load (first run, 4.2).\n        _F(\n            NUME_ORDRE=1,\n            RESULTAT=RESU,\n            NOM_CHAM=\"REAC_NODA\",\n            NOM_CMP=\"DZ\",\n            TYPE_TEST=\"SOMM\",\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=10000.0,\n            VALE_CALC=9999.999999999982,\n            PRECISION=1.0e-3,\n            LEGENDE=\"REAC_DZ_SUM\",\n        ),\n    )\n)\n\nFIN()\n",
+    "comm_syntax_error": null,
+    "comm_skipped_lines": [],
+    "command_purposes": {
+      "17": {
+        "command": "DEBUT",
+        "purpose": "begin study"
+      },
+      "22": {
+        "command": "LIRE_MAILLAGE",
+        "purpose": "read mesh"
+      },
+      "24": {
+        "command": "DEFI_GROUP",
+        "purpose": "define groups"
+      },
+      "27": {
+        "command": "MODI_MAILLAGE",
+        "purpose": "modify mesh"
+      },
+      "33": {
+        "command": "AFFE_MODELE",
+        "purpose": "assign model"
+      },
+      "37": {
+        "command": "AFFE_CARA_ELEM",
+        "purpose": "assign element properties"
+      },
+      "39": {
+        "command": "DEFI_MATERIAU",
+        "purpose": "define material"
+      },
+      "41": {
+        "command": "AFFE_MATERIAU",
+        "purpose": "assign material"
+      },
+      "43": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "53": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "55": {
+        "command": "MECA_STATIQUE",
+        "purpose": "linear static analysis"
+      },
+      "63": {
+        "command": "CALC_CHAMP",
+        "purpose": "compute derived fields"
+      },
+      "67": {
+        "command": "POST_RELEVE_T",
+        "purpose": "extract values to table"
+      },
+      "78": {
+        "command": "IMPR_TABLE",
+        "purpose": "write table"
+      },
+      "80": {
+        "command": "IMPR_RESU",
+        "purpose": "write results"
+      },
+      "86": {
+        "command": "TEST_RESU",
+        "purpose": "test result value"
+      },
+      "133": {
+        "command": "FIN",
+        "purpose": "end study"
+      }
+    },
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/reactions.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "  Opening file for writing: ./vola.1",
+      "",
+      " <INFO> Starting the run.",
+      "",
+      "            -- CODE_ASTER -- VERSION: CORRECTIVE AVANT STABILISATION (stable-updates) --",
+      "                               Version 17.4.22 modified on 30/06/2026",
+      "                              revision spack-local - branch 'v17.4.22'",
+      "                                   Copyright EDF R&D 1991 - 2026",
+      "",
+      "                                  Run on: Thu Oct 29 02:15:37 2026",
+      "                                      Host name: 5c42a166f683",
+      "                                        Architecture: 64bit",
+      "                                       Processor type: x86_64",
+      "                   Operating system: Linux-6.18.44-fc-v185-x86_64-with-glibc2.36",
+      "                                    Message language: en (UTF-8)",
+      "                                      Python version: 3.11.14",
+      "                                       NumPy version: 1.26.4",
+      "                                        MPI parallelism: on",
+      "                                  Rank of the current processor: 0",
+      "                                  Number of MPI processors used: 1",
+      "                                       OpenMP parallelism: on",
+      "                                  Number of OpenMP threads used: 1",
+      "                                    HDF5 library version: 1.10.7",
+      "                                     MED library version: 4.2.0",
+      "                                   MFront library version: 5.0.0",
+      "                                    MUMPS library version: 5.6.2",
+      "                                  PETSc library version: 3.24.0p0",
+      "                                   SCOTCH library version: 7.0.10",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <SUPERVIS_22>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║ The CODE and DEBUG keywords of DEBUT/POURSUITE are reserved for test cases.                    ║",
+      " ║ The same applies to the option \"--test\" of CA.init().                                          ║",
+      " ║ Do not use them in studies: they change some default values                                    ║",
+      " ║ of the DEBUT/POURSUITE commands, which affects the behavior                                    ║",
+      " ║ when an error occurs and the performance.                                                      ║",
+      " ╚================================================================================================╝",
+      "",
+      "  Initial value of the maximum CPU time =   600 seconds",
+      "  Maximum CPU time given to the commands =   590 seconds",
+      "  Planned CPU reserve = 10 seconds",
+      "",
+      "  Opening file for writing: ./glob.1",
+      "",
+      "  Opening file for writing: ./vola.1",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Created with version                    :  17.04.22",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Total number of read accesses           :  65",
+      "     Volume read                             :         50.78 MB.",
+      "     Total number of write accesses          :  0",
+      "     Volume written                          :          0.00 MB.",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Element catalogs read again.",
+      "",
+      "  End of reading (duration  0.278134  s.)",
+      "",
+      "                          Memory limit for dynamic allocation: 2411.00 MB",
+      "                             added at process initialization: 646.98 MB",
+      "                              Target limit of the process: 3057.98 MB",
+      "                              Size limit of the swap files: 2048.00 GB",
+      "# Memory (MB):   646.98 /   638.84 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0001   user+syst:        0.04s (syst:        1.53s, elaps:        1.59s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0002 from run.comm.changed.py, line 34",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "MED name of the mesh: mesh",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Checking the mesh.",
+      "",
+      "# Result of command #0002 (LIRE_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   646.98 /   640.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0002   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0003 from run.comm.changed.py, line 36",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0003 (DEFI_GROUP): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   646.98 /   640.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0003   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0004 from run.comm.changed.py, line 39",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Processing GROUP_MA PLATE with 400 elements.",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0004 (MODI_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   646.98 /   640.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0004   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0005 from run.comm.changed.py, line 45",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Of the 483 elements of mesh 00000001, assignment was requested for 400 and 400 could be assigned.",
+      " Modeling type    Formulation      Element type Finite element   Number",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0005 (AFFE_MODELE): MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0005   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0006 from run.comm.changed.py, line 49",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0006 (AFFE_CARA_ELEM): CARA ('<00000003>') of type <ElementaryCharacteristics>",
+      "# Depends on:",
+      "# - MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0006   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0007 from run.comm.changed.py, line 51",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0007 (DEFI_MATERIAU): ACIER ('<00000004>') of type <Material>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0007   user+syst:        0.08s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0008 from run.comm.changed.py, line 53",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0008 (AFFE_MATERIAU): MATE ('<00000005>') of type <MaterialField>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0008   user+syst:        0.07s (syst:        0.00s, elaps:        0.08s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0009 from run.comm.changed.py, line 55",
+      "[13 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0009 (AFFE_CHAR_MECA): APPUI ('<00000006>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0009   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0010 from run.comm.changed.py, line 65",
+      "[8 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0010 (AFFE_CHAR_MECA): PRESS ('<00000007>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   769.28 /   769.28 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0010   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0011 from run.comm.changed.py, line 67",
+      "[26 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 2812 degrees of freedom:",
+      "   - 2646 are physical degrees of freedom",
+      "     (carried by 441 nodes of the mesh)",
+      "   - 166 are the pairs of Lagrange multipliers associated",
+      "     with the 83 dualized linear relations.",
+      "  The matrix has 2812 equations.",
+      "  It has 69546 nonzero terms if it is symmetric and 136280 nonzero terms if it is not symmetric.",
+      "  That is a fill ratio of   1.723 %.",
+      "Field <DEPL> stored at time step  0.000000000000e+00 for step index 1",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0011 (MECA_STATIQUE): RESU ('<00000008>') of type <ElasticResult>",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0011   user+syst:        0.22s (syst:        0.00s, elaps:        0.24s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0013 from run.comm.changed.py, line 75",
+      "[8 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 2812 degrees of freedom:",
+      "   - 2646 are physical degrees of freedom",
+      "     (carried by 441 nodes of the mesh)",
+      "   - 166 are the pairs of Lagrange multipliers associated",
+      "     with the 83 dualized linear relations.",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0013 (CALC_CHAMP): RESU ('<00000008>') of type <ElasticResult>",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0013   user+syst:        0.03s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0014 from run.comm.changed.py, line 79",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0014 (POST_RELEVE_T): REAC ('<0000002b>') of type <Table>",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0014   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0015 from run.comm.changed.py, line 90",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0015   user+syst:        0.07s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0016 from run.comm.changed.py, line 92",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Creating the file in MED format 3.3.1.",
+      "",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0016   user+syst:        0.02s (syst:        0.00s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0017 from run.comm.changed.py, line 98",
+      "[33 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[20 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   780.34 /   769.29 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0017   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║        (*) MODELISA8_14 issued    3 times                                                      ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[26 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   780.34 /   777.98 /   207.82 /   199.02 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0018   user+syst:        0.10s (syst:        0.00s, elaps:        0.10s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : OK",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": []
+}
