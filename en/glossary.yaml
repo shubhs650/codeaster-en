@@ -518,3 +518,29 @@
 # proposed by caen translate messages (task 3.1); review before use
 - {fr: mot-clé facteur, en: factor keyword, kind: term, note: 'Keyword that groups sub-keywords and may be repeated, written with _F(...) (AFFE, EXCIT, POUTRE). Also spelled ''mot clef facteur'' in messages.', status: proposed}
 - {fr: fibre, en: fiber, kind: term, note: 'Multifiber beams (AFFE_CARA_ELEM MULTIFIBRE, DEFI_GEOM_FIBRE): the beam section is split into fibers integrated separately.', source: 'code_aster/Messages/modelisa8.py:40', status: proposed}
+# ---------- task 4.6 (report generator) ----------
+- {fr: POI1, en: point element (1 node), kind: value, note: "Element type (TYPE_MAILLE). MED code PO1.", source: "catalo/cataelem/Commons/mesh_types.py:34", status: proposed}
+- {fr: SEG2, en: 2-node segment, kind: value, note: "Element type (TYPE_MAILLE), linear edge. MED code SE2.", source: "catalo/cataelem/Commons/mesh_types.py:44", status: proposed}
+- {fr: SEG3, en: 3-node segment, kind: value, note: "Element type (TYPE_MAILLE), quadratic edge. MED code SE3.", source: "catalo/cataelem/Commons/mesh_types.py:76", status: proposed}
+- {fr: SEG4, en: 4-node segment, kind: value, note: "Element type (TYPE_MAILLE), cubic edge. MED code SE4.", source: "catalo/cataelem/Commons/mesh_types.py:108", status: proposed}
+- {fr: TRIA3, en: 3-node triangle, kind: value, note: "Element type (TYPE_MAILLE), linear triangle. MED code TR3.", source: "catalo/cataelem/Commons/mesh_types.py:121", status: proposed}
+- {fr: TRIA6, en: 6-node triangle, kind: value, note: "Element type (TYPE_MAILLE), quadratic triangle. MED code TR6.", source: "catalo/cataelem/Commons/mesh_types.py:147", status: proposed}
+- {fr: TRIA7, en: 7-node triangle, kind: value, note: "Element type (TYPE_MAILLE), quadratic triangle with a center node. MED code TR7.", source: "catalo/cataelem/Commons/mesh_types.py:172", status: proposed}
+- {fr: QUAD4, en: 4-node quadrangle, kind: value, note: "Element type (TYPE_MAILLE), linear quadrangle. MED code QU4.", source: "catalo/cataelem/Commons/mesh_types.py:199", status: proposed}
+- {fr: QUAD8, en: 8-node quadrangle, kind: value, note: "Element type (TYPE_MAILLE), quadratic serendipity quadrangle. MED code QU8.", source: "catalo/cataelem/Commons/mesh_types.py:221", status: proposed}
+- {fr: QUAD9, en: 9-node quadrangle, kind: value, note: "Element type (TYPE_MAILLE), quadratic Lagrange quadrangle (center node). MED code QU9.", source: "catalo/cataelem/Commons/mesh_types.py:241", status: proposed}
+- {fr: TETRA4, en: 4-node tetrahedron, kind: value, note: "Element type (TYPE_MAILLE), linear tetrahedron. MED code TE4.", source: "catalo/cataelem/Commons/mesh_types.py:268", status: proposed}
+- {fr: TETRA10, en: 10-node tetrahedron, kind: value, note: "Element type (TYPE_MAILLE), quadratic tetrahedron. MED code T10.", source: "catalo/cataelem/Commons/mesh_types.py:288", status: proposed}
+- {fr: PENTA6, en: 6-node wedge, kind: value, note: "Element type (TYPE_MAILLE), linear pentahedron (prism). MED code PE6.", source: "catalo/cataelem/Commons/mesh_types.py:306", status: proposed}
+- {fr: PENTA15, en: 15-node wedge, kind: value, note: "Element type (TYPE_MAILLE), quadratic pentahedron. MED code P15.", source: "catalo/cataelem/Commons/mesh_types.py:327", status: proposed}
+- {fr: PENTA18, en: 18-node wedge, kind: value, note: "Element type (TYPE_MAILLE), quadratic pentahedron with face nodes. MED code P18.", source: "catalo/cataelem/Commons/mesh_types.py:346", status: proposed}
+- {fr: PYRAM5, en: 5-node pyramid, kind: value, note: "Element type (TYPE_MAILLE), linear pyramid. MED code PY5.", source: "catalo/cataelem/Commons/mesh_types.py:362", status: proposed}
+- {fr: PYRAM13, en: 13-node pyramid, kind: value, note: "Element type (TYPE_MAILLE), quadratic pyramid. MED code P13.", source: "catalo/cataelem/Commons/mesh_types.py:383", status: proposed}
+- {fr: HEXA8, en: 8-node hexahedron, kind: value, note: "Element type (TYPE_MAILLE), linear hexahedron. MED code HE8.", source: "catalo/cataelem/Commons/mesh_types.py:404", status: proposed}
+- {fr: HEXA20, en: 20-node hexahedron, kind: value, note: "Element type (TYPE_MAILLE), quadratic serendipity hexahedron. MED code H20.", source: "catalo/cataelem/Commons/mesh_types.py:425", status: proposed}
+- {fr: HEXA27, en: 27-node hexahedron, kind: value, note: "Element type (TYPE_MAILLE), quadratic Lagrange hexahedron. MED code H27.", source: "catalo/cataelem/Commons/mesh_types.py:447", status: proposed}
+- {fr: SOURCE_EXTERNE, en: external source, kind: value, note: "TEST_RESU REFERENCE: the reference value comes from another code or the literature.", source: "code_aster/Cata/Commons/c_test_reference.py:89", status: proposed}
+- {fr: AUTRE_ASTER, en: other code_aster result, kind: value, note: "TEST_RESU REFERENCE: the reference value comes from another code_aster calculation.", source: "code_aster/Cata/Commons/c_test_reference.py:89", status: proposed}
+- {fr: NON_DEFINI, en: undefined reference, kind: value, note: "TEST_RESU REFERENCE: the origin of the reference value is not stated.", source: "code_aster/Cata/Commons/c_test_reference.py:89", status: proposed}
+- {fr: NON_REGRESSION, en: non-regression, kind: value, note: "Reference type the solver prints for the VALE_CALC check of TEST_RESU: the computed value against the value stored in the command file (not a catalog value).", source: "bibfor/test/trchel.F90:244", status: proposed}
+- {fr: SORENSEN, en: Sorensen eigensolver (ARPACK), kind: value, note: "CALC_MODES SOLVEUR_MODAL METHODE (default): implicitly restarted Arnoldi/Lanczos method of the ARPACK library.", source: "code_aster/Cata/Commands/calc_modes.py:268", status: proposed}
