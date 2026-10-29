@@ -88,10 +88,10 @@ All public objects are plain dataclasses, JSON-serialisable (`.to_dict()`), so C
 
 ## 5. Failure classification → billing
 
-| Class | Examples (family/number filled in Phase 4) | ClearFEA action |
+| Class | Examples (message ID or `run_aster` diagnostic; rules in `mess/classify.py`, task 4.3) | ClearFEA action |
 |---|---|---|
-| `user-model` | unknown group, missing material on group, unoriented pressure face (warning that becomes a wrong result), singular stiffness (missing BC), bad keyword in bring-your-own `.comm` | Charge; show English message + the command reference link |
-| `user-resources` | time limit, memory limit in `.export` | Charge; suggest bigger machine |
+| `user-model` | unknown group (`MODELISA7_77`), missing material on group, unoriented pressure face (warning that becomes a wrong result), singular stiffness from a missing BC (`FACTOR_11`), bad keyword in bring-your-own `.comm` (`SUPERVIS_4`), invalid Python (`<F>_SYNTAX_ERROR`) | Charge; show English message + the command reference link |
+| `user-resources` | time limit (`<S>_CPU_LIMIT`), memory limit in `.export` (`<S>_MEMORY_ERROR`); from `run_aster/status.py`, no fixture yet | Charge; suggest bigger machine |
 | `platform` | image missing, MED write I/O error, MPI launch failure, version mismatch between builder and solver | Refund; alert |
 | `unknown` | anything untranslated/unclassified | Charge provisionally, flag for review; add rule |
 

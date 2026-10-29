@@ -1,6 +1,6 @@
 # Solver fixtures
 
-Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6). Each case directory follows the job layout of `docs/CLEARFEA-INTEGRATION.md` §3:
+Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6), plus four broken runs for the log parser (below). Each case directory follows the job layout of `docs/CLEARFEA-INTEGRATION.md` §3:
 
 ```text
 <case>/
@@ -19,6 +19,19 @@ Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6). Ea
 | `modal` | `3D`, `CALC_MODES` 6 lowest | 4,197 nodes, 640 HEXA20; cantilever 400 × 20 × 10 mm | X = 0 face clamped | frequencies 52.22, 104.44, 327.26, 654.51, 916.33 Hz (Euler–Bernoulli bending) and 1485.22 Hz (Saint-Venant torsion) | `sdlv100a`, `sdll05a` |
 
 Units are mm, N, MPa, tonne, s (`units.system = "SI_mm"` in `run.json`). Material is steel, E = 210,000 MPa, ν = 0.3, ρ = 7.85e-9 t/mm³.
+
+## Broken runs (task 4.3)
+
+Four more jobs fail on purpose, so the `.mess` parser and the failure classifier (`codeaster_en.mess`, `docs/CLEARFEA-INTEGRATION.md` §5) are tested on real solver output. Each is `shell_static` cut after `MECA_STATIQUE` with one fault (marked `# fault:` in `run.comm`) and a plain `DEBUT()`, as a user's study would run, so the `MODELISA8_14` alarms are printed. They have no `run.json` and are not checked by `tests/test_fixture_outputs.py`; `tests/test_mess.py` checks them.
+
+| Case | Fault | What the solver prints | `run_aster` diagnostic | Class |
+|---|---|---|---|---|
+| `broken_missing_group` | `DDL_IMPO` on `GROUP_MA="EDGE"` (the mesh has `EDGES`) | `<EXCEPTION> <MODELISA7_77>` in `AFFE_CHAR_MECA` | `<S>_ERROR`, exit 1 | `user-model` |
+| `broken_singular_matrix` | `EXCIT` without the supports | `<EXCEPTION> <FACTOR_11>` in `MECA_STATIQUE` (MUMPS, zero pivot) | `<S>_ERROR`, exit 1 | `user-model` |
+| `broken_bad_keyword` | `PRES_REP=_F(..., PRESSION=Q)` instead of `PRES` | `<EXCEPTION> <SUPERVIS_4>` from the catalog check of `AFFE_CHAR_MECA` | `<S>_ERROR`, exit 1 | `user-model` |
+| `broken_python_syntax` | a missing comma | Python `SyntaxError` before the solver starts (no banner, no stage) | `<F>_SYNTAX_ERROR`, exit 1 | `user-model` |
+
+`FIN` still runs after an error raised as an exception, so `<I> <FIN> ARRET NORMAL` appears in two of these logs; it does not mean the run succeeded. The error box is printed again inside each Python traceback (three times for `SUPERVIS_4`); the parser marks the copies `repeat`.
 
 ## Hand values
 

@@ -115,7 +115,9 @@ class ParsedLog:
             "message_language": header.message_language if header else None,
             "diagnostic_job": trailer.diagnostic if trailer else None,
             "exit_code": exit_codes[-1] if exit_codes else None,
-            "normal_end": any(
+            # FIN closes the database ("ARRET NORMAL") even after an error raised as an
+            # exception, so this does not mean the run succeeded; see diagnostic_job.
+            "closed_normally": any(
                 isinstance(n, Notice) and n.tag == "FIN" and "ARRET NORMAL" in n.message
                 for n in self.of("notice")
             ),

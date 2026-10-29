@@ -14,6 +14,34 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.3 `.mess` log parser — agent
+Done: `codeaster_en.mess` (`events.py`, `parser.py`, `log.py`, `commlines.py`, `classify.py`)
+and `caen mess parse <run.mess> [--out run.json]`. One pass with a few lines of look-ahead turns
+a log into events: `runner`, `header`, `stage` / `stage_end` (command number, command, concept,
+line, result type, CPU/elapsed, memory), `diagnostic` (`<TYPE> <FAMILY_N>` boxes: severity, ID,
+body, Utmess footer split off, `repeat` for copies re-printed in tracebacks), `notice`, `table`
+(`TEST_RESU` rows, `CALC_MODES` frequencies, end-of-run timings), `traceback`, `summary`
+(`DIAGNOSTIC JOB`), and `text` / `blank` as the verbatim fallback. Every line lands in exactly
+one event (tested on all 7 logs). Stage and traceback lines are mapped back to the user's
+`.comm` (`run_aster` runs `run.comm.changed.py`, 12 lines longer after `DEBUT`).
+`stream(path)` follows a growing log and stops after the trailer. `classify(log)` gives the
+CLEARFEA-INTEGRATION §5 class; rules keyed by message ID (`MODELISA7_77`, `FACTOR_11`,
+`SUPERVIS_4`) then by `run_aster` diagnostic. Four broken-run fixtures run with the ADR-011
+image (`broken_missing_group`, `broken_singular_matrix`, `broken_bad_keyword`, and
+`broken_python_syntax` as a fourth), see `tests/fixtures/README.md`. `tests/test_mess.py`
+(45 tests); `solver-fixtures.yml` now also runs it on regenerated logs.
+Open: task 4.4 (English renderer, argument recovery, `caen mess translate`). Nonlinear
+convergence tables are not parsed (no nonlinear fixture; they fall back to `text`). The
+`user-resources` and `platform` rules come from `run_aster/status.py`, not from a run
+(`TODO(verify)` in `classify.py`). Plain informational solver output has no ID, so it stays
+`text`; 4.4 must match it against `I` message templates.
+Decisions: no ADR. The fallback event is called `text` rather than `unknown`: in a normal log most
+unclassified lines are the solver's own ID-less informational output, not unknown content.
+`ARRET NORMAL` is reported as `closed_normally`, not success: `FIN` closes the base even after
+an exception (seen in two broken runs). A box seen again with the same severity, ID and body is
+flagged `repeat` and left out of `errors`.
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 3.1 message translation tool — agent
 Done: `caen translate messages` (`tools/codeaster_en/translate/messages.py`, `po.py`): optional
 seed from upstream's `i18n/en-US/aster_messages.po` (verbatim `msgid` only, same checks as a
