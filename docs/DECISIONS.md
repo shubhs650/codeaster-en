@@ -139,6 +139,28 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-012 — Command-reference drafts: generated in place, no paid LLM call, translation memory for `fr=` strings
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29)
+
+**Context.** PLAN.md task 2.2 asks for `caen translate command <CMD>`: a first-draft `en/commands/<CMD>.md` with the keyword table pre-filled, "English column from glossary + LLM", astest examples linked and the doc ID linked if known. Calling a paid LLM API needs the owner's key (stop rule, ADR-010). TRANSLATION-GUIDE §1 says catalog `fr=` strings go "into the `.json` as `en_help`", but the `.json` is generated and never hand-edited (CLAUDE.md §5). Tier 1 has 5,893 keyword rows (DEFI_MATERIAU alone 3,255), far beyond what a reference can list. There is no command → U4 document ID mapping in the repo; the catalog's `docu=` is set for 8 of 268 commands.
+
+**Decision.**
+1. Drafts are written in place as `en/commands/<CMD>.md` with `status: machine` and committed. Task 2.3 edits them and sets `status: assisted`; from then on the generator skips the file unless `--force`. Machine drafts are snapshots: `tests/test_translate_command.py` regenerates them and fails when stale.
+2. The "LLM" part is an in-session agent translation stored in a translation memory, `en/catalog-help.yaml` (human-edited YAML, `{fr, en, method}`, matched on the exact French string). The generator itself makes no network call. A string with no entry is shown as `TODO(translate): «fr»`; `caen translate command --list-untranslated` lists them for the next translator (in-session, or the batch client of task 3.1 once it exists). The `.json` files are not touched.
+3. Keyword-table scope: every top-level simple keyword; factor keywords with their sub-keywords when the command has ≤ 150 distinct keyword paths, or when the factor is a "key keyword" of the command in COMMAND-SET.md; the other factors are named in an "Other keywords" list. Hidden keywords (`statut='c'`) are left out. `--all-keywords` expands everything.
+4. Doc IDs: the catalog's `docu=` first, else `en/doc-ids.yaml`. Its Tier 1 entries are agent recall with `status: proposed` (the PDFs are not reachable), queued for the owner; a draft shows where its ID came from.
+5. Upstream's 2016 English labels (`translation_upstream`, catapy) are not used in drafts: they are short labels, and ADR-004 keeps upstream English as seed only.
+6. The synonym scan ignores French text quoted in guillemets (`«…»`), because drafts quote `fr=` strings verbatim.
+
+**Why.** Drafts in place give 2.3 a starting file and keep one source of truth per command; the status gate protects authored work. A translation memory keeps the `.json` generated, is reviewable line by line, and is reused across commands and by later tasks. Scoping by COMMAND-SET keeps the drafts readable and follows ADR-003.
+
+**Consequences.**
+- PLAN 2.2's "English column from glossary + LLM" is met without spending the owner's API budget. Task 3.1's batch translator can fill `en/catalog-help.yaml` for Tier 2+ commands.
+- TRANSLATION-GUIDE §1 now points `fr=` translations to `en/catalog-help.yaml` instead of an `en_help` field in the `.json`.
+- `POURSUITE` gets no draft (no catalog; it reuses `DEBUT`'s); 2.3 covers it in `DEBUT.md`.
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>

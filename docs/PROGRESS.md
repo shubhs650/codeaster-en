@@ -14,6 +14,34 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.2 command reference draft generator — agent
+Done: `caen translate command [CMD...] [--tier N] [--all-keywords] [--force]
+[--list-untranslated]` (`tools/codeaster_en/translate/command.py`, template
+`translate/templates/command.md.j2`, new dependency `jinja2`). Drafts for all 24 Tier 1 commands
+that have a catalog were generated in one run (`--tier 1`) and committed as
+`en/commands/<CMD>.md`, `status: machine`: front matter with provenance (upstream tag, commit,
+catalog file:line, doc ID, examples), a facts table (result type, `reuse=`, tier, key
+keywords), a keyword table (1,401 rows: type/cardinality, default, allowed values, bloc
+conditions, glossary English, translated `fr=` help, `TODO(2.3)` for meaning/when to use), the
+catalog rules in English (semantics from `Cata/Language/Rules.py`), up to two calls lifted
+verbatim from astest and three linked cases (simplest Tier-1-only sequential cases, one per
+family, `erreu*` error tests excluded). New `en/catalog-help.yaml`: 220 `fr=` strings
+translated in-session (`method: machine`), which covers every string the Tier 1 drafts show.
+New `en/doc-ids.yaml`: Tier 1 U4 IDs (`proposed`; the catalog's `docu=` wins, e.g.
+POST_RELEVE_T U4.81.21). The synonym scan now skips French quoted in `«…»`. New
+`tests/test_translate_command.py` (18 tests: snapshot of the machine drafts, Tier 1 coverage, data
+files, table scope, rules, overwrite guard, snippet extraction, example ranking, CLI).
+Self-review: re-read the AFFE_MODELE, LIRE_MAILLAGE, MECA_STATIQUE and DEFI_MATERIAU drafts
+against their `.json`; types, defaults, conditions and rules match the catalog.
+Open: `POURSUITE` has no catalog, so no draft (2.3 covers it in `DEBUT.md`). 675 rows still say
+`TODO(2.3): meaning` (keyword without glossary entry or `fr=` string); 2.3 writes them.
+Decisions: ADR-012 (drafts in place with a status guard; in-session translation memory instead
+of a paid LLM call; COMMAND-SET key keywords bound the table for commands with more than 150
+keyword paths; doc IDs from `docu=` then `en/doc-ids.yaml`). Branch is
+`claude/project-thread-pssseb` (session-assigned).
+Needs owner: nothing blocking. Queue: confirm the U4 IDs (PLAN.md says U4.81.01 for IMPR_RESU,
+`en/doc-ids.yaml` says U4.91.01) and spot-check the RCC-M help translations.
+
 ## 2026-10-29 — 2.1 glossary pass 1 — agent
 Done: every non-value entry of `en/glossary.yaml` now has a `note` (164 added: 23 terms, 36
 commands, 81 keywords, 24 concepts), drafted from the catalog `fr=` strings, allowed values and

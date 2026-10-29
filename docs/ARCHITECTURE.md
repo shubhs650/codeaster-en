@@ -82,6 +82,7 @@ Rules: a `fr` key appears once; `en` is the only permitted translation; `aliases
 
 - `.json` is **generated** by `caen extract catalog` from the pinned upstream: full keyword tree, types, defaults, cardinality, allowed values, French `fr=` strings, source file + line, upstream tag.
 - `.md` is **written** (LLM-drafted, engineer-reviewed): purpose in one paragraph; keyword table (French keyword · type · default · English meaning · when to use); common patterns; pitfalls; links to translated doc ID and 2–3 astest examples; `status` and provenance header.
+- `caen translate command` (task 2.2, ADR-012) writes the first draft of the `.md` (`status: machine`) from the `.json`, `en/glossary.yaml`, the `fr=` translation memory `en/catalog-help.yaml`, `en/astest-index.json` and `en/doc-ids.yaml`.
 - A `caen check commands` step verifies every keyword in the `.md` table exists in the `.json` (no invented keywords) and every required keyword is covered.
 
 These two files per command are what an LLM gets as context when asked to write a `.comm`.

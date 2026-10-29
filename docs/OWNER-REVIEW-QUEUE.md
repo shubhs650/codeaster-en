@@ -15,6 +15,8 @@ Only the owner sets `status: reviewed`.
 | 2026-10-29 | Fixture solver image (task 4.2, ADR-011) | Runtime is code_aster 17.4.22 (`simvia/code_aster`, not an EDF image) while the pin is 17.4.26. Confirm that is acceptable, or point to an official 17.4.x image. | `CONTAINER_IMAGE`, `docs/DECISIONS.md` ADR-011 |
 | 2026-10-29 | Fixture sign conventions (task 4.2) | Reaction sums are positive (support reaction) and the plate centre `MXX` is negative under sagging; references are now signed. | `tests/fixtures/README.md` |
 | 2026-10-29 | ADR-007 licence | Status still reads "owner to confirm after reading upstream licence headers". | `docs/DECISIONS.md` |
+| 2026-10-29 | U4 doc IDs for Tier 1 (task 2.2) | 24 IDs in `en/doc-ids.yaml` are agent recall (`status: proposed`), not checked against the PDFs. One conflict: PLAN.md 5.1 names U4.81.01 for `IMPR_RESU`; the file says U4.91.01. Set `status: verified` (or fix) when the PDFs are at hand. | `en/doc-ids.yaml` |
+| 2026-10-29 | Catalog help translations (task 2.2) | 220 `fr=` strings translated in-session (`method: machine`). Spot-check the RCC-M ones (`POST_RCCM`: "Elastic limit used to compute thermal ratcheting", "Data for the Fen calculation", "Stress intensity factors (weld)") and `CREA_MAILLAGE` "elements with a discontinuity". | `en/catalog-help.yaml` |
 
 ## Inputs only the owner can give (tasks skip and continue)
 
