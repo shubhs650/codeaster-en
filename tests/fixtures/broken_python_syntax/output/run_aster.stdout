@@ -1,0 +1,141 @@
+
+# ------------------------------------------------------------------------------
+Execution of code_aster
+
+# ------------------------------------------------------------------------------
+Prepare environment in /tmp/run_aster_n367q9mt/proc.0
+
+# ------------------------------------------------------------------------------
+Command file #1 / 1
+
+Content of the file to execute:
+# coding=utf-8
+# original filename
+__file__ = r"/work/input/run.comm"
+
+# broken_python_syntax -- deliberately broken run (task 4.3): a missing comma, so the command file
+# is not valid Python and the solver never starts.
+# codeaster-en test fixture. Copy of shell_static (same mesh, units mm, N, MPa) cut after
+# MECA_STATIQUE, with one fault injected. DEBUT() without CODE, as a user's study would run.
+# The .mess this produces is a parser and classifier test input; the run is expected to fail.
+
+
+# temporarly added for compatibility with code_aster legacy
+from math import *
+
+import code_aster
+from code_aster.Commands import *
+from code_aster import CA
+
+DEBUT()
+
+Q = 0.01  # uniform pressure [MPa]
+T = 10.0  # thickness [mm]
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA="OUI"))
+
+# Mesh normals already point to +Z; this makes the orientation explicit and checked.
+MAIL = MODI_MAILLAGE(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    ORIE_NORM_COQUE=_F(GROUP_MA="PLATE", GROUP_NO="CENTER", VECT_NORM=(0.0, 0.0, 1.0)),
+)
+
+MODE = AFFE_MODELE(
+    MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", PHENOMENE="MECANIQUE", MODELISATION="DKT")
+)
+
+CARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA="PLATE", EPAIS=T, ANGL_REP=(0.0, 0.0)))
+
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", MATER=ACIER))
+
+APPUI = AFFE_CHAR_MECA(
+    MODELE=MODE,
+    DDL_IMPO=(
+        # fault: missing comma after this line
+        _F(GROUP_MA="EDGES", DZ=0.0)
+        _F(GROUP_NO="CORNER_A", DX=0.0, DY=0.0),
+        _F(GROUP_NO="CORNER_B", DY=0.0),
+    ),
+)
+
+# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).
+PRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA="PLATE", PRES=Q))
+
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    CARA_ELEM=CARA,
+    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+
+FIN()
+
+
+
+# ------------------------------------------------------------------------------
+Command line #1:
+    ulimit -c unlimited ; ulimit -t 750 ; ( /opt/spack/opt/spack/linux-zen2/python-3.11.14-crxgllx4ijrk74sukxvebk3ulzuavesl/bin/python3 -m mpi4py "run.comm.changed.py" --last --link="F::mmed::/work/input/mesh.med::D::20" --memory 2048.0 --tpmax 600 --numthreads 1 ; echo $? > _exit_code_ ) 2>&1 | tee -a fort.6
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/__main__.py", line 7, in <module>
+    main()
+  File "/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py", line 230, in main
+    run_command_line(args)
+  File "/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py", line 47, in run_command_line
+    run_path(sys.argv[0], run_name='__main__')
+  File "<frozen runpy>", line 290, in run_path
+  File "<frozen runpy>", line 259, in _get_code_from_file
+  File "run.comm.changed.py", line 49
+    _F(GROUP_MA="EDGES", DZ=0.0)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
+
+EXECUTION_CODE_ASTER_EXIT_9=1
+
+
+execution ended (command file #1): <F>_SYNTAX_ERROR
+
+# ------------------------------------------------------------------------------
+Content of /tmp/run_aster_n367q9mt/proc.0 after execution:
+.:
+total 20
+-rw-r--r-- 1 root root  399 Oct 29 05:41 9.export
+drwxr-xr-x 2 root root 4096 Oct 29 05:41 REPE_IN
+drwxr-xr-x 2 root root 4096 Oct 29 05:41 REPE_OUT
+-rw-r--r-- 1 root root 1100 Oct 29 05:41 fort.6
+-rw-r--r-- 1 root root 2002 Oct 29 05:41 run.comm.changed.py
+
+REPE_OUT:
+total 0
+
+
+# ------------------------------------------------------------------------------
+Copying results
+copying (shutil) 'fort.6' to '/work/input/../output/run.mess'...
+WARNING: file not found: fort.8
+WARNING: file not found: fort.30
+WARNING: file not found: fort.80
+
+# ------------------------------------------------------------------------------
+Execution summary
+                                      cpu     system    cpu+sys    elapsed
+--------------------------------------------------------------------------------
+Preparation of environment           0.00       0.00       0.00       0.00
+Execution of code_aster              0.03       0.01       0.04       0.04
+Copying results                      0.01       0.00       0.01       0.01
+--------------------------------------------------------------------------------
+Total                                0.04       0.01       0.05       0.05
+--------------------------------------------------------------------------------
+
+------------------------------------------------------------
+--- DIAGNOSTIC JOB : <F>_SYNTAX_ERROR
+------------------------------------------------------------
+

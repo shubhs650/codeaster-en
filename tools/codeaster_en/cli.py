@@ -1,19 +1,21 @@
 """``caen`` command-line interface.
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
-``caen extract catalog|messages|astest-index|inventory`` and
-``caen translate command|messages``. The other groups and commands are stubs that name the
+``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``
+and ``caen mess parse``. The other groups and commands are stubs that name the
 PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Annotated
 
 import typer
 
 from codeaster_en import __version__
+from codeaster_en import mess as mess_module
 from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
@@ -347,7 +349,53 @@ def translate_doc() -> None:
     raise typer.Exit(code=2)
 
 
-app.add_typer(_stub("mess", "4.3", "Parse a .mess log and render it in English."), name="mess")
+mess_app = typer.Typer(
+    help="Parse a code_aster .mess log (English rendering: task 4.4).",
+    no_args_is_help=True,
+)
+app.add_typer(mess_app, name="mess")
+
+
+@mess_app.command("parse")
+def mess_parse(
+    mess: Annotated[Path, typer.Argument(help="The .mess log, e.g. output/run.mess.")],
+    comm: Annotated[
+        Path | None,
+        typer.Option(help="The user's .comm (default: ../input/run.comm when it exists)."),
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Write the events, stages, summary and classification as JSON."),
+    ] = None,
+    raw: Annotated[
+        bool, typer.Option(help="Include the raw lines of each event in the JSON.")
+    ] = True,
+) -> None:
+    """Parse a .mess log into events; print a summary and the failure class."""
+    if not mess.is_file():
+        typer.echo(f"mess parse: no such file: {mess}", err=True)
+        raise typer.Exit(code=1)
+    log = mess_module.parse(mess, comm=comm)
+    result = mess_module.classify(log)
+    summary = log.summary()
+    if out is not None:
+        data = log.to_dict(raw=raw)
+        data["classification"] = result.to_dict()
+        out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    counts = ", ".join(f"{k} {v}" for k, v in sorted(summary["events"].items()))
+    typer.echo(f"mess parse: {summary['lines']} lines -> {counts}")
+    typer.echo(
+        f"  diagnostic {summary['diagnostic_job']}, exit code {summary['exit_code']}, "
+        f"errors {summary['errors'] or 'none'}, alarms {summary['alarms'] or 'none'}"
+    )
+    if result.failed:
+        stage = summary["failed_stage"] or {}
+        where = f" in {stage.get('command')} (command #{stage.get('number')})" if stage else ""
+        typer.echo(f"  failure: {result.failure_class}{where}: {result.reason}")
+    else:
+        typer.echo("  run ended normally")
+
+
 app.add_typer(
     _stub("report", "4.6", "Generate an English engineering report from a job directory."),
     name="report",

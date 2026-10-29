@@ -1,0 +1,55 @@
+# broken_python_syntax -- deliberately broken run (task 4.3): a missing comma, so the command file
+# is not valid Python and the solver never starts.
+# codeaster-en test fixture. Copy of shell_static (same mesh, units mm, N, MPa) cut after
+# MECA_STATIQUE, with one fault injected. DEBUT() without CODE, as a user's study would run.
+# The .mess this produces is a parser and classifier test input; the run is expected to fail.
+
+DEBUT()
+
+Q = 0.01  # uniform pressure [MPa]
+T = 10.0  # thickness [mm]
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA="OUI"))
+
+# Mesh normals already point to +Z; this makes the orientation explicit and checked.
+MAIL = MODI_MAILLAGE(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    ORIE_NORM_COQUE=_F(GROUP_MA="PLATE", GROUP_NO="CENTER", VECT_NORM=(0.0, 0.0, 1.0)),
+)
+
+MODE = AFFE_MODELE(
+    MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", PHENOMENE="MECANIQUE", MODELISATION="DKT")
+)
+
+CARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA="PLATE", EPAIS=T, ANGL_REP=(0.0, 0.0)))
+
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", MATER=ACIER))
+
+APPUI = AFFE_CHAR_MECA(
+    MODELE=MODE,
+    DDL_IMPO=(
+        # fault: missing comma after this line
+        _F(GROUP_MA="EDGES", DZ=0.0)
+        _F(GROUP_NO="CORNER_A", DX=0.0, DY=0.0),
+        _F(GROUP_NO="CORNER_B", DY=0.0),
+    ),
+)
+
+# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).
+PRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA="PLATE", PRES=Q))
+
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    CARA_ELEM=CARA,
+    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+
+FIN()
