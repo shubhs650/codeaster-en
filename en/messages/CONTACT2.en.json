@@ -45,7 +45,10 @@
    "source": {
     "line": 35
    },
-   "en": null
+   "en": "\nAt least one of the contact elements you defined is of type < %(k1)s >, but the expected types are POI1,\nSEG2, SEG3, TRIA3, TRIA6, TRIA7, QUAD4, QUAD8, QUAD9\nAdvice:\nCheck your AFFE_MODELE and the type of your elements in the definition of the contact surfaces.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "CONTACT2_11",
@@ -69,7 +72,10 @@
    "source": {
     "line": 52
    },
-   "en": null
+   "en": "\nContact with continuous formulation.\nYour model has contact surfaces resting on a mix of axisymmetric and non-axisymmetric elements.\nThis is meaningless. The whole modeling must be axisymmetric.\n\nAdvice:\nCheck your AFFE_MODELE and the type of your elements in the definition of the contact surfaces.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "CONTACT2_13",
@@ -81,7 +87,10 @@
    "source": {
     "line": 62
    },
-   "en": null
+   "en": "\nContact, meshed methods.\nContact zone number %(i1)i contains %(i2)i nodes shared by the main and secondary surfaces.\nCheck the definition of your contact surfaces, or give one of the keywords SANS_NOEUD/SANS_GROUP_NO/SANS_GROUP_MA.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "14": {
    "id": "CONTACT2_14",
@@ -90,7 +99,10 @@
    "source": {
     "line": 69
    },
-   "en": null
+   "en": "\nContact, continuous method.\n  -> A contact zone is defined on an axisymmetric modeling type. The Jacobian\n     is zero because a node of the secondary contact surface lies on the axis.\n     The contact pressure (degree of freedom LAGS_C) may be wrong.\n  -> Advice:\n     Change the integration scheme and use 'GAUSS'.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "15": {
    "id": "CONTACT2_15",
@@ -103,7 +115,10 @@
    "source": {
     "line": 79
    },
-   "en": null
+   "en": "\nDiscrete contact formulation.\nContact zones number %(i1)i and number %(i2)i have %(i3)i nodes in common on their secondary surfaces. This can sometimes lead to a singular contact matrix.\n\nIf the computation fails, check the definition of your contact surfaces, or give one of the keywords SANS_NOEUD/SANS_GROUP_NO/SANS_GROUP_MA.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "16": {
    "id": "CONTACT2_16",
@@ -116,7 +131,10 @@
    "source": {
     "line": 87
    },
-   "en": null
+   "en": "\nContact zones number %(i1)i and number %(i2)i have %(i3)i nodes in common on their secondary surfaces: this is not allowed.\nAdvice:\n - change your contact surfaces,\n - define the zones sharing a node alternately as main and secondary,\n - for the LAC method, disable smoothing.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "CONTACT2_17",
@@ -125,7 +143,10 @@
    "source": {
     "line": 96
    },
-   "en": null
+   "en": "\nOption DECOUPE_LAC of CREA_MAILLAGE did not process the same number of zones as defined in DEFI_CONTACT\nAdvice:\n - Make sure you gave the right number of secondary zones in CREA_MAILLAGE/DECOUPE_LAC and DEFI_CONTACT\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "18": {
    "id": "CONTACT2_18",
@@ -136,7 +157,10 @@
    "source": {
     "line": 103
    },
-   "en": null
+   "en": "\nOption DECOUPE_LAC of CREA_MAILLAGE did not process zone %(k1)s defined in DEFI_CONTACT.\nAdvice:\n - Make sure you gave this zone in CREA_MAILLAGE/DECOUPE_LAC.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "19": {
    "id": "CONTACT2_19",
@@ -145,7 +169,10 @@
    "source": {
     "line": 110
    },
-   "en": null
+   "en": "\nThe LAC contact method is not compatible with MATR_DISTRIBUEE='OUI'\nAdvice:\n - Make sure you do not use MATR_DISTRIBUEE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "CONTACT2_20",
@@ -154,7 +181,10 @@
    "source": {
     "line": 117
    },
-   "en": null
+   "en": "\nAt least one skin element without a volume was detected. Its orientation cannot be checked.\nIf the orientation is wrong, you may have contact detection problems with the LAC contact method.\n\nTo disable this warning, use VERI_NORM='NON' in DEFI_CONTACT.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "CONTACT2_21",
@@ -163,7 +193,10 @@
    "source": {
     "line": 125
    },
-   "en": null
+   "en": "The LAC contact method is not compatible with convergence criterion RESI_REFE_RELA.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

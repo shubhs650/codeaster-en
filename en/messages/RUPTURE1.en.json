@@ -23,7 +23,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "\nDifferent strain formulations, at least for element %(k3)s:\n - strain type extracted from the Result data structure : %(k1)s\n - strain type given to CALC_G                          : %(k2)s\n\n--> Risks & advice:\nYou are doing fracture mechanics post-processing with a strain formulation\nother than PETIT and different from the one used in the mechanical computation.\nThis is outside the validation scope of the operators.\nThe most reliable way to compute G is to run a second small-strain\ncomputation, compute G and use an opening equivalence: G in large\nstrains equals G in small strains when the defect openings\nare identical.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "RUPTURE1_3",
@@ -35,7 +38,10 @@
    "source": {
     "line": 39
    },
-   "en": null
+   "en": "\nInvalid strain formulation, at least for element %(k2)s:\n - strain type extracted from the Result data structure : %(k1)s\n\n\n--> Risks & advice:\nYou are doing fracture mechanics post-processing with a strain formulation\nother than PETIT or PETIT_REAC.\nThis is outside the validation scope of the operators.\nThe most reliable way to compute G is to run a second small-strain\ncomputation, compute G and use an opening equivalence: G in large\nstrains equals G in small strains when the defect openings\nare identical.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "RUPTURE1_4",
@@ -83,7 +89,10 @@
    "source": {
     "line": 74
    },
-   "en": null
+   "en": "\nR_INF and R_SUP cannot be computed automatically for an\nFEM modeling with a crack in open (unbonded) configuration.\n-> Risk and advice:\nGive keywords R_INF and R_SUP (or R_INF_FO and R_SUP_FO).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "RUPTURE1_8",
@@ -92,7 +101,10 @@
    "source": {
     "line": 82
    },
-   "en": null
+   "en": "\nFor a 2D modeling, the crack front must be defined by a\ngroup containing one node (keyword GROUP_NO). Keyword GROUP_MA\nis reserved for 3D modeling types.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "RUPTURE1_9",
@@ -101,7 +113,10 @@
    "source": {
     "line": 89
    },
-   "en": null
+   "en": "\nFor a 3D modeling, the crack front must be defined by an\nelement group (keyword GROUP_MA). Keyword GROUP_NO is reserved\nfor 2D modeling types.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "RUPTURE1_10",
@@ -134,7 +149,10 @@
    "source": {
     "line": 109
    },
-   "en": null
+   "en": "\nThe initial stress field is not of the right type.\nIn FEM (crack represented in the mesh), it must be of type ELNO, NOEU or ELGA.\nIn X-FEM (crack not represented in the mesh), it must be of type ELGA.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "RUPTURE1_13",
@@ -143,7 +161,10 @@
    "source": {
     "line": 116
    },
-   "en": null
+   "en": "\nThe search for the material associated with the crack front failed. This happens in particular when\nnodes of the crack front lie on the boundary between several materials.\n\nSolution: give keyword MATER of POST_K1_K2_K3 with the desired material.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "15": {
    "id": "RUPTURE1_15",
@@ -206,7 +227,10 @@
    "source": {
     "line": 165
    },
-   "en": null
+   "en": "\nFactor keyword %(k1)s is only compatible with modeling type %(k2)s.\nCheck your data.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "RUPTURE1_20",
@@ -215,7 +239,10 @@
    "source": {
     "line": 171
    },
-   "en": null
+   "en": "\nYour study has a PRE_EPSI load or an external state variable EPSA.\nThis is incompatible with an initial stress in the computation of G\n(keyword SIGM_INIT of CALC_G).\n-> Risk and advice:\nG cannot be computed with both an initial stress\nAND an initial strain. Review the data.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "RUPTURE1_21",
@@ -260,7 +287,10 @@
    "source": {
     "line": 205
    },
-   "en": null
+   "en": "\nOption CALC_K_G is incompatible with incremental behaviors,\nwith nonlinear behaviors and with strain GREEN_LAGRANGE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "25": {
    "id": "RUPTURE1_25",
@@ -281,7 +311,10 @@
    "source": {
     "line": 219
    },
-   "en": null
+   "en": "\nThe density RHO has not been defined.\n\n-> Risk and advice:\nWith gravity or rotation forces, or to compute\noption CALC_K_G with a result of type MODE_MECA, the density\nof the material must be given.\nRHO must be defined in DEFI_MATERIAU.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "29": {
    "id": "RUPTURE1_29",
@@ -302,7 +335,10 @@
    "source": {
     "line": 240
    },
-   "en": null
+   "en": "\nYour study has a PRE_EPSI load and an external state variable EPSA.\nG cannot be computed.\n-> Risk and advice:\nG cannot be computed with both a pre-strain\nAND an initial strain. Review the data.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "31": {
    "id": "RUPTURE1_31",
@@ -311,7 +347,10 @@
    "source": {
     "line": 249
    },
-   "en": null
+   "en": "\nDELTA_K_EQ contains one or more negative values.\nThis may come from a wrong computation of DELTA_K_EQ by the user, or from the use\nof operand CUMUL='MODE_I' in POST_RUPTURE when K_I has negative values.\n-> Risk and advice\nCheck the computation of DELTA_K_EQ.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "35": {
    "id": "RUPTURE1_35",
@@ -350,7 +389,10 @@
    "source": {
     "line": 275
    },
-   "en": null
+   "en": "\nRetrieving stresses from the Result data structure is only allowed if the cracks are meshed.\n-> Risk and advice:\nDo not use FISSURE with keyword CALCUL_CONTRAINTE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "41": {
    "id": "RUPTURE1_41",
@@ -359,7 +401,10 @@
    "source": {
     "line": 282
    },
-   "en": null
+   "en": "\nWarning: in CALC_G you are using keyword RELATION.\nThe relation is normally retrieved from the mechanical computation in\nMECA_STATIQUE or STAT_NON_LINE.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "RUPTURE1_42",
@@ -372,7 +417,10 @@
    "source": {
     "line": 289
    },
-   "en": null
+   "en": "\n Different constitutive laws, at least for element %(k3)s:\n - constitutive law extracted from the Result data structure : %(k1)s\n - constitutive law given to CALC_G                          : %(k2)s\n\n--> Risks & advice:\nThe same constitutive law should generally be used in the computation and the\npost-processing. Two different behaviors can be used, but then\nthe user must be careful when interpreting the results (see U2.05.01).\nIf several behaviors are defined on the structure, the behavior to\ngive in CALC_G is that of the material in which the crack grows.\nIn that case, this warning is still issued but the result is consistent.\nA nonlinear elastic post-processing of an elastoplastic computation is\nacceptable if the loading is radial and monotonic. Comparing G computed\nfrom the stresses from STAT_NON_LINE (option CALC_CONTRAINTE='NON')\nwith G computed from stresses recomputed with the constitutive law\n(CALC_CONTRAINTES='OUI') can indicate whether these\nassumptions hold.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "44": {
    "id": "RUPTURE1_44",
@@ -381,7 +429,10 @@
    "source": {
     "line": 310
    },
-   "en": null
+   "en": "\nParameters K1 and/or K2 and/or G are missing from the stress intensity factor\ntable supplied.\n-> Risk and advice:\nThe stress intensity factor table must contain these three\nparameters, plus K3 in 3D. Check the contents of your table.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "45": {
    "id": "RUPTURE1_45",
@@ -394,7 +445,10 @@
    "source": {
     "line": 319
    },
-   "en": null
+   "en": "\n Different strain formulations, at least for element %(k3)s:\n - strain type extracted from the Result data structure : %(k1)s\n - strain type given to CALC_G                          : %(k2)s\n\n--> Risks & advice:\nYou chose fracture mechanics post-processing in small strains (the only\nvalid option) although the mechanical computation was not. Be careful with the results (see U2.05.01).\nIf several strain types are defined on the structure and the crack grows in a part in\nsmall strains, this warning is still issued but the result is consistent.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "46": {
    "id": "RUPTURE1_46",
@@ -415,7 +469,10 @@
    "source": {
     "line": 341
    },
-   "en": null
+   "en": "\nYou are requesting a G computation as post-processing of an elastoplastic computation. This is only valid\nif your LOADING is MONOTONIC PROPORTIONAL.\nIf so, give option RELATION = ELAS_VMIS_XXX in CALC_G for a G computation.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "49": {
    "id": "RUPTURE1_49",
@@ -427,7 +484,10 @@
    "source": {
     "line": 348
    },
-   "en": null
+   "en": "\nCALC_G cannot be used with constitutive relation %(k2)s when\nthe mechanical problem was solved with a constitutive relation of type: %(k1)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "51": {
    "id": "RUPTURE1_51",
@@ -592,7 +652,10 @@
    "source": {
     "line": 423
    },
-   "en": null
+   "en": "Retrieving stresses from the Result data structure\nwith an initial state is not allowed.\nFor operation %(k1)s, the table must not be reentrant (reuse not allowed).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "64": {
    "id": "RUPTURE1_64",
@@ -647,7 +710,10 @@
    "source": {
     "line": 446
    },
-   "en": null
+   "en": "\nThe material properties can only depend on the external state variables TEMP and NEUT1.\n-> Advice:\nReview the material data.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "68": {
    "id": "RUPTURE1_68",
@@ -670,7 +736,10 @@
    "source": {
     "line": 458
    },
-   "en": null
+   "en": "\nIncremental behavior:\nConstitutive relation %(k1)s is not supported in CALC_G\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "71": {
    "id": "RUPTURE1_71",
@@ -681,7 +750,10 @@
    "source": {
     "line": 464
    },
-   "en": null
+   "en": "\nThe mean relative difference between G and G_IRWIN is: %(r1)f\n\n--> Risks & advice:\nFor a thermo-mechanical problem, the singular solution of a purely mechanical\nproblem was used. The stress intensity factors are computed approximately.\nIf the relative difference between G and G_IRWIN is large, the stress intensity\nfactors K computed by CALC_K_G are no longer valid.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "73": {
    "id": "RUPTURE1_73",
@@ -690,7 +762,10 @@
    "source": {
     "line": 476
    },
-   "en": null
+   "en": "\nCALC_G:\nNB_POINT_FOND cannot be used with smoothings LEGENDRE, LAGRANGE_NO_NO\nand MIXTE\n-> Advice:\nReview the type of smoothing used\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "74": {
    "id": "RUPTURE1_74",
@@ -699,7 +774,10 @@
    "source": {
     "line": 485
    },
-   "en": null
+   "en": "\nPOST_K1_K2_K3: this operator is incompatible with incompressible modeling types. It is only valid in linear elasticity, where incompressible modeling types are not needed.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "75": {
    "id": "RUPTURE1_75",
@@ -708,7 +786,10 @@
    "source": {
     "line": 490
    },
-   "en": null
+   "en": "\nCALC_G: the derivatives of the singular functions cannot be computed because the point is on the crack front.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "76": {
    "id": "RUPTURE1_76",
@@ -717,7 +798,10 @@
    "source": {
     "line": 495
    },
-   "en": null
+   "en": "\nCALC_G: the field given by CHAM_THETA_IN is not correct. Components DIR_Z, ABSC_CURV and LONG must be zero in 2D.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "89": {
    "id": "RUPTURE1_89",
@@ -726,7 +810,10 @@
    "source": {
     "line": 500
    },
-   "en": null
+   "en": "\nOption NB_COUCHE is not compatible with HEXA27 or PENTA18 elements'\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "90": {
    "id": "RUPTURE1_90",
@@ -735,7 +822,10 @@
    "source": {
     "line": 505
    },
-   "en": null
+   "en": "\nCALC_G only works with incompressible elements of type INCO_UPG. Using other element types may lead to incorrect results (INCO_UP, INCO_UPO, GRAD_INCO).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

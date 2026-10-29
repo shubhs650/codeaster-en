@@ -19,7 +19,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "\n\n      You gave a zero or negative thickness (below the precision of real numbers).\n      Give a strictly positive value.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "2": {
    "id": "MEMBRANE_2",
@@ -30,7 +33,10 @@
    "source": {
     "line": 31
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element with STAT_NON_LINE.\n      Problem: membranes do not support COMPORTEMENT %(k1)s.\n      Solution: under the small-perturbation assumption (the default), give\n                 COMPORTEMENT=PETIT. For large strains, use COMPORTEMENT=GROT_GDEP.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "MEMBRANE_3",
@@ -39,7 +45,10 @@
    "source": {
     "line": 41
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element with GROT_GDEP.\n      Problem: nonlinear membranes only work with ELAS_MEMBRANE_SV or\n                 ELAS_MEMBRANE_NH under keyword RELATION of COMPORTEMENT.\n      Solution: change your COMPORTEMENT choice.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "MEMBRANE_4",
@@ -48,7 +57,10 @@
    "source": {
     "line": 51
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element with GROT_GDEP and ELAS_MEMBRANE_SV or ELAS_MEMBRANE_NH.\n      Problem: a hyperelastic membrane only needs Young's modulus and Poisson's ratio.\n      Solution: choose behavior ELAS in DEFI_MATERIAU.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "5": {
    "id": "MEMBRANE_5",
@@ -57,7 +69,10 @@
    "source": {
     "line": 60
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element and trying to compute the elastic stiffness matrix.\n      Problem: you are using inconsistent keywords.\n      Solution: several solutions are possible:\n                 - If you use MEMBRANE elements in small strains, give\n                   keyword 'ELAS_MEMBRANE' in DEFI_MATERIAU.\n                 - If you use MEMBRANE elements in large strains with STAT_NON_LINE, give\n                   MATRICE='TANGENTE', not 'ELASTIQUE', under keyword NEWTON in\n                   STAT_NON_LINE.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "MEMBRANE_6",
@@ -66,7 +81,10 @@
    "source": {
     "line": 74
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element with GROT_GDEP and ELAS_MEMBRANE_SV or ELAS_MEMBRANE_NH.\n      Problem: you gave angles in ANGLE_REP.\n      Warning: these angles do not define an anisotropy; their only\n                      role is to define the directions in which stresses are displayed\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "7": {
    "id": "MEMBRANE_7",
@@ -75,7 +93,10 @@
    "source": {
     "line": 84
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element with GROT_GDEP and ELAS_MEMBRANE_SV or ELAS_MEMBRANE_NH.\n      Problem: you gave a load option that is not supported.\n      Solution: change your loads.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "MEMBRANE_8",
@@ -86,7 +107,10 @@
    "source": {
     "line": 93
    },
-   "en": null
+   "en": "\n\n      You want to post-process a MEMBRANE element with GROT_GDEP and %(k1)s.\n      Problem: you gave a post-processing option that is not supported.\n      Solution: change your post-processing options.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "MEMBRANE_9",
@@ -95,7 +119,10 @@
    "source": {
     "line": 102
    },
-   "en": null
+   "en": "\n\n      You are using membranes with GROT_GDEP in dynamics.\n      Problem: dynamics is not implemented for membranes in large strains.\n      SOLUTION: run a static computation or change the element.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "MEMBRANE_10",
@@ -104,7 +131,10 @@
    "source": {
     "line": 111
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element.\n      Problem: the selected behavior is not compatible with the material type.\n      Solution: as a reminder:\n                 - in small strains, use 'ELAS_MEMBRANE' under DEFI_MATERIAU\n                   with MECA_STATIQUE, or STAT_NON_LINE with\n                   keywords COMPORTEMENT='PETIT' and RELATION='ELAS'.\n                 - in large strains, use 'ELAS' under DEFI_MATERIAU with\n                   STAT_NON_LINE and keywords COMPORTEMENT='GROT_GDEP'\n                   and RELATION='ELAS_MEMBRANE_SV' or 'ELAS_MEMBRANE_NH'.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "MEMBRANE_11",
@@ -113,7 +143,10 @@
    "source": {
     "line": 126
    },
-   "en": null
+   "en": "\n\n      You are using a MEMBRANE element.\n      Problem: the behavior map is missing and the membrane thickness is\n      not 1. You are probably in CALC_MATR_ELEM.\n      Solution:\n                 - Use 'ELAS_MEMBRANE' under DEFI_MATERIAU\n                 - Set the membrane thickness to EPAIS=1 under AFFE_CARA_ELEM\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

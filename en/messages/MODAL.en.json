@@ -31,7 +31,10 @@
    "source": {
     "line": 28
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands\nNo Sturm check requested (VERI_MODE=_F(STURM='NON')).\nSo, after each modal computation on a sub-band, the only checks are that:\n   - the error norm is valid (parameter VERI_MODE/SEUIL),\n   - each frequency lies within the specified band (VERI_MODE/PREC_SHIFT).\nNo local or global Sturm check.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "MODAL_3",
@@ -40,7 +43,10 @@
    "source": {
     "line": 38
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands\nLocal Sturm check requested (VERI_MODE=_F(STURM='LOCAL')).\nSo, after each modal computation on a sub-band, the checks are that:\n    - the error norm is valid (parameter VERI_MODE/SEUIL),\n    - each frequency lies within the specified band (VERI_MODE/PREC_SHIFT),\n    - the Sturm check passes.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "MODAL_4",
@@ -54,7 +60,10 @@
    "source": {
     "line": 48
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands\nGlobal Sturm check requested (VERI_MODE=_F(STURM='GLOBAL')).\nSo, after each modal computation on a sub-band, the checks are that:\n    - the error norm is valid (parameter VERI_MODE/SEUIL),\n    - each frequency lies within the specified band (VERI_MODE/PREC_SHIFT),\n    - no local Sturm check.\nThen the frequencies computed on all sub-bands are gathered and a global Sturm\ncheck is made:\n  In the interval (%(r1)f,%(r2)f), there are in theory %(i1)d frequency(ies) and\n  %(i2)d were indeed computed.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "5": {
    "id": "MODAL_5",
@@ -70,7 +79,10 @@
    "source": {
     "line": 62
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands, global Sturm check:\n  In the interval (%(r1)f,%(r2)f), there are in theory %(i1)d frequency(ies) but\n  %(i2)d were computed.\n  The mode computation band was shifted by PREC_SHIFT=%(r3)f %%.\n\n  Advice:\n    * The band used for the Sturm check encloses the computation band. It may be\n      too wide and so enclose other modes. You can narrow it by lowering\n      VERI_MODE/PREC_SHIFT.\n    * You can rerun the computation with the post-check Sturm test\n      on each sub-band (VERI_MODE=_F(STURM='LOCAL')). This can help find the problem:\n      skipped multiple mode, bound too close to a multiple mode, rigid body mode...\n    * You can also rerun INFO_MODE and/or CALC_MODES on a sub-range to\n      confirm (or not) the previous results.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "MODAL_6",
@@ -81,7 +93,10 @@
    "source": {
     "line": 80
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands,\nsub-band no. %(i1)d is empty; moving to the next one.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "7": {
    "id": "MODAL_7",
@@ -93,7 +108,10 @@
    "source": {
     "line": 86
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands: global Sturm check.\n  This check could not be made because the requested frequency band (%(r1)f,%(r2)f) is empty!\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "MODAL_8",
@@ -105,7 +123,10 @@
    "source": {
     "line": 92
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands:\n  No mode shape in the requested frequency band (%(r1)f,%(r2)f)!\n  The result object will be empty.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "MODAL_9",
@@ -118,7 +139,10 @@
    "source": {
     "line": 99
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands, in parallel mode:\n  The number of processors, %(i1)d, and the number of non-empty frequency sub-bands, %(i2)d,\n  are incompatible!\n  With the MUMPS linear solver, the number of processors can be greater than or equal to\n  (ideally a multiple of) the number of sub-bands.\n  With the other linear solvers, these two numbers must be exactly equal.\n  Here the linear solver used is %(k1)s.\n\n  Advice:\n    * Adjust the number of processors and/or the distribution of sub-bands and/or the linear solver\n      accordingly.\n    * Without changing the numbers of processors and sub-bands, you can still benefit from parallelism\n      by restricting it to the linear solver. To do so, set keyword NIVEAU_PARALLELISME to\n      'PARTIEL' and choose the MUMPS linear solver.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "MODAL_10",
@@ -131,7 +155,10 @@
    "source": {
     "line": 117
    },
-   "en": null
+   "en": "\nINFO_MODE or CALC_MODES on several sub-bands, in parallel mode:\n  The number of processors, %(i1)d, and the number of frequency sub-bands, %(i2)d, are incompatible!\n  With the MUMPS linear solver, the number of processors can be greater than or equal to\n  (ideally a multiple of) the number of sub-bands.\n  With the other linear solvers, these two numbers must be exactly equal.\n  Here the linear solver used is %(k1)s.\n\n  Advice:\n    * Adjust the number of processors and/or the distribution of sub-bands and/or\n      the linear solver accordingly.\n    * Without changing the numbers of processors and sub-bands, you can still benefit from parallelism\n      by restricting it to the linear solver. To do so, set keyword NIVEAU_PARALLELISME to\n      'PARTIEL' and choose the MUMPS linear solver.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "MODAL_11",
@@ -144,7 +171,10 @@
    "source": {
     "line": 134
    },
-   "en": null
+   "en": "\nINFO_MODE or CALC_MODES on several sub-bands, in parallel mode:\n  Each of the %(i1)d frequencies (other than the initial one) uses the MUMPS linear solver\n  on its own group of processors.\n  However, these MUMPS instances run on different numbers of processors,\n  %(i2)d or %(i3)d, which may unbalance the load.\n  The run time is then probably not optimal!\n\n  Advice:\n    * Adjust the number of processors and/or the distribution of sub-bands\n      accordingly. For example, number of processors = %(i1)d  x 2, 4 or 8.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "12": {
    "id": "MODAL_12",
@@ -157,7 +187,10 @@
    "source": {
     "line": 148
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands in parallel mode:\n  Each of the %(i1)d non-empty frequency sub-bands uses, independently of the others,\n  the parallel MUMPS linear solver.\n  However, these linear solver instances run on different numbers of processors,\n  %(i2)d or %(i3)d, which may unbalance the load.\n  The run time is then probably not optimal!\n\n  Advice:\n    * Adjust the number of processors and/or the distribution of sub-bands\n      accordingly. For example, number of processors = %(i1)d  x 2, 4 or 8.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "MODAL_13",
@@ -169,7 +202,10 @@
    "source": {
     "line": 162
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands in parallel mode:\n  Each of the 2 frequencies of the post-check Sturm test uses the MUMPS linear solver\n  on its own group of processors.\n  However, these MUMPS instances run on different numbers of processors,\n  %(i1)d or %(i2)d, which may unbalance the load.\n  The run time is then probably not optimal!\n\n  Advice:\n    * Ideally, the number of processors should be even.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "14": {
    "id": "MODAL_14",
@@ -181,7 +217,10 @@
    "source": {
     "line": 175
    },
-   "en": null
+   "en": "\nINFO_MODE or CALC_MODES on several sub-bands, in parallel mode:\n  You requested parallelization of the linear solver part of your computation on %(i1)d processors,\n   but you set a sequential linear solver: %(k1)s!\n\n  Advice:\n    * Run your computation sequentially,\n    * Switch your linear solver to MUMPS (factor keyword SOLVEUR + METHODE='MUMPS' +\n       for better modal performance GESTION_MEMOIRE='IN_CORE' + RENUM='QAMD'),\n    * Change the parallelism level (keyword NIVEAU_PARALLELISME='COMPLET').\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "15": {
    "id": "MODAL_15",
@@ -190,7 +229,10 @@
    "source": {
     "line": 188
    },
-   "en": null
+   "en": "\nThe mode shapes cannot be improved,\nbecause at least one of the input matrices is non-symmetric,\nwhich is incompatible with the inverse power algorithm used for the improvement.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "16": {
    "id": "MODAL_16",
@@ -201,7 +243,10 @@
    "source": {
     "line": 195
    },
-   "en": null
+   "en": "\nThe mode shapes cannot be improved,\nbecause the matrix given under %(k1)s is complex,\nwhich is incompatible with the inverse power algorithm used for the improvement.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "MODAL_17",
@@ -212,7 +257,10 @@
    "source": {
     "line": 202
    },
-   "en": null
+   "en": "\nThe mode shapes cannot be improved,\nbecause very close eigenvalues were detected in result object %(k1)s\n(multiple modes or several rigid body modes),\nwhich is incompatible with the inverse power algorithm used for the improvement.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "18": {
    "id": "MODAL_18",
@@ -221,7 +269,10 @@
    "source": {
     "line": 211
    },
-   "en": null
+   "en": "\nParallelism in CALC_MODES with OPTION='BANDES' and generalized\nmatrices is not possible.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "19": {
    "id": "MODAL_19",
@@ -235,7 +286,10 @@
    "source": {
     "line": 217
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands:\n  Your computation seems unbalanced: sub-band no. %(i1)d has %(i2)d mode shape(s) while\n  no. %(i3)d has %(i4)d!\n  This may produce modes of very different quality and affect the overall robustness and\n  performance of the computation.\n  Ideally, a multi-band computation should have between 20 and 60 modes per sub-band, with\n  at most a factor of 3 between sub-bands.\n\n  Advice:\n    * It is worth calibrating such a modal computation with INFO_MODE\n      in a separate preliminary run. This is usually very fast (especially in parallel) and\n      gives concrete information for choosing an even, realistic split.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "MODAL_20",
@@ -247,7 +301,10 @@
    "source": {
     "line": 233
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands:\n  Sub-band no. %(i1)d has %(i2)d mode shape(s). That is not enough!\n  You can probably improve the performance of your computation by merging it with one\n  or two adjacent sub-bands.\n  Ideally, a multi-band computation should have between 20 and 60 modes per sub-band, with\n  at most a factor of 3 between sub-bands.\n\n  Advice:\n    * It is worth calibrating such a modal computation with INFO_MODE\n      in a separate preliminary run. This is usually very fast (especially in parallel) and\n      gives concrete information for choosing an even, realistic split.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "MODAL_21",
@@ -259,7 +316,10 @@
    "source": {
     "line": 248
    },
-   "en": null
+   "en": "\nCALC_MODES on several sub-bands:\n  Sub-band no. %(i1)d has %(i2)d mode shapes. That is a few too many!\n  You can probably improve the performance and robustness of your computation, and\n  the quality of the modes obtained, by splitting this sub-band again.\n  Ideally, a multi-band computation should have between 20 and 60 modes per sub-band, with\n  at most a factor of 3 between sub-bands.\n\n  Advice:\n    * It is worth calibrating such a modal computation with INFO_MODE\n      in a separate preliminary run. This is usually very fast (especially in parallel) and\n      gives concrete information for choosing an even, realistic split.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "22": {
    "id": "MODAL_22",
@@ -270,7 +330,10 @@
    "source": {
     "line": 263
    },
-   "en": null
+   "en": "\nCALC_MODES:\n  Your computation looks for %(i1)d mode shapes at once. That is a few too many!\n  You can probably improve the performance and robustness of your computation, and\n  the quality of the modes obtained, by splitting it into several batches.\n  Ideally, a modal computation should look for:\n      - between 20 and 60 modes at once (with options 'CENTRE', 'BANDE' or 'PLUS_PETITE/GRANDE'),\n      - about ten at most (with 'PROCHE', 'SEPARE' or 'AJUSTE').\n\n  Advice:\n    * To compute modes in batches more easily, you can use option 'BANDE'.\n    * For a standard generalized modal problem, it can also be worth calibrating the\n      load with INFO_MODE in a separate preliminary run.\n      This is usually very fast (especially in parallel) and gives concrete\n      information for then setting up an even, realistic split.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "23": {
    "id": "MODAL_23",
@@ -282,7 +345,10 @@
    "source": {
     "line": 281
    },
-   "en": null
+   "en": "\nCALC_MODES or NORM_MODES:\n  The norm computed for mode %(i1)d is zero or nearly zero.\n  Computed value:  %(r1)f\n\n  Advice:\n  You have probably chosen a norm type that only uses the values of the\n  translational degrees of freedom, while these are all zero\n  or nearly zero.\n\n  Replace the chosen norm type with the matching type that includes rotations:\n    TRAN      -> TRAN_ROTA\n    EUCL_TRAN -> EUCL\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "24": {
    "id": "MODAL_24",
@@ -291,7 +357,10 @@
    "source": {
     "line": 297
    },
-   "en": null
+   "en": "\nDYNA_ALEA_MODAL:\n  The CARA_ELEM object to use for the computation cannot be found.\n  You have probably forgotten to give keyword CARA_ELEM to the command that produced\n  the MODE_MECA of BASE_MODALE you supplied.\n\n  In most cases this command is CALC_MODES. Just give it keyword CARA_ELEM.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "25": {
    "id": "MODAL_25",
@@ -300,7 +369,10 @@
    "source": {
     "line": 307
    },
-   "en": null
+   "en": "\nPOST_MODE:\n  The material field associated with the supplied mode_meca object cannot be found.\n  You have probably forgotten to give keyword CHAM_MATER to the CALC_MODES command that\n  produced the object given under keyword MODE.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }
