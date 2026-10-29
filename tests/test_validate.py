@@ -162,6 +162,12 @@ def test_synonym_skips_code_and_uppercase() -> None:
     assert _scan(text) == []
 
 
+def test_synonym_skips_french_quotes() -> None:
+    # Drafts quote catalog fr= strings verbatim; only the English around them is prose.
+    assert _scan("TODO(translate): «Frame cell» and a cell") == ["cell"]
+    assert _scan("«unclosed cell") == ["cell"]
+
+
 def test_synonym_fence_must_close_with_same_marker() -> None:
     assert _scan("```\n~~~\ncell\n```\nframe\n") == ["frame"]
 

@@ -7,7 +7,7 @@ This governs every English artefact in `en/` whether written by a person, an LLM
 | Artefact | Translate? | Form |
 |---|---|---|
 | Command / keyword / value identifiers (`AFFE_MODELE`, `GROUP_MA`, `'OUI'`) | **Never** | Kept verbatim; explained in prose |
-| Catalog `fr=` help strings | Yes | Into the `.json` as `en_help` and into the `.md` table |
+| Catalog `fr=` help strings | Yes | `en/catalog-help.yaml` (translation memory, ADR-012), shown in the `.md` table |
 | Message texts (`cata_msg`) | Yes | `en/messages/*.en.json`, placeholders untouched |
 | Official U-docs (Tier scope) | Yes | `en/docs/<DOC-ID>.md`, structure preserved |
 | Test-case comments | No | Index only |
@@ -79,6 +79,8 @@ MODE = AFFE_MODELE(MAILLAGE=MAIL, AFFE=_F(TOUT='OUI', PHENOMENE='MECANIQUE', MOD
 - Translated doc: en/docs/U4.41.01.md
 - Examples: upstream/astest/ssls101a.comm (…)
 ```
+
+Start from the draft: `caen translate command <CMD>` (or `--tier 1`) writes `en/commands/<CMD>.md` with `status: machine`: front matter, a facts table, the keyword table (types, defaults, allowed values, bloc conditions, glossary English, translated `fr=` help), the catalog rules, and calls lifted from astest. `TODO(2.3)` marks what the author writes; `TODO(translate)` marks a `fr=` string missing from `en/catalog-help.yaml`. Once you edit a draft, set `status: assisted`: the generator then leaves the file alone (ADR-012).
 
 Rules:
 - Every keyword in the table must exist in the `.json`; nested keywords use `PARENT / CHILD` paths.
