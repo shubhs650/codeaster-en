@@ -123,7 +123,7 @@ encodes.
 | `NORME / NOM_CHAM` | text, optional | — | *field name*. One of `'DEPL'`, `'TEMP'`, `'SECH'`, `'NEUT_R'`, `'FLUX_ELGA'`, `'FLUX_ELNO'`, `'FLUX_NOEU'`, `'EPSI_ELGA'`, `'EPSI_ELNO'`, `'EPSI_NOEU'`, `'SIEF_ELGA'`, `'SIEF_ELNO'`, … (13 values; see the .json). TODO(2.3): when to use. |
 | `NORME / CHAM_GD` | `cham_no_sdaster` or `cham_elem`, optional | — | *field (physical quantity)*. TODO(2.3): when to use. |
 | `NORME / MODELE` | `modele_sdaster`, optional | — | *model*. TODO(2.3): when to use. |
-| `NORME / COEF_MULT` | real, optional, list of up to 30 | — | Only when `exists("CHAM_GD")`. TODO(2.3): meaning. TODO(2.3): when to use. |
+| `NORME / COEF_MULT` | real, optional, list of up to 30 | — | *multiplying coefficients*. Only when `exists("CHAM_GD")`. TODO(2.3): when to use. |
 | `NORME / CRITERE` | text, optional | `'RELATIF'` | *tolerance type*. One of `'RELATIF'`, `'ABSOLU'`. Only when `exists("RESULTAT")`. TODO(2.3): when to use. |
 | `NORME / PRECISION` | real, optional | `1e-06` | *tolerance*. Only when `exists("RESULTAT") and equal_to("CRITERE", 'RELATIF')`. TODO(2.3): when to use. |
 | `NORME / PRECISION` | real, required | — | *tolerance*. Only when `exists("RESULTAT") and equal_to("CRITERE", 'ABSOLU')`. TODO(2.3): when to use. |
@@ -153,7 +153,7 @@ encodes.
 | `WEIBULL / GROUP_MA` | element group, optional, list | — | *element group*. TODO(2.3): when to use. |
 | `WEIBULL / OPTION` | text, optional | `'SIGM_ELGA'` | *option*. One of `'SIGM_ELGA'`, `'SIGM_ELMOY'`. TODO(2.3): when to use. |
 | `WEIBULL / CORR_PLAST` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. TODO(2.3): meaning. TODO(2.3): when to use. |
-| `WEIBULL / COEF_MULT` | real, optional | `1.0` | TODO(2.3): meaning. TODO(2.3): when to use. |
+| `WEIBULL / COEF_MULT` | real, optional | `1.0` | *multiplying coefficients*. TODO(2.3): when to use. |
 | `RESULTAT` | `evol_noli`, optional | — | *result*. Only when `exists("WEIBULL")`; or `exists("RICE_TRACEY")`. TODO(2.3): when to use. |
 | `RICE_TRACEY` | factor keyword, optional, repeatable | — | TODO(2.3): meaning. TODO(2.3): when to use. |
 | `RICE_TRACEY / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. TODO(2.3): when to use. |

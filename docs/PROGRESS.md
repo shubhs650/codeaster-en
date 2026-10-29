@@ -14,6 +14,32 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.3c loads and functions references (AFFE_CHAR_MECA, AFFE_CHAR_CINE, DEFI_FONCTION) — agent
+Done: the three 2.2 drafts rewritten as full references, `status: assisted`, batch (a)/(b)
+format: purpose paragraph, every keyword row with meaning and "when to use" (the 100+ exotic
+`DDL_IMPO` components grouped into multi-keyword rows using the `DEPL_R` catalog comment),
+patterns from astest and our fixtures cited file:line (13 / 5 / 6), what the solver does with the
+load (order in `charme.F90`, sign conventions), pitfalls with message IDs. Evidence: catalogs,
+`CodeCommands/defi_fonction.py`, Fortran (`charme`, `caddli`, `cafaci`, `cafono`, `capesa`,
+`carota`, `caliso`, `carbe3`, `chveno`, `LoadKinematic_module`, `charci`, `chcsur`, `op0003`,
+`fointr`, `te0014`, `te0015`), message texts. Self-review: every file:line citation re-printed
+and checked; 18 `TODO(verify)` left. Glossary: 14 new `proposed` entries (`VERI_AFFE`,
+`VERI_NORM`, `DOUBLE_LAGRANGE`, `BLOCAGE`, `COEF_MULT`, `COEF_IMPO`, `DISTANCE_MAX`, `DIST_MIN`,
+`ELIM_MULT`, `EVOL_IMPO`, `VALE_PARA`, `VALE_FONC`, `NOEUD_PARA`, `CISA_2D`), kept generic where
+the keyword recurs in other commands (`DNOR`/`DTAN` left out: they mean a normal vector in
+`MACR_LIGN_COUPE`); `VITESSE` units TODO resolved. Machine drafts regenerated (`CALC_CHAMP`,
+`MACR_LIGN_COUPE`, `POST_ELEM` gain the new terms). ruff, pytest (250 passed), `caen validate` green.
+Findings for later tasks: pressure is positive against the outward normal; `FORCE_NODALE` on a
+group applies the full value at each node; `AFFE_CHAR_CINE` silently skips missing DOFs;
+`UTILITAI2_67` text says triplets for pairs; spatially varying pressure needs `AFFE_CHAR_MECA_F`
+(the COMMAND-SET "Hydrostatic" row also lists `FONC_MULT`; queued for the owner).
+Open: 2.3 batch (d) `MECA_STATIQUE`, `CALC_CHAMP`, `POST_RELEVE_T`, `POST_ELEM`, `CREA_CHAMP`,
+`IMPR_RESU`, `IMPR_TABLE`, `DEBUT`/`FIN`, `TEST_RESU`.
+Decisions: none (no ADR).
+Needs owner: nothing blocking; review items in OWNER-REVIEW-QUEUE (PLAN 2.3 owner review of
+`AFFE_CHAR_MECA`; glossary `CENTRE` and COMMAND-SET corrections).
+Branch is `claude/project-thread-geqwlq` (session-assigned).
+
 ## 2026-10-29 — 2.3b model and material references (AFFE_MODELE, DEFI_MATERIAU, AFFE_MATERIAU, AFFE_CARA_ELEM) — agent
 Done: the four 2.2 drafts rewritten as full references, `status: assisted`, batch (a) format:
 purpose paragraph, every keyword row with meaning and "when to use", 5–7 patterns each from

@@ -67,7 +67,7 @@ encodes.
 | `EXCIT` | factor keyword, optional, repeatable | — | *applied loads*. Loads that contain temperatures, distributed loads on beams, ... Only when `is_type("RESULTAT") in (evol_elas,mode_meca,mode_meca_c,comb_fourier,mult_elas,fourier_elas,mode_flamb)`; or `is_type("RESULTAT") in (dyna_harmo,dyna_trans)`; or `is_type("RESULTAT") in (evol_noli,)`; or `is_type("RESULTAT") in (evol_ther,fourier_ther,)`; or `is_type("RESULTAT") in (evol_sech,)`; or `is_type("RESULTAT") in (acou_harmo,mode_acou,tran_gene,harm_gene)`. TODO(2.3): when to use. |
 | `EXCIT / CHARGE` | `char_meca` or `char_cine_meca`, required | — | *load*. TODO(2.3): when to use. |
 | `EXCIT / FONC_MULT` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | *load multiplier function*. TODO(2.3): when to use. |
-| `EXCIT / COEF_MULT` | real, optional | — | TODO(2.3): meaning. TODO(2.3): when to use. |
+| `EXCIT / COEF_MULT` | real, optional | — | *multiplying coefficients*. TODO(2.3): when to use. |
 | `EXCIT / TYPE_CHARGE` | text, optional | `'FIXE_CSTE'` | *load type*. One of `'FIXE_CSTE'`. TODO(2.3): when to use. |
 | `CHAM_UTIL` | factor keyword, optional, repeatable | — | Only when `is_type("RESULTAT") in (evol_elas,mode_meca,mode_meca_c,comb_fourier,mult_elas,fourier_elas,mode_flamb)`; or `is_type("RESULTAT") in (dyna_harmo,dyna_trans)`; or `is_type("RESULTAT") in (evol_noli,)`; or `is_type("RESULTAT") in (evol_ther,fourier_ther,)`; or `is_type("RESULTAT") in (evol_sech,)`; or `is_type("RESULTAT") in (acou_harmo,mode_acou,tran_gene,harm_gene)`. TODO(2.3): meaning. TODO(2.3): when to use. |
 | `CHAM_UTIL / NOM_CHAM` | text, required | — | *field name*. Name of the input field. TODO(2.3): when to use. |
