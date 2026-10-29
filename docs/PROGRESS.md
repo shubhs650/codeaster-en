@@ -14,6 +14,33 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.3b model and material references (AFFE_MODELE, DEFI_MATERIAU, AFFE_MATERIAU, AFFE_CARA_ELEM) — agent
+Done: the four 2.2 drafts rewritten as full references, `status: assisted`, batch (a) format:
+purpose paragraph, every keyword row with meaning and "when to use", 5–7 patterns each from
+astest or our fixtures (cited file:line, incl. `.mess` excerpts of the assignment summary and
+filled-in defaults), solver-side checks, pitfalls with message IDs. AFFE_MODELE gets a table of
+the Tier 1 modelings (meaning, accepted element types, use); AFFE_CARA_ELEM a table of the
+`DISCRET` `CARA` codes and `VALE` counts. Evidence: catalogs, `CodeCommands/affe_modele.py`,
+`defi_materiau.py`, `affe_cara_elem.py`, `MacroCommands/affe_materiau_ops.py`, the Fortran
+(`op0018`/`modelCheck*`, `op0006`/`rcmate`, `op0019`/`aceaco`/`aceadi`/`ace_verif_affe`, element
+routines `te0121`, `coqrep`, `dxtloc`, `dxmate`, `alfint`, `verift`), message texts and the
+fixture logs. Self-review: every claim re-checked against its source; 20 `TODO(verify)` left,
+mostly options outside Tier 1 use. Glossary: 7 new `proposed` entries (`AMOR_ALPHA`, `AMOR_BETA`,
+`TEMP_DEF_ALPHA`, `A_CIS`, `COEF_RIGI_DRZ`, `EXCENTREMENT`, `VERI_JACOBIEN`); `3D_SI` English
+corrected to "reduced integration" (catalog: "Sub-integrated"). Machine drafts regenerated
+(unchanged). ruff, pytest (250 passed), `caen validate` green.
+Findings for later tasks: `AMOR_ALPHA` is the stiffness coefficient, `AMOR_BETA` the mass one
+(reverse of C = αM + βK); default shell local x is the projection of global X, fatal
+`PLATE1_40` on shells normal to X; `AFFE_CARA_ELEM` stops if the model has shells/discretes
+and their keyword is missing (`AFFECARAELEM_32/33`); missing material or shell data is only
+caught in the analysis (`CALCUL_20`, `CALCUL_21`) — useful for the 3.x message renderer and
+for ClearFEA pre-checks.
+Open: 2.3 batch (c) `AFFE_CHAR_MECA`, `AFFE_CHAR_CINE`, `DEFI_FONCTION`.
+Decisions: none (no ADR).
+Needs owner: nothing blocking; review items in OWNER-REVIEW-QUEUE (PLAN 2.3 owner review of
+`AFFE_MODELE` and `AFFE_CARA_ELEM`).
+Branch is `claude/project-thread-ji2j0p` (session-assigned).
+
 ## 2026-10-29 — 2.3a mesh command references (LIRE_MAILLAGE, MODI_MAILLAGE, DEFI_GROUP, CREA_MAILLAGE) — agent
 Done: the four 2.2 drafts rewritten as full references, `status: assisted`: purpose paragraph,
 every keyword row with meaning and "when to use", the order in which the solver applies the
