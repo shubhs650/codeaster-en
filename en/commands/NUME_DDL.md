@@ -89,7 +89,7 @@ NU = NUME_DDL(MODELE=MO, CHARGE=CHARGE)
 - **One numbering per set of matrices.** The stiffness and mass given to `CALC_MODES` must be
   assembled on the same `NUME_DDL` (`tests/fixtures/modal/input/run.comm:39`, `:41`).
 - **Two multipliers per dualized condition.** Each `DDL_IMPO` component, `LIAISON_*` relation
-  or `LIAISON_RBE3` equation adds two Lagrange unknowns (the default double dualization), which
+  or `LIAISON_RBE3` equation adds two Lagrange unknowns (the default double Lagrange-multiplier enforcement), which
   is part of why `CALC_MODES` reports fewer "active" DOFs than the total: 12813 − 222
   multipliers − 111 clamped DOFs = 12480 (`tests/fixtures/modal/output/run.mess:360`). Kinematic conditions (`AFFE_CHAR_CINE` given to
   `ASSE_MATRICE`) add none.
