@@ -30,19 +30,26 @@ spec = catalog.command("AFFE_CHAR_MECA")     # CommandSpec: keywords tree, types
 catalog.commands(tier=1)                     # list[str]
 catalog.validate_comm("run.comm")            # list[Issue]  (unknown keyword, bad enum, missing required)
 
-# --- builder ---
-b = comm.Builder(units="SI_mm")
-mesh = b.read_mesh("mesh.med")                           # LIRE_MAILLAGE
-b.orient_faces(mesh, groups=["INNER"])                   # MODI_MAILLAGE/ORIE_PEAU
-model = b.model(mesh, solids=["BODY"], shells={"PLATE": "DKT"})
-steel = b.material("steel", E=200e3, nu=0.3, rho=7.85e-9)
-b.assign_material({"BODY": steel, "PLATE": steel})
-b.shell_thickness({"PLATE": 10.0})
-b.fix("FIXED")                                           # AFFE_CHAR_CINE/MECA_IMPO
-b.pressure("INNER", 2.0)                                 # PRES_REP
-b.remote_force("NOZZLE", point=(0,0,500), F=(0,0,-5000), M=(0,0,0))   # RBE3 (Tier 2)
-b.linear_static(outputs=["DEPL","SIEQ_NOEU","SIGM_NOEU","REAC_NODA"], reactions_on=["FIXED"])
-b.write("run.comm")                                      # also returns the string
+# --- builder (task 6.1, built; ADR-019) ---
+b = comm.Builder()
+b.start()                                                # DEBUT(LANG="EN")
+mesh = b.read_mesh(unit=20)                              # LIRE_MAILLAGE (file mapped in .export)
+b.node_groups(mesh, from_groups=["FIXED"])               # DEFI_GROUP, for the reaction table
+b.orient_shell_normals(mesh, "PLATE", normal=(0.0, 0.0, 1.0), at_node_group="CENTER")
+model = b.model(mesh, "thin_shell", groups=["PLATE"])    # one body kind per model (ADR-013)
+steel = b.material("STEEL", E=200e3, nu=0.3, rho=7.85e-9)
+mate = b.assign_materials(mesh, {"PLATE": steel})
+cara = b.shell_properties(model, {"PLATE": 10.0})        # AFFE_CARA_ELEM/COQUE
+fixed = b.fix(model, "FIXED", kinematic=True)            # AFFE_CHAR_CINE/MECA_IMPO
+press = b.pressure(model, "PLATE", 2.0)                  # PRES_REP
+resu = b.linear_static(model, mate, [fixed, press], elements=cara)
+b.compute_fields(resu, stress="SIGM_NOEU", criteria="SIEQ_NOEU", forces="REAC_NODA")
+reac = b.resultant(resu, "FIXED", title="REAC_FIXED")  # POST_RELEVE_T RESULTANTE
+b.print_table(reac, unit=30)
+b.write_med(resu, ["DEPL", "SIEQ_NOEU", "REAC_NODA"], elements=cara)
+b.write("run.comm")                                      # adds FIN(), returns the string
+# Not built yet (task 6.4): b.remote_force(...) via LIAISON_RBE3; until then
+# b.file.call("AFFE_CHAR_MECA", "LOAD", MODELE=model.concept, ...) reaches any catalog keyword.
 
 # --- run ---
 res = run.run_aster(workdir, comm="run.comm", mesh="mesh.med", ncpus=4, time_limit=3600, memory_mb=8000)
