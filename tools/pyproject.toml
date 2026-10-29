@@ -12,6 +12,8 @@ dependencies = [
     "typer>=0.12",
     "pyyaml>=6",
     "jinja2>=3.1",
+    # Markdown -> HTML for the report (task 4.6).
+    "markdown>=3.5",
     # MED/HDF5 results reader, codeaster_en.results (task 4.5, ADR-015).
     "numpy>=1.26",
     "h5py>=3.10",
@@ -27,6 +29,13 @@ dev = [
     "h5py>=3.10",
     # Independent MED library, only to cross-check the native reader in tests (ADR-015).
     "medcoupling>=9.12",
+    "markdown>=3.5",
+    "weasyprint>=62",
+]
+
+# PDF output of `caen report` (task 4.6); needs the Pango system library.
+report = [
+    "weasyprint>=62",
 ]
 
 # Claude API backend of `caen translate messages` (task 3.1); not needed for tests or CI.
@@ -43,3 +52,4 @@ include = ["codeaster_en*"]
 
 [tool.setuptools.package-data]
 "codeaster_en.translate" = ["templates/*.j2"]
+"codeaster_en.report" = ["templates/*.j2", "templates/*.css"]
