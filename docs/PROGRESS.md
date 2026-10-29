@@ -14,6 +14,31 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 0.6 glossary seed — agent
+Done: `en/glossary.yaml` 250 → 353 entries, all `proposed`. (1) Every Tier 1/2 identifier in
+`docs/COMMAND-SET.md` that had no entry (70: 5 commands, 51 keywords, 13 values, 1 concept), each
+with `source` (upstream catalog file:line at 17.4.26), English drafted from the catalog `fr=`
+strings and allowed values; uncertain wording marked TODO(verify). (2) AsterStudy `GLOBAL_DICT`
+(82 keys; Copyright 2016 EDF R&D, GPL-3; copy from github.com/simvia-tech/vs-code-aster, fetched
+2026-10-26, sha256 in the glossary section header): 49 keys already had entries — our `en` kept,
+AsterStudy's English recorded verbatim in a new `asterstudy` field; 33 new entries added, English
+normalized to CLAUDE.md §5 style. `BANDE` broadened from "frequency band" to "band" (also a
+DEFI_GROUP geometric option). Narrowed aliases_en that are everyday English words (reference,
+frame, link, connection, filename, affect, loading, criteria, excitation, characteristics,
+instant) so the forbidden-synonym scan does not flag correct prose. New
+`tests/test_glossary_coverage.py` (Tier 1/2 coverage; `source` lines resolve). `source` and
+`asterstudy` fields documented in ARCHITECTURE §4.1.
+Open: none for 0.6.
+Decisions: none. Not added: message-family names (task 1.3) and COMMAND-SET's out-of-scope items.
+Findings: `SPHERE`/`BANDE` are values of `CREA_GROUP_MA/NO` `OPTION`; `MASS_EFFE_UN` is a
+`CRIT_EXTR` value; GLOBAL_DICT's `SANS_MAILLE`/`SANS_NOEUD` are absent from 17.4.26; the owner's
+upload was a corporate-proxy block page, so the file was fetched from the URL it named.
+Needs owner: nothing blocking (ADR-010; merged on green CI). Review items queued in
+`docs/OWNER-REVIEW-QUEUE.md`: AFFE_VARC/NOM_VARC ("external state variable" vs upstream's
+"command variable"), the TODO(verify) entries, BANDE, and GLOBAL_DICT disagreements.
+Phase 0 "done when" met: clone + submodule, `pip install -e tools[dev]`, pytest and
+`caen validate` all pass in the cloud sandbox.
+
 ## 2026-10-29 — ops: switch to full autodrive — agent
 Done: ADR-010 (owner's instruction, 2026-10-29). Updated `docs/cloud/PROJECT-INSTRUCTIONS.md`
 (serial threads, self-merge on green CI, agent-made decisions, short stop list), `CLAUDE.md` §3
@@ -24,6 +49,7 @@ Open: PR #3 (0.6 glossary seed) is open with `needs-engineer-review`; under ADR-
 once CI is green.
 Decisions: ADR-010.
 Needs owner: nothing blocking; see `docs/OWNER-REVIEW-QUEUE.md`.
+
 
 ## 2026-10-23 — 1.5 inventory report — agent
 Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) writes §7 of

@@ -9,6 +9,7 @@ Only the owner sets `status: reviewed`.
 | Added | Item | What to check | Source |
 |---|---|---|---|
 | 2026-10-29 | Glossary seed (task 0.6, PR #3) | All entries are `proposed`; spot-check the English for terms with structural meaning (loads, element types, results fields). | `en/glossary.yaml` |
+| 2026-10-29 | Glossary: specific calls (task 0.6) | `AFFE_VARC`/`NOM_VARC` "external state variable" (upstream says "command variable"); `TODO(verify)` entries `PM_PB`, `K_T_D_N`/`K_TR_D_N`, `VOLUMOGRAMME`, `DIFFE`, `RESI_RELA`, `VALE_REF`, `VITESSE`, `CRITERE`; `BANDE` broadened to "band"; where AsterStudy GLOBAL_DICT differs (`asterstudy:` field), e.g. `UNITE` "Filename" vs "logical unit", `PESANTEUR`, `PRECISION`, `INST`. | `en/glossary.yaml` |
 | 2026-10-29 | COMMAND-SET revision proposals (task 1.5) | The 8 proposals in `docs/INVENTORY.md` §8. The agent may apply them under ADR-010; check the result. | `docs/INVENTORY.md` §8 |
 | 2026-10-29 | ADR-007 licence | Status still reads "owner to confirm after reading upstream licence headers". | `docs/DECISIONS.md` |
 
