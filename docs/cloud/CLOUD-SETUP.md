@@ -103,6 +103,8 @@ Open the thread when it finishes and check the branch, PR and how it reported. F
 
 ### E2 — Unlock autonomous mode (after S0 merged)
 
+> Superseded on 2026-10-29 by full autodrive (ADR-010): one thread at a time, self-merge on green CI, no stops at ADRs or phase ends. See `docs/cloud/PROJECT-INSTRUCTIONS.md`.
+
 ```
 S0 looks right. From now on run the plan autonomously:
 - Follow the merge policy in the project instructions.
@@ -156,6 +158,8 @@ Routine runs are fully autonomous (no permission prompts) and count against your
 ---
 
 ## Part G — Day-to-day operating rhythm
+
+> Since ADR-010 (2026-10-29) the owner's part is optional: review `docs/OWNER-REVIEW-QUEUE.md` when time allows. Nothing waits on it.
 
 | When | You | The project |
 |---|---|---|
