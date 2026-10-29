@@ -14,6 +14,24 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.3d solver and post-processing references (MECA_STATIQUE, CALC_CHAMP, POST_RELEVE_T, POST_ELEM, CREA_CHAMP, IMPR_RESU, IMPR_TABLE, DEBUT/FIN, TEST_RESU) — agent
+Done: the ten 2.2 drafts rewritten as full references, `status: assisted`, batch (a)-(c)
+format: purpose paragraph, every keyword row with meaning and "when to use", patterns from
+astest and our fixtures cited file:line, what the solver does, pitfalls with message IDs.
+Evidence: catalogs, `CodeCommands/` and `MacroCommands/` Python (`debut.py`, `fin.py`,
+`calc_champ`, `impr_table_ops`, `TestResult`), Fortran (`op0107`, `op0195`, `irmfac`, `trresu`,
+`penorm`, `pemain`, `rvmima`, ...), message texts. Self-review: every file:line citation
+re-printed and checked; 54 `TODO(verify)` left. Generator fix: `_literal` now escapes control
+characters (the `IMPR_TABLE` `FIN_LIGNE` default `"\n"` split its draft row), with a test; the
+`IMPR_TABLE` draft regenerated. Glossary: 7 new `proposed` entries (`TOUT_ORDRE`, `CHAM_UTIL`,
+`RENUM`, `NPREC`, `ELIM_LAGR`, `STOP_SINGULIER`, `PCENT_PIVOT`), 390 entries total. ruff,
+pytest (251 passed), `caen validate` green (24 references).
+Open: 2.3 is complete. Next ready: 2.4 modelisations guide (`en/guide/modelisations.md`).
+Decisions: none (no ADR).
+Needs owner: nothing blocking; review items in OWNER-REVIEW-QUEUE (PLAN 2.3 owner review of
+`CALC_CHAMP`; catalog, message and COMMAND-SET issues; glossary `CRITERE` context).
+Branch is `claude/project-thread-wfqlrx` (session-assigned).
+
 ## 2026-10-29 — 2.3c loads and functions references (AFFE_CHAR_MECA, AFFE_CHAR_CINE, DEFI_FONCTION) — agent
 Done: the three 2.2 drafts rewritten as full references, `status: assisted`, batch (a)/(b)
 format: purpose paragraph, every keyword row with meaning and "when to use" (the 100+ exotic

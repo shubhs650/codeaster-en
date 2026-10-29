@@ -187,7 +187,9 @@ def _code(text: str) -> str:
 
 def _literal(value: Any) -> str:
     if isinstance(value, str):
-        return _code(f"'{value}'")
+        # Control characters (FIN_LIGNE defaults to "\n") would break the table row.
+        escaped = value.replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
+        return _code(f"'{escaped}'")
     if isinstance(value, list | tuple):
         return _code("(" + ", ".join(repr(v) for v in value) + ")")
     return _code(repr(value))
