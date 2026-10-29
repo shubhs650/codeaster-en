@@ -95,3 +95,83 @@ def test_summary_table_lines_point_at_catalog_entries() -> None:
         if match:
             value, line = match.group(1), int(match.group(2))
             assert lines[line - 1].strip() == f'"{value}",', (value, line)
+
+
+# --- task 2.5: fields guide -------------------------------------------------------------------
+
+FIELDS = GUIDE / "fields.md"
+NOM_CHAM = UPSTREAM / "code_aster" / "Cata" / "Commons" / "c_nom_cham_into.py"
+_SPAN = re.compile(r"`([^`]+)`")
+_PAREN_TAIL = re.compile(r"^(.*?)\s*(\([^()]*\))$")
+
+
+def _glossary_en() -> dict[str, str]:
+    import yaml
+
+    entries = yaml.safe_load((REPO / "en" / "glossary.yaml").read_text(encoding="utf-8"))
+    return {str(e["fr"]): str(e["en"]) for e in entries}
+
+
+def _labels(cell: str, count: int) -> list[str]:
+    """Split 'shear force Y, Z' into ['shear force Y', 'shear force Z'] (a trailing
+    parenthesis applies to every part)."""
+    tail = ""
+    match = _PAREN_TAIL.match(cell)
+    if match and match.group(1):
+        cell, tail = match.group(1), " " + match.group(2)
+    parts = [p.strip() for p in cell.split(", ")] if count > 1 else [cell.strip()]
+    prefix = parts[0].rsplit(" ", 1)[0] + " " if " " in parts[0] else ""
+    return [(p if " " in p or not prefix else prefix + p) + tail for p in parts]
+
+
+def _label_rows(text: str) -> list[tuple[list[str], str, int]]:
+    """(identifiers, label cell, line) for table rows whose first cell is code spans only."""
+    rows = []
+    for lineno, line in enumerate(text.splitlines(), start=1):
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if not line.startswith("| `") or len(cells) < 2:
+            continue
+        names = _SPAN.findall(cells[0])
+        if _SPAN.sub("", cells[0]).strip(" ,.") or not names:
+            continue  # e.g. "`VECT_1_X` .. `VECT_3_Z`"
+        rows.append((names, cells[1], lineno))
+    return rows
+
+
+def test_fields_guide_exists() -> None:
+    assert FIELDS.is_file()
+
+
+def test_fields_labels_are_glossary_english() -> None:
+    """CLAUDE.md §2.3: a label next to an identifier that has a glossary entry is its `en`."""
+    glossary = _glossary_en()
+    problems, checked = [], 0
+    for names, cell, lineno in _label_rows(FIELDS.read_text(encoding="utf-8")):
+        if cell.startswith("("):
+            continue
+        labels = _labels(cell, len(names))
+        if len(labels) == 1:
+            labels = labels * len(names)  # one label for a family: `MASS_EFFE_DX`, `_DY`, ...
+        if len(labels) != len(names):
+            problems.append(f"fields.md:{lineno}: {len(names)} names, labels {labels}")
+            continue
+        for name, label in zip(names, labels, strict=True):
+            if name in glossary:
+                checked += 1
+                if glossary[name] != label:
+                    problems.append(f"fields.md:{lineno}: {name} {label!r} != {glossary[name]!r}")
+    assert not problems, "\n".join(problems)
+    assert checked >= 75
+
+
+@needs_upstream
+def test_fields_summary_lines_point_at_field_catalog() -> None:
+    lines = NOM_CHAM.read_text(encoding="utf-8").splitlines()
+    table = FIELDS.read_text(encoding="utf-8").split("## Field summary", 1)[1].split("\n## ", 1)[0]
+    rows = [r for r in table.splitlines() if r.startswith("| `")]
+    assert len(rows) >= 20
+    for row in rows:
+        match = re.match(r"\| `([^`]+)` \|.*\| (\d+) \|$", row)
+        assert match, row
+        name, line = match.group(1), int(match.group(2))
+        assert lines[line - 1].strip().startswith(f'"{name}"'), (name, line)

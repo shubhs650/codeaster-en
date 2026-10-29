@@ -168,6 +168,12 @@ def test_synonym_skips_french_quotes() -> None:
     assert _scan("«unclosed cell") == ["cell"]
 
 
+def test_synonym_skips_link_targets() -> None:
+    # A link target is a file name, not prose; the link text still is.
+    assert _scan("see [Elements](cell.md) and [a cell](frame.md#cell)") == ["cell"]
+    assert _scan("a (cell) in brackets") == ["cell"]
+
+
 def test_synonym_fence_must_close_with_same_marker() -> None:
     assert _scan("```\n~~~\ncell\n```\nframe\n") == ["frame"]
 
