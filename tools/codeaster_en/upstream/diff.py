@@ -147,8 +147,12 @@ def _keyword_change(path: str, old: list[dict], new: list[dict]) -> KeywordChang
     changes: list[str] = []
     if len(old) != len(new):
         changes.append(f"definitions: {len(old)} → {len(new)}")
-    for before, after in zip(left, right, strict=False):
-        changes.extend(field_changes(before, after))
+    lines = Counter(
+        line
+        for before, after in zip(left, right, strict=False)
+        for line in field_changes(before, after)
+    )
+    changes += [line if n == 1 else f"{line} (in {n} definitions)" for line, n in lines.items()]
     return KeywordChange(path, kind, changes or ["definitions differ"])
 
 
