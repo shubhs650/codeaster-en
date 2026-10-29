@@ -5,9 +5,11 @@ French term. The scan reports each one found in Markdown prose, case-insensitive
 word (a plural ``s``/``es`` counts too).
 
 Not scanned: fenced code blocks and inline code spans (they hold ``.comm`` fragments and
-French identifiers), and matches written entirely in upper case (``MODELISATION`` is a
-keyword, not prose). A line can allow one word on purpose with an HTML comment
-``<!-- caen-allow: reference -->``, for the cases where the word is right in its own sense.
+French identifiers), French source text quoted in guillemets (``«Affectation de charges»``,
+as the command-reference drafts quote catalog ``fr=`` strings), and matches written entirely
+in upper case (``MODELISATION`` is a keyword, not prose). A line can allow one word on purpose
+with an HTML comment ``<!-- caen-allow: reference -->``, for the cases where the word is right
+in its own sense.
 """
 
 from __future__ import annotations
@@ -19,6 +21,7 @@ from typing import Any
 
 _FENCE = re.compile(r"^\s*(```|~~~)")
 _CODE_SPAN = re.compile(r"(`+)(.+?)\1")
+_FRENCH_QUOTE = re.compile(r"«[^»]*»")
 _ALLOW = re.compile(r"<!--\s*caen-allow:\s*([^>]*?)\s*-->", re.IGNORECASE)
 
 
@@ -58,7 +61,8 @@ def _prose_lines(text: str) -> list[tuple[int, str]]:
         if opening:
             fence = opening.group(1)
             continue
-        lines.append((number, _CODE_SPAN.sub(lambda m: " " * len(m.group(0)), line)))
+        line = _CODE_SPAN.sub(lambda m: " " * len(m.group(0)), line)
+        lines.append((number, _FRENCH_QUOTE.sub(lambda m: " " * len(m.group(0)), line)))
     return lines
 
 
