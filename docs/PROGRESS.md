@@ -27,7 +27,7 @@ Open: 12 entries carry `TODO(verify)` that needs the U4 docs (not in the sandbox
 VALE_REF, RESI_RELA, VOLUMOGRAMME, PM_PB, VITESSE (from 0.6) and VERI_MAIL (APLAT), REAC_NODA
 (exact definition), PRIN_1/PRIN_3 (ordering), LONG_CARA, COEF_AMOR (new). Listed in the owner
 review queue.
-Decisions: none (no ADR). Status `machine` is used for agent-drafted entries as PLAN.md 2.1
+Decisions: none (no ADR). Branch is `claude/project-thread-4lglpc` (session-assigned). Status `machine` is used for agent-drafted entries as PLAN.md 2.1
 asks; entries added later still start as `proposed`.
 Needs owner: nothing blocking.
 
