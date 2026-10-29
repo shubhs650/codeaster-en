@@ -65,8 +65,7 @@ encodes.
 | `COMMENTAIRE` | text, optional | `'#'` | Character that tells the function plotter that the line can be ignored. Only when `equal_to("FORMAT", 'TABLEAU')`. TODO(2.3): when to use. |
 | `COMM_PARA` | text, optional | `''` | Character used to comment out the line of column labels. Only when `equal_to("FORMAT", 'TABLEAU')`. TODO(2.3): when to use. |
 | `DEBUT_LIGNE` | text, optional | `''` | Line-start character. Only when `equal_to("FORMAT", 'TABLEAU')`. TODO(2.3): when to use. |
-| `FIN_LIGNE` | text, optional | `'
-'` | Line-end character. Only when `equal_to("FORMAT", 'TABLEAU')`. TODO(2.3): when to use. |
+| `FIN_LIGNE` | text, optional | `'\n'` | Line-end character. Only when `equal_to("FORMAT", 'TABLEAU')`. TODO(2.3): when to use. |
 | `LEGENDE` | text, optional | — | Legend of the function. Only when `equal_to("FORMAT", 'XMGRACE')`. TODO(2.3): when to use. |
 | `STYLE` | integer, optional | — | Style of the line that represents the function. Range: ≥ 0. Only when `equal_to("FORMAT", 'XMGRACE')`. TODO(2.3): when to use. |
 | `COULEUR` | integer, optional | — | Color of the function. Range: ≥ 0. Only when `equal_to("FORMAT", 'XMGRACE')`. TODO(2.3): when to use. |

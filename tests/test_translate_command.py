@@ -309,3 +309,9 @@ def test_cli_messages_and_doc_are_stubs() -> None:
     for sub in ("messages", "doc"):
         result = CliRunner().invoke(app, ["translate", sub])
         assert result.exit_code == 2
+
+
+def test_literal_escapes_control_characters() -> None:
+    # IMPR_TABLE / FIN_LIGNE defaults to "\n"; a raw newline would split the table row.
+    assert drafts._literal("\n") == "`'\\n'`"
+    assert drafts._literal("a\tb") == "`'a\\tb'`"
