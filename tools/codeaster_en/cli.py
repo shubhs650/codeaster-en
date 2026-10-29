@@ -1,8 +1,9 @@
 """``caen`` command-line interface.
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
-``caen extract catalog|messages|astest-index|inventory`` and ``caen translate command``. The
-other groups and commands are stubs that name the PLAN.md task which will fill them in.
+``caen extract catalog|messages|astest-index|inventory`` and
+``caen translate command|messages``. The other groups and commands are stubs that name the
+PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
@@ -18,6 +19,7 @@ from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
 from codeaster_en.translate import command as command_drafts
+from codeaster_en.translate import messages as messages_translate
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
 from codeaster_en.validate import messages as messages_validator
@@ -208,10 +210,134 @@ def translate_command(
 
 
 @translate_app.command("messages")
-def translate_messages() -> None:
-    """Glossary-locked batch translation of message families [not implemented yet: task 3.1]."""
-    typer.echo("caen translate messages: not implemented yet (PLAN.md task 3.1).", err=True)
-    raise typer.Exit(code=2)
+def translate_messages(
+    family: Annotated[
+        list[str] | None,
+        typer.Option("--family", "-f", help="Message family, e.g. MODELISA8 (repeatable)."),
+    ] = None,
+    all_families: Annotated[
+        bool, typer.Option("--all", help="Every family in en/messages.")
+    ] = False,
+    dry_run: Annotated[
+        bool,
+        typer.Option(help="Print batches, token and cost estimate; call nothing, write nothing."),
+    ] = False,
+    seed_po: Annotated[
+        bool,
+        typer.Option(
+            help="First fill messages whose French is verbatim in upstream's en-US .po "
+            "(method machine, no model call)."
+        ),
+    ] = False,
+    seed_only: Annotated[
+        bool, typer.Option(help="Only the --seed-po step: no model, no --responses.")
+    ] = False,
+    responses: Annotated[
+        Path | None,
+        typer.Option(help="Take answers from this JSON Lines file instead of the Claude API."),
+    ] = None,
+    export_requests: Annotated[
+        Path | None,
+        typer.Option(help="Append the requests to this JSON Lines file; call nothing."),
+    ] = None,
+    model: Annotated[str, typer.Option(help="Claude model ID.")] = messages_translate.DEFAULT_MODEL,
+    effort: Annotated[
+        str, typer.Option(help="low | medium | high | xhigh | max.")
+    ] = messages_translate.DEFAULT_EFFORT,
+    batch_size: Annotated[
+        int, typer.Option(min=1, help="Messages per request.")
+    ] = messages_translate.DEFAULT_BATCH_SIZE,
+    retries: Annotated[
+        int, typer.Option(min=0, help="Re-asks for items that fail validation.")
+    ] = messages_translate.DEFAULT_RETRIES,
+    method: Annotated[
+        str,
+        typer.Option(help="Recorded method: machine (batch, default) or assisted (in session)."),
+    ] = "machine",
+    source: Annotated[
+        str | None,
+        typer.Option(help="translation_source label for --responses (default: replay:<file>)."),
+    ] = None,
+    limit: Annotated[
+        int | None, typer.Option(min=1, help="At most this many messages per family.")
+    ] = None,
+    force: Annotated[
+        bool, typer.Option(help="Also redo translated messages (never 'reviewed' ones).")
+    ] = False,
+) -> None:
+    """Translate message families into en/messages (glossary-locked, placeholders validated).
+
+    Without --responses, --dry-run or --export-requests this calls the Claude API and spends
+    API credit (credentials from the environment, e.g. ANTHROPIC_API_KEY).
+    """
+    root = _repo_root()
+    seed_po = seed_po or seed_only
+    try:
+        src = messages_translate.load_sources(root)
+        names = messages_translate.all_families(root) if all_families else (family or [])
+        if not names:
+            raise messages_translate.TranslateError("give --family F (repeatable) or --all")
+        if dry_run or export_requests:
+            totals = [0, 0, 0, 0, 0.0]
+            for name in names:
+                if export_requests:
+                    messages_translate.export_requests(
+                        src, name, export_requests, batch_size, force, seed_po, limit
+                    )
+                est = messages_translate.estimate(
+                    src, name, model, batch_size, force, seed_po, limit
+                )
+                cost = "n/a" if est.cost_usd is None else f"${est.cost_usd:.2f}"
+                typer.echo(
+                    f"{est.family}: {est.items} message(s), {est.requests} request(s), "
+                    f"~{est.input_tokens} input / ~{est.output_tokens} output tokens, {cost}"
+                )
+                totals[0] += est.items
+                totals[1] += est.requests
+                totals[2] += est.input_tokens
+                totals[3] += est.output_tokens
+                totals[4] += est.cost_usd or 0.0
+            typer.echo(
+                f"translate messages: {len(names)} family file(s), {totals[0]} message(s), "
+                f"{totals[1]} request(s), ~{totals[2]} input / ~{totals[3]} output tokens, "
+                f"~${totals[4]:.2f} with {model} (estimate: chars/"
+                f"{messages_translate.CHARS_PER_TOKEN:g}, no thinking tokens, no re-asks)"
+            )
+            if export_requests:
+                typer.echo(f"translate messages: requests appended to {export_requests}")
+            return
+        translator: messages_translate.Translator | None = None
+        if responses:
+            translator = messages_translate.ReplayTranslator(responses, source)
+        elif not seed_only:
+            translator = messages_translate.AnthropicTranslator(model=model, effort=effort)
+        failed = 0
+        for name in names:
+            rep = messages_translate.translate_family(
+                src,
+                name,
+                translator,
+                batch_size=batch_size,
+                retries=retries,
+                method=method,
+                seed_po=seed_po,
+                force=force,
+                limit=limit,
+            )
+            for msg_id, problems in rep.failed.items():
+                typer.echo(f"{msg_id}: not translated: {'; '.join(problems)}", err=True)
+            failed += len(rep.failed)
+            extra = f", glossary +{len(rep.glossary_added)}" if rep.glossary_added else ""
+            typer.echo(
+                f"{rep.family}: {rep.seeded} seeded, {rep.translated}/{rep.pending} translated, "
+                f"{len(rep.failed)} failed, {rep.requests} request(s), "
+                f"{rep.input_tokens} input / {rep.output_tokens} output tokens{extra}"
+            )
+    except (OSError, ValueError, messages_translate.TranslateError) as exc:
+        typer.echo(f"translate messages: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    if failed:
+        raise typer.Exit(code=1)
 
 
 @translate_app.command("doc")
