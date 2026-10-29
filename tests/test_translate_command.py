@@ -305,10 +305,10 @@ def test_cli_writes_draft(monkeypatch, tmp_path: Path) -> None:
     assert (tmp_path / "FIN.md").read_text(encoding="utf-8").startswith("---\ncommand: FIN\n")
 
 
-def test_cli_messages_and_doc_are_stubs() -> None:
-    for sub in ("messages", "doc"):
-        result = CliRunner().invoke(app, ["translate", sub])
-        assert result.exit_code == 2
+def test_cli_doc_is_a_stub() -> None:
+    # `translate messages` is implemented since task 3.1 (tests/test_translate_messages.py).
+    result = CliRunner().invoke(app, ["translate", "doc"])
+    assert result.exit_code == 2
 
 
 def test_literal_escapes_control_characters() -> None:
