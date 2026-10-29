@@ -131,9 +131,11 @@ def test_test_resu_matches_checks(case: str) -> None:
         assert math.isclose(occ["VALE_REFE"], check["reference"], rel_tol=1e-5), legend
         assert occ["PRECISION"] == check["precision"], legend
         assert (occ.get("VALE_ABS") == "OUI") == check.get("absolute_value", False), legend
-        # Until task 4.2 records the solver's value, VALE_CALC is the hand value too.
-        assert math.isclose(occ["VALE_CALC"], occ["VALE_REFE"], rel_tol=1e-9), legend
-        assert occ["TOLE_MACHINE"] == occ["PRECISION"], legend
+        # VALE_CALC is the solver's value (task 4.2, checked against run.mess in
+        # test_fixture_outputs.py); it must sit within PRECISION of the hand value.
+        assert "TOLE_MACHINE" not in occ, legend
+        error = abs(occ["VALE_CALC"] - occ["VALE_REFE"]) / abs(occ["VALE_REFE"])
+        assert error <= occ["PRECISION"], legend
 
 
 @pytest.mark.parametrize("case", CASES)

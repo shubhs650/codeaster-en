@@ -128,7 +128,7 @@ def solid_static() -> dict[str, float]:
     mesh = FIXTURES / "solid_static" / "input" / "mesh.med"
     force = pressure_resultant(mesh, ("P_SHELL", "P_NOZZLE"), 2.0)
     return {
-        "REAC_DX_SUM": float(abs(force[0])),
+        "REAC_DX_SUM": float(-force[0]),
         "applied_FX": float(force[0]),
         "applied_FY": float(force[1]),
         "applied_FZ": float(force[2]),
@@ -142,7 +142,7 @@ def shell_static() -> dict[str, float]:
     alpha, beta = navier_square_plate(nu)
     return {
         "W_CENTER": -alpha * q * a**4 / plate_rigidity(e, nu, t),
-        "MXX_CENTER": beta * q * a**2,
+        "MXX_CENTER": -beta * q * a**2,  # sagging moment is negative in code_aster (4.2 run)
         "REAC_DZ_SUM": q * a**2,
         "alpha": alpha,
         "beta": beta,

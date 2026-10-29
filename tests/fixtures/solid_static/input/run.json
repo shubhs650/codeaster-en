@@ -70,8 +70,7 @@
       "component": "DX",
       "reference": 3891.64,
       "precision": 0.001,
-      "absolute_value": true,
-      "basis": "Equilibrium: reaction sum = -(applied pressure resultant). With the nozzle end open, the resultant is P times the projected area of the bore opening along -X (P pi ri^2 = 3927 N for a true circle); the reference is the exact resultant on the faceted mesh, computed by tests/fixtures/hand_values.py (applied FX = -3891.64 N, FY = FZ = 0).",
+      "basis": "Equilibrium: reaction sum = -(applied pressure resultant), so +X (REAC_NODA is the support reaction; sign confirmed by the first run, task 4.2). With the nozzle end open, the resultant is P times the projected area of the bore opening along -X (P pi ri^2 = 3927 N for a true circle); the reference is the exact resultant on the faceted mesh, computed by tests/fixtures/hand_values.py (applied FX = -3891.64 N, FY = FZ = 0).",
       "source": "Static equilibrium; mesh integration in tests/fixtures/hand_values.py:pressure_resultant"
     }
   ],
@@ -83,6 +82,6 @@
     ],
     "author": "codeaster-en agent (task 4.1)",
     "date": "2026-10-23",
-    "notes": "VALE_CALC in run.comm holds the hand value until task 4.2 records the solver's own value."
+    "notes": "VALE_CALC in run.comm is the solver's own value from the first run (task 4.2, code_aster 17.4.22 image, ADR-011). Outputs are in ../output/."
   }
 }

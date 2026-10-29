@@ -42,10 +42,10 @@ Environment variables (no secrets here — anyone using the environment can read
 ```text
 BASH_DEFAULT_TIMEOUT_MS=600000
 BASH_MAX_TIMEOUT_MS=1800000
-CODEASTER_IMAGE=codeastersolver/codeaster-seq:latest
 PYTHONDONTWRITEBYTECODE=1
 ```
 
+- The solver image is pinned in the repo file `CONTAINER_IMAGE` (ADR-011), not in an environment variable. Remove any old `CODEASTER_IMAGE` variable; nothing reads it now.
 - The timeouts let fixture solver runs and docker pulls finish without being backgrounded.
 - If you later add a bulk-translation step that calls the Anthropic API with your own key, add it under **Network secrets** (header `x-api-key`, host `api.anthropic.com`), never as a variable. Not needed at first: threads translate in-session.
 

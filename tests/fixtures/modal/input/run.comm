@@ -8,8 +8,8 @@
 # ignored). Expected order: Z1, Y1, Z2, Y2, Z3, T1 (Z4 ~ 1.80 kHz and axial ~ 3.2 kHz are higher).
 # Modelled on astest sdlv100a (CALC_MATR_ELEM/NUME_DDL/ASSE_MATRICE, POST_ELEM MASS_INER,
 # TEST_RESU on PARA="FREQ") and sdll05a (CALC_MODES OPTION="PLUS_PETITE", NMAX_FREQ).
-# TODO(4.2): VALE_CALC values below are the hand values, accepted with TOLE_MACHINE = PRECISION.
-# Replace them with the solver's own values from the first run and drop TOLE_MACHINE.
+# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster
+# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.
 
 DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
 
@@ -54,8 +54,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=52.2198,
-            VALE_CALC=52.2198,
-            TOLE_MACHINE=2.0e-2,
+            VALE_CALC=52.3396441683678,
             PRECISION=2.0e-2,
             LEGENDE="F1_BENDING_Z1",
         ),
@@ -65,8 +64,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=104.440,
-            VALE_CALC=104.440,
-            TOLE_MACHINE=2.0e-2,
+            VALE_CALC=104.42992528937033,
             PRECISION=2.0e-2,
             LEGENDE="F2_BENDING_Y1",
         ),
@@ -76,8 +74,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=327.256,
-            VALE_CALC=327.256,
-            TOLE_MACHINE=2.0e-2,
+            VALE_CALC=327.0652475459293,
             PRECISION=2.0e-2,
             LEGENDE="F3_BENDING_Z2",
         ),
@@ -87,8 +84,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=654.512,
-            VALE_CALC=654.512,
-            TOLE_MACHINE=2.0e-2,
+            VALE_CALC=646.9886423229167,
             PRECISION=2.0e-2,
             LEGENDE="F4_BENDING_Y2",
         ),
@@ -98,8 +94,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=916.326,
-            VALE_CALC=916.326,
-            TOLE_MACHINE=3.0e-2,
+            VALE_CALC=911.6795505473701,
             PRECISION=3.0e-2,
             LEGENDE="F5_BENDING_Z3",
         ),
@@ -109,8 +104,7 @@ TEST_RESU(
             RESULTAT=MODES,
             REFERENCE="ANALYTIQUE",
             VALE_REFE=1485.22,
-            VALE_CALC=1485.22,
-            TOLE_MACHINE=3.0e-2,
+            VALE_CALC=1497.0292704690783,
             PRECISION=3.0e-2,
             LEGENDE="F6_TORSION_1",
         ),
