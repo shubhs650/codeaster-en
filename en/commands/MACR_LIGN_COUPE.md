@@ -42,7 +42,7 @@ encodes.
 | `RESULTAT` | `evol_elas` or `evol_noli` or `evol_ther` or `evol_sech` or `mode_meca` or `comb_fourier` or `mult_elas` or `fourier_elas` or `dyna_trans`, optional | — | *result*. TODO(2.3): when to use. |
 | `CHAM_GD` | `cham_gd_sdaster`, optional | — | *field (physical quantity)*. TODO(2.3): when to use. |
 | `NUME_ORDRE` | integer, optional, list | — | *step index*. Only when `exists("RESULTAT")`. TODO(2.3): when to use. |
-| `NUME_MODE` | integer, optional, list | — | Only when `exists("RESULTAT")`. TODO(2.3): meaning. TODO(2.3): when to use. |
+| `NUME_MODE` | integer, optional, list | — | *mode number*. Only when `exists("RESULTAT")`. TODO(2.3): when to use. |
 | `LIST_ORDRE` | `listis_sdaster`, optional | — | Only when `exists("RESULTAT")`. TODO(2.3): meaning. TODO(2.3): when to use. |
 | `INST` | real, optional, list | — | *time step (pseudo-time)*. Only when `exists("RESULTAT")`. TODO(2.3): when to use. |
 | `LIST_INST` | `listr8_sdaster`, optional | — | *time-step list*. Only when `exists("RESULTAT")`. TODO(2.3): when to use. |

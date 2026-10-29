@@ -14,6 +14,30 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.5 fields and components guide — agent
+Done: `en/guide/fields.md` (`status: assisted`): how a result is organized (result → step →
+field → component), field-name grammar (quantity prefixes, location suffixes), how `NOEU` is
+averaged (plain arithmetic mean of `ELNO`, `cescns.F90:70`; shells with layers excluded,
+`UTILITAI_3` / `CALCULEL4_16`; local-axes check `UTILITAI_4`), `EVOL_ELAS` and `MODE_MECA`
+(stored fields, access parameters, mode parameters from `vpstor.F90`, MED field naming), a field
+summary table (label, option, applies to, units, catalog line), then displacement, stress,
+equivalent stress (formulas from `fgequi.F90`: `PRIN_*` sorted increasing, `TRESCA`, `VMIS_SG`,
+`TRSIG`, `TRIAX`), strain (tensor shear, `eps1mc.F90:96`), shell and beam resultants, nodal
+forces and reactions (components are DOF names; sign from fixtures), energy, and a default
+"what to report" table for task 4.6. Glossary: 59 new `proposed` entries (5 abbreviations, 13
+fields, 35 components, 6 modal parameters); `PRIN_1`/`PRIN_2`/`PRIN_3` and `REAC_NODA` notes now
+cite source and drop their `TODO(verify)`. Drafts regenerated: `MACR_LIGN_COUPE.md` gained the
+`NUME_MODE` term. `tests/test_guide.py`: labels in `fields.md` tables equal the glossary `en`
+(≥ 75 checked), field summary lines point at `c_nom_cham_into.py`. Synonym scan now skips
+Markdown link targets (file names such as `modelisations.md`), with a test. Self-review:
+citations re-printed and checked by the test; 9 `TODO(verify)`.
+Open: owner review (PLAN acceptance, queued). Phase 2 is complete once this merges; next ready
+task per PLAN.
+Decisions: none (no ADR). Choices: one glossary term per component, field-specific meaning in
+the note (`DX` is "X translation"; reports label `REAC_NODA/DX` "Reaction force, X" per
+REPORT-SPEC §4); shell results reported from `EFGE_*` until `POST_CHAMP` is in scope.
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 2.4 modelisations guide — agent
 Done: `en/guide/modelisations.md` (`status: assisted`), the first file in `en/guide/`. Covers
 `3D`, `3D_SI`, `DKT`, `DST`, `COQUE_3D`, `C_PLAN`, `D_PLAN`, `AXIS`, `POU_D_T` (+ `POU_D_E`,
