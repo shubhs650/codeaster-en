@@ -75,7 +75,10 @@
    "source": {
     "line": 53
    },
-   "en": null
+   "en": "\n  The internal variable field could not be written with IMPR_NOM_VARI='OUI'.\n  This is because some behaviors in your model cannot be written with this option:\n  - The behavior was defined with MFRONT or UMAT in prototype mode\n  - The behavior was defined on a multifiber beam\n\n  -> Advice:\n     - Do not use IMPR_NOM_VARI='OUI' to write this field\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "MED2_9",
@@ -86,7 +89,10 @@
    "source": {
     "line": 64
    },
-   "en": null
+   "en": "\n  You request output of field %(k1)s from command\n  PROJ_CHAMP using method 'SOUS_POINT'.\n\n  This output is not possible in MED format.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "MED2_10",
@@ -95,7 +101,10 @@
    "source": {
     "line": 72
    },
-   "en": null
+   "en": "\nThe internal variable field for metallurgy could not be written\nwith IMPR_NOM_VARI='OUI'.\nThis is because the result data structure does not contain the required\ninformation.\nDo not use IMPR_NOM_VARI='OUI' to write this field\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "MED2_11",
@@ -104,7 +113,10 @@
    "source": {
     "line": 81
    },
-   "en": null
+   "en": "\nYour field lies on a model with joint or interface elements\nthat cannot be written in MED format yet.\n\n    Advice: to make this output possible, file\n              a feature request.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "12": {
    "id": "MED2_12",
@@ -115,7 +127,10 @@
    "source": {
     "line": 90
    },
-   "en": null
+   "en": "\nThe model contains structural elements. But field  %(k1)s does not have the right\nstructure to be written in this format.\nDo not write this field, or use two separate IMPR_RESU.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "MED2_13",
@@ -126,7 +141,10 @@
    "source": {
     "line": 97
    },
-   "en": null
+   "en": "\nNo structural element of type COQUE, GRILLE, TUYAU or PMF with sub-points\nfor field %(k1)s. The CARA_ELEM is ignored.\n\n    Advice: remove keyword CARA_ELEM under factor keyword RESU.\n    ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "14": {
    "id": "MED2_14",
@@ -138,7 +156,10 @@
    "source": {
     "line": 105
    },
-   "en": null
+   "en": "\nField %(k1)s is being written in MED format, but for element type %(k2)s this field has sub-points.\nThe CARA_ELEM is needed to write sub-point fields for structural elements of type COQUE, GRILLE, TUYAU or PMF\n\n    Advice: \n        - Give keyword CARA_ELEM under factor keyword RESU.\n        - Allow writing without CARA_ELEM by giving keyword VISU_SP='NON' under\n          factor keyword RESU; the result is then usable only by command LIRE_RESU\n          and must not be visualized.\n    ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "MED2_20",
@@ -151,7 +172,10 @@
    "source": {
     "line": 117
    },
-   "en": null
+   "en": "\nMED output of elements with sub-points.\n    Output for %(k1)s elements with support element %(k2)s is not handled.\n    MED element: %(k3)s\n\n    Advice:\n        - Restrict the output to elements that do not contain support element %(k2)s.\n        - To make this output possible without restriction, file\n          a feature request.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }
