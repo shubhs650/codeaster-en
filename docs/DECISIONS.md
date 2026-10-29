@@ -339,3 +339,20 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 **Why.** ClearFEA should code against functions that exist and are tested; the units and the free group check are the two pieces of adapter logic that touch French and solver conventions, so they belong here (§7).
 
 **Consequences.** Signature changes to anything in §2 are API changes for ClearFEA (§6). The group check does not follow variables or statement order; those faults still reach the solver and are classified from its log. A priority tier with MPI needs a new fixture and an `export_text` parameter.
+
+## ADR-022 — Builder Tier 2: discrete elements beside the body family, remote loads by RBE3, hydrostatic pressure by formula
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 6.4b)
+
+**Context.** PLAN 6.4 adds springs, remote force and moment, hydrostatic pressure, gravity, rotation and mode normalization to the builder. ADR-013 says a model has one modeling family, but springs (`DIS_T`) and the master point of an RBE3 remote load (`DIS_TR`) are discrete elements that upstream test cases add to a solid or shell model (`astest/zzzz144a.comm:36` adds a `DIS_TR` point to a `3D` model). The builder does not read the mesh, so it cannot tell a two-node spring from a point.
+
+**Decision.**
+1. **Discrete elements are not a second family.** `model(..., springs=, remote_points=)` adds `DIS_T` / `DIS_TR` `AFFE` occurrences after the body family's; `Model.discrete` records them. Mixing two body families stays refused (ADR-013 unchanged).
+2. **`element_properties` covers every discrete group or refuses** (the solver would stop with `AFFECARAELEM_32`/`_33`). Springs need a `Spring`; the caller says whether it is a two-node spring (`K_T_D_L`) or a point tied to ground (`to_ground=True`, `K_T_D_N`). Remote points get a zero `K_TR_D_N` without asking, as zzzz144a does. All in `REPERE='GLOBAL'`, so zero-length springs need no local frame. `shell_properties` is now a shortcut for it (same output).
+3. **Remote loads are RBE3, not rigid.** `remote_load` writes `LIAISON_RBE3` (all six master DOFs, `DDL_ESCL='DX-DY-DZ'`, `COEF_ESCL=1.0`) and the `FORCE_NODALE` in one `AFFE_CHAR_MECA`, on solids and shells alike (`astest/ssls136a.comm:59` uses `DX-DY-DZ` on DKT). A rigid connection is a separate `rigid_link` (`LIAISON_SOLIDE`), because it stiffens the face and engineers pick between the two on purpose.
+4. **Hydrostatic pressure is one `FORMULE` of one coordinate**, `max(rho*g*(h - Z), 0.0)` with the numbers written into the expression (no extra `FORMULE` keyword arguments, which our catalog check does not model), then `AFFE_CHAR_MECA_F PRES_REP`. The axis points up; the free surface is at `axis = h`.
+5. **Modes:** `normalize_modes` is `NORM_MODE` in place (default `MASS_GENE`, because `CALC_MODES` scales to a unit largest component); `filter_modes` is `EXTR_MODE` by frequency band or by `MASS_EFFE_UN` threshold in any direction (`bibfor/op/op0168.F90:294`), with the cumulative print on.
+
+**Why.** These are the forms upstream's own tests use; each choice is written once in the builder, so ClearFEA does not have to rediscover the discrete-element and `DDL_ESCL` details.
+
+**Consequences.** `CLEARFEA-INTEGRATION.md` §2.1 gains the new methods (additive; no signature changed). `fix()` on a shell model clamps rotations, which a `DIS_T`-only ground node does not have; use `restrain` with translations there. Beams, masses (`M_T_D_N`) and temperature loads are not wrapped yet.
+

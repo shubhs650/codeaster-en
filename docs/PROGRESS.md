@@ -14,6 +14,23 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.4b AFFE_CHAR_MECA_F reference and Tier 2 builder methods — agent
+Done: second of three PRs for PLAN 6.4. `en/commands/AFFE_CHAR_MECA_F.md` rewritten as a full
+reference (`assisted`, 2 `TODO(verify)`). Builder (ADR-022): `model(springs=, remote_points=)`
+adds `DIS_T`/`DIS_TR` occurrences; `element_properties` (`COQUE` + `DISCRET`, `Spring`, zero
+`K_TR_D_N` on remote points, refuses uncovered discrete groups; `shell_properties` now calls it,
+fixture output unchanged); `remote_load` (`LIAISON_RBE3` + `FORCE_NODALE`), `rigid_link`
+(`LIAISON_SOLIDE`), `gravity` (`PESANTEUR`), `rotation` (`ROTATION`), `hydrostatic_pressure`
+(`FORMULE` + `AFFE_CHAR_MECA_F PRES_REP`), `normalize_modes` (`NORM_MODE`), `filter_modes`
+(`EXTR_MODE`). Every form taken from an upstream test case (zzzz144a, ssls136a, sdnv138c,
+erreu01a, forma12a). Tests: pattern test, refusal test, and the upstream `code_aster.Cata`
+checker accepts a file using every new method. `CLEARFEA-INTEGRATION.md` §2.1 lists the new
+methods (additive).
+Open: 6.4c (fixture with remote load, springs, gravity, rotation and hydrostatic pressure run
+in the solver; modal fixture with `NORM_MODE`/`EXTR_MODE`; report coverage).
+Decisions: ADR-022.
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-29 — 6.4a Tier 2 modal command references — agent
 Done: first of three PRs for PLAN 6.4. Machine drafts for the 10 new Tier 2 commands
 (`caen translate command --tier 2`; 57 Tier 2 `fr=` strings added to `en/catalog-help.yaml`, 10
