@@ -13,6 +13,7 @@ from codeaster_en.comm.builder import (
     Model,
     Restraint,
     ResultCheck,
+    Spring,
     literal,
 )
 from codeaster_en.comm.catalog import CatalogError, CommandSpec, load_command
@@ -35,6 +36,7 @@ __all__ = [
     "Param",
     "Restraint",
     "ResultCheck",
+    "Spring",
     "literal",
     "load_command",
 ]

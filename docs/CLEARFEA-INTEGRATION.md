@@ -50,17 +50,25 @@ Nothing is read at import; each module reads its data on first use (ADR-020).
 | `node_groups(mesh, *, from_groups=None, from_all_groups=False) -> Concept` | `DEFI_GROUP CREA_GROUP_NO` (node groups named after element groups) |
 | `orient_skin(mesh, groups) -> Concept` | `MODI_MAILLAGE ORIE_PEAU` |
 | `orient_shell_normals(mesh, group, *, normal, at_node_group) -> Concept` | `MODI_MAILLAGE ORIE_NORM_COQUE` |
-| `model(mesh, kind, *, groups=None, modelisation=None, name=None) -> Model` | `AFFE_MODELE`; `kind` in `BODY_KINDS`: `solid`, `thin_shell`, `thick_shell`, `curved_shell`, `plane_stress`, `plane_strain`, `axisymmetric` |
+| `model(mesh, kind, *, groups=None, modelisation=None, springs=(), remote_points=(), name=None) -> Model` | `AFFE_MODELE`; `kind` in `BODY_KINDS`: `solid`, `thin_shell`, `thick_shell`, `curved_shell`, `plane_stress`, `plane_strain`, `axisymmetric`; `springs` groups are modeled `DIS_T`, `remote_points` groups `DIS_TR` (ADR-022) |
 | `material(name, *, E, nu, rho=None, alpha=None) -> Concept` | `DEFI_MATERIAU ELAS` |
 | `assign_materials(mesh, {group or "*": material}, *, name=None) -> Concept` | `AFFE_MATERIAU` |
 | `shell_properties(model, {group: thickness}, *, reference_angles=None, name=None) -> Concept` | `AFFE_CARA_ELEM COQUE` |
+| `element_properties(model, *, shells=None, springs=None, reference_angles=None, name=None) -> Concept` | `AFFE_CARA_ELEM COQUE` + `DISCRET`: `springs` maps a spring group to `Spring((kx, ky, kz), to_ground=False)` (`K_T_D_L`, or `K_T_D_N`); remote points get a zero `K_TR_D_N` automatically; every discrete group must be covered |
 | `fix(model, groups, *, kinematic=False, name=None) -> Concept` | all displacement (and rotation, for shells) DOF zero: `AFFE_CHAR_MECA DDL_IMPO`, or `AFFE_CHAR_CINE MECA_IMPO` with `kinematic=True` |
 | `restrain(model, [Restraint({"DZ": 0.0}, groups=... or node_groups=...)], *, kinematic=False, name=None) -> Concept` | the same, per DOF |
 | `pressure(model, groups, value, *, name=None) -> Concept` | `AFFE_CHAR_MECA PRES_REP` (positive acts against the element normal) |
+| `hydrostatic_pressure(model, groups, *, density, free_surface, gravity=9.81, axis="Z", name=None) -> Concept` | `FORMULE` `max(rho*g*(h - Z), 0)` + `AFFE_CHAR_MECA_F PRES_REP` |
+| `remote_load(model, point, faces, *, force=None, moment=None, name=None) -> Concept` | `AFFE_CHAR_MECA LIAISON_RBE3` (`DDL_ESCL="DX-DY-DZ"`) + `FORCE_NODALE` on the remote point |
+| `rigid_link(model, groups, *, name=None) -> Concept` | `AFFE_CHAR_MECA LIAISON_SOLIDE` |
+| `gravity(model, *, acceleration=9.81, direction=(0, 0, -1), groups=None, name=None) -> Concept` | `AFFE_CHAR_MECA PESANTEUR` |
+| `rotation(model, *, speed, axis, center=(0, 0, 0), groups=None, name=None) -> Concept` | `AFFE_CHAR_MECA ROTATION` (speed in rad/s) |
 | `linear_static(model, materials, loads, *, elements=None, solver="MUMPS", name=None) -> Concept` | `MECA_STATIQUE` |
 | `compute_fields(result, *, stress=None, criteria=None, strain=None, forces=None, energy=None) -> Concept` | `CALC_CHAMP` (reuse) |
 | `resultant(result, node_groups, *, title, field="REAC_NODA", components=("DX","DY","DZ"), name=None) -> Concept` | `POST_RELEVE_T` `RESULTANTE` table |
 | `modal(model, materials, loads, *, count, elements=None, name=None) -> ModalMatrices` | `CALC_MATR_ELEM` ×2, `NUME_DDL`, `ASSE_MATRICE` ×2, `CALC_MODES` (`PLUS_PETITE`, `count` modes); `.modes` is the result |
+| `normalize_modes(modes, *, norm="MASS_GENE") -> Concept` | `NORM_MODE` (reuse) |
+| `filter_modes(modes, *, frequency_range=None, min_mass_fraction=None, name=None) -> Concept` | `EXTR_MODE` `FILTRE_MODE` (by `FREQ_MIN`/`FREQ_MAX` or `CRIT_EXTR="MASS_EFFE_UN"`), `IMPRESSION CUMUL="OUI"` |
 | `mass_properties(model, materials, *, elements=None, name=None) -> Concept` | `POST_ELEM MASS_INER` |
 | `modal_parameters(modes, *, parameters=MODAL_PARAMETERS, name=None) -> Concept` | `RECU_TABLE` (frequencies, generalized and effective masses) |
 | `print_table(table, *, unit, separator=",")` | `IMPR_TABLE` to a logical unit (a CSV under `output/tables/`, §3) |
@@ -68,7 +76,7 @@ Nothing is read at import; each module reads its data on first use (ADR-020).
 | `test_results([ResultCheck(...)])` | `TEST_RESU` (verification runs only) |
 | `end()`; `text() -> str`; `write(path) -> str` | `FIN()`, added by `text`/`write` if missing |
 
-Anything not covered yet (remote loads `LIAISON_RBE3`, gravity, springs, `AFFE_CHAR_MECA_F`, `NORM_MODE`, …; task 6.4) goes through the layer underneath with the same catalog checks:
+Anything not covered yet (temperature loads, beams, nonlinear analyses, …) goes through the layer underneath with the same catalog checks:
 
 ```python
 b.file.call("AFFE_CHAR_MECA", "LOAD", MODELE=model, PESANTEUR={"GRAVITE": 9810.0, "DIRECTION": (0.0, 0.0, -1.0)})

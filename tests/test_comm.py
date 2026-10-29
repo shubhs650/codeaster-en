@@ -28,6 +28,7 @@ from codeaster_en.comm import (
     Number,
     Param,
     Restraint,
+    Spring,
     catalog,
     literal,
 )
@@ -323,7 +324,10 @@ def test_builder_output_passes_upstream_checker(tmp_path: Path) -> None:
     resu = b.linear_static(model, mate, [fixed, press], solver="MULT_FRONT")
     b.compute_fields(resu, stress="SIGM_NOEU", strain=("EPSI_ELNO",), forces="REAC_NODA")
     b.write_med(resu, ["DEPL", "SIGM_NOEU"])
-    text = b.text()
+    _upstream_check(b.text())
+
+
+def _upstream_check(text: str) -> None:
     sys.dont_write_bytecode = True
     sys.path.insert(0, str(REPO / "upstream"))
     try:
@@ -331,3 +335,67 @@ def test_builder_output_passes_upstream_checker(tmp_path: Path) -> None:
     finally:
         sys.path.remove(str(REPO / "upstream"))
     exec(compile(text, "built.comm", "exec"), dict(commandStore) | {"_F": dict})
+
+
+def _tier2_file() -> str:
+    """Every Tier 2 load and mode method on a solid with a spring and a remote point."""
+    b = Builder()
+    b.start()
+    mesh = b.read_mesh()
+    b.node_groups(mesh, from_all_groups=True)
+    model = b.model(mesh, "solid", springs="SPRING", remote_points="MASTER")
+    steel = b.material("STEEL", E=2.1e11, nu=0.3, rho=7850.0)
+    mate = b.assign_materials(mesh, {"*": steel})
+    cara = b.element_properties(model, springs={"SPRING": Spring((1.0e6, 1.0e6, 1.0e6))})
+    fixed = b.fix(model, "BASE")
+    remote = b.remote_load(model, "MASTER", "LOADED", force=(0.0, 0.0, -1.0e3), moment=(0, 0, 50))
+    rigid = b.rigid_link(model, "BLOCK")
+    weight = b.gravity(model)
+    spin = b.rotation(model, speed=10.0, axis=(0.0, 0.0, 1.0))
+    water = b.hydrostatic_pressure(model, "WET", density=1000.0, free_surface=2.0)
+    loads = [fixed, remote, rigid, weight, spin, water]
+    b.linear_static(model, mate, loads, elements=cara)
+    modal = b.modal(model, mate, [fixed], count=5, elements=cara)
+    b.normalize_modes(modal.modes)
+    b.filter_modes(modal.modes, frequency_range=(0.0, 100.0))
+    b.filter_modes(modal.modes, min_mass_fraction=0.01)
+    return b.text()
+
+
+def test_tier2_methods_write_the_upstream_patterns() -> None:
+    text = _tier2_file()
+    assert 'MODELISATION="DIS_T"' in text and 'MODELISATION="DIS_TR"' in text
+    assert 'CARA="K_T_D_L"' in text
+    assert 'CARA="K_TR_D_N", GROUP_MA="MASTER", VALE=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)' in text
+    assert 'DDL_ESCL="DX-DY-DZ"' in text
+    assert 'FORCE_NODALE=_F(GROUP_NO="MASTER", FX=0.0, FY=0.0, FZ=-1000.0' in text
+    assert 'VALE="max(1000.0 * 9.81 * (2.0 - Z), 0.0)", NOM_PARA="Z"' in text
+    assert "HYDRO = AFFE_CHAR_MECA_F(" in text
+    assert 'MODES = NORM_MODE(reuse=MODES, MODE=MODES, NORME="MASS_GENE")' in text
+    assert 'CRIT_EXTR="MASS_EFFE_UN", SEUIL=0.01' in text
+
+
+def test_tier2_methods_refuse_inconsistent_models() -> None:
+    b = Builder()
+    mesh = b.read_mesh()
+    with pytest.raises(CommSyntaxError, match="both a spring and a remote point"):
+        b.model(mesh, "solid", springs="P", remote_points="P")
+    model = b.model(mesh, "solid", springs="SPRING", remote_points="MASTER")
+    with pytest.raises(CommSyntaxError, match="without stiffness"):
+        b.element_properties(model)
+    with pytest.raises(CommSyntaxError, match="not a spring group"):
+        b.element_properties(model, springs={"OTHER": Spring((1.0, 1.0, 1.0))})
+    with pytest.raises(CommSyntaxError, match="not a remote point"):
+        b.remote_load(model, "SPRING", "FACE", force=(1.0, 0.0, 0.0))
+    with pytest.raises(CommSyntaxError, match="force or a moment"):
+        b.remote_load(model, "MASTER", "FACE")
+    with pytest.raises(CommSyntaxError, match="axis"):
+        b.hydrostatic_pressure(model, "WET", density=1.0, free_surface=0.0, axis="W")
+    with pytest.raises(CommSyntaxError, match="one"):
+        b.filter_modes(Concept("M", "mode_meca"))
+
+
+def test_tier2_output_passes_upstream_checker() -> None:
+    if not (REPO / "upstream" / "code_aster" / "Cata").is_dir():
+        pytest.skip("upstream/ submodule not checked out")
+    _upstream_check(_tier2_file())

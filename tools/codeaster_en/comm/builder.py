@@ -6,10 +6,12 @@ catalog before it is added (:class:`codeaster_en.comm.CommandFile`). Values the 
 itself (field names such as ``SIEQ_NOEU``, components such as ``DX``, group names) are passed
 through as given.
 
-Coverage is COMMAND-SET Tier 1 linear static on solids and shells plus the Tier 2 modal path:
-the three fixtures in ``tests/fixtures/`` are written by this API
-(``tests/fixtures/comm_inputs.py``). Modeling defaults per body kind are ADR-013's; a model has
-one modeling family.
+Coverage is COMMAND-SET Tier 1 linear static on solids and shells plus Tier 2: the modal path
+(with mode normalization and filtering), springs, remote force and moment (``LIAISON_RBE3``),
+rigid links, gravity, rotation and hydrostatic pressure. The fixtures in ``tests/fixtures/``
+are written by this API (``tests/fixtures/comm_inputs.py``). Modeling defaults per body kind are
+ADR-013's; a model has one modeling family, plus discrete elements for springs and remote
+points (ADR-022).
 """
 
 from __future__ import annotations
@@ -46,6 +48,10 @@ _CLAMP_DOFS: dict[str, tuple[str, ...]] = {
     "AXIS": ("DX", "DY"),
 }
 _SHELLS = {"DKT", "DST", "COQUE_3D"}
+
+# ADR-022: discrete modelings a model may add on top of its body family. DIS_T carries the three
+# translations (springs), DIS_TR adds the three rotations (the master point of a remote load).
+_DISCRETE = ("DIS_T", "DIS_TR")
 
 # Modal parameters CALC_MODES stores (bibfor/algeline/vpstor.F90), as the modal fixture and
 # the results reader's modal table use them.
@@ -98,10 +104,36 @@ class Model:
     concept: Concept
     mesh: Concept
     modelisation: str
+    # Element group -> discrete modeling (``DIS_T`` or ``DIS_TR``), ADR-022.
+    discrete: dict[str, str] = field(default_factory=dict)
 
     @property
     def is_shell(self) -> bool:
         return self.modelisation in _SHELLS
+
+
+@dataclass
+class Spring:
+    """Translational stiffness of a ``DIS_T`` group along global X, Y and Z (N/m).
+
+    On two-node elements (``SEG2``) the spring acts between the two nodes (``K_T_D_L``); with
+    ``to_ground=True`` the group holds point elements (``POI1``) and each point is tied to a
+    fixed ground (``K_T_D_N``). Both are written in the global frame (``REPERE='GLOBAL'``), so
+    a zero-length two-node spring needs no local frame.
+    """
+
+    stiffness: tuple[Real, Real, Real]
+    to_ground: bool = False
+
+    def keywords(self, group: str) -> dict[str, Any]:
+        if len(self.stiffness) != 3:
+            raise CommSyntaxError("a spring takes three stiffness values (X, Y, Z)")
+        return {
+            "REPERE": "GLOBAL",
+            "CARA": "K_T_D_N" if self.to_ground else "K_T_D_L",
+            "GROUP_MA": group,
+            "VALE": tuple(_real(k) for k in self.stiffness),
+        }
 
 
 @dataclass
@@ -181,6 +213,21 @@ class ModalMatrices:
     stiffness: Concept
     mass: Concept
     modes: Concept
+
+
+def _vector(values: Sequence[Real], what: str) -> tuple[float | Number | Param, ...]:
+    if len(values) != 3:
+        raise CommSyntaxError(f"{what} takes three components (X, Y, Z)")
+    return tuple(_real(v) for v in values)
+
+
+def _formula_number(value: float | int | Number) -> str:
+    """A number as text inside a ``FORMULE`` expression."""
+    if isinstance(value, Number):
+        return value.text
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        raise CommSyntaxError(f"expected a number, got {value!r}")
+    return repr(float(value))
 
 
 @dataclass
@@ -345,14 +392,21 @@ class Builder:
         *,
         groups: Groups | None = None,
         modelisation: str | None = None,
+        springs: Groups = (),
+        remote_points: Groups = (),
         name: str | None = None,
     ) -> Model:
-        """``AFFE_MODELE`` with one modeling family (ADR-013).
+        """``AFFE_MODELE`` with one modeling family (ADR-013), plus discrete elements (ADR-022).
 
         ``kind`` is a key of :data:`BODY_KINDS`; its default modeling is used unless
         ``modelisation`` names another one of the same family. ``groups=None`` models every
         element of the mesh (``TOUT='OUI'``), which also gives the skin faces of a solid the
         boundary elements a pressure needs.
+
+        ``springs`` are element groups modeled ``DIS_T`` (give them a :class:`Spring` in
+        :meth:`element_properties`); ``remote_points`` are point-element groups modeled
+        ``DIS_TR``, the master points of :meth:`remote_load`. Later ``AFFE`` occurrences win
+        over ``TOUT='OUI'`` on the same elements, as in ``astest/zzzz144a.comm:36``.
         """
         if kind not in BODY_KINDS:
             raise CommSyntaxError(f"unknown body kind {kind!r} (one of {', '.join(BODY_KINDS)})")
@@ -363,14 +417,24 @@ class Builder:
                 f"{chosen} is not a {kind} modeling (one of {', '.join(allowed)}); "
                 "a model mixes no modeling families (ADR-013)"
             )
+        discrete: dict[str, str] = {}
+        for modeling, named in (("DIS_T", springs), ("DIS_TR", remote_points)):
+            for group in (named,) if isinstance(named, str) else named:
+                if group in discrete:
+                    raise CommSyntaxError(f"group {group!r} is both a spring and a remote point")
+                discrete[group] = modeling
         where = {"TOUT": "OUI"} if groups is None else {"GROUP_MA": _groups(groups)}
+        occ: list[dict[str, Any]] = [{**where, "PHENOMENE": "MECANIQUE", "MODELISATION": chosen}]
+        for modeling in _DISCRETE:
+            named = tuple(g for g, m in discrete.items() if m == modeling)
+            if named:
+                occ.append(
+                    {"GROUP_MA": _groups(named), "PHENOMENE": "MECANIQUE", "MODELISATION": modeling}
+                )
         concept = self._call(
-            "AFFE_MODELE",
-            self._name(name, "MODE"),
-            MAILLAGE=mesh,
-            AFFE={**where, "PHENOMENE": "MECANIQUE", "MODELISATION": chosen},
+            "AFFE_MODELE", self._name(name, "MODE"), MAILLAGE=mesh, AFFE=_one_or_many(occ)
         )
-        model = Model(concept, mesh, chosen)
+        model = Model(concept, mesh, chosen, discrete)
         self._models[concept.name] = model
         return model
 
@@ -415,20 +479,59 @@ class Builder:
     ) -> Concept:
         """``AFFE_CARA_ELEM`` ``COQUE``: thickness per shell group; ``reference_angles`` is
         ``ANGL_REP`` (the in-plane reference direction for stresses and forces)."""
-        if not model.is_shell:
-            raise CommSyntaxError(f"shell properties on a {model.modelisation} model")
-        occ = []
-        for group, t in thickness.items():
-            o: dict[str, Any] = {"GROUP_MA": group, "EPAIS": _real(t)}
-            if reference_angles is not None:
-                o["ANGL_REP"] = tuple(_real(a) for a in reference_angles)
-            occ.append(o)
-        return self._call(
-            "AFFE_CARA_ELEM",
-            self._name(name, "CARA"),
-            MODELE=model.concept,
-            COQUE=_one_or_many(occ),
+        return self.element_properties(
+            model, shells=thickness, reference_angles=reference_angles, name=name
         )
+
+    def element_properties(
+        self,
+        model: Model,
+        *,
+        shells: Mapping[str, Real] | None = None,
+        springs: Mapping[str, Spring] | None = None,
+        reference_angles: tuple[Real, Real] | None = None,
+        name: str | None = None,
+    ) -> Concept:
+        """``AFFE_CARA_ELEM``: shell thickness per group (``COQUE``) and discrete element
+        properties (``DISCRET``).
+
+        Every discrete group of the model must get properties, or the solver stops
+        (``AFFECARAELEM_32``/``_33``): each spring group needs a :class:`Spring`, and each remote
+        point gets a zero ``K_TR_D_N`` stiffness here without asking, as in
+        ``astest/zzzz144a.comm:44`` (it only carries the six degrees of freedom).
+        """
+        shells = dict(shells or {})
+        springs = dict(springs or {})
+        if shells and not model.is_shell:
+            raise CommSyntaxError(f"shell properties on a {model.modelisation} model")
+        if model.is_shell and not shells:
+            raise CommSyntaxError("a shell model needs a thickness per shell group")
+        for group in springs:
+            if model.discrete.get(group) != "DIS_T":
+                raise CommSyntaxError(f"{group!r} is not a spring group of the model")
+        missing = [g for g, m in model.discrete.items() if m == "DIS_T" and g not in springs]
+        if missing:
+            raise CommSyntaxError(f"spring groups without stiffness: {', '.join(missing)}")
+        kw: dict[str, Any] = {}
+        if shells:
+            occ = []
+            for group, t in shells.items():
+                o: dict[str, Any] = {"GROUP_MA": group, "EPAIS": _real(t)}
+                if reference_angles is not None:
+                    o["ANGL_REP"] = tuple(_real(a) for a in reference_angles)
+                occ.append(o)
+            kw["COQUE"] = _one_or_many(occ)
+        discrete = [springs[g].keywords(g) for g in springs]
+        discrete += [
+            {"REPERE": "GLOBAL", "CARA": "K_TR_D_N", "GROUP_MA": g, "VALE": (0.0,) * 6}
+            for g, m in model.discrete.items()
+            if m == "DIS_TR"
+        ]
+        if discrete:
+            kw["DISCRET"] = _one_or_many(discrete)
+        if not kw:
+            raise CommSyntaxError("no element properties to assign")
+        return self._call("AFFE_CARA_ELEM", self._name(name, "CARA"), MODELE=model.concept, **kw)
 
     # -- loads and boundary conditions -------------------------------------------------------
 
@@ -474,6 +577,132 @@ class Builder:
             self._name(name, "PRESS"),
             MODELE=model.concept,
             PRES_REP={"GROUP_MA": _groups(groups), "PRES": _real(value)},
+        )
+
+    def hydrostatic_pressure(
+        self,
+        model: Model,
+        groups: Groups,
+        *,
+        density: float | int | Number,
+        free_surface: float | int | Number,
+        gravity: float | int | Number = 9.81,
+        axis: str = "Z",
+        name: str | None = None,
+    ) -> Concept:
+        """Hydrostatic pressure ``density * gravity * depth`` on faces, zero above the free
+        surface: a ``FORMULE`` of the coordinate ``axis`` (pointing up; the free surface is at
+        ``axis = free_surface``) and ``AFFE_CHAR_MECA_F`` ``PRES_REP``.
+
+        The solver evaluates the formula at the face integration points
+        (``bibfor/load_elem/evalPressureSetFuncPara.F90:93``); the ``max(..., 0)`` form is
+        ``astest/sdnv138c.comm:173``'s.
+        """
+        if axis not in ("X", "Y", "Z"):
+            raise CommSyntaxError(f"axis must be X, Y or Z, not {axis!r}")
+        rho, g, h = (_formula_number(v) for v in (density, gravity, free_surface))
+        formula = self._call(
+            "FORMULE",
+            self._name(None, "P_HYDRO"),
+            result_type="formule",
+            VALE=f"max({rho} * {g} * ({h} - {axis}), 0.0)",
+            NOM_PARA=axis,
+        )
+        return self._call(
+            "AFFE_CHAR_MECA_F",
+            self._name(name, "HYDRO"),
+            MODELE=model.concept,
+            PRES_REP={"GROUP_MA": _groups(groups), "PRES": formula},
+        )
+
+    def remote_load(
+        self,
+        model: Model,
+        point: str,
+        faces: Groups,
+        *,
+        force: Sequence[Real] | None = None,
+        moment: Sequence[Real] | None = None,
+        name: str | None = None,
+    ) -> Concept:
+        """Force and moment at a remote point, spread over node groups without stiffening
+        them: ``LIAISON_RBE3`` (the point's six degrees of freedom are the weighted average of
+        the face translations) and ``FORCE_NODALE`` on the point, in one ``AFFE_CHAR_MECA``.
+
+        ``point`` is a ``remote_points`` group of :meth:`model`; the node group of the same
+        name must exist (:meth:`node_groups`). The faces are node groups; their translations
+        only (``DDL_ESCL='DX-DY-DZ'``) are used, on solids and shells alike, as in
+        ``astest/zzzz144a.comm:61`` and ``astest/ssls136a.comm:59``.
+        """
+        if model.discrete.get(point) != "DIS_TR":
+            raise CommSyntaxError(f"{point!r} is not a remote point of the model")
+        if force is None and moment is None:
+            raise CommSyntaxError("a remote load needs a force or a moment")
+        nodal: dict[str, Any] = {"GROUP_NO": point}
+        if force is not None:
+            nodal.update(zip(("FX", "FY", "FZ"), _vector(force, "force"), strict=True))
+        if moment is not None:
+            nodal.update(zip(("MX", "MY", "MZ"), _vector(moment, "moment"), strict=True))
+        return self._call(
+            "AFFE_CHAR_MECA",
+            self._name(name, "REMOTE"),
+            MODELE=model.concept,
+            LIAISON_RBE3={
+                "GROUP_NO_MAIT": point,
+                "GROUP_NO_ESCL": _groups(faces),
+                "DDL_MAIT": ("DX", "DY", "DZ", "DRX", "DRY", "DRZ"),
+                "DDL_ESCL": "DX-DY-DZ",
+                "COEF_ESCL": 1.0,
+            },
+            FORCE_NODALE=nodal,
+        )
+
+    def rigid_link(self, model: Model, groups: Groups, *, name: str | None = None) -> Concept:
+        """``AFFE_CHAR_MECA`` ``LIAISON_SOLIDE``: the nodes of the element groups move as one
+        rigid body (unlike :meth:`remote_load`, this stiffens them)."""
+        return self._call(
+            "AFFE_CHAR_MECA",
+            self._name(name, "RIGIDE"),
+            MODELE=model.concept,
+            LIAISON_SOLIDE={"GROUP_MA": _groups(groups)},
+        )
+
+    def gravity(
+        self,
+        model: Model,
+        *,
+        acceleration: Real = 9.81,
+        direction: Sequence[Real] = (0.0, 0.0, -1.0),
+        groups: Groups | None = None,
+        name: str | None = None,
+    ) -> Concept:
+        """``AFFE_CHAR_MECA`` ``PESANTEUR``: self-weight, ``acceleration`` (m/s²) along
+        ``direction``; needs a density in the material (``material(rho=...)``)."""
+        kw: dict[str, Any] = {} if groups is None else {"GROUP_MA": _groups(groups)}
+        kw["GRAVITE"] = _real(acceleration)
+        kw["DIRECTION"] = _vector(direction, "direction")
+        return self._call(
+            "AFFE_CHAR_MECA", self._name(name, "PESA"), MODELE=model.concept, PESANTEUR=kw
+        )
+
+    def rotation(
+        self,
+        model: Model,
+        *,
+        speed: Real,
+        axis: Sequence[Real],
+        center: Sequence[Real] = (0.0, 0.0, 0.0),
+        groups: Groups | None = None,
+        name: str | None = None,
+    ) -> Concept:
+        """``AFFE_CHAR_MECA`` ``ROTATION``: centrifugal load of a steady rotation at ``speed``
+        (rad/s) about ``axis`` through ``center``; needs a density in the material."""
+        kw: dict[str, Any] = {} if groups is None else {"GROUP_MA": _groups(groups)}
+        kw["VITESSE"] = _real(speed)
+        kw["AXE"] = _vector(axis, "axis")
+        kw["CENTRE"] = _vector(center, "center")
+        return self._call(
+            "AFFE_CHAR_MECA", self._name(name, "ROTA"), MODELE=model.concept, ROTATION=kw
         )
 
     # -- analyses ----------------------------------------------------------------------------
@@ -584,6 +813,40 @@ class Builder:
             CALC_FREQ={"NMAX_FREQ": count},
         )
         return ModalMatrices(rigi_el, mass_el, nume, rigi, mass, modes)
+
+    def normalize_modes(self, modes: Concept, *, norm: str = "MASS_GENE") -> Concept:
+        """``NORM_MODE`` in place. ``CALC_MODES`` scales each shape to a largest component
+        of 1; ``norm='MASS_GENE'`` scales it to a unit generalized mass instead."""
+        return self._call("NORM_MODE", modes, reuse=True, MODE=modes, NORME=norm)
+
+    def filter_modes(
+        self,
+        modes: Concept,
+        *,
+        frequency_range: tuple[Real, Real] | None = None,
+        min_mass_fraction: Real | None = None,
+        name: str | None = None,
+    ) -> Concept:
+        """``EXTR_MODE``: keep the modes within ``frequency_range`` (Hz), or those whose
+        effective mass fraction (``MASS_EFFE_UN``) is at least ``min_mass_fraction`` in some
+        direction (``bibfor/op/op0168.F90:294``). The cumulative mass fractions are printed in the
+        message file."""
+        if (frequency_range is None) == (min_mass_fraction is None):
+            raise CommSyntaxError("filter by frequency_range or by min_mass_fraction (one)")
+        kw: dict[str, Any] = {"MODE": modes}
+        if frequency_range is not None:
+            kw["FREQ_MIN"] = _real(frequency_range[0])
+            kw["FREQ_MAX"] = _real(frequency_range[1])
+        else:
+            kw["CRIT_EXTR"] = "MASS_EFFE_UN"
+            kw["SEUIL"] = _real(min_mass_fraction)  # type: ignore[arg-type]
+        return self._call(
+            "EXTR_MODE",
+            self._name(name, "MODES_EX"),
+            result_type="mode_meca",
+            FILTRE_MODE=kw,
+            IMPRESSION={"CUMUL": "OUI"},
+        )
 
     # -- post-processing and output ----------------------------------------------------------
 
