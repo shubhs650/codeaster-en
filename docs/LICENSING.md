@@ -21,8 +21,8 @@ Not legal advice. Written so an agent and the owner apply one consistent policy;
 
 ## Obligations checklist (release time)
 
-- `LICENSE` (GPL-3.0) at repo root; `NOTICE.md` listing upstream copyright, AsterStudy dictionary attribution, doc attributions.
-- Wheel includes `LICENSE` and `NOTICE.md`; PyPI metadata `License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)`.
+- `LICENSE` (GPL-3.0) at repo root; `NOTICE.md` listing upstream copyright, AsterStudy dictionary attribution, doc attributions. Both added in task 6.2.
+- Wheel includes `LICENSE` and `NOTICE.md` (under `codeaster_en/_data/`); metadata carries the SPDX expression `License-Expression: GPL-3.0-or-later`, which replaces the `License ::` classifier (setuptools ≥ 77 refuses both together; ADR-020).
 - Each `en/docs/*.md` header complete (see TRANSLATION-GUIDE §5).
 - No EDF logos or document layouts reproduced; text only.
 

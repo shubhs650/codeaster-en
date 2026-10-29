@@ -309,3 +309,17 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 **Why.** …
 
 **Consequences.** …
+
+## ADR-020 — Packaging: version `<upstream tag>.<serial>`, `en/` staged into the wheel, checkout first
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 6.2)
+
+**Context.** PLAN.md task 6.2 asks for a pip-installable `codeaster-en` with `en/` as package data, lazily loaded, and a version scheme `<overlay>.<upstream tag>` decided here. The package lives in `tools/` while its data is the repository's `en/`, which setuptools package data cannot reach from `tools/`. The builder (6.1) reads `en/commands/*.json`, the renderer `en/messages/*.en.json`, labels `en/glossary.yaml`, and the solver needs the `.mo` that task 3.4 builds on demand (ADR-018). Publishing needs credentials and is outward-facing.
+
+**Decision.**
+1. **Version** = `<upstream tag>.<overlay serial>`, PEP 440 release segments only: `17.4.26.1` is overlay build 1 for code_aster 17.4.26. Upstream first (not `<overlay>.<tag>` as PLAN worded it) so `pip install "codeaster-en==17.4.*"` picks the overlay that matches a solver image, and an upstream bump sorts above every build of the previous tag. The serial restarts at 1 on each bump (task 7.1). Local versions (`+17.4.26`) are not used: PyPI refuses them. Single source: `codeaster_en.__version__` (setuptools `dynamic`); a test checks its prefix against `UPSTREAM_VERSION`. Distribution name `codeaster-en`, import name `codeaster_en`.
+2. **Data**: `tools/setup.py` copies a fixed list (`DATA`) into `codeaster_en/_data/` of the build tree (`build_py`) or the sdist release tree (`sdist`), never the source tree; a wheel built from the sdist picks it up through the `_data/**/*` package-data glob. Shipped: `en/commands/*.json` and `*.md`, `en/messages/*.en.json` and `codeaster_en.po`, `en/glossary.yaml`, `catalog-help.yaml`, `doc-ids.yaml`, `UPSTREAM_VERSION`, `LICENSE`, `NOTICE.md`. Left out: `en/astest-index.json` (6 MB, only the draft generator reads it) and `en/guide/`. Wheel ≈ 3.1 MB.
+3. **The `.mo` ships** at `_data/locale/en/LC_MESSAGES/aster_messages.mo`, built at packaging time from the committed `.po` by `codeaster_en/translate/mo.py` (standard library; also the writer behind `caen translate gettext`). A test checks that `.mo` is byte-identical to the one built from `en/messages`, so no `upstream/` is needed to build the wheel. `codeaster_en.data.localedir()` gives the directory to mount (docs/ENGLISH-LOCALE.md).
+4. **Lookup**: `codeaster_en.data` resolves paths only: the checkout's `en/` when the package sits in one (editable install, tests, CI), else `_data/`. Each module reads its files when used, as before; nothing is read at import.
+5. **No publishing** in a session: CI job `package` (`scripts/check-wheel.sh`) builds sdist and wheel, installs the wheel in a clean venv, runs it from outside the checkout (report of `solid_static` equals the golden) and keeps `dist/` as a run artifact. PyPI (or a GitHub release) is an owner step, listed in OWNER-REVIEW-QUEUE.
+
+**Consequences.** A data edit in `en/` needs no packaging step in the repo; a wheel freezes it. `tools/setup.py` must be updated when the runtime starts reading another file (the test `test_shipped_data_covers_runtime_reads` guards the current set). `LICENSE` (GPL-3.0 text, copied from upstream's) and `NOTICE.md` now exist at the root, as LICENSING.md asked. The `License ::` classifier is not set: setuptools ≥ 77 refuses it next to the SPDX `license` expression, which is the newer equivalent.

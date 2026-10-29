@@ -14,6 +14,22 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.2 package codeaster-en — agent
+Done: pip-installable `codeaster-en` (ADR-020). Version `17.4.26.1` = upstream tag + overlay
+serial, single-sourced in `codeaster_en.__version__` (report goldens updated from `0.1.0`).
+`tools/setup.py` stages `en/` (commands JSON + references, messages, `.po`, glossary, help,
+doc IDs), `UPSTREAM_VERSION`, `LICENSE`, `NOTICE.md` and a `.mo` built from the committed `.po`
+into `codeaster_en/_data/` of the wheel and sdist. New `codeaster_en.data` resolves paths
+(checkout first, then wheel); `comm`, `mess`, `results`, `report` use it instead of
+`parents[3]`. `codeaster_en.translate.mo` (stdlib `.po` reader and `.mo` writer) now backs
+`caen translate gettext` too. `LICENSE` (GPL-3.0 text from upstream) and `NOTICE.md` added.
+`scripts/check-wheel.sh` + CI job `package`: `python -m build`, clean venv, `from codeaster_en
+import report`, `.mo` loads, `caen report` on `solid_static` from the wheel equals the golden;
+`dist/` kept as a run artifact. `tests/test_package.py` (4 tests). Wheel 3.1 MB, 584 data files.
+Open: publishing (PyPI or GitHub release) is an owner step, not done (OWNER-REVIEW-QUEUE).
+Decisions: ADR-020.
+Needs owner: PyPI account/trusted publisher if a public release is wanted.
+
 ## 2026-10-29 — 6.1 .comm builder — agent
 Done: `codeaster_en.comm` (`tools/codeaster_en/comm/`): `CommandFile` (French names, every call
 checked against `en/commands/*.json` when added: unknown command/keyword, `BLOC` conditions with

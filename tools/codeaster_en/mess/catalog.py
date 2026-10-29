@@ -29,9 +29,10 @@ from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 
+from codeaster_en import data
 from codeaster_en.placeholders import parse as parse_placeholders
 
-DEFAULT_MESSAGES_DIR = Path(__file__).resolve().parents[3] / "en" / "messages"
+DEFAULT_MESSAGES_DIR = data.messages_dir()
 
 _WS_RUN = re.compile(r"\s+")
 _INT = r"[ \t]*[-+]?\d+"

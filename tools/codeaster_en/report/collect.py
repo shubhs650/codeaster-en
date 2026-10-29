@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 
 import codeaster_en
-from codeaster_en import mess
+from codeaster_en import data, mess
 from codeaster_en import results as results_module
 from codeaster_en.mess.render import EnglishLog
 from codeaster_en.report import comm as comm_module
@@ -401,11 +401,7 @@ class _Collector:
     def upstream_version(self) -> str | None:
         if self.english is not None and self.english.upstream:
             return self.english.upstream
-        pinned = Path(codeaster_en.__file__).resolve().parents[2] / "UPSTREAM_VERSION"
-        if pinned.is_file():
-            lines = [ln.strip() for ln in pinned.read_text().splitlines()]
-            return next((ln for ln in lines if ln and not ln.startswith("#")), None)
-        return None
+        return data.upstream_version()
 
     def title_block(self) -> dict[str, Any]:
         tb = dict(self.run_json.get("title_block", {}))

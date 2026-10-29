@@ -8,7 +8,7 @@
 | Date | 2026-10-23 |
 | Solver | code_aster 17.4.22 |
 | English overlay pinned to | code_aster 17.4.26 |
-| Report generator | codeaster-en 0.1.0 |
+| Report generator | codeaster-en 17.4.26.1 |
 | Units | SI-mm (mm, N, MPa, t, s) |
 
 Cantilever beam L 400 mm, section 20 mm (Y) x 10 mm (Z), clamped at X = 0, first six natural frequencies (five bending, one torsion). HEXA20 mesh, linear elastic steel.

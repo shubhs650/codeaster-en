@@ -11,6 +11,10 @@ messages itself, what stays French, and how the overlay keeps the catalog curren
 | `en/messages/codeaster_en.po` | yes, generated | `caen translate gettext` | reviewable gettext catalog, domain `aster_messages` |
 | `<localedir>/en/LC_MESSAGES/aster_messages.mo` | no | `caen translate gettext --mo <localedir>` | what the solver loads |
 
+The `codeaster-en` wheel ships the `.mo` too, built from the committed `.po` (ADR-020):
+`python -c "from codeaster_en import data; print(data.localedir())"` prints the directory to
+mount below.
+
 The `.po` has 6,813 entries: every message of `en/messages` with an English text, except the 15
 bare strings upstream never passes to `_()` and the 7 log-structure lines kept French on purpose
 (below), plus the four box footers ("This is a warning. …").
