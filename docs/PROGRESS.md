@@ -14,7 +14,7 @@ Needs owner: …
 
 ---
 
-## 2026-10-26 — 0.6 glossary seed — agent
+## 2026-10-29 — 0.6 glossary seed — agent
 Done: `en/glossary.yaml` 250 → 353 entries, all `proposed`. (1) Every Tier 1/2 identifier in
 `docs/COMMAND-SET.md` that had no entry (70: 5 commands, 51 keywords, 13 values, 1 concept), each
 with `source` (upstream catalog file:line at 17.4.26), English drafted from the catalog `fr=`
@@ -33,9 +33,23 @@ Decisions: none. Not added: message-family names (task 1.3) and COMMAND-SET's ou
 Findings: `SPHERE`/`BANDE` are values of `CREA_GROUP_MA/NO` `OPTION`; `MASS_EFFE_UN` is a
 `CRIT_EXTR` value; GLOBAL_DICT's `SANS_MAILLE`/`SANS_NOEUD` are absent from 17.4.26; the owner's
 upload was a corporate-proxy block page, so the file was fetched from the URL it named.
-Needs owner: engineer review (PR labelled `needs-engineer-review`): AFFE_VARC/NOM_VARC ("external
-state variable" vs upstream's "command variable"), PM_PB, K_T_D_N, VITESSE, CRITERE, and the
-GLOBAL_DICT disagreements (UNITE "Filename" vs our "logical unit", PESANTEUR, PRECISION, INST).
+Needs owner: nothing blocking (ADR-010; merged on green CI). Review items queued in
+`docs/OWNER-REVIEW-QUEUE.md`: AFFE_VARC/NOM_VARC ("external state variable" vs upstream's
+"command variable"), the TODO(verify) entries, BANDE, and GLOBAL_DICT disagreements.
+Phase 0 "done when" met: clone + submodule, `pip install -e tools[dev]`, pytest and
+`caen validate` all pass in the cloud sandbox.
+
+## 2026-10-29 — ops: switch to full autodrive — agent
+Done: ADR-010 (owner's instruction, 2026-10-29). Updated `docs/cloud/PROJECT-INSTRUCTIONS.md`
+(serial threads, self-merge on green CI, agent-made decisions, short stop list), `CLAUDE.md` §3
+(session routine step 6, "When to stop and ask"), `docs/PLAN.md` (autodrive note on owner-review
+criteria), `docs/SESSION-PROMPTS.md`, `docs/cloud/CLOUD-SETUP.md` (E2 and Part G superseded).
+Added `docs/OWNER-REVIEW-QUEUE.md` for asynchronous, non-blocking owner review and owner-only inputs.
+Open: PR #3 (0.6 glossary seed) is open with `needs-engineer-review`; under ADR-010 it is merged
+once CI is green.
+Decisions: ADR-010.
+Needs owner: nothing blocking; see `docs/OWNER-REVIEW-QUEUE.md`.
+
 
 ## 2026-10-23 — 1.5 inventory report — agent
 Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) writes §7 of

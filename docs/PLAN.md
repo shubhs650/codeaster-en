@@ -2,6 +2,8 @@
 
 Phases are sequential; tasks inside a phase can usually run in parallel across sessions unless marked `after:`. Every task has an acceptance criterion an agent can check. Task IDs are stable; reference them in PROGRESS and PRs.
 
+**Autodrive (ADR-010, 2026-10-29).** Tasks run serially and the agent merges its own PRs. Where an acceptance criterion says "reviewed by owner", "owner sign-off" or `reviewed`, the agent meets it for progress purposes with a recorded self-review and an entry in `docs/OWNER-REVIEW-QUEUE.md`; the artefact keeps status `assisted` until the owner reviews it. Tasks owned by "Owner" (attaching files) are skipped and queued, not waited on. Phase gates are checked and passed by the agent.
+
 Scope of translation is set by `docs/COMMAND-SET.md`: **Tier 1** (alpha: linear static, solids + shells) first, **Tier 2** (modal + extra loads) second, **Tier 3** (nonlinear, contact, thermal) only when ClearFEA pulls for it.
 
 ---

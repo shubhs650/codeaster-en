@@ -107,6 +107,21 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-010 — Full autodrive: serial tasks, agent self-merge, agent decisions
+**Date:** 2026-10-29 · **Status:** accepted (owner, 2026-10-29)
+
+**Decision.** From 2026-10-29 the project runs without the owner in the loop. Tasks from `docs/PLAN.md` run serially, one thread at a time. Each thread merges its own PR (squash) once CI is green; no PR is left open for human review. ADRs, phase transitions, COMMAND-SET revisions and CI changes are decided by the agent, with the rationale recorded here or in PROGRESS. The owner is asked only for extremely urgent or important input: irreversible changes outside the repo (`upstream/`, mirror, `main` history), credentials/accounts/paid API use, security, or anything contradicting PLAN.md goals or CLAUDE.md §2. Supersedes the merge, concurrency and "owner's go-ahead" rules in `docs/cloud/PROJECT-INSTRUCTIONS.md` and the E2 prompt in `docs/cloud/CLOUD-SETUP.md`.
+
+**Why.** The owner (Shubham) is not available to merge PRs or answer gate questions ("I won't be available to manually merge GitHub PR that needs human review… autodrive all development phase by phase, task by task serially. Merge the PR yourself."). Serial execution removes merge conflicts between threads, and green CI plus branch protection stays the hard guard on `main`.
+
+**Consequences.**
+- Invariants unchanged: `upstream/` is read-only; French command and keyword names are never renamed; only the owner sets `status: reviewed`. Agent work stays `machine`/`assisted`.
+- Owner-review acceptance criteria (2.3 critical four, 2.4, 2.5, 3.3, 5.3, 6.3) are met for progress by a recorded agent self-review plus an entry in `docs/OWNER-REVIEW-QUEUE.md`. The "Definition of ready" items that require `reviewed` remain open until the owner reviews; everything else proceeds.
+- Owner-only inputs (e.g. U4 PDFs for 5.1, an API key for 3.2 bulk runs) are queued; the agent does the parts it can (in-session translation) and moves on.
+- `needs-engineer-review` label is retired as a merge blocker; existing open PRs carrying it are merged once CI is green.
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>

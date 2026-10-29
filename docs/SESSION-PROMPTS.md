@@ -9,8 +9,8 @@ Read CLAUDE.md, docs/PLAN.md and the last three entries of docs/PROGRESS.md.
 Your task is <ID> — <title> from PLAN.md. Work on branch task/<id>-<slug>.
 <task-specific context>
 When done: run ruff, pytest and `caen validate`; append a PROGRESS entry; open a PR
-titled "<id>: <title>" describing changes, verification, and anything I must review by hand.
-Do not start another task.
+titled "<id>: <title>" describing changes and verification; list anything worth an engineer's eye in
+docs/OWNER-REVIEW-QUEUE.md. Merge it yourself once CI is green (ADR-010). Do not start another task.
 ```
 
 ---

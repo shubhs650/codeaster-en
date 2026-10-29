@@ -34,15 +34,18 @@ You are working in **codeaster-en**, an English overlay for the code_aster finit
 2. Check out a branch `task/<phase>-<id>-<slug>` from `main`.
 3. Do the task. Keep PRs single-purpose. Prefer many small commits with conventional messages (`feat(messages): …`, `docs(commands): …`, `tools(extract): …`).
 4. Run `ruff check`, `ruff format`, `pytest`, `caen validate` before finishing.
-5. Append the PROGRESS entry. Open the PR with: what changed, how it was verified, anything the owner must review by hand (translations needing an engineer's eye are flagged `needs-engineer-review`).
-6. Stop. Don't start the next task in the same session unless told to.
+5. Append the PROGRESS entry. Open the PR with: what changed, how it was verified, and anything worth an engineer's eye (also listed in `docs/OWNER-REVIEW-QUEUE.md`).
+6. Merge your own PR (squash) once CI is green (full autodrive, ADR-010). Then stop; the coordinator starts the next task.
 
 ### When to stop and ask
 
-- A task needs a file or PDF that isn't in the repo.
-- A translation choice would change the glossary meaning of a term already marked `reviewed`.
-- You'd need to touch `upstream/`.
-- The upstream structure differs from what `docs/ARCHITECTURE.md` §3 assumes (paths moved, catalog format changed). Record what you found in PROGRESS and ask before adapting the tooling.
+The project runs in full autodrive (ADR-010, `docs/cloud/PROJECT-INSTRUCTIONS.md`). Decide, record the rationale in `docs/DECISIONS.md` or PROGRESS, and continue. Stop for the owner only for:
+
+- Anything that would need `upstream/` (or the mirror repo, or `main`'s history) to change.
+- Credentials, accounts, paid API usage, or security issues.
+- A choice that would contradict `docs/PLAN.md` goals or a hard rule in §2.
+
+A missing file or PDF is not a stop: record it in PROGRESS and `docs/OWNER-REVIEW-QUEUE.md` and move on. Never change a glossary term marked `reviewed`; never set `reviewed` yourself.
 
 ## 4. Layout
 
