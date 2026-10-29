@@ -206,7 +206,7 @@
 - {fr: NUME_ORDRE,    en: step index,                kind: keyword, note: "Index of a step stored in a result. Selects a step instead of INST.", status: machine}
 - {fr: TYPE_CHAM,     en: field type,                kind: keyword, note: "Field type as '<location>_<quantity>_<R|C|F>', e.g. 'NOEU_DEPL_R' (CREA_CHAMP, LIRE_CHAMP).", status: machine}
 - {fr: TYPE_RESU,     en: result type,               kind: keyword, note: "Type of result to produce, values per command: CALC_MODES 'DYNAMIQUE' | 'MODE_FLAMB' | 'GENERAL'; CREA_RESU 'EVOL_ELAS' | ...", status: machine}
-- {fr: VERI_MAIL,     en: mesh checks,               kind: keyword, note: "LIRE_MAILLAGE: mesh checks on read: VERIF 'OUI' (default) | 'NON', and APLAT (default 0.001). TODO(verify) what APLAT measures, against U4.21.01.", status: machine}
+- {fr: VERI_MAIL,     en: mesh checks,               kind: keyword, note: "LIRE_MAILLAGE: mesh checks on read: VERIF 'OUI' (default) | 'NON', and APLAT (default 0.001), the flatness threshold (ratio of shortest to longest node-to-node distance of an element; upstream bibfor/modelisa/chckma.F90).", status: machine}
 
 # ---------- values ----------
 - {fr: OUI,         en: yes,                     kind: value, asterstudy: "Yes", status: machine}
@@ -295,7 +295,7 @@
 - {fr: CREA_GROUP_NO, en: create node groups, kind: keyword, note: "DEFI_GROUP factor keyword.", source: "code_aster/Cata/Commands/defi_group.py:199", status: machine}
 - {fr: UNION, en: union of groups, kind: keyword, note: "DEFI_GROUP: new group = union of the listed groups.", source: "code_aster/Cata/Commands/defi_group.py:70", status: machine}
 - {fr: INTERSEC, en: intersection of groups, kind: keyword, note: "DEFI_GROUP: new group = intersection of the listed groups.", source: "code_aster/Cata/Commands/defi_group.py:69", status: machine}
-- {fr: DIFFE, en: difference of groups, kind: keyword, note: "DEFI_GROUP: new group = first listed group minus the others. TODO(verify) order semantics against U4.22.01.", source: "code_aster/Cata/Commands/defi_group.py:71", status: machine}
+- {fr: DIFFE, en: difference of groups, kind: keyword, note: "DEFI_GROUP: new group = first listed group minus the others (order matters; upstream bibfor/soustruc/sscgma.F90, DIFFE branch).", source: "code_aster/Cata/Commands/defi_group.py:71", status: machine}
 - {fr: COQU_VOLU, en: solid elements from shell surfaces, kind: keyword, note: "CREA_MAILLAGE. fr: 'Creation de mailles volumiques à partir de mailles surfaciques'.", source: "code_aster/Cata/Commands/crea_maillage.py:97", status: machine}
 - {fr: LINE_QUAD, en: linear to quadratic, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage linéaire -> quadratique'.", source: "code_aster/Cata/Commands/crea_maillage.py:139", status: machine}
 - {fr: QUAD_LINE, en: quadratic to linear, kind: keyword, note: "CREA_MAILLAGE. fr: 'Passage quadratique -> linéaire'.", source: "code_aster/Cata/Commands/crea_maillage.py:172", status: machine}
@@ -394,3 +394,12 @@
 - {fr: CRITERE, en: tolerance type, kind: keyword, note: "'RELATIF' | 'ABSOLU': how PRECISION is applied when matching INST values.", source: "code_aster/Cata/Commands/stat_non_line.py:364", asterstudy: "Criterion", status: machine}
 - {fr: CONCEPT, en: result object, kind: keyword, note: "IMPR_RESU: input objects (model, material field, loads...) to print their data fields, to check assignments visually.", source: "code_aster/Cata/Commands/copier.py:56", asterstudy: "Concept", status: machine}
 - {fr: SOUS_TITRE, en: subtitle, kind: keyword, note: "Subtitle text of a graph or printed result.", source: "code_aster/Cata/Commands/impr_resu.py:195", asterstudy: "Subtitle", status: machine}
+- {fr: DETR_GROUP_MA, en: delete element groups, kind: keyword, note: "DEFI_GROUP factor keyword (DETR = détruire); processed before CREA_GROUP_MA/NO in the same call.", source: "code_aster/Cata/Commands/defi_group.py:55", status: proposed}
+- {fr: DETR_GROUP_NO, en: delete node groups, kind: keyword, note: "DEFI_GROUP factor keyword (DETR = détruire); processed before CREA_GROUP_MA/NO in the same call.", source: "code_aster/Cata/Commands/defi_group.py:58", status: proposed}
+- {fr: CREA_POI1, en: create point elements, kind: keyword, note: "CREA_MAILLAGE. fr: 'Création de mailles de type POI1 à partir de noeuds' (POI1 = one-node point element, e.g. for DISCRET).", source: "code_aster/Cata/Commands/crea_maillage.py:68", status: proposed}
+- {fr: RESTREINT, en: restrict mesh, kind: keyword, note: "CREA_MAILLAGE. fr: 'Restreindre un maillage à des groupes de mailles': keep only the listed element groups and their nodes.", source: "code_aster/Cata/Commands/crea_maillage.py:88", status: proposed}
+- {fr: APLAT, en: flatness threshold, kind: keyword, note: "LIRE_MAILLAGE VERI_MAIL (aplati = flattened): elements whose shortest/longest node-to-node distance ratio is below it are reported as degenerate.", source: "code_aster/Cata/Commands/lire_maillage.py:37", status: proposed}
+- {fr: GROUP_MA_PEAU, en: boundary element groups, kind: keyword, note: "MODI_MAILLAGE ORIE_PEAU: the boundary (skin) element groups to orient outward.", source: "code_aster/Cata/Commands/modi_maillage.py:115", status: proposed}
+- {fr: GROUP_MA_INTERNE, en: inside element groups, kind: keyword, note: "MODI_MAILLAGE ORIE_PEAU: elements that define the inside of a boundary group lying between elements on both sides.", source: "code_aster/Cata/Commands/modi_maillage.py:116", status: proposed}
+- {fr: NOEUD_QUART, en: quarter-point nodes, kind: value, note: "MODI_MAILLAGE MODI_MAILLE OPTION: moves mid-side nodes next to a crack front to the quarter points (Barsoum elements).", source: "code_aster/Cata/Commands/modi_maillage.py:136", status: proposed}
+- {fr: ABSC_CURV, en: curvilinear abscissa, kind: keyword, note: "Distance measured along a line (abscisse curviligne). MODI_MAILLAGE ABSC_CURV computes it on a line of elements; POST_RELEVE_T tables report it.", source: "code_aster/Cata/Commands/modi_maillage.py:172", status: proposed}

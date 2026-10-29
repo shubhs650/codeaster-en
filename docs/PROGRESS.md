@@ -14,6 +14,30 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 2.3a mesh command references (LIRE_MAILLAGE, MODI_MAILLAGE, DEFI_GROUP, CREA_MAILLAGE) — agent
+Done: the four 2.2 drafts rewritten as full references, `status: assisted`: purpose paragraph,
+every keyword row with meaning and "when to use", the order in which the solver applies the
+keywords (DEFI_GROUP, MODI_MAILLAGE), 4–7 patterns each lifted from astest or our fixtures
+(cited file:line, incl. `.mess` excerpts), and pitfalls. Evidence: catalogs, the
+`CodeCommands/*.py` implementations, the Fortran they call (`op0001`/`chckma`, `op0104`/
+`sscgma`/`sscgno`, `op0154`/`orilgm`/`mesh_modification_module`, `op0167`/`rdtmai`/`cmcovo`/
+`crea_maillage_module`), message texts (`en/messages/*.en.json`, French) and the fixture logs.
+Self-review (PLAN.md acceptance, ADR-010): every claim re-checked against its cited source;
+claims with no source are `TODO(verify)` (11 in total, mostly joint, solid-shell and beam-section options
+outside Tier 1 use). Glossary: 9 new entries (`proposed`: `DETR_GROUP_MA`, `DETR_GROUP_NO`,
+`CREA_POI1`, `RESTREINT`, `APLAT`, `GROUP_MA_PEAU`, `GROUP_MA_INTERNE`, `NOEUD_QUART`,
+`ABSC_CURV`); the `TODO(verify)` notes of `VERI_MAIL` (APLAT) and `DIFFE` resolved from source.
+Machine drafts regenerated (unchanged). ruff, pytest (250 passed), `caen validate` green.
+Findings for later tasks: `DEFI_GROUP` and `MODI_MAILLAGE` always return their input mesh
+(in place, even without `reuse=`); `DEFI_GROUP CREA_GROUP_MA TYPE_MAILLE` that matches nothing
+creates the group unfiltered while warning that it is empty (looks like an upstream bug, listed
+in OWNER-REVIEW-QUEUE); `AFFE_CHAR_MECA` checks `PRES_REP`/`FACE_IMPO`/`EFFE_FOND` normals
+(`chveno.F90`) — relevant to 2.3c; `CREA_MAILLAGE RESTREINT` drops node groups by default.
+Open: 2.3 batch (b) `AFFE_MODELE`, `DEFI_MATERIAU`, `AFFE_MATERIAU`, `AFFE_CARA_ELEM`.
+Decisions: none (no ADR). Fixture files are cited as pattern sources alongside astest.
+Needs owner: nothing blocking; review items in OWNER-REVIEW-QUEUE.
+Branch is `claude/project-thread-64a5ae` (session-assigned).
+
 ## 2026-10-29 — 2.2 command reference draft generator — agent
 Done: `caen translate command [CMD...] [--tier N] [--all-keywords] [--force]
 [--list-untranslated]` (`tools/codeaster_en/translate/command.py`, template
