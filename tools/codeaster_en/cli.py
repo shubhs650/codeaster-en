@@ -28,6 +28,7 @@ from codeaster_en.translate import command as command_drafts
 from codeaster_en.translate import gettext_po
 from codeaster_en.translate import messages as messages_translate
 from codeaster_en.upstream import bump as bump_module
+from codeaster_en.upstream import scheduled as scheduled_module
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
 from codeaster_en.validate import messages as messages_validator
@@ -753,6 +754,69 @@ def upstream_bump(
         typer.echo(f"  wrote {result.report_path}")
     if result.deleted:
         typer.echo(f"  deleted {len(result.deleted)} file(s) of removed commands/families")
+
+
+@upstream_app.command("check")
+def upstream_check(
+    to: Annotated[str, typer.Option("--to", help="Tag of the mirror to compare the pin with.")] = (
+        "stable"
+    ),
+) -> None:
+    """Print status=newer|current|older and the resolved tags, as key=value lines (task 7.2)."""
+    try:
+        result = scheduled_module.check(_repo_root(), to)
+    except (bump_module.BumpError, OSError) as exc:
+        typer.echo(f"upstream check: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    typer.echo("\n".join(result.lines()))
+
+
+@upstream_app.command("stale")
+def upstream_stale() -> None:
+    """List the messages to re-translate (stale or without English), as Markdown."""
+    typer.echo(
+        scheduled_module.render_stale(scheduled_module.stale_items(_repo_root()), limit=None),
+        nl=False,
+    )
+
+
+@upstream_app.command("pr-body")
+def upstream_pr_body(
+    report: Annotated[Path, typer.Option(help="Diff report written by `caen upstream bump`.")],
+    previous: Annotated[str, typer.Option(help="Tag pinned before the bump.")],
+    target: Annotated[str, typer.Option(help="Tag pinned by the bump.")],
+    target_commit: Annotated[str, typer.Option(help="Commit of the new tag.")],
+    validate_log: Annotated[
+        Path | None, typer.Option(help="Output of `caen validate` on the bumped tree.")
+    ] = None,
+    validate_ok: Annotated[bool, typer.Option(help="Whether `caen validate` passed.")] = True,
+    run_url: Annotated[str, typer.Option(help="URL of the workflow run.")] = "",
+    dry_run: Annotated[
+        bool, typer.Option("--dry-run", help="The bump was a dry run (en/ not rewritten).")
+    ] = False,
+    tests_log: Annotated[
+        Path | None, typer.Option(help="Output of `pytest -rfE` on the bumped tree.")
+    ] = None,
+    tests_ok: Annotated[bool, typer.Option(help="Whether pytest passed.")] = True,
+) -> None:
+    """Print the description of the scheduled bump PR (task 7.2)."""
+    root = _repo_root()
+    result = scheduled_module.Check(previous, None, target, target_commit, "newer")
+    typer.echo(
+        scheduled_module.pr_body(
+            result,
+            report.read_text(encoding="utf-8"),
+            scheduled_module.stale_items(root),
+            validate_ok=validate_ok,
+            validate_log=validate_log.read_text(encoding="utf-8") if validate_log else "",
+            report_path=report.as_posix(),
+            run_url=run_url,
+            dry_run=dry_run,
+            tests_ok=tests_ok if tests_log else None,
+            tests_log=tests_log.read_text(encoding="utf-8") if tests_log else "",
+        ),
+        nl=False,
+    )
 
 
 app.add_typer(_stub("bundle", "5.5", "Package the overlay data for ClearFEA."), name="bundle")

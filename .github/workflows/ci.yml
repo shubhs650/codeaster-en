@@ -4,6 +4,9 @@ on:
   pull_request:
   push:
     branches: [main]
+  # upstream-bump.yml (task 7.2) dispatches this on its branch: a push or PR made with
+  # GITHUB_TOKEN does not trigger pull_request/push runs.
+  workflow_dispatch:
 
 permissions:
   contents: read

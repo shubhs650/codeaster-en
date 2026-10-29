@@ -1,0 +1,144 @@
+name: upstream-bump
+
+# Task 7.2 (ADR-024): once a month, move the upstream/ pin to the mirror's `stable` tag with
+# `caen upstream bump` (task 7.1, ADR-023) and open a PR with the diff report and the list of
+# stale messages to re-translate.
+# - Nothing happens when `stable` resolves to the pinned tag (the usual case) or to an older
+#   one, or when a branch upstream/bump-<tag> already exists (an earlier run's PR is open).
+# - Pushes and PRs made with GITHUB_TOKEN start no other workflow, so the run dispatches ci.yml
+#   and solver-fixtures.yml on the new branch itself. solver-fixtures then opens a
+#   "fixtures: regenerate" PR into the bump branch: after a bump CI stays red until those
+#   outputs (upstream_version) and the placeholder-changed messages are redone.
+# - If the repository does not let Actions open PRs, the branch is pushed and an issue is
+#   opened with the same body instead.
+# - workflow_dispatch: `to` picks another mirror tag; `dry_run` only writes the report and the
+#   PR body to the run summary (nothing is pushed).
+
+on:
+  schedule:
+    - cron: "17 5 3 * *" # 05:17 UTC on the 3rd of every month
+  workflow_dispatch:
+    inputs:
+      to:
+        description: "Mirror tag to bump to (a version such as 17.5.8, or a moving tag)"
+        type: string
+        default: stable
+      dry_run:
+        description: "Only report: write the diff and PR body to the run summary"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: upstream-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write # dispatch ci.yml and solver-fixtures.yml on the bump branch
+    env:
+      TO: ${{ inputs.to || 'stable' }}
+      DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+      GH_TOKEN: ${{ github.token }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true # upstream/ (shallow per .gitmodules)
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: tools/pyproject.toml
+
+      - name: Install system libraries for WeasyPrint (report PDF) and OSMesa (report images)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libpango-1.0-0 libpangoft2-1.0-0 libosmesa6
+
+      - name: Install tools
+        run: pip install -e "tools[dev]"
+
+      - name: Compare the pin with the mirror
+        id: check
+        run: |
+          caen upstream check --to "$TO" > "$RUNNER_TEMP/check.env"
+          tee -a "$GITHUB_OUTPUT" < "$RUNNER_TEMP/check.env"
+          . "$RUNNER_TEMP/check.env"
+          branch="upstream/bump-${target}"
+          echo "branch=${branch}" >> "$GITHUB_OUTPUT"
+          go=false
+          if [ "$status" != newer ]; then
+            echo "::notice::Pin ${current}, mirror ${TO} = ${target}: ${status}, nothing to do."
+          elif git ls-remote --exit-code --heads origin "$branch" > /dev/null; then
+            echo "::notice::Branch ${branch} already exists (earlier bump not merged yet), nothing to do."
+          else
+            go=true
+          fi
+          echo "go=${go}" >> "$GITHUB_OUTPUT"
+
+      - name: Bump
+        if: steps.check.outputs.go == 'true'
+        id: bump
+        env:
+          CURRENT: ${{ steps.check.outputs.current }}
+          TARGET: ${{ steps.check.outputs.target }}
+          TARGET_COMMIT: ${{ steps.check.outputs.target_commit }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898+github-actions[bot]@users.noreply.github.com"
+          if [ "$DRY_RUN" = true ]; then
+            report="$RUNNER_TEMP/${CURRENT}-${TARGET}.md"
+            caen upstream bump --to "$TARGET" --dry-run --report "$report"
+          else
+            report="docs/upstream-diffs/${CURRENT}-${TARGET}.md"
+            caen upstream bump --to "$TARGET"
+          fi
+          echo "report=${report}" >> "$GITHUB_OUTPUT"
+          # Failures are expected after a bump (ADR-023/024): record them for the PR body.
+          flags=(--run-url "$RUN_URL" --validate-log "$RUNNER_TEMP/validate.log")
+          caen validate > "$RUNNER_TEMP/validate.log" 2>&1 || flags+=(--no-validate-ok)
+          cat "$RUNNER_TEMP/validate.log"
+          if [ "$DRY_RUN" = true ]; then
+            flags+=(--dry-run)
+          else
+            python -m pytest -q -rfE --no-header -p no:cacheprovider > "$RUNNER_TEMP/pytest.log" 2>&1 \
+              || flags+=(--no-tests-ok)
+            tail -n 5 "$RUNNER_TEMP/pytest.log"
+            flags+=(--tests-log "$RUNNER_TEMP/pytest.log")
+          fi
+          caen upstream pr-body --report "$report" --previous "$CURRENT" --target "$TARGET" \
+            --target-commit "$TARGET_COMMIT" "${flags[@]}" > "$RUNNER_TEMP/body.md"
+          cat "$RUNNER_TEMP/body.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit, push and open the PR
+        if: steps.check.outputs.go == 'true' && env.DRY_RUN != 'true'
+        env:
+          BRANCH: ${{ steps.check.outputs.branch }}
+          CURRENT: ${{ steps.check.outputs.current }}
+          TARGET: ${{ steps.check.outputs.target }}
+        run: |
+          git checkout -b "$BRANCH"
+          git add -A upstream UPSTREAM_VERSION CONTAINER_IMAGE en docs tools/codeaster_en/__init__.py
+          git commit -s -q -m "chore(upstream): bump upstream to ${TARGET} (scheduled)" \
+            -m "From ${CURRENT}. Generated by caen upstream bump in ${RUN_URL}."
+          git push -q origin "$BRANCH"
+          title="upstream: bump to ${TARGET} (scheduled)"
+          if url="$(gh pr create --base "${{ github.ref_name }}" --head "$BRANCH" \
+                --title "$title" --body-file "$RUNNER_TEMP/body.md")"; then
+            echo "::notice::Opened ${url}"
+          else
+            echo "::warning::Actions may not open PRs here; opening an issue instead."
+            gh issue create --title "$title: open the PR from branch ${BRANCH}" \
+              --body-file "$RUNNER_TEMP/body.md"
+          fi
+          gh workflow run ci.yml --ref "$BRANCH"
+          gh workflow run solver-fixtures.yml --ref "$BRANCH" -f english=true
