@@ -14,6 +14,28 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.4a Tier 2 modal command references — agent
+Done: first of three PRs for PLAN 6.4. Machine drafts for the 10 new Tier 2 commands
+(`caen translate command --tier 2`; 57 Tier 2 `fr=` strings added to `en/catalog-help.yaml`, 10
+U4 IDs to `en/doc-ids.yaml`, `proposed`). Seven rewritten as full references, `status:
+assisted`, 2.3 format: `CALC_MODES`, `NORM_MODE`, `EXTR_MODE`, `ASSEMBLAGE`, `CALC_MATR_ELEM`,
+`NUME_DDL`, `ASSE_MATRICE`. Evidence: catalogs, `MacroCommands/Modal/calc_modes_*.py`,
+`assemblage_ops.py`, `calc_matr_elem_ops.py`, `nume_ddl_ops.py`, `asse_matrice_ops.py`, Fortran
+(`op0037`, `op0045`, `op0168`, `vpinis`, `vpfopr`, `vppara`, `vpnorm`, `vpcntl`, `vppost`,
+`vpstor`), message texts and the modal fixture log. Self-review: every file:line re-printed; 11
+`TODO(verify)` left. Glossary: 12 new `proposed` entries (`VERI_MODE`, `STOP_ERREUR`, `STURM`,
+`SEUIL_FREQ`, `DIM_SOUS_ESPACE`, `STOP_BANDE_VIDE`, `AMELIORATION`, `MODE_SIGNE`, `AVEC_CMP`,
+`SANS_CMP`, `MATR_ELEM`, `CHAR_CINE`), 500 entries.
+Findings: default `CALC_MODES` shapes have a unit largest component, not unit generalized mass
+(`vppara.F90:130`); `CALC_MODES` has no `MODELE` form (COMMAND-SET says it has); kinematic
+supports work for modal analysis through `ASSE_MATRICE CHAR_CINE` (`sdll02b`), although the 6.1
+builder doc says static only; `VERI_MODE` failure is `ALGELINE2_74` raised as a solver error.
+Open: 6.4b (`AFFE_CHAR_MECA_F` reference + builder methods for remote force/moment, hydrostatic
+pressure, centrifugal load, springs, `NORM_MODE`) and 6.4c (fixtures, report). `THER_LINEAIRE`
+and `AFFE_CHAR_THER` (COMMAND-SET Tier 2 thermal row, outside PLAN 6.4's list) stay `machine`.
+Decisions: none (no ADR).
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-29 — 6.3 ClearFEA adapter spec — agent
 Done: `docs/CLEARFEA-INTEGRATION.md` rewritten against the built code (signatures checked with
 `inspect`): builder method table (6.1), `job`, `mess`, `results`, `report`, `data`, version
