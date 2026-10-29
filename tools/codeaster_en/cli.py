@@ -2,8 +2,8 @@
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
 ``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``,
-``caen mess parse|translate``, ``caen results fields|extrema|reactions|modal`` and
-``caen report``. The other
+``caen mess parse|translate``, ``caen results fields|extrema|reactions|modal``,
+``caen report`` and ``caen upstream bump``. The other
 groups and commands are stubs that name the PLAN.md task which will fill them in.
 """
 
@@ -27,6 +27,7 @@ from codeaster_en.mess import render as mess_render
 from codeaster_en.translate import command as command_drafts
 from codeaster_en.translate import gettext_po
 from codeaster_en.translate import messages as messages_translate
+from codeaster_en.upstream import bump as bump_module
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
 from codeaster_en.validate import messages as messages_validator
@@ -697,10 +698,63 @@ def report(
         typer.echo(f"report: {warning}", err=True)
 
 
-app.add_typer(
-    _stub("upstream", "7.1", "Bump the pinned upstream tag and diff extracted data."),
-    name="upstream",
+upstream_app = typer.Typer(
+    help="Bump the pinned upstream tag and diff extracted data.", no_args_is_help=True
 )
+app.add_typer(upstream_app, name="upstream")
+
+
+@upstream_app.command("bump")
+def upstream_bump(
+    to: Annotated[
+        str,
+        typer.Option(
+            "--to", help="Tag of the mirror: a version (17.5.8) or a moving tag (stable)."
+        ),
+    ],
+    dry_run: Annotated[
+        bool,
+        typer.Option(
+            "--dry-run", help="Only compute the diff: no file in en/ or upstream/ changes."
+        ),
+    ] = False,
+    image: Annotated[
+        str | None,
+        typer.Option(help="New CONTAINER_IMAGE, name:tag@sha256:... (ADR-011)."),
+    ] = None,
+    report_out: Annotated[
+        Path | None,
+        typer.Option(
+            "--report",
+            help="Report file (default: docs/upstream-diffs/<old>-<new>.md; "
+            "with --dry-run, stdout).",
+        ),
+    ] = None,
+) -> None:
+    """Move upstream/ to a tag, re-extract commands and messages, and write the diff report."""
+    root = _repo_root()
+    try:
+        result = bump_module.bump(root, to, dry_run=dry_run, image=image, report_path=report_out)
+    except (bump_module.BumpError, RuntimeError, OSError) as exc:
+        typer.echo(f"upstream bump: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    report = result.report
+    if result.report_path is None:
+        typer.echo(result.markdown, nl=False)
+    cat, msg = report.catalog, report.messages
+    typer.echo(
+        f"upstream bump: {report.old['upstream']} -> {report.new['upstream']}"
+        f"{' (dry run)' if dry_run else ''}: commands +{len(cat.added)} -{len(cat.removed)} "
+        f"~{len(cat.changed)}; messages +{len(msg.added)} -{len(msg.removed)} "
+        f"~{len(msg.changed)} ({len(msg.stale)} stale)",
+        err=result.report_path is None,
+    )
+    if result.report_path is not None:
+        typer.echo(f"  wrote {result.report_path}")
+    if result.deleted:
+        typer.echo(f"  deleted {len(result.deleted)} file(s) of removed commands/families")
+
+
 app.add_typer(_stub("bundle", "5.5", "Package the overlay data for ClearFEA."), name="bundle")
 
 validate_app = typer.Typer(help="Validate overlay artefacts (glossary, placeholders, schemas).")
