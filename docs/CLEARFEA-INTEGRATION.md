@@ -55,11 +55,13 @@ diag = mess.parse(res.mess_path).render("en")            # whole-file
 cls  = mess.classify(diag)                               # FailureClass
 
 # --- results ---
-r = results.open(res.rmed_path)
-r.fields()                                               # [("EVOL_ELAS","DEPL",[1]), ("EVOL_ELAS","SIEQ_NOEU",[1]), ...]
-r.extrema("SIEQ_NOEU", "VMIS", groups=["BODY","PLATE"])  # list[Extremum(value, entity_id, xyz, group)]
-r.reactions(res.tables)                                  # ReactionSummary(per_group, total, applied, balance_pct)
-r.modal(res.tables)                                      # ModalTable
+r = results.open(res.rmed_path)                          # task 4.5 (built)
+tables = results.read_table_dir(job / "output/tables")
+r.fields()                                               # [FieldInfo(result="RESU", field="SIEQ_NOEU", label, locations, components, steps), ...]
+r.extrema("SIEQ_NOEU", "VMIS", groups=["BODY","PLATE"])  # [GroupExtrema(group, min, max: Extremum(value, entity, entity_id, xyz)), ...] whole model first
+r.extrema("DEPL", ("DX","DY","DZ"))                      # norm of several components (max |U|)
+r.reactions(groups=["FIXED"], tables=tables)             # ReactionSummary(total, per_group, from_tables); applied load + balance: report (4.6)
+r.modal(tables)                                          # ModalTable(modes[frequency_hz, period_s, effective_mass_fraction, cumulative_fraction], total_mass)
 
 # --- report ---
 report.build(workdir, config=report.Config(sections=..., title_block=..., logo=..., images=False), out="report")

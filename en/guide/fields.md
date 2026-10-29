@@ -154,9 +154,14 @@ for `NORM_MODE / NORME` is `'TRAN_ROTA'`
 (`upstream/code_aster/Cata/Commands/calc_modes.py:118`). TODO(verify) against U4.52.02 that
 this is the normalization applied when `NORM_MODE` is not given, and how `MASS_GENE` depends on
 it. A report must label mode shapes "normalized" and never print their values in length units.
-TODO(verify) whether `CALC_MODES` fills the `MASS_EFFE_*` and `FACT_PARTICI_*` values without a
-separate request; the modal fixture computes the total mass with `POST_ELEM / MASS_INER`
-instead (`tests/fixtures/modal/output/tables/mass_inertia.csv`).
+`CALC_MODES` fills the `MASS_EFFE_*` values without a separate request: the modal fixture
+prints them with `RECU_TABLE(CO=MODES, NOM_PARA=(...))` and `IMPR_TABLE`
+(`tests/fixtures/modal/output/tables/modal_parameters.csv`, task 4.5). There the first bending
+mode in Z carries 61.2 % of the mass in Z, against 61.3 % for an Euler-Bernoulli cantilever
+(`tests/fixtures/hand_values.py`). `MASS_EFFE_UN_DZ` equals `MASS_EFFE_DZ` divided by the total
+mass from `POST_ELEM / MASS_INER` (`tests/fixtures/modal/output/tables/mass_inertia.csv`).
+The `.rmed` file holds only the mode shapes and their frequencies, so a report needs this table
+for effective masses (`codeaster_en.results`, `Results.modal`).
 
 ### Field names in MED files
 

@@ -14,6 +14,32 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.5 results readers — agent
+Done: `codeaster_en.results`: `med.py` (native MED reader over `h5py`: mesh, numbering,
+families to groups, fields, steps, values on nodes, per element/Gauss point and at element
+nodes, profiles), `tables.py` (`IMPR_TABLE` `TABLEAU` files, several tables per file, with or
+without `SEPARATEUR`), `labels.py` (glossary labels; stem + axis composition such as
+`MASS_EFFE_UN_DZ` -> "effective mass fraction (Z)"), `reader.py` (`results.open(rmed)` ->
+`fields()`, `groups()`, `extrema(field, component or tuple for a norm, groups)` with node or
+element ID and coordinates, `reactions(groups, tables)` from `REAC_NODA` and `POST_RELEVE_T`
+tables, `modal(tables)`: frequency, period, generalized mass, effective mass and fraction per
+direction, cumulative sums, total mass). JSON-ready dataclasses. CLI `caen results
+fields|extrema|reactions|modal <rmed or output dir> [--json]`. The `modal` fixture now prints
+`RECU_TABLE(CO=MODES, NOM_PARA=(FREQ, MASS_GENE, MASS_EFFE_D*, MASS_EFFE_UN_D*))` to
+`tables/modal_parameters.csv` (rerun with the ADR-011 image; `DIAGNOSTIC JOB : OK`, frequencies
+unchanged). Tested on all three fixtures (`tests/test_results.py`, 26 tests): reader values equal
+`VALE_CALC` (centre `DZ`, `MXX`, reaction sums, frequencies to 1e-12); effective mass fractions
+of the bending modes match the Euler-Bernoulli cantilever (61.3/18.8/6.5 %) within 1 %
+(`hand_values.py`); every nodal value equals `medcoupling`'s; a synthetic element-node field
+checks the element path. Fields guide `TODO(verify)` on `MASS_EFFE_*` resolved: `CALC_MODES`
+fills them without a request.
+Open: the applied-load resultant and the balance percentage (REPORT-SPEC §3 item 10) need the
+loads from the `.comm`, so they belong to task 4.6. No fixture writes an element field
+(`*_ELNO`/`*_ELGA`) to the `.rmed`; only the synthetic test covers them.
+Decisions: ADR-015 (native `h5py` reader; `medcoupling` as a dev-only cross-check; `meshio`
+not used). `numpy` and `h5py` are now runtime dependencies. 7 glossary entries `proposed`.
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 4.4 English `.mess` renderer — agent
 Done: `codeaster_en.mess.catalog` compiles each French message of `en/messages` into a regular
 expression (literal text exact, any whitespace run flexible for `cut_long_lines` wrapping,

@@ -57,5 +57,5 @@ If the run failed, the report still generates: sections 1–7 and 13 only, with 
 
 - `report/collect.py` builds a single `RunModel` dataclass from the inputs; `report/render.py` renders templates from it. Tests target `RunModel` (JSON-serialisable, committed as golden files for each fixture).
 - Parsing the `.comm` for model/material/load tables: use upstream's own command-language parser if `code_aster.Cata` imports standalone (it yields the keyword tree with values); fallback is a restricted Python AST walk (the `.comm` is Python).
-- MED access: `medcoupling` wheels from PyPI; if import fails, `meshio` (h5py) reads mesh and nodal fields but not all element-located fields — report says which fields were unavailable instead of failing.
+- MED access: `codeaster_en.results` (task 4.5), a native `h5py` reader of the MED layout (ADR-015). It reads nodal, element-node, Gauss-point and per-element fields; a field missing from the `.rmed` (not in `IMPR_RESU NOM_CHAM`) is reported as unavailable instead of failing. Effective modal masses are not in the `.rmed`: they come from a printed `RECU_TABLE` of the modal result.
 - Images (`report/images.py`): pyvista off-screen; feature-flagged; CI without GL skips and the report shows a placeholder line.

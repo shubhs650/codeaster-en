@@ -12,6 +12,9 @@ dependencies = [
     "typer>=0.12",
     "pyyaml>=6",
     "jinja2>=3.1",
+    # MED/HDF5 results reader, codeaster_en.results (task 4.5, ADR-015).
+    "numpy>=1.26",
+    "h5py>=3.10",
 ]
 
 [project.optional-dependencies]
@@ -22,6 +25,8 @@ dev = [
     "jsonschema>=4",
     "numpy>=1.26",
     "h5py>=3.10",
+    # Independent MED library, only to cross-check the native reader in tests (ADR-015).
+    "medcoupling>=9.12",
 ]
 
 # Claude API backend of `caen translate messages` (task 3.1); not needed for tests or CI.
