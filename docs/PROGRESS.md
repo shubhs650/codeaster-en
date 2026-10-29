@@ -14,6 +14,23 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.7 report images — agent
+Done: `codeaster_en.report.images` (pyvista off-screen): deformed shape colored by displacement
+magnitude over the undeformed edges (largest displacement drawn at 10 % of the model diagonal,
+scale in the caption), von Mises from `SIEQ_NOEU` `VMIS`, and one thumbnail per mode for modal
+runs. Off by default; `caen report --images` / `Config(images=True)`. `available()` probes
+rendering in a child process; without pyvista or an off-screen OpenGL context every figure
+becomes a placeholder line with the reason. PNGs in `<report>/images/`, linked from the Markdown,
+embedded in the PDF. `run_model.json` gains `images` (`null` unless requested; goldens
+regenerated). Optional extra `images` (pyvista, also in `dev`); CI installs `libosmesa6`.
+`tests/test_report_images.py` (12 tests): figure plan per fixture, mesh conversion, scale,
+placeholders with rendering forced off, CLI flag, real renders of all three fixtures (PNG size,
+links, PDF embedding; skipped without OpenGL). Checked the images by eye in session.
+Open: shell layers, ELNO/ELGA fields and other components are not drawn; no fixture writes `SIEQ`
+on shells, so the shell report has only the deformed shape.
+Decisions: ADR-017 (opt-in, subprocess probe, corner-node geometry, 10 % scale, PDF links).
+Needs owner: nothing blocking; review queue entry added (look of the figures).
+
 ## 2026-10-29 — 4.6 report generator — agent
 Done: `codeaster_en.report`: `comm.py` (restricted AST reader of the `.comm` and of the `.mess`
 command echo: calls, `_F`, constants, arithmetic, result-object references; nothing executed),

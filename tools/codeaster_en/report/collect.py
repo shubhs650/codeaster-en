@@ -248,6 +248,8 @@ class RunModel:
     verification: dict[str, Any]
     appendix: dict[str, Any]
     notes: list[str] = field(default_factory=list)
+    # Figures of task 4.7 (``images.Figure`` dicts); ``None`` when images were not requested.
+    images: list[dict[str, Any]] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

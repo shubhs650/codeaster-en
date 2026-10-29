@@ -622,6 +622,14 @@ def report(
         bool, typer.Option("--log", help="Add appendix C, the solver log in English.")
     ] = False,
     pdf: Annotated[bool, typer.Option("--pdf/--no-pdf", help="Write report.pdf.")] = True,
+    images: Annotated[
+        bool,
+        typer.Option(
+            "--images/--no-images",
+            help="Add deformed-shape, von Mises and mode-shape images (needs pyvista: "
+            "pip install codeaster_en[images], and off-screen OpenGL).",
+        ),
+    ] = False,
 ) -> None:
     """Write an English engineering report of a run: report.md, report.html, report.pdf
     (needs WeasyPrint: pip install codeaster_en[report]) and run_model.json."""
@@ -640,7 +648,7 @@ def report(
     if with_log:
         base = sections or list(report_module.collect_module.default_sections(job))
         sections = [*base, "appendix_log"] if "appendix_log" not in base else base
-    config = report_module.Config(sections=sections, logo=logo)
+    config = report_module.Config(sections=sections, logo=logo, images=images)
     result = report_module.build(job, config, out, pdf=pdf)
     outcome = result.model.outcome["status"].replace("_", " ")
     typer.echo(f"report: run {outcome}")

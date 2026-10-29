@@ -237,6 +237,27 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-017 — Report images: pyvista off-screen, opt-in, probed in a subprocess
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 4.7)
+
+**Context.** PLAN 4.7 asks for optional deformed-shape and von Mises images in the report, feature-flagged because CI may lack OpenGL; REPORT-SPEC §3 item 11 adds mode-shape thumbnails. In session: pyvista 0.49.2 with the VTK 9.7.1 wheel renders off-screen once the OSMesa library is installed (`libosmesa6`); without it (no X display, no EGL, no OSMesa) the first render attempt ended the Python process instead of raising.
+
+**Decision.**
+1. `codeaster_en.report.images`, off by default: `Config(images=True)` / `caen report --images`. pyvista is the optional extra `images` (also in `dev`); CI installs `libosmesa6` so the rendering tests run there too.
+2. `available()` renders one sphere in a child Python process (cached per process). Only when that succeeds does the report render in-process. Otherwise each planned figure keeps its number and caption and the report prints one placeholder line with the reason ("Figure 1 not generated (…): …"); nothing fails.
+3. Figures: deformed shape colored by displacement magnitude over the undeformed feature edges, largest displacement drawn at 10 % of the bounding-box diagonal (scale rounded to 2 significant figures and stated in the caption); von Mises from `SIEQ_NOEU` `VMIS` on the undeformed shape (no image when the run wrote no nodal `SIEQ`, e.g. the DKT fixture); one thumbnail per mode (at most 12), same 10 % rule, captioned as arbitrary in sign and amplitude. Values come from the same `.rmed` fields as the report tables.
+4. Geometry: the highest-dimension cells of the result mesh, drawn through their corner nodes (quadratic cells as linear ones, so no MED↔VTK node reordering is needed for mid-side nodes); lower-dimension skin and point cells are not drawn.
+5. PNGs go to `<report dir>/images/`; the Markdown links them relatively. For the PDF those links are rewritten to absolute file URIs because WeasyPrint's base URL stays the job directory (logo paths). `run_model.json` gains `images` (`null` when not requested), so the goldens change by one key; images are not golden-tested, the tests check size, links, scale and captions.
+
+**Why.** Images are a convenience, not a result: they must never make a report fail or depend on a GPU. The subprocess probe is the only way to survive a VTK build that aborts without a context. Drawing corner nodes keeps the converter to a table of cell types while staying faithful at report-thumbnail scale.
+
+**Consequences.**
+- On a machine without OSMesa/EGL, `--images` costs one probe (a second or two) and yields placeholder lines.
+- Shell layers, element (ELNO/ELGA) fields and contour plots of other components are not drawn; add them when a fixture writes them.
+- `run_model.json` schema stays at version 1 (one optional key added).
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>
