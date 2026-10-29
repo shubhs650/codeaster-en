@@ -23,9 +23,10 @@ export DEBIAN_FRONTEND=noninteractive
     meshio h5py numpy pandas gmsh medcoupling \
   ) >/tmp/setup-pip.log 2>&1 || echo "pip step had failures (non-fatal), see /tmp/setup-pip.log"
 
-# 3. Pre-pull the official code_aster solver image so fixture runs don't pay the pull each session.
+# 3. Pre-pull the code_aster solver image so fixture runs don't pay the pull each session.
+#    Keep in step with CONTAINER_IMAGE in the repo (ADR-011); the setup script cannot read the repo.
 #    The image is large; give it ~3 minutes. If it doesn't finish, the SessionStart hook pulls it later.
-CA_IMAGE="${CODEASTER_IMAGE:-codeastersolver/codeaster-seq:latest}"
+CA_IMAGE="simvia/code_aster:17.4.22@sha256:ac8e68feee27329717f9350c2782f63d860dd4771b267c43e47bf588a00005eb"
 if ! docker info >/dev/null 2>&1; then
   (dockerd >/tmp/dockerd.log 2>&1 &) ; sleep 5
 fi

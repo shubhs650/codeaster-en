@@ -6,8 +6,8 @@
 # nozzle end the resultant is P * (area of the bore opening) along -X; see run.json "checks".
 # Modelled on astest forma01a (LIRE_MAILLAGE MED, ORIE_PEAU, PRES_REP, CALC_CHAMP SIEQ_NOEU)
 # and zzzz341b (POST_RELEVE_T RESULTANTE on REAC_NODA).
-# TODO(4.2): VALE_CALC values below are the hand values, accepted with TOLE_MACHINE = PRECISION.
-# Replace them with the solver's own values from the first run and drop TOLE_MACHINE.
+# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster
+# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.
 
 DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
 
@@ -66,7 +66,8 @@ IMPR_RESU(
 
 # Reaction sum over the whole REAC_NODA field (non-zero only on the fixed base nodes).
 # TYPE_TEST sums the whole field; GROUP_NO is not combined with it (see bibfor/test/trresu.F90).
-# VALE_ABS: the hand value is a magnitude; the sign convention of REAC_NODA is TODO(verify) in 4.2.
+# The reference is signed: REAC_NODA is the support reaction, so its sum is +X, opposite to the
+# applied resultant along -X. Confirmed by the first run (task 4.2): DX sum = +3891.64 N.
 TEST_RESU(
     RESU=(
         _F(
@@ -75,11 +76,9 @@ TEST_RESU(
             NOM_CHAM="REAC_NODA",
             NOM_CMP="DX",
             TYPE_TEST="SOMM",
-            VALE_ABS="OUI",
             REFERENCE="ANALYTIQUE",
             VALE_REFE=3891.64,
-            VALE_CALC=3891.64,
-            TOLE_MACHINE=1.0e-3,
+            VALE_CALC=3891.6428187786923,
             PRECISION=1.0e-3,
             LEGENDE="REAC_DX_SUM",
         ),

@@ -5,10 +5,16 @@
 # Reference: Navier double series (Timoshenko & Woinowsky-Krieger, Theory of Plates and
 # Shells, 2nd ed., sec. 30 and table 8): w_max = alpha q a^4 / D, M_x = beta q a^2 at the centre.
 # Modelled on astest ssls101n (DKT, ORIE_NORM_COQUE, PRES_REP, TEST_RESU on DEPL DZ).
-# TODO(4.2): VALE_CALC values below are the hand values, accepted with TOLE_MACHINE = PRECISION.
-# Replace them with the solver's own values from the first run and drop TOLE_MACHINE.
+# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster
+# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.
 
-DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
+# The Gmsh mesh stores the point groups (CENTER, CORNER_A, CORNER_B) as POI1 cells on plate
+# nodes, which the LIRE_MAILLAGE mesh check reports as alarm MODELISA8_14 ("POI1 cell included
+# in another"). That is intended, so the alarm is ignored. ERREUR=_F(ALARME="EXCEPTION") cannot
+# be kept with it: Utmess.py turns the alarm into an error before IGNORE_ALARM is consulted
+# (seen in the first run, task 4.2). Any other alarm still shows in run.mess as <A> and makes
+# the job diagnostic <A>_ALARM instead of OK, which tests/test_fixture_outputs.py rejects.
+DEBUT(CODE="OUI", IGNORE_ALARM=("MODELISA8_14",))
 
 Q = 0.01  # uniform pressure [MPa]
 T = 10.0  # thickness [mm]
@@ -88,39 +94,36 @@ TEST_RESU(
             NOM_CMP="DZ",
             REFERENCE="ANALYTIQUE",
             VALE_REFE=-2.11242,
-            VALE_CALC=-2.11242,
-            TOLE_MACHINE=1.0e-2,
+            VALE_CALC=-2.112263828055923,
             PRECISION=1.0e-2,
             LEGENDE="W_CENTER",
         ),
-        # Centre bending moment per unit length: M_x = beta q a^2, beta = 0.0478864 (NU=0.3).
-        # VALE_ABS: the hand value is a magnitude; the EFGE sign convention is TODO(verify) in 4.2.
+        # Centre bending moment per unit length: M_x = -beta q a^2, beta = 0.0478864 (NU=0.3).
+        # Negative: in the first run (task 4.2) EFGE_NOEU MXX = MYY < 0 at the centre while the
+        # plate sags (DZ < 0), so the sagging moment is negative in code_aster's convention.
         _F(
             NUME_ORDRE=1,
             RESULTAT=RESU,
             NOM_CHAM="EFGE_NOEU",
             GROUP_NO="CENTER",
             NOM_CMP="MXX",
-            VALE_ABS="OUI",
             REFERENCE="ANALYTIQUE",
-            VALE_REFE=478.864,
-            VALE_CALC=478.864,
-            TOLE_MACHINE=3.0e-2,
+            VALE_REFE=-478.864,
+            VALE_CALC=-479.645314641979,
             PRECISION=3.0e-2,
             LEGENDE="MXX_CENTER",
         ),
-        # Reaction sum = q a^2 (whole REAC_NODA field; only supported nodes carry reactions).
+        # Reaction sum = +q a^2 (whole REAC_NODA field; only supported nodes carry reactions).
+        # Positive: REAC_NODA is the support reaction, opposite to the -Z load (first run, 4.2).
         _F(
             NUME_ORDRE=1,
             RESULTAT=RESU,
             NOM_CHAM="REAC_NODA",
             NOM_CMP="DZ",
             TYPE_TEST="SOMM",
-            VALE_ABS="OUI",
             REFERENCE="ANALYTIQUE",
             VALE_REFE=10000.0,
-            VALE_CALC=10000.0,
-            TOLE_MACHINE=1.0e-3,
+            VALE_CALC=9999.999999999982,
             PRECISION=1.0e-3,
             LEGENDE="REAC_DZ_SUM",
         ),

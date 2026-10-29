@@ -113,8 +113,8 @@ Keep meshes small (each run < 10 min on 4 vCPU).
 
 ```
 Task 4.2. Write .github/workflows/solver-fixtures.yml: on workflow_dispatch and on changes to
-UPSTREAM_VERSION or tests/fixtures/**/input/**, pull codeastersolver/codeaster-seq with the
-tag matching UPSTREAM_VERSION (read CONTAINER_TAG; create it), run each fixture with run_aster
+UPSTREAM_VERSION or tests/fixtures/**/input/**, pull the image pinned in CONTAINER_IMAGE
+(ADR-011: no image exists for 17.4.26; codeastersolver/codeaster-seq is dead), run each fixture with run_aster
 inside the container, copy .mess/.rmed/tables/exit code to tests/fixtures/<case>/output/,
 fail if any TEST_RESU is not OK, and commit the outputs on a branch + open a PR.
 Document the image/version mapping in docs/ARCHITECTURE.md §6.
@@ -146,7 +146,7 @@ CLI: `caen report <job_dir> --out report --sections all --no-images`.
 
 ```
 Task 7.1. Implement `caen upstream bump --to <tag>`: update the submodule, UPSTREAM_VERSION,
-CONTAINER_TAG; re-run extract catalog + messages; diff against the previous JSON and write
+CONTAINER_IMAGE (ADR-011); re-run extract catalog + messages; diff against the previous JSON and write
 docs/upstream-diffs/<old>-<new>.md (commands/keywords added/removed/changed; messages
 added/removed/text-changed → mark those en entries status: stale). Dry-run flag. Test by
 bumping between two real tags in the mirror and back.

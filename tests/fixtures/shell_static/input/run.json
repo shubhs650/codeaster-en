@@ -78,10 +78,9 @@
       "field": "EFGE_NOEU",
       "component": "MXX",
       "group": "CENTER",
-      "reference": 478.864,
+      "reference": -478.864,
       "precision": 0.03,
-      "absolute_value": true,
-      "basis": "M_x = beta q a^2, beta = 0.0478864 (nu = 0.3).",
+      "basis": "M_x = -beta q a^2, beta = 0.0478864 (nu = 0.3); negative because the sagging moment is negative in code_aster's EFGE convention (observed in the first run, task 4.2: MXX = MYY < 0 at the centre while DZ < 0).",
       "source": "Timoshenko & Woinowsky-Krieger, Theory of Plates and Shells, 2nd ed., sec. 30, table 8"
     },
     {
@@ -91,8 +90,7 @@
       "component": "DZ",
       "reference": 10000.0,
       "precision": 0.001,
-      "absolute_value": true,
-      "basis": "Equilibrium: total reaction = q a^2.",
+      "basis": "Equilibrium: total reaction = +q a^2. REAC_NODA is the support reaction, opposite to the -Z load (sign confirmed by the first run, task 4.2).",
       "source": "Static equilibrium"
     }
   ],
@@ -103,6 +101,6 @@
     ],
     "author": "codeaster-en agent (task 4.1)",
     "date": "2026-10-23",
-    "notes": "VALE_CALC in run.comm holds the hand value until task 4.2 records the solver's own value."
+    "notes": "VALE_CALC in run.comm is the solver's own value from the first run (task 4.2, code_aster 17.4.22 image, ADR-011). Outputs are in ../output/."
   }
 }

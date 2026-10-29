@@ -6,7 +6,7 @@ ClearFEA's solver worker is built around CalculiX first. code_aster is added as 
 
 | Concern | codeaster-en (this repo) | ClearFEA |
 |---|---|---|
-| Solver binaries / container | Points at the official image tag matching `UPSTREAM_VERSION`; documents run invocation | Builds its own worker image `FROM codeastersolver/codeaster-seq:<tag>` + `pip install codeaster-en` |
+| Solver binaries / container | Pins the solver image in `CONTAINER_IMAGE` (closest published image to `UPSTREAM_VERSION`, ADR-011); documents run invocation | Builds its own worker image `FROM <CONTAINER_IMAGE>` + `pip install codeaster-en` |
 | Catalog knowledge (what keywords exist, types, defaults) | `codeaster_en.catalog` (from `en/commands/*.json`) | Consumes; never hard-codes keyword names outside the builder |
 | Building the `.comm` | `codeaster_en.comm` typed builder (English API → French file) | Maps its UI/job model onto builder calls; owns defaults policy |
 | Meshing | — (Gmsh/Netgen are ClearFEA's) | Produces `.med` (Gmsh `-format med`) with named physical groups |
@@ -81,7 +81,7 @@ All public objects are plain dataclasses, JSON-serialisable (`.to_dict()`), so C
 
 ## 4. Container contract
 
-- Base: official `codeastersolver/codeaster-seq:<tag>` (MPI variant later for the priority tier). Tag pinned to `UPSTREAM_VERSION`; `caen upstream bump` updates a `CONTAINER_TAG` file too.
+- Base: the image in `CONTAINER_IMAGE` (today `simvia/code_aster:17.4.22`, an MPI-enabled Spack build; ADR-011). `caen upstream bump` updates `CONTAINER_IMAGE` too.
 - Entry: `run_aster run.export` from `input/`, with `--ncpus`, time and memory in the `.export`. ClearFEA wraps with its own timeout and cgroup limits; the `.export` limits are the inner guard.
 - If ADR-004 chose gettext: the image build installs `en/messages/*.mo` and sets `LANG=en_US.UTF-8` (or whatever upstream honours) so `run.mess` is English natively; the renderer still runs for IDs and classification.
 - Exit codes: `run_aster` returns 0 success, 1 solver error (`<F>`/`<EXCEPTION>`), 4 time limit, other non-zero platform; mapping is verified in Phase 4.2 and recorded in `mess/classify.py`.
@@ -100,7 +100,7 @@ Pre-run checks (`catalog.validate_comm` + mesh-group presence check against the 
 ## 6. Versioning
 
 - `codeaster-en` version `MAJOR.MINOR.PATCH+<upstream tag>` (PEP 440 local version, e.g. `0.3.0+17.2.11`). `MAJOR` bumps on builder API breaks.
-- ClearFEA pins exact `codeaster-en` and `CONTAINER_TAG` together in its worker image; upgrades are a PR there, triggered by this repo's release.
+- ClearFEA pins exact `codeaster-en` and `CONTAINER_IMAGE` together in its worker image; upgrades are a PR there, triggered by this repo's release.
 
 ## 7. What ClearFEA should not do
 

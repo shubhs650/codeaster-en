@@ -25,9 +25,8 @@ fi
 # 3. Cloud only: make sure Docker is up and the solver image is present (pull in background).
 if [ "${CLAUDE_CODE_REMOTE:-}" = "true" ]; then
   docker info >/dev/null 2>&1 || (dockerd >/tmp/dockerd.log 2>&1 &)
-  IMG="${CODEASTER_IMAGE:-codeastersolver/codeaster-seq:latest}"
-  [ -f CONTAINER_TAG ] && IMG="codeastersolver/codeaster-seq:$(tr -d '[:space:]' < CONTAINER_TAG)"
-  ( sleep 3; docker image inspect "$IMG" >/dev/null 2>&1 || docker pull -q "$IMG" >/tmp/docker-pull.log 2>&1 ) &
+  IMG="$(grep -v '^#' CONTAINER_IMAGE 2>/dev/null | tr -d '[:space:]')"  # ADR-011
+  ( sleep 3; [ -n "$IMG" ] && { docker image inspect "$IMG" >/dev/null 2>&1 || docker pull -q "$IMG" >/tmp/docker-pull.log 2>&1; } ) &
 fi
 
 # 4. One-line orientation for the agent.

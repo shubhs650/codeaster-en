@@ -14,6 +14,34 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.2 run fixtures, commit outputs, solver-fixtures Action — agent
+Done: ran all three fixtures in-session with Docker and committed `tests/fixtures/*/output/`
+(`run.mess`, `run.rmed`, `run.resu` (empty), `tables/*.csv`, `exit_code`, `run_aster.stdout`,
+new `provenance.json`). All three jobs end `DIAGNOSTIC JOB : OK`, every `TEST_RESU` is `OK`
+(errors vs hand values: 0.00007 % reaction, 0.007 % / 0.16 % plate, 0.01–1.15 % frequencies).
+`VALE_CALC` = solver values, `TOLE_MACHINE` and `VALE_ABS` removed; signs confirmed (reaction
+sums +X / +Z, plate MXX negative) and propagated to `run.json` and `hand_values.py`. New
+`CONTAINER_IMAGE` (digest-pinned) read by `run-fixture.sh` (now runs as the caller's uid, wipes
+`output/` first, writes provenance), `session-start.sh`, and new
+`.github/workflows/solver-fixtures.yml` (verify on PRs touching inputs/image/pin; on dispatch,
+commit regenerated outputs to a branch and open a PR). New `tests/test_fixture_outputs.py`
+(clean exit, no printed alarm, all TEST_RESU OK, VALE_CALC = run.mess values, MED fields,
+tables, provenance). Each run takes under 10 s.
+Open: `LANG='EN'` fixture variant moves to task 3.4 (needs our `.mo`). The cloud environment still
+sets `CODEASTER_IMAGE=codeastersolver/codeaster-seq:latest` and its setup script pulls that
+dead image; nothing reads the variable now (owner queue).
+Decisions: ADR-011 (fixture image `simvia/code_aster:17.4.22`: no 17.4.26 image exists,
+`codeastersolver/codeaster-seq` stopped at 14.4.0, building is rule 8; 17.4.22 → 17.4.26 diff is
+52 files, none on fixture code paths). ADR-004 point 5 resolved: the image ships no `.mo`;
+`profile.sh` overrides `ASTER_LOCALEDIR`, so the `.mo` must be mounted at
+`<install>/share/locale/aster`; with that plus `DEBUT(LANG='EN')` a probe `.mo` turned a
+Fortran-emitted alarm English in `run.mess`. `shell_static`: Gmsh point groups are POI1 cells
+and trip alarm `MODELISA8_14`; `IGNORE_ALARM` does not work together with
+`ERREUR=_F(ALARME="EXCEPTION")` (Utmess raises the alarm to an error first), so that case uses
+`IGNORE_ALARM` only; the test rejects any other printed alarm. `run_aster` resolves
+`../output/` relative to the export (TODO from 4.1 closed).
+Needs owner: nothing blocking (queue: image choice, environment variable cleanup).
+
 ## 2026-10-29 — 0.6 glossary seed — agent
 Done: `en/glossary.yaml` 250 → 353 entries, all `proposed`. (1) Every Tier 1/2 identifier in
 `docs/COMMAND-SET.md` that had no entry (70: 5 commands, 51 keywords, 13 values, 1 concept), each
