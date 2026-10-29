@@ -90,7 +90,7 @@ encodes.
 | `LIGN_COUPE / DNOR` | real, optional, list of up to 3, at least 2 | — | Only when `equal_to("TYPE", 'ARC')`. TODO(2.3): meaning. TODO(2.3): when to use. |
 | `LIGN_COUPE / ORIGINE` | real, optional, list of up to 3, at least 2 | — | Only when `equal_to("REPERE", 'CYLINDRIQUE') and not equal_to("TYPE", 'ARC')`. TODO(2.3): meaning. TODO(2.3): when to use. |
 | `LIGN_COUPE / AXE_Z` | real, optional, list of up to 3, at least 3 | — | Only when `equal_to("REPERE", 'CYLINDRIQUE') and not equal_to("TYPE", 'ARC')`. TODO(2.3): meaning. TODO(2.3): when to use. |
-| `LIGN_COUPE / DISTANCE_MAX` | real, optional | `0.0` | If the distance between a node of the cut line and the cut mesh is greater than DISTANCE_MAX, the node is ignored. TODO(2.3): when to use. |
+| `LIGN_COUPE / DISTANCE_MAX` | real, optional | `0.0` | *maximum distance*. If the distance between a node of the cut line and the cut mesh is greater than DISTANCE_MAX, the node is ignored. TODO(2.3): when to use. |
 | `LIGN_COUPE / DISTANCE_ALARME` | real, optional | — | If the distance between a node of the cut line and the cut mesh is greater than DISTANCE_ALARME, a warning is issued. TODO(2.3): when to use. |
 
 1 hidden keyword(s) (`statut='c'`, set by the code, not by users) are not listed.
