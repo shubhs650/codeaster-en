@@ -14,6 +14,15 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 5.4 engineers' guide — agent
+Done: "code_aster for structural engineers" in `en/guide/`, 8 new pages (`status: assisted`): `README.md` (index, reading order, tools), `concepts.md` (workflow, the command sequence as result objects, supports are loads, `EXCIT`, syntax, groups, units, logical units, message levels, log line offsets), three walkthroughs built from the fixtures (`walkthrough-solid-static.md`, `walkthrough-shell-static.md`, `walkthrough-modal.md`), `reading-logs.md`, `reading-results.md` (`caen results`, tables, checks, `caen report`) and `faq.md` (every message ID our fixture runs printed: `SUPERVIS_22`, `CATAMESS_89`, `MODELISA8_14`, `DISCRETS_26`, `MODELISA7_77`, `FACTOR_11`, `SUPERVIS_4`, Python `SyntaxError`, plus four practical questions).
+The solid walkthrough is a full study: `mesh.geo` and `run.export` are the fixture's, the `.comm` is the fixture's without `CODE` and `TEST_RESU`. Verified in session by doing it: Gmsh 4.15.2 mesh, the Docker command from the page with the pinned image, `DIAGNOSTIC JOB : OK`, `reactions.csv` identical to the fixture, `caen report` on the study directory. The "things to try" variants were run too: wrong group `MODELISA7_77`, support left out `FACTOR_11`, `PRESSION` `SUPERVIS_4`, `TETRA10` mesh (peak 46.7 vs 34.7 MPa, reaction 3926.97 N = the true-circle value). Without `docker run --user` the run fails with `PermissionError` (uid 1000 in the image); the page says so.
+`tests/test_guide.py` (+6 tests): page structure, `<!-- example: path -->` blocks byte-identical to fixture files, the `example-study` block has the fixture's commands (AST) minus `DEBUT` keywords and `TEST_RESU` and passes the pinned catalog check, relative links and heading anchors resolve, FAQ IDs appear in a committed fixture log (or the fixture notes) and in `en/messages`. Citation check now skips placeholder paths such as `en/messages/<FAMILY>.en.json`.
+Self-review: every `path:line` citation re-printed and read against its line; numbers recomputed (Navier, Euler–Bernoulli ratios, mean hoop stress P·Ri/t = 10.0 MPa vs 9.9 MPa in the run).
+Open: PLAN 5.4's acceptance (a colleague completes `solid_static` unaided) is the owner's; queued. 5.1–5.3 still wait for the U4 PDFs. Next ready task: 5.5 (LLM context bundle), which includes this guide.
+Decisions: none (no ADR). The wheel still does not ship `en/guide/` (ADR-020); 5.5's bundle is the way the guide reaches an agent.
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-29 — 7.2 scheduled monthly upstream bump — agent
 Done: `.github/workflows/upstream-bump.yml`, which runs at 05:17 UTC on the 3rd of each month or on dispatch (`to`, `dry_run`).
 It runs the new `caen upstream check` (prints `status=newer|current|older` against the mirror) and goes on only for `newer`, and only when no `upstream/bump-<tag>` branch exists yet.
