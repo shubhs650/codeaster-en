@@ -544,3 +544,16 @@
 - {fr: NON_DEFINI, en: undefined reference, kind: value, note: "TEST_RESU REFERENCE: the origin of the reference value is not stated.", source: "code_aster/Cata/Commons/c_test_reference.py:89", status: proposed}
 - {fr: NON_REGRESSION, en: non-regression, kind: value, note: "Reference type the solver prints for the VALE_CALC check of TEST_RESU: the computed value against the value stored in the command file (not a catalog value).", source: "bibfor/test/trchel.F90:244", status: proposed}
 - {fr: SORENSEN, en: Sorensen eigensolver (ARPACK), kind: value, note: "CALC_MODES SOLVEUR_MODAL METHODE (default): implicitly restarted Arnoldi/Lanczos method of the ARPACK library.", source: "code_aster/Cata/Commands/calc_modes.py:268", status: proposed}
+# Task 6.4 (2026-10-29): Tier 2 modal keywords.
+- {fr: VERI_MODE, en: mode checks, kind: keyword, note: "CALC_MODES: a posteriori checks of the computed modes (error norm, Sturm count).", source: "code_aster/Cata/Commands/calc_modes.py:380", status: proposed}
+- {fr: STOP_ERREUR, en: stop on failed check, kind: keyword, note: "CALC_MODES VERI_MODE: 'OUI' makes a failed mode check an error (ALGELINE2_74).", source: "code_aster/Cata/Commands/calc_modes.py:382", status: proposed}
+- {fr: STURM, en: Sturm check, kind: keyword, note: "CALC_MODES VERI_MODE: count of the eigenvalues in the computed range from a factorization (Sturm sequence).", source: "code_aster/Cata/Commands/calc_modes.py:391", status: proposed}
+- {fr: SEUIL_FREQ, en: rigid-body frequency threshold, kind: keyword, note: "CALC_MODES CALC_FREQ: frequency below which a mode counts as a rigid-body mode (vpinis.F90).", source: "code_aster/Cata/Commands/calc_modes.py:149", status: proposed}
+- {fr: DIM_SOUS_ESPACE, en: subspace size, kind: keyword, note: "CALC_MODES SOLVEUR_MODAL: dimension of the projection subspace of the eigensolver.", source: "code_aster/Cata/Commands/calc_modes.py:311", status: proposed}
+- {fr: STOP_BANDE_VIDE, en: stop on empty band, kind: keyword, note: "CALC_MODES: 'OUI' makes a frequency band with no mode an error (MODAL_1).", source: "code_aster/Cata/Commands/calc_modes.py:875", status: proposed}
+- {fr: AMELIORATION, en: mode refinement, kind: keyword, note: "CALC_MODES: 'OUI' refines the modes by inverse iteration after the main computation.", source: "code_aster/Cata/Commands/calc_modes.py:876", status: proposed}
+- {fr: MODE_SIGNE, en: mode sign, kind: keyword, note: "NORM_MODE: fixes the sign of each mode from one component at one node.", source: "code_aster/Cata/Commands/norm_mode.py:63", status: proposed}
+- {fr: AVEC_CMP, en: components used, kind: keyword, note: "NORM_MODE: components whose largest value is scaled to 1.", source: "code_aster/Cata/Commands/norm_mode.py:61", status: proposed}
+- {fr: SANS_CMP, en: components excluded, kind: keyword, note: "NORM_MODE: components left out of the scaling.", source: "code_aster/Cata/Commands/norm_mode.py:62", status: proposed}
+- {fr: MATR_ELEM, en: element matrices, kind: keyword, note: "ASSE_MATRICE: the CALC_MATR_ELEM results to assemble.", source: "code_aster/Cata/Commands/asse_matrice.py:48", status: proposed}
+- {fr: CHAR_CINE, en: kinematic loads, kind: keyword, note: "ASSE_MATRICE, ASSEMBLAGE: AFFE_CHAR_CINE loads eliminated at assembly.", source: "code_aster/Cata/Commands/asse_matrice.py:55", status: proposed}

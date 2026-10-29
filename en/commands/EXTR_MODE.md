@@ -55,7 +55,7 @@ The COMMAND-SET "Modal post" row groups `NORM_MODE`, `EXTR_MODE` and `POST_ELEM 
 | `FILTRE_MODE / NUME_ORDRE` | integer, optional, list | — | *step index*. The modes at these storage indices (1, 2, … in the order stored). An index that does not exist gives warning `ALGELINE4_55` and is skipped (`upstream/bibfor/op/op0168.F90:188`). |
 | `FILTRE_MODE / NUME_MODE` | integer, optional, list | — | *mode number*. The modes with these mode numbers (`NUME_MODE` parameter of the result; the same as the storage index for a single `CALC_MODES` call) (`upstream/astest/zzzz115c.comm:101`). |
 | `FILTRE_MODE / NUME_MODE_EXCLU` | integer, optional, list | — | Every mode except those with these mode numbers (`upstream/bibfor/op/op0168.F90:224`). |
-| `FILTRE_MODE / FREQ_MIN` | real, optional | — | Lower bound of a frequency range, in Hz (with `FREQ_MAX`): the modes with FREQ_MIN − `PRECISION` ≤ f ≤ FREQ_MAX + `PRECISION` are kept (`upstream/bibfor/op/op0168.F90:255`, `upstream/astest/forma12c.comm:189`). |
+| `FILTRE_MODE / FREQ_MIN` | real, optional | — | Lower bound of a frequency range, in Hz (with `FREQ_MAX`): the modes with FREQ_MIN − `PRECISION` ≤ f ≤ FREQ_MAX + `PRECISION` are kept (`upstream/bibfor/op/op0168.F90:254`, `upstream/astest/forma12c.comm:189`). |
 | `FILTRE_MODE / CRIT_EXTR` | text, optional | — | *mode selection criterion*. One of `'MASS_EFFE_UN'`, `'MASS_GENE'`, `'MASS_EFFE'`, `'INER_EFFE_UN'`, `'INER_EFFE'`. Keep the modes whose stored parameter reaches `SEUIL` (or `SEUIL_X/Y/Z` for one direction): `'MASS_EFFE_UN'` the unit effective mass, that is the effective mass as a fraction of the total mass, the usual choice (`upstream/astest/sdls300b.comm:57`); `'MASS_EFFE'` the effective mass itself (model units); `'INER_EFFE_UN'`/`'INER_EFFE'` the effective rotational inertia, unit or absolute; `'MASS_GENE'` the generalized mass as a fraction of the sum over all modes (`upstream/bibfor/op/op0168.F90:282`, `:422`). With `SEUIL`, a mode is kept if any of the three directions reaches it. |
 | `FILTRE_MODE / FREQ_MAX` | real, required | — | Only when `exists("FREQ_MIN")`. Upper bound of the frequency range, in Hz. |
 | `FILTRE_MODE / PRECISION` | real, optional | `0.001` | *tolerance*. Only when `exists("FREQ_MIN")`. Absolute tolerance, in Hz, added on both sides of the range (`upstream/bibfor/op/op0168.F90:256`). |
@@ -132,7 +132,7 @@ EXTR = EXTR_MODE(FILTRE_MODE=_F(MODE=MODMECA, NUME_MODE=1))
 
 `op0168` (`upstream/bibfor/op/op0168.F90`) checks that every input shares the reference
 matrices (`:139`), builds the list of storage indices each filter keeps (`:150`–`:445`), copies
-those modes and all their parameters into a new `mode_meca` (`vprecu`/`vpstor`, `:476`), warns when two
+those modes and all their parameters into a new `mode_meca` (`vpstor`, `:478`), warns when two
 extracted modes carry the same `NUME_MODE` (`ALGELINE4_57`, `:532`), and prints the
 `IMPRESSION` table (`:540`). An empty selection overall is fatal (`ALGELINE3_11`, `:459`); an
 occurrence that keeps no mode only warns (`ALGELINE4_56`, `:471`).
