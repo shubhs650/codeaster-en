@@ -68,6 +68,25 @@ def _reformat(spec: str, value: str) -> str:
     return value
 
 
+_Pieces = list[tuple[str, str | None, str | None]]
+
+
+def _split(text: str) -> _Pieces:
+    """``(literal, spec, key)`` triples covering ``text`` stripped (spec ``None`` for the tail)."""
+    text = text.strip()
+    pieces: _Pieces = []
+    pos = 0
+    for ph in parse_placeholders(text).placeholders:
+        literal = text[pos : ph.offset]
+        if ph.conversion == "%":
+            pieces.append((literal + "%", None, None))
+        else:
+            pieces.append((literal, ph.text, ph.key))
+        pos = ph.offset + len(ph.text)
+    pieces.append((text[pos:], None, None))
+    return pieces
+
+
 @dataclass
 class Template:
     """One message of ``en/messages``: its French and English texts and their matchers."""
@@ -84,18 +103,12 @@ class Template:
     @cached_property
     def _pieces(self) -> list[tuple[str, str | None, str | None]]:
         """``(literal, spec, key)`` triples covering ``fr`` (spec ``None`` for the tail)."""
-        text = self.fr.strip()
-        pieces: list[tuple[str, str | None, str | None]] = []
-        pos = 0
-        for ph in parse_placeholders(text).placeholders:
-            literal = text[pos : ph.offset]
-            if ph.conversion == "%":
-                pieces.append((literal + "%", None, None))
-            else:
-                pieces.append((literal, ph.text, ph.key))
-            pos = ph.offset + len(ph.text)
-        pieces.append((text[pos:], None, None))
-        return pieces
+        return _split(self.fr)
+
+    @cached_property
+    def _en_pieces(self) -> list[tuple[str, str | None, str | None]]:
+        """The same for ``en``: a solver run with our gettext catalog prints the English."""
+        return _split(self.en or "")
 
     @cached_property
     def literal_chars(self) -> int:
@@ -107,10 +120,12 @@ class Template:
         words = self._pieces[0][0].split()
         return words[0][:_KEY_LEN] if words else None
 
-    def _compile(self, multiline: bool, anchored: bool = True) -> re.Pattern[str]:
+    def _compile(
+        self, multiline: bool, anchored: bool = True, pieces: _Pieces | None = None
+    ) -> re.Pattern[str]:
         seen: dict[str, str] = {}
         out: list[str] = []
-        for n, (literal, spec, _key) in enumerate(self._pieces):
+        for n, (literal, spec, _key) in enumerate(self._pieces if pieces is None else pieces):
             out.append(_literal_pattern(literal))
             if spec is None:
                 continue
@@ -155,9 +170,14 @@ class Template:
             return text
         return self.inline.sub(lambda m: (self.fill(self._args(m)) or m.group(0)).strip(), text)
 
-    def _args(self, match: re.Match[str]) -> dict[str, str]:
+    @cached_property
+    def en_box(self) -> re.Pattern[str] | None:
+        """``box`` for the English text (ADR-004: the solver may print it with our ``.mo``)."""
+        return self._compile(multiline=True, pieces=self._en_pieces) if self.en else None
+
+    def _args(self, match: re.Match[str], pieces: _Pieces | None = None) -> dict[str, str]:
         args: dict[str, str] = {}
-        for n, (_, spec, _key) in enumerate(self._pieces):
+        for n, (_, spec, _key) in enumerate(self._pieces if pieces is None else pieces):
             if spec is not None and spec not in args and match.group(f"g{n}") is not None:
                 args[spec] = match.group(f"g{n}")
         return args
@@ -168,12 +188,28 @@ class Template:
         m = self.box.match(body)
         return self._args(m) if m else None
 
+    def recover_en(self, body: str) -> dict[str, str] | None:
+        """:meth:`recover` for a body the solver already printed in English."""
+        m = self.en_box.match(body) if self.en_box is not None else None
+        return self._args(m, self._en_pieces) if m else None
+
     def match_at(self, text: str, pos: int) -> tuple[int, dict[str, str]] | None:
         """Match free text at ``pos`` (a line start); return the end offset and arguments."""
         m = self.line.match(text, pos)
         if not m or m.end() == pos:
             return None
         return m.end(), self._args(m)
+
+    @cached_property
+    def en_line(self) -> re.Pattern[str] | None:
+        return self._compile(multiline=False, pieces=self._en_pieces) if self.en else None
+
+    def match_at_en(self, text: str, pos: int) -> tuple[int, dict[str, str]] | None:
+        """:meth:`match_at` for text the solver already printed in English."""
+        m = self.en_line.match(text, pos) if self.en_line is not None else None
+        if not m or m.end() == pos:
+            return None
+        return m.end(), self._args(m, self._en_pieces)
 
     def fill(self, args: dict[str, str]) -> str | None:
         """The English text with the recovered arguments, ``None`` if there is no English."""

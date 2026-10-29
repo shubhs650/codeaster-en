@@ -85,9 +85,12 @@ RE_DASHES = re.compile(r"^-{20,}\s*$")
 
 RE_TEST_RULE = re.compile(r"^-{80}\s*$")
 RE_TEST_LINE = re.compile(r"^( ---- | {6}\S| (OK|NOOK) | +$)")
-RE_MODES_HEAD = re.compile(r"^numéro\s+fréquence \(HZ\)\s+norme d'erreur\s*$")
+# French, or English when the solver ran with our gettext catalog (task 3.4).
+RE_MODES_HEAD = re.compile(
+    r"^(?:numéro\s+fréquence \(HZ\)\s+norme d'erreur|number\s+frequency \(HZ\)\s+error norm)\s*$"
+)
 RE_MODES_ROW = re.compile(r"^\s*(?P<n>\d+)\s+(?P<f>[-+0-9.Ee]+)\s+(?P<err>[-+0-9.Ee]+)\s*$")
-RE_MODES_TAIL = re.compile(r"^Norme d'erreur moyenne\s*:")
+RE_MODES_TAIL = re.compile(r"^(?:Norme d'erreur moyenne|Mean error norm)\s*:")
 RE_STARS = re.compile(r"^ \*{20,}\s*$")
 RE_TIMING_ROW = re.compile(
     r"^ \* (?P<name>.+?)\s*:\s*(?P<user>[\d.]+) :\s*(?P<sys>[\d.]+) :\s*(?P<tot>[\d.]+) :"
@@ -124,6 +127,20 @@ UTMESS_FOOTERS = (
     "Cette erreur est fatale. Le code s'arrête.",
 )
 
+# English of the comments Utmess.format_message appends to A/E/S/F boxes (upstream
+# code_aster/Messages/Utmess.py lines 613-624, ``dcomm``); French as printed -> English.
+# Method: assisted (task 4.4), wording follows the glossary.
+FOOTERS_EN = {
+    "A": "This is a warning. If you do not understand what it means, you may get unexpected "
+    "results!",
+    "E": "This error will be followed by a fatal error.",
+    "S": "This error is fatal. The code stops. All steps of the analysis up to the stop have "
+    "been saved in the database.",
+    "F": "This error is fatal. The code stops.",
+}
+# A run with our gettext catalog (DEBUT(LANG='EN'), task 3.4) prints these instead.
+UTMESS_FOOTERS_EN = tuple(FOOTERS_EN.values())
+
 _WS = re.compile(r"\s+")
 
 
@@ -131,7 +148,7 @@ def _collapse(text: str) -> str:
     return _WS.sub(" ", text).strip()
 
 
-_FOOTERS = {_collapse(f) for f in UTMESS_FOOTERS}
+_FOOTERS = {_collapse(f) for f in UTMESS_FOOTERS + UTMESS_FOOTERS_EN}
 
 
 class _Reader:
