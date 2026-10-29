@@ -19,7 +19,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "\n\n The global residual converges faster than the plane stress condition.\n Convergence of the plane stress condition can be improved by\n increasing ITER_CPLAN_MAXI under factor keyword COMPORTEMENT.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "27": {
    "id": "MECANONLINE2_27",
@@ -31,7 +34,10 @@
    "source": {
     "line": 32
    },
-   "en": null
+   "en": "\n The DEPL_CALCULE prediction at computation time step %(r1)f from result object %(k1)s could not be built.\n Possible reasons:\n  - the result object holds no displacement fields\n  - the requested time step is outside the range of time steps computed in the given result object (there is no extrapolation on either side)\n\n Advice:\n - check that the result object given under keyword EVOL_NOLI holds enough time steps to interpolate the requested field\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "28": {
    "id": "MECANONLINE2_28",
@@ -42,7 +48,10 @@
    "source": {
     "line": 43
    },
-   "en": null
+   "en": "\n The DEPL_CALCULE prediction at computation time step %(r1)f from the given result could not be built because the meshes differ and you use Lagrange-type boundary conditions (AFFE_CHAR_MECA).\n Advice: try AFFE_CHAR_CINE boundary conditions if possible. But then the displacement field is no longer kinematically admissible at the first time step, and you may get convergence problems.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "29": {
    "id": "MECANONLINE2_29",
@@ -51,7 +60,10 @@
    "source": {
     "line": 49
    },
-   "en": null
+   "en": "\n Prediction by DEPL_CALCULE or EXTRAPOLE is not possible because the numbering of the displacement field is inconsistent with the computation model.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "37": {
    "id": "MECANONLINE2_37",
@@ -76,7 +88,10 @@
    "source": {
     "line": 59
    },
-   "en": null
+   "en": "\n    DEFI_CONTACT/ALGO_CONT=PENALISATION/ADAPTATION=ADAPT_COEF or TOUT. You may be asking for a penetration criterion that is too strict. The adapted penalty coefficient takes unexpected values.\n\n    Advice:\n    - Either change the adaptive penalty mode: DEFI_CONTACT/ALGO_CONT=PENALISATION/ADAPTATION=NON with COEF_PENA_CONT <= %(r3).2e\n    - Or run your computation again with PENE_MAXI based on the mesh in the contact zone.  For information:\n        - The shortest edge of all main zones is  %(r2).2e.\n        - The longest edge of all main zones is  %(r4).2e.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "93": {
    "id": "MECANONLINE2_93",
@@ -85,7 +100,10 @@
    "source": {
     "line": 71
    },
-   "en": null
+   "en": "\n  -> Risk and advice: in an incremental solution, any incompatible stresses caused\n     by these initial external state variables are not taken into account.\n     To account for these stresses you can:\n     - start from an earlier fictitious time step at which all external state variables are zero\n       (or equal to the reference values)\n     - choose suitable reference values\n\n     For more information, see the documentation of AFFE_MATERIAU\n     (keyword AFFE_VARC).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "94": {
    "id": "MECANONLINE2_94",
@@ -121,7 +139,10 @@
    "source": {
     "line": 92
    },
-   "en": null
+   "en": "\n  -> Further information: for external state variable:  %(k1)s\n     and component:  %(k2)s\n     Maximum of the absolute value of ( %(k2)s - %(k5)s_REF): %(r1)f on element: %(k3)s\n     Minimum of the absolute value of ( %(k2)s - %(k5)s_REF): %(r2)f on element: %(k4)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "96": {
    "id": "MECANONLINE2_96",
@@ -142,7 +163,10 @@
    "source": {
     "line": 106
    },
-   "en": null
+   "en": "\n  -> In the initial state (before the first computation time step) the external\n     state variables (temperature, hydration, drying...) cause a\n     non-zero inelastic strain.\n     This non-zero strain is inconsistent with the \"virgin\" initial state that is\n     used.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "98": {
    "id": "MECANONLINE2_98",
@@ -154,7 +178,10 @@
    "source": {
     "line": 115
    },
-   "en": null
+   "en": "\n  -> The external forces (imposed load and support reactions) are detected as almost zero (%(r1)g).\n     But you requested convergence with the relative criterion (RESI_GLOB_RELA).\n     To avoid a division by zero, the code switched automatically to the absolute\n     convergence criterion (RESI_GLOB_MAXI).\n     RESI_GLOB_MAXI was chosen automatically, with value %(r2)g.\n  -> Risk & advice: check that your load (and the support reactions) should be zero at this time step\n     For THM-type problems, consider using a\n     reference criterion (RESI_REFE_RELA).\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

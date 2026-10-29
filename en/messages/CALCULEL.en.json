@@ -38,7 +38,10 @@
    "source": {
     "line": 30
    },
-   "en": null
+   "en": "\nUser error:\n With AFFE_CHAR_CINE/EVOL_IMPO, the field of the EVOL_XXX at the\n first time step sets the \"rule\": all the DOFs of this field are imposed at all\n time steps of the computation.\n\n However, a DOF is missing in EVOL_XXX %(k1)s:\n   time step: %(r1)f  node: %(i1)d  component: %(k2)s\n\nRisks & advice:\n Make sure that the imposed evolution %(k1)s covers the same DOFs at all time steps.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "CALCULEL_3",
@@ -116,7 +119,10 @@
    "source": {
     "line": 86
    },
-   "en": null
+   "en": "\n A thermal strain is to be computed but not all the required\n quantities are found:\n    - temperature\n    - reference temperature\n    - expansion coefficient\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "CALCULEL_17",
@@ -142,7 +148,10 @@
    "source": {
     "line": 100
    },
-   "en": null
+   "en": "\nError:\n CHAM_ELEM %(k1)s is inconsistent:\n   It has %(i1)d element group(s).\n   It was computed with LIGREL %(k2)s, which has %(i2)d element group(s).\n\nRisks & advice:\n This may be a programming error.\n But it can also happen if the LIGREL (or the MODELE)\n was destroyed in the meantime and created again under the same name.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "CALCULEL_20",
@@ -153,7 +162,10 @@
    "source": {
     "line": 113
    },
-   "en": null
+   "en": "\nQuantity field %(k1)s does not follow the naming format.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "CALCULEL_21",
@@ -162,7 +174,10 @@
    "source": {
     "line": 118
    },
-   "en": null
+   "en": "\nThe real and imaginary fields to assemble do not hold the same quantity\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "22": {
    "id": "CALCULEL_22",
@@ -203,7 +218,10 @@
    "source": {
     "line": 135
    },
-   "en": null
+   "en": "\nUser error:\n You are probably using command PROJ_SPEC_BASE or behavior ENDO_HETEROGENE.\n Only parallelism METHODE='CENTRALISE' is allowed. Model concerned: %(k1)s\n\nAdvice:\n In command AFFE_MODELE (or MODI_MODELE), use METHODE='CENTRALISE'\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "26": {
    "id": "CALCULEL_26",
@@ -232,7 +250,10 @@
    "source": {
     "line": 154
    },
-   "en": null
+   "en": "\nUsage (or programming) error:\n   Two element fields that do not have the same \"structure\" are being combined.\n   The code does not allow this at present.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "28": {
    "id": "CALCULEL_28",
@@ -243,7 +264,10 @@
    "source": {
     "line": 161
    },
-   "en": null
+   "en": "\n Problem using data structure %(k1)s.\n This data structure is a \"time evolution\" and must not\n be used outside its interval.\n But here the data structure has only one time step.\n In that case the transient is assumed to be \"steady\" and usable\n for any time value.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "29": {
    "id": "CALCULEL_29",
@@ -256,7 +280,10 @@
    "source": {
     "line": 171
    },
-   "en": null
+   "en": "\n User error:\n   The program needs field %(k2)s of result data structure %(k1)s\n   for NUME_ORDRE: %(i1)d\n   But this field does not exist in the given data structure.\n   Cannot continue.\n\n Risks & advice:\n Check that data structure %(k1)s is the right one to use.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "30": {
    "id": "CALCULEL_30",
@@ -267,7 +294,10 @@
    "source": {
     "line": 183
    },
-   "en": null
+   "en": "\nUser error:\n  The program cannot interpolate between two fields of type \"carte\" (map).\n\nRisks and advice:\n  * Make the fields element fields of type 'ELEM'.\n  * Command CREA_CHAMP can produce element fields directly.\n  * If a result data structure is written to and read back from a MED file,\n    the maps of the result data structure become element fields of type 'ELEM'.\n  The \"culprit\" data structure is: %(k1)s\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "33": {
    "id": "CALCULEL_33",
@@ -348,7 +378,10 @@
    "source": {
     "line": 234
    },
-   "en": null
+   "en": "\nThe load (keyword: EXCIT) given by the user differs from the one stored\nin the result data structure. In that case reuse is not allowed.\n\nAdvice:\n  Run the computation again, creating a new result data structure.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "40": {
    "id": "CALCULEL_40",
@@ -364,7 +397,10 @@
    "source": {
     "line": 243
    },
-   "en": null
+   "en": "\n Possible usage error:\n   You assigned data to some elements but this data\n   has no meaning for the finite elements on these elements.\n   This may be an assignment error.\n\n Field: '%(k1)s'\n Comment on this field: %(k2)s\n Quantity: %(k3)s   Unrecognized component: %(k4)s\n\n This problem concerns %(i1)d elements\n The first elements concerned are printed below.\n Type of the finite element assigned to the first printed element: %(k5)s\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "41": {
    "id": "CALCULEL_41",
@@ -398,7 +434,10 @@
    "source": {
     "line": 263
    },
-   "en": null
+   "en": "\n Use of COEF_RIGI_DRZ in in-plane rotation mode:\n   You assigned a negative COEF_RIGI_DRZ to TRIA3 and QUAD4 elements or element groups. This use is allowed,\n   but in-plane rotation mode is not activated on triangles. In-plane rotation gives a physical\n   meaning to the third rotation, unlike classical thin plate models.\n   This may be an assignment error.\n Advice:\n   This value should satisfy -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Field: '%(k1)s'\n Comment on this field: %(k2)s\n Quantity: %(k3)s   Unrecognized component: %(k4)s\n\n This problem concerns %(i1)d elements\n The first elements concerned are printed below.\n Type of the finite element assigned to the first printed element: %(k5)s\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "43": {
    "id": "CALCULEL_43",
@@ -414,7 +453,10 @@
    "source": {
     "line": 282
    },
-   "en": null
+   "en": "\n Use of COEF_RIGI_DRZ in in-plane rotation mode:\n   You assigned a negative COEF_RIGI_DRZ to TRIA3 elements only.\n   This use is not possible at present for these element types. In-plane rotation gives a physical\n   meaning to the third rotation, unlike classical thin plate models.\n   This may be an assignment error.\n Advice:\n   This value should satisfy -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Field: '%(k1)s'\n Comment on this field: %(k2)s\n Quantity: %(k3)s   Unrecognized component: %(k4)s\n\n This problem concerns %(i1)d elements\n The first elements concerned are printed below.\n Type of the finite element assigned to the first printed element: %(k5)s\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "44": {
    "id": "CALCULEL_44",
@@ -430,7 +472,10 @@
    "source": {
     "line": 301
    },
-   "en": null
+   "en": "\n Use of COEF_RIGI_DRZ in in-plane rotation mode:\n   You assigned a negative COEF_RIGI_DRZ. In-plane rotation gives a physical meaning to the third rotation,\n   unlike classical thin plate models.\n Advice:\n   This value should satisfy -1.E-2 < COEF_RIGI_DRZ < -1.E-12.\n\n Field: '%(k1)s'\n Comment on this field: %(k2)s\n Quantity: %(k3)s   Unrecognized component: %(k4)s\n\n This problem concerns %(i1)d elements\n The first elements concerned are printed below.\n Type of the finite element assigned to the first printed element: %(k5)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "45": {
    "id": "CALCULEL_45",
@@ -446,7 +491,10 @@
    "source": {
     "line": 318
    },
-   "en": null
+   "en": "\nUse of COEF_RIGI_DRZ in in-plane rotation mode in a nonlinear analysis.\nThis option is not possible at present. Use a positive value for this coefficient.\n\n Field: '%(k1)s'\n Comment on this field: %(k2)s\n Quantity: %(k3)s   Unrecognized component: %(k4)s\n\n This problem concerns %(i1)d elements\n The first elements concerned are printed below.\n Type of the finite element assigned to the first printed element: %(k5)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "47": {
    "id": "CALCULEL_47",
@@ -502,7 +550,10 @@
    "source": {
     "line": 347
    },
-   "en": null
+   "en": "\n You are projecting an unusual field onto the final model.\n Check that the modeling types you use are compatible.\n\n Message for developers:\n Parameter:  %(k1)s  of option:  %(k2)s  is not known to the TYPE_ELEM of LIGREL:  %(k3)s\n Field: %(k4)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "52": {
    "id": "CALCULEL_52",
@@ -698,7 +749,10 @@
    "source": {
     "line": 444
    },
-   "en": null
+   "en": "\n Error in command CALC_FERRAILLAGE:\n   The reinforcement map could not be computed on an element.\n   z = 0.9(h-c) is negative or zero (the user gave cover values incompatible with the element thickness)\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "74": {
    "id": "CALCULEL_74",
@@ -707,7 +761,10 @@
    "source": {
     "line": 451
    },
-   "en": null
+   "en": "\n User error in command CALC_FERRAILLAGE / TYPE_COMB = ELU:\n   Some keywords of CALC_FERRAILLAGE / AFFE are required for an ULS computation:\n     for CODIFICATION = 'BAEL91': FE, FCJ, GAMMA_S, GAMMA_C, TYPE_DIAGRAMME and EYS\n     for CODIFICATION = 'EC2': FYK, FCK, GAMMA_S, GAMMA_C, TYPE_DIAGRAMME and EYS\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "75": {
    "id": "CALCULEL_75",
@@ -740,7 +797,10 @@
    "source": {
     "line": 471
    },
-   "en": null
+   "en": "\nCommand CALC_FERRAILLAGE:\n   ELS_QP: the reinforcement density could not be computed on the element.\n   The section is highly loaded and no reinforcement can be designed\n   that meets the crack width limit!\n   Advice: change the concrete class or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "78": {
    "id": "CALCULEL_78",
@@ -749,7 +809,10 @@
    "source": {
     "line": 480
    },
-   "en": null
+   "en": "\nCommand CALC_FERRAILLAGE:\n   TYPE_STRUCTURE: 'POUTRE' or 'POTEAU' cannot be used for surface elements\n   Advice: use TYPE_STRUCTURE = '2D'\n   CALC_FERRAILLAGE may also have been run on a mesh\n   that contains both surface and line elements\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "79": {
    "id": "CALCULEL_79",
@@ -758,7 +821,10 @@
    "source": {
     "line": 489
    },
-   "en": null
+   "en": "\nCommand CALC_FERRAILLAGE:\n    TYPE_STRUCTURE: '2D' cannot be used for line elements\n    Advice: use TYPE_STRUCTURE = '1D'\n    CALC_FERRAILLAGE may also have been run on a mesh\n    that contains both surface and line elements\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "80": {
    "id": "CALCULEL_80",
@@ -767,7 +833,10 @@
    "source": {
     "line": 498
    },
-   "en": null
+   "en": "\nCommand CALC_FERRAILLAGE:\n   Shear reinforcement is not computed at SLS for codification 'BAEL91'\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "81": {
    "id": "CALCULEL_81",
@@ -776,7 +845,10 @@
    "source": {
     "line": 504
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELU: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the concrete shear is too high.\n   The shear reinforcement density is set to -1 for the element.\n   Advice: change the concrete class or revise the formwork.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "82": {
    "id": "CALCULEL_82",
@@ -785,7 +857,10 @@
    "source": {
     "line": 514
    },
-   "en": null
+   "en": "\n User error in command CALC_FERRAILLAGE / TYPE_COMB = ELS:\n   Some keywords of CALC_FERRAILLAGE / AFFE are required for an SLS computation:\n     for CODIFICATION = 'BAEL91': N,SIGS_ELS,SIGC_INF_ELS,SIGC_SUP_ELS,SIGC_INF_Y_ELS,SIGC_SUP_Y_ELS,SIGC_INF_Z_ELS,SIGC_SUP_Z_ELS\n     for CODIFICATION = 'EC2': ALPHA_E,SIGS_ELS,SIGC_INF_ELS,SIGC_SUP_ELS,SIGC_INF_Y_ELS,SIGC_SUP_Y_ELS,SIGC_INF_Z_ELS,SIGC_SUP_Z_ELS,FCK\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "83": {
    "id": "CALCULEL_83",
@@ -794,7 +869,10 @@
    "source": {
     "line": 522
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELU: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the section is too compressed (PIVOT B with compression steel, or PIVOT C).\n   WARNING: if you chose FERR_COMP = 'NON', compression steel is not computed!\n   The reinforcement density is set to -1.\n   Advice: run the computation again with FERR_COMP = 'OUI', change the concrete class, or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "84": {
    "id": "CALCULEL_84",
@@ -803,7 +881,10 @@
    "source": {
     "line": 532
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELS: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the section is too compressed (PIVOT B with compression steel).\n   WARNING: if you chose FERR_COMP = 'NON', compression steel is not computed!\n   The reinforcement density is set to -1.\n   Advice: run the computation again with FERR_COMP = 'OUI', change the concrete class, or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "85": {
    "id": "CALCULEL_85",
@@ -812,7 +893,10 @@
    "source": {
     "line": 542
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELS_QP: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the section is too compressed (PIVOT B with compression steel).\n   WARNING: if you chose FERR_COMP = 'NON', compression steel is not computed!\n   The reinforcement density is set to -1.\n   Advice: run the computation again with FERR_COMP = 'OUI', change the concrete class, or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "86": {
    "id": "CALCULEL_86",
@@ -821,7 +905,10 @@
    "source": {
     "line": 552
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELS: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the concrete shear is too high.\n   The shear reinforcement density is set to -1 for the element.\n   Advice: change the concrete class or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "87": {
    "id": "CALCULEL_87",
@@ -830,7 +917,10 @@
    "source": {
     "line": 561
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE:\n   ELS_QP: the reinforcement density could not be computed on the element.\n   For at least one of the Capra-Maury facets, the concrete shear is too high.\n   The shear reinforcement density is set to -1 for the element.\n   Advice: change the concrete class or revise the formwork.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "CALCULEL_88",
@@ -842,7 +932,10 @@
    "source": {
     "line": 570
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE: WARNING, a reinforcement field already exists at step index %(i1)d of result %(k1)s\n   This reinforcement field will be overwritten!\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "89": {
    "id": "CALCULEL_89",
@@ -851,7 +944,10 @@
    "source": {
     "line": 576
    },
-   "en": null
+   "en": "\n Command CALC_FERRAILLAGE: WARNING, the steel density is not given or is negative!\n   Consequence: the volume density of reinforcement is not computed.\n   Give keyword RHO_ACIER to have the volume density of reinforcement computed.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "90": {
    "id": "CALCULEL_90",
