@@ -43,7 +43,10 @@
    "source": {
     "line": 37
    },
-   "en": null
+   "en": "\nPETSc solver:\n  Limit reached: the PETSc solver is used by more than 5 matrices at the same time.\nSolution:\n  The program must be fixed.\n  Contact support.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "PETSC_4",
@@ -104,7 +107,10 @@
    "source": {
     "line": 79
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The solver failed: the residual norm is an invalid value.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "9": {
    "id": "PETSC_9",
@@ -113,7 +119,10 @@
    "source": {
     "line": 85
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The system matrix is non-symmetric, but the algorithm you are using requires\n  symmetry.\n  Change the algorithm, or use keyword MATR_RIGI_SYME ='OUI' under factor\n  keyword NEWTON to symmetrize the matrix.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "PETSC_10",
@@ -198,7 +207,10 @@
    "source": {
     "line": 143
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The linear system solution completed, but the solution does not meet the convergence criterion.\n  The residual is %(r1)f\n  \n  This can happen:\n     - if the matrix of the linear system is ill-conditioned\n     - if you used preconditioner 'LDLT_SP' with ALGORITHME='GMRES'\n\n  Advice: use preconditioner 'LDLT_SP' with ALGORITHME='FGMRES', or a direct solver ('MULT_FRONT' or 'MUMPS')\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "17": {
    "id": "PETSC_17",
@@ -207,7 +219,10 @@
    "source": {
     "line": 156
    },
-   "en": null
+   "en": "\nPETSC solver: \n   You are using preconditioner LDLT_INC: option MATR_DISTRIBUEE='OUI' is not\n   available with this preconditioner.\n\nAdvice:\n   Use MATR_DISTRIBUEE='NON'. You can also replace preconditioner \n   LDLT_INC with LDLT_SP, which is compatible with MATR_DISTRIBUEE='OUI'.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "18": {
    "id": "PETSC_18",
@@ -216,7 +231,10 @@
    "source": {
     "line": 167
    },
-   "en": null
+   "en": "\nPETSc solver:\n  Preconditioners 'ML', 'BOOMER', 'GAMG' and 'HPDDM' must not be used when:\n  - the model has Lagrange-multiplier loads from AFFE_CHAR_MECA, or\n  - the model nodes do not all carry the same degrees of freedom.\n\n  Advice:\n  - do not mix modeling types in your computation\n  - replace AFFE_CHAR_MECA with AFFE_CHAR_CINE if possible\n  - use preconditioner 'LDLT_SP' or a direct solver ('MULT_FRONT' or 'MUMPS').\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "19": {
    "id": "PETSC_19",
@@ -227,7 +245,10 @@
    "source": {
     "line": 180
    },
-   "en": null
+   "en": "\nPETSc solver:\n  Selecting preconditioner '%(k1)s' failed.\n  Your PETSc installation was probably not built with support for this preconditioner.\n\n  Advice:\n  - rebuild PETSc with support for preconditioners 'ML', 'BOOMER', 'GAMG' and 'HPDDM'\n  - use another preconditioner (for example 'LDLT_SP')\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "PETSC_20",
@@ -236,7 +257,10 @@
    "source": {
     "line": 191
    },
-   "en": null
+   "en": "\n Usage error:\n   Preconditioner SOLVEUR / PRE_COND='BLOC_LAGR' was requested,\n   but several processors are active.\n Risks & advice:\n   Use the MPI version with a single processor.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "21": {
    "id": "PETSC_21",
@@ -247,7 +271,10 @@
    "source": {
     "line": 200
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The linear solver did not converge. The correction phase was started and converged in '%(i1)d' iterations.\n\n  Advice:\n  - to speed up the computation next time, make your preconditioner more robust: 'LDLT_DP' instead of 'LDLT_SP',\n    or increase LOW_RANK_SEUIL.\n  - use the default linear solver.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "22": {
    "id": "PETSC_22",
@@ -258,7 +285,10 @@
    "source": {
     "line": 211
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The linear solver converged in '%(i1)d' iterations without needing the correction procedure.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "23": {
    "id": "PETSC_23",
@@ -267,7 +297,10 @@
    "source": {
     "line": 217
    },
-   "en": null
+   "en": "\nPETSc solver:\n  Preconditioner 'HPDDM' only works in distributed parallel mode.\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "24": {
    "id": "PETSC_24",
@@ -278,7 +311,10 @@
    "source": {
     "line": 223
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The previous linear system was solved in %(i1)d iterations.\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "25": {
    "id": "PETSC_25",
@@ -287,7 +323,10 @@
    "source": {
     "line": 229
    },
-   "en": null
+   "en": "\nPETSC solver: \n   You are using preconditioner LDLT_INC: this preconditioner is not available \n   in distributed parallel mode.\n\nAdvice:\n   You can replace preconditioner LDLT_INC with LDLT_SP, which is available \n   in distributed parallel mode.\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "26": {
    "id": "PETSC_26",
@@ -296,7 +335,10 @@
    "source": {
     "line": 240
    },
-   "en": null
+   "en": "\nPETSc solver:\n  Building a new second-level preconditioner from the Ritz elements computed while solving the previous linear system.\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "27": {
    "id": "PETSC_27",
@@ -305,7 +347,10 @@
    "source": {
     "line": 246
    },
-   "en": null
+   "en": "\nPETSc solver:\n  The second-level preconditioner is kept for later solutions.\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "28": {
    "id": "PETSC_28",
@@ -314,7 +359,10 @@
    "source": {
     "line": 252
    },
-   "en": null
+   "en": "\nPETSc solver:\n  You requested a second-level preconditioner. This is only possible with first-level preconditioner 'LDLT_SP'.\n  Advice:\n  You can:\n  - either change the first-level preconditioner (choose PRE_COND='LDLT_SP'),\n  - or disable the second-level preconditioner (choose ALGORITHME='GMRES' or 'FGMRES' instead of 'GMRES_LMP').\n  ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }

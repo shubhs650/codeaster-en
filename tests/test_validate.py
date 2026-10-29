@@ -123,6 +123,11 @@ def test_empty_english_rejected() -> None:
     assert issues == ["DEMO_1: 'en' must be null or a non-empty string"]
 
 
+def test_empty_english_ok_for_empty_french() -> None:
+    doc = _family(fr="", placeholders=[], en="", method="assisted")
+    assert messages.check_family(doc, "DEMO") == []
+
+
 def test_format_change_rejected() -> None:
     issues = messages.check_family(_family(en="Field %(k1)s: %(r1)e.", method="machine"), "DEMO")
     assert "DEMO_1: en is missing %(r1)12.5E" in issues

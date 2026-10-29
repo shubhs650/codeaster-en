@@ -14,26 +14,38 @@ Needs owner: …
 
 ---
 
-## 2026-10-29 — 3.2 bulk message translation (in progress) — agent
-Done: 3.2a (PR #26): free upstream seed, 3,113 messages from upstream's 2016
-`i18n/en-US/aster_messages.po` (`method: machine`). 3.2b: 992 messages translated in session
-(`method: assisted`, `translation_source: session:task-3.2`, same `check()` as 3.1) for the
-priority families: SUPERVIS*, UTILITAI*, MODELISA*, CALCULEL*, MECANONLINE*, ALGELINE*,
-FACTOR*, POSTRELE. 3.2c: 634 more in session for CHARGES*, ELEMENTS*, ELEMENT, MATERIAL*,
-MESH*, MED*, RESULT*, CHAMPS, COMPOR*. 3.2d: 801 more for CALCUL*, CALCCHAMP*, ASSEMBLA,
-CONTACT*, DISCRETS, POUTRE0, PLATE1, SHELL1, MEMBRANE, PIPE1, SOLIDSHELL1, DYNAMIQUE*,
-DYNALINE*, DYNAPOST, DYNAVISCO, MODAL, SEISME, MISS0, DAMPING*, DEFIBASEMODALE1, MODESTAT1,
-SPECTRAL0, XFEM*, RUPTURE*, THM*, POST0, POSTRCCM, POSTROCHE; earlier session entries now say
-"step index" (glossary: *numéro d'ordre*) and "mode shape" (glossary: *mode propre*).
-5,639 of 6,890 messages have English. No API calls, no token cost.
-Open: the remaining 1,251 messages (3.2e onward).
+## 2026-10-29 — 3.2 bulk message translation — agent
+Done: every one of the 6,890 messages in 277 families has English (`en` non-null); `caen validate`
+green. Token cost: zero (no API calls; the owner's API key was never needed).
+- 3.2a (PR #26): free upstream seed, 3,113 messages from upstream's 2016
+  `i18n/en-US/aster_messages.po` (`method: machine`).
+- 3.2b (PR #27): 992 messages translated in session (`method: assisted`,
+  `translation_source: session:task-3.2`, same `check()` as 3.1): SUPERVIS*, UTILITAI*,
+  MODELISA*, CALCULEL*, MECANONLINE*, ALGELINE*, FACTOR*, POSTRELE.
+- 3.2c (PR #28): 634 for CHARGES*, ELEMENTS*, ELEMENT, MATERIAL*, MESH*, MED*, RESULT*, CHAMPS,
+  COMPOR*.
+- 3.2d (PR #29): 801 for CALCUL*, CALCCHAMP*, ASSEMBLA, CONTACT*, DISCRETS, POUTRE0, PLATE1,
+  SHELL1, MEMBRANE, PIPE1, SOLIDSHELL1, DYNAMIQUE*, DYNALINE*, DYNAPOST, DYNAVISCO, MODAL, SEISME,
+  MISS0, DAMPING*, DEFIBASEMODALE1, MODESTAT1, SPECTRAL0, XFEM*, RUPTURE*, THM*, POST0, POSTRCCM,
+  POSTROCHE; earlier session entries now say "step index" (glossary: *numéro d'ordre*) and
+  "mode shape" (glossary: *mode propre*).
+- 3.2e (this PR): the last 1,251 (all other families: JEVEUX*, PREPOST*, ROM*, ALGORITH*,
+  DISCRETISATION*, FONCT0, PETSC, ELIMLAGR, ETATINIT, FATIGUE1, HHO*, META1, MFRONT, OAR0,
+  PARTITION*, PCOMB, PROJECTION4, SOUSTRUC*, SUBDIVISE, TABLE0, VARC1, VOLUFINI and the rest).
+  `VIDE_1` has an empty French text, so its English is the empty string: the validator and
+  `check()` now accept an empty `en` only when `fr` is empty (test added).
+Totals: 3,113 `machine` (seed) + 3,777 `assisted` (session); none `reviewed`.
+Open: 3.3 (owner/engineer review, owner-only `reviewed`); the seed English is literal 2016
+Crowdin wording and is the first place to look when a message reads badly.
 Decisions: none. Wording choices: "Ce message est un message d'erreur développeur. Contactez
 le support technique." = "This is a developer error message. Contact technical support.";
-*noeud sommet* = "corner node" (the glossary forbids "vertex"); *variable de commande* =
-"external state variable" (as AFFE_VARC); *pilotage* = "continuation control"; *instant de
-calcul* = "time step"; grid *cellules* in PROJ_CHAMP = "grid boxes" (the glossary forbids
-"cell").
-Needs owner: nothing.
+*noeud sommet* / *sommet* = "corner node" (the glossary forbids "vertex"); *variable de
+commande* = "external state variable" (as AFFE_VARC); *pilotage* = "continuation control";
+*instant de calcul* = "time step"; grid *cellules* in PROJ_CHAMP = "grid boxes" (the glossary
+forbids "cell"); *Conseil* = "Advice"; *nappe* = "two-variable function"; *carte* = "map";
+*fond de fissure* / *lèvre* = "crack front" / "lip"; *choc* = "impact"; *appui* = "support";
+ELU/ELS = "ULS (ELU)" / "SLS (ELS)".
+Needs owner: nothing blocking; review queue entry added.
 
 ## 2026-10-29 — 4.7 report images — agent
 Done: `codeaster_en.report.images` (pyvista off-screen): deformed shape colored by displacement

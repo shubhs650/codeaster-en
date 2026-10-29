@@ -19,7 +19,10 @@
    "source": {
     "line": 26
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested,\n   but this version of the program does not include the PETSC solver,\n   which this feature requires.\n\n Risks & advice:\n   Use the MPI version with a single processor.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "2": {
    "id": "ELIMLAGR_2",
@@ -28,7 +31,10 @@
    "source": {
     "line": 37
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested.\n   Several processors are active, but the model data must\n   be centralized.\n Risks & advice:\n   Use DISTRIBUTION='CENTRALISE' in AFFE_MODELE.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "ELIMLAGR_3",
@@ -37,7 +43,10 @@
    "source": {
     "line": 47
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested.\n   The matrix is not real (it is probably complex).\n   This is not allowed for now.\n Risks & advice:\n   Do not use SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "4": {
    "id": "ELIMLAGR_4",
@@ -46,7 +55,10 @@
    "source": {
     "line": 57
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested.\n   Some boundary conditions are applied with AFFE_CHAR_CINE.\n   This is not allowed for now.\n Risks & advice:\n   Replace AFFE_CHAR_CINE with AFFE_CHAR_MECA.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "6": {
    "id": "ELIMLAGR_6",
@@ -55,7 +67,10 @@
    "source": {
     "line": 67
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested,\n   but the matrix is a generalized matrix.\n   This is not allowed.\n Risks & advice:\n   Do not use SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "7": {
    "id": "ELIMLAGR_7",
@@ -64,7 +79,10 @@
    "source": {
     "line": 77
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested,\n   but the \"reduced\" matrix has zero size\n   (all DOFs are imposed).\n   This is not allowed for now.\n Risks & advice:\n   Do not use SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "ELIMLAGR_8",
@@ -73,7 +91,10 @@
    "source": {
     "line": 88
    },
-   "en": null
+   "en": "\n Usage error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested,\n   but a step of the computation failed (computing the kernel of the constraint matrix).\n Risks & advice:\n   Do not use SOLVEUR / ELIM_LAGR='OUI'.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "ELIMLAGR_10",
@@ -84,7 +105,10 @@
    "source": {
     "line": 97
    },
-   "en": null
+   "en": "\n Error:\n   Feature SOLVEUR / ELIM_LAGR='OUI' was requested,\n   but the coefficients of the linear relations are all zero\n   in matrix %(k1)s.\n Risks & advice:\n   For example, do not use SOLVEUR / ELIM_LAGR='OUI' with\n   a mass matrix.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "11": {
    "id": "ELIMLAGR_11",
@@ -93,7 +117,10 @@
    "source": {
     "line": 108
    },
-   "en": null
+   "en": "\n User error:\n   ELIM_LAGR is being used to eliminate the Lagrange equations\n   from a matrix that is not a stiffness matrix.\n   First use ELIM_LAGR on the stiffness\n   matrix.\n\n Risks & advice:\n   The call sequence should look like:\n      K2=ELIM_LAGR(MATR_RIGI=K1, )\n      M2=ELIM_LAGR(MATR_RIGI=K1, MATR_ASSE=M1)\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "12": {
    "id": "ELIMLAGR_12",
@@ -105,7 +132,10 @@
    "source": {
     "line": 122
    },
-   "en": null
+   "en": "\n    The matrix has %(i1)d columns (in total).\n    Of these columns, %(i2)d are linearly independent.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "13": {
    "id": "ELIMLAGR_13",
@@ -120,7 +150,10 @@
    "source": {
     "line": 128
    },
-   "en": null
+   "en": "\n    The kernel of the matrix is a space of dimension %(i1)d. A basis of this space was built.\n    Matrix norm                : %(r1)f\n    Basis norm                 : %(r2)f\n    Matrix-basis product norm  : %(r3)f\n    Elapsed time (seconds)     : %(r4)f\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }
