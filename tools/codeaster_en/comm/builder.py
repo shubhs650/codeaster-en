@@ -119,21 +119,30 @@ class Spring:
     On two-node elements (``SEG2``) the spring acts between the two nodes (``K_T_D_L``); with
     ``to_ground=True`` the group holds point elements (``POI1``) and each point is tied to a
     fixed ground (``K_T_D_N``). Both are written in the global frame (``REPERE='GLOBAL'``), so
-    a zero-length two-node spring needs no local frame.
+    a zero-length two-node spring needs no local frame. A two-node spring of non-zero length
+    carries no moment: its two end forces form a couple unless they act along the spring, so
+    the support moments then miss that couple (seen in the ``solid_loads`` fixture, where it is
+    about 1e-4 of the moment balance).
     """
 
     stiffness: tuple[Real, Real, Real]
     to_ground: bool = False
 
-    def keywords(self, group: str) -> dict[str, Any]:
+    def keywords(self, group: str) -> list[dict[str, Any]]:
+        """The stiffness occurrence and a zero mass occurrence (see
+        :meth:`Builder.element_properties`)."""
         if len(self.stiffness) != 3:
             raise CommSyntaxError("a spring takes three stiffness values (X, Y, Z)")
-        return {
-            "REPERE": "GLOBAL",
-            "CARA": "K_T_D_N" if self.to_ground else "K_T_D_L",
-            "GROUP_MA": group,
-            "VALE": tuple(_real(k) for k in self.stiffness),
-        }
+        suffix = "N" if self.to_ground else "L"
+        return [
+            {
+                "REPERE": "GLOBAL",
+                "CARA": f"K_T_D_{suffix}",
+                "GROUP_MA": group,
+                "VALE": tuple(_real(k) for k in self.stiffness),
+            },
+            {"CARA": f"M_T_D_{suffix}", "GROUP_MA": group, "VALE": (0.0,)},
+        ]
 
 
 @dataclass
@@ -353,6 +362,28 @@ class Builder:
         )
         return self._call("DEFI_GROUP", mesh, reuse=True, MAILLAGE=mesh, CREA_GROUP_NO=occ)
 
+    def node_group_at(
+        self, mesh: Concept, name: str, point: Sequence[Real], *, tolerance: Real
+    ) -> Concept:
+        """``DEFI_GROUP`` ``CREA_GROUP_NO`` ``OPTION='ENV_SPHERE'``: the nodes within
+        ``2 * tolerance`` of ``point`` (``bibfor/modelisa/cgnoes.F90:167``), as in
+        ``astest/forma01d.comm:193``. Use it for a node
+        that is not a group of the mesh, such as the free end of a spring: a point element
+        there would be included in the spring and raise alarm ``MODELISA8_14``."""
+        return self._call(
+            "DEFI_GROUP",
+            mesh,
+            reuse=True,
+            MAILLAGE=mesh,
+            CREA_GROUP_NO={
+                "NOM": name,
+                "OPTION": "ENV_SPHERE",
+                "POINT": tuple(_real(v) for v in point),
+                "RAYON": _real(tolerance),
+                "PRECISION": _real(tolerance),
+            },
+        )
+
     def orient_skin(self, mesh: Concept, groups: Groups) -> Concept:
         """``MODI_MAILLAGE`` ``ORIE_PEAU``: skin elements' normals point out of the solid.
 
@@ -498,7 +529,11 @@ class Builder:
         Every discrete group of the model must get properties, or the solver stops
         (``AFFECARAELEM_32``/``_33``): each spring group needs a :class:`Spring`, and each remote
         point gets a zero ``K_TR_D_N`` stiffness here without asking, as in
-        ``astest/zzzz144a.comm:44`` (it only carries the six degrees of freedom).
+        ``astest/zzzz144a.comm:44`` (it only carries the six degrees of freedom). Every discrete
+        group also gets a zero mass (``M_T_D_L``/``M_T_D_N``/``M_TR_D_N``, as in
+        ``astest/fdlv100a.comm:78`` and ``astest/sslx200a.comm:62``): without one, gravity,
+        rotation and mass matrices raise alarm ``DISCRETS_26`` on the discrete elements
+        (``bibfor/te/te0043.F90:79``; seen in the ``solid_loads`` fixture's first run).
         """
         shells = dict(shells or {})
         springs = dict(springs or {})
@@ -521,12 +556,13 @@ class Builder:
                     o["ANGL_REP"] = tuple(_real(a) for a in reference_angles)
                 occ.append(o)
             kw["COQUE"] = _one_or_many(occ)
-        discrete = [springs[g].keywords(g) for g in springs]
-        discrete += [
-            {"REPERE": "GLOBAL", "CARA": "K_TR_D_N", "GROUP_MA": g, "VALE": (0.0,) * 6}
-            for g, m in model.discrete.items()
-            if m == "DIS_TR"
-        ]
+        discrete = [occ for g in springs for occ in springs[g].keywords(g)]
+        for g, m in model.discrete.items():
+            if m == "DIS_TR":
+                discrete += [
+                    {"REPERE": "GLOBAL", "CARA": "K_TR_D_N", "GROUP_MA": g, "VALE": (0.0,) * 6},
+                    {"CARA": "M_TR_D_N", "GROUP_MA": g, "VALE": (0.0,) * 10},
+                ]
         if discrete:
             kw["DISCRET"] = _one_or_many(discrete)
         if not kw:
@@ -858,21 +894,27 @@ class Builder:
         title: str,
         field: str = "REAC_NODA",
         components: Sequence[str] = ("DX", "DY", "DZ"),
+        moment_about: Sequence[Real] | None = None,
         name: str | None = None,
     ) -> Concept:
-        """``POST_RELEVE_T`` ``RESULTANTE``: sum of ``field`` over node groups, as a table."""
-        return self._call(
-            "POST_RELEVE_T",
-            self._name(name, "REAC"),
-            ACTION={
-                "OPERATION": "EXTRACTION",
-                "INTITULE": title,
-                "RESULTAT": result,
-                "NOM_CHAM": field,
-                "GROUP_NO": _groups(node_groups),
-                "RESULTANTE": tuple(components),
-            },
-        )
+        """``POST_RELEVE_T`` ``RESULTANTE``: sum of ``field`` over node groups, as a table.
+
+        With ``moment_about`` (a point) the table also has the moment of those forces about the
+        point (``MOMENT=('DRX', 'DRY', 'DRZ')``, ``POINT``, as in ``astest/ssll14a.comm:213``),
+        and its columns are ``RESULT_X`` ... ``MOMENT_Z`` instead of the component names
+        (``bibfor/postrele/rvpsts.F90:146``)."""
+        action: dict[str, Any] = {
+            "OPERATION": "EXTRACTION",
+            "INTITULE": title,
+            "RESULTAT": result,
+            "NOM_CHAM": field,
+            "GROUP_NO": _groups(node_groups),
+            "RESULTANTE": tuple(components),
+        }
+        if moment_about is not None:
+            action["MOMENT"] = ("DRX", "DRY", "DRZ")
+            action["POINT"] = _vector(moment_about, "moment_about")
+        return self._call("POST_RELEVE_T", self._name(name, "REAC"), ACTION=action)
 
     def mass_properties(
         self,

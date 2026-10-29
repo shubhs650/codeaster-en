@@ -48,13 +48,14 @@ Nothing is read at import; each module reads its data on first use (ADR-020).
 | `param(name, value, note=None) -> Param` | `NAME = value  # note` |
 | `read_mesh(*, unit=20, name=None) -> Concept` | `LIRE_MAILLAGE(FORMAT="MED", UNITE=unit)` |
 | `node_groups(mesh, *, from_groups=None, from_all_groups=False) -> Concept` | `DEFI_GROUP CREA_GROUP_NO` (node groups named after element groups) |
+| `node_group_at(mesh, name, point, *, tolerance) -> Concept` | `DEFI_GROUP CREA_GROUP_NO OPTION="ENV_SPHERE"` (the nodes within 2 × `tolerance` of `point`, e.g. the free end of a spring) |
 | `orient_skin(mesh, groups) -> Concept` | `MODI_MAILLAGE ORIE_PEAU` |
 | `orient_shell_normals(mesh, group, *, normal, at_node_group) -> Concept` | `MODI_MAILLAGE ORIE_NORM_COQUE` |
 | `model(mesh, kind, *, groups=None, modelisation=None, springs=(), remote_points=(), name=None) -> Model` | `AFFE_MODELE`; `kind` in `BODY_KINDS`: `solid`, `thin_shell`, `thick_shell`, `curved_shell`, `plane_stress`, `plane_strain`, `axisymmetric`; `springs` groups are modeled `DIS_T`, `remote_points` groups `DIS_TR` (ADR-022) |
 | `material(name, *, E, nu, rho=None, alpha=None) -> Concept` | `DEFI_MATERIAU ELAS` |
 | `assign_materials(mesh, {group or "*": material}, *, name=None) -> Concept` | `AFFE_MATERIAU` |
 | `shell_properties(model, {group: thickness}, *, reference_angles=None, name=None) -> Concept` | `AFFE_CARA_ELEM COQUE` |
-| `element_properties(model, *, shells=None, springs=None, reference_angles=None, name=None) -> Concept` | `AFFE_CARA_ELEM COQUE` + `DISCRET`: `springs` maps a spring group to `Spring((kx, ky, kz), to_ground=False)` (`K_T_D_L`, or `K_T_D_N`); remote points get a zero `K_TR_D_N` automatically; every discrete group must be covered |
+| `element_properties(model, *, shells=None, springs=None, reference_angles=None, name=None) -> Concept` | `AFFE_CARA_ELEM COQUE` + `DISCRET`: `springs` maps a spring group to `Spring((kx, ky, kz), to_ground=False)` (`K_T_D_L`, or `K_T_D_N`); remote points get a zero `K_TR_D_N` automatically; every discrete group must be covered, and each also gets a zero mass (`M_T_D_L`/`M_T_D_N`/`M_TR_D_N`), without which gravity and rotation stop on `DISCRETS_26` |
 | `fix(model, groups, *, kinematic=False, name=None) -> Concept` | all displacement (and rotation, for shells) DOF zero: `AFFE_CHAR_MECA DDL_IMPO`, or `AFFE_CHAR_CINE MECA_IMPO` with `kinematic=True` |
 | `restrain(model, [Restraint({"DZ": 0.0}, groups=... or node_groups=...)], *, kinematic=False, name=None) -> Concept` | the same, per DOF |
 | `pressure(model, groups, value, *, name=None) -> Concept` | `AFFE_CHAR_MECA PRES_REP` (positive acts against the element normal) |
@@ -65,7 +66,7 @@ Nothing is read at import; each module reads its data on first use (ADR-020).
 | `rotation(model, *, speed, axis, center=(0, 0, 0), groups=None, name=None) -> Concept` | `AFFE_CHAR_MECA ROTATION` (speed in rad/s) |
 | `linear_static(model, materials, loads, *, elements=None, solver="MUMPS", name=None) -> Concept` | `MECA_STATIQUE` |
 | `compute_fields(result, *, stress=None, criteria=None, strain=None, forces=None, energy=None) -> Concept` | `CALC_CHAMP` (reuse) |
-| `resultant(result, node_groups, *, title, field="REAC_NODA", components=("DX","DY","DZ"), name=None) -> Concept` | `POST_RELEVE_T` `RESULTANTE` table |
+| `resultant(result, node_groups, *, title, field="REAC_NODA", components=("DX","DY","DZ"), moment_about=None, name=None) -> Concept` | `POST_RELEVE_T` `RESULTANTE` table; with `moment_about` (a point) also `MOMENT`, and the columns become `RESULT_X..Z`, `MOMENT_X..Z` |
 | `modal(model, materials, loads, *, count, elements=None, name=None) -> ModalMatrices` | `CALC_MATR_ELEM` ×2, `NUME_DDL`, `ASSE_MATRICE` ×2, `CALC_MODES` (`PLUS_PETITE`, `count` modes); `.modes` is the result |
 | `normalize_modes(modes, *, norm="MASS_GENE") -> Concept` | `NORM_MODE` (reuse) |
 | `filter_modes(modes, *, frequency_range=None, min_mass_fraction=None, name=None) -> Concept` | `EXTR_MODE` `FILTRE_MODE` (by `FREQ_MIN`/`FREQ_MAX` or `CRIT_EXTR="MASS_EFFE_UN"`), `IMPRESSION CUMUL="OUI"` |

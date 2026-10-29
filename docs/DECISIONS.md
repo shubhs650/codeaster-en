@@ -354,5 +354,7 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 **Why.** These are the forms upstream's own tests use; each choice is written once in the builder, so ClearFEA does not have to rediscover the discrete-element and `DDL_ESCL` details.
 
+**Amendment (task 6.4c, first solver run of the `solid_loads` fixture).** `element_properties` also writes a zero mass for every discrete group (`M_T_D_L`/`M_T_D_N` for springs, `M_TR_D_N` for remote points, as in `astest/fdlv100a.comm:78` and `astest/sslx200a.comm:62`): without it, gravity and rotation loads stop on alarm `DISCRETS_26` (`bibfor/te/te0043.F90:79`) raised as an error. Two additive methods: `node_group_at` (`DEFI_GROUP ENV_SPHERE`, for a node that must not be a POI1 because of `MODELISA8_14`) and `resultant(moment_about=)`. The report lists body loads (`PESANTEUR`, `ROTATION`) as not summed, because their resultant needs the mass (REPORT-SPEC §1), and with any unsummed load it states that no equilibrium check was made instead of printing a misleading percentage.
+
 **Consequences.** `CLEARFEA-INTEGRATION.md` §2.1 gains the new methods (additive; no signature changed). `fix()` on a shell model clamps rotations, which a `DIS_T`-only ground node does not have; use `restrain` with translations there. Beams, masses (`M_T_D_N`) and temperature loads are not wrapped yet.
 

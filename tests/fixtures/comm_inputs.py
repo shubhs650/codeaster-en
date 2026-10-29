@@ -11,7 +11,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from codeaster_en.comm import Builder, Restraint, ResultCheck, literal
+from codeaster_en.comm import Builder, Restraint, ResultCheck, Spring, literal
 
 FIXTURES = Path(__file__).resolve().parent
 
@@ -235,6 +235,13 @@ def modal() -> str:
     mass = b.mass_properties(model, mate)
     b.print_table(mass, unit=30)
     modes = b.modal(model, mate, [clamp], count=6).modes
+    b.comment(
+        "CALC_MODES scales each shape to a largest component of 1 (bibfor/algeline/vppara.F90); "
+        "NORM_MODE\n"
+        "rescales them to a unit generalized mass, the usual form for modal superposition "
+        "(task 6.4)."
+    )
+    b.normalize_modes(modes)
     b.write_med(modes, "DEPL")
     b.comment(
         "Modal parameters stored by CALC_MODES (bibfor/algeline/vpstor.F90), printed for the "
@@ -258,11 +265,129 @@ def modal() -> str:
             )
             for mode, ref, calc, tol, label in _MODAL_CHECKS
         ]
+        + [
+            ResultCheck(
+                modes,
+                step=1,
+                parameter="MASS_GENE",
+                reference=1.0,
+                computed=1.0,
+                tolerance=literal("1.0e-6"),
+                label="M1_MASS_GENE",
+                comment="Generalized mass of mode 1 after NORM_MODE NORME='MASS_GENE'.",
+            )
+        ]
     )
     return b.text()
 
 
-CASES = {"solid_static": solid_static, "shell_static": shell_static, "modal": modal}
+# (component, hand value, solver value from the first run); hand values from hand_values.py.
+_LOADS_CHECKS = (
+    ("DX", -828.0, -828.000000000001),
+    ("DY", -500.39, -500.38999999999965),
+    ("DZ", 654.017, 654.017),
+)
+
+
+def solid_loads() -> str:
+    b = Builder()
+    b.header(
+        "solid_loads -- steel block on its base under the Tier 2 loads (task 6.4).\n"
+        "codeaster-en test fixture. Units: mm, N, MPa, tonne, s (density in t/mm3).\n"
+        "Block 200 (X) x 100 (Y) x 100 (Z), HEXA8, steel E=210000, NU=0.3, RHO=7.85e-9; "
+        "base Z=0 clamped.\n"
+        "Loads: gravity 9810 mm/s2 along -Z; rotation 20 rad/s about Z through the origin; "
+        "water\n"
+        "(1e-9 t/mm3, free surface Z=1000) on the face Y=0; F=(200, 0, -500) N and "
+        "M=(0, 0, 2.0e4) N.mm\n"
+        "at the remote point MASTER (100, 50, 200), spread over the top face by RBE3; a "
+        "1000 N/mm spring\n"
+        "from (200, 50, 50) to a fixed ground node at (250, 50, 50).\n"
+        "Check: the REAC_NODA sum over the whole field is minus the sum of the applied forces "
+        "(see\n"
+        'run.json "checks" and hand_values.py). Modelled on astest zzzz144a (DIS_TR point, '
+        "LIAISON_RBE3,\n"
+        "FORCE_NODALE), sdnv138c (pressure FORMULE), erreu01a (ROTATION) and forma01d "
+        "(ENV_SPHERE).\n"
+        "VALE_CALC values are the solver's own results from the first run (task 6.4c)."
+    )
+    b.start(language=None, testing=True, alarms_as_errors=True)
+    mesh = b.read_mesh()
+    b.node_groups(mesh, from_groups=("BASE", "TOP", "MASTER"))
+    b.comment(
+        "The free end of the spring is not a mesh group: a POI1 there would be included in "
+        "the SEG2\n"
+        "and raise alarm MODELISA8_14."
+    )
+    b.node_group_at(mesh, "GROUND", (250.0, 50.0, 50.0), tolerance=0.1)
+    b.orient_skin(mesh, "WET")
+    model = b.model(mesh, "solid", springs="SPRING", remote_points="MASTER")
+    steel = b.material("ACIER", E=210000.0, nu=0.3, rho=literal("7.85e-9"))
+    mate = b.assign_materials(mesh, {"BLOCK": steel})
+    cara = b.element_properties(model, springs={"SPRING": Spring((1000.0, 1000.0, 1000.0))})
+    fixed = b.fix(model, "BASE")
+    ground = b.restrain(
+        model, [Restraint({"DX": 0.0, "DY": 0.0, "DZ": 0.0}, node_groups="GROUND")], name="SOL"
+    )
+    remote = b.remote_load(
+        model, "MASTER", "TOP", force=(200.0, 0.0, -500.0), moment=(0.0, 0.0, 2.0e4)
+    )
+    weight = b.gravity(model, acceleration=9810.0, groups="BLOCK")
+    spin = b.rotation(model, speed=20.0, axis=(0.0, 0.0, 1.0), groups="BLOCK")
+    b.comment("Water pressure rho g (h - Z) in MPa: rho = 1e-9 t/mm3, g = 9810 mm/s2, h = 1000 mm.")
+    water = b.hydrostatic_pressure(
+        model, "WET", density=literal("1.0e-9"), gravity=9810.0, free_surface=1000.0
+    )
+    resu = b.linear_static(model, mate, [fixed, ground, remote, weight, spin, water], elements=cara)
+    b.compute_fields(resu, criteria="SIEQ_NOEU", forces="REAC_NODA")
+    reac = b.resultant(resu, ("BASE", "GROUND"), title="REAC_SUPPORTS")
+    b.print_table(reac, unit=30)
+    b.comment(
+        "Moment of the support reactions about the base center (100, 50, 0): minus the moment "
+        "of the\n"
+        "applied loads, including the remote moment MZ (hand_values.py; checked by "
+        "tests/test_fixture_outputs.py)."
+    )
+    moment = b.resultant(
+        resu,
+        ("BASE", "GROUND"),
+        title="MOMENT_SUPPORTS",
+        moment_about=(100.0, 50.0, 0.0),
+        name="MOMT",
+    )
+    b.print_table(moment, unit=32)
+    mass = b.mass_properties(model, mate, elements=cara)
+    b.print_table(mass, unit=31)
+    b.write_med(resu, ("DEPL", "SIEQ_NOEU", "REAC_NODA"), elements=cara)
+    b.comment(
+        "Reaction sums over the whole REAC_NODA field: minus the applied force. The RBE3 "
+        "relations\n"
+        "pass forces between TOP and MASTER that cancel in the sum."
+    )
+    b.test_results(
+        [
+            ResultCheck(
+                resu,
+                field="REAC_NODA",
+                component=comp,
+                sum=True,
+                reference=ref,
+                computed=calc,
+                tolerance=literal("1.0e-4"),
+                label=f"REAC_{comp}_SUM",
+            )
+            for comp, ref, calc in _LOADS_CHECKS
+        ]
+    )
+    return b.text()
+
+
+CASES = {
+    "solid_static": solid_static,
+    "shell_static": shell_static,
+    "modal": modal,
+    "solid_loads": solid_loads,
+}
 
 
 def main() -> int:

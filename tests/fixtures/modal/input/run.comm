@@ -42,6 +42,10 @@ MASS = ASSE_MATRICE(MATR_ELEM=MASS_EL, NUME_DDL=NUME)
 
 MODES = CALC_MODES(MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION="PLUS_PETITE", CALC_FREQ=_F(NMAX_FREQ=6))
 
+# CALC_MODES scales each shape to a largest component of 1 (bibfor/algeline/vppara.F90); NORM_MODE
+# rescales them to a unit generalized mass, the usual form for modal superposition (task 6.4).
+MODES = NORM_MODE(reuse=MODES, MODE=MODES, NORME="MASS_GENE")
+
 IMPR_RESU(FORMAT="MED", UNITE=80, RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL"))
 
 # Modal parameters stored by CALC_MODES (bibfor/algeline/vpstor.F90), printed for the modal
@@ -124,6 +128,17 @@ TEST_RESU(
             VALE_CALC=1497.0292704690783,
             PRECISION=3.0e-2,
             LEGENDE="F6_TORSION_1",
+        ),
+        # Generalized mass of mode 1 after NORM_MODE NORME='MASS_GENE'.
+        _F(
+            NUME_ORDRE=1,
+            PARA="MASS_GENE",
+            RESULTAT=MODES,
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=1.0,
+            VALE_CALC=1.0,
+            PRECISION=1.0e-6,
+            LEGENDE="M1_MASS_GENE",
         ),
     )
 )

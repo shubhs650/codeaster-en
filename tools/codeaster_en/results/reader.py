@@ -118,10 +118,13 @@ class ReactionGroup:
 
 @dataclass
 class ReactionSummary:
-    """Support reactions. ``total`` sums the whole ``REAC_NODA`` field: only nodes with imposed
+    """Support reactions. ``total`` sums the whole ``REAC_NODA`` field: nodes with imposed
     DOFs carry a reaction (glossary, ``REAC_NODA``), so it is the reaction of all supports
-    together. The applied-load resultant and the balance check (``docs/REPORT-SPEC.md`` §3
-    item 10) need the loads of the ``.comm`` and are the report's job (task 4.6)."""
+    together. Nodes tied by linear relations (``LIAISON_RBE3``...) carry relation forces too;
+    they cancel in the force sums, but a remote point's ``DRX``-``DRZ`` sums are its applied
+    moment with the opposite sign (``solid_loads`` fixture, task 6.4c). The applied-load
+    resultant and the balance check (``docs/REPORT-SPEC.md`` §3 item 10) need the loads of the
+    ``.comm`` and are the report's job (task 4.6)."""
 
     field: str | None
     per_group: list[ReactionGroup] = field(default_factory=list)
@@ -344,6 +347,12 @@ class Results:
                     for c in TRANSLATIONS + ROTATIONS
                     if c in table.columns and isinstance(row.get(c), int | float)
                 }
+                # With MOMENT, POST_RELEVE_T names the resultant columns RESULT_X..Z
+                # (bibfor/postrele/rvpsts.F90:146); the moments about POINT are not sums of
+                # DRX..DRZ, so they are left out here.
+                for c, col in zip(TRANSLATIONS, ("RESULT_X", "RESULT_Y", "RESULT_Z"), strict=True):
+                    if c not in values and isinstance(row.get(col), int | float):
+                        values[c] = float(row[col])
                 summary.from_tables.append(
                     ReactionGroup(
                         group=None,

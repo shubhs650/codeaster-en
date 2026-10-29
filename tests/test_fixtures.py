@@ -20,7 +20,7 @@ import pytest
 REPO = Path(__file__).resolve().parents[1]
 FIXTURES = REPO / "tests" / "fixtures"
 SCHEMA = REPO / "docs" / "schemas" / "run.schema.json"
-CASES = ("solid_static", "shell_static", "modal")
+CASES = ("solid_static", "shell_static", "modal", "solid_loads")
 GROUP_KEYWORDS = {"GROUP_MA", "GROUP_NO", "GROUP_MA_PEAU"}
 
 pytest.importorskip("numpy")
@@ -47,14 +47,18 @@ def _calls(case: str, name: str) -> list[ast.Call]:
 
 
 def _literal_groups(case: str) -> set[str]:
-    """Every string given to a GROUP_* keyword anywhere in run.comm."""
+    """Every string given to a GROUP_* keyword anywhere in run.comm, less the node groups
+    run.comm creates itself by name (``DEFI_GROUP CREA_GROUP_NO NOM=``)."""
     tree = ast.parse((_input(case) / "run.comm").read_text())
     names: set[str] = set()
+    created: set[str] = set()
     for node in ast.walk(tree):
         if isinstance(node, ast.keyword) and node.arg in GROUP_KEYWORDS:
             value = ast.literal_eval(node.value)
             names.update([value] if isinstance(value, str) else value)
-    return names
+        if isinstance(node, ast.keyword) and node.arg == "NOM":
+            created.add(ast.literal_eval(node.value))
+    return names - created
 
 
 def _test_resu_occurrences(case: str) -> dict[str, dict]:

@@ -206,10 +206,53 @@ def modal() -> dict[str, float]:
     out["mass"] = rho * length * b * h
     for n in (1, 2, 3):
         out[f"mass_fraction_bending_{n}"] = cantilever_effective_mass_fraction(n)
+    out["M1_MASS_GENE"] = 1.0  # NORM_MODE NORME="MASS_GENE" (task 6.4)
     return out
 
 
-ALL = {"solid_static": solid_static, "shell_static": shell_static, "modal": modal}
+def solid_loads() -> dict[str, float]:
+    """Block 200 x 100 x 100 mm on its base: reaction sums = minus the applied loads.
+
+    Gravity 9810 mm/s^2 along -Z and rotation at 20 rad/s about Z through the origin act on
+    the steel block (mass RHO V, center (100, 50, 50)); water (1e-9 t/mm3, free surface at
+    Z = 1000) presses on the face Y = 0; the remote point carries F = (200, 0, -500) N.
+    """
+    rho, g, omega = 7.85e-9, 9810.0, 20.0
+    size, center = (200.0, 100.0, 100.0), (100.0, 50.0, 50.0)
+    mass = rho * size[0] * size[1] * size[2]
+    gravity = np.array([0.0, 0.0, -mass * g])
+    rotation = mass * omega**2 * np.array([center[0], center[1], 0.0])
+    rho_w, h_free = 1.0e-9, 1000.0
+    # Pressure rho_w g (h - z) on the face Y = 0 (outward normal -Y) pushes along +Y.
+    water = np.array([0.0, rho_w * g * size[0] * (h_free * size[2] - size[2] ** 2 / 2), 0.0])
+    remote = np.array([200.0, 0.0, -500.0])
+    total = gravity + rotation + water + remote
+    out = {f"REAC_{a}_SUM": float(-v) for a, v in zip(("DX", "DY", "DZ"), total, strict=True)}
+    # Moments about the base center p = (100, 50, 0). Gravity acts through p's vertical; the
+    # centrifugal load rho w^2 (x, y, 0) gives (-m w^2 zc yc, m w^2 zc xc, 0); the water gives
+    # MX = -int z p dA; the remote force acts at (100, 50, 200), plus the remote moment.
+    m_rotation = mass * omega**2 * np.array([-center[2] * center[1], center[2] * center[0], 0.0])
+    zz = h_free * size[2] ** 2 / 2 - size[2] ** 3 / 3
+    m_water = np.array([-rho_w * g * size[0] * zz, 0.0, 0.0])
+    m_remote = np.cross([0.0, 0.0, 200.0], remote) + np.array([0.0, 0.0, 2.0e4])
+    moment = m_rotation + m_water + m_remote
+    out.update({f"REAC_M{a}": float(-v) for a, v in zip("XYZ", moment, strict=True)})
+    out.update(
+        mass=mass,
+        weight=float(-gravity[2]),
+        centrifugal_FX=float(rotation[0]),
+        centrifugal_FY=float(rotation[1]),
+        water_FY=float(water[1]),
+    )
+    return out
+
+
+ALL = {
+    "solid_static": solid_static,
+    "shell_static": shell_static,
+    "modal": modal,
+    "solid_loads": solid_loads,
+}
 
 if __name__ == "__main__":
     for case, func in ALL.items():

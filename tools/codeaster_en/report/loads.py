@@ -63,6 +63,9 @@ KINEMATIC = {
 # Keywords that set options, not loads.
 OPTIONS = {"MODELE", "INFO", "VERI_NORM", "VERI_AFFE", "DOUBLE_LAGRANGE", "SYNTAXE", "reuse"}
 EVALUATED = ("PRES_REP", "FORCE_NODALE", "FORCE_FACE", "FORCE_ARETE")
+# Body loads: their resultant needs the mass distribution, which is physics, not a sum
+# (REPORT-SPEC §1), so they are never evaluated.
+BODY_LOADS = ("PESANTEUR", "ROTATION", "FORCE_INTERNE")
 LOAD_COMMANDS = ("AFFE_CHAR_MECA", "AFFE_CHAR_MECA_F", "AFFE_CHAR_CINE", "AFFE_CHAR_CINE_F")
 
 # Node order around the boundary of a face (corner and mid-side nodes, MED numbering).
@@ -296,6 +299,10 @@ def applied_loads(
                     continue
                 if name in multiplied:
                     item.basis = "multiplied by a function of time (FONC_MULT): not evaluated"
+                    continue
+                if keyword in BODY_LOADS:
+                    item.basis = "body load: needs the mass distribution, not summed"
+                    complete = False
                     continue
                 if keyword not in EVALUATED or evaluator is None:
                     item.basis = (

@@ -12,18 +12,20 @@ import csv
 import json
 import math
 import re
+import sys
 from pathlib import Path
 
 import pytest
 
 REPO = Path(__file__).resolve().parents[1]
 FIXTURES = REPO / "tests" / "fixtures"
-CASES = ("solid_static", "shell_static", "modal")
+CASES = ("solid_static", "shell_static", "modal", "solid_loads")
 TEST_LINE = re.compile(r"^ (OK|NOOK) +(\S+) +(\S+) +(\S+) +(\S+)")
 EXPECTED_FIELDS = {
     "solid_static": {"DEPL", "SIGM_NOEU", "SIEQ_NOEU", "REAC_NODA"},
     "shell_static": {"DEPL", "EFGE_NOEU", "REAC_NODA"},
     "modal": {"DEPL"},
+    "solid_loads": {"DEPL", "SIEQ_NOEU", "REAC_NODA"},
 }
 
 
@@ -108,12 +110,49 @@ def test_reaction_tables_match_test_resu() -> None:
     for case, comp, legend in (
         ("solid_static", "DX", "REAC_DX_SUM"),
         ("shell_static", "DZ", "REAC_DZ_SUM"),
+        ("solid_loads", "DX", "REAC_DX_SUM"),
+        ("solid_loads", "DY", "REAC_DY_SUM"),
+        ("solid_loads", "DZ", "REAC_DZ_SUM"),
     ):
         text = (_output(case) / "tables" / "reactions.csv").read_text(encoding="utf-8")
         rows = [r for r in csv.reader(text.splitlines()) if r and not r[0].startswith("#")]
         header = [h.strip() for h in rows[0]]
         value = float(rows[1][header.index(comp)])
         assert math.isclose(value, _vale_calc(case)[legend], rel_tol=1e-5), case
+
+
+def _table_row(case: str, name: str) -> dict[str, str]:
+    text = (_output(case) / "tables" / name).read_text(encoding="utf-8")
+    rows = [r for r in csv.reader(text.splitlines()) if r and not r[0].startswith("#")]
+    return dict(zip([h.strip() for h in rows[0]], rows[1], strict=True))
+
+
+def test_solid_loads_support_moments() -> None:
+    """Moment of the support reactions about (100, 50, 0) against the hand value.
+
+    MX is exact. MY and MZ also hold the couple of the finite-length spring: a translational
+    two-node spring (DIS_T, K_T_D_L) passes equal and opposite forces at its two ends, 50 mm
+    apart along X, and no moment, so its end forces F leave a couple (0, -50 FZ, 50 FY) out of
+    the balance (about 2 N.mm here, F about 0.04 N; seen in the first run, task 6.4c).
+    """
+    sys.path.insert(0, str(FIXTURES))
+    try:
+        import hand_values
+    finally:
+        sys.path.remove(str(FIXTURES))
+    hand = hand_values.solid_loads()
+    row = _table_row("solid_loads", "moments.csv")
+    for axis, rel_tol in (("X", 1e-5), ("Y", 1e-4), ("Z", 2e-4)):
+        value = float(row[f"MOMENT_{axis}"])
+        assert math.isclose(value, hand[f"REAC_M{axis}"], rel_tol=rel_tol), axis
+    for comp, axis in (("DX", "X"), ("DY", "Y"), ("DZ", "Z")):
+        assert math.isclose(float(row[f"RESULT_{axis}"]), hand[f"REAC_{comp}_SUM"], rel_tol=1e-5)
+
+
+def test_solid_loads_mass_matches_geometry() -> None:
+    row = _table_row("solid_loads", "mass_inertia.csv")
+    assert math.isclose(float(row["MASSE"]), 7.85e-9 * 200.0 * 100.0 * 100.0, rel_tol=1e-5)
+    assert [float(row[f"CDG_{a}"]) for a in "XYZ"] == [100.0, 50.0, 50.0]
 
 
 def test_modal_mass_matches_geometry() -> None:

@@ -14,6 +14,27 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.4c Tier 2 fixture and report coverage — agent
+Done: last of three PRs for PLAN 6.4 (with #35, #36). New fixture `solid_loads`: steel block
+on a clamped base with gravity, rotation, water pressure (`FORMULE` + `AFFE_CHAR_MECA_F`), a
+remote force and moment spread by RBE3, and a SEG2 spring to a ground node; run in the pinned
+image (17.4.22), `DIAGNOSTIC JOB : OK`, no alarm. Reaction sums match the hand values to
+1e-12 %; the support moment table (new `resultant(moment_about=)`) matches the hand moments
+(MX exact; MY, MZ within 2e-5 and 9e-5, the couple of the 50 mm spring). `modal` now runs
+`NORM_MODE` (mode 1 generalized mass 1, new check `M1_MASS_GENE`; frequencies unchanged), rerun
+in both locales. Builder: zero masses on discrete groups (found by the first run: alarm
+`DISCRETS_26` under gravity), `node_group_at` (`ENV_SPHERE`). Results reader: nodal fields
+with a MED profile (the `SIEQ_NOEU` of a model with discrete-only nodes) failed to load; fixed.
+Report: RBE3 targets, `FORMULE` expressions under the loads table, body loads marked "needs
+the mass distribution", no balance percentage when loads are unsummed, a note on relation
+reactions, `RESULT_X..Z` table columns. Goldens regenerated.
+Open: PLAN 6.4 done. `EXTR_MODE` and `rigid_link` (`LIAISON_SOLIDE`) are checked by the
+upstream syntax checker only, not by a solver run. Tier 2 rows outside PLAN 6.4's list stay
+open: bonded contact (`LIAISON_MAIL`), temperature load (`AFFE_VARC`), steady thermal
+(`THER_LINEAIRE`, `AFFE_CHAR_THER`, still `machine`).
+Decisions: ADR-022 amended (zero masses, report treatment of body loads).
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-29 — 6.4b AFFE_CHAR_MECA_F reference and Tier 2 builder methods — agent
 Done: second of three PRs for PLAN 6.4. `en/commands/AFFE_CHAR_MECA_F.md` rewritten as a full
 reference (`assisted`, 2 `TODO(verify)`). Builder (ADR-022): `model(springs=, remote_points=)`
