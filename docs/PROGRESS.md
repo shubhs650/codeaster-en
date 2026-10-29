@@ -14,6 +14,27 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.3 ClearFEA adapter spec — agent
+Done: `docs/CLEARFEA-INTEGRATION.md` rewritten against the built code (signatures checked with
+`inspect`): builder method table (6.1), `job`, `mess`, `results`, `report`, `data`, version
+(ADR-020); job layout with the logical-unit table; container contract (image, wheel, `.mo`
+placement, entry, exit codes); failure → billing in three steps with each rule's evidence; the
+§8 open items decided; §9 worked example (build → precheck → run → classify → results →
+report). New `codeaster_en.job` (ADR-021): `export_text`/`write_export` (byte-identical to the
+four fixture exports), `table_units`, `precheck` (catches `broken_python_syntax` and
+`broken_missing_group` without a solver). `tests/test_job.py` (18) and
+`tests/test_clearfea_example.py` (4: the doc's block is executed; shell_static outputs stand in
+for the solver; a misspelled group is rejected before the solver; a singular-matrix run is
+`FACTOR_11`, charged).
+Verified: `ruff check`, `ruff format --check` clean; `pytest` 538 passed / 4 skipped;
+`caen validate` OK.
+Open: owner sign-off (PLAN 6.3 acceptance; OWNER-REVIEW-QUEUE). `TODO(verify)`: exit codes for
+time/memory limits and crashes, the worker image's Python, MPI. Next ready task: 6.4 (Tier 2
+sweep).
+Decisions: ADR-021 (no `run` helper, no `validate_comm` for bring-your-own files, per-event
+tail, no MPI yet).
+Needs owner: sign-off on the spec (not blocking further tasks).
+
 ## 2026-10-29 — 6.2 package codeaster-en — agent
 Done: pip-installable `codeaster-en` (ADR-020). Version `17.4.26.1` = upstream tag + overlay
 serial, single-sourced in `codeaster_en.__version__` (report goldens updated from `0.1.0`).
