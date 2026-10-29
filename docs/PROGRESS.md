@@ -14,6 +14,20 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 7.2 scheduled monthly upstream bump — agent
+Done: `.github/workflows/upstream-bump.yml`, which runs at 05:17 UTC on the 3rd of each month or on dispatch (`to`, `dry_run`).
+It runs the new `caen upstream check` (prints `status=newer|current|older` against the mirror) and goes on only for `newer`, and only when no `upstream/bump-<tag>` branch exists yet.
+It then runs `caen upstream bump`, followed by `caen validate` and `pytest`. Failures are recorded, not fatal.
+It commits exactly what the tool wrote, pushes `upstream/bump-<tag>` and opens a PR. If Actions may not open PRs, it opens an issue instead.
+The PR body comes from the new `caen upstream pr-body`: a merge checklist, the validate and pytest results with each failing test, the stale list (`caen upstream stale`: stale messages with a placeholder-match flag, plus messages with no English), and the diff report, truncated under GitHub's limit.
+GITHUB_TOKEN pushes start no workflows, so the job dispatches `ci.yml` (new `workflow_dispatch` trigger) and `solver-fixtures.yml` on the branch. solver-fixtures opens its regenerate PR into the bump branch.
+4 new tests: check/bump/stale/body on the stand-in mirror, truncation and caps, the CLI flags the workflow uses, and the workflow structure. actionlint clean.
+Checked against the real mirror: `check` gives `stable` → current (17.4.26), 17.5.8 → newer, 17.4.22 → older.
+Rehearsal: I applied a real bump to 17.5.8 locally and ran the workflow's steps by hand, then reverted it. All changed paths fall inside the commit pathspec. The stale list showed `HOMO1_18` (placeholders match) and 4 messages with no English. validate passed, and pytest had 27 failed and 3 errors (classes in ADR-024 Consequences). ADR-023 only expected the fixtures and placeholders to fail.
+Open: the PR path runs for real only once `stable` moves. After this merges, a dispatched dry run to 17.5.8 exercises the job on Actions (result below, if any). The follow-up for a bump PR is a coordinator task: re-translate, regenerate goldens, drafts and counts, and merge the fixture PR.
+Decisions: ADR-024.
+Needs owner: nothing blocking. Queue entry: allow Actions to create PRs (repo setting); an optional token would make CI run natively on bump PRs.
+
 ## 2026-10-29 — 7.1 upstream bump tool — agent
 Done: `caen upstream bump --to <tag> [--dry-run] [--image …] [--report …]` (new package
 `codeaster_en.upstream`: `bump.py`, `diff.py`). Resolves the tag with `ls-remote` (moving tags

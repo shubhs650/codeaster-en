@@ -15,7 +15,7 @@ from pathlib import Path
 
 import pytest
 
-from codeaster_en.upstream import bump, diff
+from codeaster_en.upstream import bump, diff, scheduled
 
 REPO = Path(__file__).resolve().parents[1]
 UPSTREAM = REPO / "upstream"
@@ -275,3 +275,119 @@ def test_bump_refuses(overlay: Path) -> None:
     (overlay / "upstream/code_aster/stray.txt").write_text("x", encoding="utf-8")
     with pytest.raises(bump.BumpError, match="local changes"):
         bump.bump(overlay, "1.0.1")
+
+
+# --------------------------------------------------------------------------------------
+# scheduled bump helpers (task 7.2)
+# --------------------------------------------------------------------------------------
+
+
+def test_scheduled_check_bump_and_pr_body(overlay: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    first = scheduled.check(overlay, "stable")
+    assert (first.status, first.current, first.target) == ("newer", "1.0.0", "1.0.1")
+    assert first.target_commit == _git(overlay / "upstream", "rev-parse", "1.0.1")
+    assert "status=newer" in first.lines() and "target=1.0.1" in first.lines()
+    assert scheduled.check(overlay, "1.0.0").status == "current"
+
+    monkeypatch.setattr(bump.astest_extractor, "write", lambda r, o: None)
+    monkeypatch.setattr(bump.inventory_extractor, "write", lambda r: r / "INV")
+    monkeypatch.setattr(bump.gettext_po, "build", lambda r: {"po": r / "PO"})
+    applied = bump.bump(overlay, first.target)
+    assert scheduled.check(overlay, "stable").status == "current"
+    # The pin is now ahead of 1.0.0: a mirror tag pointing back is "older", never bumped to.
+    assert scheduled.check(overlay, "1.0.0").status == "older"
+
+    items = scheduled.stale_items(overlay)
+    assert [(m.id, m.method, m.placeholders_ok) for m in items.stale] == [
+        ("HOMO1_18", "assisted", False)
+    ]
+    assert items.failing == items.stale
+    stale_md = scheduled.render_stale(items)
+    assert "| `HOMO1_18` | assisted | **no** |" in stale_md
+    assert "of which **1** have placeholders" in stale_md
+
+    body = scheduled.pr_body(
+        first,
+        applied.markdown,
+        items,
+        validate_ok=False,
+        validate_log="ok glossary\nHOMO1_18: placeholder %(i1)d missing\n",
+        report_path="docs/upstream-diffs/1.0.0-1.0.1.md",
+        run_url="https://example.invalid/run/1",
+    )
+    assert body.startswith("Scheduled upstream bump 1.0.0 → **1.0.1**")
+    assert "[this run](https://example.invalid/run/1)" in body
+    assert "`caen validate` **fails**" in body and "HOMO1_18: placeholder" in body
+    assert body.index("## Stale items to re-translate") < body.index("# Upstream diff 1.0.0")
+    assert body.endswith(applied.markdown)
+
+
+def test_pr_body_truncates_long_reports() -> None:
+    result = scheduled.Check("1.0.0", "a" * 40, "1.0.1", "b" * 40, "newer")
+    items = scheduled.StaleItems(
+        stale=[scheduled.StaleMessage(f"F_{i}", "machine", True) for i in range(400)]
+    )
+    report = "# Upstream diff\n" + "| row |\n" * 20_000
+    body = scheduled.pr_body(result, report, items, validate_ok=True, report_path="r.md")
+    assert len(body) <= scheduled.BODY_LIMIT
+    assert "`caen validate` passes" in body
+    assert "*(100 more: `caen upstream stale`.)*" in body
+    assert body.rstrip().endswith("*(Report truncated. Full report: `r.md` on this branch.)*")
+    assert "| `F_399` |" in scheduled.render_stale(items, limit=None)
+    dry = scheduled.pr_body(result, "# r\n", items, validate_ok=True, dry_run=True)
+    assert "**dry run**" in dry and "`F_0`" not in dry
+
+
+def test_upstream_cli_check_and_pr_body(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    from typer.testing import CliRunner
+
+    from codeaster_en.cli import app
+
+    monkeypatch.chdir(REPO)
+    fake = scheduled.Check("17.4.26", "a" * 40, "17.4.26", "a" * 40, "current")
+    monkeypatch.setattr(scheduled, "check", lambda repo, to: fake)
+    out = CliRunner().invoke(app, ["upstream", "check", "--to", "stable"])
+    assert out.exit_code == 0, out.output
+    assert out.output.splitlines()[0] == "status=current"
+
+    report = tmp_path / "report.md"
+    report.write_text("# Upstream diff 17.4.26 → 9.9.9\n", encoding="utf-8")
+    log = tmp_path / "validate.log"
+    log.write_text("validate: 1 problem\n", encoding="utf-8")
+    args = ["upstream", "pr-body", "--report", str(report), "--previous", "17.4.26"]
+    args += ["--target", "9.9.9", "--target-commit", "c" * 40, "--validate-log", str(log)]
+    tests = tmp_path / "pytest.log"
+    tests.write_text(
+        "F.\nFAILED tests/test_fixture_outputs.py::test_provenance[modal] - assert\n"
+        "1 failed, 1 passed in 0.1s\n",
+        encoding="utf-8",
+    )
+    args += ["--tests-log", str(tests), "--no-tests-ok"]
+    out = CliRunner().invoke(app, [*args, "--no-validate-ok"])
+    assert out.exit_code == 0, out.output
+    assert "`pytest` on the bumped tree: 1 failed, 1 passed in 0.1s." in out.output
+    assert "FAILED tests/test_fixture_outputs.py::test_provenance[modal]" in out.output
+    assert "17.4.26 → **9.9.9**" in out.output and "validate: 1 problem" in out.output
+    assert out.output.endswith("# Upstream diff 17.4.26 → 9.9.9\n")
+
+
+def test_upstream_bump_workflow() -> None:
+    import yaml
+
+    wf = yaml.safe_load((REPO / ".github/workflows/upstream-bump.yml").read_text())
+    triggers = wf.get("on", wf.get(True))  # YAML 1.1 reads a bare `on` key as True
+    assert triggers["schedule"] == [{"cron": "17 5 3 * *"}]
+    assert set(triggers["workflow_dispatch"]["inputs"]) == {"to", "dry_run"}
+    script = "\n".join(s.get("run", "") for s in wf["jobs"]["bump"]["steps"])
+    for needle in (
+        "caen upstream check",
+        "caen upstream bump",
+        "caen validate",
+        "caen upstream pr-body",
+        "gh pr create",
+        "gh workflow run ci.yml",
+        "gh workflow run solver-fixtures.yml",
+    ):
+        assert needle in script, needle
+    ci = yaml.safe_load((REPO / ".github/workflows/ci.yml").read_text())
+    assert "workflow_dispatch" in ci.get("on", ci.get(True))
