@@ -22,9 +22,9 @@ Cantilever beam L 400 mm, section 20 mm (Y) x 10 mm (Z), clamped at X = 0, first
 | Analysis | modal (natural frequencies) |
 | Outcome | completed |
 | Model size | 4197 nodes, 656 elements |
-| Elapsed time (whole job) | 4.440 s |
-| CPU time (sum of commands) | 2.010 s |
-| Peak memory | 907.7 MB |
+| Elapsed time (whole job) | 6.100 s |
+| CPU time (sum of commands) | 3.150 s |
+| Peak memory | 907.8 MB |
 
 Headline results:
 
@@ -96,7 +96,7 @@ The load case is the `EXCIT` list of `CALC_MODES`: none.
 | Modes sought | smallest (frequencies) (`PLUS_PETITE`) |
 | Number of modes requested | 6 |
 | Frequency shift [Hz] | 0 |
-| Solve time | 0.9500 s CPU, 1.380 s elapsed |
+| Solve time | 1.400 s CPU, 1.790 s elapsed |
 
 *Source: solver settings from the command echo in the solver log (defaults filled in); degrees of freedom from the solver log message ALGELINE7_17.*
 
@@ -131,8 +131,9 @@ The solver issued no warning or error.
 | `F4_BENDING_Y2` | Natural frequency of mode 4 [Hz], bending in Y, n = 2 | analytical | 654.512 | 646.9886423 | 1.149461E+00% | 2.0% | pass |
 | `F5_BENDING_Z3` | Natural frequency of mode 5 [Hz], bending in Z, n = 3 | analytical | 916.326 | 911.6795505 | 5.070738E-01% | 3.0% | pass |
 | `F6_TORSION_1` | Natural frequency of mode 6 [Hz], first torsion mode | analytical | 1485.22 | 1497.02927 | 7.951193E-01% | 3.0% | pass |
+| `M1_MASS_GENE` | Generalized mass of mode 1 after NORM_MODE [t] | analytical | 1 | 1 | 0.0% | 9.999999999999999E-05% | pass |
 
-6 of 6 non-regression checks (computed value against the value stored in the command file) passed.
+7 of 7 non-regression checks (computed value against the value stored in the command file) passed.
 
 *Source: `TEST_RESU` output in the solver log; pass or fail by the solver's own tolerance.*
 
@@ -197,6 +198,11 @@ MASS = ASSE_MATRICE(MATR_ELEM=MASS_EL, NUME_DDL=NUME)
 
 # >> CALC_MODES: compute natural modes
 MODES = CALC_MODES(MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION="PLUS_PETITE", CALC_FREQ=_F(NMAX_FREQ=6))
+
+# CALC_MODES scales each shape to a largest component of 1 (bibfor/algeline/vppara.F90); NORM_MODE
+# rescales them to a unit generalized mass, the usual form for modal superposition (task 6.4).
+# >> NORM_MODE: normalize modes
+MODES = NORM_MODE(reuse=MODES, MODE=MODES, NORME="MASS_GENE")
 
 # >> IMPR_RESU: write results
 IMPR_RESU(FORMAT="MED", UNITE=80, RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL"))
@@ -283,6 +289,17 @@ TEST_RESU(
             VALE_CALC=1497.0292704690783,
             PRECISION=3.0e-2,
             LEGENDE="F6_TORSION_1",
+        ),
+        # Generalized mass of mode 1 after NORM_MODE NORME='MASS_GENE'.
+        _F(
+            NUME_ORDRE=1,
+            PARA="MASS_GENE",
+            RESULTAT=MODES,
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=1.0,
+            VALE_CALC=1.0,
+            PRECISION=1.0e-6,
+            LEGENDE="M1_MASS_GENE",
         ),
     )
 )

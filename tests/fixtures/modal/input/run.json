@@ -95,6 +95,14 @@
       "precision": 0.03,
       "basis": "f = 1 / (4 L) sqrt(G J / (rho I_p)), G = E / (2 (1 + nu)), I_p = b h (b^2 + h^2) / 12, Saint-Venant J = 4574 mm^4 (series); warping restraint at the clamp ignored, so the solver should be slightly higher.",
       "source": "Clamped-free torsion of a bar; J from Timoshenko & Goodier, Theory of Elasticity, sec. 109; computed in tests/fixtures/hand_values.py"
+    },
+    {
+      "legend": "M1_MASS_GENE",
+      "quantity": "Generalized mass of mode 1 after NORM_MODE [t]",
+      "reference": 1.0,
+      "precision": 1e-06,
+      "basis": "NORM_MODE NORME=\"MASS_GENE\" scales each mode to a unit generalized mass",
+      "source": "en/commands/NORM_MODE.md; upstream/code_aster/Cata/Commands/norm_mode.py"
     }
   ],
   "provenance": {
@@ -105,6 +113,6 @@
     ],
     "author": "codeaster-en agent (task 4.1)",
     "date": "2026-10-23",
-    "notes": "VALE_CALC in run.comm is the solver's own value from the first run (task 4.2, code_aster 17.4.22 image, ADR-011). Outputs are in ../output/."
+    "notes": "VALE_CALC in run.comm is the solver's own value from the first run (task 4.2, code_aster 17.4.22 image, ADR-011). Outputs are in ../output/. Mode normalization (NORM_MODE) and its check added in task 6.4c; rerun with the same image."
   }
 }

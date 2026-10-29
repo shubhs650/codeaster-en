@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "case": "solid_loads",
+  "description": "Steel block 200 x 100 x 100 mm on a clamped base under gravity, rotation about Z, water pressure on one face, a remote force and moment spread over the top face (RBE3), with a spring to a fixed ground node. Linear hexahedra, linear elastic steel.",
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Block under remote, body and water loads",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-29"
+  },
+  "analysis": "linear_static",
+  "units": {
+    "system": "SI_mm"
+  },
+  "groups": {
+    "BLOCK": {
+      "display_name": "Block",
+      "role": "body",
+      "report": true
+    },
+    "BASE": {
+      "display_name": "Clamped base (Z = 0)",
+      "role": "support",
+      "report": true
+    },
+    "WET": {
+      "display_name": "Water face (Y = 0)",
+      "role": "load"
+    },
+    "TOP": {
+      "display_name": "Top face (RBE3 slave nodes)",
+      "role": "load"
+    },
+    "SPRING": {
+      "display_name": "Spring to ground",
+      "role": "support"
+    },
+    "MASTER": {
+      "display_name": "Remote point (100, 50, 200)",
+      "role": "load"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "element_properties",
+    "loads_and_bcs",
+    "solution",
+    "displacements",
+    "stresses",
+    "reactions",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "solver": {
+    "linear_solver": "MUMPS",
+    "ncpus": 1,
+    "time_limit_s": 600,
+    "memory_limit_mb": 2048
+  },
+  "checks": [
+    {
+      "legend": "REAC_DX_SUM",
+      "quantity": "Sum of X reactions over the whole field [N]",
+      "field": "REAC_NODA",
+      "component": "DX",
+      "reference": -828.0,
+      "precision": 0.0001,
+      "basis": "Reaction sum = -(applied force). Applied FX = centrifugal m w^2 xc (m = 0.0157 t, w = 20 rad/s, xc = 100 mm: 628 N) + remote 200 N.",
+      "source": "Static equilibrium; tests/fixtures/hand_values.py:solid_loads"
+    },
+    {
+      "legend": "REAC_DY_SUM",
+      "quantity": "Sum of Y reactions over the whole field [N]",
+      "field": "REAC_NODA",
+      "component": "DY",
+      "reference": -500.39,
+      "precision": 0.0001,
+      "basis": "Applied FY = centrifugal m w^2 yc (yc = 50 mm: 314 N) + water rho g b (h Lz - Lz^2/2) on the face Y = 0 (186.39 N, pushing along +Y).",
+      "source": "Static equilibrium; tests/fixtures/hand_values.py:solid_loads"
+    },
+    {
+      "legend": "REAC_DZ_SUM",
+      "quantity": "Sum of Z reactions over the whole field [N]",
+      "field": "REAC_NODA",
+      "component": "DZ",
+      "reference": 654.017,
+      "precision": 0.0001,
+      "basis": "Applied FZ = weight -m g (g = 9810 mm/s^2: -154.017 N) + remote -500 N.",
+      "source": "Static equilibrium; tests/fixtures/hand_values.py:solid_loads"
+    }
+  ],
+  "provenance": {
+    "upstream_version": "17.4.26",
+    "modelled_on": [
+      "zzzz144a",
+      "sdnv138c",
+      "erreu01a",
+      "forma01d",
+      "fdlv100a"
+    ],
+    "author": "codeaster-en agent (task 6.4c)",
+    "date": "2026-10-29",
+    "notes": "VALE_CALC in run.comm is the solver's own value from the first run (code_aster 17.4.22 image, ADR-011). The support moment table (moments.csv) is checked by tests/test_fixture_outputs.py. Outputs are in ../output/."
+  }
+}

@@ -43,6 +43,11 @@ def _vale_calc(case: str) -> dict[str, float]:
     return out
 
 
+def _frequencies() -> dict[str, float]:
+    """The modal fixture's frequency checks (legends F1_... to F6_...)."""
+    return {k: v for k, v in _vale_calc("modal").items() if k.startswith("F")}
+
+
 def _hand(case: str) -> dict[str, float]:
     import importlib.util
 
@@ -133,7 +138,7 @@ def test_fields_listed(opened) -> None:
 
 def test_modal_steps_are_frequencies(opened) -> None:
     (depl,) = opened["modal"].fields()
-    calc = _vale_calc("modal")
+    calc = _frequencies()
     legends = sorted(calc, key=lambda k: int(k[1]))
     assert [s.nume_ordre for s in depl.steps] == [1, 2, 3, 4, 5, 6]
     for step, legend in zip(depl.steps, legends, strict=True):
@@ -212,16 +217,17 @@ def test_solid_von_mises_peak(opened) -> None:
     assert whole.location == "nodes"
 
 
-def test_mode_shapes_are_normalized(opened) -> None:
+def test_mode_shapes_are_normalized(opened, tables) -> None:
+    # Since task 6.4c the fixture runs NORM_MODE NORME="MASS_GENE": unit generalized mass, so
+    # the largest component is no longer 1 (CALC_MODES' own scaling, fields guide).
     r = opened["modal"]
-    for step in range(1, 7):
-        # The largest absolute component is 1 (fields guide); the vector norm can exceed it.
-        peaks = [
-            abs(r.extrema("DEPL", c, nume_ordre=step)[0].max_abs.value) for c in ("DX", "DY", "DZ")
-        ]
-        assert max(peaks) == pytest.approx(1.0, abs=1e-12)
+    for mode in r.modal(tables["modal"]).modes:
+        assert mode.generalized_mass == pytest.approx(1.0, rel=1e-9)
     (_, tip) = r.extrema("DEPL", "DZ", groups=["TIP"], nume_ordre=1)
-    assert tip.max.value == pytest.approx(1.0)  # first bending mode in Z, largest at the tip
+    (whole,) = r.extrema("DEPL", "DZ", nume_ordre=1)
+    # First bending mode in Z: largest at the tip.
+    assert abs(tip.max_abs.value) == pytest.approx(abs(whole.max_abs.value))
+    assert abs(tip.max_abs.value) > 1.0
 
 
 # ---------- reactions ----------
@@ -263,7 +269,7 @@ def test_reactions_without_field(opened) -> None:
 
 def test_modal_table(opened, tables) -> None:
     table = opened["modal"].modal(tables["modal"])
-    calc = _vale_calc("modal")
+    calc = _frequencies()
     hand = _hand("modal")
     assert table.result == "MODES"
     assert table.total_mass == pytest.approx(hand["mass"], rel=1e-5)

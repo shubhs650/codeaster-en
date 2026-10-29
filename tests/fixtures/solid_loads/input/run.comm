@@ -1,0 +1,190 @@
+# solid_loads -- steel block on its base under the Tier 2 loads (task 6.4).
+# codeaster-en test fixture. Units: mm, N, MPa, tonne, s (density in t/mm3).
+# Block 200 (X) x 100 (Y) x 100 (Z), HEXA8, steel E=210000, NU=0.3, RHO=7.85e-9; base Z=0 clamped.
+# Loads: gravity 9810 mm/s2 along -Z; rotation 20 rad/s about Z through the origin; water
+# (1e-9 t/mm3, free surface Z=1000) on the face Y=0; F=(200, 0, -500) N and M=(0, 0, 2.0e4) N.mm
+# at the remote point MASTER (100, 50, 200), spread over the top face by RBE3; a 1000 N/mm spring
+# from (200, 50, 50) to a fixed ground node at (250, 50, 50).
+# Check: the REAC_NODA sum over the whole field is minus the sum of the applied forces (see
+# run.json "checks" and hand_values.py). Modelled on astest zzzz144a (DIS_TR point, LIAISON_RBE3,
+# FORCE_NODALE), sdnv138c (pressure FORMULE), erreu01a (ROTATION) and forma01d (ENV_SPHERE).
+# VALE_CALC values are the solver's own results from the first run (task 6.4c).
+
+DEBUT(CODE="OUI", ERREUR=_F(ALARME="EXCEPTION"))
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(GROUP_MA=("BASE", "TOP", "MASTER")))
+
+# The free end of the spring is not a mesh group: a POI1 there would be included in the SEG2
+# and raise alarm MODELISA8_14.
+MAIL = DEFI_GROUP(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    CREA_GROUP_NO=_F(
+        NOM="GROUND", OPTION="ENV_SPHERE", POINT=(250.0, 50.0, 50.0), RAYON=0.1, PRECISION=0.1
+    ),
+)
+
+MAIL = MODI_MAILLAGE(reuse=MAIL, MAILLAGE=MAIL, ORIE_PEAU=_F(GROUP_MA_PEAU="WET"))
+
+MODE = AFFE_MODELE(
+    MAILLAGE=MAIL,
+    AFFE=(
+        _F(TOUT="OUI", PHENOMENE="MECANIQUE", MODELISATION="3D"),
+        _F(GROUP_MA="SPRING", PHENOMENE="MECANIQUE", MODELISATION="DIS_T"),
+        _F(GROUP_MA="MASTER", PHENOMENE="MECANIQUE", MODELISATION="DIS_TR"),
+    ),
+)
+
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3, RHO=7.85e-9))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="BLOCK", MATER=ACIER))
+
+CARA = AFFE_CARA_ELEM(
+    MODELE=MODE,
+    DISCRET=(
+        _F(REPERE="GLOBAL", CARA="K_T_D_L", GROUP_MA="SPRING", VALE=(1000.0, 1000.0, 1000.0)),
+        _F(CARA="M_T_D_L", GROUP_MA="SPRING", VALE=(0.0,)),
+        _F(
+            REPERE="GLOBAL", CARA="K_TR_D_N", GROUP_MA="MASTER", VALE=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        ),
+        _F(
+            CARA="M_TR_D_N",
+            GROUP_MA="MASTER",
+            VALE=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0),
+        ),
+    ),
+)
+
+FIXE = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA="BASE", DX=0.0, DY=0.0, DZ=0.0))
+
+SOL = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_NO="GROUND", DX=0.0, DY=0.0, DZ=0.0))
+
+REMOTE = AFFE_CHAR_MECA(
+    MODELE=MODE,
+    LIAISON_RBE3=_F(
+        GROUP_NO_MAIT="MASTER",
+        GROUP_NO_ESCL="TOP",
+        DDL_MAIT=("DX", "DY", "DZ", "DRX", "DRY", "DRZ"),
+        DDL_ESCL="DX-DY-DZ",
+        COEF_ESCL=1.0,
+    ),
+    FORCE_NODALE=_F(GROUP_NO="MASTER", FX=200.0, FY=0.0, FZ=-500.0, MX=0.0, MY=0.0, MZ=20000.0),
+)
+
+PESA = AFFE_CHAR_MECA(
+    MODELE=MODE, PESANTEUR=_F(GROUP_MA="BLOCK", GRAVITE=9810.0, DIRECTION=(0.0, 0.0, -1.0))
+)
+
+ROTA = AFFE_CHAR_MECA(
+    MODELE=MODE,
+    ROTATION=_F(GROUP_MA="BLOCK", VITESSE=20.0, AXE=(0.0, 0.0, 1.0), CENTRE=(0.0, 0.0, 0.0)),
+)
+
+# Water pressure rho g (h - Z) in MPa: rho = 1e-9 t/mm3, g = 9810 mm/s2, h = 1000 mm.
+P_HYDRO = FORMULE(VALE="max(1.0e-9 * 9810.0 * (1000.0 - Z), 0.0)", NOM_PARA="Z")
+
+HYDRO = AFFE_CHAR_MECA_F(MODELE=MODE, PRES_REP=_F(GROUP_MA="WET", PRES=P_HYDRO))
+
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    CARA_ELEM=CARA,
+    EXCIT=(
+        _F(CHARGE=FIXE),
+        _F(CHARGE=SOL),
+        _F(CHARGE=REMOTE),
+        _F(CHARGE=PESA),
+        _F(CHARGE=ROTA),
+        _F(CHARGE=HYDRO),
+    ),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+RESU = CALC_CHAMP(reuse=RESU, RESULTAT=RESU, CRITERES="SIEQ_NOEU", FORCE="REAC_NODA")
+
+REAC = POST_RELEVE_T(
+    ACTION=_F(
+        OPERATION="EXTRACTION",
+        INTITULE="REAC_SUPPORTS",
+        RESULTAT=RESU,
+        NOM_CHAM="REAC_NODA",
+        GROUP_NO=("BASE", "GROUND"),
+        RESULTANTE=("DX", "DY", "DZ"),
+    )
+)
+
+IMPR_TABLE(TABLE=REAC, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=30)
+
+# Moment of the support reactions about the base center (100, 50, 0): minus the moment of the
+# applied loads, including the remote moment MZ (hand_values.py; checked by tests/test_fixture_outputs.py).
+MOMT = POST_RELEVE_T(
+    ACTION=_F(
+        OPERATION="EXTRACTION",
+        INTITULE="MOMENT_SUPPORTS",
+        RESULTAT=RESU,
+        NOM_CHAM="REAC_NODA",
+        GROUP_NO=("BASE", "GROUND"),
+        RESULTANTE=("DX", "DY", "DZ"),
+        MOMENT=("DRX", "DRY", "DRZ"),
+        POINT=(100.0, 50.0, 0.0),
+    )
+)
+
+IMPR_TABLE(TABLE=MOMT, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=32)
+
+MASSE = POST_ELEM(MODELE=MODE, CHAM_MATER=MATE, CARA_ELEM=CARA, MASS_INER=_F(TOUT="OUI"))
+
+IMPR_TABLE(TABLE=MASSE, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=31)
+
+IMPR_RESU(
+    FORMAT="MED",
+    UNITE=80,
+    RESU=_F(RESULTAT=RESU, CARA_ELEM=CARA, NOM_CHAM=("DEPL", "SIEQ_NOEU", "REAC_NODA")),
+)
+
+# Reaction sums over the whole REAC_NODA field: minus the applied force. The RBE3 relations
+# pass forces between TOP and MASTER that cancel in the sum.
+TEST_RESU(
+    RESU=(
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DX",
+            TYPE_TEST="SOMM",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=-828.0,
+            VALE_CALC=-828.000000000001,
+            PRECISION=1.0e-4,
+            LEGENDE="REAC_DX_SUM",
+        ),
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DY",
+            TYPE_TEST="SOMM",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=-500.39,
+            VALE_CALC=-500.38999999999965,
+            PRECISION=1.0e-4,
+            LEGENDE="REAC_DY_SUM",
+        ),
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DZ",
+            TYPE_TEST="SOMM",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=654.017,
+            VALE_CALC=654.017,
+            PRECISION=1.0e-4,
+            LEGENDE="REAC_DZ_SUM",
+        ),
+    )
+)
+
+FIN()

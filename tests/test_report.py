@@ -29,7 +29,7 @@ from codeaster_en.report.tripwire import french_words
 REPO = Path(__file__).resolve().parents[1]
 FIXTURES = REPO / "tests" / "fixtures"
 GOLDEN = REPO / "tests" / "golden" / "report"
-CASES = ("solid_static", "shell_static", "modal")
+CASES = ("solid_static", "shell_static", "modal", "solid_loads")
 BROKEN = (
     "broken_missing_group",
     "broken_python_syntax",
@@ -195,8 +195,8 @@ def test_headline_numbers_match_solver(models: dict) -> None:
 
 def test_verification_rows(models: dict) -> None:
     v = models["modal"].verification
-    assert len(v["rows"]) == 6 and all(r["passed"] for r in v["rows"])
-    assert v["non_regression"] == {"count": 6, "ok": 6}
+    assert len(v["rows"]) == 7 and all(r["passed"] for r in v["rows"])
+    assert v["non_regression"] == {"count": 7, "ok": 7}
     assert v["rows"][0]["reference_type"] == {"fr": "ANALYTIQUE", "en": "analytical"}
 
 
@@ -304,6 +304,27 @@ def test_unevaluated_loads_make_balance_partial() -> None:
     assert item.status == "not_evaluated"
     bal = loads.balance({"DX": 0.0, "DY": 0.0, "DZ": 1.0}, "test", a)
     assert bal is not None and not bal.complete and bal.notes
+
+
+def test_solid_loads_report_covers_tier2_loads(models: dict) -> None:
+    """Remote load, spring, body loads and a pressure formula (task 6.4c)."""
+    m = models["solid_loads"]
+    rows = {(r["load"], r["keyword"]): r for r in m.loads_and_bcs["rows"]}
+    assert [t["name"] for t in rows[("REMOTE", "LIAISON_RBE3")]["targets"]] == ["MASTER", "TOP"]
+    assert rows[("REMOTE", "LIAISON_RBE3")]["kind"] == "boundary condition"
+    (formula,) = m.loads_and_bcs["functions"]
+    assert formula["name"] == "P_HYDRO" and formula["parameters"] == ["Z"]
+    assert formula["expression"].startswith("max(1.0e-9 * 9810.0")
+    bases = {i["keyword"]: i["basis"] for i in m.reactions["applied"]["items"]}
+    assert bases["PESANTEUR"].startswith("body load") and bases["ROTATION"].startswith("body")
+    assert m.reactions["relations"] == ["LIAISON_RBE3"]
+    tables = {t["source"].split(":")[-1]: t for t in m.reactions["summary"]["from_tables"]}
+    # The table with moments names its columns RESULT_X..Z; both give the support sums.
+    assert tables["MOMENT_SUPPORTS"]["components"] == tables["REAC_SUPPORTS"]["components"]
+    assert {p["keyword"] for p in m.element_properties} == {"DISCRET"}
+    md = report.render_markdown(m)
+    assert "Equilibrium check: not made" in md and "Balance error" not in md
+    assert "`P_HYDRO` is a formula (`FORMULE`) of `Z`" in md
 
 
 def test_fonc_mult_is_not_evaluated() -> None:

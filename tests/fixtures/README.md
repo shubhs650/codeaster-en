@@ -1,6 +1,6 @@
 # Solver fixtures
 
-Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6), plus four broken runs for the log parser (below). Each case directory follows the job layout of `docs/CLEARFEA-INTEGRATION.md` §3:
+Four reference jobs, three for the alpha scope (`docs/ARCHITECTURE.md` §6) and `solid_loads` for the Tier 2 loads (task 6.4), plus four broken runs for the log parser (below). Each case directory follows the job layout of `docs/CLEARFEA-INTEGRATION.md` §3:
 
 ```text
 <case>/
@@ -9,7 +9,7 @@ Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6), pl
 └── output_en/  same without run.rmed, English-locale run (task 3.4; solid_static, shell_static, modal, broken_missing_group)
 ```
 
-`input/` was hand-written (task 4.1); since task 6.1 the three `run.comm` files are written by the English `.comm` builder in `comm_inputs.py` (`python tests/fixtures/comm_inputs.py` rewrites them, `tests/test_comm.py` checks byte identity), so edit them there and rerun the fixture. `output/` is produced by `scripts/run-fixture.sh tests/fixtures/<case>` with the image pinned in `/CONTAINER_IMAGE` and committed (task 4.2). There is no image for upstream 17.4.26, so the outputs come from code_aster **17.4.22** (`simvia/code_aster`, ADR-011); `output/provenance.json` records the image digest and versions. `run.resu` is empty (no job writes to unit 8). Unit tests never run the solver: `tests/test_fixture_outputs.py` reads the committed outputs, and `.github/workflows/solver-fixtures.yml` regenerates them and reruns that test. `output_en/` is the same input run with `DEBUT(LANG="EN")` and our gettext catalog (`FIXTURE_LANG=EN scripts/run-fixture.sh`, `docs/ENGLISH-LOCALE.md`); `tests/test_gettext.py` checks it.
+`input/` was hand-written (task 4.1); since task 6.1 the `run.comm` files are written by the English `.comm` builder in `comm_inputs.py` (`python tests/fixtures/comm_inputs.py` rewrites them, `tests/test_comm.py` checks byte identity), so edit them there and rerun the fixture. `output/` is produced by `scripts/run-fixture.sh tests/fixtures/<case>` with the image pinned in `/CONTAINER_IMAGE` and committed (task 4.2). There is no image for upstream 17.4.26, so the outputs come from code_aster **17.4.22** (`simvia/code_aster`, ADR-011); `output/provenance.json` records the image digest and versions. `run.resu` is empty (no job writes to unit 8). Unit tests never run the solver: `tests/test_fixture_outputs.py` reads the committed outputs, and `.github/workflows/solver-fixtures.yml` regenerates them and reruns that test. `output_en/` is the same input run with `DEBUT(LANG="EN")` and our gettext catalog (`FIXTURE_LANG=EN scripts/run-fixture.sh`, `docs/ENGLISH-LOCALE.md`); `tests/test_gettext.py` checks it.
 
 ## Cases
 
@@ -17,7 +17,8 @@ Three reference jobs that cover the alpha scope (`docs/ARCHITECTURE.md` §6), pl
 |---|---|---|---|---|---|
 | `solid_static` | `3D`, linear static | 4,622 nodes, 14,439 TETRA4; cylinder Ri 100 / Ro 120 / H 300 mm with a radial nozzle ri 25 / ro 35 mm | base fixed (`DDL_IMPO`), 2 MPa internal pressure on shell wall and nozzle bore (`PRES_REP` after `ORIE_PEAU`) | reaction sum DX = applied pressure resultant (3891.64 N, exact on the faceted mesh) | `forma01a`, `zzzz341b` |
 | `shell_static` | `DKT` (QUAD4, so DKQ), linear static | 441 nodes, 20 × 20 QUAD4; square plate a 1000 mm, t 10 mm | edges DZ = 0, two corners restrain in-plane motion, 0.01 MPa pressure | centre DZ = −2.11242 mm, centre MXX = −478.864 N·mm/mm (Navier), reaction sum DZ = 10,000 N | `ssls101n` |
-| `modal` | `3D`, `CALC_MODES` 6 lowest | 4,197 nodes, 640 HEXA20; cantilever 400 × 20 × 10 mm | X = 0 face clamped | frequencies 52.22, 104.44, 327.26, 654.51, 916.33 Hz (Euler–Bernoulli bending) and 1485.22 Hz (Saint-Venant torsion) | `sdlv100a`, `sdll05a` |
+| `modal` | `3D`, `CALC_MODES` 6 lowest, `NORM_MODE` to unit generalized mass (task 6.4) | 4,197 nodes, 640 HEXA20; cantilever 400 × 20 × 10 mm | X = 0 face clamped | frequencies 52.22, 104.44, 327.26, 654.51, 916.33 Hz (Euler–Bernoulli bending) and 1485.22 Hz (Saint-Venant torsion); mode 1 generalized mass 1 | `sdlv100a`, `sdll05a` |
+| `solid_loads` | `3D` + `DIS_T` spring + `DIS_TR` remote point, linear static (task 6.4) | 1,379 nodes, 1,024 HEXA8; block 200 × 100 × 100 mm, one SEG2 spring, one POI1 remote point | base clamped; gravity (`PESANTEUR`), rotation 20 rad/s about Z (`ROTATION`), water pressure `max(ρg(h − Z), 0)` on Y = 0 (`FORMULE` + `AFFE_CHAR_MECA_F PRES_REP`), F = (200, 0, −500) N and MZ = 2·10⁴ N·mm at the remote point spread over the top face (`LIAISON_RBE3` + `FORCE_NODALE`), 1000 N/mm spring to a fixed ground node | reaction sums DX = −828, DY = −500.39, DZ = 654.017 N (minus the applied forces); support moments about (100, 50, 0) in `moments.csv`, checked by `tests/test_fixture_outputs.py` | `zzzz144a`, `sdnv138c`, `erreu01a`, `forma01d`, `fdlv100a` |
 
 Units are mm, N, MPa, tonne, s (`units.system = "SI_mm"` in `run.json`). Material is steel, E = 210,000 MPa, ν = 0.3, ρ = 7.85e-9 t/mm³.
 
@@ -47,12 +48,16 @@ Four more jobs fail on purpose, so the `.mess` parser and the failure classifier
 | `shell_static` | `MXX_CENTER` | −478.864 N·mm/mm | −479.645 N·mm/mm | 0.16 % |
 | `shell_static` | `REAC_DZ_SUM` | 10,000 N | 10,000.000 N | 0 % |
 | `modal` | `F1`–`F6` | 52.22, 104.44, 327.26, 654.51, 916.33, 1485.22 Hz | 52.34, 104.43, 327.07, 646.99, 911.68, 1497.03 Hz | 0.01–1.15 % |
+| `modal` | `M1_MASS_GENE` (task 6.4) | 1 | 1.0 | 0 % |
+| `solid_loads` | `REAC_DX_SUM`, `REAC_DY_SUM`, `REAC_DZ_SUM` (task 6.4) | −828, −500.39, 654.017 N | same | below 1e-12 % |
 
 Printed tables (`output/tables/`, `IMPR_TABLE` units in `run.export`): `reactions.csv` (`POST_RELEVE_T` resultant of `REAC_NODA` on the supports) in both static cases; in `modal`, `mass_inertia.csv` (`POST_ELEM MASS_INER`) and, since task 4.5, `modal_parameters.csv` (`RECU_TABLE` of the `CALC_MODES` result: `FREQ`, `MASS_GENE`, `MASS_EFFE_D*`, `MASS_EFFE_UN_D*`). The modal case was rerun for that table with the same image; its frequencies did not change. Its effective mass fractions in the bending planes (61.2/18.8/6.5 % in Z, 61.3/18.9 % in Y) agree with the Euler–Bernoulli cantilever (61.3/18.8/6.5 %, `hand_values.py`) within 1 %; `tests/test_results.py` checks them.
 
+`solid_loads` notes (first run, task 6.4c): the remote point and the spring need a mass, even zero (`M_TR_D_N`, `M_T_D_L`), or gravity and rotation stop on alarm `DISCRETS_26` (raised as an error); the builder writes them. The free end of the spring is found with `DEFI_GROUP ENV_SPHERE`, because a POI1 there would raise `MODELISA8_14`. The support moments `MOMENT_Y` and `MOMENT_Z` differ from the hand values by the couple of the 50 mm spring (about 2 N·mm): a translational two-node spring passes its end forces without a moment. `SIEQ_NOEU` is written with a MED profile that skips the two discrete-only nodes.
+
 Signs, confirmed by the first run: `REAC_NODA` is the support reaction, so the reaction sums carry the opposite sign of the applied load (+X for `solid_static`, +Z for `shell_static`); the sagging moment `MXX` of the plate is negative. No check uses `VALE_ABS` any more.
 
-`shell_static` sets `DEBUT(IGNORE_ALARM=("MODELISA8_14",))` without `ERREUR=_F(ALARME="EXCEPTION")`: the Gmsh point groups are POI1 cells, which the mesh check reports, and code_aster raises the alarm as an error before it looks at `IGNORE_ALARM`. The other two cases keep `ALARME="EXCEPTION"`. `tests/test_fixture_outputs.py` rejects any printed alarm in every case.
+`shell_static` sets `DEBUT(IGNORE_ALARM=("MODELISA8_14",))` without `ERREUR=_F(ALARME="EXCEPTION")`: the Gmsh point groups are POI1 cells, which the mesh check reports, and code_aster raises the alarm as an error before it looks at `IGNORE_ALARM`. The other cases keep `ALARME="EXCEPTION"`. `tests/test_fixture_outputs.py` rejects any printed alarm in every case.
 
 ## Regenerating a mesh
 

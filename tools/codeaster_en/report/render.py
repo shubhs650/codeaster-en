@@ -308,11 +308,15 @@ class _Writer:
             )
         if h["key"] == "balance":
             b = h["balance"]
-            text = (
+            if not b["complete"]:
+                return (
+                    "Equilibrium check: not made, because some applied loads are not summed by "
+                    "this report (see Results: reactions)."
+                )
+            return (
                 "Equilibrium check: support reactions balance the applied loads to "
-                f"{_percent(b['error_percent'])} of the applied resultant"
+                f"{_percent(b['error_percent'])} of the applied resultant."
             )
-            return text + ("." if b["complete"] else " (partial: some loads not evaluated).")
         if h["key"] == "first_frequency":
             return f"First natural frequency: {num(h['value'])} Hz."
         return _esc(h)
@@ -449,7 +453,13 @@ class _Writer:
                 f"({code('AFFE_CHAR_MECA')}: Lagrange multipliers; "
                 f"{code('AFFE_CHAR_CINE')}: eliminated)."
             )
-        lines = sorted({r["comm_line"] for r in lb["rows"]})
+        for f in lb.get("functions", []):
+            params = ", ".join(code(p) for p in f["parameters"]) or "no parameter"
+            expr = code(f["expression"]) if f["expression"] else "an expression not read"
+            self.para(f"{code(f['name'])} is a formula ({code(f['command'])}) of {params}: {expr}.")
+        lines = sorted(
+            {r["comm_line"] for r in lb["rows"]} | {f["comm_line"] for f in lb.get("functions", [])}
+        )
         self.source(f"command file line {', '.join(map(str, lines))}; values in model units")
 
     def solution(self) -> None:
@@ -598,6 +608,15 @@ class _Writer:
                 "structure):"
             )
             self.table(header, rows, ["l", "r"] + ["r"] * len(comps))
+            if r.get("relations"):
+                self.para(
+                    "Nodes tied by linear relations ("
+                    + ", ".join(code(k) for k in r["relations"])
+                    + ") also carry reactions, the relation forces. They cancel in the force "
+                    "sums, so the totals are still the support reactions; the rotation columns "
+                    "of the totals hold the reaction of a remote point to its applied moment, "
+                    "not a support moment."
+                )
             self.source(f"results file field {code(summary['field'])}, sum over the group's nodes")
         if summary and summary["from_tables"]:
             rows = []
@@ -633,7 +652,7 @@ class _Writer:
             ]
             self.add("### Equilibrium check", "")
             self.table(["", f"X{b}", f"Y{b}", f"Z{b}"], rows, ["l", "r", "r", "r"])
-            if bal["error_percent"] is not None:
+            if bal["error_percent"] is not None and bal["complete"]:
                 self.para(
                     f"Balance error: **{_percent(bal['error_percent'])}** "
                     "(magnitude of the residual over the magnitude of the applied resultant)."

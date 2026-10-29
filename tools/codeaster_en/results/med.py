@@ -312,11 +312,14 @@ class MedFile:
             else:  # faces/edges of structured meshes (FAC, ARE) are not written by code_aster
                 continue
             for pfl_name, pfl in sup.items():
-                n = int(pfl.attrs["NBR"])
                 points = int(pfl.attrs.get("NGA", 1))
-                values = pfl["CO"][()].reshape(ncomp, n, points)
                 if pfl_name == NO_PROFILE:
                     entities = np.arange(total)
                 else:
+                    # With a profile, the values cover the profile's entities only; NBR on the
+                    # values dataset can still be the mesh total (seen on a nodal field that
+                    # skips the discrete-element nodes, solid_loads fixture, task 6.4c).
                     entities = self._h5["PROFILS"][pfl_name]["PFL"][()] - 1
+                n = int(pfl.attrs["NBR"]) if pfl_name == NO_PROFILE else entities.size
+                values = pfl["CO"][()].reshape(ncomp, n, points)
                 yield Support(kind, med_type, np.asarray(entities), points, values)

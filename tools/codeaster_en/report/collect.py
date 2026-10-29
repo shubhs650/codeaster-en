@@ -266,11 +266,16 @@ def _value_text(value: Any) -> Any:
     return comm_module.to_jsonable(value)
 
 
+# Where an occurrence applies: plain groups, then the main/secondary node groups of linear
+# relations such as LIAISON_RBE3 (task 6.4c).
+TARGET_KEYS = ("GROUP_MA", "GROUP_NO", "MAILLE", "NOEUD", "GROUP_NO_MAIT", "GROUP_NO_ESCL")
+
+
 def _targets(occ: dict[str, Any]) -> list[str]:
     if occ.get("TOUT") == "OUI":
         return ["TOUT"]
     out: list[str] = []
-    for key in ("GROUP_MA", "GROUP_NO", "MAILLE", "NOEUD"):
+    for key in TARGET_KEYS:
         out.extend(str(v) for v in as_list(occ.get(key)) if isinstance(v, str))
     return out
 
@@ -278,7 +283,7 @@ def _targets(occ: dict[str, Any]) -> list[str]:
 def _keyword_values(occ: dict[str, Any], terms: Terms) -> list[dict[str, Any]]:
     out = []
     for key, value in occ.items():
-        if key in ("GROUP_MA", "GROUP_NO", "MAILLE", "NOEUD", "TOUT"):
+        if key in (*TARGET_KEYS, "TOUT"):
             continue
         out.append({"keyword": key, "label": terms.get(key), "value": _value_text(value)})
     return out
@@ -646,7 +651,33 @@ class _Collector:
             "solve_command": self.solve.command if self.solve else None,
             "load_case": list(in_case),
             "rows": rows,
+            "functions": self._functions(rows),
         }
+
+    def _functions(self, rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """The ``FORMULE`` objects that load values name, with their expression (task 6.4c)."""
+        out: list[dict[str, Any]] = []
+        seen: set[str] = set()
+        for r in rows:
+            for kv in r["values"]:
+                ref = kv["value"].get("ref") if isinstance(kv["value"], dict) else None
+                if not isinstance(ref, str) or ref in seen:
+                    continue
+                call = self.comm.producer(ref, before=r["comm_line"])
+                if call is None or call.command != "FORMULE":
+                    continue
+                seen.add(ref)
+                expr, params = call.get("VALE"), call.get("NOM_PARA")
+                out.append(
+                    {
+                        "name": ref,
+                        "command": call.command,
+                        "expression": expr if isinstance(expr, str) else None,
+                        "parameters": [str(p) for p in as_list(params)],
+                        "comm_line": call.line,
+                    }
+                )
+        return out
 
     def solution(self) -> dict[str, Any]:
         out: dict[str, Any] = {"command": None}
@@ -844,6 +875,9 @@ class _Collector:
             "target_display": {t: self.group_name(t) for t in sorted(targets)},
             "applied": applied.to_dict(),
             "balance": bal.to_dict() if bal else None,
+            "relations": sorted(
+                {i.keyword for i in applied.items if i.keyword.startswith("LIAISON_")}
+            ),
             "snippet": None,
         }
         if summary is None or (not summary.total and not summary.from_tables):
