@@ -152,7 +152,7 @@ Two layers: `CommandFile` takes French command and keyword names and checks ever
 
 **Mirror repo** `code_aster` — `.github/workflows/sync-upstream.yml` (in `mirror-repo/` here, copied into that repo): nightly `git fetch` from GitLab, force-update `main` and tags, push. The initial copy can be done with GitHub's "Import repository" from `https://gitlab.com/codeaster/src.git`, or by running the same workflow once with `workflow_dispatch`. Check for blobs > 100 MB before the first push (`git rev-list --objects --all | git cat-file --batch-check` → sort by size); if any exist, mirror `main` only or route them through Git LFS.
 
-**Overlay repo** — `caen upstream bump --to <tag>`: updates the submodule, writes `UPSTREAM_VERSION`, re-runs extraction, and produces a diff report: commands/keywords added, removed, or changed; messages added, removed, or whose French text changed (those are marked `stale` in the English catalogue). This diff is the Phase 7 maintenance loop; it is deliberately mechanical so an agent can do it.
+**Overlay repo** — `caen upstream bump --to <tag>`: updates the submodule, writes `UPSTREAM_VERSION`, re-runs extraction, and produces a diff report: commands/keywords added, removed, or changed; messages added, removed, or whose French text changed (those are marked `stale` in the English catalogue). This diff is the Phase 7 maintenance loop; it is deliberately mechanical so an agent can do it. `--dry-run` computes the same report from a `git archive` export of the tag without touching `upstream/` or `en/`; the full list of what an applied bump writes, and what it leaves to the caller, is ADR-023. Reports live in `docs/upstream-diffs/`.
 
 ## 6. Testing without building the solver
 
