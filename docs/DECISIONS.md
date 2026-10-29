@@ -256,6 +256,27 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 - Shell layers, element (ELNO/ELGA) fields and contour plots of other components are not drawn; add them when a fixture writes them.
 - `run_model.json` schema stays at version 1 (one optional key added).
 
+## ADR-018 — English gettext catalog: generated .po, own .mo writer, log-structure lines stay French
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29)
+
+**Context.** PLAN.md task 3.4 and ADR-004 (b): ship the English of `en/messages` as a gettext catalog the solver loads with `DEBUT(LANG='EN')`, check it with `msgfmt`, and run one fixture in English. Task 4.2 showed the `.mo` must be mounted at `<install>/share/locale/aster` (the image's `profile.sh` resets `ASTER_LOCALEDIR`).
+
+**Decision.**
+1. `caen translate gettext` (`codeaster_en/translate/gettext_po.py`) writes `en/messages/codeaster_en.po` (committed, generated, never hand-edited; `caen validate gettext` fails when it is stale) and, with `--mo DIR`, `DIR/en/LC_MESSAGES/aster_messages.mo` (never committed). Domain `aster_messages`, language directory `en` (what `i18n.py` asks for with `LANG='EN'`).
+2. `msgid` = the extracted `fr`, exactly as passed to `_()`. Included: every non-stale translated message except the 15 bare strings (never passed to `_()`); the two f-strings are included (`_()` sees the evaluated text). Plus the four `Utmess` box footers, whose English stays `FOOTERS_EN` in `mess/render.py` (now defined in `mess/parser.py`), so solver and renderer print the same words.
+3. Identical French must have identical English (one `msgid`); the generator refuses a conflict. Five pairs differed after 3.2 and were aligned in this task (`ALGELINE3_7`/`SOUSTRUC_88`, `ELEMENTS_45`/`SHELL1_3`, `ELEMENTS3_51`/`PLATE1_2`, `ELEMENTS3_52`/`PLATE1_3`, `VARC1_1`/`MATERIAL2_51`).
+4. The `.mo` is written by our code (GNU format, no hash table); `msgfmt --check` (which includes `--check-format` for the `python-format` entries) runs in tests when installed. No system dependency for users.
+5. `KEEP_FRENCH`: `SUPERVIS2_99` (`<I> <FIN> ARRET NORMAL`, which `run_aster/status.py` `RE_FIN` counts to recognize a normal end) and the stage lines `SUPERVIS2_71/72/73/74/75/80` (`# Commande #`, `# Résultat commande #`, `# Mémoire (Mo)`, `# Fin commande #`, `# Dépend de`) are left out of the catalog, so tools that read the log by these lines keep working. The renderer still shows them in English.
+6. The `.mess` parser and renderer read both languages: English footers, English modal table head/tail (`ALGELINE6`), and English box bodies matched against the English template (`already_english: true`).
+7. `FIXTURE_LANG=EN scripts/run-fixture.sh` runs a fixture with the catalog (copy of `run.comm` with `LANG="EN"` added to `DEBUT`, `.mo` mounted read-only) into `<case>/output_en/` (no `.rmed`; `provenance.json` records `po_sha256`). The optional `english` job of `solver-fixtures.yml` runs `solid_static`, `shell_static`, `modal`, `broken_missing_group` and commits on dispatch.
+
+**Why.** One source of truth (ADR-004); a committed `.po` is reviewable and diffable, the binary is not. Writing the `.mo` ourselves keeps ClearFEA's image build to `pip install` plus one command. `run_aster`'s exit diagnosis must not depend on our translation. The gate of ADR-004 is met: the English runs show English diagnostics and identical `TEST_RESU` values.
+
+**Consequences.**
+- Gettext cannot reach `SUPERVIS` (and `SUPERVIS2` when `DEBUT` prints first, e.g. `CODE='OUI'`): imported before `LANG` is applied. The upstream proposal in ADR-004 (apply `LANG` before the first `UTMESS`) still stands.
+- Editing an English text that fixtures print makes `output_en/` stale; `tests/test_gettext.py` then skips its renderer check (sha mismatch) until the `english` job is rerun.
+- The `.comm` builder (Phase 6) emits `DEBUT(LANG='EN')`; the ClearFEA image installs the `.mo` (`docs/ENGLISH-LOCALE.md`, `docs/CLEARFEA-INTEGRATION.md` §4).
+
 ---
 
 ## Template

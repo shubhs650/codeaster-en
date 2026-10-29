@@ -86,7 +86,7 @@ All public objects are plain dataclasses, JSON-serialisable (`.to_dict()`), so C
 
 - Base: the image in `CONTAINER_IMAGE` (today `simvia/code_aster:17.4.22`, an MPI-enabled Spack build; ADR-011). `caen upstream bump` updates `CONTAINER_IMAGE` too.
 - Entry: `run_aster run.export` from `input/`, with `--ncpus`, time and memory in the `.export`. ClearFEA wraps with its own timeout and cgroup limits; the `.export` limits are the inner guard.
-- If ADR-004 chose gettext: the image build installs `en/messages/*.mo` and sets `LANG=en_US.UTF-8` (or whatever upstream honours) so `run.mess` is English natively; the renderer still runs for IDs and classification.
+- English messages (ADR-004, ADR-018): the image build runs `caen translate gettext --mo <dir>` and copies `<dir>/en/LC_MESSAGES/aster_messages.mo` to `${RUNASTER_ROOT}/share/locale/aster/en/LC_MESSAGES/` (or mounts `<dir>` there), and the `.comm` builder emits `DEBUT(LANG='EN')`; the system locale has no effect. Supervisor lines and the `<I> <FIN> ARRET NORMAL` line `run_aster` checks stay French; the renderer still runs for IDs, classification and those lines. Steps: `docs/ENGLISH-LOCALE.md`.
 - Exit codes: `run_aster` returns 0 success, 1 solver error (`<F>`/`<EXCEPTION>`), 4 time limit, other non-zero platform; mapping is verified in Phase 4.2 and recorded in `mess/classify.py`.
 
 ## 5. Failure classification → billing

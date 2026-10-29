@@ -25,6 +25,7 @@ from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
 from codeaster_en.mess import render as mess_render
 from codeaster_en.translate import command as command_drafts
+from codeaster_en.translate import gettext_po
 from codeaster_en.translate import messages as messages_translate
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
@@ -344,6 +345,43 @@ def translate_messages(
         raise typer.Exit(code=1) from exc
     if failed:
         raise typer.Exit(code=1)
+
+
+@translate_app.command("gettext")
+def translate_gettext(
+    po: Annotated[
+        Path | None,
+        typer.Option(help="Output .po (default: en/messages/codeaster_en.po)."),
+    ] = None,
+    mo: Annotated[
+        Path | None,
+        typer.Option(
+            help="Also write the .mo under this locale directory, as "
+            "<DIR>/en/LC_MESSAGES/aster_messages.mo (e.g. build/locale)."
+        ),
+    ] = None,
+    check: Annotated[
+        bool,
+        typer.Option("--check", help="Only check that the committed .po is up to date."),
+    ] = False,
+) -> None:
+    """Generate the gettext catalog the solver loads with DEBUT(LANG='EN') (ADR-004)."""
+    root = _repo_root()
+    if check:
+        if not _report("gettext", gettext_po.check(root), "en/messages/codeaster_en.po current"):
+            raise typer.Exit(code=1)
+        return
+    try:
+        result = gettext_po.build(root, po, mo)
+        typer.echo(f"wrote {result['po']} ({result['entries']} entries)")
+        if result["mo"] is not None:
+            typer.echo(f"wrote {result['mo']}")
+            stats = gettext_po.msgfmt_check(Path(str(result["po"])), mo / "msgfmt-check.mo")
+            (mo / "msgfmt-check.mo").unlink(missing_ok=True)
+            typer.echo("msgfmt: not installed, skipped" if stats is None else f"msgfmt: {stats}")
+    except (OSError, gettext_po.CatalogError) as exc:
+        typer.echo(f"translate gettext: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
 
 
 @translate_app.command("doc")
@@ -703,6 +741,13 @@ def _validate_synonyms(root: Path) -> bool:
     return _report("synonyms", issues, f"{files} Markdown file(s), {len(forbidden)} aliases")
 
 
+def _validate_gettext(root: Path) -> bool:
+    if not (root / "upstream" / gettext_po.UTMESS_RELPATH).is_file():
+        typer.echo("gettext: skipped (no upstream/ checkout)")
+        return True
+    return _report("gettext", gettext_po.check(root), "en/messages/codeaster_en.po current")
+
+
 def _validate_commands(root: Path) -> bool:
     issues, files = commands_validator.validate_dir(root / COMMANDS_RELPATH)
     return _report("commands", issues, f"{files} reference(s)")
@@ -719,6 +764,7 @@ def validate_all(ctx: typer.Context) -> None:
         _validate_messages(root),
         _validate_synonyms(root),
         _validate_commands(root),
+        _validate_gettext(root),
     ]
     raise typer.Exit(code=0 if all(results) else 1)
 
@@ -747,6 +793,13 @@ def validate_messages() -> None:
 def validate_synonyms() -> None:
     """Scan en/**/*.md for the glossary's forbidden synonyms (aliases_en)."""
     if not _validate_synonyms(_repo_root()):
+        raise typer.Exit(code=1)
+
+
+@validate_app.command("gettext")
+def validate_gettext() -> None:
+    """Check that en/messages/codeaster_en.po matches en/messages/*.en.json."""
+    if not _validate_gettext(_repo_root()):
         raise typer.Exit(code=1)
 
 

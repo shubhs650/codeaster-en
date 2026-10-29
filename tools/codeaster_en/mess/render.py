@@ -35,6 +35,7 @@ from codeaster_en.mess.catalog import MessageCatalog, Template
 from codeaster_en.mess.classify import Classification, classify
 from codeaster_en.mess.events import Diagnostic, Event, Stage
 from codeaster_en.mess.log import ParsedLog
+from codeaster_en.mess.parser import FOOTERS_EN
 
 SCHEMA_VERSION = 1
 RENDERER = "codeaster_en.mess.render"
@@ -54,23 +55,14 @@ SEVERITY_EN = {
     "EXCEPTION": "error",
 }
 
-# The comments Utmess.format_message appends to A/E/S/F boxes (upstream
-# code_aster/Messages/Utmess.py lines 613-624, ``dcomm``); French as printed -> English.
-# Method: assisted (task 4.4), wording follows the glossary.
-FOOTERS_EN = {
-    "A": "This is a warning. If you do not understand what it means, you may get unexpected "
-    "results!",
-    "E": "This error will be followed by a fatal error.",
-    "S": "This error is fatal. The code stops. All steps of the analysis up to the stop have "
-    "been saved in the database.",
-    "F": "This error is fatal. The code stops.",
-}
 _FOOTER_FR = {
     "Ceci est une alarme.": "A",
     "Cette erreur sera suivie": "E",
     "Cette erreur est fatale. Le code s'arrête. Toutes": "S",
     "Cette erreur est fatale. Le code s'arrête.": "F",
 }
+# A run with our gettext catalog prints FOOTERS_EN itself (task 3.4).
+_FOOTER_FR.update({text: key for key, text in FOOTERS_EN.items()})
 
 # Messages the supervisor prints inside another message's argument, or inside lines it formats
 # itself: SUPERVIS2_76 (" de type <...>") goes into SUPERVIS2_72's %(k3)s and into the
@@ -112,6 +104,7 @@ class RenderedDiagnostic:
     repeat: bool
     method: str | None = None
     extra: list[dict[str, Any]] = field(default_factory=list)  # other messages in the box
+    already_english: bool = False  # printed in English by the solver (gettext, task 3.4)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -249,12 +242,28 @@ def render_diagnostic(diag: Diagnostic, catalog: MessageCatalog) -> RenderedDiag
             end, args = hit
             rest = diag.body[end:].lstrip("\n").split("\n")
     if args is None:
+        # A run with our gettext catalog (DEBUT(LANG='EN'), ADR-004) printed the English.
+        args = tpl.recover_en(diag.body)
+        if args is None:
+            hit = tpl.match_at_en(diag.body, 0)
+            if hit is not None:
+                end, args = hit
+                rest = diag.body[end:].lstrip("\n").split("\n")
+        rd.already_english = args is not None
+    if args is None:
         rd.status = "no-args"
         return rd
     rd.args = args
     en = _fill(tpl, args, catalog)
     rd.status = "english" if en is not None else "untranslated"
-    if rest:
+    if rest and rd.already_english:
+        # Continuation messages were printed in English too: keep them as printed.
+        for line in rest:
+            if line.strip():
+                rd.extra.append(
+                    {"message_id": None, "status": "kept", "args": {}, "en": line, "fr": line}
+                )
+    elif rest:
         for seg in match_lines(rest, catalog, family=diag.family):
             if seg.status == "blank":
                 continue
