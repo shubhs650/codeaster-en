@@ -124,21 +124,29 @@ A native MED reader over `h5py` (ADR-015; `medcoupling` cross-checks it in the t
 
 Input: a run directory (`.comm`, `.export`, `.mess`, `.rmed`, tables). Output: a structured engineering report (Markdown → HTML → PDF via WeasyPrint) in English only. Content spec is `docs/REPORT-SPEC.md`. This is the piece that directly fixes the "SimScale shows French" problem and is the first runtime deliverable ClearFEA consumes.
 
-### 4.8 Command-file builder — `tools/codeaster_en/comm/` (Phase 6)
+### 4.8 Command-file builder — `tools/codeaster_en/comm/` (Phase 6, ADR-019)
 
-A typed Python builder with English method names that emits a French `.comm`:
+A typed Python builder with English method names that writes a French `.comm` (ADR-008):
 
 ```python
-m = Model.from_med("mesh.med")                       # LIRE_MAILLAGE + AFFE_MODELE
-m.assign_solid(group="ALL", modelisation="3D")
-m.material("steel", E=200e9, nu=0.3, rho=7850).assign_to("ALL")
-m.fix(group="FIXED")                                  # AFFE_CHAR_MECA DDL_IMPO
-m.pressure(group="INNER", value=2.0e6)                # PRES_REP
-m.linear_static()                                     # MECA_STATIQUE + CALC_CHAMP + IMPR_RESU
-m.write("run.comm")
+from codeaster_en.comm import Builder
+
+b = Builder()
+b.start()                                             # DEBUT(LANG="EN")
+mesh = b.read_mesh()                                  # LIRE_MAILLAGE, unit 20
+b.orient_skin(mesh, "INNER")                          # MODI_MAILLAGE ORIE_PEAU
+model = b.model(mesh, "solid")                        # AFFE_MODELE, 3D (ADR-013 default)
+steel = b.material("STEEL", E=200e3, nu=0.3, rho=7.85e-9)
+mate = b.assign_materials(mesh, {"BODY": steel})      # AFFE_MATERIAU
+fixed = b.fix(model, "FIXED")                         # AFFE_CHAR_MECA DDL_IMPO
+press = b.pressure(model, "INNER", 2.0)               # PRES_REP
+resu = b.linear_static(model, mate, [fixed, press])   # MECA_STATIQUE
+b.compute_fields(resu, criteria="SIEQ_NOEU", forces="REAC_NODA")
+b.write_med(resu, ["DEPL", "SIEQ_NOEU", "REAC_NODA"])
+b.write("run.comm")                                   # adds FIN()
 ```
 
-Every method is validated against `en/commands/*.json` at build time, so the builder cannot emit a keyword the pinned upstream doesn't know. ClearFEA's code_aster adapter is a client of this builder.
+Two layers: `CommandFile` takes French command and keyword names and checks every call against `en/commands/*.json` when it is added (unknown keyword, block conditions, mandatory keywords, catalog rules, types, allowed values), so the builder cannot emit a keyword the pinned upstream does not know; `Builder` is the English API on top. Output is laid out as `ruff format` would, and the three fixture command files are builder output (`tests/fixtures/comm_inputs.py`). ClearFEA's code_aster adapter is a client of this builder.
 
 ## 5. Upstream synchronisation
 

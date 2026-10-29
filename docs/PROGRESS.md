@@ -14,6 +14,35 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 6.1 .comm builder — agent
+Done: `codeaster_en.comm` (`tools/codeaster_en/comm/`): `CommandFile` (French names, every call
+checked against `en/commands/*.json` when added: unknown command/keyword, `BLOC` conditions with
+defaults, mandatory keywords, the 7 catalog rules, counts, types, `into`, bounds, `reuse`, result
+names, known concept types) and `Builder`, the English API (`read_mesh`, `node_groups`,
+`orient_skin`, `orient_shell_normals`, `model` with ADR-013 body kinds, `material`,
+`assign_materials`, `shell_properties`, `fix`/`restrain` (`DDL_IMPO` or kinematic
+`MECA_IMPO`), `pressure`, `linear_static`, `compute_fields`, `resultant`, `modal`
+(`CALC_MATR_ELEM`/`NUME_DDL`/`ASSE_MATRICE`/`CALC_MODES`), `mass_properties`,
+`modal_parameters`, `print_table`, `write_med`, `test_results`). Layout = `ruff format`'s, done
+in code (`syntax.py`). `tests/fixtures/comm_inputs.py` writes the three fixture `run.comm` files
+with the English API, comments included; `tests/test_comm.py` (26 tests): byte identity, `ruff
+format` leaves builder output unchanged, round trip through the report's `.comm` reader, upstream
+checker accepts builder output, catalog-check failures, `DS_PARENTS` vs upstream.
+`solid_static` and `shell_static` were already byte-identical. `modal` had one hand-wrapped
+statement (`CALC_MODES`, 99 columns, which `ruff format` keeps on one line): regenerated from the
+builder and rerun in session (`run-fixture.sh`, French and `FIXTURE_LANG=EN`, image of ADR-011):
+exit 0, same `TEST_RESU` values, only timestamps/timings changed; modal report goldens updated.
+ARCHITECTURE §4.8 and CLEARFEA-INTEGRATION §2 now show the built API (snippets executed).
+Verified: `ruff check` and `ruff format --check` clean, `pytest` 512 passed / 4 skipped (msgfmt,
+off-screen OpenGL), `caen validate` OK.
+Open: 6.2 (packaging) is next; `en/commands/*.json` are read from the repo path, so 6.2 must
+ship them as package data and point `DEFAULT_COMMANDS_DIR` there. Remote loads, gravity, springs,
+temperature, `AFFE_CHAR_MECA_F`, `MACR_LIGN_COUPE`, `NORM_MODE` are not English methods yet
+(6.4); `Builder.file.call` reaches them with the same checks.
+Decisions: ADR-019.
+Needs owner: nothing blocking; review-queue entry added.
+Branch is `claude/project-thread-uo0mbf` (session-assigned).
+
 ## 2026-10-29 — 3.4 English messages as gettext — agent
 Done: `caen translate gettext` (`tools/codeaster_en/translate/gettext_po.py`) generates
 `en/messages/codeaster_en.po` (6,813 entries, committed) and, with `--mo DIR`,

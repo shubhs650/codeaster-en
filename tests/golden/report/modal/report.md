@@ -22,9 +22,9 @@ Cantilever beam L 400 mm, section 20 mm (Y) x 10 mm (Z), clamped at X = 0, first
 | Analysis | modal (natural frequencies) |
 | Outcome | completed |
 | Model size | 4197 nodes, 656 elements |
-| Elapsed time (whole job) | 4.910 s |
-| CPU time (sum of commands) | 1.770 s |
-| Peak memory | 907.8 MB |
+| Elapsed time (whole job) | 4.440 s |
+| CPU time (sum of commands) | 2.010 s |
+| Peak memory | 907.7 MB |
 
 Headline results:
 
@@ -96,7 +96,7 @@ The load case is the `EXCIT` list of `CALC_MODES`: none.
 | Modes sought | smallest (frequencies) (`PLUS_PETITE`) |
 | Number of modes requested | 6 |
 | Frequency shift [Hz] | 0 |
-| Solve time | 0.9100 s CPU, 1.370 s elapsed |
+| Solve time | 0.9500 s CPU, 1.380 s elapsed |
 
 *Source: solver settings from the command echo in the solver log (defaults filled in); degrees of freedom from the solver log message ALGELINE7_17.*
 
@@ -196,9 +196,7 @@ RIGI = ASSE_MATRICE(MATR_ELEM=RIGI_EL, NUME_DDL=NUME)
 MASS = ASSE_MATRICE(MATR_ELEM=MASS_EL, NUME_DDL=NUME)
 
 # >> CALC_MODES: compute natural modes
-MODES = CALC_MODES(
-    MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION="PLUS_PETITE", CALC_FREQ=_F(NMAX_FREQ=6)
-)
+MODES = CALC_MODES(MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION="PLUS_PETITE", CALC_FREQ=_F(NMAX_FREQ=6))
 
 # >> IMPR_RESU: write results
 IMPR_RESU(FORMAT="MED", UNITE=80, RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL"))

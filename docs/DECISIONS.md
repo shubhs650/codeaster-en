@@ -277,6 +277,26 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 - Editing an English text that fixtures print makes `output_en/` stale; `tests/test_gettext.py` then skips its renderer check (sha mismatch) until the `english` job is rerun.
 - The `.comm` builder (Phase 6) emits `DEBUT(LANG='EN')`; the ClearFEA image installs the `.mo` (`docs/ENGLISH-LOCALE.md`, `docs/CLEARFEA-INTEGRATION.md` §4).
 
+## ADR-019 — `.comm` builder: two layers, catalog-checked calls, ruff layout, fixtures as builder output
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 6.1)
+
+**Context.** PLAN.md task 6.1 asks for a typed English API that emits French `.comm`, validated against the catalog JSON, covering Tier 1 (+ Tier 2 modal), with the three fixtures regenerated from it byte-identically (modulo comments). The committed solver outputs refer to `run.comm` line numbers, so a fixture whose text changes must be rerun. ARCHITECTURE §4.8 and CLEARFEA-INTEGRATION §2 sketched the API.
+
+**Decision.**
+1. Two layers in `codeaster_en/comm/`: `CommandFile` (`document.py`) takes French command and keyword names as the catalog spells them and checks every call when it is added (`catalog.py`); `Builder` (`builder.py`) is the English API on top (`read_mesh`, `model`, `material`, `assign_materials`, `shell_properties`, `fix`, `restrain`, `pressure`, `linear_static`, `compute_fields`, `resultant`, `modal`, `mass_properties`, `modal_parameters`, `print_table`, `write_med`, `test_results`). French solver names that are values (fields `SIEQ_NOEU`, components `DX`, groups) pass through unchanged.
+2. The check follows upstream's `SyntaxChecker`: unknown command or keyword, `BLOC` conditions evaluated with defaults filled in (an unevaluable condition disables the block, as upstream does), mandatory keywords, the seven catalog rules (with their default values), `max`/`min`, type, `into`, bounds, `reuse` only on reentrant commands, a result name only where the command returns one. Concept types are checked when known, through a small parent map that a test checks against upstream `DataStructure.py`. It runs from `en/commands/*.json` only (no `upstream/` at run time); tests also pass builder output through upstream's own checker.
+3. Layout is `ruff format`'s (Black's right-hand split, line length 100) re-implemented for the `.comm` subset in `syntax.py`, so no formatter is a runtime dependency; a test runs `ruff format` on builder output and expects no change. Comments are supported where fixtures use them (header blocks, a comment above a statement, a trailing note on a constant, a comment above a tuple item). `literal("1.0e-3")` keeps a number written as typed.
+4. ADR-013 is enforced by the API: `model(mesh, kind)` takes one body kind and its default modeling; another modeling must be of the same family; shell properties are refused on a non-shell model; `fix` clamps rotations too on shells. Beams stay out (COMMAND-SET gap).
+5. `start()` writes `DEBUT(LANG='EN')` by default (ADR-004, ADR-018); fixtures pass `language=None`, `testing=True` (`CODE='OUI'`). `alarms_as_errors` with `ignore_alarms` is refused (task 4.2 finding).
+6. `tests/fixtures/comm_inputs.py` writes the three fixture files with the English API; `tests/test_comm.py` requires byte identity, comments included. `solid_static` and `shell_static` were already identical. `modal` had one statement (`CALC_MODES`) split by hand where `ruff format` keeps it on one 99-column line; the file was regenerated from the builder and the fixture rerun in session (French and English, image of ADR-011), with goldens updated.
+
+**Why.** Keeping the French layer separate makes the English API thin and lets ClearFEA (or a later builder method) reach any catalog command with the same guarantee. Matching `ruff format` makes "byte-identical" a property any reviewer can reproduce, and builder files diff cleanly against hand-written ones. Rerunning one fixture costs seconds and keeps every `.mess` line reference true.
+
+**Consequences.**
+- A keyword the pinned catalog does not know cannot be written; an upstream bump that renames one fails the builder tests, not a solver run.
+- Not checked without the solver: element/modeling compatibility, mesh groups present in the `.med` (ClearFEA's pre-run check), concept types of results whose type depends on keywords unless the builder names it.
+- Not yet in the API (later tasks, Tier 2 sweep 6.4): `AFFE_CHAR_MECA_F`, remote loads (`LIAISON_RBE3`), gravity, springs, temperature loads, `MACR_LIGN_COUPE`, `NORM_MODE`; `CommandFile.call` covers them meanwhile.
+
 ---
 
 ## Template
