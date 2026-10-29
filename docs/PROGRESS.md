@@ -14,6 +14,17 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — ops: switch to full autodrive — agent
+Done: ADR-010 (owner's instruction, 2026-10-29). Updated `docs/cloud/PROJECT-INSTRUCTIONS.md`
+(serial threads, self-merge on green CI, agent-made decisions, short stop list), `CLAUDE.md` §3
+(session routine step 6, "When to stop and ask"), `docs/PLAN.md` (autodrive note on owner-review
+criteria), `docs/SESSION-PROMPTS.md`, `docs/cloud/CLOUD-SETUP.md` (E2 and Part G superseded).
+Added `docs/OWNER-REVIEW-QUEUE.md` for asynchronous, non-blocking owner review and owner-only inputs.
+Open: PR #3 (0.6 glossary seed) is open with `needs-engineer-review`; under ADR-010 it is merged
+once CI is green.
+Decisions: ADR-010.
+Needs owner: nothing blocking; see `docs/OWNER-REVIEW-QUEUE.md`.
+
 ## 2026-10-23 — 1.5 inventory report — agent
 Done: `caen extract inventory` (`tools/codeaster_en/extract/inventory.py`) writes §7 of
 `docs/INVENTORY.md` between marker comments from `en/commands/`, `en/messages/`,
