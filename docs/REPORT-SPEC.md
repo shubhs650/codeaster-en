@@ -21,7 +21,7 @@ Everything in the report must be traceable to one of these. The generator never 
 
 - `report.md` (source of truth, golden-file tested), `report.html` (Jinja2 + CSS, print-ready), `report.pdf` (WeasyPrint). Optional `report.docx` later via Pandoc.
 - Deterministic: same inputs → identical `.md` (timestamps come from `run.json` or the `.mess`, not from `now()`).
-- English only. CI runs a tripwire: the rendered `.md` must not contain any of the top-200 French function words/engineering terms (`le`, `la`, `les`, `des`, `maillage`, `modèle`, `contrainte`, `déplacement`, `calcul`, `erreur`, `alarme`…) outside fenced code blocks that quote the `.comm`.
+- English only. CI runs a tripwire: the rendered `.md` must not contain any of the top-200 French function words/engineering terms (`le`, `la`, `les`, `des`, `maillage`, `modèle`, `contrainte`, `déplacement`, `calcul`, `erreur`, `alarme`…) outside fenced code blocks (the quoted `.comm` and log excerpts), inline code spans (solver identifiers) and all-capital identifiers (`tools/codeaster_en/report/tripwire.py`, ADR-016). Log lines the renderer cannot translate are replaced by a bracketed count.
 
 ## 3. Sections (all switchable via config; defaults in bold)
 
@@ -55,7 +55,8 @@ If the run failed, the report still generates: sections 1–7 and 13 only, with 
 
 ## 6. Implementation notes
 
-- `report/collect.py` builds a single `RunModel` dataclass from the inputs; `report/render.py` renders templates from it. Tests target `RunModel` (JSON-serialisable, committed as golden files for each fixture).
+- `report/collect.py` builds a single `RunModel` dataclass from the inputs; `report/render.py` writes the Markdown from it and wraps the converted HTML in `report/templates/report.html.j2`. Tests target `RunModel` and `report.md` (committed as golden files for each fixture under `tests/golden/report/`; ADR-016).
+- Applied-load resultant and balance: `report/loads.py` sums constant `PRES_REP`, `FORCE_FACE`, `FORCE_ARETE` and `FORCE_NODALE` over the `.rmed` mesh; other loads are listed as not evaluated and the balance is flagged partial (ADR-016).
 - Parsing the `.comm` for model/material/load tables: use upstream's own command-language parser if `code_aster.Cata` imports standalone (it yields the keyword tree with values); fallback is a restricted Python AST walk (the `.comm` is Python).
 - MED access: `codeaster_en.results` (task 4.5), a native `h5py` reader of the MED layout (ADR-015). It reads nodal, element-node, Gauss-point and per-element fields; a field missing from the `.rmed` (not in `IMPR_RESU NOM_CHAM`) is reported as unavailable instead of failing. Effective modal masses are not in the `.rmed`: they come from a printed `RECU_TABLE` of the modal result.
 - Images (`report/images.py`): pyvista off-screen; feature-flagged; CI without GL skips and the report shows a placeholder line.

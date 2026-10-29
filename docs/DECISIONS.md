@@ -215,6 +215,28 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-016 — Report generator: Markdown built in code, applied loads summed over the result mesh, tripwire scope
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 4.6)
+
+**Context.** PLAN 4.6 asks for Markdown → HTML (Jinja2) → PDF (WeasyPrint) with a golden test on the `.md`; REPORT-SPEC §3 item 10 asks for an applied-load resultant and a balance check, which task 4.5 left open because it needs the loads of the `.comm`; REPORT-SPEC §1 allows the generator only sums, extrema, percentages and unit conversion. In session: WeasyPrint needs the Pango system library; the fixture logs print solution statistics in French (`Le système linéaire à résoudre a 14730 degrés de liberté`); reaction and load sums carry round-off of about 1e-15 of their largest term, whose last digits depend on the summation order.
+
+**Decision.**
+1. `codeaster_en.report`: `collect.py` builds one JSON-ready `RunModel` (golden `run_model.json` per fixture, compared with a 1e-9 float tolerance); `render.py` writes the Markdown in Python (tables need escaping and per-table "French name once" bookkeeping, which is clearer in code than in a template), converts it with Python-Markdown and places it in a Jinja2 page (`templates/report.html.j2`, print CSS) that WeasyPrint prints. `markdown` is a runtime dependency; WeasyPrint is the optional extra `report` (and in `dev`, so CI checks the PDF); without it `caen report` writes `.md`/`.html`/`.json` and warns.
+2. The `.comm` is read by a restricted AST walk (`report/comm.py`): command calls, `_F`, literals, arithmetic, names bound to constants, references to result objects. Nothing is executed; unread statements are listed in the report. Solver settings with their defaults come from the command echo in the `.mess`, parsed by the same reader.
+3. Solution statistics come from the arguments of catalog messages recovered by the 4.4 renderer (`FACTOR_1`, `ALGELINE7_17`, `ALGELINE6_41/42`), never from French regular expressions, so they survive an English `.mo` (ADR-004).
+4. The applied-load resultant is a sum over the mesh the solver used (the `.rmed` mesh, written after `MODI_MAILLAGE`): `PRES_REP` (constant `PRES`): `-PRES × Σ vector area` of the face elements; `FORCE_FACE`: force × area; `FORCE_ARETE`: force × length; `FORCE_NODALE`: force × node count (full force at every node, `cafono.F90:271`). Kinematic keywords add no load. Anything else (gravity, functions, `FONC_MULT`, occurrences of one keyword that overlap) is listed as "not evaluated" and the balance is flagged partial. Balance error = |reactions + applied| / |applied| × 100 on the force components; reactions are the whole `REAC_NODA` sum (or the single printed resultant table when the field is not in the `.rmed`).
+5. Display: values whose magnitude is below 1e-9 of the largest in a reaction/load table print as `0`; a balance error below 1e-6 % prints as "less than 0.000001 %". Numbers otherwise have 4 significant figures, engineering exponents.
+6. English-only tripwire (`report/tripwire.py`): French function words, engineering terms and accented letters, checked outside fenced code, inline code spans and all-capital words (solver identifiers quoted in English message text). Log excerpts and the log appendix replace every line the renderer could not translate (printed outside the message catalog) with a bracketed count, so raw French never reaches the report; the command echo is kept (French keywords are the API).
+
+**Why.** Every number in the report then has a cited source and survives being regenerated on another machine; the balance check is honest about what it could not sum instead of guessing physics.
+
+**Consequences.**
+- Both static fixtures balance to below 1e-6 % against the solver's own reaction sums (`TEST_RESU` `VALE_CALC`).
+- Cut lines (REPORT-SPEC §3 item 12) and images (task 4.7) are not built; the report says the section is omitted. 2D models (`PRES_REP` on edges, per unit thickness or per radian) are not evaluated.
+- Regenerating the fixtures (`solver-fixtures.yml`) changes timings in the logs: rerun `UPDATE_GOLDEN=1 pytest tests/test_report.py` in the same PR.
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>

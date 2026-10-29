@@ -1,0 +1,2017 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "solid_static",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": "input/run.json",
+      "mess": "output/run.mess",
+      "rmed": "output/run.rmed",
+      "mesh": "input/mesh.med",
+      "tables": [
+        "output/tables/reactions.csv"
+      ],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "loads_and_bcs",
+    "solution",
+    "displacements",
+    "stresses",
+    "reactions",
+    "diagnostics",
+    "verification",
+    "appendix_command_file",
+    "appendix_run_parameters"
+  ],
+  "sections_omitted": {},
+  "title_block": {
+    "project": "codeaster-en fixtures",
+    "title": "Nozzle in cylindrical shell, internal pressure",
+    "revision": "A",
+    "author": "codeaster-en",
+    "date": "2026-10-23",
+    "description": "Cylindrical shell (Ri 100, Ro 120, H 300 mm) with a radial nozzle (ri 25, ro 35 mm, open end at X = 220 mm), base fixed, 2 MPa internal pressure. Linear tetrahedra, linear elastic steel.",
+    "logo": null,
+    "solver_version": "17.4.22",
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": "SI_mm",
+    "name": "SI-mm (mm, N, MPa, t, s)",
+    "declared": true,
+    "units": {
+      "length": "mm",
+      "force": "N",
+      "stress": "MPa",
+      "mass": "t",
+      "time": "s",
+      "density": "t/mm³",
+      "moment": "N·mm",
+      "force_per_length": "N/mm",
+      "moment_per_length": "N·mm/mm",
+      "angle": "rad",
+      "frequency": "Hz",
+      "expansion": "1/K"
+    },
+    "note": null
+  },
+  "outcome": {
+    "status": "completed",
+    "diagnostic_job": "OK",
+    "exit_code": 0,
+    "classification": {
+      "failure_class": null,
+      "reason": "the run ended normally",
+      "message_id": null,
+      "diagnostic_job": "OK",
+      "evidence": null
+    },
+    "failed_command": null,
+    "failed_comm_line": null,
+    "fatal_message": null,
+    "fatal_message_id": null,
+    "fatal_message_english": null,
+    "last_lines": []
+  },
+  "analysis": {
+    "type": "linear_static",
+    "solve_command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "solve_comm_line": 33,
+    "result": "RESU"
+  },
+  "summary": {
+    "analysis_type": "linear_static",
+    "nodes": 4622,
+    "elements": 18778,
+    "outcome": "completed",
+    "elapsed_s": 3.56,
+    "cpu_s": 1.59,
+    "peak_memory_mb": 854.21,
+    "warnings": {},
+    "ignored_warnings": [],
+    "headline": [
+      {
+        "key": "max_displacement",
+        "extremum": {
+          "kind": "max",
+          "value": 0.00774865526276363,
+          "entity": "node",
+          "entity_id": 279,
+          "xyz": [
+            -24.1921895599671,
+            97.02957262759956,
+            300.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "quantity": "length"
+      },
+      {
+        "key": "max_von_mises",
+        "field": "SIEQ_NOEU",
+        "extremum": {
+          "kind": "max",
+          "value": 34.73803397973492,
+          "entity": "node",
+          "entity_id": 9,
+          "xyz": [
+            100.0,
+            -9.184850993605147e-15,
+            175.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "quantity": "stress"
+      },
+      {
+        "key": "balance",
+        "balance": {
+          "reaction": {
+            "DX": 3891.642818778684,
+            "DY": 6.553868558967224e-12,
+            "DZ": 5.4569682106375694e-12
+          },
+          "reaction_source": "rmed:RESU____REAC_NODA (sum of all nodes)",
+          "applied": {
+            "DX": -3891.642818778681,
+            "DY": 6.863842827442568e-12,
+            "DZ": -2.6723068202727518e-12
+          },
+          "residual": {
+            "DX": 3.183231456205249e-12,
+            "DY": 1.3417711386409792e-11,
+            "DZ": 2.7846613903648176e-12
+          },
+          "error_percent": 3.615050511628135e-13,
+          "complete": true,
+          "notes": []
+        }
+      }
+    ]
+  },
+  "model": {
+    "modelings": [
+      {
+        "targets": [
+          {
+            "name": "TOUT",
+            "display_name": null
+          }
+        ],
+        "physics": {
+          "fr": "MECANIQUE",
+          "en": "mechanical"
+        },
+        "modeling": {
+          "fr": "3D",
+          "en": "3D solid"
+        },
+        "comm_line": 23
+      }
+    ],
+    "mesh_source": "output/run.rmed",
+    "nodes": 4622,
+    "elements": [
+      {
+        "type": "TETRA4",
+        "label": "4-node tetrahedron",
+        "count": 14439
+      },
+      {
+        "type": "TRIA3",
+        "label": "3-node triangle",
+        "count": 4339
+      }
+    ],
+    "element_total": 18778,
+    "bounding_box": {
+      "X": [
+        -120.0,
+        220.0
+      ],
+      "Y": [
+        -120.0,
+        119.99999870690968
+      ],
+      "Z": [
+        0.0,
+        300.0
+      ]
+    },
+    "groups": {
+      "node": [
+        "BASE"
+      ],
+      "element": [
+        "BASE",
+        "NOZ_END",
+        "P_NOZZLE",
+        "P_SHELL",
+        "SOLID",
+        "TOP"
+      ]
+    }
+  },
+  "materials": [
+    {
+      "name": "ACIER",
+      "laws": [
+        {
+          "law": "ELAS",
+          "label": "linear elastic",
+          "properties": [
+            {
+              "keyword": "E",
+              "label": "Young's modulus",
+              "value": 210000.0,
+              "quantity": "stress"
+            },
+            {
+              "keyword": "NU",
+              "label": "Poisson's ratio",
+              "value": 0.3,
+              "quantity": null
+            }
+          ]
+        }
+      ],
+      "assigned_to": [
+        {
+          "name": "SOLID",
+          "display_name": "Shell and nozzle"
+        }
+      ],
+      "comm_line": 25
+    }
+  ],
+  "element_properties": [],
+  "loads_and_bcs": {
+    "solve_command": "MECA_STATIQUE",
+    "load_case": [
+      "FIXE",
+      "PRESS"
+    ],
+    "rows": [
+      {
+        "load": "FIXE",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "BASE",
+            "display_name": "Fixed base (Z = 0)"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DX",
+            "label": "X translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DZ",
+            "label": "Z translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 29
+      },
+      {
+        "load": "PRESS",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "PRES_REP",
+        "label": "distributed pressure",
+        "kind": "load",
+        "enforcement": null,
+        "targets": [
+          {
+            "name": "P_SHELL",
+            "display_name": "Shell inner wall (pressure)"
+          },
+          {
+            "name": "P_NOZZLE",
+            "display_name": "Nozzle bore (pressure)"
+          }
+        ],
+        "values": [
+          {
+            "keyword": "PRES",
+            "label": null,
+            "value": 2.0
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 31
+      }
+    ]
+  },
+  "solution": {
+    "command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "settings_source": "command echo in the solver log (defaults filled in)",
+    "linear_solver": {
+      "fr": "MUMPS",
+      "en": "MUMPS direct solver"
+    },
+    "renumbering": "AUTO",
+    "lagrange_elimination": "LAGR2",
+    "dofs": {
+      "total": 14730,
+      "physical": 13866,
+      "nodes": 4622,
+      "lagrange": 864,
+      "relations": 432,
+      "source": "solver log message FACTOR_1"
+    },
+    "cpu_s": 0.59,
+    "elapsed_s": 0.83
+  },
+  "displacements": {
+    "field": "DEPL",
+    "med_name": "RESU____DEPL",
+    "label": "displacement",
+    "quantity": "length",
+    "magnitude": [
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": null,
+        "nume_ordre": 1,
+        "count": 4622,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 48,
+          "xyz": [
+            116.76538446957888,
+            27.673904489092784,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 0.00774865526276363,
+          "entity": "node",
+          "entity_id": 279,
+          "xyz": [
+            -24.1921895599671,
+            97.02957262759956,
+            300.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 0.00774865526276363,
+          "entity": "node",
+          "entity_id": 279,
+          "xyz": [
+            -24.1921895599671,
+            97.02957262759956,
+            300.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      },
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": {
+          "name": "SOLID",
+          "display_name": "Shell and nozzle"
+        },
+        "nume_ordre": 1,
+        "count": 4622,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 48,
+          "xyz": [
+            116.76538446957888,
+            27.673904489092784,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 0.00774865526276363,
+          "entity": "node",
+          "entity_id": 279,
+          "xyz": [
+            -24.1921895599671,
+            97.02957262759956,
+            300.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 0.00774865526276363,
+          "entity": "node",
+          "entity_id": 279,
+          "xyz": [
+            -24.1921895599671,
+            97.02957262759956,
+            300.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      },
+      {
+        "field": "DEPL",
+        "component": "|DX,DY,DZ|",
+        "label": "magnitude of DX, DY, DZ",
+        "group": {
+          "name": "BASE",
+          "display_name": "Fixed base (Z = 0)"
+        },
+        "nume_ordre": 1,
+        "count": 144,
+        "min": {
+          "kind": "min",
+          "value": 0.0,
+          "entity": "node",
+          "entity_id": 48,
+          "xyz": [
+            116.76538446957888,
+            27.673904489092784,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "max": {
+          "kind": "max",
+          "value": 1.9332373875005302e-19,
+          "entity": "node",
+          "entity_id": 231,
+          "xyz": [
+            30.901699437494518,
+            95.10565162951544,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "location": "nodes",
+        "note": null,
+        "max_abs": {
+          "kind": "max",
+          "value": 1.9332373875005302e-19,
+          "entity": "node",
+          "entity_id": 231,
+          "xyz": [
+            30.901699437494518,
+            95.10565162951544,
+            0.0
+          ],
+          "node_id": null,
+          "point": null
+        },
+        "component_label": null
+      }
+    ],
+    "components": [
+      {
+        "component": "DX",
+        "label": "X translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DX",
+          "label": "X translation (DX)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 4622,
+          "min": {
+            "kind": "min",
+            "value": -0.005665932744445505,
+            "entity": "node",
+            "entity_id": 3564,
+            "xyz": [
+              -99.99789605435265,
+              0.6486791987431506,
+              242.02961728543488
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0036404620936212936,
+            "entity": "node",
+            "entity_id": 2974,
+            "xyz": [
+              87.66763318031545,
+              48.108066813806325,
+              124.83652614647836
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -0.005665932744445505,
+            "entity": "node",
+            "entity_id": 3564,
+            "xyz": [
+              -99.99789605435265,
+              0.6486791987431506,
+              242.02961728543488
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "X translation"
+        }
+      },
+      {
+        "component": "DY",
+        "label": "Y translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DY",
+          "label": "Y translation (DY)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 4622,
+          "min": {
+            "kind": "min",
+            "value": -0.007154073607556739,
+            "entity": "node",
+            "entity_id": 2677,
+            "xyz": [
+              13.21226935607086,
+              -99.12333700225507,
+              174.65195001620424
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0071348922768168805,
+            "entity": "node",
+            "entity_id": 2742,
+            "xyz": [
+              24.088361900197235,
+              97.055400782054,
+              162.21731466240504
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -0.007154073607556739,
+            "entity": "node",
+            "entity_id": 2677,
+            "xyz": [
+              13.21226935607086,
+              -99.12333700225507,
+              174.65195001620424
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "Y translation"
+        }
+      },
+      {
+        "component": "DZ",
+        "label": "Z translation",
+        "quantity": "length",
+        "extrema": {
+          "field": "DEPL",
+          "component": "DZ",
+          "label": "Z translation (DZ)",
+          "group": null,
+          "nume_ordre": 1,
+          "count": 4622,
+          "min": {
+            "kind": "min",
+            "value": -0.0036282824867668153,
+            "entity": "node",
+            "entity_id": 289,
+            "xyz": [
+              -99.75640502598239,
+              -6.975647374413059,
+              300.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "max": {
+            "kind": "max",
+            "value": 0.0013836018740491752,
+            "entity": "node",
+            "entity_id": 8,
+            "xyz": [
+              220.0,
+              6.12323399573677e-15,
+              175.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "location": "nodes",
+          "note": null,
+          "max_abs": {
+            "kind": "min",
+            "value": -0.0036282824867668153,
+            "entity": "node",
+            "entity_id": 289,
+            "xyz": [
+              -99.75640502598239,
+              -6.975647374413059,
+              300.0
+            ],
+            "node_id": null,
+            "point": null
+          },
+          "component_label": "Z translation"
+        }
+      }
+    ],
+    "groups": [
+      {
+        "name": "SOLID",
+        "display_name": "Shell and nozzle"
+      },
+      {
+        "name": "BASE",
+        "display_name": "Fixed base (Z = 0)"
+      }
+    ]
+  },
+  "stresses": {
+    "tables": [
+      {
+        "kind": "stress",
+        "field": "SIEQ_NOEU",
+        "med_name": "RESU____SIEQ_NOEU",
+        "label": "equivalent stress (nodal average)",
+        "averaging": "nodal average (values of adjoining elements averaged at each node)",
+        "rows": [
+          {
+            "field": "SIEQ_NOEU",
+            "component": "VMIS",
+            "label": "von Mises (VMIS)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": 2.1347538696392037,
+              "entity": "node",
+              "entity_id": 1810,
+              "xyz": [
+                140.59953478192915,
+                -0.0818181200325148,
+                115.0000956316273
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 34.73803397973492,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 34.73803397973492,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "von Mises",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "VMIS",
+            "label": "von Mises (VMIS)",
+            "group": {
+              "name": "SOLID",
+              "display_name": "Shell and nozzle"
+            },
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": 2.1347538696392037,
+              "entity": "node",
+              "entity_id": 1810,
+              "xyz": [
+                140.59953478192915,
+                -0.0818181200325148,
+                115.0000956316273
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 34.73803397973492,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 34.73803397973492,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "von Mises",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "VMIS",
+            "label": "von Mises (VMIS)",
+            "group": {
+              "name": "BASE",
+              "display_name": "Fixed base (Z = 0)"
+            },
+            "nume_ordre": 1,
+            "count": 144,
+            "min": {
+              "kind": "min",
+              "value": 6.109562557846203,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                120.0,
+                -2.939152317953648e-14,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 12.117519799485352,
+              "entity": "node",
+              "entity_id": 255,
+              "xyz": [
+                -10.452846326764806,
+                -99.45218953682739,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 12.117519799485352,
+              "entity": "node",
+              "entity_id": 255,
+              "xyz": [
+                -10.452846326764806,
+                -99.45218953682739,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "von Mises",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "TRESCA",
+            "label": "Tresca (TRESCA)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": 2.416546048727578,
+              "entity": "node",
+              "entity_id": 1810,
+              "xyz": [
+                140.59953478192915,
+                -0.0818181200325148,
+                115.0000956316273
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 36.16957770406947,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 36.16957770406947,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "Tresca",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "TRESCA",
+            "label": "Tresca (TRESCA)",
+            "group": {
+              "name": "SOLID",
+              "display_name": "Shell and nozzle"
+            },
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": 2.416546048727578,
+              "entity": "node",
+              "entity_id": 1810,
+              "xyz": [
+                140.59953478192915,
+                -0.0818181200325148,
+                115.0000956316273
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 36.16957770406947,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 36.16957770406947,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "Tresca",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "TRESCA",
+            "label": "Tresca (TRESCA)",
+            "group": {
+              "name": "BASE",
+              "display_name": "Fixed base (Z = 0)"
+            },
+            "nume_ordre": 1,
+            "count": 144,
+            "min": {
+              "kind": "min",
+              "value": 6.813932499343423,
+              "entity": "node",
+              "entity_id": 4,
+              "xyz": [
+                120.0,
+                -2.939152317953648e-14,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 13.551470426578648,
+              "entity": "node",
+              "entity_id": 230,
+              "xyz": [
+                43.83711467890756,
+                89.87940462991678,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 13.551470426578648,
+              "entity": "node",
+              "entity_id": 230,
+              "xyz": [
+                43.83711467890756,
+                89.87940462991678,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "Tresca",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_1",
+            "label": "1st principal (PRIN_1)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.1537478543229684,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                100.0,
+                -2.4492935982947064e-14,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "1st principal",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_1",
+            "label": "1st principal (PRIN_1)",
+            "group": {
+              "name": "SOLID",
+              "display_name": "Shell and nozzle"
+            },
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.1537478543229684,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                100.0,
+                -2.4492935982947064e-14,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "1st principal",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_1",
+            "label": "1st principal (PRIN_1)",
+            "group": {
+              "name": "BASE",
+              "display_name": "Fixed base (Z = 0)"
+            },
+            "nume_ordre": 1,
+            "count": 144,
+            "min": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 2.1537478543229684,
+              "entity": "node",
+              "entity_id": 6,
+              "xyz": [
+                100.0,
+                -2.4492935982947064e-14,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "min",
+              "value": -14.978420759917231,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "1st principal",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_3",
+            "label": "3rd principal (PRIN_3)",
+            "group": null,
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": -3.1845079285410884,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 36.14342291997597,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 36.14342291997597,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "3rd principal",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_3",
+            "label": "3rd principal (PRIN_3)",
+            "group": {
+              "name": "SOLID",
+              "display_name": "Shell and nozzle"
+            },
+            "nume_ordre": 1,
+            "count": 4622,
+            "min": {
+              "kind": "min",
+              "value": -3.1845079285410884,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 36.14342291997597,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 36.14342291997597,
+              "entity": "node",
+              "entity_id": 9,
+              "xyz": [
+                100.0,
+                -9.184850993605147e-15,
+                175.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "3rd principal",
+            "quantity": "stress"
+          },
+          {
+            "field": "SIEQ_NOEU",
+            "component": "PRIN_3",
+            "label": "3rd principal (PRIN_3)",
+            "group": {
+              "name": "BASE",
+              "display_name": "Fixed base (Z = 0)"
+            },
+            "nume_ordre": 1,
+            "count": 144,
+            "min": {
+              "kind": "min",
+              "value": -3.1845079285410884,
+              "entity": "node",
+              "entity_id": 64,
+              "xyz": [
+                -59.99999999999961,
+                103.92304845413285,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "max": {
+              "kind": "max",
+              "value": 15.06797869002375,
+              "entity": "node",
+              "entity_id": 260,
+              "xyz": [
+                55.91929034707492,
+                -82.903757255504,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "location": "nodes",
+            "note": null,
+            "max_abs": {
+              "kind": "max",
+              "value": 15.06797869002375,
+              "entity": "node",
+              "entity_id": 260,
+              "xyz": [
+                55.91929034707492,
+                -82.903757255504,
+                0.0
+              ],
+              "node_id": null,
+              "point": null
+            },
+            "component_label": "3rd principal",
+            "quantity": "stress"
+          }
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "name": "SOLID",
+        "display_name": "Shell and nozzle"
+      },
+      {
+        "name": "BASE",
+        "display_name": "Fixed base (Z = 0)"
+      }
+    ]
+  },
+  "reactions": {
+    "summary": {
+      "field": "RESU____REAC_NODA",
+      "per_group": [
+        {
+          "group": "BASE",
+          "source": "rmed:RESU____REAC_NODA",
+          "nume_ordre": 1,
+          "nodes": 144,
+          "components": {
+            "DX": 3891.6428187784586,
+            "DY": -1.7462298274040222e-10,
+            "DZ": 1.0913936421275139e-10
+          }
+        }
+      ],
+      "from_tables": [
+        {
+          "group": null,
+          "source": "table:reactions.csv:REAC_BASE",
+          "nume_ordre": 1,
+          "nodes": null,
+          "components": {
+            "DX": 3891.64,
+            "DY": -1.77693e-10,
+            "DZ": 1.27073e-10
+          }
+        }
+      ],
+      "total": {
+        "DX": 3891.642818778684,
+        "DY": 6.553868558967224e-12,
+        "DZ": 5.4569682106375694e-12
+      },
+      "labels": {
+        "DX": "X translation",
+        "DY": "Y translation",
+        "DZ": "Z translation",
+        "DRX": "rotation about X",
+        "DRY": "rotation about Y",
+        "DRZ": "rotation about Z"
+      },
+      "notes": []
+    },
+    "per_group_display": {
+      "BASE": {
+        "name": "BASE",
+        "display_name": "Fixed base (Z = 0)"
+      }
+    },
+    "keyword_labels": {
+      "DDL_IMPO": "imposed DOF",
+      "PRES_REP": "distributed pressure"
+    },
+    "target_display": {
+      "BASE": {
+        "name": "BASE",
+        "display_name": "Fixed base (Z = 0)"
+      },
+      "P_NOZZLE": {
+        "name": "P_NOZZLE",
+        "display_name": "Nozzle bore (pressure)"
+      },
+      "P_SHELL": {
+        "name": "P_SHELL",
+        "display_name": "Shell inner wall (pressure)"
+      }
+    },
+    "applied": {
+      "solve_command": "MECA_STATIQUE",
+      "loads": [
+        "FIXE",
+        "PRESS"
+      ],
+      "items": [
+        {
+          "load": "FIXE",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "DDL_IMPO",
+          "occurrence": 1,
+          "status": "kinematic",
+          "targets": [
+            "BASE"
+          ],
+          "values": {
+            "DX": 0.0,
+            "DY": 0.0,
+            "DZ": 0.0
+          },
+          "resultant": null,
+          "basis": null,
+          "comm_line": 29
+        },
+        {
+          "load": "PRESS",
+          "command": "AFFE_CHAR_MECA",
+          "keyword": "PRES_REP",
+          "occurrence": 1,
+          "status": "evaluated",
+          "targets": [
+            "P_SHELL",
+            "P_NOZZLE"
+          ],
+          "values": {
+            "PRES": 2.0
+          },
+          "resultant": {
+            "DX": -3891.642818778681,
+            "DY": 6.863842827442568e-12,
+            "DZ": -2.6723068202727518e-12
+          },
+          "basis": "-PRES × vector area of 3843 faces",
+          "comm_line": 31
+        }
+      ],
+      "total": {
+        "DX": -3891.642818778681,
+        "DY": 6.863842827442568e-12,
+        "DZ": -2.6723068202727518e-12
+      },
+      "complete": true,
+      "mesh_source": "output/run.rmed",
+      "notes": []
+    },
+    "balance": {
+      "reaction": {
+        "DX": 3891.642818778684,
+        "DY": 6.553868558967224e-12,
+        "DZ": 5.4569682106375694e-12
+      },
+      "reaction_source": "rmed:RESU____REAC_NODA (sum of all nodes)",
+      "applied": {
+        "DX": -3891.642818778681,
+        "DY": 6.863842827442568e-12,
+        "DZ": -2.6723068202727518e-12
+      },
+      "residual": {
+        "DX": 3.183231456205249e-12,
+        "DY": 1.3417711386409792e-11,
+        "DZ": 2.7846613903648176e-12
+      },
+      "error_percent": 3.615050511628135e-13,
+      "complete": true,
+      "notes": []
+    },
+    "snippet": null
+  },
+  "modal": null,
+  "diagnostics": {
+    "items": [],
+    "ignored_warnings": [],
+    "coverage": {
+      "diagnostics": 2,
+      "diagnostics_english": 2,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [
+      {
+        "legend": "REAC_DX_SUM",
+        "quantity": "Sum of X reactions at the base [N]",
+        "context": {
+          "RESULTAT": "00000007",
+          "NUME_ORDRE": "1",
+          "NOM_CHAM": "REAC_NODA",
+          "TYPE_TEST": "SOMM",
+          "NOM_CMP": "DX"
+        },
+        "reference_type": {
+          "fr": "ANALYTIQUE",
+          "en": "analytical"
+        },
+        "reference": 3891.64,
+        "computed": 3891.6428187786923,
+        "error": "7.243164E-05%",
+        "tolerance": "0.1%",
+        "passed": true
+      }
+    ],
+    "non_regression": {
+      "count": 1,
+      "ok": 1
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# solid_static -- cylindrical shell with a radial nozzle under internal pressure.\n# codeaster-en test fixture (task 4.1). Units: mm, N, MPa.\n# Geometry: shell Ri=100 Ro=120 H=300 (axis Z); nozzle ri=25 ro=35 on +X at Z=150, open end at X=220.\n# Base (Z=0) fully fixed; internal pressure P on the shell inner wall and the nozzle bore.\n# Check: the reaction sum at the base balances the applied pressure resultant. With an open\n# nozzle end the resultant is P * (area of the bore opening) along -X; see run.json \"checks\".\n# Modelled on astest forma01a (LIRE_MAILLAGE MED, ORIE_PEAU, PRES_REP, CALC_CHAMP SIEQ_NOEU)\n# and zzzz341b (POST_RELEVE_T RESULTANTE on REAC_NODA).\n# VALE_CALC values are the solver's own results from the first run (task 4.2, code_aster\n# 17.4.22 image, see ADR-011); TEST_RESU checks them at the default TOLE_MACHINE.\n\nDEBUT(CODE=\"OUI\", ERREUR=_F(ALARME=\"EXCEPTION\"))\n\nP = 2.0  # internal pressure [MPa]\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(GROUP_MA=\"BASE\"))\n\nMAIL = MODI_MAILLAGE(reuse=MAIL, MAILLAGE=MAIL, ORIE_PEAU=_F(GROUP_MA_PEAU=(\"P_SHELL\", \"P_NOZZLE\")))\n\n# TOUT=\"OUI\" so the pressure faces (TRIA3 skin cells) get boundary elements, as in forma01a.\nMODE = AFFE_MODELE(MAILLAGE=MAIL, AFFE=_F(TOUT=\"OUI\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"3D\"))\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"SOLID\", MATER=ACIER))\n\nFIXE = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA=\"BASE\", DX=0.0, DY=0.0, DZ=0.0))\n\nPRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=(\"P_SHELL\", \"P_NOZZLE\"), PRES=P))\n\nRESU = MECA_STATIQUE(\n    MODELE=MODE,\n    CHAM_MATER=MATE,\n    EXCIT=(_F(CHARGE=FIXE), _F(CHARGE=PRESS)),\n    SOLVEUR=_F(METHODE=\"MUMPS\"),\n)\n\nRESU = CALC_CHAMP(\n    reuse=RESU,\n    RESULTAT=RESU,\n    CONTRAINTE=(\"SIGM_ELNO\", \"SIGM_NOEU\"),\n    CRITERES=(\"SIEQ_ELNO\", \"SIEQ_NOEU\"),\n    FORCE=\"REAC_NODA\",\n)\n\nREAC = POST_RELEVE_T(\n    ACTION=_F(\n        OPERATION=\"EXTRACTION\",\n        INTITULE=\"REAC_BASE\",\n        RESULTAT=RESU,\n        NOM_CHAM=\"REAC_NODA\",\n        GROUP_NO=\"BASE\",\n        RESULTANTE=(\"DX\", \"DY\", \"DZ\"),\n    )\n)\n\nIMPR_TABLE(TABLE=REAC, FORMAT=\"TABLEAU\", SEPARATEUR=\",\", UNITE=30)\n\nIMPR_RESU(\n    FORMAT=\"MED\",\n    UNITE=80,\n    RESU=_F(RESULTAT=RESU, NOM_CHAM=(\"DEPL\", \"SIGM_NOEU\", \"SIEQ_NOEU\", \"REAC_NODA\")),\n)\n\n# Reaction sum over the whole REAC_NODA field (non-zero only on the fixed base nodes).\n# TYPE_TEST sums the whole field; GROUP_NO is not combined with it (see bibfor/test/trresu.F90).\n# The reference is signed: REAC_NODA is the support reaction, so its sum is +X, opposite to the\n# applied resultant along -X. Confirmed by the first run (task 4.2): DX sum = +3891.64 N.\nTEST_RESU(\n    RESU=(\n        _F(\n            NUME_ORDRE=1,\n            RESULTAT=RESU,\n            NOM_CHAM=\"REAC_NODA\",\n            NOM_CMP=\"DX\",\n            TYPE_TEST=\"SOMM\",\n            REFERENCE=\"ANALYTIQUE\",\n            VALE_REFE=3891.64,\n            VALE_CALC=3891.6428187786923,\n            PRECISION=1.0e-3,\n            LEGENDE=\"REAC_DX_SUM\",\n        ),\n    )\n)\n\nFIN()\n",
+    "comm_syntax_error": null,
+    "comm_skipped_lines": [],
+    "command_purposes": {
+      "12": {
+        "command": "DEBUT",
+        "purpose": "begin study"
+      },
+      "16": {
+        "command": "LIRE_MAILLAGE",
+        "purpose": "read mesh"
+      },
+      "18": {
+        "command": "DEFI_GROUP",
+        "purpose": "define groups"
+      },
+      "20": {
+        "command": "MODI_MAILLAGE",
+        "purpose": "modify mesh"
+      },
+      "23": {
+        "command": "AFFE_MODELE",
+        "purpose": "assign model"
+      },
+      "25": {
+        "command": "DEFI_MATERIAU",
+        "purpose": "define material"
+      },
+      "27": {
+        "command": "AFFE_MATERIAU",
+        "purpose": "assign material"
+      },
+      "29": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "31": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "33": {
+        "command": "MECA_STATIQUE",
+        "purpose": "linear static analysis"
+      },
+      "40": {
+        "command": "CALC_CHAMP",
+        "purpose": "compute derived fields"
+      },
+      "48": {
+        "command": "POST_RELEVE_T",
+        "purpose": "extract values to table"
+      },
+      "59": {
+        "command": "IMPR_TABLE",
+        "purpose": "write table"
+      },
+      "61": {
+        "command": "IMPR_RESU",
+        "purpose": "write results"
+      },
+      "71": {
+        "command": "TEST_RESU",
+        "purpose": "test result value"
+      },
+      "88": {
+        "command": "FIN",
+        "purpose": "end study"
+      }
+    },
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/reactions.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "  Opening file for writing: ./vola.1",
+      "",
+      " <INFO> Starting the run.",
+      "",
+      "            -- CODE_ASTER -- VERSION: CORRECTIVE AVANT STABILISATION (stable-updates) --",
+      "                               Version 17.4.22 modified on 30/06/2026",
+      "                              revision spack-local - branch 'v17.4.22'",
+      "                                   Copyright EDF R&D 1991 - 2026",
+      "",
+      "                                  Run on: Thu Oct 29 02:15:29 2026",
+      "                                      Host name: 6fadab63d267",
+      "                                        Architecture: 64bit",
+      "                                       Processor type: x86_64",
+      "                   Operating system: Linux-6.18.44-fc-v185-x86_64-with-glibc2.36",
+      "                                    Message language: en (UTF-8)",
+      "                                      Python version: 3.11.14",
+      "                                       NumPy version: 1.26.4",
+      "                                        MPI parallelism: on",
+      "                                  Rank of the current processor: 0",
+      "                                  Number of MPI processors used: 1",
+      "                                       OpenMP parallelism: on",
+      "                                  Number of OpenMP threads used: 1",
+      "                                    HDF5 library version: 1.10.7",
+      "                                     MED library version: 4.2.0",
+      "                                   MFront library version: 5.0.0",
+      "                                    MUMPS library version: 5.6.2",
+      "                                  PETSc library version: 3.24.0p0",
+      "                                   SCOTCH library version: 7.0.10",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <SUPERVIS_22>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║ The CODE and DEBUG keywords of DEBUT/POURSUITE are reserved for test cases.                    ║",
+      " ║ The same applies to the option \"--test\" of CA.init().                                          ║",
+      " ║ Do not use them in studies: they change some default values                                    ║",
+      " ║ of the DEBUT/POURSUITE commands, which affects the behavior                                    ║",
+      " ║ when an error occurs and the performance.                                                      ║",
+      " ╚================================================================================================╝",
+      "",
+      "  Initial value of the maximum CPU time =   600 seconds",
+      "  Maximum CPU time given to the commands =   590 seconds",
+      "  Planned CPU reserve = 10 seconds",
+      "",
+      "  Opening file for writing: ./glob.1",
+      "",
+      "  Opening file for writing: ./vola.1",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Created with version                    :  17.04.22",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Total number of read accesses           :  65",
+      "     Volume read                             :         50.78 MB.",
+      "     Total number of write accesses          :  0",
+      "     Volume written                          :          0.00 MB.",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Element catalogs read again.",
+      "",
+      "  End of reading (duration  0.318322  s.)",
+      "",
+      "                          Memory limit for dynamic allocation: 2411.02 MB",
+      "                             added at process initialization: 647.01 MB",
+      "                              Target limit of the process: 3058.03 MB",
+      "                              Size limit of the swap files: 2048.00 GB",
+      "# Memory (MB):   647.01 /   638.87 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0001   user+syst:        0.04s (syst:        1.54s, elaps:        1.60s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0002 from run.comm.changed.py, line 28",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "MED name of the mesh: mesh",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Checking the mesh.",
+      "",
+      "# Result of command #0002 (LIRE_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.01 /   641.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0002   user+syst:        0.13s (syst:        0.00s, elaps:        0.13s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0003 from run.comm.changed.py, line 30",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0003 (DEFI_GROUP): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.01 /   641.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0003   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0004 from run.comm.changed.py, line 32",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0004 (MODI_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.01 /   641.55 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0004   user+syst:        0.08s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0005 from run.comm.changed.py, line 35",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Of the 18778 elements of mesh 00000001, assignment was requested for 18778 and 18778 could be",
+      "assigned.",
+      " Modeling type    Formulation      Element type Finite element   Number",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0005 (AFFE_MODELE): MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   772.18 /   771.11 /   207.82 /   199.99 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0005   user+syst:        0.12s (syst:        0.00s, elaps:        0.13s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0006 from run.comm.changed.py, line 37",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0006 (DEFI_MATERIAU): ACIER ('<00000003>') of type <Material>",
+      "# Memory (MB):   772.18 /   771.82 /   207.82 /   199.99 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0006   user+syst:        0.09s (syst:        0.00s, elaps:        0.10s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0007 from run.comm.changed.py, line 39",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0007 (AFFE_MATERIAU): MATE ('<00000004>') of type <MaterialField>",
+      "# Memory (MB):   772.18 /   771.82 /   207.82 /   199.99 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0007   user+syst:        0.09s (syst:        0.00s, elaps:        0.09s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0008 from run.comm.changed.py, line 41",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0008 (AFFE_CHAR_MECA): FIXE ('<00000005>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   772.21 /   772.21 /   207.82 /   199.99 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0008   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0009 from run.comm.changed.py, line 43",
+      "[8 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0009 (AFFE_CHAR_MECA): PRESS ('<00000006>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   773.46 /   772.21 /   207.82 /   199.99 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0009   user+syst:        0.05s (syst:        0.01s, elaps:        0.05s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0010 from run.comm.changed.py, line 45",
+      "[25 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 14730 degrees of freedom:",
+      "   - 13866 are physical degrees of freedom",
+      "     (carried by 4622 nodes of the mesh)",
+      "   - 864 are the pairs of Lagrange multipliers associated",
+      "     with the 432 dualized linear relations.",
+      "  The matrix has 14730 equations.",
+      "  It has 242688 nonzero terms if it is symmetric and 470646 nonzero terms if it is not symmetric.",
+      "  That is a fill ratio of   0.217 %.",
+      "Field <DEPL> stored at time step  0.000000000000e+00 for step index 1",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0010 (MECA_STATIQUE): RESU ('<00000007>') of type <ElasticResult>",
+      "# Memory (MB):   854.21 /   780.36 /   216.13 /   202.10 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0010   user+syst:        0.59s (syst:        0.24s, elaps:        0.83s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0012 from run.comm.changed.py, line 52",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 14730 degrees of freedom:",
+      "   - 13866 are physical degrees of freedom",
+      "     (carried by 4622 nodes of the mesh)",
+      "   - 864 are the pairs of Lagrange multipliers associated",
+      "     with the 432 dualized linear relations.",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0012 (CALC_CHAMP): RESU ('<00000007>') of type <ElasticResult>",
+      "# Memory (MB):   854.21 /   794.94 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0012   user+syst:        0.19s (syst:        0.04s, elaps:        0.22s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0013 from run.comm.changed.py, line 60",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0013 (POST_RELEVE_T): REAC ('<0000002a>') of type <Table>",
+      "# Memory (MB):   854.21 /   794.94 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0013   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0014 from run.comm.changed.py, line 71",
+      "[12 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   854.21 /   794.94 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0014   user+syst:        0.08s (syst:        0.00s, elaps:        0.08s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0015 from run.comm.changed.py, line 73",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Creating the file in MED format 3.3.1.",
+      "",
+      "# Memory (MB):   854.21 /   794.94 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0015   user+syst:        0.02s (syst:        0.02s, elaps:        0.04s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0016 from run.comm.changed.py, line 83",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "# Memory (MB):   854.21 /   794.94 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0016   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║            no warnings                                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[25 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Memory (MB):   854.21 /   803.64 /   237.80 /   210.95 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0017   user+syst:        0.09s (syst:        0.00s, elaps:        0.09s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : OK",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": []
+}

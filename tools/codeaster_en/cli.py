@@ -2,7 +2,8 @@
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
 ``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``,
-``caen mess parse|translate`` and ``caen results fields|extrema|reactions|modal``. The other
+``caen mess parse|translate``, ``caen results fields|extrema|reactions|modal`` and
+``caen report``. The other
 groups and commands are stubs that name the PLAN.md task which will fill them in.
 """
 
@@ -16,6 +17,7 @@ import typer
 
 from codeaster_en import __version__
 from codeaster_en import mess as mess_module
+from codeaster_en import report as report_module
 from codeaster_en import results as results_module
 from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
@@ -598,10 +600,57 @@ def results_modal(path: RunPath, as_json: JsonFlag = False) -> None:
         typer.echo(f"note: {note}")
 
 
-app.add_typer(
-    _stub("report", "4.6", "Generate an English engineering report from a job directory."),
-    name="report",
-)
+@app.command("report")
+def report(
+    job: Annotated[
+        Path,
+        typer.Argument(help="Job directory: input/ (run.comm, run.export, run.json) + output/."),
+    ],
+    out: Annotated[
+        Path | None, typer.Option("--out", "-o", help="Output directory (default <job>/report).")
+    ] = None,
+    section: Annotated[
+        list[str] | None,
+        typer.Option(
+            "--section",
+            "-s",
+            help="Section to include (repeatable); overrides run.json and the defaults.",
+        ),
+    ] = None,
+    logo: Annotated[str | None, typer.Option(help="Logo image for the title block.")] = None,
+    with_log: Annotated[
+        bool, typer.Option("--log", help="Add appendix C, the solver log in English.")
+    ] = False,
+    pdf: Annotated[bool, typer.Option("--pdf/--no-pdf", help="Write report.pdf.")] = True,
+) -> None:
+    """Write an English engineering report of a run: report.md, report.html, report.pdf
+    (needs WeasyPrint: pip install codeaster_en[report]) and run_model.json."""
+    if not job.is_dir():
+        typer.echo(f"report: no such directory: {job}", err=True)
+        raise typer.Exit(code=1)
+    sections = list(section) if section else None
+    unknown = [s for s in sections or [] if s not in report_module.ALL_SECTIONS]
+    if unknown:
+        typer.echo(
+            f"report: unknown section(s) {', '.join(unknown)}; choose from "
+            + ", ".join(report_module.ALL_SECTIONS),
+            err=True,
+        )
+        raise typer.Exit(code=2)
+    if with_log:
+        base = sections or list(report_module.collect_module.default_sections(job))
+        sections = [*base, "appendix_log"] if "appendix_log" not in base else base
+    config = report_module.Config(sections=sections, logo=logo)
+    result = report_module.build(job, config, out, pdf=pdf)
+    outcome = result.model.outcome["status"].replace("_", " ")
+    typer.echo(f"report: run {outcome}")
+    for path in (result.markdown, result.html, result.pdf, result.run_model):
+        if path is not None:
+            typer.echo(f"  wrote {path}")
+    for warning in result.warnings:
+        typer.echo(f"report: {warning}", err=True)
+
+
 app.add_typer(
     _stub("upstream", "7.1", "Bump the pinned upstream tag and diff extracted data."),
     name="upstream",

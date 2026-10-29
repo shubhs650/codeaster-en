@@ -14,6 +14,33 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.6 report generator — agent
+Done: `codeaster_en.report`: `comm.py` (restricted AST reader of the `.comm` and of the `.mess`
+command echo: calls, `_F`, constants, arithmetic, result-object references; nothing executed),
+`loads.py` (applied-load resultant summed over the `.rmed` mesh: constant `PRES_REP`,
+`FORCE_FACE`, `FORCE_ARETE`, `FORCE_NODALE`; others listed as not evaluated; balance check
+with percentage error), `collect.py` (`RunModel`: title block, units, outcome and failure
+class, model, materials, element properties, loads and BCs, solution statistics from message
+arguments `FACTOR_1`/`ALGELINE7_17`, displacements, stresses or shell resultants per report
+group, reactions, modal table, deduplicated English diagnostics, `TEST_RESU` verification,
+appendices), `render.py` (Markdown, HTML via Python-Markdown + Jinja2 page with print CSS,
+PDF via WeasyPrint), `tripwire.py` (French words outside code). CLI `caen report <job>
+[--out] [--section ...] [--logo] [--log] [--no-pdf]` writes `report.md`, `report.html`,
+`report.pdf`, `run_model.json`. Failed runs get sections 1-7 and 13 with the failing command,
+`.comm` line, fatal message in English, class and the last 50 English log lines.
+`tests/test_report.py` (63 tests): golden `report.md` and `run_model.json` for all 7 fixtures
+(`tests/golden/report/`), tripwire on every report, balance against the solver's own reaction
+sums (both static fixtures < 1e-6 %), load rules on synthetic `.comm` files, PDF when WeasyPrint
+is installed, CLI. Glossary: 25 `proposed` entries (element types `TETRA4`..`HEXA27`,
+`TEST_RESU` reference types, `SORENSEN`). CI installs Pango for WeasyPrint.
+Open: cut lines (REPORT-SPEC item 12; no fixture prints such tables) and images (task 4.7).
+2D-model loads, gravity and function loads are not summed (balance flagged partial). Shell
+stresses per layer need a fixture that writes `SIEQ` on shells. Regenerating fixtures needs
+`UPDATE_GOLDEN=1 pytest tests/test_report.py` (noted in `tests/fixtures/README.md`).
+Decisions: ADR-016 (Markdown built in code, Jinja2 page, WeasyPrint optional extra `report`;
+loads summed over the result mesh; display round-off threshold; tripwire scope).
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 4.5 results readers — agent
 Done: `codeaster_en.results`: `med.py` (native MED reader over `h5py`: mesh, numbering,
 families to groups, fields, steps, values on nodes, per element/Gauss point and at element

@@ -1,0 +1,981 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "broken_singular_matrix",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": null,
+      "mess": "output/run.mess",
+      "rmed": null,
+      "mesh": "input/mesh.med",
+      "tables": [],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "element_properties",
+    "loads_and_bcs",
+    "solution",
+    "diagnostics"
+  ],
+  "sections_omitted": {
+    "displacements": "the run failed (REPORT-SPEC §5)",
+    "stresses": "the run failed (REPORT-SPEC §5)",
+    "reactions": "the run failed (REPORT-SPEC §5)",
+    "modal": "the run failed (REPORT-SPEC §5)",
+    "verification": "the run failed (REPORT-SPEC §5)",
+    "appendix_command_file": "the run failed (REPORT-SPEC §5)",
+    "appendix_run_parameters": "the run failed (REPORT-SPEC §5)"
+  },
+  "title_block": {
+    "project": null,
+    "title": "code_aster run broken_singular_matrix",
+    "revision": null,
+    "author": null,
+    "date": null,
+    "description": null,
+    "logo": null,
+    "solver_version": "17.4.22",
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": null,
+    "name": "model units",
+    "declared": false,
+    "guess": "SI_mm",
+    "units": {},
+    "note": "No unit system is declared (run.json units); values are in model units. Young's modulus E = 210000 suggests SI-mm (mm, N, MPa, t, s); this is an assumption, so units are not printed."
+  },
+  "outcome": {
+    "status": "failed",
+    "diagnostic_job": "<S>_ERROR",
+    "exit_code": 1,
+    "classification": {
+      "failure_class": "user-model",
+      "reason": "the stiffness matrix is singular (rigid-body motion not restrained, or redundant conditions)",
+      "message_id": "FACTOR_11",
+      "diagnostic_job": "<S>_ERROR",
+      "evidence": "tests/fixtures/broken_singular_matrix"
+    },
+    "failed_command": "MECA_STATIQUE",
+    "failed_comm_line": 44,
+    "fatal_message": "Problem: the matrix is singular or nearly singular:\n  During the factorization of the matrix, a problem was found\n  (zero or nearly zero pivot) at row 517, which corresponds to the degree of freedom given above.\n\nRisks and advice:\n   * If the row is a physical degree of freedom, a rigid-body motion is probably\n     not restrained.\n     Check the boundary conditions.\n     If you use contact, the structure must not be held by contact alone.\n     Also check the material properties (Young's modulus, ...).\n\n   * If the row is a Lagrange degree of freedom, a boundary condition is probably\n     redundant.\n     In particular, the redundant linear relation may come from the contact conditions.\n     You may need to exclude some nodes from the contact conditions\n     (keywords SANS_NOEUD and SANS_GROUP_NO).\n\n   * If the solver is LDLT or MULT_FRONT, you can use the MUMPS solver\n     instead: it is the only one that can factorize matrices that are not positive definite.\n\n   * In parallel, the MUMPS singularity detection criterion is sometimes too pessimistic! It is still often\n     possible to complete the analysis by relaxing this criterion (increase the value of the NPREC keyword by 1 or 2) or\n     by switching it off (NPREC=-1), or by running the analysis on fewer processors.\n\n   * With X-FEM this can also be quite normal when the crack passes\n     very close to a node.\n     If the number of lost decimal digits is not too large (at most 10),\n     you can rerun the analysis with a larger number of allowed lost digits:\n     keyword NPREC of the factor keyword SOLVEUR.\n     Otherwise, contact the development team.",
+    "fatal_message_id": "FACTOR_11",
+    "fatal_message_english": true,
+    "last_lines": [
+      " ║      possible to complete the analysis by relaxing this criterion (increase the value of the   ║",
+      " ║      NPREC keyword by 1 or 2) or                                                               ║",
+      " ║      by switching it off (NPREC=-1), or by running the analysis on fewer processors.           ║",
+      " ║                                                                                                ║",
+      " ║    * With X-FEM this can also be quite normal when the crack passes                            ║",
+      " ║      very close to a node.                                                                     ║",
+      " ║      If the number of lost decimal digits is not too large (at most 10),                       ║",
+      " ║      you can rerun the analysis with a larger number of allowed lost digits:                   ║",
+      " ║      keyword NPREC of the factor keyword SOLVEUR.                                              ║",
+      " ║      Otherwise, contact the development team.                                                  ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║        MODELISA8_14  issued    3 times                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[14 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <S>_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "analysis": {
+    "type": "linear_static",
+    "solve_command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "solve_comm_line": 44,
+    "result": "RESU"
+  },
+  "summary": {
+    "analysis_type": "linear_static",
+    "nodes": 441,
+    "elements": 483,
+    "outcome": "failed",
+    "elapsed_s": null,
+    "cpu_s": 0.42,
+    "peak_memory_mb": 778.11,
+    "warnings": {
+      "MODELISA8_14": 3
+    },
+    "ignored_warnings": [],
+    "headline": []
+  },
+  "model": {
+    "modelings": [
+      {
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": null
+          }
+        ],
+        "physics": {
+          "fr": "MECANIQUE",
+          "en": "mechanical"
+        },
+        "modeling": {
+          "fr": "DKT",
+          "en": "thin shell (DKT)"
+        },
+        "comm_line": 22
+      }
+    ],
+    "mesh_source": "input/mesh.med",
+    "nodes": 441,
+    "elements": [
+      {
+        "type": "POI1",
+        "label": "point element (1 node)",
+        "count": 3
+      },
+      {
+        "type": "QUAD4",
+        "label": "4-node quadrangle",
+        "count": 400
+      },
+      {
+        "type": "SEG2",
+        "label": "2-node segment",
+        "count": 80
+      }
+    ],
+    "element_total": 483,
+    "bounding_box": {
+      "X": [
+        0.0,
+        1000.0
+      ],
+      "Y": [
+        0.0,
+        1000.0
+      ],
+      "Z": [
+        0.0,
+        0.0
+      ]
+    },
+    "groups": null
+  },
+  "materials": [
+    {
+      "name": "ACIER",
+      "laws": [
+        {
+          "law": "ELAS",
+          "label": "linear elastic",
+          "properties": [
+            {
+              "keyword": "E",
+              "label": "Young's modulus",
+              "value": 210000.0,
+              "quantity": "stress"
+            },
+            {
+              "keyword": "NU",
+              "label": "Poisson's ratio",
+              "value": 0.3,
+              "quantity": null
+            }
+          ]
+        }
+      ],
+      "assigned_to": [
+        {
+          "name": "PLATE",
+          "display_name": null
+        }
+      ],
+      "comm_line": 28
+    }
+  ],
+  "element_properties": [
+    {
+      "keyword": "COQUE",
+      "label": "shell properties",
+      "targets": [
+        {
+          "name": "PLATE",
+          "display_name": null
+        }
+      ],
+      "values": [
+        {
+          "keyword": "EPAIS",
+          "label": "thickness",
+          "value": 10.0
+        },
+        {
+          "keyword": "ANGL_REP",
+          "label": "local-axis angles",
+          "value": [
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "comm_line": 26
+    }
+  ],
+  "loads_and_bcs": {
+    "solve_command": "MECA_STATIQUE",
+    "load_case": [
+      "PRESS"
+    ],
+    "rows": [
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "EDGES",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DZ",
+            "label": "Z translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": false,
+        "multiplier": null,
+        "comm_line": 32
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_A",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DX",
+            "label": "X translation",
+            "value": 0.0
+          },
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": false,
+        "multiplier": null,
+        "comm_line": 32
+      },
+      {
+        "load": "APPUI",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "DDL_IMPO",
+        "label": "imposed DOF",
+        "kind": "boundary condition",
+        "enforcement": "Lagrange multipliers",
+        "targets": [
+          {
+            "name": "CORNER_B",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "DY",
+            "label": "Y translation",
+            "value": 0.0
+          }
+        ],
+        "in_load_case": false,
+        "multiplier": null,
+        "comm_line": 32
+      },
+      {
+        "load": "PRESS",
+        "command": "AFFE_CHAR_MECA",
+        "keyword": "PRES_REP",
+        "label": "distributed pressure",
+        "kind": "load",
+        "enforcement": null,
+        "targets": [
+          {
+            "name": "PLATE",
+            "display_name": null
+          }
+        ],
+        "values": [
+          {
+            "keyword": "PRES",
+            "label": null,
+            "value": 0.01
+          }
+        ],
+        "in_load_case": true,
+        "multiplier": null,
+        "comm_line": 42
+      }
+    ]
+  },
+  "solution": {
+    "command": {
+      "fr": "MECA_STATIQUE",
+      "en": "linear static analysis"
+    },
+    "settings_source": "command echo in the solver log (defaults filled in)",
+    "linear_solver": {
+      "fr": "MUMPS",
+      "en": "MUMPS direct solver"
+    },
+    "renumbering": "AUTO",
+    "lagrange_elimination": "LAGR2",
+    "dofs": {
+      "total": 2646,
+      "physical": 2646,
+      "nodes": 441,
+      "lagrange": 0,
+      "relations": 0,
+      "source": "solver log message FACTOR_1"
+    },
+    "cpu_s": 0.16,
+    "elapsed_s": 0.17
+  },
+  "displacements": null,
+  "stresses": null,
+  "reactions": null,
+  "modal": null,
+  "diagnostics": {
+    "items": [
+      {
+        "message_id": "FACTOR_11",
+        "severity": "error",
+        "count": 1,
+        "english": true,
+        "status": "english",
+        "text": "Problem: the matrix is singular or nearly singular:\n  During the factorization of the matrix, a problem was found\n  (zero or nearly zero pivot) at row 517, which corresponds to the degree of freedom given above.\n\nRisks and advice:\n   * If the row is a physical degree of freedom, a rigid-body motion is probably\n     not restrained.\n     Check the boundary conditions.\n     If you use contact, the structure must not be held by contact alone.\n     Also check the material properties (Young's modulus, ...).\n\n   * If the row is a Lagrange degree of freedom, a boundary condition is probably\n     redundant.\n     In particular, the redundant linear relation may come from the contact conditions.\n     You may need to exclude some nodes from the contact conditions\n     (keywords SANS_NOEUD and SANS_GROUP_NO).\n\n   * If the solver is LDLT or MULT_FRONT, you can use the MUMPS solver\n     instead: it is the only one that can factorize matrices that are not positive definite.\n\n   * In parallel, the MUMPS singularity detection criterion is sometimes too pessimistic! It is still often\n     possible to complete the analysis by relaxing this criterion (increase the value of the NPREC keyword by 1 or 2) or\n     by switching it off (NPREC=-1), or by running the analysis on fewer processors.\n\n   * With X-FEM this can also be quite normal when the crack passes\n     very close to a node.\n     If the number of lost decimal digits is not too large (at most 10),\n     you can rerun the analysis with a larger number of allowed lost digits:\n     keyword NPREC of the factor keyword SOLVEUR.\n     Otherwise, contact the development team.",
+        "commands": [
+          "MECA_STATIQUE"
+        ],
+        "log_lines": [
+          358
+        ]
+      },
+      {
+        "message_id": "MODELISA8_14",
+        "severity": "warning",
+        "count": 3,
+        "english": true,
+        "status": "english",
+        "text": "POI1 element 1 is included in another element.",
+        "commands": [
+          "LIRE_MAILLAGE"
+        ],
+        "log_lines": [
+          119,
+          130,
+          141
+        ]
+      }
+    ],
+    "ignored_warnings": [],
+    "coverage": {
+      "diagnostics": 5,
+      "diagnostics_english": 5,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [],
+    "non_regression": {
+      "count": 0,
+      "ok": 0
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# broken_singular_matrix -- deliberately broken run (task 4.3): no support conditions, so the stiffness matrix is singular.\n# codeaster-en test fixture. Copy of shell_static (same mesh, units mm, N, MPa) cut after\n# MECA_STATIQUE, with one fault injected. DEBUT() without CODE, as a user's study would run.\n# The .mess this produces is a parser and classifier test input; the run is expected to fail.\n\nDEBUT()\n\nQ = 0.01  # uniform pressure [MPa]\nT = 10.0  # thickness [mm]\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA=\"OUI\"))\n\n# Mesh normals already point to +Z; this makes the orientation explicit and checked.\nMAIL = MODI_MAILLAGE(\n    reuse=MAIL,\n    MAILLAGE=MAIL,\n    ORIE_NORM_COQUE=_F(GROUP_MA=\"PLATE\", GROUP_NO=\"CENTER\", VECT_NORM=(0.0, 0.0, 1.0)),\n)\n\nMODE = AFFE_MODELE(\n    MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"DKT\")\n)\n\nCARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA=\"PLATE\", EPAIS=T, ANGL_REP=(0.0, 0.0)))\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", MATER=ACIER))\n\nAPPUI = AFFE_CHAR_MECA(\n    MODELE=MODE,\n    DDL_IMPO=(\n        _F(GROUP_MA=\"EDGES\", DZ=0.0),\n        _F(GROUP_NO=\"CORNER_A\", DX=0.0, DY=0.0),\n        _F(GROUP_NO=\"CORNER_B\", DY=0.0),\n    ),\n)\n\n# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).\nPRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=\"PLATE\", PRES=Q))\n\nRESU = MECA_STATIQUE(\n    MODELE=MODE,\n    CHAM_MATER=MATE,\n    CARA_ELEM=CARA,\n    # fault: APPUI left out\n    EXCIT=_F(CHARGE=PRESS),\n    SOLVEUR=_F(METHODE=\"MUMPS\"),\n)\n\n\nFIN()\n",
+    "comm_syntax_error": null,
+    "comm_skipped_lines": [],
+    "command_purposes": {
+      "6": {
+        "command": "DEBUT",
+        "purpose": "begin study"
+      },
+      "11": {
+        "command": "LIRE_MAILLAGE",
+        "purpose": "read mesh"
+      },
+      "13": {
+        "command": "DEFI_GROUP",
+        "purpose": "define groups"
+      },
+      "16": {
+        "command": "MODI_MAILLAGE",
+        "purpose": "modify mesh"
+      },
+      "22": {
+        "command": "AFFE_MODELE",
+        "purpose": "assign model"
+      },
+      "26": {
+        "command": "AFFE_CARA_ELEM",
+        "purpose": "assign element properties"
+      },
+      "28": {
+        "command": "DEFI_MATERIAU",
+        "purpose": "define material"
+      },
+      "30": {
+        "command": "AFFE_MATERIAU",
+        "purpose": "assign material"
+      },
+      "32": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "42": {
+        "command": "AFFE_CHAR_MECA",
+        "purpose": "assign mechanical loads and BCs"
+      },
+      "44": {
+        "command": "MECA_STATIQUE",
+        "purpose": "linear static analysis"
+      },
+      "54": {
+        "command": "FIN",
+        "purpose": "end study"
+      }
+    },
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/reactions.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "[5 line(s) printed by the solver outside the message catalog]",
+      "  Opening file for writing: ./vola.1",
+      "",
+      " <INFO> Starting the run.",
+      "",
+      "            -- CODE_ASTER -- VERSION: CORRECTIVE AVANT STABILISATION (stable-updates) --",
+      "                               Version 17.4.22 modified on 30/06/2026",
+      "                              revision spack-local - branch 'v17.4.22'",
+      "                                   Copyright EDF R&D 1991 - 2026",
+      "",
+      "                                  Run on: Thu Oct 29 05:41:19 2026",
+      "                                      Host name: 12fbbfeb72a0",
+      "                                        Architecture: 64bit",
+      "                                       Processor type: x86_64",
+      "                   Operating system: Linux-6.18.44-fc-v185-x86_64-with-glibc2.36",
+      "                                    Message language: en (UTF-8)",
+      "                                      Python version: 3.11.14",
+      "                                       NumPy version: 1.26.4",
+      "                                        MPI parallelism: on",
+      "                                  Rank of the current processor: 0",
+      "                                  Number of MPI processors used: 1",
+      "                                       OpenMP parallelism: on",
+      "                                  Number of OpenMP threads used: 1",
+      "                                    HDF5 library version: 1.10.7",
+      "                                     MED library version: 4.2.0",
+      "                                   MFront library version: 5.0.0",
+      "                                    MUMPS library version: 5.6.2",
+      "                                  PETSc library version: 3.24.0p0",
+      "                                   SCOTCH library version: 7.0.10",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  Initial value of the maximum CPU time =   600 seconds",
+      "  Maximum CPU time given to the commands =   540 seconds",
+      "  Planned CPU reserve = 60 seconds",
+      "",
+      "  Opening file for writing: ./glob.1",
+      "",
+      "  Opening file for writing: ./vola.1",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Created with version                    :  17.04.22",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Opening file for reading:",
+      "  /opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/elem",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "     Database name                           :  ELEMBASE",
+      "     Records used                            :  47",
+      "     Maximum number of records               :  512",
+      "     Records per file                        :  512",
+      "     Record length (bytes)                   :  819200",
+      "     Total number of read accesses           :  65",
+      "     Volume read                             :         50.78 MB.",
+      "     Total number of write accesses          :  0",
+      "     Volume written                          :          0.00 MB.",
+      "     Identifiers used                        :  123",
+      "     Maximum directory size                  :  300",
+      "     Directory usage                         :  41 %",
+      "",
+      "  Element catalogs read again.",
+      "",
+      "  End of reading (duration  0.255882  s.)",
+      "",
+      "                          Memory limit for dynamic allocation: 2410.03 MB",
+      "                             added at process initialization: 647.27 MB",
+      "                              Target limit of the process: 3057.30 MB",
+      "                              Size limit of the swap files: 2048.00 GB",
+      "# Memory (MB):   647.27 /   639.85 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0001   user+syst:        0.07s (syst:        1.66s, elaps:        1.76s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0002 from run.comm.changed.py, line 23",
+      "[7 line(s) printed by the solver outside the message catalog]",
+      "",
+      "MED name of the mesh: mesh",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Checking the mesh.",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 1 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 2 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <A> <MODELISA8_14>                                                                             ║",
+      " ║                                                                                                ║",
+      " ║ POI1 element 3 is included in another element.                                                 ║",
+      " ║                                                                                                ║",
+      " ║ This is a warning. If you do not understand what it means, you may get unexpected results!     ║",
+      " ╚================================================================================================╝",
+      "",
+      "# Result of command #0002 (LIRE_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.27 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0002   user+syst:        0.02s (syst:        0.01s, elaps:        0.02s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0003 from run.comm.changed.py, line 25",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[10 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0003 (DEFI_GROUP): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.27 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0003   user+syst:        0.00s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0004 from run.comm.changed.py, line 28",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Processing GROUP_MA PLATE with 400 elements.",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0004 (MODI_MAILLAGE): MAIL ('<00000001>') of type <Mesh>",
+      "# Memory (MB):   647.27 /   640.57 /   207.82 /   183.73 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0004   user+syst:        0.00s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0005 from run.comm.changed.py, line 34",
+      "[11 line(s) printed by the solver outside the message catalog]",
+      "",
+      "Of the 483 elements of mesh 00000001, assignment was requested for 400 and 400 could be assigned.",
+      " Modeling type    Formulation      Element type Finite element   Number",
+      "[2 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0005 (AFFE_MODELE): MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0005   user+syst:        0.00s (syst:        0.01s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0006 from run.comm.changed.py, line 38",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "# Result of command #0006 (AFFE_CARA_ELEM): CARA ('<00000003>') of type <ElementaryCharacteristics>",
+      "# Depends on:",
+      "# - MODE ('<00000002>') of type <Model>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0006   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0007 from run.comm.changed.py, line 40",
+      "[6 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0007 (DEFI_MATERIAU): ACIER ('<00000004>') of type <Material>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0007   user+syst:        0.07s (syst:        0.00s, elaps:        0.09s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0008 from run.comm.changed.py, line 42",
+      "[4 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0008 (AFFE_MATERIAU): MATE ('<00000005>') of type <MaterialField>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0008   user+syst:        0.07s (syst:        0.00s, elaps:        0.07s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0009 from run.comm.changed.py, line 44",
+      "[13 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0009 (AFFE_CHAR_MECA): APPUI ('<00000006>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0009   user+syst:        0.01s (syst:        0.00s, elaps:        0.00s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0010 from run.comm.changed.py, line 54",
+      "[8 line(s) printed by the solver outside the message catalog]",
+      "",
+      "# Result of command #0010 (AFFE_CHAR_MECA): PRESS ('<00000007>') of type <MechanicalLoadReal>",
+      "# Memory (MB):   769.30 /   769.30 /   207.82 /   197.30 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0010   user+syst:        0.01s (syst:        0.00s, elaps:        0.01s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "# ----------------------------------------------------------------------------------------------",
+      "# Command #0011 from run.comm.changed.py, line 56",
+      "[24 line(s) printed by the solver outside the message catalog]",
+      "",
+      "  The linear system to solve has 2646 degrees of freedom:",
+      "   - 2646 are physical degrees of freedom",
+      "     (carried by 441 nodes of the mesh)",
+      "   - 0 are the pairs of Lagrange multipliers associated",
+      "     with the 0 dualized linear relations.",
+      "  The matrix has 2646 equations.",
+      "  It has 68301 nonzero terms if it is symmetric and 133956 nonzero terms if it is not symmetric.",
+      "  That is a fill ratio of   1.913 %.",
+      "  Physical degree of freedom of node 87, component DX.",
+      "",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <EXCEPTION> <FACTOR_11>                                                                        ║",
+      " ║                                                                                                ║",
+      " ║ Problem: the matrix is singular or nearly singular:                                            ║",
+      " ║   During the factorization of the matrix, a problem was found                                  ║",
+      " ║   (zero or nearly zero pivot) at row 517, which corresponds to the degree of freedom given     ║",
+      " ║   above.                                                                                       ║",
+      " ║                                                                                                ║",
+      " ║ Risks and advice:                                                                              ║",
+      " ║    * If the row is a physical degree of freedom, a rigid-body motion is probably               ║",
+      " ║      not restrained.                                                                           ║",
+      " ║      Check the boundary conditions.                                                            ║",
+      " ║      If you use contact, the structure must not be held by contact alone.                      ║",
+      " ║      Also check the material properties (Young's modulus, ...).                                ║",
+      " ║                                                                                                ║",
+      " ║    * If the row is a Lagrange degree of freedom, a boundary condition is probably              ║",
+      " ║      redundant.                                                                                ║",
+      " ║      In particular, the redundant linear relation may come from the contact conditions.        ║",
+      " ║      You may need to exclude some nodes from the contact conditions                            ║",
+      " ║      (keywords SANS_NOEUD and SANS_GROUP_NO).                                                  ║",
+      " ║                                                                                                ║",
+      " ║    * If the solver is LDLT or MULT_FRONT, you can use the MUMPS solver                         ║",
+      " ║      instead: it is the only one that can factorize matrices that are not positive definite.   ║",
+      " ║                                                                                                ║",
+      " ║    * In parallel, the MUMPS singularity detection criterion is sometimes too pessimistic! It   ║",
+      " ║    is still often                                                                              ║",
+      " ║      possible to complete the analysis by relaxing this criterion (increase the value of the   ║",
+      " ║      NPREC keyword by 1 or 2) or                                                               ║",
+      " ║      by switching it off (NPREC=-1), or by running the analysis on fewer processors.           ║",
+      " ║                                                                                                ║",
+      " ║    * With X-FEM this can also be quite normal when the crack passes                            ║",
+      " ║      very close to a node.                                                                     ║",
+      " ║      If the number of lost decimal digits is not too large (at most 10),                       ║",
+      " ║      you can rerun the analysis with a larger number of allowed lost digits:                   ║",
+      " ║      keyword NPREC of the factor keyword SOLVEUR.                                              ║",
+      " ║      Otherwise, contact the development team.                                                  ║",
+      " ╚================================================================================================╝",
+      "",
+      "  Result object '0000000b' deleted after the previous error.",
+      "",
+      "# Memory (MB):   778.11 /   777.95 /   207.82 /   199.01 (VmPeak / VmSize / Optimum / Minimum)",
+      "# End of command #0011   user+syst:        0.16s (syst:        0.01s, elaps:        0.17s)",
+      "# ----------------------------------------------------------------------------------------------",
+      "Traceback (most recent call last):",
+      "  File \"<frozen runpy>\", line 198, in _run_module_as_main",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/__main__.py\", line 7, in <module>",
+      "    main()",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 230, in main",
+      "    run_command_line(args)",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 47, in run_command_line",
+      "    run_path(sys.argv[0], run_name='__main__')",
+      "  File \"<frozen runpy>\", line 291, in run_path",
+      "  File \"<frozen runpy>\", line 98, in _run_module_code",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"run.comm.changed.py\", line 56, in <module>",
+      "    RESU = MECA_STATIQUE(",
+      "           ^^^^^^^^^^^^^^",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 183, in run",
+      "    return cmd.run_(**kwargs)",
+      "           ^^^^^^^^^^^^^^^^^^",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 226, in run_",
+      "    self.exec_(keywords)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Supervis/ExecuteCommand.py\", line 742, in exec_",
+      "    output = self._op(self, **keywords)",
+      "             ^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/MacroCommands/meca_statique_ops.py\", line 259, in meca_statique_ops",
+      "    linear_solver.factorize(matrix)",
+      "  File \"/opt/spack/opt/spack/linux-zen2/code-aster-17.4.22-qvronprjirskcxaala43j55z7obyclfv/lib64/aster/code_aster/Utilities/statistics_manager.py\", line 54, in wrapper",
+      "    result = func(*args, **kwargs)",
+      "             ^^^^^^^^^^^^^^^^^^^^^",
+      "libaster.AsterError: ",
+      " ╔================================================================================================╗",
+      " ║ <EXCEPTION> <FACTOR_11>                                                                        ║",
+      " ║                                                                                                ║",
+      " ║ Problem: the matrix is singular or nearly singular:                                            ║",
+      " ║   During the factorization of the matrix, a problem was found                                  ║",
+      " ║   (zero or nearly zero pivot) at row 517, which corresponds to the degree of freedom given     ║",
+      " ║   above.                                                                                       ║",
+      " ║                                                                                                ║",
+      " ║ Risks and advice:                                                                              ║",
+      " ║    * If the row is a physical degree of freedom, a rigid-body motion is probably               ║",
+      " ║      not restrained.                                                                           ║",
+      " ║      Check the boundary conditions.                                                            ║",
+      " ║      If you use contact, the structure must not be held by contact alone.                      ║",
+      " ║      Also check the material properties (Young's modulus, ...).                                ║",
+      " ║                                                                                                ║",
+      " ║    * If the row is a Lagrange degree of freedom, a boundary condition is probably              ║",
+      " ║      redundant.                                                                                ║",
+      " ║      In particular, the redundant linear relation may come from the contact conditions.        ║",
+      " ║      You may need to exclude some nodes from the contact conditions                            ║",
+      " ║      (keywords SANS_NOEUD and SANS_GROUP_NO).                                                  ║",
+      " ║                                                                                                ║",
+      " ║    * If the solver is LDLT or MULT_FRONT, you can use the MUMPS solver                         ║",
+      " ║      instead: it is the only one that can factorize matrices that are not positive definite.   ║",
+      " ║                                                                                                ║",
+      " ║    * In parallel, the MUMPS singularity detection criterion is sometimes too pessimistic! It   ║",
+      " ║    is still often                                                                              ║",
+      " ║      possible to complete the analysis by relaxing this criterion (increase the value of the   ║",
+      " ║      NPREC keyword by 1 or 2) or                                                               ║",
+      " ║      by switching it off (NPREC=-1), or by running the analysis on fewer processors.           ║",
+      " ║                                                                                                ║",
+      " ║    * With X-FEM this can also be quite normal when the crack passes                            ║",
+      " ║      very close to a node.                                                                     ║",
+      " ║      If the number of lost decimal digits is not too large (at most 10),                       ║",
+      " ║      you can rerun the analysis with a larger number of allowed lost digits:                   ║",
+      " ║      keyword NPREC of the factor keyword SOLVEUR.                                              ║",
+      " ║      Otherwise, contact the development team.                                                  ║",
+      " ╚================================================================================================╝",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      " ╔================================================================================================╗",
+      " ║ <I> <CATAMESS_89>                                                                              ║",
+      " ║                                                                                                ║",
+      " ║     List of the warnings issued during the analysis.                                           ║",
+      " ║                                                                                                ║",
+      " ║     Warnings you chose to ignore are marked with (*).                                          ║",
+      " ║     Number of occurrences of each warning:                                                     ║",
+      " ║        MODELISA8_14  issued    3 times                                                         ║",
+      " ╚================================================================================================╝",
+      "",
+      "<I> <FIN> NORMAL STOP IN \"FIN\" BY CALL TO \"JEFINI\".",
+      "  ",
+      "[3 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[9 line(s) printed by the solver outside the message catalog]",
+      "  ",
+      "[14 line(s) printed by the solver outside the message catalog]",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <S>_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": []
+}

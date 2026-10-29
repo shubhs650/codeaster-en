@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "generated_from": {
+    "generator": "codeaster_en.report",
+    "generator_version": "0.1.0",
+    "job": "broken_python_syntax",
+    "inputs": {
+      "comm": "input/run.comm",
+      "export": "input/run.export",
+      "run_json": null,
+      "mess": "output/run.mess",
+      "rmed": null,
+      "mesh": "input/mesh.med",
+      "tables": [],
+      "exit_code": "output/exit_code"
+    }
+  },
+  "sections": [
+    "title_block",
+    "summary",
+    "model",
+    "materials",
+    "loads_and_bcs",
+    "solution",
+    "diagnostics"
+  ],
+  "sections_omitted": {
+    "element_properties": "no AFFE_CARA_ELEM in the command file",
+    "displacements": "the run failed (REPORT-SPEC §5)",
+    "stresses": "the run failed (REPORT-SPEC §5)",
+    "reactions": "the run failed (REPORT-SPEC §5)",
+    "modal": "the run failed (REPORT-SPEC §5)",
+    "verification": "the run failed (REPORT-SPEC §5)",
+    "appendix_command_file": "the run failed (REPORT-SPEC §5)",
+    "appendix_run_parameters": "the run failed (REPORT-SPEC §5)"
+  },
+  "title_block": {
+    "project": null,
+    "title": "code_aster run broken_python_syntax",
+    "revision": null,
+    "author": null,
+    "date": null,
+    "description": null,
+    "logo": null,
+    "solver_version": null,
+    "overlay_version": "0.1.0",
+    "upstream_version": "17.4.26",
+    "statement": "This report was produced by software from the results of one run. It documents what the solver computed; it is not a verdict on compliance with any design code."
+  },
+  "units": {
+    "system": null,
+    "name": "model units",
+    "declared": false,
+    "guess": null,
+    "units": {},
+    "note": "No unit system is declared (run.json units); values are in model units."
+  },
+  "outcome": {
+    "status": "failed",
+    "diagnostic_job": "<F>_SYNTAX_ERROR",
+    "exit_code": 1,
+    "classification": {
+      "failure_class": "user-model",
+      "reason": "the command file is not valid Python",
+      "message_id": null,
+      "diagnostic_job": "<F>_SYNTAX_ERROR",
+      "evidence": "tests/fixtures/broken_python_syntax"
+    },
+    "failed_command": null,
+    "failed_comm_line": 37,
+    "fatal_message": "SyntaxError: invalid syntax. Perhaps you forgot a comma?",
+    "fatal_message_id": null,
+    "fatal_message_english": true,
+    "last_lines": [
+      "Traceback (most recent call last):",
+      "  File \"<frozen runpy>\", line 198, in _run_module_as_main",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/__main__.py\", line 7, in <module>",
+      "    main()",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 230, in main",
+      "    run_command_line(args)",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 47, in run_command_line",
+      "    run_path(sys.argv[0], run_name='__main__')",
+      "  File \"<frozen runpy>\", line 290, in run_path",
+      "  File \"<frozen runpy>\", line 259, in _get_code_from_file",
+      "  File \"run.comm.changed.py\", line 49",
+      "    _F(GROUP_MA=\"EDGES\", DZ=0.0)",
+      "    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "SyntaxError: invalid syntax. Perhaps you forgot a comma?",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <F>_SYNTAX_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "analysis": {
+    "type": null,
+    "solve_command": null,
+    "solve_comm_line": null,
+    "result": null
+  },
+  "summary": {
+    "analysis_type": null,
+    "nodes": 441,
+    "elements": 483,
+    "outcome": "failed",
+    "elapsed_s": null,
+    "cpu_s": null,
+    "peak_memory_mb": null,
+    "warnings": {},
+    "ignored_warnings": [],
+    "headline": []
+  },
+  "model": {
+    "modelings": [],
+    "mesh_source": "input/mesh.med",
+    "nodes": 441,
+    "elements": [
+      {
+        "type": "POI1",
+        "label": "point element (1 node)",
+        "count": 3
+      },
+      {
+        "type": "QUAD4",
+        "label": "4-node quadrangle",
+        "count": 400
+      },
+      {
+        "type": "SEG2",
+        "label": "2-node segment",
+        "count": 80
+      }
+    ],
+    "element_total": 483,
+    "bounding_box": {
+      "X": [
+        0.0,
+        1000.0
+      ],
+      "Y": [
+        0.0,
+        1000.0
+      ],
+      "Z": [
+        0.0,
+        0.0
+      ]
+    },
+    "groups": null
+  },
+  "materials": [],
+  "element_properties": [],
+  "loads_and_bcs": {
+    "solve_command": null,
+    "load_case": [],
+    "rows": []
+  },
+  "solution": {
+    "command": null
+  },
+  "displacements": null,
+  "stresses": null,
+  "reactions": null,
+  "modal": null,
+  "diagnostics": {
+    "items": [],
+    "ignored_warnings": [],
+    "coverage": {
+      "diagnostics": 0,
+      "diagnostics_english": 0,
+      "diagnostics_not_english": []
+    }
+  },
+  "verification": {
+    "rows": [],
+    "non_regression": {
+      "count": 0,
+      "ok": 0
+    }
+  },
+  "appendix": {
+    "comm_file": "input/run.comm",
+    "comm_text": "# broken_python_syntax -- deliberately broken run (task 4.3): a missing comma, so the command file\n# is not valid Python and the solver never starts.\n# codeaster-en test fixture. Copy of shell_static (same mesh, units mm, N, MPa) cut after\n# MECA_STATIQUE, with one fault injected. DEBUT() without CODE, as a user's study would run.\n# The .mess this produces is a parser and classifier test input; the run is expected to fail.\n\nDEBUT()\n\nQ = 0.01  # uniform pressure [MPa]\nT = 10.0  # thickness [mm]\n\nMAIL = LIRE_MAILLAGE(FORMAT=\"MED\", UNITE=20)\n\nMAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(TOUT_GROUP_MA=\"OUI\"))\n\n# Mesh normals already point to +Z; this makes the orientation explicit and checked.\nMAIL = MODI_MAILLAGE(\n    reuse=MAIL,\n    MAILLAGE=MAIL,\n    ORIE_NORM_COQUE=_F(GROUP_MA=\"PLATE\", GROUP_NO=\"CENTER\", VECT_NORM=(0.0, 0.0, 1.0)),\n)\n\nMODE = AFFE_MODELE(\n    MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", PHENOMENE=\"MECANIQUE\", MODELISATION=\"DKT\")\n)\n\nCARA = AFFE_CARA_ELEM(MODELE=MODE, COQUE=_F(GROUP_MA=\"PLATE\", EPAIS=T, ANGL_REP=(0.0, 0.0)))\n\nACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))\n\nMATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA=\"PLATE\", MATER=ACIER))\n\nAPPUI = AFFE_CHAR_MECA(\n    MODELE=MODE,\n    DDL_IMPO=(\n        # fault: missing comma after this line\n        _F(GROUP_MA=\"EDGES\", DZ=0.0)\n        _F(GROUP_NO=\"CORNER_A\", DX=0.0, DY=0.0),\n        _F(GROUP_NO=\"CORNER_B\", DY=0.0),\n    ),\n)\n\n# Positive PRES acts against the element normal (+Z), i.e. downward (as in ssls101n).\nPRESS = AFFE_CHAR_MECA(MODELE=MODE, PRES_REP=_F(GROUP_MA=\"PLATE\", PRES=Q))\n\nRESU = MECA_STATIQUE(\n    MODELE=MODE,\n    CHAM_MATER=MATE,\n    CARA_ELEM=CARA,\n    EXCIT=(_F(CHARGE=APPUI), _F(CHARGE=PRESS)),\n    SOLVEUR=_F(METHODE=\"MUMPS\"),\n)\n\n\nFIN()\n",
+    "comm_syntax_error": "line 37: invalid syntax. Perhaps you forgot a comma?",
+    "comm_skipped_lines": [],
+    "command_purposes": {},
+    "export_file": "input/run.export",
+    "export": {
+      "parameters": [
+        {
+          "key": "time_limit",
+          "label": "Time limit",
+          "value": "600",
+          "unit": "s"
+        },
+        {
+          "key": "memory_limit",
+          "label": "Memory limit",
+          "value": "2048",
+          "unit": "MB"
+        },
+        {
+          "key": "ncpus",
+          "label": "OpenMP threads per process",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbcpu",
+          "label": "MPI processes",
+          "value": "1",
+          "unit": ""
+        },
+        {
+          "key": "mpi_nbnoeud",
+          "label": "MPI nodes",
+          "value": "1",
+          "unit": ""
+        }
+      ],
+      "files": [
+        {
+          "type": "comm",
+          "label": "command file",
+          "path": "run.comm",
+          "direction": "input",
+          "unit": 1
+        },
+        {
+          "type": "mmed",
+          "label": "MED mesh",
+          "path": "mesh.med",
+          "direction": "input",
+          "unit": 20
+        },
+        {
+          "type": "mess",
+          "label": "message log",
+          "path": "../output/run.mess",
+          "direction": "output",
+          "unit": 6
+        },
+        {
+          "type": "resu",
+          "label": "text results",
+          "path": "../output/run.resu",
+          "direction": "output",
+          "unit": 8
+        },
+        {
+          "type": "libr",
+          "label": "free-format file (tables)",
+          "path": "../output/tables/reactions.csv",
+          "direction": "output",
+          "unit": 30
+        },
+        {
+          "type": "rmed",
+          "label": "MED results",
+          "path": "../output/run.rmed",
+          "direction": "output",
+          "unit": 80
+        }
+      ]
+    },
+    "log_lines": [
+      "Traceback (most recent call last):",
+      "  File \"<frozen runpy>\", line 198, in _run_module_as_main",
+      "  File \"<frozen runpy>\", line 88, in _run_code",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/__main__.py\", line 7, in <module>",
+      "    main()",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 230, in main",
+      "    run_command_line(args)",
+      "  File \"/opt/spack/var/spack/environments/simvia_env/.spack-env/view/lib/python3.11/site-packages/mpi4py/run.py\", line 47, in run_command_line",
+      "    run_path(sys.argv[0], run_name='__main__')",
+      "  File \"<frozen runpy>\", line 290, in run_path",
+      "  File \"<frozen runpy>\", line 259, in _get_code_from_file",
+      "  File \"run.comm.changed.py\", line 49",
+      "    _F(GROUP_MA=\"EDGES\", DZ=0.0)",
+      "    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+      "SyntaxError: invalid syntax. Perhaps you forgot a comma?",
+      "",
+      "[1 line(s) printed by the solver outside the message catalog]",
+      "",
+      "",
+      "",
+      "------------------------------------------------------------",
+      "--- DIAGNOSTIC JOB : <F>_SYNTAX_ERROR",
+      "------------------------------------------------------------",
+      ""
+    ]
+  },
+  "notes": [
+    "The command file is not valid Python (line 37: invalid syntax. Perhaps you forgot a comma?); the model, material and load tables could not be read from it."
+  ]
+}
