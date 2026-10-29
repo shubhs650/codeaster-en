@@ -2,7 +2,7 @@
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
 ``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``
-and ``caen mess parse``. The other groups and commands are stubs that name the
+and ``caen mess parse|translate``. The other groups and commands are stubs that name the
 PLAN.md task which will fill them in.
 """
 
@@ -20,6 +20,7 @@ from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
+from codeaster_en.mess import render as mess_render
 from codeaster_en.translate import command as command_drafts
 from codeaster_en.translate import messages as messages_translate
 from codeaster_en.validate import commands as commands_validator
@@ -350,7 +351,7 @@ def translate_doc() -> None:
 
 
 mess_app = typer.Typer(
-    help="Parse a code_aster .mess log (English rendering: task 4.4).",
+    help="Parse a code_aster .mess log and render it in English.",
     no_args_is_help=True,
 )
 app.add_typer(mess_app, name="mess")
@@ -394,6 +395,63 @@ def mess_parse(
         typer.echo(f"  failure: {result.failure_class}{where}: {result.reason}")
     else:
         typer.echo("  run ended normally")
+
+
+@mess_app.command("translate")
+def mess_translate(
+    mess: Annotated[Path, typer.Argument(help="The .mess log, e.g. output/run.mess.")],
+    comm: Annotated[
+        Path | None,
+        typer.Option(help="The user's .comm (default: ../input/run.comm when it exists)."),
+    ] = None,
+    out_dir: Annotated[
+        Path | None,
+        typer.Option(
+            help="Where to write <name>.en.mess and <name>.en.json (default: next to the log)."
+        ),
+    ] = None,
+    messages: Annotated[
+        Path | None,
+        typer.Option(help="Message families to use (default: en/messages of the overlay)."),
+    ] = None,
+    strict: Annotated[
+        bool,
+        typer.Option(help="Exit 1 when a diagnostic box could not be rendered in English."),
+    ] = False,
+) -> None:
+    """Render a .mess log in English: <name>.en.mess (the log) and <name>.en.json."""
+    if not mess.is_file():
+        typer.echo(f"mess translate: no such file: {mess}", err=True)
+        raise typer.Exit(code=1)
+    try:
+        catalog = mess_render.MessageCatalog(messages)
+    except FileNotFoundError as exc:
+        typer.echo(f"mess translate: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    english = mess_render.translate(mess_module.parse(mess, comm=comm), catalog)
+    target = out_dir or mess.parent
+    target.mkdir(parents=True, exist_ok=True)
+    stem = mess.name[: -len(".mess")] if mess.name.endswith(".mess") else mess.name
+    text_path = target / f"{stem}.en.mess"
+    json_path = target / f"{stem}.en.json"
+    text_path.write_text(english.to_text(), encoding="utf-8")
+    json_path.write_text(english.to_json(), encoding="utf-8")
+    cov = english.coverage()
+    typer.echo(f"mess translate: wrote {text_path} and {json_path}")
+    typer.echo(
+        f"  diagnostics in English: {cov['diagnostics_english']}/{cov['diagnostics']}"
+        + (
+            f" (not: {', '.join(cov['diagnostics_not_english'])})"
+            if cov["diagnostics_not_english"]
+            else ""
+        )
+    )
+    if cov["untranslated_messages"]:
+        typer.echo(f"  messages without English: {', '.join(cov['untranslated_messages'])}")
+    for problem in english.problems():
+        typer.echo(f"  {problem['headline']}")
+    if strict and cov["diagnostics_not_english"]:
+        raise typer.Exit(code=1)
 
 
 app.add_typer(

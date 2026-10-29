@@ -14,6 +14,38 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 4.4 English `.mess` renderer — agent
+Done: `codeaster_en.mess.catalog` compiles each French message of `en/messages` into a regular
+expression (literal text exact, any whitespace run flexible for `cut_long_lines` wrapping,
+centering and boxes; placeholders as captures; repeated placeholders as back-references) and
+fills the English with the recovered arguments, numbers re-printed with their original format.
+All 6,890 French texts recover their own arguments (round-trip test). `codeaster_en.mess.render`:
+boxes joined by `<TYPE> <ID>`, with further messages inside the same box matched too
+(`CATAMESS_89` + `CATAMESS_90`); ID-less informational output matched line by line against the
+templates (longest match wins); `SUPERVIS2_76` translated where it is nested in another
+message's argument; Utmess footers in English; command echo, tracebacks and the trailer kept as
+printed. `caen mess translate run.mess [--out-dir] [--messages] [--strict]` writes
+`run.en.mess` (same layout, boxes redrawn) and `run.en.json` (diagnostics with status and
+arguments, `problems` = English account of what stopped the run with command and `.comm` line,
+failure class, coverage). `render_event` renders streamed events. 56 messages that fire in the
+fixtures translated in session (`method: assisted`, `translation_source: session:task-4.4`):
+`SUPERVIS2` (header and command lines), `SUPERVIS`, `CATAMESS`, `JEVEUX`, `FACTOR`/`FACTOR2`,
+`MODELISA7_77`, `MED`, `MESH3`, `MODELE1`, `ALGELINE6/7`, `ARCHIVAGE`. Result: every diagnostic
+in all 7 fixture logs renders in English (24/24 boxes); broken runs give e.g. "AFFE_CHAR_MECA
+(command file line 33) failed: GROUP_MA EDGE is not part of mesh: 00000001 [error
+MODELISA7_77]". `tests/test_mess_render.py` (30 tests), also run by `solver-fixtures.yml`.
+Severity label for `A` is now "warning" (glossary: *alarme*), also in the 4.3 events model.
+Open: lines printed outside the message catalog (Fortran `WRITE`: mesh statistics, the
+end-of-run JEVEUX memory report, `CALC_MODES` tables) stay French and are counted under
+`coverage.text_lines.verbatim` (73 of ~265 lines in `broken_missing_group`); a later task could
+add a small hand table for the common ones. Task 3.4 must keep `SUPERVIS2_99` out of the `.mo`:
+`run_aster/status.py:237` greps its French text to recognize a normal end. Two padded string arguments side by side
+(`%(k1)3s %(k2)-20s`) cannot be split exactly when one is empty; the English still reads right.
+Decisions: no ADR. English output is `run.en.json` (not `run.json`) so it never overwrites the
+4.3 parser's JSON. `tests/test_messages_extract.py` CLI test now starts from the committed
+`CATAMESS` file, since that family has English now.
+Needs owner: nothing blocking; review queue entry added.
+
 ## 2026-10-29 — 4.3 `.mess` log parser — agent
 Done: `codeaster_en.mess` (`events.py`, `parser.py`, `log.py`, `commlines.py`, `classify.py`)
 and `caen mess parse <run.mess> [--out run.json]`. One pass with a few lines of look-ahead turns

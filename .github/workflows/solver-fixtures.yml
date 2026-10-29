@@ -2,8 +2,9 @@ name: solver-fixtures
 
 # Runs the solver fixtures with the pinned code_aster image (CONTAINER_IMAGE, ADR-011) and checks
 # the outputs: tests/test_fixture_outputs.py for the three reference cases (clean exit, no alarm,
-# every TEST_RESU OK, VALE_CALC equal to the solver's values) and tests/test_mess.py for every
-# log, including the broken_* runs that fail on purpose (task 4.3).
+# every TEST_RESU OK, VALE_CALC equal to the solver's values), tests/test_mess.py for every
+# log, including the broken_* runs that fail on purpose (task 4.3), and tests/test_mess_render.py
+# (every diagnostic renders in English, task 4.4).
 # - pull_request (fixture inputs, image or pin changed): verify only; outputs are uploaded as an
 #   artifact, nothing is committed.
 # - workflow_dispatch: verify, then commit the regenerated outputs on a new branch and open a PR.
@@ -17,6 +18,7 @@ on:
       - tests/fixtures/**/input/**
       - tests/test_fixture_outputs.py
       - tests/test_mess.py
+      - tests/test_mess_render.py
       - scripts/run-fixture.sh
       - .github/workflows/solver-fixtures.yml
 
@@ -56,7 +58,7 @@ jobs:
           done
 
       - name: Check outputs
-        run: pytest -q tests/test_fixture_outputs.py tests/test_mess.py
+        run: pytest -q tests/test_fixture_outputs.py tests/test_mess.py tests/test_mess_render.py
 
       - name: Upload outputs
         if: always()

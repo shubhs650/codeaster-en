@@ -25,7 +25,10 @@
    "source": {
     "line": 23
    },
-   "en": null
+   "en": "  The linear system to solve has %(i1)d degrees of freedom:\n   - %(i2)d are physical degrees of freedom\n     (carried by %(i3)d nodes of the mesh)\n   - %(i4)d are the pairs of Lagrange multipliers associated\n     with the %(i5)d dualized linear relations.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-4.4"
   },
   "2": {
    "id": "FACTOR_2",
@@ -40,7 +43,10 @@
    "source": {
     "line": 30
    },
-   "en": null
+   "en": "  The matrix has %(i1)d equations.\n  It has %(i2)d nonzero terms if it is symmetric and %(i3)d nonzero terms if it is not symmetric.\n  That is a fill ratio of  %(r1)6.3f %%.",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-4.4"
   },
   "9": {
    "id": "FACTOR_9",
@@ -75,7 +81,10 @@
    "source": {
     "line": 97
    },
-   "en": null
+   "en": "\nProblem: the matrix is singular or nearly singular:\n  During the factorization of the matrix, a problem was found\n  (zero or nearly zero pivot) at row %(i1)d, which corresponds to the degree of freedom given above.\n\nRisks and advice:\n   * If the row is a physical degree of freedom, a rigid-body motion is probably\n     not restrained.\n     Check the boundary conditions.\n     If you use contact, the structure must not be held by contact alone.\n     Also check the material properties (Young's modulus, ...).\n\n   * If the row is a Lagrange degree of freedom, a boundary condition is probably\n     redundant.\n     In particular, the redundant linear relation may come from the contact conditions.\n     You may need to exclude some nodes from the contact conditions\n     (keywords SANS_NOEUD and SANS_GROUP_NO).\n\n   * If the solver is LDLT or MULT_FRONT, you can use the MUMPS solver\n     instead: it is the only one that can factorize matrices that are not positive definite.\n\n   * In parallel, the MUMPS singularity detection criterion is sometimes too pessimistic! It is still often\n     possible to complete the analysis by relaxing this criterion (increase the value of the NPREC keyword by 1 or 2) or\n     by switching it off (NPREC=-1), or by running the analysis on fewer processors.\n\n   * With X-FEM this can also be quite normal when the crack passes\n     very close to a node.\n     If the number of lost decimal digits is not too large (at most 10),\n     you can rerun the analysis with a larger number of allowed lost digits:\n     keyword NPREC of the factor keyword SOLVEUR.\n     Otherwise, contact the development team.\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-4.4"
   },
   "12": {
    "id": "FACTOR_12",
