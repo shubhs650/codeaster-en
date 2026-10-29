@@ -21,7 +21,9 @@ from typing import Any
 import jinja2
 import markdown as markdown_lib
 
-from codeaster_en.report.collect import Config, RunModel, collect
+from codeaster_en import results as results_module
+from codeaster_en.report import images as images_module
+from codeaster_en.report.collect import Config, RunModel, collect, find_files
 from codeaster_en.report.labels import full, num, unit
 
 TEMPLATES = Path(__file__).resolve().parent / "templates"
@@ -547,6 +549,7 @@ class _Writer:
             lambda r: "angle" if r["component"].startswith("DR") else "length",
         )
         self.source(f"results file field {code(d['med_name'])}, last stored step")
+        self.figures("displacements")
 
     def stresses(self) -> None:
         s = self.m.stresses
@@ -565,6 +568,7 @@ class _Writer:
             )
             self._extrema_table(t["rows"], lambda r: r.get("quantity"))
             self.source(f"results file field {code(t['med_name'])}, last stored step")
+        self.figures("stresses")
 
     def reactions(self) -> None:
         r = self.m.reactions
@@ -702,6 +706,24 @@ class _Writer:
         for note in t["notes"]:
             self.para(f"Note: {note}.")
         self.source(", ".join(code(s) for s in t["sources"]))
+        self.figures("modal")
+
+    def figures(self, section: str) -> None:
+        """Images of task 4.7 for a section, or one placeholder line per image not rendered."""
+        for f in self.m.images or []:
+            if f["section"] != section:
+                continue
+            caption = f["caption"]
+            if f["kind"] == "deformed_shape" and f["scale"]:
+                caption = f"{caption}; displacements scaled by {f['scale']:g}"
+            elif f["kind"] == "mode_shape" and f["scale"]:
+                caption = f"{caption}; drawn scaled by {f['scale']:g}"
+            if f["file"]:
+                alt = f"Figure {f['number']}, {f['kind'].replace('_', ' ')}"
+                self.add(f"![{alt}]({f['file']})", "")
+                self.para(f"*Figure {f['number']}: {caption}.*")
+            else:
+                self.para(f"*Figure {f['number']} not generated ({caption}): {_esc(f['reason'])}.*")
 
     def diagnostics(self) -> None:
         d = self.m.diagnostics
@@ -921,6 +943,18 @@ def write_pdf(html_text: str, path: str | Path, base_url: str | Path | None = No
     return path
 
 
+def _figures(job: Path, model: RunModel, out_dir: Path) -> list[dict[str, Any]]:
+    """Plan and render the report images (task 4.7) from the job's results file."""
+    figures = images_module.plan(model)
+    rmed = find_files(job).rmed
+    if not figures:
+        return []
+    if rmed is None:
+        return [f.to_dict() for f in images_module.render(figures, None, out_dir, model)]
+    with results_module.open(rmed) as res:
+        return [f.to_dict() for f in images_module.render(figures, res, out_dir, model)]
+
+
 @dataclass
 class BuildResult:
     model: RunModel
@@ -940,6 +974,8 @@ def build(
     out_dir = Path(out) if out is not None else job / "report"
     out_dir.mkdir(parents=True, exist_ok=True)
     model = collect(job, config)
+    if config is not None and config.images:
+        model.images = _figures(job, model, out_dir)
     md = render_markdown(model)
     page = render_html(model, md)
     md_path = out_dir / "report.md"
@@ -951,7 +987,10 @@ def build(
     result = BuildResult(model, md_path, html_path, json_path)
     if pdf:
         try:
-            result.pdf = write_pdf(page, out_dir / "report.pdf", base_url=job.resolve())
+            # Images sit next to the report while relative links (the logo) are from the job.
+            image_uri = (out_dir / images_module.IMAGE_DIR).resolve().as_uri()
+            printable = page.replace(f'src="{images_module.IMAGE_DIR}/', f'src="{image_uri}/')
+            result.pdf = write_pdf(printable, out_dir / "report.pdf", base_url=job.resolve())
         except (ImportError, OSError) as exc:
             result.warnings.append(f"PDF not written: {html.escape(str(exc))}")
     return result
