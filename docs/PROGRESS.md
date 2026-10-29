@@ -14,6 +14,26 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 7.1 upstream bump tool — agent
+Done: `caen upstream bump --to <tag> [--dry-run] [--image …] [--report …]` (new package
+`codeaster_en.upstream`: `bump.py`, `diff.py`). Resolves the tag with `ls-remote` (moving tags
+such as `stable` → lowest version tag on the same commit), fetches it `--depth 1`, extracts
+commands and messages from a `git archive` export, diffs against the committed `en/` JSON and
+writes `docs/upstream-diffs/<old>-<new>.md` (commands/keywords added, removed, changed field by
+field; messages added, removed, French changed with the differing span; stale count and
+placeholder-changed flag; command references and glossary entries to revisit; follow-up). An
+applied bump also moves the submodule and rewrites `UPSTREAM_VERSION`, the JSON (removed
+commands/families deleted), astest index, inventory block, `.po`, `__version__` (`<tag>.1`) and,
+with `--image`, `CONTAINER_IMAGE`; it commits nothing. Exercised on real tags: applied 17.4.26 →
+17.4.22 and back with `--to stable` (every file restored except the English of the two messages
+17.4.22 lacks, restored from git); dry run to 17.5.8 (1 command, 4 added, 1 removed, 1 stale
+message). Both reports committed with a README. 7 new tests (diff units; a bump against a local
+stand-in mirror with tags 1.0.0/1.0.1: dry run leaves the tree untouched, apply marks the stale
+message, deletes the removed family, sets version and image).
+Open: task 7.2 (scheduled monthly run + PR). The pin stays at 17.4.26: `stable` has not moved.
+Decisions: ADR-023.
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-29 — 6.4c Tier 2 fixture and report coverage — agent
 Done: last of three PRs for PLAN 6.4 (with #35, #36). New fixture `solid_loads`: steel block
 on a clamped base with gravity, rotation, water pressure (`FORMULE` + `AFFE_CHAR_MECA_F`), a
