@@ -1,9 +1,9 @@
 """``caen`` command-line interface.
 
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
-``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``
-and ``caen mess parse|translate``. The other groups and commands are stubs that name the
-PLAN.md task which will fill them in.
+``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``,
+``caen mess parse|translate`` and ``caen results fields|extrema|reactions|modal``. The other
+groups and commands are stubs that name the PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ import typer
 
 from codeaster_en import __version__
 from codeaster_en import mess as mess_module
+from codeaster_en import results as results_module
 from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
@@ -452,6 +453,149 @@ def mess_translate(
         typer.echo(f"  {problem['headline']}")
     if strict and cov["diagnostics_not_english"]:
         raise typer.Exit(code=1)
+
+
+results_app = typer.Typer(
+    help="Read a run's results (.rmed and IMPR_TABLE files) with English labels.",
+    no_args_is_help=True,
+)
+app.add_typer(results_app, name="results")
+
+RunPath = Annotated[
+    Path,
+    typer.Argument(help="A .rmed file, or a job's output/ directory (run.rmed + tables/)."),
+]
+JsonFlag = Annotated[bool, typer.Option("--json", help="Print JSON instead of text.")]
+
+
+def _open_results(path: Path) -> tuple[results_module.Results, list[results_module.Table]]:
+    if path.is_dir():
+        rmeds = sorted(path.glob("*.rmed")) or sorted(path.glob("*.med"))
+        if not rmeds:
+            typer.echo(f"results: no .rmed file in {path}", err=True)
+            raise typer.Exit(code=1)
+        return results_module.open(rmeds[0]), results_module.read_table_dir(path / "tables")
+    if not path.is_file():
+        typer.echo(f"results: no such file: {path}", err=True)
+        raise typer.Exit(code=1)
+    return results_module.open(path), results_module.read_table_dir(path.parent / "tables")
+
+
+def _echo_json(data: object) -> None:
+    typer.echo(json.dumps(data, ensure_ascii=False, indent=2))
+
+
+def _g(value: float | None) -> str:
+    return "-" if value is None else f"{value:.4g}"
+
+
+@results_app.command("fields")
+def results_fields(path: RunPath, as_json: JsonFlag = False) -> None:
+    """List the results, fields, components and steps in a .rmed file, and its groups."""
+    res, _tables = _open_results(path)
+    with res:
+        fields, groups = res.fields(), res.groups()
+    if as_json:
+        _echo_json({"fields": [f.to_dict() for f in fields], "groups": groups})
+        return
+    for f in fields:
+        label = f" ({f.label})" if f.label else ""
+        typer.echo(f"{f.result} {f.field}{label}: at {', '.join(f.locations)}")
+        typer.echo(f"  components: {', '.join(f.components)}")
+        steps = ", ".join(f"{s.nume_ordre} ({s.value:g})" for s in f.steps)
+        typer.echo(f"  steps (NUME_ORDRE, INST or FREQ): {steps}")
+    typer.echo(f"node groups: {', '.join(groups['node']) or 'none'}")
+    typer.echo(f"element groups: {', '.join(groups['element']) or 'none'}")
+
+
+@results_app.command("extrema")
+def results_extrema(
+    path: RunPath,
+    field: Annotated[str, typer.Argument(help="Field name, e.g. SIEQ_NOEU or DEPL.")],
+    components: Annotated[
+        list[str],
+        typer.Argument(help="Component, e.g. VMIS; several give their norm (DX DY DZ)."),
+    ],
+    group: Annotated[
+        list[str] | None, typer.Option("--group", "-g", help="Group (repeatable).")
+    ] = None,
+    step: Annotated[int | None, typer.Option(help="NUME_ORDRE (default: the last).")] = None,
+    as_json: JsonFlag = False,
+) -> None:
+    """Min and max of a component over the whole model and per group, with location."""
+    res, _tables = _open_results(path)
+    comp: str | tuple[str, ...] = components[0] if len(components) == 1 else tuple(components)
+    try:
+        with res:
+            found = res.extrema(field, comp, groups=group or [], nume_ordre=step)
+    except KeyError as exc:
+        typer.echo(f"results extrema: {exc.args[0]}", err=True)
+        raise typer.Exit(code=1) from exc
+    if as_json:
+        _echo_json([e.to_dict() for e in found])
+        return
+    for e in found:
+        where = e.group or "whole model"
+        typer.echo(f"{e.field} {e.label}, {where} (step {e.nume_ordre}, {e.count} values):")
+        for ext in (e.min, e.max):
+            if ext is None:
+                typer.echo(f"  {e.note}")
+                continue
+            xyz = ", ".join(f"{x:g}" for x in ext.xyz)
+            typer.echo(f"  {ext.kind} {_g(ext.value)} at {ext.entity} {ext.entity_id} ({xyz})")
+
+
+@results_app.command("reactions")
+def results_reactions(
+    path: RunPath,
+    group: Annotated[
+        list[str] | None, typer.Option("--group", "-g", help="Group (repeatable).")
+    ] = None,
+    as_json: JsonFlag = False,
+) -> None:
+    """Reaction sums: whole model and per group from REAC_NODA, and from printed tables."""
+    res, tables = _open_results(path)
+    with res:
+        summary = res.reactions(groups=group or [], tables=tables)
+    if as_json:
+        _echo_json(summary.to_dict())
+        return
+
+    def line(name: str, comps: dict[str, float]) -> str:
+        return f"{name}: " + ", ".join(f"{c} {_g(v)}" for c, v in comps.items())
+
+    if summary.total:
+        typer.echo(line(f"all supports ({summary.field})", summary.total))
+    for g in summary.per_group + summary.from_tables:
+        typer.echo(line(g.group or g.source, g.components))
+    for note in summary.notes:
+        typer.echo(f"note: {note}")
+
+
+@results_app.command("modal")
+def results_modal(path: RunPath, as_json: JsonFlag = False) -> None:
+    """Modal table: frequency, period, effective mass fractions and their cumulative sums."""
+    res, tables = _open_results(path)
+    with res:
+        table = res.modal(tables)
+    if as_json:
+        _echo_json(table.to_dict())
+        return
+    typer.echo(f"modal result {table.result}; total mass {_g(table.total_mass)}")
+
+    def pct(values: dict[str, float]) -> str:
+        return " ".join(
+            f"{100 * values[a]:5.1f}" if a in values else "    -" for a in ("DX", "DY", "DZ")
+        )
+
+    typer.echo("mode  frequency [Hz]  period [s]  effective mass % X Y Z  cumulative % X Y Z")
+    for m in table.modes:
+        typer.echo(
+            f"{m.nume_ordre:4d}  {m.frequency_hz:14.4f}  {_g(m.period_s):>10}  "
+            f"{pct(m.effective_mass_fraction):>22}  {pct(m.cumulative_fraction)}"
+        )
+    for note in table.notes:
+        typer.echo(f"note: {note}")
 
 
 app.add_typer(

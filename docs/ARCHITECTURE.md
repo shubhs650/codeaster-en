@@ -118,7 +118,7 @@ The `.mess` file is the solver's log. The parser produces a structured list of e
 
 ### 4.6 Results readers — `tools/codeaster_en/results/`
 
-Thin wrappers over `medcoupling` (pip wheels exist) with a `meshio` fallback: open `.rmed`, list results and fields, map French field names (`DEPL`, `SIEQ_NOEU`, `SIGM_ELNO`, `REAC_NODA`, `EFGE_ELNO`) and components (`DX`, `VMIS`, `SIXX`, `TRESCA`) to English labels via the glossary; extract per-group extrema; read `IMPR_TABLE` outputs (CSV/ASTER format) into dataframes. No plotting here; images are optional and come later via pyvista.
+A native MED reader over `h5py` (ADR-015; `medcoupling` cross-checks it in the tests, `meshio` is not used): `results.open(rmed)` lists results, fields, locations (nodes, element nodes, Gauss points, elements), components and steps (`NUME_ORDRE` and the `INST` or `FREQ` value) and the mesh groups; labels French field, component and table parameter names (`DEPL`, `SIEQ_NOEU`, `VMIS`, `MASS_EFFE_UN_DZ`) in English via the glossary, the French name always kept; gives per-group min and max of a component or of a vector norm with node or element ID and coordinates (`extrema`), reaction sums per group from `REAC_NODA` and from `POST_RELEVE_T` tables (`reactions`), and the modal table: frequency, period, generalized mass, effective mass and its fraction per direction with cumulative sums (`modal`, from a `RECU_TABLE` of the `CALC_MODES` result and the `POST_ELEM MASS_INER` total mass). `read_tables` reads `IMPR_TABLE` `TABLEAU` files (with or without `SEPARATEUR`) into plain rows. CLI: `caen results fields|extrema|reactions|modal`. No plotting here; images are optional and come later via pyvista.
 
 ### 4.7 English report generator — `tools/codeaster_en/report/`
 

@@ -46,6 +46,25 @@ MODES = CALC_MODES(
 
 IMPR_RESU(FORMAT="MED", UNITE=80, RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL"))
 
+# Modal parameters stored by CALC_MODES (bibfor/algeline/vpstor.F90), printed for the modal
+# table of the results reader and the report (task 4.5): frequency, generalized mass and the
+# effective masses per direction. RECU_TABLE with NOM_PARA as in astest zzzz399a.
+PARA = RECU_TABLE(
+    CO=MODES,
+    NOM_PARA=(
+        "FREQ",
+        "MASS_GENE",
+        "MASS_EFFE_DX",
+        "MASS_EFFE_DY",
+        "MASS_EFFE_DZ",
+        "MASS_EFFE_UN_DX",
+        "MASS_EFFE_UN_DY",
+        "MASS_EFFE_UN_DZ",
+    ),
+)
+
+IMPR_TABLE(TABLE=PARA, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=31)
+
 TEST_RESU(
     RESU=(
         _F(

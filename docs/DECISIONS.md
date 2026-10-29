@@ -196,6 +196,23 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 - Task 3.2 is: `caen translate messages --all --seed-only` (free), then the model run on the rest. The seed fills 3,130 messages: 3,221 match verbatim, 91 fail the placeholder or forbidden-synonym check (most use "cell" for *maille*). The model run needs the owner's API key and budget approval, or is done in session family by family through the replay path.
 - TRANSLATION-GUIDE §6 describes the tool as built.
 
+## ADR-015 — Results reader: native `h5py` MED reader; `medcoupling` as a test cross-check only
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 4.5)
+
+**Context.** ARCHITECTURE §4.6 and PLAN 4.5 asked for `medcoupling` first with a `meshio` fallback. In session: the `medcoupling` 9.15 wheel is 18 MB, a compiled SWIG module with its own C++ MED stack; reading groups and element fields through it needs per-level and per-type bookkeeping (`getGroupArr(level, ...)`, Gauss localizations) that hides the file layout the report must cite. `meshio` 5.3 reads our three `.rmed` files but flattens steps into names like `MODES___DEPL[0] - 52.3396`, does not keep component names, and keeps groups only as family tags. The MED layout that `IMPR_RESU` writes is small and stable (HDF5: `ENS_MAA`, `FAS`, `CHA`, `PROFILS`; no-interlace datasets), and `h5py` is already used by our fixture tools.
+
+**Decision.**
+1. `codeaster_en.results.med` reads MED with `h5py` directly: coordinates, node and element numbers, families to groups, fields with components and steps, values on nodes (`NOE`), per element or Gauss point (`MAI.<type>`) and at element nodes (`NOE.<type>`), with profiles. `numpy` and `h5py` become runtime dependencies of the package.
+2. `medcoupling` is a `dev` extra only: `tests/test_results.py` compares the native reader with it (coordinates, node groups, every nodal field value of the three fixtures) and uses it to write a synthetic element-node field. Tests skip those checks when it is not installed. `meshio` is not used.
+3. The modal table takes effective masses from a printed `RECU_TABLE` of the `CALC_MODES` result (they are not in the `.rmed`); the `modal` fixture now prints one (`tables/modal_parameters.csv`). Frequencies come from the `.rmed` step values (full precision) when they match the table.
+
+**Why.** One small reader we can test byte for byte against an independent library, with no compiled dependency for ClearFEA's worker, and with the file layout visible in the code that the report cites. The cross-check keeps the main risk (misreading the no-interlace layout) covered.
+
+**Consequences.**
+- ARCHITECTURE §4.6, REPORT-SPEC §6 and CLEARFEA-INTEGRATION §2 now describe the built API (`results.open`, `fields`, `extrema`, `reactions`, `modal`, `read_tables`).
+- Structured (`MED_STRUCTURE`) meshes, polygons/polyhedra and fields on faces/edges (`FAC`, `ARE`) are not read; code_aster does not write them for our scope. A new MED major version must be checked with the cross-check test.
+- `PLAN.md` 4.5 wording ("medcoupling first, meshio fallback") is superseded by this ADR.
+
 ---
 
 ## Template

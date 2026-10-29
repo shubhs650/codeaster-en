@@ -47,6 +47,8 @@ Four more jobs fail on purpose, so the `.mess` parser and the failure classifier
 | `shell_static` | `REAC_DZ_SUM` | 10,000 N | 10,000.000 N | 0 % |
 | `modal` | `F1`–`F6` | 52.22, 104.44, 327.26, 654.51, 916.33, 1485.22 Hz | 52.34, 104.43, 327.07, 646.99, 911.68, 1497.03 Hz | 0.01–1.15 % |
 
+Printed tables (`output/tables/`, `IMPR_TABLE` units in `run.export`): `reactions.csv` (`POST_RELEVE_T` resultant of `REAC_NODA` on the supports) in both static cases; in `modal`, `mass_inertia.csv` (`POST_ELEM MASS_INER`) and, since task 4.5, `modal_parameters.csv` (`RECU_TABLE` of the `CALC_MODES` result: `FREQ`, `MASS_GENE`, `MASS_EFFE_D*`, `MASS_EFFE_UN_D*`). The modal case was rerun for that table with the same image; its frequencies did not change. Its effective mass fractions in the bending planes (61.2/18.8/6.5 % in Z, 61.3/18.9 % in Y) agree with the Euler–Bernoulli cantilever (61.3/18.8/6.5 %, `hand_values.py`) within 1 %; `tests/test_results.py` checks them.
+
 Signs, confirmed by the first run: `REAC_NODA` is the support reaction, so the reaction sums carry the opposite sign of the applied load (+X for `solid_static`, +Z for `shell_static`); the sagging moment `MXX` of the plate is negative. No check uses `VALE_ABS` any more.
 
 `shell_static` sets `DEBUT(IGNORE_ALARM=("MODELISA8_14",))` without `ERREUR=_F(ALARME="EXCEPTION")`: the Gmsh point groups are POI1 cells, which the mesh check reports, and code_aster raises the alarm as an error before it looks at `IGNORE_ALARM`. The other two cases keep `ALARME="EXCEPTION"`. `tests/test_fixture_outputs.py` rejects any printed alarm in every case.

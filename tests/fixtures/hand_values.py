@@ -61,6 +61,25 @@ def cantilever_frequencies(
     return sorted(out)[:count]
 
 
+def cantilever_effective_mass_fraction(n: int, samples: int = 20001) -> float:
+    """Effective mass of bending mode n of a uniform clamped-free beam over its total mass.
+
+    Mode shape phi(x) = cosh(lx) - cos(lx) - s (sinh(lx) - sin(lx)), x in [0, 1], with
+    s = (cosh l + cos l) / (sinh l + sin l); fraction = (int phi)^2 / int phi^2 (uniform mass,
+    rigid-body motion transverse to the beam). Independent of the section and of the plane.
+    """
+    lam = CANTILEVER_ROOTS[n - 1]
+    x = np.linspace(0.0, 1.0, samples)
+    s = (math.cosh(lam) + math.cos(lam)) / (math.sinh(lam) + math.sin(lam))
+    phi = np.cosh(lam * x) - np.cos(lam * x) - s * (np.sinh(lam * x) - np.sin(lam * x))
+    dx = x[1] - x[0]
+
+    def integral(y: np.ndarray) -> float:  # trapezoidal rule (numpy < 2 has no trapezoid)
+        return float(dx * (y.sum() - 0.5 * (y[0] + y[-1])))
+
+    return integral(phi) ** 2 / integral(phi**2)
+
+
 def med_group_names(path: Path) -> set[str]:
     """Names of all groups (on cells or nodes) stored in a MED file."""
     names: set[str] = set()
@@ -185,6 +204,8 @@ def modal() -> dict[str, float]:
     out["next_bending"] = cantilever_frequencies(e, rho, length, b, h, 6)[5][0]
     out["axial_1"] = cantilever_axial_frequency(e, rho, length)
     out["mass"] = rho * length * b * h
+    for n in (1, 2, 3):
+        out[f"mass_fraction_bending_{n}"] = cantilever_effective_mass_fraction(n)
     return out
 
 
