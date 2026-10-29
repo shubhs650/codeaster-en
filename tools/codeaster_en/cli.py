@@ -1,8 +1,8 @@
 """``caen`` command-line interface.
 
-Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands) and
-``caen extract catalog|messages|astest-index|inventory``. The other groups are stubs that name
-the PLAN.md task which will fill them in.
+Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
+``caen extract catalog|messages|astest-index|inventory`` and ``caen translate command``. The
+other groups and commands are stubs that name the PLAN.md task which will fill them in.
 """
 
 from __future__ import annotations
@@ -17,6 +17,7 @@ from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
+from codeaster_en.translate import command as command_drafts
 from codeaster_en.validate import commands as commands_validator
 from codeaster_en.validate import glossary as glossary_validator
 from codeaster_en.validate import messages as messages_validator
@@ -142,10 +143,84 @@ def extract_inventory(
     typer.echo(f"extract inventory: updated {path}")
 
 
-app.add_typer(
-    _stub("translate", "2.2/3.1/5.2", "Glossary-locked LLM translation of commands and messages."),
-    name="translate",
+translate_app = typer.Typer(
+    help="Draft English command references; glossary-locked translation of messages and docs.",
+    no_args_is_help=True,
 )
+app.add_typer(translate_app, name="translate")
+
+
+@translate_app.command("command")
+def translate_command(
+    command: Annotated[
+        list[str] | None,
+        typer.Argument(help="Commands to draft, e.g. AFFE_MODELE."),
+    ] = None,
+    tier: Annotated[
+        str | None,
+        typer.Option(help="Draft every command of this docs/COMMAND-SET.md tier (e.g. 1)."),
+    ] = None,
+    out: Annotated[
+        Path | None,
+        typer.Option(help="Output directory (default: en/commands in the repo root)."),
+    ] = None,
+    force: Annotated[
+        bool,
+        typer.Option(help="Overwrite references whose status is not 'machine'."),
+    ] = False,
+    all_keywords: Annotated[
+        bool,
+        typer.Option(help="Expand every factor keyword, not only the key ones."),
+    ] = False,
+    list_untranslated: Annotated[
+        bool,
+        typer.Option(
+            help="Print the catalog fr= strings with no en/catalog-help.yaml entry; write nothing."
+        ),
+    ] = False,
+) -> None:
+    """Write a first-draft en/commands/<CMD>.md (status: machine) from the extracted .json."""
+    root = _repo_root()
+    try:
+        src = command_drafts.load_sources(root)
+        names = command_drafts.resolve(src, command, tier)
+        if list_untranslated:
+            missing = command_drafts.untranslated(src, names, all_keywords)
+            for fr in missing:
+                typer.echo(fr)
+            typer.echo(f"translate command: {len(missing)} untranslated string(s)", err=True)
+            return
+        outcomes = command_drafts.write(
+            src, names, out or root / COMMANDS_RELPATH, force=force, all_keywords=all_keywords
+        )
+    except (OSError, ValueError, command_drafts.DraftError) as exc:
+        typer.echo(f"translate command: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    for outcome in outcomes:
+        if outcome.action == "skipped":
+            typer.echo(f"translate command: skipped {outcome.command}: {outcome.reason}", err=True)
+    counts = {a: sum(o.action == a for o in outcomes) for a in ("written", "unchanged", "skipped")}
+    typer.echo(
+        "translate command: "
+        + ", ".join(f"{n} {action}" for action, n in counts.items())
+        + f" ({len(outcomes)} command(s))"
+    )
+
+
+@translate_app.command("messages")
+def translate_messages() -> None:
+    """Glossary-locked batch translation of message families [not implemented yet: task 3.1]."""
+    typer.echo("caen translate messages: not implemented yet (PLAN.md task 3.1).", err=True)
+    raise typer.Exit(code=2)
+
+
+@translate_app.command("doc")
+def translate_doc() -> None:
+    """Chunked translation of a U4 document [not implemented yet: task 5.2]."""
+    typer.echo("caen translate doc: not implemented yet (PLAN.md task 5.2).", err=True)
+    raise typer.Exit(code=2)
+
+
 app.add_typer(_stub("mess", "4.3", "Parse a .mess log and render it in English."), name="mess")
 app.add_typer(
     _stub("report", "4.6", "Generate an English engineering report from a job directory."),
