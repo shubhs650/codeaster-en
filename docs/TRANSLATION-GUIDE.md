@@ -112,7 +112,26 @@ reviewed_by:
 
 ## 6. Batch translation prompt (for `caen translate`)
 
-The prompt sent per batch contains, in order: role and rules (this file §2–§3 condensed), the relevant glossary slice (entries whose `fr` appears in the batch, plus all `kind: term`), the items as JSON (`id`, `fr`, `placeholders`), and the required output schema (`id`, `en`, `severity_hint`, `glossary_additions[]`). Temperature 0. The tool rejects any item whose placeholders differ and re-asks for only those. Glossary additions are written as `proposed`, never applied automatically to other items in the same run.
+`caen translate messages` (task 3.1, ADR-014) builds every request the same way:
+
+- **System prompt** (identical for every batch, cached): role and rules (§2–§3 condensed) and every glossary entry of `kind: term` or `abbrev`, with its forbidden synonyms.
+- **User prompt**: the family name, the `command`/`keyword`/`value`/`concept` entries whose French appears in the batch, and the items as JSON (`id`, `fr`, `placeholders`, and `upstream_en` when the 2016 `.po` has the same French after whitespace normalization; it is a hint, labelled as dated and literal).
+- **Output schema**: `translations[]` (`id`, `en`) and `glossary_additions[]` (`fr`, `en`, `kind`, `note`), enforced with structured output.
+
+The tool rejects any item whose placeholder set differs from the French, or that uses a forbidden synonym of a glossary term present in the French, and asks again for only those items with the problems listed. Glossary additions are written to `en/glossary.yaml` as `proposed`, never applied automatically to other items in the same run. The severity hint is computed from the French wording (§3.5), not asked from the model.
+
+Usage:
+
+```bash
+caen translate messages -f MODELISA8 --dry-run            # batches, tokens, cost; writes nothing
+caen translate messages --all --seed-only                 # verbatim .po matches only, free
+caen translate messages -f MODELISA8                      # Claude API (needs credentials; spends credit)
+caen translate messages -f MODELISA8 --export-requests req.jsonl   # in-session path, step 1
+caen translate messages -f MODELISA8 --responses ans.jsonl \
+    --method assisted --source session:<task>             # step 2: import through the same checks
+```
+
+A run writes after every batch and skips translated messages, so it can be stopped and restarted. `--force` redoes translated messages but never `reviewed` ones.
 
 ## 7. Review checklist (engineer)
 

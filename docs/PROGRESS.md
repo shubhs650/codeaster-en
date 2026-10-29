@@ -14,6 +14,34 @@ Needs owner: …
 
 ---
 
+## 2026-10-29 — 3.1 message translation tool — agent
+Done: `caen translate messages` (`tools/codeaster_en/translate/messages.py`, `po.py`): optional
+seed from upstream's `i18n/en-US/aster_messages.po` (verbatim `msgid` only, same checks as a
+model answer), batched requests with the rules and `term`/`abbrev` glossary in a cached system
+prompt and the matching `command`/`keyword`/`value`/`concept` entries per batch, JSON-schema
+output, placeholder and forbidden-synonym checks with re-asks of failed items only, severity
+hint from the French wording, dry-run token/cost estimate, atomic write per batch (resumable),
+`--force` that never touches `reviewed`. Backends: Claude API (`claude-opus-5-5`, effort
+`medium`, server-side refusal fallback; optional extra `tools[llm]`) and a JSON Lines replay
+(`--export-requests` / `--responses`) for in-session work and tests. End-to-end family:
+`MODELISA8`, 43/43 messages translated in session through export/import, 0 placeholder or
+glossary failures, `method: assisted`, `translation_source: session:task-3.1`; 2 proposed
+glossary entries (`mot-clé facteur`, `fibre`). `tests/test_translate_messages.py` (30 tests,
+no network) incl. a check that `MODELISA8` is complete and valid. TRANSLATION-GUIDE §6
+rewritten to match. Dry run, all 277 families: 506 requests, ~2.5 M input / ~0.4 M output
+tokens, ~$17 with Opus 5.5 (~$12 after the seed); thinking tokens not included.
+Open: task 3.2 (bulk). The seed fills 3,130 messages for free (3,221 verbatim matches, 91
+rejected by the checks, mostly "cell" for *maille*); the remaining ~3,700 need either the
+owner's API key and budget approval, or in-session translation family by family via the
+replay path. The Claude backend has not been called for real (no key in session); its
+request shape is unit-tested against the installed `anthropic` 2.3.0 signature.
+Decisions: ADR-014. The guide's "temperature 0" is dropped (sampling parameters are removed
+from the current API); the schema and the checks give determinism where it matters.
+`MODELISA8_53` French looks truncated ("n3 colinéaires"), noted in the file. A stray remote
+branch `task/3-1-translate-messages` (same commit, pushed by mistake before switching to the
+session branch) could not be deleted from the sandbox.
+Needs owner: nothing blocking; review queue entry added. Bulk model run in 3.2 needs budget.
+
 ## 2026-10-29 — 2.5 fields and components guide — agent
 Done: `en/guide/fields.md` (`status: assisted`): how a result is organized (result → step →
 field → component), field-name grammar (quantity prefixes, location suffixes), how `NOEU` is

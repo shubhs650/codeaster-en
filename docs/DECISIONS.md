@@ -174,6 +174,30 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 
 ---
 
+## ADR-014 — Message translation tool: seed, cached glossary prompt, strict checks, replay backend
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29)
+
+**Context.** PLAN.md task 3.1 asks for `caen translate messages --family <F>`: batched LLM translation with the glossary in the prompt, placeholder validation, a severity hint from the French wording, a dry-run cost estimate, resumable runs, `method: machine`. ADR-004 says to seed from upstream's 2016 `.po` where the French matches exactly. A run against the Claude API spends the owner's budget, which is a stop condition (ADR-010), and the session has no API key; the acceptance criterion still asks for one family translated end-to-end.
+
+**Decision.**
+1. One tool, `codeaster_en/translate/messages.py`, three steps per family: optional `.po` seed (verbatim `msgid` only, never the 87 whitespace-normalized matches; `method: machine`, `translation_source: upstream:i18n/en-US/aster_messages.po`), model translation of what is left (`en` null or `stale`), atomic write after every batch so a rerun resumes.
+2. Prompt (TRANSLATION-GUIDE §6): rules plus every `term`/`abbrev` glossary entry in the system prompt, which is the same for every request and carries `cache_control`; the `command`/`keyword`/`value`/`concept` entries whose French occurs in the batch go in the user prompt with the items (`id`, `fr`, `placeholders`, and the `.po` English as a labelled `upstream_en` hint when the French matches after whitespace normalization). Output is forced by a JSON schema (`output_config.format`).
+3. Every answer, model or `.po`, passes the same check: identical placeholder set (`placeholders.compare`) and no forbidden synonym (`aliases_en`) of a glossary entry whose French occurs in that message. Failures are asked again alone with the problem listed (default 2 re-asks), then left null and reported with a non-zero exit code.
+4. Severity hint is rule-based from the French (TRANSLATION-GUIDE §3.5), not asked from the model: it is deterministic, free, and testable.
+5. Claude backend: `claude-opus-5-5`, effort `medium`, server-side refusal fallback (`fallbacks: "default"`), no `temperature` (removed from the current API; the guide's "temperature 0" is replaced by the schema and the checks). `anthropic` is an optional extra (`tools[llm]`); CI never needs it.
+6. Replay backend: answers from a JSON Lines file. `--export-requests` writes the exact requests; an agent in session (or a person) answers them, `--responses` imports them through the same checks. In-session work is recorded `method: assisted`, `translation_source: session:<task>`.
+7. Glossary additions from a reply are appended to `en/glossary.yaml` as `status: proposed` (with `source` when the French occurs literally in the family's upstream file), never applied to other items in the same run.
+8. `--force` never touches `reviewed` messages, and the `.po` seed never replaces an `assisted` translation.
+
+**Why.** The seed is free and ADR-004 asks for it; checking it like a model answer stops the 2016 file's glossary conflicts from entering through the back door. Putting the stable part of the glossary in a cached system prompt keeps a bulk run cheap (dry run for all 277 families: about 506 requests, about $17 with Opus 5.5 before seeding, about $12 after, thinking tokens excluded). The replay path makes the tool usable without the owner's key, and the same validation path covers both.
+
+**Consequences.**
+- Task 3.1's end-to-end family is `MODELISA8` (43 messages; `MODELISA8_14` fires in the `shell_static` fixture), translated in session through `--export-requests`/`--responses`, `method: assisted`.
+- Task 3.2 is: `caen translate messages --all --seed-only` (free), then the model run on the rest. The seed fills 3,130 messages: 3,221 match verbatim, 91 fail the placeholder or forbidden-synonym check (most use "cell" for *maille*). The model run needs the owner's API key and budget approval, or is done in session family by family through the replay path.
+- TRANSLATION-GUIDE §6 describes the tool as built.
+
+---
+
 ## Template
 
 ## ADR-NNN — <title>
