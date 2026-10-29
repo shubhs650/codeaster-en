@@ -323,3 +323,19 @@ Format: ID, date, status, decision, why, consequences. Append; never rewrite his
 5. **No publishing** in a session: CI job `package` (`scripts/check-wheel.sh`) builds sdist and wheel, installs the wheel in a clean venv, runs it from outside the checkout (report of `solid_static` equals the golden) and keeps `dist/` as a run artifact. PyPI (or a GitHub release) is an owner step, listed in OWNER-REVIEW-QUEUE.
 
 **Consequences.** A data edit in `en/` needs no packaging step in the repo; a wheel freezes it. `tools/setup.py` must be updated when the runtime starts reading another file (the test `test_shipped_data_covers_runtime_reads` guards the current set). `LICENSE` (GPL-3.0 text, copied from upstream's) and `NOTICE.md` now exist at the root, as LICENSING.md asked. The `License ::` classifier is not set: setuptools ≥ 77 refuses it next to the SPDX `license` expression, which is the newer equivalent.
+
+## ADR-021 — ClearFEA adapter contract: `codeaster_en.job`, free pre-run check, event-level tailing, no MPI yet
+**Date:** 2026-10-29 · **Status:** accepted (agent, 2026-10-29, task 6.3; owner sign-off pending per PLAN 6.3)
+
+**Context.** PLAN 6.3 asks for `docs/CLEARFEA-INTEGRATION.md` with concrete signatures, the container contract, job layout, the failure → billing mapping and a worked example. The draft named modules that were never built (`codeaster_en.run`, `catalog.validate_comm`, `version`) and left three items open (§8). The `.export` logical units are a coupling between the builder's defaults and the job layout, and the spec's billing policy relies on "pre-run checks" that did not exist.
+
+**Decision.**
+1. **New module `codeaster_en.job`** (no new data): `export_text` / `write_export` write `run.export` for the §3 layout (units 1, 20, 6, 8, tables 30–79, 80; byte-identical to the fixtures'), `table_units` numbers table files, and `precheck(comm_text, mesh)` returns `Problem`s for a command file that is not Python and for literal `GROUP_MA*`/`GROUP_NO*` names absent from the `.med` and not created by `DEFI_GROUP`. It catches two of the four broken fixtures (`broken_python_syntax`, `broken_missing_group`) with no solver.
+2. **Running stays with ClearFEA.** No `run` helper: the call is one `run_aster run.export` inside ClearFEA's container with ClearFEA's limits; a wrapper here would only hide the timeout/cancellation policy ClearFEA owns. `scripts/run-fixture.sh` is the reference.
+3. **No `catalog.validate_comm` for arbitrary `.comm` files.** Builder output is checked call by call already; a full checker for bring-your-own files would need the upstream `code_aster.Cata` checker (not in the wheel) or a second implementation of it. Such files fail fast at run time with `SUPERVIS_4` (`user-model`).
+4. **Open items closed:** live tail is per event (`mess.stream` + `render_event`); `.comm` + `run_aster` stays (ADR-008); MPI is out until a fixture runs with `mpi_nbcpu > 1`.
+5. **Worked example is executable:** the fenced block between `worked-example` markers in §9 runs in `tests/test_clearfea_example.py`, so the spec cannot drift from the code.
+
+**Why.** ClearFEA should code against functions that exist and are tested; the units and the free group check are the two pieces of adapter logic that touch French and solver conventions, so they belong here (§7).
+
+**Consequences.** Signature changes to anything in §2 are API changes for ClearFEA (§6). The group check does not follow variables or statement order; those faults still reach the solver and are classified from its log. A priority tier with MPI needs a new fixture and an `export_text` parameter.
