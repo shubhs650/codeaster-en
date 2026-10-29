@@ -8,6 +8,7 @@ byte for byte. The hand-written checks pin facts read directly from the upstream
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 from pathlib import Path
 
@@ -198,6 +199,9 @@ def test_cli_writes_selected_family_and_keeps_upstream_clean(
     if not (UPSTREAM / messages.MESSAGES_RELDIR).is_dir():
         pytest.skip("upstream/ submodule not checked out")
     monkeypatch.chdir(REPO)
+    # Start from the committed file: re-extraction keeps its translations, so the result must
+    # be byte-identical whether or not the family has English yet.
+    shutil.copy(MESSAGES / "CATAMESS.en.json", tmp_path / "CATAMESS.en.json")
     result = CliRunner().invoke(app, ["extract", "messages", "catamess", "--out", str(tmp_path)])
     assert result.exit_code == 0, result.output
     assert [p.name for p in tmp_path.iterdir()] == ["CATAMESS.en.json"]

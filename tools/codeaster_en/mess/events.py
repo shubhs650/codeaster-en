@@ -37,7 +37,7 @@ from typing import Any, ClassVar
 SEVERITY_LABELS = {
     "I": "information",
     "INFO": "information",
-    "A": "alarm",
+    "A": "warning",  # glossary: alarme -> warning
     "E": "error",
     "F": "fatal error",
     "S": "fatal error (base saved)",
