@@ -60,12 +60,13 @@ tables = results.read_table_dir(job / "output/tables")
 r.fields()                                               # [FieldInfo(result="RESU", field="SIEQ_NOEU", label, locations, components, steps), ...]
 r.extrema("SIEQ_NOEU", "VMIS", groups=["BODY","PLATE"])  # [GroupExtrema(group, min, max: Extremum(value, entity, entity_id, xyz)), ...] whole model first
 r.extrema("DEPL", ("DX","DY","DZ"))                      # norm of several components (max |U|)
-r.reactions(groups=["FIXED"], tables=tables)             # ReactionSummary(total, per_group, from_tables); applied load + balance: report (4.6)
+r.reactions(groups=["FIXED"], tables=tables)             # ReactionSummary(total, per_group, from_tables); applied load + balance: RunModel.reactions (4.6)
 r.modal(tables)                                          # ModalTable(modes[frequency_hz, period_s, effective_mass_fraction, cumulative_fraction], total_mass)
 
 # --- report ---
-report.build(workdir, config=report.Config(sections=..., title_block=..., logo=..., images=False), out="report")
-# → report.md, report.html, report.pdf
+model = report.collect(workdir)                           # task 4.6 (built): RunModel, JSON-ready (.to_json())
+report.build(workdir, config=report.Config(sections=..., title_block=..., logo=...), out=workdir / "report")
+# → report.md, report.html, report.pdf (WeasyPrint extra), run_model.json; also `caen report <job>`
 ```
 
 All public objects are plain dataclasses, JSON-serialisable (`.to_dict()`), so ClearFEA can store them in D1/R2 and render in the browser without importing the package client-side.

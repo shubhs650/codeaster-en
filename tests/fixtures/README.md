@@ -65,3 +65,5 @@ The committed meshes were written by Gmsh 4.15.2 (MED 4.1). Another Gmsh version
 ## Checks without the solver
 
 `tests/test_fixtures.py` validates `run.json` against `docs/schemas/run.schema.json`, checks the `run.export` file list and logical units, checks that every group named in `run.comm` exists in `mesh.med`, and runs each `run.comm` through the pinned catalog's own syntax checker (`code_aster.Cata`, imported from `upstream/` without the solver). These tests cannot catch runtime behaviour: element and mesh compatibility, solver convergence, or the actual `TEST_RESU` verdicts. `tests/test_fixture_outputs.py` covers those from the committed outputs.
+
+The report generator (task 4.6) keeps golden files of every fixture's report under `tests/golden/report/`. A PR that regenerates `output/` must also run `UPDATE_GOLDEN=1 pytest tests/test_report.py` and commit the changed goldens (timings and memory in the logs change on every run).
