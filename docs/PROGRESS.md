@@ -19,8 +19,10 @@ Done: 3.2a (PR #26): free upstream seed, 3,113 messages from upstream's 2016
 `i18n/en-US/aster_messages.po` (`method: machine`). 3.2b: 992 messages translated in session
 (`method: assisted`, `translation_source: session:task-3.2`, same `check()` as 3.1) for the
 priority families: SUPERVIS*, UTILITAI*, MODELISA*, CALCULEL*, MECANONLINE*, ALGELINE*,
-FACTOR*, POSTRELE. 4,204 of 6,890 messages have English. No API calls, no token cost.
-Open: the remaining 2,686 messages (3.2c onward).
+FACTOR*, POSTRELE. 3.2c: 634 more in session for CHARGES*, ELEMENTS*, ELEMENT, MATERIAL*,
+MESH*, MED*, RESULT*, CHAMPS, COMPOR*. 4,838 of 6,890 messages have English. No API calls,
+no token cost.
+Open: the remaining 2,052 messages (3.2d onward).
 Decisions: none. Wording choices: "Ce message est un message d'erreur développeur. Contactez
 le support technique." = "This is a developer error message. Contact technical support.";
 *noeud sommet* = "corner node" (the glossary forbids "vertex"); *variable de commande* =

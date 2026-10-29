@@ -36,7 +36,10 @@
    "source": {
     "line": 32
    },
-   "en": null
+   "en": "\n  -> The number of Gauss points differs between the MED file and Aster:\n      - number of Gauss points in the MED file: %(i1)d\n      - number of Gauss points defined in Aster: %(i2)d\n\n     This part of the field is not read.\n\n  -> Advice:\n      - Choose finite elements that are compatible between Aster and the third-party code\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "3": {
    "id": "MED_3",
@@ -101,7 +104,10 @@
    "source": {
     "line": 68
    },
-   "en": null
+   "en": "\n  -> Group name \"%(k1)s\" is too long. It is ignored in the mesh\n     used by the computation.\n\n  -> Advice:\n     To use this group in the computation, rename it with a name of at most\n     24 characters.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "8": {
    "id": "MED_8",
@@ -130,7 +136,10 @@
    "source": {
     "line": 83
    },
-   "en": null
+   "en": "\nCannot write in MED format %(i1)d.%(i2)d.%(i3)d.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "10": {
    "id": "MED_10",
@@ -155,7 +164,10 @@
    "source": {
     "line": 93
    },
-   "en": null
+   "en": "\nWriting to '%(k1)s' is being attempted.\nTo write results in MED format to a single file, an absolute path\nto the file must be given (it must start with '/').\n\nRisk & advice: use DEFI_FICHIER to associate the logical unit with an absolute path.\n    ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "12": {
    "id": "MED_12",
@@ -166,7 +178,10 @@
    "source": {
     "line": 102
    },
-   "en": null
+   "en": "\nYou asked to read a MED field whose time step and iteration numbers\nare not equal. This is not allowed in LIRE_RESU.\n\nAdvice: use %(k1)s.\n    ",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "18": {
    "id": "MED_18",
@@ -175,7 +190,10 @@
    "source": {
     "line": 110
    },
-   "en": null
+   "en": "\n  You are trying to partition the mesh while the computation is sequential.\n  Partitioning is turned off.\n  -> Advice:\n     To remove this warning, use keyword SANS in PARTITIONNEUR\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "20": {
    "id": "MED_20",
@@ -187,7 +205,10 @@
    "source": {
     "line": 118
    },
-   "en": null
+   "en": "\n  The mesh partitioner is compatible only with MED version >= %(k1)s. The MED version of the mesh used is %(k2)s, hence the incompatibility.\n\n  -> Advice:\n     Convert your mesh to a newer version.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "24": {
    "id": "MED_24",
@@ -266,7 +287,10 @@
    "source": {
     "line": 155
    },
-   "en": null
+   "en": "\n  -> Your model seems to be made of several modeling types; the components\n      of %(k1)s that do not exist on part of the model were\n      set to zero.\n\n     In some cases the MED file produced can become large. In that\n     case, using keyword NOM_CMP is recommended.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "31": {
    "id": "MED_31",
@@ -277,7 +301,10 @@
    "source": {
     "line": 165
    },
-   "en": null
+   "en": "\n  -> This field already exists in the MED file with a different number of\n     components at an earlier time step. It cannot be created again.\n\n     MED name of the field: \"%(k1)s\"\n\n  -> Risk & advice:\n     A field whose number of components varies over time\n     cannot be written. You have several options:\n     - to get a field with the same components\n     at each time step, give after keyword NOM_CMP the names\n     of the components common to the different time steps.\n     - to write a field with all the Aster components\n     it contains, use several IMPR_RESU and\n     give a suitable list of time steps for each write.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "32": {
    "id": "MED_32",
@@ -360,7 +387,10 @@
    "source": {
     "line": 215
    },
-   "en": null
+   "en": "\n  -> Catalog - Fortran inconsistency\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "39": {
    "id": "MED_39",
@@ -369,7 +399,10 @@
    "source": {
     "line": 222
    },
-   "en": null
+   "en": "\n  -> Catalog - Fortran inconsistency\nThis is a developer error message.\nContact technical support.\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "40": {
    "id": "MED_40",
@@ -395,7 +428,10 @@
    "source": {
     "line": 234
    },
-   "en": null
+   "en": "\nError reading the mesh.\n\nException:\n%(k1)s\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "42": {
    "id": "MED_42",
@@ -565,7 +601,10 @@
    "source": {
     "line": 308
    },
-   "en": null
+   "en": "\n  -> The mesh given to the command is not consistent with the type of result\n     data structure you want to produce.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "55": {
    "id": "MED_55",
@@ -591,7 +630,10 @@
    "source": {
     "line": 319
    },
-   "en": null
+   "en": "\n     The physics %(k1)s of your model is not compatible with a\n     result data structure of type %(k2)s.\n  -> Risk & advice:\n     Give LIRE_RESU another model or change TYPE_RESU.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "57": {
    "id": "MED_57",
@@ -630,7 +672,10 @@
    "source": {
     "line": 347
    },
-   "en": null
+   "en": "\n     The elements of the given model are supported by geometric\n     elements that are not in the MED file.\n     For example, there are %(i1)d elements of type %(k1)s in the MED file,\n     while the model contains %(i2)d.\n  -> Risk & advice:\n     Give a model whose mesh matches the one in\n     the MED file.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "60": {
    "id": "MED_60",
@@ -655,7 +700,10 @@
    "source": {
     "line": 363
    },
-   "en": null
+   "en": "\n     The mesh in the MED file contains more elements\n     than the mesh given as input to the command.\n     For example, there are %(i1)d elements of type %(k1)s in the MED\n     mesh, while the Aster mesh contains only %(i2)d!\n  -> Risk & advice:\n     Check that the given mesh is not the result of a restriction,\n     or whether one of the meshes is quadratic and the other linear.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "62": {
    "id": "MED_62",
@@ -917,7 +965,10 @@
    "source": {
     "line": 477
    },
-   "en": null
+   "en": "\n  Field %(k1)s does not lie on the element group for which MED output\n  is requested.\n\n  Nothing is written for this field.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "83": {
    "id": "MED_83",
@@ -930,7 +981,10 @@
    "source": {
     "line": 485
    },
-   "en": null
+   "en": "\nThe number of values read from the MED file for field  %(k1)s differs from the\n number of values actually assigned in the field of the result\n data structure:\n  - values read from the file          : %(i1)d\n  - values not assigned in the field   : %(i2)d\n\nRisks:\n  Either the model is not suited to the field you want to read, and you may\n   get wrong results. Or the model is a mix of modeling types\n   that do not carry the same components on the different elements of the mesh, and\n   this warning is not relevant.\n\nAdvice:\n  Check the consistency of the model and the MED file.\n",
+   "method": "assisted",
+   "severity_hint": "warning",
+   "translation_source": "session:task-3.2"
   },
   "84": {
    "id": "MED_84",
@@ -939,7 +993,10 @@
    "source": {
     "line": 503
    },
-   "en": null
+   "en": "\n  The field read is not of the right type. A real field is expected\n  but the field in the MED file is not of that type.\n\n  This field cannot be read.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "85": {
    "id": "MED_85",
@@ -969,7 +1026,10 @@
    "source": {
     "line": 516
    },
-   "en": null
+   "en": "\n  -> field to read:  %(k1)s type  %(i1)d type  %(i2)d\n     requested time:  %(r1)f\n     --> step index:  %(i3)d\n     --> time step number:  %(i4)d\nThis is a developer error message.\nContact technical support.\n\n",
+   "method": "assisted",
+   "severity_hint": "error",
+   "translation_source": "session:task-3.2"
   },
   "87": {
    "id": "MED_87",
@@ -981,7 +1041,10 @@
    "source": {
     "line": 527
    },
-   "en": null
+   "en": "\n  Step index %(i1)d that you gave is not\n  in the list of step indices of the MED result.\n  Consequence: the corresponding field is not in the\n  result data structure %(k1)s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "88": {
    "id": "MED_88",
@@ -1062,7 +1125,10 @@
    "source": {
     "line": 564
    },
-   "en": null
+   "en": "\n     MED write of  %(k1)s finished in %(r1)f s\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "94": {
    "id": "MED_94",
@@ -1115,7 +1181,10 @@
    "source": {
     "line": 594
    },
-   "en": null
+   "en": "\n  -> MED file:  %(k1)s, Field:  %(k2)s, Requested time:  %(r1)f\n     - Type:  %(i1)d\n     - Type:  %(i2)d\n\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   },
   "98": {
    "id": "MED_98",
@@ -1141,7 +1210,10 @@
    "source": {
     "line": 607
    },
-   "en": null
+   "en": "\n  The number of components to write is too large for field %(k1)s.\n  The MED format accepts at most 200 components in a field.\n\n  The field is therefore not written in MED format.\n",
+   "method": "assisted",
+   "severity_hint": "info",
+   "translation_source": "session:task-3.2"
   }
  }
 }
