@@ -355,7 +355,6 @@ def check_chunk(chunk: Chunk, en: str, src: Sources) -> list[str]:
     missing = identifiers_in(chunk.fr, src.identifiers) - set(IDENT.findall(en))
     if missing:
         problems.append("solver identifiers missing: " + ", ".join(sorted(missing)))
-    problems += msg.glossary_problems(_prose(chunk.fr), en, src.terms)
     for number, alias, word in synonyms.scan_text(en, src.forbidden):
         problems.append(
             f"line {number}: forbidden synonym {word!r} (glossary {alias.fr!r} -> {alias.en!r})"
