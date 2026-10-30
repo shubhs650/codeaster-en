@@ -16,7 +16,8 @@ MODELISATIONS = GUIDE / "modelisations.md"
 PLAN_VALUES = {"3D", "3D_SI", "DKT", "DST", "COQUE_3D", "C_PLAN", "D_PLAN", "AXIS", "POU_D_T"}
 
 # `path:line` or `path:line`, `:line2` inside a code span; paths start at the repo root.
-_CITATION = re.compile(r"`((?:upstream|tests|en|docs)/[^`:\s]+?)(?::(\d+))?`")
+# Patterns such as `en/messages/<FAMILY>.en.json` are not citations.
+_CITATION = re.compile(r"`((?:upstream|tests|en|docs)/[^`:\s<]+?)(?::(\d+))?`")
 _EXTRA_LINES = re.compile(r"`:(\d+)`")
 
 needs_upstream = pytest.mark.skipif(
@@ -175,3 +176,149 @@ def test_fields_summary_lines_point_at_field_catalog() -> None:
         assert match, row
         name, line = match.group(1), int(match.group(2))
         assert lines[line - 1].strip().startswith(f'"{name}"'), (name, line)
+
+
+# --- task 5.4: engineers' guide ---------------------------------------------------------------
+
+ENGINEERS_GUIDE = (
+    "README.md",
+    "concepts.md",
+    "walkthrough-solid-static.md",
+    "walkthrough-shell-static.md",
+    "walkthrough-modal.md",
+    "reading-logs.md",
+    "reading-results.md",
+    "faq.md",
+)
+# `<!-- example: <path> -->` before a fenced block: the block is that file, byte for byte.
+# `<!-- example-study: <path> -->`: the block is the study form of that fixture command file
+# (same commands and keywords, except DEBUT and the TEST_RESU checks).
+_EXAMPLE = re.compile(r"<!-- (example|example-study): (\S+) -->\n```\w*\n(.*?)```", re.DOTALL)
+_LINK = re.compile(r"\]\(([^)#\s]+\.md)(?:#([^)\s]+))?\)")
+
+
+def _headings(text: str) -> list[str]:
+    """ATX heading lines outside fenced code blocks."""
+    found, fenced = [], False
+    for line in text.splitlines():
+        if line.lstrip().startswith("```"):
+            fenced = not fenced
+        elif not fenced and re.match(r"#{1,6} ", line):
+            found.append(line)
+    return found
+
+
+def _examples() -> list[tuple[str, str, str, str]]:
+    found = []
+    for name in ENGINEERS_GUIDE:
+        for kind, path, body in _EXAMPLE.findall((GUIDE / name).read_text(encoding="utf-8")):
+            found.append((name, kind, path, body))
+    return found
+
+
+def test_engineers_guide_pages_exist() -> None:
+    for name in ENGINEERS_GUIDE:
+        text = (GUIDE / name).read_text(encoding="utf-8")
+        assert text.startswith("---\n"), name
+        assert sum(1 for line in _headings(text) if line.startswith("# ")) == 1, name
+    # The three walkthroughs carry the fixture files; the solid one is the full study.
+    kinds = {(name, kind) for name, kind, _, _ in _examples()}
+    assert ("walkthrough-solid-static.md", "example-study") in kinds
+    assert ("walkthrough-shell-static.md", "example") in kinds
+    assert ("walkthrough-modal.md", "example") in kinds
+
+
+@pytest.mark.parametrize("example", _examples(), ids=lambda e: f"{e[0]}:{e[2]}")
+def test_guide_examples_match_fixtures(example: tuple[str, str, str, str]) -> None:
+    _, kind, path, body = example
+    source = (REPO / path).read_text(encoding="utf-8")
+    if kind == "example":
+        assert body == source
+        return
+
+    def calls(text: str) -> list[str]:
+        """Each top-level command call, as its AST dump, minus DEBUT's keywords and TEST_RESU."""
+        out = []
+        for node in __import__("ast").parse(text).body:
+            value = getattr(node, "value", None)
+            if not isinstance(value, __import__("ast").Call):
+                continue
+            name = getattr(value.func, "id", "")
+            if name == "TEST_RESU":
+                continue
+            if name == "DEBUT":
+                value.keywords = []
+            out.append(__import__("ast").dump(node))
+        return out
+
+    assert calls(body) == calls(source)
+    assert "CODE=" not in body and "TEST_RESU" not in body
+
+
+def _catalog_namespace() -> dict:
+    import sys
+
+    sys.dont_write_bytecode = True  # never write into upstream/
+    sys.path.insert(0, str(UPSTREAM))
+    try:
+        from code_aster.Cata.Commands import commandStore
+    finally:
+        sys.path.remove(str(UPSTREAM))
+    return dict(commandStore)
+
+
+@needs_upstream
+def test_guide_study_comm_passes_catalog_check() -> None:
+    """The walkthrough's study command file runs through the pinned catalog's syntax checker."""
+    pytest.importorskip("numpy")
+    for _, kind, _, body in _examples():
+        if kind == "example-study":
+            namespace = _catalog_namespace() | {"_F": dict}
+            exec(compile(body, "walkthrough.comm", "exec"), namespace)
+
+
+def _slug(heading: str) -> str:
+    """GitHub's anchor for a Markdown heading."""
+    text = heading.strip().lower().replace("`", "")
+    text = re.sub(r"[^\w\- ]", "", text)
+    return text.replace(" ", "-")
+
+
+def test_guide_links_resolve() -> None:
+    """Relative links between guide pages and to command references point at real files and
+    headings."""
+    problems = []
+    for name in ENGINEERS_GUIDE:
+        text = (GUIDE / name).read_text(encoding="utf-8")
+        for target, anchor in _LINK.findall(text):
+            if target.startswith("http"):
+                continue
+            path = (GUIDE / target).resolve()
+            if not path.is_file():
+                problems.append(f"{name}: {target} does not exist")
+                continue
+            if anchor:
+                slugs = {_slug(h.lstrip("#")) for h in _headings(path.read_text(encoding="utf-8"))}
+                if anchor not in slugs:
+                    problems.append(f"{name}: {target}#{anchor} has no such heading")
+    assert not problems, "\n".join(problems)
+
+
+def test_faq_entries_are_seen_in_fixture_logs() -> None:
+    """Every message ID the FAQ table lists was printed by a committed fixture log, or is
+    recorded in the fixture notes as seen on a first run."""
+    text = (GUIDE / "faq.md").read_text(encoding="utf-8")
+    ids = re.findall(r"^\| \[`([A-Z0-9]+_\d+)`\]", text, re.MULTILINE)
+    assert len(ids) >= 7
+    logs = "".join(
+        p.read_text(encoding="utf-8", errors="replace")
+        for p in (REPO / "tests" / "fixtures").glob("*/output*/run.mess")
+    )
+    notes = (REPO / "tests" / "fixtures" / "README.md").read_text(encoding="utf-8")
+    for message_id in ids:
+        assert f"<{message_id}>" in logs or message_id in notes, message_id
+        family, number = message_id.rsplit("_", 1)
+        messages = json.loads(
+            (REPO / "en" / "messages" / f"{family}.en.json").read_text(encoding="utf-8")
+        )["messages"]
+        assert number in messages, message_id
