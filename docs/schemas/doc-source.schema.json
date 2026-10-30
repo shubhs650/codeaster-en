@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/shubhs650/codeaster-en/docs/schemas/doc-source.schema.json",
+  "title": "Ingested French code_aster document (en/docs/_src/<DOC-ID>.fr.json)",
+  "description": "Written by `caen docs ingest` (codeaster_en.docs.ingest, PLAN task 5.1). Never hand-edited.",
+  "type": "object",
+  "required": ["_generated_from", "schema_version", "doc_id", "language", "copyright", "licence", "meta", "blocks", "chunks"],
+  "additionalProperties": false,
+  "properties": {
+    "_generated_from": {
+      "type": "object",
+      "required": ["extractor", "extractor_version", "source_url", "source_sha256", "source_bytes"],
+      "additionalProperties": false,
+      "properties": {
+        "extractor": {"const": "codeaster_en.docs.ingest"},
+        "extractor_version": {"type": "string"},
+        "source_url": {"type": ["string", "null"], "description": "Where the PDF was downloaded from, after the site's redirect (names the documentation version, e.g. /doc/v16/)."},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "source_bytes": {"type": "integer", "minimum": 1}
+      }
+    },
+    "schema_version": {"const": 1},
+    "doc_id": {"type": "string", "pattern": "^[URVD]\\d\\.\\d\\d\\.\\d\\d$"},
+    "language": {"const": "fr"},
+    "copyright": {"type": "string"},
+    "licence": {"type": "string"},
+    "meta": {
+      "type": "object",
+      "description": "Fields of page 1's running header and footer and of the PDF metadata.",
+      "required": ["page_count"],
+      "properties": {
+        "title": {"type": "string"},
+        "date": {"type": "string", "pattern": "^\\d\\d/\\d\\d/\\d{4}$"},
+        "pages": {"type": "string"},
+        "page_count": {"type": "integer", "minimum": 1},
+        "responsible": {"type": "string"},
+        "revision": {"type": "string"},
+        "version_label": {"type": "string"},
+        "fascicle": {"type": "string"},
+        "licence_notice": {"type": "string"},
+        "pdf_title": {"type": "string"},
+        "pdf_keywords": {"type": "string"}
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "page"],
+        "properties": {
+          "type": {"enum": ["title", "heading", "paragraph", "list_item", "code", "table", "figure"]},
+          "page": {"type": "integer", "minimum": 1},
+          "text": {"type": "string"},
+          "level": {"type": "integer", "minimum": 1},
+          "number": {"type": "string", "pattern": "^\\d+(\\.\\d+)*$"},
+          "depth": {"type": "integer", "minimum": 0},
+          "lines": {"type": "array", "items": {"type": "string"}},
+          "rows": {"type": "array", "items": {"type": "array", "items": {"type": "string"}}},
+          "equation": {"const": true, "description": "The block holds formula text that the PDF extraction cannot render faithfully."}
+        },
+        "allOf": [
+          {"if": {"properties": {"type": {"const": "heading"}}}, "then": {"required": ["level", "number", "text"]}},
+          {"if": {"properties": {"type": {"enum": ["title", "paragraph"]}}}, "then": {"required": ["text"]}},
+          {"if": {"properties": {"type": {"const": "list_item"}}}, "then": {"required": ["depth", "text"]}},
+          {"if": {"properties": {"type": {"const": "code"}}}, "then": {"required": ["lines"]}},
+          {"if": {"properties": {"type": {"const": "table"}}}, "then": {"required": ["rows"]}}
+        ]
+      }
+    },
+    "chunks": {
+      "type": "array",
+      "description": "Translation units of whole blocks, in order, covering every block once.",
+      "items": {
+        "type": "object",
+        "required": ["id", "first", "last", "chars", "section"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "integer", "minimum": 1},
+          "first": {"type": "integer", "minimum": 0},
+          "last": {"type": "integer", "minimum": 0},
+          "chars": {"type": "integer", "minimum": 0},
+          "section": {"type": "string"}
+        }
+      }
+    }
+  }
+}

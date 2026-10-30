@@ -3,7 +3,8 @@
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
 ``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``,
 ``caen mess parse|translate``, ``caen results fields|extrema|reactions|modal``,
-``caen report``, ``caen upstream bump|check|stale|pr-body`` and ``caen bundle``.
+``caen report``, ``caen upstream bump|check|stale|pr-body``, ``caen bundle`` and
+``caen docs ingest|fetch``.
 """
 
 from __future__ import annotations
@@ -19,6 +20,7 @@ from codeaster_en import bundle as bundle_module
 from codeaster_en import mess as mess_module
 from codeaster_en import report as report_module
 from codeaster_en import results as results_module
+from codeaster_en.docs import ingest as docs_ingest
 from codeaster_en.extract import astest as astest_extractor
 from codeaster_en.extract import catalog as catalog_extractor
 from codeaster_en.extract import inventory as inventory_extractor
@@ -841,6 +843,82 @@ def bundle(
     )
     if max_tokens and result.tokens > max_tokens:
         typer.echo(f"bundle: over the budget of {max_tokens:,} tokens", err=True)
+        raise typer.Exit(code=1)
+
+
+docs_app = typer.Typer(
+    help="Official French documents (U4 command reference): fetch and ingest PDFs.",
+    no_args_is_help=True,
+)
+app.add_typer(docs_app, name="docs")
+
+DocsOut = Annotated[
+    Path | None,
+    typer.Option(help="Output directory (default: en/docs/_src of the checkout)."),
+]
+
+
+def _ingest_one(pdf: Path, url: str | None, out_dir: Path) -> None:
+    try:
+        doc = docs_ingest.ingest(pdf, source_url=url)
+    except (OSError, docs_ingest.IngestError) as exc:
+        typer.echo(f"docs ingest: {pdf}: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    json_path, _ = docs_ingest.write(doc, out_dir)
+    kinds: dict[str, int] = {}
+    for block in doc["blocks"]:
+        kinds[block["type"]] = kinds.get(block["type"], 0) + 1
+    detail = ", ".join(f"{n} {k}" for k, n in sorted(kinds.items()))
+    typer.echo(
+        f"{doc['doc_id']}: {doc['meta'].get('title', '')}: {doc['meta']['page_count']} pages, "
+        f"{len(doc['chunks'])} chunks ({detail}) -> {json_path}"
+    )
+
+
+@docs_app.command("ingest")
+def docs_ingest_cmd(
+    pdfs: Annotated[list[Path], typer.Argument(help="French PDFs from code-aster.org.")],
+    url: Annotated[str | None, typer.Option(help="Source URL to record (one PDF only).")] = None,
+    out: DocsOut = None,
+) -> None:
+    """Extract a French document's text with its structure (headings, syntax blocks, tables,
+    lists), chunk it for translation and write <DOC-ID>.fr.json and .fr.md (PLAN 5.1)."""
+    if url and len(pdfs) > 1:
+        typer.echo("docs ingest: --url needs exactly one PDF", err=True)
+        raise typer.Exit(code=2)
+    out_dir = out or _repo_root() / docs_ingest.SOURCE_RELDIR
+    for pdf in pdfs:
+        _ingest_one(pdf, url, out_dir)
+    docs_ingest.write_index(out_dir)
+
+
+@docs_app.command("fetch")
+def docs_fetch(
+    doc_ids: Annotated[
+        list[str] | None,
+        typer.Argument(help="Document IDs, e.g. U4.41.01 (default: en/doc-ids.yaml + extras)."),
+    ] = None,
+    cache: Annotated[
+        Path, typer.Option(help="Where downloaded PDFs are kept (git-ignored).")
+    ] = Path(".cache/docs-pdf"),
+    out: DocsOut = None,
+) -> None:
+    """Download French PDFs from code-aster.org into the cache and ingest them."""
+    repo = _repo_root()
+    ids = doc_ids or docs_ingest.default_doc_ids(repo)
+    out_dir = out or repo / docs_ingest.SOURCE_RELDIR
+    failed = []
+    for doc_id in ids:
+        try:
+            pdf, url = docs_ingest.fetch(doc_id, cache)
+        except (OSError, docs_ingest.IngestError) as exc:
+            typer.echo(f"docs fetch: {doc_id}: {exc}", err=True)
+            failed.append(doc_id)
+            continue
+        _ingest_one(pdf, url, out_dir)
+    docs_ingest.write_index(out_dir)
+    if failed:
+        typer.echo(f"docs fetch: {len(failed)} failed: {', '.join(failed)}", err=True)
         raise typer.Exit(code=1)
 
 

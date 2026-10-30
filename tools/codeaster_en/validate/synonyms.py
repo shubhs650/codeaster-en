@@ -90,9 +90,10 @@ def scan_text(text: str, forbidden: list[Alias]) -> list[tuple[int, Alias, str]]
 
 
 def scan_tree(root: Path, forbidden: list[Alias]) -> tuple[list[str], int]:
-    """``(issues, files scanned)`` for ``root/**/*.md``."""
+    """``(issues, files scanned)`` for ``root/**/*.md``, French sources (``_src/``) left out."""
     issues: list[str] = []
-    files = sorted(root.rglob("*.md")) if root.is_dir() else []
+    files = sorted(p for p in root.rglob("*.md") if "_src" not in p.relative_to(root).parts)
+    files = files if root.is_dir() else []
     for path in files:
         text = path.read_text(encoding="utf-8")
         for number, alias, word in scan_text(text, forbidden):
