@@ -5,7 +5,8 @@ affiliated with or endorsed by EDF, and its translations are not official. "code
 "Salome-Meca" are trademarks of EDF.
 
 Everything in this repository and in the `codeaster-en` package is distributed under the GNU
-General Public License, version 3 or (at your option) any later version (`LICENSE`).
+General Public License, version 3 or (at your option) any later version (`LICENSE`), except
+the official documentation text in `en/docs/` (GNU Free Documentation License, see below).
 Policy: `docs/LICENSING.md`.
 
 ## Third-party material
@@ -15,6 +16,7 @@ Policy: `docs/LICENSING.md`.
 | code_aster command catalogs (`code_aster/Cata/`), messages (`code_aster/Messages/`) and test cases (`astest/`) | Extracted into `en/commands/*.json` and the `fr` fields of `en/messages/*.en.json`; cited in references | Copyright (C) 1991 - 2026 EDF, www.code-aster.org; GPL-3.0-or-later |
 | code_aster English localization (`i18n/en-US/aster_messages.po`, `i18n/catapy_en_US.ts`, 2016) | Seed for messages with `method: machine` and for catalog help strings | EDF R&D and code_aster translators; distributed with code_aster under the GPL |
 | AsterStudy translation dictionary (`GLOBAL_DICT`) | Seed of `en/glossary.yaml` (entries with `asterstudy:`) | Copyright 2016 EDF R&D; GPL-3 |
+| code_aster documentation (U1, U4, U7 manuals, code-aster.org) | Extracted French text in `en/docs/_src/`; translations in `en/docs/` (not in the package) | Copyright EDF R&D; GNU Free Documentation License (1.3 chosen, `en/docs/_src/LICENSE-GFDL-1.3.txt`) |
 
 Each generated file names its upstream tag and commit in `_generated_from` (or its header), and
 each English text records its translation method.
