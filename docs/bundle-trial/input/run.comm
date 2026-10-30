@@ -1,0 +1,128 @@
+# Steel plate with a central circular hole under uniaxial tension (linear static, 3D solid).
+# Full plate 200 (X) x 100 (Y) x 10 (Z) mm, hole radius 10 mm at the center.
+# Quarter model X >= 0, Y >= 0 (hole center at the origin), full thickness Z = 0..10.
+# Units: mm, N, MPa. Mesh: TETRA10 (Gmsh, mesh.geo).
+
+# Plain study start: no CODE (reserved for test cases, SUPERVIS_22).
+DEBUT()
+
+SIG = 50.0  # tensile traction on the end face X = 100 [MPa], acting in +X
+W_HALF = 50.0  # half width of the plate modeled [mm]
+THICK = 10.0  # thickness [mm]
+# Hand value of the X reaction resultant on the symmetry face X = 0:
+# applied force = SIG x (end face area of the quarter model) = 50 x (50 x 10) = 25000 N in +X.
+# REAC_NODA is the force the support applies to the structure, so it opposes the load:
+# sum of DX reactions = -25000 N. (The net section at X = 0 is 40 x 10 mm, but the reaction
+# balances the load applied on the 50 x 10 mm end face, not the net-section stress.)
+REAC_X_REF = -SIG * W_HALF * THICK
+
+# 1. Mesh and node groups
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+
+# Node groups of the symmetry faces (reaction table) and one node for the Z support:
+# PIN_Z = the single node common to X = 0, Y = 50 and Z = 0 (corner of the plate edge).
+# Named by intersecting face groups instead of a Gmsh point group, to avoid POI1 elements
+# and warning MODELISA8_14.
+MAIL = DEFI_GROUP(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    CREA_GROUP_NO=(
+        _F(GROUP_MA=("SYM_X", "SYM_Y", "SIDE_Y", "BOTTOM")),
+        _F(NOM="PIN_Z", INTERSEC=("SYM_X", "SIDE_Y", "BOTTOM")),
+    ),
+)
+
+# 2. Model: 3D solid on the whole mesh (the LOAD faces carry the traction)
+MODE = AFFE_MODELE(MAILLAGE=MAIL, AFFE=_F(TOUT="OUI", PHENOMENE="MECANIQUE", MODELISATION="3D"))
+
+# 3. Material
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3))
+
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="PLATE", MATER=ACIER))
+
+# 4. Supports (kinematic, eliminated DOFs, no Lagrange multipliers) and load
+# - SYM_X (X = 0): DX = 0, symmetry about the YZ plane.
+# - SYM_Y (Y = 0): DY = 0, symmetry about the XZ plane.
+# - PIN_Z: DZ = 0 at one node. The two symmetry planes already stop rigid rotation about X,
+#   Y and Z and translation in X and Y; only translation in Z is free. One node in Z removes
+#   it without restraining the Poisson thinning of the plate, so the support is statically
+#   determinate in Z: its reaction is zero and it changes no stress (only shifts DZ).
+#   Fixing a whole face in Z would wrongly stop the through-thickness contraction.
+SUPP = AFFE_CHAR_CINE(
+    MODELE=MODE,
+    MECA_IMPO=(
+        _F(GROUP_MA="SYM_X", DX=0.0),
+        _F(GROUP_MA="SYM_Y", DY=0.0),
+        _F(GROUP_NO="PIN_Z", DZ=0.0),
+    ),
+)
+
+# Surface traction (force per unit area, global X), not a pressure.
+TRAC = AFFE_CHAR_MECA(MODELE=MODE, FORCE_FACE=_F(GROUP_MA="LOAD", FX=SIG))
+
+# 5. Solve
+RESU = MECA_STATIQUE(
+    MODELE=MODE,
+    CHAM_MATER=MATE,
+    EXCIT=(_F(CHARGE=SUPP), _F(CHARGE=TRAC)),
+    SOLVEUR=_F(METHODE="MUMPS"),
+)
+
+# 6. Stresses, von Mises, reactions
+RESU = CALC_CHAMP(
+    reuse=RESU,
+    RESULTAT=RESU,
+    CONTRAINTE=("SIGM_ELNO", "SIGM_NOEU"),
+    CRITERES=("SIEQ_ELNO", "SIEQ_NOEU"),
+    FORCE="REAC_NODA",
+)
+
+# 7. Reaction resultant on the X symmetry face, printed to tables/reactions.csv
+REAC = POST_RELEVE_T(
+    ACTION=_F(
+        OPERATION="EXTRACTION",
+        INTITULE="REAC_SYM_X",
+        RESULTAT=RESU,
+        NOM_CHAM="REAC_NODA",
+        GROUP_NO="SYM_X",
+        RESULTANTE=("DX", "DY", "DZ"),
+    )
+)
+
+IMPR_TABLE(TABLE=REAC, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=30)
+
+# 8. Fields for the viewer, written to run.rmed
+IMPR_RESU(
+    FORMAT="MED",
+    UNITE=80,
+    RESU=_F(RESULTAT=RESU, NOM_CHAM=("DEPL", "SIGM_NOEU", "SIEQ_NOEU", "REAC_NODA")),
+)
+
+# 9. Equilibrium check against the hand value.
+# TYPE_TEST="SOMM" sums REAC_NODA DX over the whole field; GROUP_NO is left out because
+# TYPE_TEST ignores it and warns (CALCULEL6_96). The sum equals the X = 0 face resultant:
+# DX is imposed only on SYM_X, so DX reactions are zero elsewhere.
+# VALE_CALC: the TEST_RESU catalog requires one (rule "exactly one of VALE_CALC, ..."), and
+# no run of this file has been seen. It is NOT copied from a run: it is set to the hand value.
+# This is justified for this one quantity only: the element internal forces of any
+# displacement field sum to zero, so the sum of all REAC_NODA DX equals minus the applied
+# load exactly, up to round-off, and the loaded face is flat so its area is exact (500 mm2)
+# on the mesh. Replace it with the full-digit value of the first run.
+TEST_RESU(
+    RESU=(
+        _F(
+            NUME_ORDRE=1,
+            RESULTAT=RESU,
+            NOM_CHAM="REAC_NODA",
+            NOM_CMP="DX",
+            TYPE_TEST="SOMM",
+            REFERENCE="ANALYTIQUE",
+            VALE_REFE=REAC_X_REF,
+            VALE_CALC=REAC_X_REF,
+            PRECISION=1.0e-4,
+            LEGENDE="REAC_DX_SUM",
+        ),
+    )
+)
+
+FIN()

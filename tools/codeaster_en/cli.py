@@ -3,8 +3,7 @@
 Implemented so far: ``caen validate`` (glossary, messages, synonyms, commands),
 ``caen extract catalog|messages|astest-index|inventory``, ``caen translate command|messages``,
 ``caen mess parse|translate``, ``caen results fields|extrema|reactions|modal``,
-``caen report`` and ``caen upstream bump``. The other
-groups and commands are stubs that name the PLAN.md task which will fill them in.
+``caen report``, ``caen upstream bump|check|stale|pr-body`` and ``caen bundle``.
 """
 
 from __future__ import annotations
@@ -16,6 +15,7 @@ from typing import Annotated
 import typer
 
 from codeaster_en import __version__
+from codeaster_en import bundle as bundle_module
 from codeaster_en import mess as mess_module
 from codeaster_en import report as report_module
 from codeaster_en import results as results_module
@@ -52,18 +52,6 @@ def _repo_root(start: Path | None = None) -> Path:
         if (candidate / GLOSSARY_RELPATH).is_file():
             return candidate
     return here
-
-
-def _stub(name: str, task: str, help_text: str) -> typer.Typer:
-    group = typer.Typer(help=f"{help_text} [not implemented yet: task {task}]")
-
-    @group.callback(invoke_without_command=True)
-    def _not_implemented(ctx: typer.Context) -> None:
-        if ctx.invoked_subcommand is None:
-            typer.echo(f"caen {name}: not implemented yet (PLAN.md task {task}).", err=True)
-            raise typer.Exit(code=2)
-
-    return group
 
 
 extract_app = typer.Typer(
@@ -819,7 +807,42 @@ def upstream_pr_body(
     )
 
 
-app.add_typer(_stub("bundle", "5.5", "Package the overlay data for ClearFEA."), name="bundle")
+@app.command("bundle")
+def bundle(
+    tier: Annotated[
+        str, typer.Option(help="Command tier: 1, or 2 for Tiers 1 and 2 (docs/COMMAND-SET.md).")
+    ] = "1",
+    detail: Annotated[
+        str,
+        typer.Option(help="compact (fits a context window, ADR-025) or full (every page whole)."),
+    ] = "compact",
+    out: Annotated[
+        Path | None,
+        typer.Option("--out", "-o", help="Output file (default codeaster-en-tier<N>-<detail>.md)."),
+    ] = None,
+    max_tokens: Annotated[
+        int,
+        typer.Option(help="Fail when the estimated size is above this many tokens; 0: no limit."),
+    ] = bundle_module.DEFAULT_MAX_TOKENS,
+) -> None:
+    """Write the LLM context bundle: guide, command references and glossary in one Markdown
+    file, for a coding agent's context window (PLAN 5.5)."""
+    try:
+        result = bundle_module.build(_repo_root(), tier, detail)
+    except (OSError, ValueError) as exc:
+        typer.echo(f"bundle: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    path = out or Path(f"codeaster-en-tier{tier}-{detail}.md")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(result.text, encoding="utf-8")
+    typer.echo(
+        f"bundle: wrote {path}: {len(result.sections) - 1} pages + glossary, "
+        f"{len(result.text):,} characters, about {result.tokens:,} tokens"
+    )
+    if max_tokens and result.tokens > max_tokens:
+        typer.echo(f"bundle: over the budget of {max_tokens:,} tokens", err=True)
+        raise typer.Exit(code=1)
+
 
 validate_app = typer.Typer(help="Validate overlay artefacts (glossary, placeholders, schemas).")
 app.add_typer(validate_app, name="validate")
