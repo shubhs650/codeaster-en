@@ -83,7 +83,7 @@ MATASSM2 = ASSE_MATRICE(MATR_ELEM=MELM2, NUME_DDL=NUM2, CHAR_CINE=(CH2, CH3))
 ## See also
 
 - French reference: U4.61.22 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.61.22.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+  `en/docs/_src/U4.61.22.fr.md`; translation: `en/docs/U4.61.22.md`)
 - Catalog: `en/commands/ASSE_MATRICE.json` (generated from `upstream/code_aster/Cata/Commands/asse_matrice.py:42`)
 - Implementation: `upstream/code_aster/MacroCommands/asse_matrice_ops.py`
 - Before: [CALC_MATR_ELEM](CALC_MATR_ELEM.md), [NUME_DDL](NUME_DDL.md),

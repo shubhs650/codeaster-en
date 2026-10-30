@@ -63,7 +63,7 @@ gives the assembled matrices `CALC_MODES` needs; `ASSEMBLAGE` runs the three ste
 | `MASS_MECA` | `matr_elem_depl_r`, optional | — | *mechanical mass matrix*. Only when `equal_to("OPTION", 'AMOR_MECA')`. Element mass matrix used for the mass-proportional part of Rayleigh damping (`AMOR_BETA` × M). |
 | `AMOR_FLUI` | text, optional | `'OUI'` | One of `'OUI'`, `'NON'`. Only when `equal_to("OPTION", 'AMOR_MECA')`. Include (`'OUI'`) or not the damping of fluid elements. Fluid-structure; out of scope. |
 | `VNOR` | real, optional | `1.0` | One of `1.0`, `-1.0`. Only when `equal_to("OPTION", 'AMOR_MECA')`; or `(equal_to("OPTION", 'MASS_ACOU')) or (equal_to("OPTION", 'AMOR_ACOU')) and equal_to("OPTION", 'AMOR_ACOU')`; or `(equal_to("OPTION", 'IMPE_MECA')) or (equal_to("OPTION", 'ONDE_FLUI')) and equal_to("OPTION", 'IMPE_MECA')`. Sign (+1 or −1) of the normal velocity of the impedance or absorbing boundary. Fluid-structure and acoustics; out of scope. |
-| `TYPE_AMOR` | text, optional | `'TOUT'` | One of `'TOUT'`, `'ABSO'`. Only when `equal_to("OPTION", 'AMOR_MECA')`. `'TOUT'`: full damping matrix (Rayleigh terms and discrete dampers); `'ABSO'`: absorbing-boundary terms only, which need just the material field; `'TOUT'` needs the stiffness and mass matrices (Rayleigh) or the discrete element properties (U4.61.01 §3.10, French only). |
+| `TYPE_AMOR` | text, optional | `'TOUT'` | One of `'TOUT'`, `'ABSO'`. Only when `equal_to("OPTION", 'AMOR_MECA')`. `'TOUT'`: full damping matrix (Rayleigh terms and discrete dampers); `'ABSO'`: absorbing-boundary terms only, which need just the material field; `'TOUT'` needs the stiffness and mass matrices (Rayleigh) or the discrete element properties (U4.61.01 §3.10). |
 | `RIGI_MECA` | `matr_elem_depl_r`, required | — | *mechanical stiffness matrix*. Only when `equal_to("OPTION", 'RIGI_MECA_HYST')`. The element stiffness matrix that the hysteretic stiffness is built from (with the `AMOR_HYST` coefficient of `DEFI_MATERIAU/ELAS`, `upstream/code_aster/Cata/Commands/defi_materiau.py:420`). |
 | `CHARGE` | `char_ther`, optional, list | — | *load*. Only when `equal_to("OPTION", 'RIGI_THER')`. The loads that define the rotating or fluid-structure terms, required for these options. |
 | `CHARGE` | `char_acou`, optional, list | — | *load*. Only when `equal_to("OPTION", 'RIGI_ACOU')`; or `(equal_to("OPTION", 'MASS_ACOU')) or (equal_to("OPTION", 'AMOR_ACOU'))`. The loads that define the rotating or fluid-structure terms, required for these options. |
@@ -134,7 +134,7 @@ MELM2 = CALC_MATR_ELEM(MODELE=MO, CARA_ELEM=CARELEM, CHAM_MATER=CHMAT, OPTION="M
 ## See also
 
 - French reference: U4.61.01 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.61.01.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+  `en/docs/_src/U4.61.01.fr.md`; translation: `en/docs/U4.61.01.md`)
 - Catalog: `en/commands/CALC_MATR_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/calc_matr_elem.py:68`)
 - Implementation: `upstream/code_aster/MacroCommands/calc_matr_elem_ops.py`
 - Before: [AFFE_MODELE](AFFE_MODELE.md), [AFFE_MATERIAU](AFFE_MATERIAU.md),

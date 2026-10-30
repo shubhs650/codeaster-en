@@ -311,10 +311,12 @@ def test_scope_names_ingested_documents_and_real_chunks() -> None:
             assert scope.chunks <= {c["id"] for c in doc["chunks"]}, doc_id
 
 
-def test_tier1_documents_are_fully_translated() -> None:
-    """PLAN 5.2 acceptance: every in-scope chunk of every Tier 1 document is translated."""
+def test_tier1_and_tier2_documents_are_fully_translated() -> None:
+    """PLAN 5.2 acceptance, extended to Tier 2: every in-scope chunk of every Tier 1 and 2
+    document is translated."""
     src = td.load_sources(REPO)
-    for doc_id in td.tier_docs(src, 1):
+    assert {s.tier for s in src.scope.values()} == {1, 2}
+    for doc_id in td.tier_docs(src, 2):
         path = td.doc_path(REPO, doc_id)
         assert path.is_file(), doc_id
         stored = td.read_stored(path)

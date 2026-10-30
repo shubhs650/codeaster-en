@@ -155,7 +155,7 @@ occurrence that keeps no mode only warns (`ALGELINE4_56`, `:471`).
 ## See also
 
 - French reference: U4.52.12 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.52.12.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+  `en/docs/_src/U4.52.12.fr.md`; translation: `en/docs/U4.52.12.md`)
 - Catalog: `en/commands/EXTR_MODE.json` (generated from `upstream/code_aster/Cata/Commands/extr_mode.py:41`)
 - Implementation: `upstream/bibfor/op/op0168.F90`
 - Before: [CALC_MODES](CALC_MODES.md), [NORM_MODE](NORM_MODE.md)

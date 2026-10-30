@@ -133,7 +133,7 @@ give the same matrices (`assemblage_ops.py:143`–`:163` calls exactly these com
 ## See also
 
 - French reference: U4.61.21 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.61.21.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+  `en/docs/_src/U4.61.21.fr.md`; translation: `en/docs/U4.61.21.md`)
 - Catalog: `en/commands/ASSEMBLAGE.json` (generated from `upstream/code_aster/Cata/Commands/assemblage.py:80`)
 - Implementation: `upstream/code_aster/MacroCommands/assemblage_ops.py`
 - Same steps one by one: [CALC_MATR_ELEM](CALC_MATR_ELEM.md), [NUME_DDL](NUME_DDL.md),
