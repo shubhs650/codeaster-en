@@ -4,7 +4,10 @@
 
 | Doc ID | Title | Date | Revision | Pages | Chunks | Tables | Figures | Source |
 |---|---|---|---|---|---|---|---|---|
+| [R3.06.10](R3.06.10.fr.md) | Élément quadrangulaire à un point d’intégration, stabilisé par la méthode « Assumed Strain » | 25/02/2014 | 3f6b0c104334 | 25 | 9 | 9 | 18 | https://code-aster.org/doc/v16/man_r/r3/r3.06.10.pdf |
 | [U1.03.01](U1.03.01.fr.md) | Superviseur et langage de commande | 08/05/2012 | 54d5d0ce0986 | 16 | 11 | 6 | 0 | https://code-aster.org/doc/v16/man_u/u1/u1.03.01.pdf |
+| [U2.01.05](U2.01.05.fr.md) | Contraintes, efforts, forces et déformations | 12/05/2020 | d0f7a0823523 | 15 | 6 | 12 | 0 | https://code-aster.org/doc/v16/man_u/u2/u2.01.05.pdf |
+| [U3.14.01](U3.14.01.fr.md) | Modélisations 3D et 3D_SI mécaniques | 21/12/2016 | 441b9348d86f | 4 | 2 | 5 | 0 | https://code-aster.org/doc/v16/man_u/u3/u3.14.01.pdf |
 | [U4.11.01](U4.11.01.fr.md) | Procédure DEBUT | 04/11/2021 | 351031e89ec7 | 10 | 6 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.11.01.pdf |
 | [U4.11.02](U4.11.02.fr.md) | Procédure FIN | 04/11/2021 | 5ad2df270126 | 5 | 2 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.11.02.pdf |
 | [U4.11.03](U4.11.03.fr.md) | Procédure POURSUITE | 04/11/2021 | 04c6ef195364 | 5 | 3 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.11.03.pdf |
@@ -32,6 +35,7 @@
 | [U4.61.21](U4.61.21.fr.md) | Opérateur ASSEMBLAGE | 11/01/2024 | 0872cb06e0ca | 9 | 5 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.61.21.pdf |
 | [U4.61.22](U4.61.22.fr.md) | Opérateur ASSE_MATRICE | 20/04/2009 | cb37b9c38910 | 4 | 2 | 1 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.61.22.pdf |
 | [U4.72.04](U4.72.04.fr.md) | Opérateur CREA_CHAMP | 03/11/2021 | 6806a45e7e56 | 24 | 11 | 7 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.72.04.pdf |
+| [U4.72.05](U4.72.05.fr.md) | Opérateur PROJ_CHAMP | 05/06/2023 | 43471f1d7e4d | 16 | 11 | 1 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.72.05.pdf |
 | [U4.81.04](U4.81.04.fr.md) | Opérateur CALC_CHAMP | 10/03/2024 | f77bf25363cc | 40 | 15 | 20 | 9 | https://code-aster.org/doc/v16/man_u/u4/u4.81.04.pdf |
 | [U4.81.13](U4.81.13.fr.md) | Opérateur MACR_LIGN_COUPE | 09/09/2020 | cf7d88529335 | 8 | 4 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.81.13.pdf |
 | [U4.81.21](U4.81.21.fr.md) | Opérateur POST_RELEVE_T | 09/09/2020 | 4b15ed525526 | 23 | 9 | 3 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.81.21.pdf |

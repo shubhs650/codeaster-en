@@ -48,7 +48,7 @@ place to check that the supports were taken into account.
 | `MATR_RIGI` | `matr_elem_depl_r` or `matr_elem_depl_c` or `matr_elem_temp_r` or `matr_elem_pres_c`, optional, list of up to 100 | — | *stiffness matrix*. Build the numbering from these element matrices: their elements and the Lagrange terms they contain (`upstream/code_aster/MacroCommands/nume_ddl_ops.py:66`). Give the `RIGI_MECA` element matrix, so the multipliers of the `CHARGE` given to `CALC_MATR_ELEM` are numbered (`tests/fixtures/modal/input/run.comm:37`). |
 | `MODELE` | `modele_sdaster`, optional | — | *model*. Build the numbering from a model and loads instead of element matrices (`nume_ddl_ops.py:57`, `upstream/astest/pynl01a.comm:93`). Use it when no element matrix exists yet, for example to assemble vectors first. |
 | `CHARGE` | `char_meca` or `char_ther` or `char_acou`, optional, list | — | *load*. Only when `exists("MODELE")`. With `MODELE`: the loads whose dualized conditions add Lagrange multipliers to the numbering. Give the same loads as to the matrices that will use this numbering. |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the system size: total DOFs and nodes, Lagrange DOFs, largest and mean column height, stored terms (U4.61.11 §4.3); `2` prints more detail. TODO(verify) the level-2 output by a run. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the system size: total and physical DOFs with their nodes, Lagrange pairs and relations, matrix size, non-zero terms (symmetric and not) and fill rate. Our 17.4 run printed the same at level `2` and no column height, which U4.61.11 §4.3 (v16) still lists (`docs/reference-checks/todo-verify/`). |
 
 ## Rules
 

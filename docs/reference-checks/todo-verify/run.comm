@@ -1,0 +1,183 @@
+# todo-verify -- settles the command-reference TODO(verify) notes that need a solver run (task 2.3g).
+# Mesh: tests/fixtures/modal/input/mesh.med (cantilever 400 x 20 x 10 mm, HEXA20; groups BEAM,
+# CLAMP at X=0, TIP at X=400). Units: mm, N, MPa, tonne. Every case that is expected to fail runs
+# in try/except and prints "CHECK <case>: <message id>" so one run covers all of them.
+
+from code_aster.CA import AsterError
+
+DEBUT(CODE="OUI", ERREUR=_F(ERREUR_F="EXCEPTION"))
+
+
+def check(case, func):
+    """Run func(); print the message ID it stops with, or OK."""
+    try:
+        func()
+        print(f"CHECK {case}: OK")
+    except AsterError as err:
+        print(f"CHECK {case}: {err.id_message}")
+    except Exception as err:  # Python-level errors of macros
+        print(f"CHECK {case}: {type(err).__name__}: {err}")
+
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+MAIL = DEFI_GROUP(
+    reuse=MAIL,
+    MAILLAGE=MAIL,
+    CREA_GROUP_NO=(
+        _F(GROUP_MA="CLAMP"),
+        _F(NOM="P_ORIG", OPTION="ENV_SPHERE", POINT=(0.0, 0.0, 0.0), RAYON=0.01, PRECISION=0.01),
+        _F(NOM="P_EXTR", OPTION="ENV_SPHERE", POINT=(400.0, 0.0, 0.0), RAYON=0.01, PRECISION=0.01),
+    ),
+)
+MODE = AFFE_MODELE(MAILLAGE=MAIL, AFFE=_F(TOUT="OUI", PHENOMENE="MECANIQUE", MODELISATION="3D"))
+ACIER = DEFI_MATERIAU(ELAS=_F(E=210000.0, NU=0.3, RHO=7.85e-9))
+MATE = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="BEAM", MATER=ACIER))
+FIXE = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA="CLAMP", DX=0.0, DY=0.0, DZ=0.0))
+TIPF = AFFE_CHAR_MECA(MODELE=MODE, FORCE_FACE=_F(GROUP_MA="TIP", FZ=-0.005))
+
+# --- NUME_DDL INFO=2 (NUME_DDL.md)
+RIGI_EL = CALC_MATR_ELEM(MODELE=MODE, CHAM_MATER=MATE, CHARGE=FIXE, OPTION="RIGI_MECA")
+MASS_EL = CALC_MATR_ELEM(MODELE=MODE, CHAM_MATER=MATE, CHARGE=FIXE, OPTION="MASS_MECA")
+NUME1 = NUME_DDL(MATR_RIGI=RIGI_EL, INFO=1)
+print("CHECK NUME_DDL_INFO2: begin")
+NUME = NUME_DDL(MATR_RIGI=RIGI_EL, INFO=2)
+print("CHECK NUME_DDL_INFO2: end")
+RIGI = ASSE_MATRICE(MATR_ELEM=RIGI_EL, NUME_DDL=NUME)
+MASS = ASSE_MATRICE(MATR_ELEM=MASS_EL, NUME_DDL=NUME)
+
+# --- CALC_MODES without CHAM_MATER, then CALC_CHAMP on its modes (CALC_MODES.md)
+MODES = CALC_MODES(MATR_RIGI=RIGI, MATR_MASS=MASS, OPTION="PLUS_PETITE", CALC_FREQ=_F(NMAX_FREQ=3))
+check("CALC_CHAMP_MODES_NO_CHAM_MATER", lambda: CALC_CHAMP(RESULTAT=MODES, CONTRAINTE="SIGM_ELNO"))
+check(
+    "CALC_CHAMP_MODES_WITH_CHAM_MATER",
+    lambda: CALC_CHAMP(RESULTAT=MODES, CHAM_MATER=MATE, CONTRAINTE="SIGM_ELNO"),
+)
+
+# --- NORM_MODE INFO=2 (NORM_MODE.md)
+MODES_T = NORM_MODE(MODE=MODES, NORME="TRAN", INFO=1)
+print("CHECK NORM_MODE_INFO2: begin")
+MODES = NORM_MODE(reuse=MODES, MODE=MODES, NORME="MASS_GENE", INFO=2)
+print("CHECK NORM_MODE_INFO2: end")
+
+# --- IMPR_RESU MED NOM_PARA (IMPR_RESU.md); the file is read afterwards with h5py
+IMPR_RESU(
+    FORMAT="MED",
+    UNITE=81,
+    RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL", NOM_PARA=("FREQ", "MASS_GENE")),
+)
+IMPR_RESU(FORMAT="MED", UNITE=82, RESU=_F(RESULTAT=MODES, NOM_CHAM="DEPL"))
+
+# --- EXTR_MODE on complex modes of a damped (quadratic) problem (EXTR_MODE.md)
+AMOR = COMB_MATR_ASSE(COMB_R=_F(MATR_ASSE=MASS, COEF_R=1.0))
+MODES_C = None
+
+
+def qep():
+    global MODES_C
+    MODES_C = CALC_MODES(
+        MATR_RIGI=RIGI,
+        MATR_MASS=MASS,
+        MATR_AMOR=AMOR,
+        OPTION="PLUS_PETITE",
+        CALC_FREQ=_F(NMAX_FREQ=3),
+        SOLVEUR_MODAL=_F(METHODE="TRI_DIAG", APPROCHE="REEL"),
+    )
+
+
+check("CALC_MODES_QEP", qep)
+check(
+    "EXTR_MODE_REAL_MASS_EFFE_UN",
+    lambda: EXTR_MODE(FILTRE_MODE=_F(MODE=MODES, CRIT_EXTR="MASS_EFFE_UN", SEUIL=1.0e-3)),
+)
+
+# --- DEFI_FONCTION INFO=2 with VALE (DEFI_FONCTION.md)
+RAMPE1 = DEFI_FONCTION(NOM_PARA="INST", VALE=(0.0, 0.0, 1.0, 1.0, 2.0, 2.0), INFO=1)
+print("CHECK DEFI_FONCTION_INFO2: begin")
+RAMPE = DEFI_FONCTION(NOM_PARA="INST", VALE=(0.0, 0.0, 1.0, 1.0, 2.0, 2.0), INFO=2)
+print("CHECK DEFI_FONCTION_INFO2: end")
+
+# --- FONC_MULT with a function of X instead of INST (DEFI_FONCTION.md)
+FX = DEFI_FONCTION(NOM_PARA="X", VALE=(0.0, 1.0, 10.0, 1.0))
+check(
+    "FONC_MULT_WRONG_PARA",
+    lambda: MECA_STATIQUE(
+        MODELE=MODE, CHAM_MATER=MATE, EXCIT=(_F(CHARGE=FIXE), _F(CHARGE=TIPF, FONC_MULT=FX))
+    ),
+)
+
+# --- AFFE_CHAR_MECA_F INFO=2, and a formula of an unknown parameter (AFFE_CHAR_MECA_F.md)
+FZY = FORMULE(VALE="-0.005*(1.0 + Y/20.0)", NOM_PARA="Y")
+print("CHECK AFFE_CHAR_MECA_F_INFO2: begin")
+TIPF_F = AFFE_CHAR_MECA_F(MODELE=MODE, FORCE_FACE=_F(GROUP_MA="TIP", FZ=FZY), INFO=2)
+print("CHECK AFFE_CHAR_MECA_F_INFO2: end")
+
+# --- Redundant supports (AFFE_CHAR_MECA.md)
+FIXE_BIS = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA="CLAMP", DX=0.0, DY=0.0, DZ=0.0))
+FIXE_DX = AFFE_CHAR_MECA(MODELE=MODE, DDL_IMPO=_F(GROUP_MA="CLAMP", DX=0.001))
+SOLIDE = AFFE_CHAR_MECA(MODELE=MODE, LIAISON_SOLIDE=_F(GROUP_MA="CLAMP"))
+for case, loads in (
+    ("REDUNDANT_SAME_DDL_IMPO_TWO_LOADS", (FIXE, FIXE_BIS)),
+    ("REDUNDANT_CONFLICTING_DDL_IMPO_TWO_LOADS", (FIXE, FIXE_DX)),
+    ("REDUNDANT_DDL_IMPO_AND_LIAISON_SOLIDE", (FIXE, SOLIDE)),
+):
+    for method in ("MUMPS", "MULT_FRONT"):
+        check(
+            f"{case}_{method}",
+            lambda loads=loads, method=method: MECA_STATIQUE(
+                MODELE=MODE,
+                CHAM_MATER=MATE,
+                EXCIT=[_F(CHARGE=c) for c in loads] + [_F(CHARGE=TIPF)],
+                SOLVEUR=_F(METHODE=method),
+            ),
+        )
+
+# --- MACR_LIGN_COUPE REPERE='LOCAL' with node groups instead of coordinates (MACR_LIGN_COUPE.md)
+STAT = MECA_STATIQUE(MODELE=MODE, CHAM_MATER=MATE, EXCIT=(_F(CHARGE=FIXE), _F(CHARGE=TIPF)))
+STAT = CALC_CHAMP(reuse=STAT, RESULTAT=STAT, CONTRAINTE="SIGM_NOEU")
+check(
+    "MACR_LIGN_COUPE_LOCAL_GROUP_NO",
+    lambda: MACR_LIGN_COUPE(
+        RESULTAT=STAT,
+        NOM_CHAM="SIGM_NOEU",
+        LIGN_COUPE=_F(
+            TYPE="SEGMENT",
+            NB_POINTS=5,
+            GROUP_NO_ORIG="P_ORIG",
+            GROUP_NO_EXTR="P_EXTR",
+            REPERE="LOCAL",
+            VECT_Y=(0.0, 1.0, 0.0),
+        ),
+    ),
+)
+check(
+    "MACR_LIGN_COUPE_LOCAL_COOR",
+    lambda: MACR_LIGN_COUPE(
+        RESULTAT=STAT,
+        NOM_CHAM="SIGM_NOEU",
+        LIGN_COUPE=_F(
+            TYPE="SEGMENT",
+            NB_POINTS=5,
+            COOR_ORIG=(0.0, 0.0, 0.0),
+            COOR_EXTR=(400.0, 0.0, 0.0),
+            REPERE="LOCAL",
+            VECT_Y=(0.0, 1.0, 0.0),
+        ),
+    ),
+)
+
+# Late: this failure leaves the command echo of the log broken for the commands after it.
+check(
+    "EXTR_MODE_COMPLEX_MASS_EFFE_UN",
+    lambda: EXTR_MODE(FILTRE_MODE=_F(MODE=MODES_C, CRIT_EXTR="MASS_EFFE_UN", SEUIL=1.0e-3)),
+)
+
+# --- A formula of an unknown parameter in AFFE_CHAR_MECA_F (AFFE_CHAR_MECA_F.md)
+FZW = FORMULE(VALE="-0.005*(1.0 + W)", NOM_PARA="W")
+def unknown_para():
+    load = AFFE_CHAR_MECA_F(MODELE=MODE, FORCE_FACE=_F(GROUP_MA="TIP", FZ=FZW))
+    MECA_STATIQUE(MODELE=MODE, CHAM_MATER=MATE, EXCIT=(_F(CHARGE=FIXE), _F(CHARGE=load)))
+# Last: the failed formula evaluation closes the database (NameError, not an AsterError).
+print("CHECK AFFE_CHAR_MECA_F_UNKNOWN_PARA: begin")
+unknown_para()
+
+FIN()

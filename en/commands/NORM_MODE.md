@@ -66,7 +66,7 @@ the key keywords above mix the three: only `NORME` belongs to `NORM_MODE`. `FILT
 | `RAIDE` | `matr_asse_depl_r` or `matr_asse_depl_c` or `matr_asse_gene_r` or `matr_asse_pres_r`, optional | — | Stiffness matrix, under the same rule as `MASSE` (`ALGELINE_2`). Missing both for such a basis is fatal (`ALGELINE_1` + `ALGELINE_6`). |
 | `AMOR` | `matr_asse_depl_r` or `matr_asse_gene_r`, optional | — | Damping matrix, for complex modes of a modal basis normalized by `MASS_GENE` or `RIGI_GENE` (`ALGELINE_8`). Not used for real modes. |
 | `TITRE` | text, optional | — | *title*. A title stored with the result. Optional. |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the rule applied (`ALGELINE7_5`); `2` also prints the scaling coefficient of each mode. U4.52.11 §3.8 lists only the old and new norm of each mode; TODO(verify) the level-2 output by a run. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints, per mode, the old and new norm (U4.52.11 §3.8), then the total, Lagrange and active DOF counts. Our 17.4 run printed the same at level `2`, with no scaling coefficient (`docs/reference-checks/todo-verify/`). |
 
 2 hidden keyword(s) (`statut='c'`, set by the code, not by users) are not listed.
 

@@ -142,7 +142,9 @@ occurrence that keeps no mode only warns (`ALGELINE4_56`, `:471`).
 - **Effective masses must exist.** The `MASS_EFFE*` and `INER_EFFE*` criteria read parameters
   that `CALC_MODES` stores for physical matrices; a result without them stops the command
   (`ALGELINE3_10`, whose English text blames `NORM_MODE`). Modes recombined from a
-  generalized basis may not carry them. TODO(verify) which results lack them.
+  generalized basis may not carry them. Our run (`docs/reference-checks/todo-verify/`): real modes from `CALC_MODES` filter
+  fine; the complex modes of a quadratic `CALC_MODES` (with damping) lack them and stop with
+  `ALGELINE3_10`, followed by a developer error (`JEVEUX_26`).
 - **Nothing kept is an error.** If no occurrence keeps a mode, the run stops with
   `ALGELINE3_11` ("no mode fills the criterion"). Lower `SEUIL` or check the modal result.
 - **`SEUIL` is per mode, not cumulative.** `CRIT_EXTR` keeps each mode whose own fraction is

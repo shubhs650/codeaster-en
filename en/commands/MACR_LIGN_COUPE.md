@@ -88,7 +88,7 @@ they have, which field and components are read, and in which axes.
 | `LIGN_COUPE / ANGL_NAUT` | real, required, list of 3 | — | With `REPERE='UTILISATEUR'`: three nautical angles in degrees; only the first is used in 2D (`:223`–`:230`). |
 | `LIGN_COUPE / ORIGINE` | real, list of 2 or 3 | — | With `REPERE='CYLINDRIQUE'` on a segment or group line: a point of the axis. |
 | `LIGN_COUPE / AXE_Z` | real, list of 3 | — | With `REPERE='CYLINDRIQUE'` in 3D: the direction of the axis. |
-| `LIGN_COUPE / DISTANCE_MAX` | real, optional | `0.0` | *maximum distance*. A point of the line farther than this from the model is ignored (catalog help). The macro always passes the value to `PROJ_CHAMP` (`macr_lign_coupe_ops.py:826`), and an explicit distance makes a point found in no element get no value instead of a fatal error (`upstream/bibfor/projection/pjefco.F90:121`, `upstream/bibfor/projection/pj4dco.F90:312`). So with the default `0.0`, points outside the elements are dropped (see Pitfalls); a small positive value lets a point just outside a curved or faceted surface take the value of the nearest element (`upstream/astest/sslv134b.comm:77`: 0.001 on an arc of radius 0.24 through a curved, faceted mesh). Only the smallest value over all occurrences is used, for every line (`POST0_53`, `:808`–`:818`). TODO(verify) the tolerance below which a point counts as inside an element. |
+| `LIGN_COUPE / DISTANCE_MAX` | real, optional | `0.0` | *maximum distance*. A point of the line farther than this from the model is ignored (catalog help). The macro always passes the value to `PROJ_CHAMP` (`macr_lign_coupe_ops.py:826`), and an explicit distance makes a point found in no element get no value instead of a fatal error (`upstream/bibfor/projection/pjefco.F90:121`, `upstream/bibfor/projection/pj4dco.F90:312`). So with the default `0.0`, points outside the elements are dropped (see Pitfalls); a small positive value lets a point just outside a curved or faceted surface take the value of the nearest element (`upstream/astest/sslv134b.comm:77`: 0.001 on an arc of radius 0.24 through a curved, faceted mesh). Only the smallest value over all occurrences is used, for every line (`POST0_53`, `:808`–`:818`). Inside means barycentric coordinates in [−1e-10, 1 + 1e-10] (`upstream/bibfor/calculel/pj3da1.F90:94`); U4.72.05 §3.15 gives no tolerance. |
 | `LIGN_COUPE / DISTANCE_ALARME` | real, optional | — | A point farther than this from the model gives a warning (catalog help). As `DISTANCE_MAX`, the smallest value applies to all lines (`POST0_54`). |
 
 ## Rules
@@ -229,9 +229,10 @@ EXTRFO = MACR_LIGN_COUPE(
   `:893`). Our run: a `'LOCAL'` line followed by an `'INITIAL'` one came out unrotated; the
   reverse order stopped with `ValueError: SEGMENT using INITIAL not handled`. Use one call per
   `REPERE`. Candidate upstream bug (`docs/OWNER-REVIEW-QUEUE.md`).
-- **`REPERE='LOCAL'` reads the coordinates.** The local x axis comes from `COOR_ORIG` and
-  `COOR_EXTR` (`:185`); give coordinates, not `GROUP_NO_ORIG`/`GROUP_NO_EXTR`. TODO(verify) the
-  error otherwise.
+- **`REPERE='LOCAL'` with node groups.** The local x axis comes from `COOR_ORIG` and
+  `COOR_EXTR` (`:185`); for one-node `GROUP_NO_ORIG`/`GROUP_NO_EXTR`, `get_coor` writes those
+  first (`:517`), so both forms work (`docs/reference-checks/todo-verify/`); more nodes give
+  `POST0_27`.
 - **Element stresses in other axes need `REPERE_INIT='GLOBAL'`** (`POST0_55`, `:655`–`:662`).
   That is true for solids; shell stresses are in local axes, where it would be false.
 - **Element-node values at material interfaces.** An `_ELNO` field has one value per element at

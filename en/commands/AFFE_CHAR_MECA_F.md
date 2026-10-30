@@ -58,7 +58,7 @@ listed under [Other keywords](#other-keywords).
 | `PRES_REP / FISSURE` | `fiss_xfem`, optional, list of up to 100 | — | An XFEM crack whose faces carry the pressure. Out of scope (XFEM). |
 | `PRES_REP / PRES` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | The pressure function, in the model's stress units (MPa in mm/N models). Hydrostatic pressure as a `FORMULE`: `FORMULE(VALE="max(RHO*G*(H-Z), 0.)", NOM_PARA="Z", RHO=..., G=..., H=...)`, with `max` so that the faces above the free surface carry none (`upstream/astest/sdnv138c.comm:173`, in `Y`). Or a piecewise-linear `DEFI_FONCTION` of `Z` (`upstream/astest/forma00a.comm:84`, in `Y`), with `PROL_GAUCHE`/`PROL_DROITE` set if faces lie outside its range. A constant (`DEFI_CONSTANTE`) also works (`upstream/astest/adls102a.comm:255`). |
 | `PRES_REP / CISA_2D` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | *in-plane shear*. In-plane shear on edges of a 2D model, as a function. Not used in Tier 2. |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the assigned load per element. TODO(verify) the output against a run. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints nothing more than `1` for `FORCE_FACE` in our 17.4 run (`docs/reference-checks/todo-verify/`). |
 
 ## Rules
 
@@ -172,7 +172,8 @@ CHMECF = AFFE_CHAR_MECA_F(
   this for faces above the free surface.
 - **Parameter names are coordinates.** `NOM_PARA` must be `X`, `Y`, `Z` (and `INST`), the
   names the element routine passes (`evalPressureSetFuncPara.F90:96`); a formula of another
-  name is not evaluated with the coordinate. TODO(verify) the message for an unknown parameter.
+  name is not evaluated with the coordinate. With `NOM_PARA='W'` the solve prints "Evaluation
+  failed with: {'X': …, 'INST': 0.0}" and stops on a Python `NameError`, no message ID (`docs/reference-checks/todo-verify/`).
 - **Sign.** Positive `PRES` pushes into the solid, against the outward normal, as for
   `AFFE_CHAR_MECA`; water pressure on a wall is positive. Orient the faces (`ORIE_PEAU`) first.
 - **`FONC_MULT` is not a spatial function.** The COMMAND-SET "Hydrostatic" row lists `PRES_REP`
