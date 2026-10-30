@@ -23,7 +23,7 @@ Pre-alpha. See [`docs/PLAN.md`](docs/PLAN.md) for phases and [`docs/PROGRESS.md`
 
 - **ClearFEA** — this repo is the code_aster adapter layer for the ClearFEA cloud platform (CalculiX first, code_aster second). The contract is in [`docs/CLEARFEA-INTEGRATION.md`](docs/CLEARFEA-INTEGRATION.md).
 - Anyone running code_aster who wants English diagnostics and English reports.
-- Anyone pointing an LLM at code_aster.
+- Anyone pointing an LLM at code_aster: `caen bundle --tier 1` writes our guide, the Tier 1 command references and the glossary as one Markdown file that fits a 200k-token context window (ADR-025). The latest build is attached to the `llm-bundle` pre-release on GitHub.
 
 ## Principles (short version)
 

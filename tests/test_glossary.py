@@ -142,14 +142,8 @@ def test_cli_validate_glossary_fails_on_bad_file(tmp_path: Path) -> None:
     assert "3 problem(s)" in result.output
 
 
-def test_cli_lists_stub_subcommands() -> None:
+def test_cli_lists_subcommands() -> None:
     result = CliRunner().invoke(app, ["--help"])
     assert result.exit_code == 0
     for name in ("extract", "translate", "validate", "mess", "report", "upstream", "bundle"):
         assert name in result.output
-
-
-def test_cli_stub_exits_nonzero() -> None:
-    result = CliRunner().invoke(app, ["bundle"])
-    assert result.exit_code == 2
-    assert "not implemented yet" in result.output
