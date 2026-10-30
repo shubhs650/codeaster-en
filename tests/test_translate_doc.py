@@ -309,3 +309,19 @@ def test_scope_names_ingested_documents_and_real_chunks() -> None:
         if scope.chunks is not None:
             assert scope.reason, doc_id
             assert scope.chunks <= {c["id"] for c in doc["chunks"]}, doc_id
+
+
+def test_tier1_documents_are_fully_translated() -> None:
+    """PLAN 5.2 acceptance: every in-scope chunk of every Tier 1 document is translated."""
+    src = td.load_sources(REPO)
+    for doc_id in td.tier_docs(src, 1):
+        path = td.doc_path(REPO, doc_id)
+        assert path.is_file(), doc_id
+        stored = td.read_stored(path)
+        doc = td.load_source(REPO, doc_id)
+        left = [
+            c.id
+            for c in td.chunks_of(doc)
+            if src.scope[doc_id].includes(c.id) and td.pending(c, stored.get(c.id))
+        ]
+        assert left == [], (doc_id, left)
