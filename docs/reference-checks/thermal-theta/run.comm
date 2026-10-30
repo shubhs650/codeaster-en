@@ -1,0 +1,45 @@
+# Transient checks for the THER_LINEAIRE reference (task 2.3e): THETA=1.0 and a fine time
+# list with PAS_ARCH, against the default-THETA run of ../thermal. solid_loads mesh.
+DEBUT()
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(GROUP_MA=("BASE", "TOP")))
+
+MOTH = AFFE_MODELE(
+    MAILLAGE=MAIL,
+    AFFE=_F(GROUP_MA=("BLOCK", "BASE", "TOP"), PHENOMENE="THERMIQUE", MODELISATION="3D"),
+)
+
+# lambda = 50 W/(m.K) = 0.05 W/(mm.K); rho*cp = 3.6e6 J/(m3.K) = 3.6e-3 J/(mm3.K)
+ACIER = DEFI_MATERIAU(THER=_F(LAMBDA=0.05, RHO_CP=3.6e-3))
+CHMAT = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="BLOCK", MATER=ACIER))
+
+BASE0 = AFFE_CHAR_THER(MODELE=MOTH, TEMP_IMPO=_F(GROUP_MA="BASE", TEMP=0.0))
+# (a) flux 0.01 W/mm2 on TOP: T(TOP) = q L / lambda = 20 if FLUN > 0 enters the body
+FLUX = AFFE_CHAR_THER(MODELE=MOTH, FLUX_REP=_F(GROUP_MA="TOP", FLUN=0.01))
+# (b) convection h = 5e-4 W/(mm2.K), T_ext = 100: T(TOP) = h Text / (h + lambda/L) = 50
+CONV = AFFE_CHAR_THER(MODELE=MOTH, ECHANGE=_F(GROUP_MA="TOP", COEF_H=5.0e-4, TEMP_EXT=100.0))
+# (c) volume source 1e-4 W/mm3, TOP adiabatic: T(TOP) = s L^2 / (2 lambda) = 10
+SOUR = AFFE_CHAR_THER(MODELE=MOTH, SOURCE=_F(GROUP_MA="BLOCK", SOUR=1.0e-4))
+
+L0 = DEFI_LIST_REEL(VALE=0.0)
+
+def top_temp(resu, label, unit):
+    tab = POST_RELEVE_T(ACTION=_F(OPERATION="MOYENNE_ARITH", INTITULE=label, RESULTAT=resu,
+                                  NOM_CHAM="TEMP", GROUP_NO="TOP", NOM_CMP="TEMP"))
+    IMPR_TABLE(TABLE=tab, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=unit)
+
+# transient, default ETAT_INIT (steady state of the loads at the first time) versus VALE=0
+LT = DEFI_LIST_REEL(DEBUT=0.0, INTERVALLE=_F(JUSQU_A=3600.0, PAS=360.0))
+TD = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT,
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=LT))
+top_temp(TD, "TRAN_DEFAULT", 34)
+TE = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, ETAT_INIT=_F(VALE=0.0), SCHEMA_TEMPS=_F(THETA=1.0),
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=LT))
+top_temp(TE, "TRAN_THETA1", 35)
+LF = DEFI_LIST_REEL(DEBUT=0.0, INTERVALLE=_F(JUSQU_A=3600.0, PAS=10.0))
+TH = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, ETAT_INIT=_F(VALE=0.0),
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=LF),
+                   ARCHIVAGE=_F(PAS_ARCH=36))
+top_temp(TH, "TRAN_FINE", 36)
+FIN()
