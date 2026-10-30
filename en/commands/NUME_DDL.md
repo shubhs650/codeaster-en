@@ -17,6 +17,8 @@ examples: [zzzz289d, zzzz507a, sdlv126a]
 > **Assisted reference.** Written in session from the pinned catalog, the solver source it
 > calls, the message catalog, upstream test cases and the committed fixture runs. Every behavior
 > claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 Builds the numbering of the degrees of freedom, with or without renumbering, and the matrix storage.
 
@@ -46,7 +48,7 @@ place to check that the supports were taken into account.
 | `MATR_RIGI` | `matr_elem_depl_r` or `matr_elem_depl_c` or `matr_elem_temp_r` or `matr_elem_pres_c`, optional, list of up to 100 | — | *stiffness matrix*. Build the numbering from these element matrices: their elements and the Lagrange terms they contain (`upstream/code_aster/MacroCommands/nume_ddl_ops.py:66`). Give the `RIGI_MECA` element matrix, so the multipliers of the `CHARGE` given to `CALC_MATR_ELEM` are numbered (`tests/fixtures/modal/input/run.comm:37`). |
 | `MODELE` | `modele_sdaster`, optional | — | *model*. Build the numbering from a model and loads instead of element matrices (`nume_ddl_ops.py:57`, `upstream/astest/pynl01a.comm:93`). Use it when no element matrix exists yet, for example to assemble vectors first. |
 | `CHARGE` | `char_meca` or `char_ther` or `char_acou`, optional, list | — | *load*. Only when `exists("MODELE")`. With `MODELE`: the loads whose dualized conditions add Lagrange multipliers to the numbering. Give the same loads as to the matrices that will use this numbering. |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the system size; `2` prints more detail. TODO(verify) the level-2 output. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the system size: total DOFs and nodes, Lagrange DOFs, largest and mean column height, stored terms (U4.61.11 §4.3, French only); `2` prints more detail. TODO(verify) the level-2 output by a run. |
 
 ## Rules
 
@@ -98,7 +100,7 @@ NU = NUME_DDL(MODELE=MO, CHARGE=CHARGE)
 ## See also
 
 - French reference: U4.61.11 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.61.11.fr.md`; translation: `en/docs/U4.61.11.md` once task 5.2 lands)
+  `en/docs/_src/U4.61.11.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
 - Catalog: `en/commands/NUME_DDL.json` (generated from `upstream/code_aster/Cata/Commands/nume_ddl.py:24`)
 - Implementation: `upstream/code_aster/MacroCommands/nume_ddl_ops.py`
 - Before: [CALC_MATR_ELEM](CALC_MATR_ELEM.md)

@@ -17,6 +17,8 @@ examples: [ssll06a, forma00a, ssll11b, sdll23a, fdlv116a, sdnd125e, zzzz270b]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `DEFI_FONCTION` defines a tabulated function of one real parameter: a list of points
 (abscissa, ordinate), the parameter's name (`NOM_PARA`), how to interpolate between the points
@@ -50,7 +52,7 @@ function of time. Neither is a keyword of `DEFI_FONCTION`; see the patterns belo
 | Keyword | Type / cardinality | Default | Meaning and when to use |
 |---|---|---|---|
 | `NOM_PARA` | text, required | — | *parameter name*. One of `'DX'`, `'DY'`, `'DZ'`, `'DRX'`, `'DRY'`, `'DRZ'`, `'DTAN'`, `'TEMP'`, `'TSEC'`, `'INST'`, `'X'`, `'Y'`, … (44 values; see the .json). The name of the abscissa. Use `'INST'` for a function of time (load multiplier, `upstream/astest/ssll11b.comm:158`), `'TEMP'` for a function of temperature (material data, `upstream/astest/ssll06a.comm:49`), `'X'`/`'Y'`/`'Z'` for a function of position (`upstream/astest/forma00a.comm:84`), `'FREQ'` for a function of frequency. |
-| `NOM_RESU` | text, optional | `'TOUTRESU'` | *result name*. A name for the ordinate, stored with the function (`upstream/code_aster/CodeCommands/defi_fonction.py:115`). A label only, as far as we have checked; leave the default. TODO(verify) whether any command reads it. |
+| `NOM_RESU` | text, optional | `'TOUTRESU'` | *result name*. A name for the ordinate, stored with the function (`upstream/code_aster/CodeCommands/defi_fonction.py:115`). Some commands (`CALC_FONCTION`, `DEFI_MATERIAU`, …) check that the parameter and result names suit their use, for example a tensile curve with `NOM_PARA='EPSI'` and `NOM_RESU='SIGM'` (U4.31.02 §3.2). Otherwise leave the default. |
 | `VALE` | real, optional, list, at least 2 | — | *value(s)*. The points as one flat list of pairs: x1, y1, x2, y2, ... (catalog translation "Coordinates"). The usual form. The number of values must be even (`UTILITAI2_67`, see Pitfalls). |
 | `ABSCISSE` | real, optional, list, at least 2 | — | *abscissas*. The x values, as a separate list; give the y values in `ORDONNEE`. Convenient when the two lists are computed in Python (`upstream/astest/sdnd125e.comm:148`). |
 | `ORDONNEE` | real, required, list, at least 2 | — | *ordinates*. Only when `exists("ABSCISSE")`. The y values, one per abscissa; lists of different lengths stop the command (`UTILITAI2_77`, `upstream/code_aster/CodeCommands/defi_fonction.py:94`). |
@@ -64,7 +66,7 @@ function of time. Neither is a keyword of `DEFI_FONCTION`; see the patterns belo
 | `PROL_DROITE` | text, optional | `'EXCLU'` | *right extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. What the function returns for a parameter above the last abscissa: `'EXCLU'` (the default) refuses, and the command that evaluates the function stops with `FONCT0_20` (`upstream/bibfor/utilitai/fointr.F90:216`); `'CONSTANT'` returns the last ordinate; `'LINEAIRE'` extends the last segment. Set `'CONSTANT'` for material data that may be evaluated a little outside the measured range (`upstream/astest/ssll06a.comm:49`); keep `'EXCLU'` when a value outside the range would mean an input error. |
 | `PROL_GAUCHE` | text, optional | `'EXCLU'` | *left extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. Same, below the first abscissa (`FONCT0_19`, `upstream/bibfor/utilitai/fointr.F90:143`). |
 | `VERIF` | text, optional | `'CROISSANT'` | *check*. One of `'CROISSANT'`, `'NON'`. `'CROISSANT'` (the default) requires strictly increasing abscissas and stops otherwise (`FONCT0_44`); `'NON'` sorts the points by abscissa instead (`upstream/code_aster/CodeCommands/defi_fonction.py:96`). Keep the default: an unsorted list is more often a typing error than a choice. `'NON'` is for computed lists that are known to be unsorted (`upstream/astest/zzzz270b.comm:231`). |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the function. Only the Fortran path (`NOEUD_PARA`) is seen to print at level 2 (`upstream/bibfor/op/op0003.F90:289`); the Python implementation that handles the other forms does not read `INFO` (`upstream/code_aster/CodeCommands/defi_fonction.py:45`). TODO(verify) whether `INFO=2` prints anything for `VALE`. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the function. Only the Fortran path (`NOEUD_PARA`) is seen to print at level 2 (`upstream/bibfor/op/op0003.F90:289`); the Python implementation that handles the other forms does not read `INFO` (`upstream/code_aster/CodeCommands/defi_fonction.py:45`). U4.31.02 §3.10 says level 2 prints the parameters and the first 10 values; TODO(verify) by a run that 17.4 still does so for `VALE`. |
 | `TITRE` | text, optional | — | *title*. A free title stored with the function. |
 
 ## Rules
@@ -181,7 +183,7 @@ ACCE_T = DEFI_FONCTION(NOM_PARA="INST", VALE_PARA=LINST, VALE_FONC=ACCE)
 
 ## See also
 
-- French reference: U4.31.02 (French text: `en/docs/_src/U4.31.02.fr.md`; translation: `en/docs/U4.31.02.md` once task 5.2 lands)
+- French reference: U4.31.02 (French text: `en/docs/_src/U4.31.02.fr.md`; translation: `en/docs/U4.31.02.md`)
 - Catalog: `en/commands/DEFI_FONCTION.json` (generated from `upstream/code_aster/Cata/Commands/defi_fonction.py:43`)
 - Implementation: `upstream/code_aster/CodeCommands/defi_fonction.py`; `upstream/bibfor/op/op0003.F90`
   (`NOEUD_PARA` only); evaluation `upstream/bibfor/utilitai/fointr.F90`

@@ -17,6 +17,8 @@ examples: [zzzz505d, sslv114a, ssls147a, ssnp126a, tpls102a, zzzz118a, ssnl127a]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `AFFE_MATERIAU` builds a material field (`cham_mater`): it says which material
 (`DEFI_MATERIAU`) holds on which element groups, and optionally which external state variables
@@ -47,7 +49,7 @@ and its reference value are assigned here.
 | `AFFE` | factor keyword, optional, repeatable | — | One material assignment (catalog translation: "Material assignement"). Repeat it for parts with different materials (`upstream/astest/ssnp126a.comm:62`). An element in several occurrences takes the material of the last one, so a `TOUT='OUI'` occurrence followed by `GROUP_MA` occurrences sets a default material and then overrides it on some groups. |
 | `AFFE / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. Every element of the mesh. |
 | `AFFE / GROUP_MA` | element group, optional, list | — | *element group*. The groups that get this material. Give at least every group of the model that has a finite element needing a material; boundary face elements that only carry a pressure do not need one, as our `solid_static` fixture shows (material on `SOLID` only, `tests/fixtures/solid_static/input/run.comm:27`). |
-| `AFFE / MATER` | `mater_sdaster`, required, list of up to 30 | — | *material*. The material from `DEFI_MATERIAU`. Normally one. A list assigns several materials to the same elements (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:228`); TODO(verify) which element types read a list, against U4.43.03. |
+| `AFFE / MATER` | `mater_sdaster`, required, list of up to 30 | — | *material*. The material from `DEFI_MATERIAU`. Normally one. A list assigns several materials to the same elements (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:228`); a list is needed only when the nonlinear behavior is built with `DEFI_COMPOR` (multifiber beams, polycrystals); U4.43.03 §4.3.3 limits it to 26 materials, the catalog to 30. |
 | `CHAM_MATER` | `cham_mater`, optional | — | *material field*. Copy the material assignments of an existing field instead of giving `AFFE` (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:52`), typically to add `AFFE_VARC` to it (`upstream/astest/ssnl127a.comm:83`). The source field must be on the same mesh (`MATERIAL2_60`); its own external state variables are not copied (warning `MATERIAL2_61`). |
 | `AFFE_COMPOR` | factor keyword, optional, repeatable | — | Behavior assignment (catalog translation: "Behaviour assignement"): assigns a behavior object from `DEFI_COMPOR`. The catalog comment limits it to multifiber beams "for now" (`upstream/code_aster/Cata/Commands/affe_materiau.py:47`). Out of Tier 1 scope. |
 | `AFFE_COMPOR / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. |
@@ -60,9 +62,9 @@ and its reference value are assigned here.
 | `AFFE_VARC / CHAM_GD` | `cham_gd_sdaster`, optional | — | *field (physical quantity)*. A field that is constant in time, for example a temperature field built with `CREA_CHAMP(TYPE_CHAM='NOEU_TEMP_R', ...)` (`upstream/astest/tpls102a.comm:62`) or computed by a linear thermal solve (`upstream/astest/hplv102a.comm:58`). Use it for a static analysis under one temperature distribution. |
 | `AFFE_VARC / EVOL` | `evol_sdaster`, optional | — | *time-dependent result*. A result with several time steps, typically the `evol_ther` of a thermal transient (`THER_LINEAIRE`, `THER_NON_LINE`); the variable is read at each time of the mechanical analysis (`upstream/astest/zzzz118a.comm:146`). |
 | `AFFE_VARC / NOM_CHAM` | text, optional | — | *field name*. One of `'TEMP'`, `'CORR'`, `'IRRA'`, `'NEUT'`, `'GEOM'`, `'HYDR_ELNO'`, `'HYDR_NOEU'`, `'META_ELNO'`, `'META_NOEU'`, `'EPSA_ELNO'`, `'EPSA_NOEU'`, `'PTOT'`, … (14 values; see the .json). Only when `exists("EVOL")`. The field of `EVOL` to read. Default from `NOM_VARC`: `'TEMP'` for `'TEMP'`, `'HYDR_ELNO'` for `'HYDR'`, `'META_ELNO'` for the metallurgical phases, `'NEUT'` for `'NEUT1'`–`'NEUT3'` (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:178`). |
-| `AFFE_VARC / PROL_DROITE` | text, optional | `'EXCLU'` | *right extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. Only when `exists("EVOL")`. What to do when the mechanical analysis asks for a time after the last time of `EVOL`. `'EXCLU'` (the default) refuses it; `'CONSTANT'` keeps the last field; `'LINEAIRE'` extrapolates linearly. TODO(verify) the message raised by `'EXCLU'`. |
+| `AFFE_VARC / PROL_DROITE` | text, optional | `'EXCLU'` | *right extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. Only when `exists("EVOL")`. What to do when the mechanical analysis asks for a time after the last time of `EVOL`. `'EXCLU'` (the default) refuses it; `'CONSTANT'` keeps the last field; `'LINEAIRE'` extrapolates linearly. With `'EXCLU'` the run stops with `UTILITAI8_33` ("Extrapolation cannot be made on the right") followed by `UTILITAI8_37`, which names the result, field and time (`upstream/bibfor/resu_util/rsinch.F90:225`, called with stop level 2 by `upstream/bibfor/calculel/vrcin1.F90:304`); `PROL_GAUCHE` gives `UTILITAI8_32` (U4.43.03 §4.4.4). |
 | `AFFE_VARC / PROL_GAUCHE` | text, optional | `'EXCLU'` | *left extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. Only when `exists("EVOL")`. Same, before the first time of `EVOL`. |
-| `AFFE_VARC / FONC_INST` | `fonction_sdaster` or `formule`, optional | — | Only when `exists("EVOL")`. A function of time attached to the `EVOL` reading (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:192`). TODO(verify) its meaning (time map from the mechanical to the thermal time scale) against U4.43.03. |
+| `AFFE_VARC / FONC_INST` | `fonction_sdaster` or `formule`, optional | — | Only when `exists("EVOL")`. A function of time attached to the `EVOL` reading (`upstream/code_aster/MacroCommands/affe_materiau_ops.py:192`). It maps the time of the analysis to the time of `EVOL`: `t_evol = FONC_INST(t_calc)`. Use it to shift the thermal transient, or to repeat one computed temperature cycle for a cyclic mechanical load (U4.43.03 §4.4.4; test case `zzzz223a`). |
 | `AFFE_VARC / VALE_REF` | real, required | — | *reference state value*. Only when `is_in("NOM_VARC", ('TEMP','SECH'))`. For `'TEMP'`, the reference (stress-free) temperature T_ref: thermal strain is ALPHA × (T − T_ref) (`upstream/bibfor/modelisa/verift.F90:264`), and `ELAS_FO/ALPHA` is re-based from `TEMP_DEF_ALPHA` to it (`upstream/bibfor/mate_util/alfint.F90:192`). Usually the assembly temperature, for example 20 °C (`upstream/astest/zzzz118a.comm:146`). |
 | `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the content of the material field (`upstream/bibfor/op/op0006.F90:99`). |
 
@@ -169,7 +171,7 @@ CHMAT1 = AFFE_MATERIAU(
 
 ## See also
 
-- French reference: U4.43.03 (French text: `en/docs/_src/U4.43.03.fr.md`; translation: `en/docs/U4.43.03.md` once task 5.2 lands)
+- French reference: U4.43.03 (French text: `en/docs/_src/U4.43.03.fr.md`; translation: `en/docs/U4.43.03.md`)
 - Catalog: `en/commands/AFFE_MATERIAU.json` (generated from `upstream/code_aster/Cata/Commands/affe_materiau.py:26`);
   `AFFE_VARC` from `upstream/code_aster/Cata/Commons/c_affe_varc.py:25`
 - Implementation: `upstream/code_aster/MacroCommands/affe_materiau_ops.py`;

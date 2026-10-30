@@ -17,6 +17,8 @@ examples: [zzzz505d, sslx102f, ssnl130f, tpls102a, ssls119c, sdll135f, ssnd112a]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `AFFE_CARA_ELEM` gives structural elements the data that the mesh cannot carry: shell
 thickness and local axes (`COQUE`), the stiffness, mass or damping of discrete elements
@@ -55,19 +57,19 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `COQUE` | factor keyword, optional, repeatable | — | *shell properties*. Thickness and local axes of `DKT`, `DST` and `COQUE_3D` elements. One occurrence per group with its own data. |
 | `COQUE / GROUP_MA` | element group, required, list | — | *element group*. The shell groups. Cover every shell element of the model: an element without shell data stops the calculation with `CALCUL_21` (`upstream/bibfor/calcul/jevech.F90:192`). |
 | `COQUE / EPAIS` | real, optional | — | *thickness*. Constant shell thickness, in the length unit of the mesh. Exactly one of `EPAIS`, `EPAIS_FO`. |
-| `COQUE / EPAIS_FO` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | Thickness as a function. Use it for a thickness that varies over the shell. TODO(verify) the function parameters accepted (coordinates `X`, `Y`, `Z`), against U4.42.01. |
+| `COQUE / EPAIS_FO` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | Thickness as a function of the coordinates `X`, `Y`, `Z`, evaluated at the center of gravity of each element, in mesh length units (U4.42.01 §8.3.1). Use it for a thickness that varies over the shell. |
 | `COQUE / ANGL_REP` | real, optional, list of up to 2, at least 2 | — | *local-axis angles*. Two angles α, β in degrees that define a reference direction d = (cos β cos α, cos β sin α, −sin β) in the global axes. Its projection on each element's plane is the local x axis in which shell stresses and generalized forces are reported (`upstream/bibfor/elements/coqrep.F90:43`). Without `ANGL_REP` or `VECTEUR` the angles are 0, so d is the global X axis (`upstream/bibfor/modelisa/aceaco.F90:130`; message `PLATE1_40`). Give it whenever the stresses are read in local axes. |
 | `COQUE / VECTEUR` | real, optional, list of up to 3, at least 3 | — | *reference vector (local x)*. The reference direction d given as a vector instead of angles; it is converted to `ANGL_REP` (`upstream/bibfor/modelisa/aceaco.F90:164`). Exclusive with `ANGL_REP`. Usually easier to write than the angles. |
 | `COQUE / A_CIS` | real, optional | `0.8333333` | *transverse shear correction factor*. The 5/6 shear correction coefficient. Read by the `COQUE_3D` elements (`upstream/bibfor/elements/vdxrig.F90`, `upstream/bibfor/elements/vdesga.F90:74`); `DKT` / `DST` use a fixed 5/6 (`upstream/bibfor/elements/dxmate.F90:196`). Keep the default. |
 | `COQUE / COEF_RIGI_DRZ` | real, optional | `1e-05` | *drilling stiffness coefficient*. Plate elements have no stiffness for the rotation about their normal (`DRZ`); a positive value adds one equal to this coefficient times the smallest bending rotation stiffness of the element, to keep the assembled matrix regular (`upstream/bibfor/elements/dxtloc.F90:125`). A negative value switches the `DKT` / `DST` elements to a drilling formulation scaled by its absolute value (`upstream/bibfor/elements/dkqrig.F90:134`; used in `upstream/astest/sdll135f.comm:66`). Keep the default. |
-| `COQUE / COQUE_NCOU` | integer, optional | `1` | *number of shell layers*. Number of layers through the thickness at which stresses are integrated and stored; post-processing selects a layer with `NUME_COUCHE` and a level in it with `NIVE_COUCHE` (`'INF'`, `'MOY'`, `'SUP'`) (`upstream/astest/ssls119c.comm:57`). Linear elastic analyses can keep 1; use more for nonlinear materials (TODO(verify) the recommended count, against U4.42.01). |
+| `COQUE / COQUE_NCOU` | integer, optional | `1` | *number of shell layers*. Number of layers through the thickness at which stresses are integrated and stored; post-processing selects a layer with `NUME_COUCHE` and a level in it with `NIVE_COUCHE` (`'INF'`, `'MOY'`, `'SUP'`) (`upstream/astest/ssls119c.comm:57`). The stress field has 2n+1 sub-points through the thickness. Linear elastic analyses can keep 1; nonlinear analyses need more than one layer to integrate the stresses correctly (U4.42.01 §8.3.5, which leaves the count to U2.02.01). |
 | `COQUE / EXCENTREMENT` | real, optional | — | *shell offset*. Distance along the normal between the mesh surface and the shell mid-surface. Use it when the mesh is drawn on a face of the plate rather than its mid-plane. Giving it also sets `INER_ROTA='OUI'` (`upstream/bibfor/modelisa/aceaco.F90:180`). |
 | `COQUE / EXCENTREMENT_FO` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional | — | Offset as a function. Exclusive with `EXCENTREMENT`. |
-| `COQUE / INER_ROTA` | text, optional | — | One of `'OUI'`. Takes rotational inertia into account in the shell mass matrix. Required with an offset (catalog rule; set automatically, `upstream/bibfor/modelisa/aceaco.F90:180`). TODO(verify) its effect without an offset, against U4.42.01. |
-| `COQUE / MODI_METRIQUE` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Metric correction through the thickness for the curvature of the shell. TODO(verify) which elements read it (the routine `upstream/bibfor/elements/carcou.F90:43` refers to it for pipe elements), against U4.42.01. Keep `'NON'`. |
+| `COQUE / INER_ROTA` | text, optional | — | One of `'OUI'`. Takes rotational inertia into account in the shell mass matrix. Required with an offset (catalog rule; set automatically, `upstream/bibfor/modelisa/aceaco.F90:180`). Read by `DKT`, `DST` and `Q4G`; without an offset it can be left out for thin shells, where the rotational inertia terms are negligible in the mass matrix (U4.42.01 §8.3.3). |
+| `COQUE / MODI_METRIQUE` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Metric correction through the thickness for the curvature of the shell. `'OUI'` is for `COQUE_AXIS`, whose integration through the thickness then follows the change of radius of curvature; `'NON'` assumes a thin shell and is the default for every shell (U4.42.01 §8.3.3). Keep `'NON'`. |
 | `DISCRET` | factor keyword, optional, repeatable | — | *discrete element properties*. Stiffness (`K_...`), mass (`M_...`) or damping (`A_...`) matrices of `DIS_T` / `DIS_TR` elements (catalog comment, `upstream/code_aster/Cata/Commands/affe_cara_elem.py:855`). One occurrence per group and matrix kind; give stiffness and mass in separate occurrences (`upstream/astest/sdll135f.comm:51`). |
-| `DISCRET / REPERE` | text, optional | `'GLOBAL'` | *coordinate system*. One of `'LOCAL'`, `'GLOBAL'`. `'GLOBAL'`: the values are in the global axes. `'LOCAL'`: in the local axes of the element (`upstream/astest/ssnd102a.comm:557`). TODO(verify) how the local axes of a `POI1` are set (`ORIENTATION`), against U4.42.01. |
-| `DISCRET / AMOR_HYST` | real, optional | — | Hysteretic damping coefficient of the discrete element. TODO(verify) its use in harmonic analyses, against U4.42.01. |
+| `DISCRET / REPERE` | text, optional | `'GLOBAL'` | *coordinate system*. One of `'LOCAL'`, `'GLOBAL'`. `'GLOBAL'`: the values are in the global axes. `'LOCAL'`: in the local axes of the element (`upstream/astest/ssnd102a.comm:557`). On a `POI1` (or a node) the local axes are those given by the `ORIENTATION` keyword; on a `SEG2` they follow the element (first node to second node), with an optional twist angle from `ORIENTATION` (U4.42.01 §12.3.6). |
+| `DISCRET / AMOR_HYST` | real, optional | — | Hysteretic damping coefficient η of the discrete element: it builds the complex stiffness j·η·K from the `K_*` matrix of the same occurrence, and only when `CALC_MATR_ELEM` is called with `OPTION='AMOR_HYST'` (U4.42.01 §12.3.5; test case `sdld313`). |
 | `DISCRET / SYME` | text, optional | `'OUI'` | One of `'OUI'`, `'NON'`. `'OUI'` (default): symmetric matrix, given as its upper triangle column by column. `'NON'`: full matrix, column by column (catalog help of the `VALE` blocs). |
 | `DISCRET / CARA` | text, optional | — | One of `'K_T_D_N'`, `'K_T_D_L'`, `'K_TR_D_N'`, `'K_TR_D_L'`, `'K_T_N'`, `'K_T_L'`, `'K_TR_N'`, `'K_TR_L'`, `'M_T_D_N'`, `'M_T_D_L'`, `'M_TR_D_N'`, `'M_TR_D_L'`, … (24 values; see the .json). Only when `equal_to("SYME", 'OUI')`. Which matrix is given, coded as kind (`K` stiffness, `M` mass, `A` damping), degrees of freedom (`T` translations, `TR` translations and rotations), `D` for diagonal, and support (`N` node, a `POI1` element; `L` line, a `SEG2` element). See [Discrete values](#discrete-values). |
 | `DISCRET / GROUP_MA` | element group, required, list | — | *element group*. The `DIS_T` / `DIS_TR` element groups. With `CARA` ending in `_N` they must hold `POI1` elements, otherwise `SEG2`; a wrong type stops the run with `MODELISA_56` (`upstream/bibfor/modelisa/aceadi.F90:181`). |
@@ -106,7 +108,7 @@ For a symmetric matrix (`SYME='OUI'`) the number of values is that of the upper 
 
 The diagonal terms follow the element's degrees of freedom: `DX`, `DY`, `DZ`, then `DRX`,
 `DRY`, `DRZ`. For instance `VALE=(0.0, pena, 0.0)` with `K_T_D_N` gives a spring along Y only
-(`upstream/astest/ssnd112a.comm:177`). TODO(verify) this order against U4.42.01.
+(`upstream/astest/ssnd112a.comm:177`; order kx, ky, kz, krx, kry, krz in U4.42.01 §12.3.3).
 
 ## Rules
 
@@ -251,7 +253,9 @@ CARAC = AFFE_CARA_ELEM(
 - **Local axes vary with element orientation.** Shell stresses and forces (`SIGM_ELNO`,
   `EFGE_ELNO`) are reported in each element's local axes. On a curved shell those axes rotate
   from element to element, so components such as `NXX` are not directly comparable across the
-  model. TODO(verify) the recommended post-processing (`MODI_REPERE`) against U4.42.01.
+  model. Give one `VECTEUR` so that the local x axis is its projection on each element (U4.42.01
+  §8.3.4); changing the axes of results afterward is covered by U2.01.05, which is not
+  ingested (TODO(verify) the recommended `MODI_REPERE` use against it).
 - **Discrete matrix on the wrong element type.** `_N` matrices need `POI1` groups and `_L`
   matrices `SEG2` groups (`MODELISA_56` otherwise). A node group cannot be given directly:
   create `POI1` elements on it with `CREA_MAILLAGE/CREA_POI1`
@@ -262,7 +266,7 @@ CARAC = AFFE_CARA_ELEM(
 
 ## See also
 
-- French reference: U4.42.01 (French text: `en/docs/_src/U4.42.01.fr.md`; translation: `en/docs/U4.42.01.md` once task 5.2 lands)
+- French reference: U4.42.01 (French text: `en/docs/_src/U4.42.01.fr.md`; translation: `en/docs/U4.42.01.md`)
 - Catalog: `en/commands/AFFE_CARA_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/affe_cara_elem.py:481`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_cara_elem.py`; `upstream/bibfor/op/op0019.F90`;
   `COQUE` in `upstream/bibfor/modelisa/aceaco.F90`; `DISCRET` in `upstream/bibfor/modelisa/aceadi.F90`;

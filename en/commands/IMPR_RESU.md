@@ -17,6 +17,8 @@ examples: [hplv101b, forma30a, forma04b, ahlv100a, hsnv132c]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `IMPR_RESU` writes a mesh, a field or a result to a file, for viewing in a post-processor or
 for reading by a program. The default and Tier 1 format is MED (the `.rmed` file ParaVis and
@@ -58,8 +60,8 @@ merges the `RESU` blocks and says in each row which formats accept the keyword.
 | `VERSION` | real, optional | `1.2` | One of `1.0`, `1.2`. Only when `equal_to("FORMAT", 'GMSH')`. Gmsh file format version. Not used in Tier 1. |
 | `RESU` | factor keyword, required, repeatable | — | Only when `equal_to("FORMAT", 'MED')`; or `equal_to("FORMAT", 'RESULTAT')`; or `equal_to("FORMAT", 'GMSH')`; or `equal_to("FORMAT", 'IDEAS')`; or `equal_to("FORMAT", 'ASTER')`. One block to write: a mesh, a field object or a result, with the fields, steps, components and region to keep. Repeat it to write several results or selections to the same file. The catalog defines one `RESU` per `FORMAT`; the keywords below say where they apply. |
 | `RESU / MAILLAGE` | `maillage_sdaster` or `squelette`, optional | — | *mesh*. The mesh to write. Alone, it writes the mesh only (`upstream/astest/hplv101b.comm:89`); with a result, mesh and fields. A mesh different from the model's mesh is refused (`RESULT3_66`). |
-| `RESU / CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Element properties. Give it for shells, beams and pipes so that fields with sub-points (layers, fibers) are written with their structure (`tests/fixtures/shell_static/input/run.comm:83`). TODO(verify) the effect on the MED file against U7.05.21. |
-| `RESU / VISU_SP` | text, optional | — | One of `'NON'`. Only when `not exists("CARA_ELEM")`. MED, without `CARA_ELEM`: `'NON'` writes no sub-point information (`upstream/bibfor/prepost/irmfac.F90:139`). TODO(verify) against U7.05.21. |
+| `RESU / CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Element properties. Give it for shells, beams and pipes so that fields with sub-points (layers, fibers) are written with their structure (`tests/fixtures/shell_static/input/run.comm:83`). The MED file then carries the data that positions the sub-points (shell thickness, beam twist angle, …) (U7.05.21 §4.3). It must be the result's own `CARA_ELEM` (`MED_64` otherwise, `upstream/bibfor/prepost/iremed.F90:131`). |
+| `RESU / VISU_SP` | text, optional | — | One of `'NON'`. Only when `not exists("CARA_ELEM")`. MED, without `CARA_ELEM`: `'NON'` writes no sub-point information (`upstream/bibfor/prepost/irmfac.F90:139`); the file is then fit only for `LIRE_RESU`, not for viewing (`MED2_14` advice). |
 | `RESU / CHAM_GD` | `cham_gd_sdaster`, optional | — | *field (physical quantity)*. A field object (for example from `CREA_CHAMP`) instead of a result. In MED it is named after its Python variable (`upstream/code_aster/CodeCommands/impr_resu.py:57`). |
 | `RESU / RESULTAT` | `resultat_sdaster`, optional | — | *result*. The result to write. The usual Tier 1 choice, with `NOM_CHAM`. |
 | `RESU / TYPE_NOM` | text, optional | `'NUME_ORDRE'` | One of `'NUME_ORDRE'`, `'NOM_CAS'`. Only when `is_type("RESULTAT") == mult_elas`. MED, `mult_elas` results: name the stored fields by step index or by load case name. Not used in Tier 1. |
@@ -82,7 +84,7 @@ merges the `RESU` blocks and says in each row which formats accept the keyword.
 | `RESU / CRITERE` | text, optional | `'RELATIF'` | *tolerance type*. One of `'RELATIF'`, `'ABSOLU'`. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST"))`. How `INST`/`FREQ`/`ANGLE` are matched. |
 | `RESU / PRECISION` | real, optional | `1e-06` | *tolerance*. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST")) and equal_to("CRITERE", 'RELATIF')`. Matching tolerance. |
 | `RESU / PRECISION` | real, required | — | *tolerance*. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST")) and equal_to("CRITERE", 'ABSOLU')`. Matching tolerance, required with `'ABSOLU'`. |
-| `RESU / NOM_PARA` | text, optional, list | — | *parameter name*. With `RESULTAT`: the result parameters (for example `INST`, `FREQ`) to print with the fields. Formats MED and RESULTAT. TODO(verify) the MED effect against U7.05.21. |
+| `RESU / NOM_PARA` | text, optional, list | — | *parameter name*. With `RESULTAT`: the result parameters (for example `INST`, `FREQ`) to print with the fields. Formats MED and RESULTAT. U7.05.21 does not cover it; the MED path reads and checks the list (`upstream/bibfor/prepost/irchor.F90:293`). TODO(verify) by a run what the MED file stores. |
 | `RESU / TOUT_CMP` | text, optional | — | One of `'OUI'`. All components (formats MED and RESULTAT). |
 | `RESU / NOM_CMP` | text, optional, list | — | *component name*. Formats MED and RESULTAT (and GMSH with `TYPE_CHAM='SCALAIRE'`): write only these components, for example `('VMIS', 'TRSIG')`. In MED it cannot be combined with `NOM_RESU_MED` (`MED3_6`). |
 | `RESU / NOM_CHAM_MED` | text, optional, list | — | Only when `exists("CHAM_GD") or exists("RESULTAT")`. MED: the names to give the fields in the file, one per field (at most 64 characters), instead of the automatic `<result>_<field>` name (`upstream/astest/ahlv100a.comm:430`). Rule: not with `NOM_RESU_MED`. |
@@ -95,8 +97,8 @@ merges the `RESU` blocks and says in each row which formats accept the keyword.
 | `RESU / FORM_TABL` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`, `'EXCEL'`. RESULTAT format: print the values as a table (`'OUI'`), as tab-separated columns for a spreadsheet (`'EXCEL'`), or in the default listing layout (`'NON'`) (`upstream/bibfor/prepost/irmfac.F90:118`). |
 | `RESU / VALE_MAX` | text, optional | — | One of `'OUI'`. RESULTAT format: print only the maximum of each component, and where it occurs (`upstream/astest/forma30a.comm:108`). |
 | `RESU / VALE_MIN` | text, optional | — | One of `'OUI'`. RESULTAT format: print only the minimum of each component, and where it occurs. |
-| `RESU / BORNE_SUP` | real, optional | — | RESULTAT format: print only values below this bound. TODO(verify) against U4.91.01. |
-| `RESU / BORNE_INF` | real, optional | — | RESULTAT format: print only values above this bound. TODO(verify) against U4.91.01. |
+| `RESU / BORNE_SUP` | real, optional | — | RESULTAT format: upper bound of the interval printed, values below it are printed; it bounds `VALE_MAX`/`VALE_MIN` too (U4.91.01 §11.3). |
+| `RESU / BORNE_INF` | real, optional | — | RESULTAT format: lower bound of the interval printed, values above it are printed (U4.91.01 §11.4). |
 | `RESU / IMPR_COOR` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. RESULTAT format: `'OUI'` also prints the node coordinates (`upstream/bibfor/prepost/irmfac.F90:148`). |
 | `RESU / FORMAT_R` | text, optional | `'1PE21.14'` | RESULTAT format: Fortran edit descriptor of real values (default `1PE21.14`, 14 decimals). |
 | `RESU / PARTIE` | text, optional | — | One of `'REEL'`, `'IMAG'`. GMSH format: real or imaginary part of a complex field. |
@@ -224,12 +226,13 @@ IMPR_RESU(FORMAT="GMSH", UNITE=37, RESU=_F(RESULTAT=RES_XFEM, NOM_CHAM="DEPL"))
 - **`NOM_CMP` and `NOM_RESU_MED` do not mix** in MED (`MED3_6`): with `NOM_CMP` and no
   `NOM_CHAM`, the wrapper leaves the automatic naming (`impr_resu.py:53`).
 - **Shell and beam fields.** Pass `CARA_ELEM` for structural elements so that sub-point fields
-  are written with their layer or fiber structure (our shell fixture does). TODO(verify) what is
-  written without it, against U4.91.01.
+  are written with their layer or fiber structure (our shell fixture does). Without it, a field
+  with sub-points on shells, grids, pipes or multifiber beams stops the command with `MED2_14`
+  (`upstream/bibfor/prepost/irmpga.F90:183`), unless `VISU_SP='NON'` is given.
 
 ## See also
 
-- French reference: U4.91.01 (French text: `en/docs/_src/U4.91.01.fr.md`; translation: `en/docs/U4.91.01.md` once task 5.2 lands). U4.91.01
+- French reference: U4.91.01 (French text: `en/docs/_src/U4.91.01.fr.md`; translation: `en/docs/U4.91.01.md`). U4.91.01
   covers the RESULTAT and ASTER formats; the MED format is U7.05.21 (`en/docs/_src/U7.05.21.fr.md`).
 - Catalog: `en/commands/IMPR_RESU.json` (generated from `upstream/code_aster/Cata/Commands/impr_resu.py:25`)
 - Implementation: `upstream/code_aster/CodeCommands/impr_resu.py`; `upstream/bibfor/prepost/irmfac.F90`

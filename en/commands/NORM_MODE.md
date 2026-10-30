@@ -17,6 +17,8 @@ examples: [forma12a, sdls505c, sdld02f]
 > **Assisted reference.** Written in session from the pinned catalog, the solver source it
 > calls, the message catalog, upstream test cases and the committed fixture runs. Every behavior
 > claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 Normalizes eigenmodes by a criterion chosen by the user.
 
@@ -64,7 +66,7 @@ the key keywords above mix the three: only `NORME` belongs to `NORM_MODE`. `FILT
 | `RAIDE` | `matr_asse_depl_r` or `matr_asse_depl_c` or `matr_asse_gene_r` or `matr_asse_pres_r`, optional | — | Stiffness matrix, under the same rule as `MASSE` (`ALGELINE_2`). Missing both for such a basis is fatal (`ALGELINE_1` + `ALGELINE_6`). |
 | `AMOR` | `matr_asse_depl_r` or `matr_asse_gene_r`, optional | — | Damping matrix, for complex modes of a modal basis normalized by `MASS_GENE` or `RIGI_GENE` (`ALGELINE_8`). Not used for real modes. |
 | `TITRE` | text, optional | — | *title*. A title stored with the result. Optional. |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the rule applied (`ALGELINE7_5`); `2` also prints the scaling coefficient of each mode. TODO(verify) the level-2 output. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `1` prints the rule applied (`ALGELINE7_5`); `2` also prints the scaling coefficient of each mode. U4.52.11 §3.8 lists only the old and new norm of each mode; TODO(verify) the level-2 output by a run. |
 
 2 hidden keyword(s) (`statut='c'`, set by the code, not by users) are not listed.
 
@@ -148,7 +150,7 @@ result's `NORME` parameter (`op0037.F90:750`), which `RECU_TABLE` can print.
 ## See also
 
 - French reference: U4.52.11 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.52.11.fr.md`; translation: `en/docs/U4.52.11.md` once task 5.2 lands)
+  `en/docs/_src/U4.52.11.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
 - Catalog: `en/commands/NORM_MODE.json` (generated from `upstream/code_aster/Cata/Commands/norm_mode.py:40`)
 - Implementation: `upstream/bibfor/op/op0037.F90`, `upstream/bibfor/algeline/vpnorm.F90`
 - Before: [CALC_MODES](CALC_MODES.md)

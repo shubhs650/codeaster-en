@@ -17,6 +17,8 @@ examples: [mesh001h, zzzz383d, ssls147a, ssls04d, sslv130a, zzzz236a, sdld110a, 
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `CREA_MAILLAGE` builds a **new** mesh from an existing one; the input mesh is left unchanged
 (the result is a fresh object, `upstream/code_aster/CodeCommands/crea_maillage.py:39`). Each
@@ -45,7 +47,7 @@ the old mesh (model, fields) must be rebuilt on the new one.
 | Keyword | Type / cardinality | Default | Meaning and when to use |
 |---|---|---|---|
 | `MAILLAGE` | `maillage_sdaster` or `maillage_p`, optional | — | *mesh*. The source mesh. Required for every transformation except `GEOM_FIBRE` and `ECLA_PG` (`MESH1_15`; catalog comment). A parallel mesh (`maillage_p`) is refused by `CREA_FISS`, `MODI_MAILLE`, `COQU_VOLU` and `CREA_MAILLE` (`MESH1_22`). |
-| `GEOM_FIBRE` | `gfibre_sdaster`, optional | — | A fiber-section geometry from `DEFI_GEOM_FIBRE`; the command returns the mesh of its fibers (`upstream/bibfor/op/op0167.F90:258`). Example: `upstream/astest/forma43a.comm:70`. TODO(verify): typical use (plotting fiber results), against U4.23.02. |
+| `GEOM_FIBRE` | `gfibre_sdaster`, optional | — | A fiber-section geometry from `DEFI_GEOM_FIBRE`; the command returns the mesh of its fibers (`upstream/bibfor/op/op0167.F90:258`). Example: `upstream/astest/forma43a.comm:70`. The mesh holds all the fiber groups of the study (U4.23.02 §4.16). |
 | `CREA_POI1` | factor keyword, optional, repeatable | — | Creates POI1 elements from nodes. Use it to carry point properties on nodes, for example discrete masses or springs (`DISCRET` in `AFFE_CARA_ELEM`), which need an element to be assigned to (`upstream/astest/sdld110a.comm:31`). |
 | `CREA_POI1 / NOM_GROUP_MA` | element group, optional, list | — | Name of the element group that receives the new POI1 elements. Without it the elements are created but no group holds them (`upstream/bibfor/op/op0167.F90:758`), so later commands cannot address them: always give it. |
 | `CREA_POI1 / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. A POI1 on every node of the mesh. |
@@ -61,7 +63,7 @@ the old mesh (model, fields) must be rebuilt on the new one.
 | `RESTREINT / GROUP_NO` | node group, optional, list | — | *node group*. Extra node groups whose nodes are kept even if no kept element uses them; with `TOUT_GROUP_NO='NON'` these are also the only node groups kept. |
 | `RESTREINT / TOUT_GROUP_NO` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. `'NON'` (default): only the node groups listed in `GROUP_NO` are kept, so with no `GROUP_NO` the new mesh has no node groups at all. `'OUI'`: every node group is kept, reduced to the kept nodes. |
 | `COQU_VOLU` | factor keyword, optional | — | *solid elements from shell surfaces*. Creates volume elements from surface elements: each surface element is extruded by `EPAIS` along its normal into one layer of solid elements (`upstream/bibfor/algeline/cmcovo.F90`). Use it to go from a shell model to a solid model of the same part. No upstream test case uses it in 17.4.26. |
-| `COQU_VOLU / NOM` | text, required | — | Name of the element group that receives the new solid elements. TODO(verify) against `cmcovo.F90` and U4.23.02. |
+| `COQU_VOLU / NOM` | text, required | — | Name of the element group made of the new solid elements (U4.23.02 §4.13.1). |
 | `COQU_VOLU / GROUP_MA` | element group, required, list | — | *element group*. The surface elements to extrude. Orient their normals consistently first (`MODI_MAILLAGE/ORIE_NORM_COQUE`), since the extrusion follows them. |
 | `COQU_VOLU / EPAIS` | real, required | — | *thickness*. Thickness of the solid layer. |
 | `COQU_VOLU / PLAN` | text, required | — | One of `'SUP'`, `'MOY'`, `'INF'`. Where the given surface sits in the layer. `'SUP'`: it is the top face, the layer grows against the normal. `'INF'`: it is the bottom face, the layer grows along the normal. `'MOY'`: it is the mid-surface (see `TRANSLATION`) (`upstream/bibfor/algeline/cmcovo.F90`, `plan` branches). |
@@ -73,10 +75,10 @@ the old mesh (model, fields) must be rebuilt on the new one.
 | `RAFFINEMENT` | factor keyword, optional | — | Uniform refinement of the mesh: each edge is split in two, `NIVEAU` times (`upstream/code_aster/ObjectsExt/mesh_ext.py`, `refine`). Use it for mesh-convergence studies. The whole mesh is refined; a partial selection is a fatal error (`MESH1_4`, `op0167.F90:474`). |
 | `RAFFINEMENT / TOUT` | text, optional | `'OUI'` | *all (entire mesh)*. One of `'OUI'`. The only allowed value. |
 | `RAFFINEMENT / NIVEAU` | integer, optional | `1` | Number of successive refinements. Each level multiplies the number of elements by about 2^d in dimension d. Example: `NIVEAU=2` (`upstream/astest/mesh001h.py:30`). |
-| `CREA_FISS` | factor keyword, optional, repeatable | — | Creates a potential crack with joint elements or elements with a discontinuity, between two facing node lines. Use it to insert interface (joint) elements along a predefined crack path; the new group is then given a joint modeling type, for example `PLAN_JOINT` in `upstream/astest/ssnp142j.comm:80`, `:104`. The created elements have 4 nodes (`upstream/bibfor/mesh/cmcrea.F90` header), which suggests a 2D feature. TODO(verify) 2D-only. |
+| `CREA_FISS` | factor keyword, optional, repeatable | — | Creates a potential crack with joint elements or elements with a discontinuity, between two facing node lines. Use it to insert interface (joint) elements along a predefined crack path; the new group is then given a joint modeling type, for example `PLAN_JOINT` in `upstream/astest/ssnp142j.comm:80`, `:104`. The created elements have 4 nodes (`upstream/bibfor/mesh/cmcrea.F90` header), a 2D feature: the new elements are `QUAD4` along a line (U4.23.02 §4.14). |
 | `CREA_FISS / NOM` | text, required | — | Name of the element group that receives the new joint elements. |
 | `CREA_FISS / GROUP_NO_1` | node group, required | — | The nodes of one side of the crack path. |
-| `CREA_FISS / GROUP_NO_2` | node group, required | — | The nodes of the other side, facing `GROUP_NO_1`. TODO(verify): pairing and ordering requirements between the two groups, against U4.23.02. |
+| `CREA_FISS / GROUP_NO_2` | node group, required | — | The nodes of the other side, facing `GROUP_NO_1`. Both groups must have the same number of nodes and be ordered so that their numbering starts on the same side (for example with `DEFI_GROUP` `CREA_GROUP_NO` `OPTION='NOEUD_ORDO'`). `GROUP_NO_1` carries local nodes 1 and 2 and `GROUP_NO_2` nodes 3 and 4; choose them so that the element numbering runs counterclockwise (U4.23.02 §4.14.2). |
 | `LINE_QUAD` | factor keyword, optional | — | *linear to quadratic*. Linear to quadratic conversion: adds a mid-side node on every edge (and center nodes where the element type needs them). Use it when the mesher produced linear elements but quadratic elements are wanted (bending of solids, stress accuracy). Example: `upstream/astest/ssls04d.comm:29`. |
 | `LINE_QUAD / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. Convert the whole mesh (the default when neither `TOUT` nor `GROUP_MA` is given). |
 | `LINE_QUAD / GROUP_MA` | element group, optional, list | — | *element group*. Convert only these elements. Gives warning `MESH1_4` (risk of a non-conforming mesh). |
@@ -90,18 +92,18 @@ the old mesh (model, fields) must be rebuilt on the new one.
 | `MODI_HHO / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. |
 | `COQUE_SOLIDE` | factor keyword, optional, repeatable | — | Creates a mesh for the `COQUE_SOLIDE` (solid-shell) modeling type: HEXA8 become HEXA9 and PENTA6 become PENTA7 (`upstream/bibfor/op/op0167.F90:353`). Use it before assigning that modeling type. Example: `upstream/astest/zzzz416c.comm:23`. |
 | `COQUE_SOLIDE / GROUP_MA` | element group, required, list | — | *element group*. The solid elements to convert. |
-| `COQUE_SOLIDE / GROUP_MA_SURF` | element group, optional, list | — | Surface elements used to orient the converted elements (`orieHexa9` is called per occurrence). TODO(verify) meaning, against U4.23.02. |
+| `COQUE_SOLIDE / GROUP_MA_SURF` | element group, optional, list | — | The top or bottom surface of the shell, used to orient the converted hexahedra (`orieHexa9` is called per occurrence). Required when the mesh has `HEXA8`; not needed for `PENTA6`, whose `TRIA3` faces mark top and bottom (U4.23.02 §4.9). |
 | `QUAD_LINE` | factor keyword, optional | — | *quadratic to linear*. Quadratic to linear conversion: removes mid-side and center nodes. Use it to obtain a linear mesh for a linear element formulation, or to locate mesh defects (advice of `MODELISA4_10`). Example: `upstream/astest/sslv130a.comm:1399`. |
 | `QUAD_LINE / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. Convert the whole mesh (default). |
 | `QUAD_LINE / GROUP_MA` | element group, optional, list | — | *element group*. Convert only these elements (warning `MESH1_4`). |
 | `REPERE` | factor keyword, optional | — | *coordinate system*. Change of coordinate system used to determine the properties of a beam section: moves a beam cross-section mesh to the origin and axes given by its section properties. Use it in beam-section workflows; no upstream test case calls it directly in 17.4.26. |
-| `REPERE / TABLE` | `table_sdaster`, required | — | *table*. Name of the table that contains the beam section properties (as produced for the section mesh). TODO(verify): producing command (`MACR_CARA_POUTRE`), against U4.23.02. |
+| `REPERE / TABLE` | `table_sdaster`, required | — | *table*. Name of the table of geometric properties of the section (center of gravity, torsion center, principal axes), made by `POST_ELEM` with `CARA_GEOM` or `CARA_POUTRE`. `MACR_CARA_POUTRE` uses this feature to compute the warping constant (U4.23.02 §4.12). |
 | `REPERE / NOM_ORIG` | text, optional | — | Origin of the new coordinate system. One of `'CDG'`, `'TORSION'`. Center of gravity or torsion (shear) center of the section. |
 | `REPERE / NOM_ROTA` | text, optional | — | Direction of the coordinate system. One of `'INERTIE'`. Align the axes with the principal axes of inertia. |
 | `REPERE / GROUP_MA` | element group, optional | — | *element group*. Name of the element group whose center of gravity becomes the origin of the new coordinate system. Only when `equal_to("NOM_ORIG", 'CDG')`. |
 | `DECOUPE_LAC` | factor keyword, optional | — | Creates LAC patches for contact: cuts the elements under the contact surface so that the LAC contact method can be used. Use it only for `DEFI_CONTACT` with the LAC method. After it, `MODI_MAILLAGE` may only move nodes (`MESH1_12`). Example: `upstream/astest/zzzz383d.comm:29`. |
 | `DECOUPE_LAC / GROUP_MA_ESCL` | element group, required, list | — | *secondary element group*. The secondary contact surface to cut into patches. |
-| `DECOUPE_LAC / DECOUPE_HEXA` | text, optional | `'PYRA'` | One of `'PYRA'`, `'HEXA'`. How the hexahedra under the surface are cut: into pyramids or into hexahedra (`upstream/astest/zzzz383c.comm:33`). TODO(verify) the effect on solution quality, against U4.23.02. |
+| `DECOUPE_LAC / DECOUPE_HEXA` | text, optional | `'PYRA'` | One of `'PYRA'`, `'HEXA'`. How the hexahedra under the surface are cut: into pyramids or into hexahedra (`upstream/astest/zzzz383c.comm:33`). `'PYRA'` adds the fewest nodes; `'HEXA'` helps when pyramids in the mesh are a problem (U4.23.02 §4.18). `DECOUPE_LAC` must be the last command acting on the mesh. |
 | `ECLA_PG` | factor keyword, optional | — | Splits the elements into small elements that each contain a single Gauss point. Use it to visualize fields at Gauss points (`*_ELGA`): each value gets its own small element. `MAILLAGE` is not needed: the mesh comes from `MODELE`. No upstream test case calls it directly in 17.4.26. |
 | `ECLA_PG / MODELE` | `modele_sdaster`, required | — | *model*. The model whose Gauss points are used. |
 | `ECLA_PG / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. Every element of the model. |
@@ -206,7 +208,7 @@ mesh = CREA_MAILLAGE(MAILLAGE=mesh_init, RAFFINEMENT=_F(TOUT="OUI", NIVEAU=2), I
 
 ## See also
 
-- French reference: U4.23.02 (French text: `en/docs/_src/U4.23.02.fr.md`; translation: `en/docs/U4.23.02.md` once task 5.2 lands)
+- French reference: U4.23.02 (French text: `en/docs/_src/U4.23.02.fr.md`; translation: `en/docs/U4.23.02.md`)
 - Catalog: `en/commands/CREA_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/crea_maillage.py:38`)
 - Implementation: `upstream/bibfor/op/op0167.F90`, `upstream/code_aster/CodeCommands/crea_maillage.py`
 - Related: `LIRE_MAILLAGE`, `MODI_MAILLAGE`, `DEFI_GROUP`, `AFFE_MODELE` (modeling type decides

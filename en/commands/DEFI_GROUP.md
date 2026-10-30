@@ -17,6 +17,8 @@ examples: [mesh001e, zzzz360a, zzzz238a, ssnp168a, ssnp110c, forma04a, ssnv183a,
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `DEFI_GROUP` adds element groups and node groups to an existing mesh, or deletes them. Every
 later command addresses parts of the model through these groups (`GROUP_MA`, `GROUP_NO`), so
@@ -51,7 +53,7 @@ occurrence (as in `upstream/astest/mesh001e.py:30`), and a deleted name can be r
 | Keyword | Type / cardinality | Default | Meaning and when to use |
 |---|---|---|---|
 | `MAILLAGE` | `maillage_sdaster` or `squelette`, optional | — | *mesh*. The mesh to add groups to. It is modified in place and is also the result (`upstream/code_aster/CodeCommands/defi_group.py:39`). Give this or `GRILLE`. |
-| `GRILLE` | `grille_sdaster`, optional | — | A grid object (`grille_sdaster`) instead of a mesh. TODO(verify): grids come from `DEFI_GRILLE` (XFEM auxiliary grid); not needed for standard structural models. |
+| `GRILLE` | `grille_sdaster`, optional | — | An auxiliary grid (`grille_sdaster`, made by `DEFI_GRILLE`) to enrich instead of a mesh (U4.22.01 §3.2). It serves XFEM crack propagation; not needed for standard structural models. |
 | `DETR_GROUP_MA` | factor keyword, optional, repeatable | — | Deletes element groups. Use it to free a name before re-creating the group, since creating a group whose name exists is a fatal error (`ALGELINE3_7`). |
 | `DETR_GROUP_MA / NOM` | text, required, list | — | Names of the element groups to delete. |
 | `DETR_GROUP_NO` | factor keyword, optional, repeatable | — | Deletes node groups. Same use as `DETR_GROUP_MA` (the fatal error for an existing node group name is `SOUSTRUC_37`). |
@@ -104,7 +106,7 @@ occurrence (as in `upstream/astest/mesh001e.py:30`), and a deleted name can be r
 | `CREA_GROUP_NO / VECT_NORMALE` | real, optional, list of up to 3 | — | Only when `equal_to("OPTION", 'ENV_CYLINDRE')`; or `equal_to("OPTION", 'PLAN')`. Cylinder axis, or normal to the plane (to the line in 2D), as a vector. |
 | `CREA_GROUP_NO / GROUP_NO_ORIG` | node group, required | — | Only when `equal_to("OPTION", 'SEGM_DROI_ORDO')`. Start node of the segment. |
 | `CREA_GROUP_NO / GROUP_NO_EXTR` | node group, required | — | Only when `equal_to("OPTION", 'SEGM_DROI_ORDO')`. End node of the segment. |
-| `CREA_GROUP_NO / CRITERE` | text, required | — | *tolerance type*. One of `'ABSOLU'`, `'RELATIF'`. Only when `equal_to("OPTION", 'SEGM_DROI_ORDO')`. Whether `PRECISION` is an absolute distance or relative to the segment length. TODO(verify) the relative reference length in `oreino.F90`. |
+| `CREA_GROUP_NO / CRITERE` | text, required | — | *tolerance type*. One of `'ABSOLU'`, `'RELATIF'`. Only when `equal_to("OPTION", 'SEGM_DROI_ORDO')`. Whether `PRECISION` is an absolute distance or relative: with `'RELATIF'` the distance of each node to the segment AB is divided by the length of AB; a node farther than `PRECISION` stops the command (U4.22.01 §3.5.9). |
 | `CREA_GROUP_NO / GROUP_MA` | element group, required, list | — | *element group*. Only when `equal_to("OPTION", 'NOEUD_ORDO')`; or `equal_to("OPTION", 'INCLUSION')`. For `NOEUD_ORDO`: line elements (SEG2/SEG3/SEG4, all of one type) that form one continuous line without branches (`upstream/bibfor/elements/cgnoor.F90`). For `INCLUSION`: the elements whose nodes are tested. |
 | `CREA_GROUP_NO / GROUP_NO_ORIG` | node group, optional | — | Only when `equal_to("OPTION", 'NOEUD_ORDO')`; or `equal_to("OPTION", 'TUNNEL')`. `NOEUD_ORDO`: the start of the path, which fixes its direction; if omitted the code picks one of the two ends (catalog comment, `defi_group.py:309`). `TUNNEL`: the start of the axis. |
 | `CREA_GROUP_NO / GROUP_NO_EXTR` | node group, optional | — | Only when `equal_to("OPTION", 'NOEUD_ORDO')`. The end of the path. For a closed line, give the same node as `GROUP_NO_ORIG`. |
@@ -303,7 +305,7 @@ MA = DEFI_GROUP(
 
 ## See also
 
-- French reference: U4.22.01 (French text: `en/docs/_src/U4.22.01.fr.md`; translation: `en/docs/U4.22.01.md` once task 5.2 lands)
+- French reference: U4.22.01 (French text: `en/docs/_src/U4.22.01.fr.md`; translation: `en/docs/U4.22.01.md`)
 - Catalog: `en/commands/DEFI_GROUP.json` (generated from `upstream/code_aster/Cata/Commands/defi_group.py:42`)
 - Implementation: `upstream/bibfor/op/op0104.F90`, `upstream/bibfor/soustruc/sscgma.F90`,
   `upstream/bibfor/soustruc/sscgno.F90`

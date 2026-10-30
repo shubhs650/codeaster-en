@@ -134,7 +134,7 @@ MAIL0 = LIRE_MAILLAGE(FORMAT="MED", VERI_MAIL=_F(VERIF="NON"))
 
 ## See also
 
-- French reference: U4.21.01 (French text: `en/docs/_src/U4.21.01.fr.md`; translation: `en/docs/U4.21.01.md` once task 5.2 lands)
+- French reference: U4.21.01 (French text: `en/docs/_src/U4.21.01.fr.md`; translation: `en/docs/U4.21.01.md`)
 - Catalog: `en/commands/LIRE_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/lire_maillage.py:87`)
 - Implementation: `upstream/code_aster/CodeCommands/lire_maillage.py`; mesh checks
   `upstream/bibfor/modelisa/chckma.F90`

@@ -243,7 +243,7 @@ EXTRFO = MACR_LIGN_COUPE(
 - [`POST_RELEVE_T`](POST_RELEVE_T.md), which does the extraction (components, invariants,
   resultants, `MOYENNE`); [`POST_RCCM`](POST_RCCM.md), which linearizes the stresses this command
   extracts; [`CALC_CHAMP`](CALC_CHAMP.md), which computes the fields.
-- French reference: U4.81.13 (French text: `en/docs/_src/U4.81.13.fr.md`; translation: `en/docs/U4.81.13.md` once task 5.2 lands)
+- French reference: U4.81.13 (French text: `en/docs/_src/U4.81.13.fr.md`; translation: `en/docs/U4.81.13.md`)
 - Catalog: `en/commands/MACR_LIGN_COUPE.json` (generated from `upstream/code_aster/Cata/Commands/macr_lign_coupe.py:25`)
 - Implementation: `upstream/code_aster/MacroCommands/macr_lign_coupe_ops.py`
 - Example: `upstream/astest/sslv100c.comm` (lines 62)

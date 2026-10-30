@@ -17,6 +17,8 @@ examples: [gcpc002c, ssls106a, ssnp123f, zzzz144a, ssla200a, ttnl101e]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `AFFE_CHAR_CINE` imposes known values of degrees of freedom (DOFs) on nodes, the condition
 U = U0, and produces a kinematic load (`char_cine_meca` for `MECA_IMPO`). The analysis
@@ -61,14 +63,14 @@ elements around the node: solid (`3D`) nodes carry `DX`, `DY`, `DZ`; shell nodes
 | `MECA_IMPO / DRX` | real, optional | — | Rotation about global X, in radians. Exists only on nodes with rotational DOFs (shells, beams, discrete `DIS_TR`). |
 | `MECA_IMPO / DRY` | real, optional | — | Rotation about global Y, in radians. |
 | `MECA_IMPO / DRZ` | real, optional | — | Rotation about global Z, in radians. |
-| `MECA_IMPO / GRX` | real, optional | — | A beam DOF not described in the catalog comment. TODO(verify) its meaning (cross-section warping of the `POU_D_TG` beam) against U4.44.01. Not used in Tier 1. |
-| `MECA_IMPO / PRES` | real, optional | — | A pressure DOF; not described in the catalog comment. TODO(verify) which modelings carry it (fluid, incompressible formulations) against U4.44.01. Not used in Tier 1. |
+| `MECA_IMPO / GRX` | real, optional | — | Warping of the `POU_D_TG` beam (U4.44.01 §5.1). Not used in Tier 1. |
+| `MECA_IMPO / PRES` | real, optional | — | A pressure DOF: acoustic pressure of `3D_FLUIDE` (u–p–φ and u–p formulations), pore pressure of `3D_JOINT_CT`, or the Lagrange multiplier of the second-gradient mixed formulation (U4.44.01 §5.1). Not used in Tier 1. |
 | `MECA_IMPO / PHI` | real, optional | — | Depending on the modeling, a fluid displacement potential, a crack angle or a shear angle of the `PLAQ_MITC` plate (catalog comment). Not used in Tier 1. |
 | `MECA_IMPO / PSI` | real, optional | — | Fluid velocity potential (catalog comment). Not used in Tier 1. |
 | `MECA_IMPO / TEMP` | real, optional | — | *temperature*. A temperature DOF of the mechanical quantity (catalog comment «DDL de temperature»), carried by coupled modelings such as THM; not the temperature of a thermal model: to impose a temperature in a thermal analysis use `THER_IMPO`. Not used in Tier 1. |
 | `MECA_IMPO / PRE1` | real, optional | — | First pressure DOF of coupled hydro-mechanical (THM) modelings (catalog comment: «DDL de pression»). Out of scope. |
 | `MECA_IMPO / PRE2` | real, optional | — | Second pressure DOF of THM modelings. Out of scope. |
-| `MECA_IMPO / GONF` | real, optional | — | Not described in the catalog comment. TODO(verify) its meaning (swelling DOF of incompressible formulations) against U4.44.01. Out of scope. |
+| `MECA_IMPO / GONF` | real, optional | — | Swelling DOF of the incompressible (`_INCO_UPG`) and second-gradient formulations (U4.44.01 §5.1). Out of scope. |
 | `MECA_IMPO / GLIS` | real, optional | — | Relative tangential displacement (slip), in a local basis (catalog comment). Out of scope. |
 | `MECA_IMPO / LAG_GV` | real, optional | — | A Lagrange multiplier of some formulations (catalog comment: «méthode plaq_mitc»). Out of scope. |
 | `MECA_IMPO / LH1` | real, optional | — | Lagrange multiplier of the pressure across a crack in HM-XFEM (catalog comment). Out of scope (XFEM). |
@@ -198,12 +200,13 @@ BND_TEMP = AFFE_CHAR_CINE(MODELE=MODEL, THER_IMPO=_F(GROUP_MA="END", TEMP=0))
   Write each support once, or put the exceptions last on purpose.
 - **Modal analyses need the same load on every matrix.** The matrices are assembled with the
   kinematic load, and the dynamic commands check that it is consistent across them
-  (`DYNALINE2_4` to `DYNALINE2_10`). TODO(verify) the `CALC_MODES` path when task 2.3d/Tier 2
-  covers it.
+  (`DYNALINE2_4` to `DYNALINE2_10`). For `CALC_MODES`, give the same `CHAR_CINE` to the
+  stiffness and the mass in `ASSE_MATRICE` ([ASSE_MATRICE](ASSE_MATRICE.md),
+  `upstream/astest/sdll02b.comm:63`, `:65`).
 
 ## See also
 
-- French reference: U4.44.03 (French text: `en/docs/_src/U4.44.03.fr.md`; translation: `en/docs/U4.44.03.md` once task 5.2 lands)
+- French reference: U4.44.03 (French text: `en/docs/_src/U4.44.03.fr.md`; translation: `en/docs/U4.44.03.md`)
 - Catalog: `en/commands/AFFE_CHAR_CINE.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_cine.py:48`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_cine.py`;
   `upstream/bibfor/op/op0101.F90`, `upstream/bibfor/modelisa/charci.F90`,
