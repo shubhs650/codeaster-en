@@ -1,0 +1,66 @@
+# Thermal checks for the THER_LINEAIRE / AFFE_CHAR_THER references (task 2.3e).
+# Block 200 x 100 x 100 mm (solid_loads mesh, HEXA8). Units: mm, W, K, s.
+# One-dimensional through Z: BASE (Z=0) and TOP (Z=100); the other faces are adiabatic.
+DEBUT()
+
+MAIL = LIRE_MAILLAGE(FORMAT="MED", UNITE=20)
+MAIL = DEFI_GROUP(reuse=MAIL, MAILLAGE=MAIL, CREA_GROUP_NO=_F(GROUP_MA=("BASE", "TOP")))
+
+MOTH = AFFE_MODELE(
+    MAILLAGE=MAIL,
+    AFFE=_F(GROUP_MA=("BLOCK", "BASE", "TOP"), PHENOMENE="THERMIQUE", MODELISATION="3D"),
+)
+
+# lambda = 50 W/(m.K) = 0.05 W/(mm.K); rho*cp = 3.6e6 J/(m3.K) = 3.6e-3 J/(mm3.K)
+ACIER = DEFI_MATERIAU(THER=_F(LAMBDA=0.05, RHO_CP=3.6e-3))
+CHMAT = AFFE_MATERIAU(MAILLAGE=MAIL, AFFE=_F(GROUP_MA="BLOCK", MATER=ACIER))
+
+BASE0 = AFFE_CHAR_THER(MODELE=MOTH, TEMP_IMPO=_F(GROUP_MA="BASE", TEMP=0.0))
+# (a) flux 0.01 W/mm2 on TOP: T(TOP) = q L / lambda = 20 if FLUN > 0 enters the body
+FLUX = AFFE_CHAR_THER(MODELE=MOTH, FLUX_REP=_F(GROUP_MA="TOP", FLUN=0.01))
+# (b) convection h = 5e-4 W/(mm2.K), T_ext = 100: T(TOP) = h Text / (h + lambda/L) = 50
+CONV = AFFE_CHAR_THER(MODELE=MOTH, ECHANGE=_F(GROUP_MA="TOP", COEF_H=5.0e-4, TEMP_EXT=100.0))
+# (c) volume source 1e-4 W/mm3, TOP adiabatic: T(TOP) = s L^2 / (2 lambda) = 10
+SOUR = AFFE_CHAR_THER(MODELE=MOTH, SOURCE=_F(GROUP_MA="BLOCK", SOUR=1.0e-4))
+
+L0 = DEFI_LIST_REEL(VALE=0.0)
+
+def top_temp(resu, label, unit):
+    tab = POST_RELEVE_T(ACTION=_F(OPERATION="MOYENNE_ARITH", INTITULE=label, RESULTAT=resu,
+                                  NOM_CHAM="TEMP", GROUP_NO="TOP", NOM_CMP="TEMP"))
+    IMPR_TABLE(TABLE=tab, FORMAT="TABLEAU", SEPARATEUR=",", UNITE=unit)
+
+TA = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, TYPE_CALCUL="STAT",
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=FLUX)), INCREMENT=_F(LIST_INST=L0))
+top_temp(TA, "FLUX", 31)
+TB = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, TYPE_CALCUL="STAT",
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=L0))
+top_temp(TB, "CONV", 32)
+TC = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, TYPE_CALCUL="STAT",
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=SOUR)), INCREMENT=_F(LIST_INST=L0))
+top_temp(TC, "SOUR", 33)
+
+# transient, default ETAT_INIT (steady state of the loads at the first time) versus VALE=0
+LT = DEFI_LIST_REEL(DEBUT=0.0, INTERVALLE=_F(JUSQU_A=3600.0, PAS=360.0))
+TD = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT,
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=LT))
+top_temp(TD, "TRAN_DEFAULT", 34)
+TE = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, ETAT_INIT=_F(VALE=0.0),
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=CONV)), INCREMENT=_F(LIST_INST=LT))
+top_temp(TE, "TRAN_VALE0", 35)
+
+# STAT with several times: one steady solution per time
+L3 = DEFI_LIST_REEL(VALE=(0.0, 1.0, 2.0))
+RAMP = DEFI_FONCTION(NOM_PARA="INST", VALE=(0.0, 0.0, 2.0, 2.0))
+TF = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, TYPE_CALCUL="STAT",
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=FLUX, FONC_MULT=RAMP)),
+                   INCREMENT=_F(LIST_INST=L3))
+top_temp(TF, "STAT_RAMP", 36)
+
+# radiation in a linear analysis (expected to be refused or linearized)
+RAYO = AFFE_CHAR_THER(MODELE=MOTH, RAYONNEMENT=_F(GROUP_MA="TOP", SIGMA=5.67e-14, EPSILON=0.8, TEMP_EXT=100.0))
+TG = THER_LINEAIRE(MODELE=MOTH, CHAM_MATER=CHMAT, TYPE_CALCUL="STAT",
+                   EXCIT=(_F(CHARGE=BASE0), _F(CHARGE=RAYO)), INCREMENT=_F(LIST_INST=L0))
+top_temp(TG, "RAYO", 37)
+
+FIN()
