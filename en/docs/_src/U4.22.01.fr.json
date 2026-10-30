@@ -1,0 +1,2526 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.22.01.pdf",
+  "source_sha256": "e80a374d40c89624b4a909fef22e5729e24fb87ff0626904595a0a489e9bbacc",
+  "source_bytes": 311979
+ },
+ "schema_version": 1,
+ "doc_id": "U4.22.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "29/01/2020",
+  "fascicle": "Manuel d'utilisation Fascicule u4.22:",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 24,
+  "pages": "24",
+  "pdf_keywords": "U4.22.01-H",
+  "pdf_title": "Opérateur DEFI_GROUP",
+  "responsible": "PIGNET Nicolas",
+  "revision": "49fc7e9bf234",
+  "title": "Opérateur DEFI_GROUP",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur DEFI_GROUP",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Définir dans un maillage existant, de nouveaux groupes de nœuds ou de mailles. Ceci peut faciliter la définition de nouveaux lieux géométriques pour des entrées de données ou des post-traitements.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour créer de nouveaux groupes, on utilise des critères topologiques, logiques ou géométriques.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Modifie une structure de données de type maillage, squelette ou grille.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Table des matières",
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "3.4.7 Sous-groupe d’un groupe existant : mots clé GROUP_MA / POSITION / NUME_INIT /",
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "3.5.5 Sous groupe d’un groupe existant : mots clé GROUP_NO / POSITION / NUME_INIT /",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma (maillage) =    DEFI_GROUP    (",
+    "          ◊  reuse = / ma,",
+    "                    / gr,",
+    "          ♦  | MAILLAGE = ma ,                   /         [maillage]",
+    "                                                 /         [squelette]",
+    "             | GRILLE =   gr ,                   /         [grille]",
+    "          ♦  |  DETR_GROUP_MA =  _F (",
+    "                ♦  NOM =            lgma      ),           [l_group_ma]",
+    "             |  DETR_GROUP_NO =  _F (",
+    "                ♦  NOM =            lgno      ),           [l_group_no]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CREA_GROUP_MA =  (_F (",
+    "   ♦  NOM =            gma    ,               [identificateur]",
+    "   ◊  TYPE_MAILLE      =  / 'TOUT'            [DEFAUT]",
+    "                          / '3D' / '2D' / '1D'",
+    "                          / 'SEG2' / 'TRIA3' / 'QUAD4'",
+    "                          / 'QUAD8' / … / 'PYRAM13'",
+    "   ♦  /   TOUT      =  'OUI'  ,",
+    "      /   INTERSEC  =  lgma   ,               [l_group_ma]",
+    "      /   UNION     =  lgma   ,               [l_group_ma]",
+    "      /   DIFFE     =  lgma   ,               [l_group_ma]",
+    "      /   GROUP_MA  =  gma    ,               [group_ma]",
+    "          /  NUME_INIT =  /   nuini ,         [I]",
+    "                          /   1     ,         [DEFAUT]",
+    "             NUME_FIN  =      nufin ,         [I]",
+    "          /  POSITION  =  /   'INIT',",
+    "                          /   'FIN' ,",
+    "                          /   'MILIEU' ,",
+    "      /   OPTION=   'FACE_NORMALE'  ,",
+    "          ♦  /  ANGL_NAUT   = (a, b)    ,     [l_R]",
+    "             /  VECT_NORMALE= (x, y, z) ,     [l_R]",
+    "          ◊  ANGL_PREC  = / a ,               [R]",
+    "                          / 0.5,              [DEFAUT]",
+    "          ◊  VERI_SIGNE = / 'NON' ,",
+    "                          / 'OUI' ,           [DEFAUT]",
+    "      /   OPTION=   'SPHERE' ,",
+    "          ♦  /  POINT = (x, y, z),            [l_R]",
+    "             /  GROUP_NO_CENTRE = grno,       [group_no]",
+    "          ♦  RAYON = r,                       [R]",
+    "      /   OPTION=   'CYLINDRE' ,",
+    "          ♦  /  POINT = (x, y, z),            [l_R]",
+    "             /  GROUP_NO_CENTRE = grno,       [group_no]",
+    "          ♦  RAYON = r,                       [R]",
+    "          ♦  /  ANGL_NAUT   = (a, b),         [l_R]",
+    "             /  VECT_NORMALE= (x, y, z),      [l_R]",
+    "      /   OPTION=   'BANDE' ,",
+    "          ♦  /  POINT = (x, y, z),            [l_R]",
+    "             /  GROUP_NO_CENTRE = grno,       [group_no]",
+    "          ♦  /  ANGL_NAUT   = (a, b),         [l_R]",
+    "             /  VECT_NORMALE= (x, y, z),      [l_R]",
+    "          ♦  DIST = d,                        [R]",
+    "      /   OPTION=   'APPUI' ,",
+    "          ♦  GROUP_NO = lgno     ,         [l_group_no]",
+    "          ♦  TYPE_APPUI = / 'AU_MOINS_UN'",
+    "                          / 'TOUT'",
+    "                          / 'SOMMET'",
+    "                          / 'MAJORITE'",
+    "      /   OPTION=   'FISS_XFEM' ,",
+    "          ♦  FISSURE = (fiss1, fiss2,...),       [l_fiss_xfem]",
+    "          ♦  TYPE_GROUP = / 'XFEM'",
+    "                          / 'HEAVISIDE'",
+    "                          / 'CRACKTIP'",
+    "                          / 'MIXTE'",
+    "                          / 'FISSUREE'",
+    "      ),),"
+   ],
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CREA_GROUP_NO =  (_F(",
+    "   /  ♦   NOM =           gno    ,            [identificateur]",
+    "      ♦   /  INTERSEC  =  lgno   ,            [l_group_no]",
+    "          /  UNION     =  lgno   ,            [l_group_no]",
+    "          /  DIFFE     =  lgno   ,            [l_group_no]",
+    "          /  GROUP_NO  =  gno    ,            [group_no]",
+    "             /  NUME_INIT =   /  nuini  ,     [I]",
+    "                              /  1      ,     [DEFAUT]",
+    "                NUME_FIN  =      nufin  ,     [I]",
+    "             /  POSITION  =   /  'INIT' ,",
+    "                              /  'FIN'  ,",
+    "                              /  'MILIEU' ,",
+    "          /  OPTION =  'ENV_SPHERE' ,",
+    "             ♦  /   POINT = (x, y, z),        [l_R]",
+    "                /   GROUP_NO_CENTRE = grno,   [group_no]",
+    "             ♦  RAYON = r,                    [R]",
+    "             ♦  PRECISION = eps  ,            [R]",
+    "          /  OPTION =  'ENV_CYLINDRE' ,",
+    "             ♦  /   POINT = (x, y, z),        [l_R]",
+    "                /   GROUP_NO_CENTRE = grno,   [group_no]",
+    "             ♦  RAYON = r,                    [R]",
+    "             ♦  / ANGL_NAUT   =(a, b),        [l_R]",
+    "                / VECT_NORMALE=(x, y, z),     [l_R]",
+    "             ♦  PRECISION = eps,              [R]",
+    "          /  OPTION =  'PLAN' ,",
+    "             ♦  /   POINT = (x, y, z),        [l_R]",
+    "                /   GROUP_NO_CENTRE = grno,   [group_no]",
+    "             ♦  / ANGL_NAUT   =(a, b),        [l_R]",
+    "                / VECT_NORMALE=(x, y, z),     [l_R]",
+    "             ♦  PRECISION = eps,              [R]",
+    "          /  OPTION =  'SEGM_DROI_ORDO' ,",
+    "             ♦  GROUP_NO     = gno2 ,      [group_no]",
+    "             ♦  GROUP_NO_ORIG= gnoA ,      [group_no]",
+    "             ♦  GROUP_NO_EXTR= gnoB ,      [group_no]",
+    "             ♦  PRECISION =   prec,           [R]",
+    "             ♦  CRITERE   =   /  'RELATIF' ,",
+    "                              /  'ABSOLU'  ,",
+    "          /  OPTION =  'NOEUD_ORDO' ,",
+    "             ♦  GROUP_MA =    gmaAB ,         [group_ma]",
+    "             ◊  GROUP_NO_ORIG= gnoA ,      [group_no]",
+    "             ◊  GROUP_NO_EXTR= gnoB ,      [group_no]",
+    "             ◊  VECT_ORIE   = (vx, vy,[vz]),  [l_R]",
+    "          /  OPTION =  'TUNNEL' ,",
+    "             ♦  /   TOUT         = 'OUI'",
+    "                /   GROUP_MA     = lgma ,  [l_group_ma]",
+    "             ♦  GROUP_MA_AXE = gnoA ,      [l_group_ma]",
+    "             ♦  GROUP_NO_ORIG= gnoA ,      [group_no]",
+    "             ♦      RAYON        = r,         [R]",
+    "             ◊      LONGUEUR     = long ,     [R]",
+    "          /  OPTION =  'INCLUSION' ,",
+    "             ♦  GROUP_MA     = lgma ,         [l_group_ma]",
+    "             ♦  CAS_FIGURE     =    / '2D'",
+    "                                    / '3D'",
+    "                                    / '2.5D'",
+    "             ◊  DISTANCE_MAX = distma         [R]",
+    "             ♦  GROUP_MA_INCL = lgma_inc   ,  [l_group_ma]",
+    "             ◊  MAILLAGE_INCL = ma_inc  ,     [maillage]"
+   ],
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "       /  OPTION =  'INTERVALLE_VALE' ,",
+    "          ♦  CHAM_GD    = chno   ,         [cham_no]",
+    "          ♦  NOM_CMP    = cmp,             [TXM]",
+    "          ♦  VALE       = (vmin, vmax)     [R]",
+    "       /  OPTION =  'FISS_XFEM' ,",
+    "          ♦  FISSURE = (fiss1, fiss2,...), [l_fiss_xfem]",
+    "          ♦  TYPE_GROUP =  / 'XFEM'",
+    "                           / 'HEAVISIDE'",
+    "                           / 'CRACKTIP'",
+    "                           / 'MIXTE'",
+    "                           / 'ZONE_MAJ'",
+    "                           / 'TORE'",
+    "          #  Si TYPE_GROUP = 'TORE':",
+    "          ♦  RAYON_TORE = r,               [R]",
+    "       /  OPTION =  'RELA_CINE_BP' ,",
+    "          ♦  CABLE_BP      = cable_bp,     [cable_precont]",
+    "          ♦  PREF_GRNO     = pref,         [TXM]",
+    "                           = 'RCBP'        [DEFAUT]",
+    "       /  GROUP_MA  = lgma,        [l_identificateur]",
+    "          ◊  NOM        = lgno,            [l_group_no]",
+    "          ◊  CRIT_NOEUD =  / 'TOUS'  ,     [DEFAUT]",
+    "                           / 'SOMMET' ,",
+    "                           / 'MILIEU' ,",
+    "                           / 'CENTRE' ,",
+    "       /  TOUT_GROUP_MA : 'OUI' ,",
+    "   ),),",
+    "◊  ALARME =  /   'OUI',                    [DEFAUT]",
+    "             /   'NON',",
+    "◊  INFO   =  /   1,                        [DEFAUT]",
+    "             /   2,",
+    "          )"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Type du résultat :",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SiMAILLAGE   :  maillage      alors:    maillage",
+    "             :  squelette               squelette",
+    "SiGRILLE     :  grille        alors:    grille"
+   ],
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Généralités sur les opérandes",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande traite de la même façon les concepts de type maillage ou squelette. Dans la suite on utilisera le vocabulaire \"maillage\".",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande permet de définir de nouveaux groupes de mailles (ou groupes de nœuds) dans un maillage existant : on enrichit le maillage ma. Aucune nouvelle maille et aucun nouveau nœud ne sont créés. Ils doivent être déjà présent dans le maillage pour pouvoir être utilisés.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "La définition d'un nouveau groupe peut se faire de plusieurs façons :",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par opération booléenne sur des groupes existants : intersection (INTERSEC), réunion (UNION) ou différence (DIFFE),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "suivant un critère géométrique : mailles dont un nœud appartient à une sphère donnée, …",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les groupes de nœuds, en faisant référence à des groupes de mailles existants. Le groupe de nœuds ainsi défini contient tous les nœuds des mailles du groupe de mailles origine (mots clés TOUT_GROUP_MA et GROUP_MA).",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "L'opérateur traite d'abord le mot clé CREA_GROUP_MA pour que l'on puisse se servir des groupes de mailles ainsi définis dans le mot clé CREA_GROUP_NO.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "À chaque occurrence d'un mot clé CREA_GROUP_MA(_NO) on définit un nouveau groupe nommé (mot clé NOM). Ce nouveau groupe peut alors être réutilisé dans les occurrences suivantes pour définir de nouveaux groupes par intersection, réunion, ...",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés DETR_GROUP_MA et DETR_GROUP_NO permettent de \"détruire\" des groupes de mailles ou de nœuds. Les mailles et les nœuds de ces groupes ne sont pas supprimés, ce sont seulement les définitions des groupes qui sont effacées. Ces mots clés sont utiles par exemple dans les boucles python lorsque l'on veut créer un groupe à chaque itération de la boucle : on commence par détruire ce groupe puis on le recrée sous le même nom. Cela évite de changer de nom de groupe à chaque itération.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut noter que la plupart des fonctionnalités de DEFI_GROUP sont faisables directement dans le module SMESH de SALOME, à savoir :",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "opération booléenne sur des groupes existants,",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "création de groupe par type de maille (filtre SMESH Type ),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "suivant un critère géométrique (filtre SMESH LyingOn),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "suivant un critère d'angle de normale pour des mailles surfaciques (filtre SMESH Coplanar),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les groupes de mailles s'appuyant sur des groupes de nœuds (fonction SMESH ' Group based on nodes of other groups '),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les groupes de nœuds, en faisant référence à des groupes de mailles existants (fonction SMESH ' Group based on nodes of other groups '),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "suppression de groupes.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérandes MAILLAGE et GRILLE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  | MAILLAGE = ma"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "ma est le nom du maillage que l'on veut \"enrichir\".",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "| GRILLE = gr"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "gr est le nom de la grille auxiliaire que l'on veut \"enrichir\".",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Mots clés DETR_GROUP_MA et DETR_GROUP_NO",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces deux mots clés facteur permettent de supprimer la définition de groupes de mailles ou de nœuds. Ces mots clés sont parfois nécessaires car le code s'arrête en erreur fatale si l'on tente de créer un groupe dont le nom est déjà utilisé. Il faut détruire le groupe avant de pouvoir réutiliser son nom. Le comportement des deux mots clés est similaire et nous ne parlerons ici que de DETR_GROUP_MA.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Syntaxe :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DETR_GROUP_MA=_F(NOM=(gm1,gm2, ...)),"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé facteur DETR_GROUP_MA est a priori répétable mais ce n'est jamais nécessaire car le mot clé NOM permet d'indiquer une liste de noms de groupes à détruire (gm1,gm2, …).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est important de savoir que toutes les occurrences du mot clé DETR_GROUP_MA sont traitées avant celles du mot clé CREA_GROUP_NO car l'objectif de ce mot clé est de pouvoir réutiliser le nom détruit. Il faut également savoir que la destruction d'un groupe inexistant n'entraîne aucun message d'alarme. Ces choix permettent par exemple de faire dans une boucle python :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "for i in range(n) :",
+    "   DEFI_GROUPE(reuse=MA, MAILLAGE=MA,",
+    "             DETR_GROUP_MA=_F(NOM('GM1',),",
+    "             CREA_GROUP_MA=_F(NOM='GM1', ..."
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Lors de la première itération, le groupe 'GM1' n'existe pas, on demande sa destruction mais aucun message d'alarme n'est émis.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme les destructions ont lieu au début de la commande, il est impossible de modifier un groupe en faisant un seul appel à DEFI_GROUP . Par exemple, on ne peut pas faire \"grossir\" (dans une boucle) un groupe en lui ajoutant un petit groupe ( b1 ) :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "for i in range(n):",
+    "   b1=nouveau groupe ...",
+    "   DEFI_GROUP(reuse=MA,MAILLAGE=MA,",
+    "   CREA_GROUP_MA=_F(NOM='tout', UNION=('tout','b1'),),)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour faire cela, il faut appeler deux fois DEFI_GROUP :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "for i in range(n):",
+    "   b1=nouveau groupe ...",
+    "   DEFI_GROUP(reuse=MA,MAILLAGE=MA,",
+    "       DETR_GROUP_MA=_F(NOM='tout2'),",
+    "       CREA_GROUP_MA=_F(NOM='tout2', UNION=('tout','b1'),),)",
+    "   DEFI_GROUP(reuse=MA,MAILLAGE=MA,",
+    "       DETR_GROUP_MA=_F(NOM='tout'),",
+    "       CREA_GROUP_MA=_F(NOM='tout', UNION=('tout2','b1'),),)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Mot clé CREA_GROUP_MA",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CREA_GROUP_MA"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de définir un nouveau groupe de mailles.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.1",
+   "text": "Opérande NOM",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM = gma"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "On donne ici le nom (avec \"quotes\") du nouveau groupe de mailles.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.2",
+   "text": "Opérande TYPE_MAILLE",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TYPE_MAILLE= /'TOUT'/'3D'/'2D'/'1D'   (DEFAUT='TOUT')",
+    "                /'SEG2'/'TRIA3'/'QUAD4'/.../'PYRAM13'"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de filtrer les mailles que l'on mettra dans le nouveau groupe de mailles. Par défaut, il n'y a pas de filtre, mais si l'utilisateur écrit par exemple : TYPE_MAILLE='2D', le groupe créé ne contiendra que des mailles surfaciques. L'utilisateur peut également filtrer le groupe à créer pour un type de maille particulier (TRIA3, HEXA27, …). Tous les types de mailles (POI1,SEG2,SEG3,SEG4, …, PYRAM13) sont autorisés.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemples :",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CREA_GROUP_MA=_F(NOM='VOLUM', 'TOUT='OUI', TYPE_MAILLE='3D')"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "permet de créer le groupe de toutes les mailles volumiques (HEXA, PENTA, ...) du maillage.",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CREA_GROUP_MA=_F(NOM='VOLH27',                       'GROUP_MA='GMA1',",
+    "TYPE_MAILLE='HEXA27')"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "permet de créer le groupe de toutes les mailles de type 'HEXA27' contenues dans le GROUP_MA. GMA1.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.3",
+   "text": "Opérande TOUT",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TOUT = 'OUI'"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir un groupe contenant toutes les mailles du maillage.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.4",
+   "text": "Opérande INTERSEC",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  INTERSEC = (gma1, gma2, gma3,...),"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de mailles sera obtenu en prenant toutes les mailles de gma1 qui appartiennent aussi à gma2, gma3,.... L'ordre des mailles reste celui de gma1.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.5",
+   "text": "Opérande UNION",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  UNION = (gma1, gma2, gma3,...)"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de mailles sera obtenu en prenant toutes les mailles de gma1, puis en ajoutant les mailles de gma2 qui n'appartiennent pas à gma1, puis celles de gma3 qui n'appartiennent ni à gma1 ni à gma2, etc.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.6",
+   "text": "Opérande DIFFE",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  DIFFE = (gma1, gma2, gma3,...)"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de mailles sera obtenu en prenant toutes les mailles de gma1 qui n'appartiennent pas aux autres groupes de la liste. L'ordre des mailles reste celui de gma1.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.7",
+   "text": "Sous-groupe d’un groupe existant : mots clé GROUP_MA / POSITION /",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NUME_INIT/NUME_FIN"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut créer un nouveau groupe de maille en sélectionnant certaines mailles d’un groupe existant.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "ère possibilité :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On crée un groupe d’une seule maille en précisant par le mot clé POSITION la maille recherchée.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CREA_GROUP_MA = _F (   GROUP_MA = G1,   POSITION = 'INIT' ,NOM = G1I )"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Le groupe G1I contient la 1ère maille du groupe G1.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "ème possibilité :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On crée un groupe contenant les mailles comprises entre les rangs nuini et nufin (inclus) dans un groupe existant.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   CREA_GROUP_MA=_F (GROUP_MA = G1, NUME_INIT = 3,   NUME_FIN = 7,NOM =",
+    "G1P)"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Le groupe G1P contient les mailles 3, 4, 5, ..., 7 de G1.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots clés utilisent la notion d’ordre des mailles dans un groupe de mailles. Cet ordre est souvent inconnu de l’utilisateur. Il peut dépendre du préprocesseur. C’est l’ordre des mailles lors de la définition du GROUP_MA dans le fichier de maillage Aster.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.8",
+   "text": "Opérande OPTION = 'FACE_NORMALE'",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION = 'FACE_NORMALE'"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_MA constitué de mailles surfaciques dont la normale est parallèle à la direction du vecteur défini par ses composantes si l'on utilise le mot-clé VECT_NORMALE ou à celle du premier vecteur de la nouvelle base définie par le changement de repère dû aux angles nautiques.",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, on suppose que les mailles surfaciques sont des facettes planes. Elles sont de type TRIA3, TRIA6, QUAD4, QUAD8 ou QUAD9. Si l'on appelle X , X , et X les vecteurs 1 2 3 position des trois premiers nœuds sommets de l'élément, la normale est déterminée par le produit vectoriel : X −X ∧X −X . 2 1 3 1",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, on suppose que les mailles surfaciques sont des segments droits. Elles sont de type SEG2 ou SEG3. Si l'on appelle X et X les vecteurs position des deux nœuds extrémités 1 2 de l'élément, la normale est définie par X −X ∧z où z est le vecteur unitaire 2 1 perpendiculaire au plan et où l'on a affecté 0. comme troisième composante à X −X . 2 1",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Une maille \"facette\" sera retenue si sa normale est colinéaire au vecteur normal défini par VECT_NORMALE . Cette condition doit être vérifiée à une certaine précision près (mot clé ANGL_PREC ).",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque l'on choisit un ANGL_PREC (par exemple 30. degrés), on définit en fait le groupe des mailles dont la normale appartient au cône d'axe VECT_NORMALE et d'angle au sommet ANGL_PREC .",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Ceci peut être utilisé (par exemple) pour regrouper les mailles d'une demi enveloppe sphérique ( ANGL_PREC = 90.).",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.8.1",
+   "text": "Opérande ANGL_NAUT",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  ANGL_NAUT =  a      en2D"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "(a,b) en 3D",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques (a,b) définis en degrés, sont les angles permettant de passer du repère global de définition des coordonnées des nœuds à un repère dont le premier vecteur désigne la direction selon laquelle est orientée la normale des mailles surfaciques que l'on souhaite récupérer.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la définition des angles nautiques, voir l'opérateur AFFE_CARA_ELEM [U4.42.01] opérande ORIENTATION.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.8.2",
+   "text": "Opérande VECT_NORMALE",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VECT_NORMALE =   (x, y)    en2D",
+    "                       (x, y, z) en3D"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Les coordonnées x, y, z sont celles donnant la direction selon laquelle est orientée la normale des mailles surfaciques que l'on souhaite récupérer.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.8.3",
+   "text": "Opérande ANGL_PREC",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ANGL_PREC =  a"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "C'est la tolérance, en degrés, que l'on accepte sur l'angle formé par le vecteur fourni par l'utilisateur et le vecteur normal à l'élément surfacique pour affirmer que ces deux vecteurs ont la même direction.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur par défaut de a est 0.5 degré.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.8.4",
+   "text": "Opérande VERI_SIGNE",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VERI_SIGNE = /  'NON'  ,",
+    "                /  'OUI'  ,      [DEFAUT]"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l'on affecte la valeur 'NON' à VERI_SIGNE, le GROUP_MA sera constitué des mailles surfaciques dont la normale est parallèle au vecteur donné par l'utilisateur.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l'on affecte la valeur 'OUI', le GROUP_MA sera constitué des mailles surfaciques dont la normale est parallèle et a la même orientation que le vecteur donné par l'utilisateur.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur par défaut est 'OUI'.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.9",
+   "text": "Opérande OPTION = 'SPHERE'",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION = 'SPHERE'"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_MA constitué des mailles dont au moins un nœud appartient à une sphère (un cercle en 2D) définie par son centre et son rayon.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.9.1",
+   "text": "Opérande POINT",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y)    en2D",
+    "                (x, y, z) en3D"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées du centre de la sphère.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.9.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d'indiquer quel est le nœud coïncidant avec le centre de la sphère.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.9.3",
+   "text": "Opérande RAYON",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RAYON = r"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "r est le rayon de la sphère (du cercle en 2D).",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.10",
+   "text": "Opérande OPTION = 'CYLINDRE'",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION = 'CYLINDRE'"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_MA constitué des mailles dont au moins un nœud appartient à un cylindre défini par son axe et son rayon.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "L'axe est défini par un vecteur et un point appartenant à cet axe. Cette option n'a de sens qu'en 3D.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.10.1",
+   "text": "Opérande POINT",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y, z)"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un point situé sur l'axe du cylindre.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.10.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d'indiquer un nœud situé sur l'axe du cylindre.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.10.3",
+   "text": "Opérande RAYON",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RAYON = r"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "r est le rayon du cylindre.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.10.1",
+   "text": "Opérande ANGL_NAUT",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  ANGL_NAUT =  (a, b)"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques a, b définis en degrés, sont les angles permettant de passer du repère global de définition des coordonnées des nœuds à un repère dont le premier vecteur désigne la direction de l'axe du cylindre.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la définition des angles nautiques voir l'opérateur AFFE_CARA_ELEM [U4.42.01] opérande ORIENTATION.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.10.2",
+   "text": "Opérande VECT_NORMALE",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VECT_NORMALE =   (x, y, z)"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un vecteur orientant l'axe du cylindre.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.11",
+   "text": "Opérande OPTION = 'BANDE'",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION = 'BANDE'"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_MA constitué des mailles dont au moins un nœud appartient à une \"bande\" définie par un plan \"milieu\" (une droite en 2D) et la demi-largeur de part et d'autre de ce plan.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le plan est défini par un vecteur normal à ce plan et un point lui appartenant.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.11.1",
+   "text": "Opérande POINT",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y)    en2D",
+    "                (x, y, z) en3D"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un point appartenant au plan \"milieu\" de la bande.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.11.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir un appartenant au plan \"milieu\" de la bande.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.11.3",
+   "text": "Opérande ANGL_NAUT",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  ANGL_NAUT =  a      en2D"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "(a b) en 3D",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques a, b définis en degrés, sont les angles permettant de passer du repère global de définition des coordonnées des nœuds à un repère dont le premier vecteur est orthogonal au plan \"milieu\" de la bande.",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la définition des angles nautiques, voir l'opérateur AFFE_CARA_ELEM [U4.42.01] opérande ORIENTATION.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.11.4",
+   "text": "Opérande VECT_NORMALE",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VECT_NORMALE =   (x, y)    en2D",
+    "                       (x, y, z) en3D"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "x y et z sont les composantes d'un vecteur perpendiculaire au plan \"milieu\" de la bande.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.4.11.5",
+   "text": "Opérande DIST",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  DIST = d"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "d est la demi-largeur de la bande.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.12",
+   "text": "Opérande OPTION = 'APPUI'",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de récupérer le groupe des mailles dont certains nœuds appartiennent à l'ensemble des nœuds spécifiés par le mot clé GROUP_NO.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "GROUP_NO  =  l_gno"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir la liste des nœuds qui serviront d'appui aux mailles. Appelons lno1 cette liste.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  TYPE_APPUI   ="
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 'TOUT' : la maille sera retenue si tous ses nœuds appartiennent à lno1 / 'SOMMET' : la maille sera retenue si tous ses nœuds « sommet » appartiennent à lno1 / 'AU_MOINS_UN' : la maille sera retenue au moins un de ses nœuds appartient à lno1 / 'MAJORITE' : la maille sera retenue si plus de la moitié de ses nœuds appartiennent à lno1",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.13",
+   "text": "Opérande OPTION = 'FISS_XFEM'",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de récupérer le groupe des mailles de type X-FEM précisé par les mots clés TYPE_GROUP.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  FISSURE   =  (fiss1, fiss2, ...)",
+    "♦  TYPE_GROUP   ="
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 'HEAVISIDE' : la maille sera retenue si elle est de type Heaviside / 'CRACKTIP' : la maille sera retenue si elle est de type Crack-tip / 'MIXTE' : la maille sera retenue si elle est de type Mixte (Heaviside et Crack-tip) / 'XFEM' : la maille sera retenue si elle est de type Heaviside, Crack-tip ou Mixte / 'FISSUREE' : la maille sera retenue si tous ses nœuds sont enrichis Pour une définition précise des notions de maille Heaviside et maille Crack-tip, voir R7.02.12, §3.2.5.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Mot clé CREA_GROUP_NO",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CREA_GROUP_NO"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de définir un nouveau groupe de nœuds (pour les mots clés GROUP_MA et TOUT_GROUP_MA, on crée plusieurs groupes de nœuds \"d'un coup\").",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.1",
+   "text": "Opérande NOM",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ♦   NOM = gno"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "On donne ici le nom (avec \"quotes\") du nouveau groupe de nœuds.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.2",
+   "text": "Opérande INTERSEC",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  INTERSEC = (gno1, gno2, gno3,...)"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de nœuds sera obtenu en prenant tous les nœuds de gno1 qui appartiennent aussi à gno2, gno3,.... L'ordre des nœuds reste celui de gno1.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.3",
+   "text": "Opérande UNION",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  UNION = (gno1, gno2, gno3,...)"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de nœuds sera obtenu en prenant tous les nœuds de gno1, puis en ajoutant les nœuds de gno2 qui n'appartiennent pas à gno1, puis ceux de gno3 qui n'appartiennent ni à gno1 ni à gno2, etc.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.4",
+   "text": "Opérande DIFFE",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  DIFFE = (gno1, gno2, gno3,...)"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nouveau groupe de nœuds sera obtenu en prenant tous les nœuds de gno1 qui n'appartiennent pas aux autres groupes de la liste. L'ordre des nœuds reste celui de gno1.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.5",
+   "text": "Sous groupe d’un groupe existant : mots clé GROUP_NO / POSITION /",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NUME_INIT/NUME_FIN"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut créer un nouveau groupe de nœud en sélectionnant certains nœuds d’un groupe existant.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "ère possibilité :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "On crée un groupe d’un seul nœud en précisant par le mot clé POSITION le nœud recherché.",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CREA_GROUP_NO = _F ( GROUP_NO = G1  ,   POSITION = 'INIT' ,NOM = G1I )"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le groupe G1I contient le 1er nœud du groupe G1.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "ème possibilité :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "On crée un groupe contenant les nœuds compris entre les rangs nuini et nufin (inclus) dans un groupe existant.",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CREA_GROUP_NO=_F(GROUP_NO = G1,  NUME_INIT = 3NUME_FIN = 7 , NOM = G1P)"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le groupe G1P contient les nœud 3, 4, 5, ..., 7 de G1.",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention :",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots clés utilisent la notion d’ordre des nœuds dans un groupe de nœuds. Cet ordre est souvent inconnu de l’utilisateur. Il peut dépendre du préprocesseur. C’est l’ordre des nœuds lors de la définition du GROUP_NO dans le fichier de maillage Aster.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.6",
+   "text": "Opérande OPTION = 'ENV_SPHERE'",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION = 'ENV_SPHERE'"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_NO constitué des nœuds situés sur l'enveloppe d'une sphère à une précision donnée près.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.6.1",
+   "text": "Opérande POINT",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y) ,     en 2D",
+    "                (x, y, z),   en 3D"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées du centre de la sphère.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.6.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir le nœud coïncidant avec le centre de la sphère.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.6.3",
+   "text": "Opérande RAYON",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RAYON =   r"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "r est le rayon de la sphère.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.6.4",
+   "text": "Opérande PRECISION",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PRECISION =  eps"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "eps est la tolérance avec laquelle on définit l'appartenance d'un nœud à l'enveloppe de la sphère. Cette tolérance est à prendre au sens suivant :",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "si d est la distance d’un nœud au centre de la sphère, on dit que ce nœud appartient au groupe si : ∣d−r∣≤eps",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.7",
+   "text": "Opérande OPTION = 'ENV_CYLINDRE'",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION =  'ENV_CYLINDRE'"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_NO constitué de nœuds situés sur l'enveloppe d'un cylindre à une précision donné près.",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option n'a de sens qu'en 3D.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.1",
+   "text": "Opérande POINT",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y, z)"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un point appartenant à l'axe du cylindre.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir un nœud appartenant à l'axe du cylindre.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.3",
+   "text": "Opérande RAYON",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RAYON =   r"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "r est le rayon du cylindre.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.4",
+   "text": "Opérande ANGL_NAUT",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  ANGL_NAUT =  (a b)"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques a, b définis en degrés, sont les angles permettant de passer du repère global de définition des coordonnées des nœuds à un repère dont le premier vecteur désigne la direction de l'axe du cylindre.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la définition des angles nautiques, voir l'opérateur AFFE_CARA_ELEM [U4.42.01] opérande ORIENTATION.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.5",
+   "text": "Opérande VECT_NORMALE",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VECT_NORMALE =   (x, y, z)"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un vecteur orientant l'axe du cylindre.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.7.6",
+   "text": "Opérande PRECISION",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PRECISION =  eps"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "eps est la tolérance avec laquelle on définit l'appartenance d'un nœud à l'enveloppe du cylindre.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette tolérance est à prendre au sens suivant :",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "si d désigne la distance du point courant à l'axe du cylindre, on dit que le point courant appartient à l'enveloppe du cylindre si : ∣d−r∣≤eps",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.8",
+   "text": "Opérande OPTION = 'PLAN'",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de définir un GROUP_NO constitué de nœuds situés sur une droite (en 2D) ou dans un plan (en 3D) à une précision donnée près.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.8.1",
+   "text": "Opérande POINT",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POINT =   (x, y) ,     en 2D",
+    "                (x, y, z),   en 3D"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "x y z sont les coordonnées d'un point appartenant au plan (à la droite).",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.8.2",
+   "text": "Opérande GROUP_NO_CENTRE",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_CENTRE = grno"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir un nœud appartenant au plan (à la droite).",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.8.3",
+   "text": "Opérande ANGL_NAUT",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  ANGL_NAUT =  a   ,  en2D"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "(a b), en 3D",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques a, b définis en degrés, sont les angles permettant de passer du repère global de définition des coordonnées des nœuds à un repère dont le premier vecteur est orthogonal au plan 'milieu' de la bande.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la définition des angles nautiques, voir l'opérateur AFFE_CARA_ELEM [U4.42.01] opérande ORIENTATION.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.8.4",
+   "text": "Opérande VECT_NORMALE",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VECT_NORMALE =   (x, y),      en2D",
+    "                       (x, y, z),   en3D"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "x y et z sont les composantes d'un vecteur perpendiculaire au plan (à la droite).",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.8.5",
+   "text": "Opérande PRECISION",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PRECISION =  eps"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "eps est la tolérance avec laquelle on définit l'appartenance d'un nœud au plan (ou à la droite).",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette tolérance est à prendre au sens suivant :",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "si d désigne la distance du nœud au plan (ou à la droite), on dit que ce nœud appartient à ce plan (ou à cette droite) si : ∣d∣≤eps",
+   "page": 20,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.9",
+   "text": "Opérande OPTION = 'SEGM_DROI_ORDO'",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option sert à ordonner un ensemble de nœuds approximativement situés sur un segment de droite AB.",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO  = gno2,"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "On définit l’ensemble des nœuds que l’on veut ordonner.",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_ORIG= gnoA ,",
+    "♦  GROUP_NO_EXTR= gnoB ,"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "On définit les nœuds A et B , origine et extrémité du segment AB .",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  PRECISION =  prec,",
+    "♦  CRITERE   =  /  'RELATIF' ,",
+    "                /  'ABSOLU'  ,"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces deux arguments sont des garde-fous, ils servent à vérifier que les nœuds que l’on cherche à ordonner (lno2 ou gno2) sont bien sur le segment AB . Si l’écart d’un nœud avec AB est supérieur à prec le code s’arrête en erreur fatale. Si le critère choisi est 'RELATIF', la distance d’un nœud avec AB sera divisé par la longueur de AB .",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.10",
+   "text": "Opérande OPTION = 'NOEUD_ORDO'",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option sert à créer un group_no ordonné contenant les nœuds d’un ensemble de mailles formé de segments (SEG2, SEG3 ou SEG4). L’ensemble de ces mailles doit former une ligne continue. La ligne peut être « ouverte » (avec 2 extrémités) ou « fermée » (c'est alors une boucle simple).",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA =   gmaAB"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du group_ma dont on veut ordonner les nœuds. Les mailles de gmaAB doivent former une ligne ouverte.",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_NO_ORIG= gnoA ,",
+    "◊  GROUP_NO_EXTR= gnoB ,"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés permettent de définir les nœuds A et B, origine et extrémité de la ligne AB .",
+   "page": 20,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nœud A sera numéroté en premier, puis on se sert de la topologie des mailles de gmaAB pour numéroter les nœuds de proche en proche.",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le nœud A n'est pas fourni par l'utilisateur, le programme choisira comme nœud \"origine\", le premier nœud de gmaAB qui n'appartient qu'à une seule maille segment. L'origine est donc arbitraire : le programme aurait pu tout aussi bien tomber sur l'autre extrémité.",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "On vérifie que le dernier nœud numéroté est bien B (si celui-ci est donné).",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.5.10.1",
+   "text": "Cas des lignes fermées",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Si la ligne est une boucle, on ne peut pas déterminer automatiquement ses extrémités. Pour définir l'origine des abscisses curvilignes, l'utilisateur peut renseigner les nœuds origine et extrémité. Il faut que ces 2 nœuds soient identiques. Mais il peut aussi écrire : ORIGINE='SANS'. Le nœud « origine » sera alors pris au hasard sur la ligne fermée.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour orienter une ligne fermée, on ne peut pas se servir de la connaissance des nœuds origine et extrémité. S'il le souhaite, l'utilisateur peut alors renseigner le mot clé VECT_ORIE (2 ou 3 cordonnées selon la dimension de l'espace). On choisira comme sens de parcours de la boucle, la maille de gmaAB qui touche le nœud origine et qui minimise l'angle avec le vecteur fournit par VECT_ORIE.",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.11",
+   "text": "Opérande OPTION = 'TUNNEL'",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option sert à créer le group_no formé des nœuds situés à l'intérieur d'un \"tunnel\" dont on fournit l'axe et le rayon. Les nœuds retenus seront ceux dont la distance à l'axe est inférieure au rayon.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "L'axe du \"tunnel\" est défini par les mailles linéiques fournies via le mot clé GROUP_MA_AXE.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "L'axe du tunnel doit avoir une \"origine\" définie par le mot clé GROUP_NO_ORIG.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé RAYON sert à définir le \"rayon\" du tunnel.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut limiter le tunnel en donnant sa longueur par le mot clé LONGUEUR. Cette longueur est mesurée à partir de l'origine du tunnel.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Les nœuds candidats à faire partie du tunnel sont ceux portés par les mailles définies par les mots clés : TOUT='OUI' et GROUP_MA.",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.12",
+   "text": "Opérande OPTION = 'INCLUSION'",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  OPTION =  'INCLUSION' ,",
+    "   ♦   GROUP_MA     = lgma,         [l_group_ma]",
+    "   ♦   CAS_FIGURE     =   / '2D'",
+    "                          / '3D'",
+    "                          / '2.5D'",
+    "   ◊   DISTANCE_MAX = distma",
+    "   ♦   GROUP_MA_INCL = lgma_inc  ,  [l_group_ma]",
+    "   ◊   MAILLAGE_INCL = ma_inc ,     [maillage]"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de créer le groupe des nœuds des mailles de lgma qui sont géométriquement à l'intérieur des mailles de lgma_inc. Si MAILLAGE_INCL n'est pas fourni, lgma_inc est une liste de GROUP_MA du maillage que l'on enrichit (ma). Sinon ce sont des GROUP_MA de ma_inc.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé CAS_FIGURE est obligatoire, il sert à déterminer quelles sont les mailles de lgma_inc qui doivent être utilisées pour déterminer l'inclusion : '2D' : on ne s'intéresse qu'aux mailles surfaciques (TRIA et QUAD) d'un maillage 2D (plan XOY ). '3D' : on ne s'intéresse qu'aux mailles volumiques (TETRA, PENTA, …) '2.5D' : on ne s'intéresse qu'aux mailles surfaciques (TRIA et QUAD) d'un maillage 3D (coque).",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé DISTANCE_MAX est facultatif. Il sert à donner une petite tolérance pour définir si un nœud est inclus dans une maille. En effet, un nœud situé « juste » sur une interface entre 2 mailles, risque d'être considéré comme « extérieur » aux 2 mailles et donc comme ne faisant pas partie de l'inclusion. C'est pourquoi une valeur par défaut de distma est prise par le code. On a choisi 1% de la longueur de l'arête la plus petite du maillage ma_inc. Dans le cas d'un maillage de type « coque » (2.5D), si la surface n'est pas plane, il est quasiment impossible qu'un élément de facette soit géométriquement inclus dans d'autres mailles : il y a presque toujours un écart dans la direction « normale » à la surface. Il faudra donc en général, dans ce cas, fournir une valeur de distma supérieure à la valeur par défaut.",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.13",
+   "text": "Opérande OPTION = 'INTERVALLE_VALE'",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option sert à créer le group_no formé des nœuds dont la valeur d'une composante (cmp) d'un champ aux nœuds (cham_no) est comprise entre deux valeurs (vmin et vmax).",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Le champ et la composante qui serviront à sélectionner les nœuds sont donnés par les mots clés CHAM_GD et NOM_CMP.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs vmin et vmax sont fournies via le mot clé VALE.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DEFI_GROUP( reuse  = MAIL, MAILLAGE = MAIL,",
+    "            CREA_GROUP_NO = _F(NOM='GN700', OPTION='INTERVALLE_VALE',",
+    "            CHAM_GD=TEMPER, NOM_CMP='TEMP', VALE=(700., 800.),),);"
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Le GROUP_NO 'GN700' sera formé de tous les nœuds du maillage MAIL dont la température dans le champ TEMPER est comprise entre 700. et 800.",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.14",
+   "text": "Opérande OPTION = 'FISS_XFEM'",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de récupérer le groupe des noeuds de type XFEM précisé par les mots clés TYPE_GROUP.",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  FISSURE   =  (fiss1, fiss2, ...)",
+    "♦  TYPE_GROUP   ="
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 'XFEM' : le nœud sera retenu si c'est un nœud enrichi / 'HEAVISIDE' : le nœud sera retenu si c'est un nœud enrichi de type Heaviside / 'CRACKTIP' : le nœud sera retenu si c'est un nœud enrichi de type Cracktip / 'MIXTE' : le nœud sera retenu si c'est un nœud enrichi de type Mixte (Heaviside et Cracktip) / 'ZONE_MAJ' : le nœud sera retenu si il est contenu dans la zone de mise à jour des level sets. Dans le cas où le maillage de la fissure est passé par le mot-clé MAILLAGE ( § 3.2 ) , la zone de mise à jour coïncide:",
+   "page": 22
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en l'absence d'une grille auxiliaire associée à la fissure, avec le domaine de calcul autour du fond,",
+   "page": 22
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en présence d'une grille auxiliaire associée à la fissure, avec le domaine de projection entre grille et maillage , indépendamment du domaine de calcul utilisé sur la grille. Dans le cas où une grille est passée par le mot-clé GRILLE (§ 3.2 ) , la zone de mise à jour coïncide toujours avec le domaine de calcul utilisé sur la grille.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 'TORE' : le nœud sera retenu si il est contenu dans un tore construit autour du fond de fissure de rayon donné par le mot-clé RAYON_TORE . Si la localisation du domaine a été utilisée pour le calcul de la fissure, cette option ne peut pas être sélectionnée. Dans ce cas, le groupe de nœuds est créé en utilisant la zone de mise à jour (on sélectionne automatiquement l'option TYPE_GROUP='ZONE_MAJ' ) et le choix de l'utilisateur est ignoré.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour une définition précise des notions de nœud enrichi, nœud Heaviside, nœud Crack-tip, grille auxiliaire, domaine de calcul et sa localisation, voir R7.02.12, §3.2.5.",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.15",
+   "text": "Opérande RAYON_TORE",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#SiTYPE_GROUP='TORE'",
+    "♦  RAYON_TORE = r,"
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "On spécifie le rayon r du tore à utiliser pour la sélection des nœuds.",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.16",
+   "text": "Opérande OPTION = 'RELA_CINE_BP'",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque triplet de liaisons (3 directions de l'espace) contenu dans la liste de relations cinématiques d'un concept cable_precont issu de DEFI_CABLE_BP, cette option créée un groupe de nœuds contenant le nœud de câble et les nœuds de béton concernés. Le nom de ce groupe est la valeur donnée à PREF_GRNO suivie du nom du nœud de câble.",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  CABLE_BP  =  cable_bp"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept cable_precont.",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  PREF_GRNO = pref"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Préfixe donné aux groupes de nœuds créés.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.17",
+   "text": "Opérandes GROUP_MA et NOM",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA = lgma"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque groupe de mailles de la liste lgma, on crée un groupe de nœuds formé des nœuds portés par les mailles de ce groupe de mailles.",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   NOM = lgno"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Si lgno est fourni par l'utilisateur, cette liste doit être de même longueur que lgma. Ce sont les noms que l'on veut donner aux nouveaux groupes de nœuds.",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Si lgno n'est pas fourni, les groupes de nœuds porteront les mêmes noms que les groupes de mailles qui leur ont donné naissance.",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   CRIT_NOEUD ="
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "/'TOUS' [DEFAUT] : on prend tous les nœuds de chaque maille. /'SOMMET' : on ne prend que les nœuds \"sommet\" des mailles (c’est-à-dire les extrémités des arêtes). /'MILIEU' : on ne prend que les nœuds \"milieu\" des arêtes des mailles. /'CENTRE' : on ne prend que les noeuds qui ne sont ni \"sommet\" ni \"milieu\" c'est-à-dire les nœuds au centre des facettes ou des éléments volumiques.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.18",
+   "text": "Opérande TOUT_GROUP_MA",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TOUT_GROUP_MA = 'OUI'"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé a la même signification que le précédent, sauf que l'on crée des groupes de nœuds pour tous les groupes de mailles existants du maillage.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.19",
+   "text": "Opérande ALARME = 'OUI' [DEFAUT] / 'NON'",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "si ALARME = 'NON', le code n'émet pas d'alarme ; par exemple lorsqu'on lui demande de créer un GROUP_NO et que ce groupe est vide. La valeur par défaut de ce mot clé est 'OUI'.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.20",
+   "text": "Opérande INFO",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "si INFO = 1, on imprime dans le fichier 'MESSAGE', le nombre de groupes crées et pour chaque groupe, le nom du groupe et le nombre d’entités le constituant.",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "si INFO = 2, on imprime dans le fichier 'MESSAGE', le nombre de groupes crées et pour chaque groupe, le nom du groupe, le nombre d’entités le constituant puis la liste des entités constituant le ou les groupes.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemples",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple 1 (critères topologiques et logiques) :",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit ma un maillage contenant déjà les groupes de mailles :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M1   M2   M3"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "et les groupes de nœuds :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "N1   N2   N3",
+    "ma = DEFI _GROUP (reuse = ma, MAILLAGE = ma,",
+    "           CREA_GRO UP_MA = ( _F (   NOM = NM1, GROUP_MA = (GMA7, GMA9,...)   ),",
+    "                              _F (   NOM = NM2, UNION = (M1, NM1) ),",
+    "                              _F (   NOM = NM3, DIFFE = (NM2, M2) ),),",
+    "           CREA_GRO UP_NO = _F   (   TOUT_GROUP_MA = 'OUI '),                 )",
+    "ma = DEFI _GROUP (reuse = ma, MAILLAGE = ma,",
+    "           CREA_GRO UP_MA = _F   (   NOM = NM4, GROUP_MA = (GMA7, GMA11, GMA1 3))",
+    "           CREA_GRO UP_NO = (_F  (   NOM = NN1, INTERSEC=  (NM1, N1)),",
+    "                              _F(GROUP _MA = NM4)))"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Après ces deux appels à la commande DEFI_GROUP, le maillage contient alors :",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les groupes de mailles :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•   M1, M2, M3 (initiaux)",
+    "•   NM1 = (mailles : MA7, MA9, ...)",
+    "•   NM2 = M1  \"union\" NM1",
+    "•   NM3 = NM2 \"moins\" M2",
+    "•   NM4 = (MAILLES : MA7, MA11, MA13)"
+   ],
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les groupes de nœuds :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•   N1, N2, N3 (initiaux)"
+   ],
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "M1, M2, M3, NM1, NM2, NM3 : group_no contenant les nœuds des group_ma de mêmes noms. Ces group_no sont créés par la 1ère commande DEFI_GROUP.",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "NN1 = NM1 \"intersection\" N1",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "NM4 = (nœuds du group_ma NM4)",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple 2 (critères géométriques) :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma = DEFI _GROUP   (reuse = ma, MAILLAGE = ma,",
+    "           CREA_GRO UP_MA=(_F ( NOM = facesup   ,   OPTION =   'FACE_NORMALE' ,",
+    "                                 VECT_ NORMALE = (0.,  0.,  1.)),",
+    "                              _F ( NOM  = S01   ,       OPTION =   'SPHERE' ,",
+    "                                 POINT  = (0.,  0.,  0.),  RAYON = 1.),),",
+    "           CREA_GRO UP_NO =(_F   ( NOM  = BO_S01,   OPTION =   'ENV_SPHERE' ,",
+    "                                 POINT =(0.,0.,0.),RAYON=1.,PRECISION=0.01),",
+    "                          _F  ( NOM = S01_1 ,   GROUP_MA = S01),",
+    "                          _F  ( NOM = S01_2 ,   OPTION = 'ENV_SPHERE'  ,",
+    "                                 POINT =(0.,0.,0.),RAYON=0.5,PRECISION=0.5),),",
+    "                   )"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Après DEFI_GROUP le maillage ma contiendra 2 nouveaux GROUP_MA et 3 nouveaux GROUP_NO :",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "facesup contient les facettes dont la normale est orientée selon OZ (vers les Z0 ),",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "S01 contient toutes les mailles dont l'un des nœuds appartient à la sphère de rayon 1. et centrée en O (origine des axes),",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "B0_S01 est le groupe des nœuds qui se trouvent au voisinage de l'enveloppe de la sphère précédente (S01),",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "S01_1 est le groupe de tous les nœuds des mailles du groupe de mailles S01 ; attention : certains nœuds de ce groupe peuvent être à l'extérieur de la sphère !",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "S01_2 est le groupe des nœuds inclus dans la sphère S01 : ∣dM ,O−0.5∣≤0.5",
+   "page": 24
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 9,
+   "chars": 3575,
+   "id": 1,
+   "section": "1 But"
+  },
+  {
+   "first": 10,
+   "last": 13,
+   "chars": 4272,
+   "id": 2,
+   "section": "1 But"
+  },
+  {
+   "first": 14,
+   "last": 32,
+   "chars": 2491,
+   "id": 3,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 33,
+   "last": 50,
+   "chars": 2244,
+   "id": 4,
+   "section": "3.2 Opérandes MAILLAGE et GRILLE"
+  },
+  {
+   "first": 51,
+   "last": 79,
+   "chars": 2118,
+   "id": 5,
+   "section": "3.4 Mot clé CREA_GROUP_MA"
+  },
+  {
+   "first": 80,
+   "last": 160,
+   "chars": 5995,
+   "id": 6,
+   "section": "1 ère possibilité :"
+  },
+  {
+   "first": 161,
+   "last": 198,
+   "chars": 3090,
+   "id": 7,
+   "section": "3.5.5 Sous groupe d’un groupe existant : mots clé GROUP_NO / POSITION /"
+  },
+  {
+   "first": 199,
+   "last": 289,
+   "chars": 6000,
+   "id": 8,
+   "section": "1 ère possibilité :"
+  },
+  {
+   "first": 290,
+   "last": 323,
+   "chars": 5946,
+   "id": 9,
+   "section": "3.5.10.1 Cas des lignes fermées"
+  },
+  {
+   "first": 324,
+   "last": 344,
+   "chars": 2122,
+   "id": 10,
+   "section": "3.5.20 Opérande INFO"
+  },
+  {
+   "first": 345,
+   "last": 366,
+   "chars": 2661,
+   "id": 11,
+   "section": "4 Exemples"
+  }
+ ]
+}

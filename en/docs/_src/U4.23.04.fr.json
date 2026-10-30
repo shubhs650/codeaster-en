@@ -1,0 +1,1057 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.23.04.pdf",
+  "source_sha256": "eaff572702b446ba13710238a08f35a9cbf446dae1b6c4ecf3c0f1471fde459d",
+  "source_bytes": 285274
+ },
+ "schema_version": 1,
+ "doc_id": "U4.23.04",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "10/03/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.23: Modification et création du maillage",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 12,
+  "pages": "12",
+  "pdf_keywords": "U4.23.04-F",
+  "pdf_title": "Opérateur MODI_MAILLAGE",
+  "responsible": "PIGNET Nicolas",
+  "revision": "ce661e61bc7f",
+  "title": "Opérateur MODI_MAILLAGE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur MODI_MAILLAGE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Effectuer des modifications sur un maillage existant. Les possibilités de modifications sont :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "réorienter des mailles de bord servant à appliquer une pression,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "vérifier l’orientation des normales sur les éléments de coque,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "réorienter les mailles d’une mono-couche d’éléments de joint,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "réactualiser le maillage à partir d’une déformée calculée précédemment,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "dans un maillage avec fond de fissure, déplacer les nœuds milieux des arêtes touchant le fond de fissure au quart de ces arêtes,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "translater un maillage,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "imposer une ou plusieurs rotations d’axes quelconques à un maillage,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "générer un maillage symétrique par rapport à un plan en 3D ou une droite en 2D.",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calculer l'abscisse curviligne le long d'une ligne formée d'éléments linéiques (SEG)",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "modifier aléatoirement les coordonnées des nœuds",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type maillage ou modifie la structure de données (opérateur ré entrant).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Table des matières",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mailla[maillage] = MODI_MAILLAGE",
+    "   (  ♦   reuse    = mailla,",
+    "      ♦   MAILLAGE =   ma,                                 [maillage]",
+    "      ◊   ORIE_FISSURE = _F  (   ♦  GROUP_MA =   l_gm      [l_gr_ma]",
+    "                             ),",
+    "      ◊   DEFORME  =   _F (  ♦   OPTION       =  'TRAN',",
+    "                             ♦   /  DEPL         =   depl, [cham_no]",
+    "                                 /  ALEA         =   epsi, [R]",
+    "                          ),"
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   ORIE_PEAU=_F (  ♦  GROUP_MA_PEAU    =  lgrma,    [l_gr_ma]",
+    "                       ◊   GROUP_MA_INTERNE=   l_gmv),  [l_gr_ma]",
+    "                    ),"
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   ORIE_NORM_COQUE=_F(♦   GROUP_MA  =  lgrma,       [l_gr_ma]",
+    "                       ◊   VECT_NORM =  (n1,n2,[n3]),[l_R]",
+    "                       ◊    GROUP_NO=   grno,        [gr_no]",
+    "                    ),",
+    "◊   ORIE_LIGNE=_F(     ♦   GROUP_MA  =  lgrma,       [l_gr_ma]",
+    "                       ◊   VECT_TANG =  (n1,n2,[n3]),[l_R]",
+    "                        ◊   GROUP_NO=   grno,        [gr_no]",
+    "                    ),",
+    "◊   MODI_MAILLE  = _F( ♦   OPTION =  'NOEUD_QUART',",
+    "                       ♦   /  GROUP_MA_FOND= lgma_fo,[l_gr_ma]",
+    "                           /  GROUP_NO_FOND= lgno_fo,[l_gr_no]",
+    "                    ),"
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊   TRANSLATION  =  (n1,n2,[n3]),                       [l_R]",
+    "   ◊   ROTATION =_F (  ♦      POIN_1=   (n1,n2,[n3]),      [l_R]",
+    "                       ♦  /   POIN_2 =  (n1,n2,[n3]),      [l_R]",
+    "                          /   DIR   =   (n1,n2,[n3]),      [l_R]",
+    "                       ♦      ANGLE =   /  a,              [R]",
+    "                                        /  0.,             [DEFAUT]",
+    "                    ),",
+    "   ◊   ECHELLE      =  n1,                                 [R]",
+    "   ◊   MODI_BASE=_F (  ♦      VECT_X =  (n1,n2,[n3]),      [l_R]",
+    "                       ◊      VECT_Y=   (n1,n2,[n3]),      [l_R]",
+    "                    ),",
+    "   ◊   SYMETRIE =_F (  ♦      POINT =   (n1,n2,[n3]),      [l_R]",
+    "                       ♦      AXE_1 =   (n1,n2,[n3]),      [l_R]",
+    "                       ◊      AXE_2 =   (n1,n2,n3),        [l_R]",
+    "                    ),",
+    "   ◊   ABSC_CURV = _F( ♦  /   TOUT =    'OUI' ,",
+    "                          /   GROUP_MA = (gm1,gm2, ...),[l_gr_ma]",
+    "                       ♦  GROUP_NO_ORIG =     gnorig ,  [gr_no]",
+    "                    ),",
+    "   ◊   INFO =   /   1,                                     [DEFAUT]",
+    "                /   2,",
+    ")"
+   ],
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MAILLAGE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MAILLAGE = ma,"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Maillage de type [maillage] sur lequel vont porter les modifications et/ou vérifications.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Il est possible d’appliquer une modification 3D sur un maillage initialement bidimensionnel.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande INFO",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Indique le niveau d'impression des résultats de l'opérateur,",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "1 = aucune impression, 2 = impression des mailles dont la connectivité a été modifiée, y compris l'impression des anciennes et nouvelles connectivités.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les impressions se font dans le fichier 'MESSAGE'.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Mot-clé ORIE_FISSURE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ORIE_FISSURE ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé sert à réorienter (si nécessaire) les mailles d’un groupe formant une \"mono couche\" d’éléments. Il fonctionne en 2D ou en 3D, avec un maillage linéaire ou quadratique [Figure 3.4-a].",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 3.4-a",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Actuellement, ce mot clé sert à réorienter les éléments de joint et les éléments d'interface (modélisations AXIS_xxx, PLAN_xxx et 3D_xxx avec xxx=JOINT ou INTERFACE).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisateur précise (avec le mot clé GROUP_MA) quelles sont les mailles candidates à la réorientation (la \"mono couche\"). Ces mailles doivent être des \"prismes\" (QUAD en 2D, HEXA et PENTA en 3D).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "La direction \"transverse\" à la couche est déterminée de façon topologique (et non selon un critère d’aplatissement). Pour pouvoir être réorientés, les éléments de la couche doivent s'appuyer (via les bases des prismes ) sur d'autres mailles de même dimension (2D ou 3D) qui n'appartiennent pas au groupe des mailles à ré-orienter.",
+   "page": 5
+  },
+  {
+   "type": "figure",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit le maillage (2D) ci-contre.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "On souhaite ré-orienter le groupe des 3 mailles A, B et C. Pour les mailles A et B, les mailles d'appui (au dessus et au dessous) déterminent une orientation transverse non ambigue (verticale).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "En revanche, la maille C a 3 mailles d'appui (haut, bas, droite) et on ne sait pas déterminer la direction transverse. L'algorithme de réorientation va échouer.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "La \"réorientation\" dont on parle ici consiste en réalité à modifier la définition de la connectivité des mailles. Par exemple, en 2D, la convention est que les côtés 2 et 4 des quadrangles sont transverses à la couche.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA= l_gm,"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des groupes de mailles dont on souhaite la vérification (et éventuellement modification) de l'orientation.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Mot-clé DEFORMEE",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  DEFORME /OPTION ='TRAN'"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Option permettant d’ajouter à la géométrie initiale du maillage ma :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "les valeurs de TRANslation (dx, dy (+ dz en 3D)) du champ de déplacement depl donné par le mot-clé DEPL ;",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "Ou une quantité aléatoire.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  DEPL = depl ,"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Champ de déplacement servant à réactualiser la géométrie",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ALEA = epsi ,"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On ajoute à chaque coordonnée de chaque nœud du maillage une quantité (delta) aléatoire.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette quantité est obtenue par la formule : delta=epsi*dim*alea() Où :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "epsi est un nombre fourni par l'utilisateur (1.e-8 par exemple)",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "dim est la dimension du maillage dans la direction concernée par la composante (X,Y ou Z)",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "alea() est une fonction retournant un nombre pseudo-aléatoire dans l'intervalle",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "[-1,1].",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : La possibilité de modifier aléatoirement les coordonnées d'un maillage est, a priori, une fonctionnalité de « développeur ». Elle est dangereuse dans certaines situations : mailles très aplaties (joints, ...)",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Mot-clé ORIE_PEAU",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ORIE_PEAU ="
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé sert à réorienter des mailles de bord de façon à ce que leurs normales soient cohérentes (vers l'extérieur de la matière). Ce mot clé est valable pour une étude bidimensionnelle (2D) ou tridimensionnelle (3D). C'est un préalable indispensable si, par exemple, on veut appliquer un chargement de pression sur cette « peau ».",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA_PEAU = lgrma,           [l_gr_ma]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de mailles à réorienter.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mailles sont orientées de telle façon que la normale soit sortante. Pour chaque maille de bord (arête ou face), on cherche la maille « volumique » qu'elle « borde ». On l’oriente de telle façon que sa normale soit de sens opposé au vecteur reliant son premier nœud au barycentre de la maille volumique.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Il arrive parfois que la « peau » que l'on souhaite orienter soit insérée dans la matière (par exemple, quand on fait un calcul pour lequel, des mailles sont progressivement ajoutées ou retirées du modèle : modélisation d'une excavation, ou d'une construction par couches). L'algorithme d'orientation décrit ci-dessus échoue alors car on trouve en général 2 mailles volumiques de part et d'autre de la maille de peau. On ne sait pas alors laquelle utiliser pour orienter la maille de peau.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour cela, on a introduit le mot clé facultatif GROUP_MA_INTERNE. Ce mot clé permet à l'utilisateur de préciser quelles sont les mailles « internes » à utiliser pour orienter les mailles de peau.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit 1 groupe de maille de peau (GPEAU) que l'on veut orienter avec une normale dirigée vers l'extérieur. Il faut indiquer qu'il est la peau du groupe de mailles \"volumiques\" GV2. On écrira :",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ORIE_PEAU=_F(GROUP_MA_PEAU='GPEAU', GROUP_MA_INTERNE='GV2'),"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "GPEAU GV1",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "GV2",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Mot-clé ORIE_NORM_COQUE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ORIE_NORM_COQUE = _F("
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé sert à vérifier que dans une liste de mailles surfaciques (coques), les normales sont cohérentes entre elles. Dans le cas contraire, certaines mailles sont réorientées.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA =   lgrma,           [l_gr_ma]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de mailles surfaciques à réorienter. Les mailles de lgrma doivent former un groupe \"connexe\" pour que l'on puisse les réorienter par continuité.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut imposer le sens de l'orientation à l’aide des mots-clé GROUP_NO/VECT_NORM. Si on ne le fait pas, l'orientation retenue sera celle de la 1ère maille de lgrma, mais ce n'est pas forcément la 1ère maille du 1er GROUP_MA ! Il est donc conseillé de toujours utiliser le mot clé VECT_NORM.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VECT_NORM = (n1, n2, [n3]),   [l_R]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "ni : 2 ou 3 composantes (selon la dimension) du vecteur normal. Il faut également préciser le nœud support de cette normale :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_NO  =  grno,     [gr_no]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "grno doit être une GROUP_NO ne contenant qu'un seul nœud. La normale choisie sera celle qui fait un angle aigu avec le vecteur donné par VECT_NORM.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque: si GROUP_NO n'est pas donné par l'utilisateur, le code choisira automatiquement l'un des noeuds de GROUP_MA . Il faut donc être prudent dans la définition de ce dernier, de manière à ce que la normale soit bien définie sur l'ensemble des mailles. En particulier, il faut éviter les cas où le groupe ne définit pas une zone topologique presque plane.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Mot-clé ORIE_LIGNE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ORIE_LIGNE = _F("
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé sert à vérifier que dans une liste de mailles linéiques (poutres), les tangentes sont cohérentes entre elles. Dans le cas contraire, certaines mailles sont réorientées.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA =   lgrma,           [l_gr_ma]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de mailles linéiques à réorienter. Les mailles de lgrma doivent former un groupe \"connexe\" pour que l'on puisse les réorienter par continuité.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut imposer le sens de l'orientation à l’aide des mots-clé GROUP_NO/VECT_TANG. Si on ne le fait pas, l'orientation retenue sera celle de la 1ère maille de lgrma, mais ce n'est pas forcément la première maille du premier GROUP_MA ! Il est donc conseillé de toujours utiliser le mot clé VECT_TANG.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VECT_TANG = (n1, n2, [n3]),   [l_R]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "ni : 2 ou 3 composantes (selon la dimension) du vecteur tangent. Il faut également préciser le nœud support de cette normale :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_NO  =  grno,     [gr_no]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "grno doit être une GROUP_NO ne contenant qu'un seul nœud. La tangente choisie sera celle qui fait un angle aigu avec le vecteur donné par VECT_TANG.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Mot-clé MODI_MAILLE",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  OPTION = 'NOEUD_QUART' ,"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Active le déplacement des nœuds milieux des arêtes touchant le fond de fissure au quart de ces arêtes (vers le fond de fissure).",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /   GROUP_MA_FOND = lgma_fo,  [l_gr_ma]",
+    "   /   GROUP_NO_FOND = lgno_fo,  [l_gr_no]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, on rentre le nœud du fond de fissure (par GROUP_NO_FOND).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, on rentre soit les nœuds du fond de fissure, soit les mailles SEG3 du fond de fissure (et non pas les mailles des lèvres de la fissure ou des mailles de matière adossées au fond).",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.9",
+   "text": "Mot-clé TRANSLATION",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut combiner cette fonctionnalité avec ROTATION , mais ces opérations ne sont pas commutatives. La translation est toujours exécutée avant la rotation. On ne peut pas combiner cette fonctionnalité avec SYMETRIE .",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TRANSLATION = (n1, n2, [n3]),    [l_R]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé simple pour la translation d’un maillage suivant un vecteur.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.10",
+   "text": "Mot-clé ROTATION",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut combiner cette fonctionnalité avec TRANSLATION , mais ces opérations ne sont pas commutatives. En revanche, il n’est pas autorisé d’utiliser ROTATION , MODI_BASE et SYMETRIE en même temps. La translation est toujours exécutée avant la rotation.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ROTATION ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur pour la rotation d’axe quelconque d’un maillage.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  POIN_1    =  (ni, n2, [n3]),     [l_R]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du premier point pour définir l’axe de rotation.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  POIN_2 =  (ni, n2, [n3]),     [l_R]",
+    "   /  DIR    =  (ni, n2, [n3]),     [l_R]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du deuxième point ou direction pour définir complètement l’axe de rotation.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  ANGLE     =  a,                  [R]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Angle de rotation exprimé en degrés.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "La rotation se fait dans le sens direct, par rapport à son axe orienté. Cet axe passe par le point POIN_1 et son orientation est donnée, soit par le vecteur DIR, soit par le vecteur d’origine POIN_1 et d’extrémité POIN_2.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "La rotation est définie par :",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit Mx,y,z un point de l’espace, on lui impose une rotation d’angle  (en radians) dont l’axe passe par Ppx, py,pz et a pour direction Ddx,dy,dz. Alors M devient M’ après la rotation :",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "M'=Pcos.PM1−cos.PM.D.DsinD∧PM",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.11",
+   "text": "Mot-clé ECHELLE",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité est utilisable avec TRANSLATION et ROTATION . La mise à l'échelle, quand elle est demandée, est toujours faite après TRANSLATION et ROTATION. On ne peut pas combiner cette fonctionnalité avec SYMETRIE.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ECHELLE = n1,                    [R]"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé simple pour la mise à l’échelle d’un maillage suivant un réel.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit Mx,y,z un point du maillage, il deviendra, par cette transformation de rapport n1 : M’n1⋅x,n1⋅y,n1⋅z .",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.12",
+   "text": "Mot-clé MODI_BASE",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité n’est pas autorisée avec ROTATION et SYMETRIE.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODI_BASE ="
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur pour le changement de base dans lequel on exprime les coordonnées d’un maillage. Le changement de repère a toujours lieu entre 2 bases orthonormées.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  VECT_X    =  (n1, n2, [n3]),     [l_R]"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du premier vecteur de la nouvelle base, de norme quelconque.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VECT_Y    =  (n1, n2, [n3]),     [l_R]"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du deuxième vecteur de la nouvelle base (non utilisé en 2D), aussi de norme quelconque.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, il suffit de donner l’axe VECT_X, et Code_Aster construit automatiquement le deuxième vecteur pour définir une base orthogonale directe. Un test vérifie si VECT_X est de norme non nulle.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, on vérifie que VECT_X et VECT_Y sont de norme non nulle et on vérifie qu’ils sont orthogonaux. Le troisième vecteur qui complète la base est construit comme étant le produit vectoriel de VECT_X avec VECT_Y. On s’assure ainsi la construction d’une base orthogonale directe.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ensuite, dans tous les cas (2D et 3D), les vecteurs de la base sont normés à 1, l’utilisateur n’a donc pas à s’en soucier. On a donc finalement une base orthonormée directe.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, on attend donc la donnée de VECT_X et VECT_Y, les deux premiers vecteurs de la nouvelle base. Ensuite le changement de base se définit comme :",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.13",
+   "text": "Mot-clé SYMETRIE",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "On ne peut pas combiner cette fonctionnalité avec TRANSLATION , ROTATION , ECHELLE et MODI_BASE .",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  POINT     =  (n1, n2, [n3])      [l_R]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées d'un point appartenant à la droite en 2D ou au plan en 3D.",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  AXE_1  =  (n1, n2, [n3])         [l_R]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Vecteur directeur de la droite en 2D ou 1er vecteur permettant de décrire le plan.",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  AXE_2  =  (n1, n2, n3)           [l_R]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "2nd vecteur permettant de décrire le plan.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, la symétrie se fait par rapport à une droite, qui est dans le plan OXY. Pour définir cette droite il faut donner le vecteur directeur de la droite (AXE_1) et un point (POINT) appartenant à cette droite. En 3D, la symétrie se fait par rapport à un plan. Pour définir ce plan, il faut donner 2 vecteurs du plan (AXE_1, AXE_2) et un point (POINT) appartenant à ce plan.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans tous les cas (2D ou 3D), la symétrie est réalisée par rapport à un plan. En 2D, le second vecteur nécessaire à la définition du plan est fixé à AXE_2 = (0.0, 0.0, -1.0).",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "La distance algébrique  entre un point Mx,y,z et un plan passant par le point Moxo,yo,zo avec pour vecteur perpendiculaire V=AXE_1∧AXE_2=a,b,c est :",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ax−x by−y cz−z  = 0 0 0  a2b2c2",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les coordonnées du point M' symétrique du point M par rapport au plan sont données par : V OM '=−2. OM ∥V∥",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.14",
+   "text": "Mot clé ABSC_CURV",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   ABSC_CURV = _F (...),"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Calcule l'abscisse curviligne pour l’ensemble des mailles SEG fournies via les mots clés GROUP_MA ou TOUT='OUI'. Pour chacun des nœuds des mailles concernées, on calcule son abscisse curviligne en tenant compte de son éventuelle courbure.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé GROUP_NO_ORIG permet à l'utilisateur de choisir l'origine des abscisses curvilignes (le nœud où l'abscisse est nulle). L'origine doit être l'une des extrémités de la ligne sur laquelle on veut calculer l'abscisse curviligne.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option est nécessaire, par exemple, pour réaliser un calcul modal pour un tube avec fluide externe et interne, quand la masse volumique du fluide externe est définie en fonction de l’abscisse curviligne.",
+   "page": 11
+  },
+  {
+   "type": "figure",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Toutes les mailles concernées doivent être du type SEG2, SEG3 ou SEG4.",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les mailles de type SEG2 sont considérées comme droites et les mailles SEG3 et SEG4 sont supposées en forme d'arc de cercle.",
+   "page": 12
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 18,
+   "chars": 3292,
+   "id": 1,
+   "section": "1 But"
+  },
+  {
+   "first": 19,
+   "last": 43,
+   "chars": 2200,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 44,
+   "last": 71,
+   "chars": 2654,
+   "id": 3,
+   "section": "3.4 Mot-clé DEFORMEE"
+  },
+  {
+   "first": 72,
+   "last": 92,
+   "chars": 2473,
+   "id": 4,
+   "section": "3.6 Mot-clé ORIE_NORM_COQUE"
+  },
+  {
+   "first": 93,
+   "last": 118,
+   "chars": 2051,
+   "id": 5,
+   "section": "3.8 Mot-clé MODI_MAILLE"
+  },
+  {
+   "first": 119,
+   "last": 151,
+   "chars": 3083,
+   "id": 6,
+   "section": "3.11 Mot-clé ECHELLE"
+  },
+  {
+   "first": 152,
+   "last": 160,
+   "chars": 930,
+   "id": 7,
+   "section": "3.14 Mot clé ABSC_CURV"
+  }
+ ]
+}

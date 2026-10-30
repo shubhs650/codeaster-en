@@ -1,0 +1,230 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.61.11.pdf",
+  "source_sha256": "d055e2b9558171f188378d6f26c61e8bff43bb8c93666c66fd8b913349683ad1",
+  "source_bytes": 116487
+ },
+ "schema_version": 1,
+ "doc_id": "U4.61.11",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "01/06/2016",
+  "fascicle": "Manuel d'utilisation Fascicule u4.61: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 4,
+  "pages": "4",
+  "pdf_keywords": "U4.61.11-I",
+  "pdf_title": "Opérateur NUME_DDL",
+  "responsible": "SELLENET Nicolas",
+  "revision": "5d762150e872",
+  "title": "Opérateur NUME_DDL",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur NUME_DDL",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Numéroter les inconnues d’un système d’équations linéaires. Cet opérateur \"prépare\" également l’assemblage de la matrice associée à ce système d’équations.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "C’est dans cet opérateur qu’est choisie la méthode de résolution des systèmes linéaires : LDLT, gradient conjugué, multi-frontale…",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type nume_ddl.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "nu [nume_ddl] = NUME_DDL   (",
+    "   ♦  /  MODELE    =   mo,                       [modele]",
+    "          ◊  CHARGE=   lchar,                 /  [l_char_meca]",
+    "                                              /  [l_char_ther]",
+    "                                              /  [l_char_acou]",
+    "      /   MATR_RIGI =  lmel,                  /  [l_matr_elem_TEMP_R]",
+    "                                              /  [l_matr_elem_DEPL_R]",
+    "                                              /  [l_matr_elem_DEPL_C]",
+    "                                              /  [l_matr_elem_PRES_C]"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   INFO     =   /  1,                     [DEFAUT]",
+    "                 /  2,",
+    "                       )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Généralités",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande permet de numéroter les équations (et les inconnues) des systèmes linéaires à résoudre. On prépare également le travail d’assemblage des matrices, en établissant les tableaux de pointeurs correspondant au stockage de ces matrices.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Opérande MODELE / CHARGE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  / MODELE = mo  , CHARGE = lchar"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le code numérotera les degrés de liberté des éléments du modèle mo ainsi que les degrés de liberté de dualisation des conditions cinématiques dualisées éventuellement présentes dans les charges de la liste lchar.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Opérande MATR_RIGI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  / MATR_RIGI = lmel"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des matr_elem_* permettant d'établir la numérotation des inconnues du problème.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le but de cet opérateur est de numéroter tous les degrés de liberté du problème. Ces degrés de liberté sont ceux portés par les matrices élémentaires calculées par l’opérateur CALC_MATR_ELEM (lmel).",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Du fait de la dualisation des conditions \"cinématiques\", les degrés de liberté de Lagrange sont portés par les matr_elem calculés par l’option 'RIGI_MECA' (ou 'RIGI_THER', ...) sur les charges où sont définies les conditions cinématiques.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est donc important de donner dans lmel, la liste de tous les matr_elem de \"rigidité\" et de ne pas oublier les charges dans l’opérateur CALC_MATR_ELEM [U4.61.01].",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Opérande INFO",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO ="
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 1 sur le fichier MESSAGE.",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre total de degrés de liberté, nombre de nœuds,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de degrés de liberté de LAGRANGE,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "hauteur maximum d'une colonne (et hauteur moyenne),",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de termes stockés (pour le stockage 'MORSE'),",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir les exemples dans la commande RESOUDRE [U4.55.02]",
+   "page": 4
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 19,
+   "chars": 2280,
+   "id": 1,
+   "section": "4.2 Opérande MATR_RIGI"
+  },
+  {
+   "first": 20,
+   "last": 28,
+   "chars": 306,
+   "id": 2,
+   "section": "4.3 Opérande INFO"
+  }
+ ]
+}

@@ -1,0 +1,543 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.21.01.pdf",
+  "source_sha256": "9cdb74052273ba6fbd7aa117f387454e91e887b23a6deaba444204560e64b907",
+  "source_bytes": 147562
+ },
+ "schema_version": 1,
+ "doc_id": "U4.21.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "10/03/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.21: Lecture du maillage",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 5,
+  "pages": "5",
+  "pdf_keywords": "U4.21.01-I",
+  "pdf_title": "Opérateur LIRE_MAILLAGE",
+  "responsible": "PIGNET Nicolas",
+  "revision": "4e7dd15207ae",
+  "title": "Opérateur LIRE_MAILLAGE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur LIRE_MAILLAGE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Créer un maillage par lecture sur un fichier. Les formats de fichiers supportés sont : ASTER, MED, GIBI, GMSH et IDEAS.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type maillage.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque importante :",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut vérifier la qualité du maillage lu en utilisant (à la suite de LIRE_MAILLAGE, la commande MACR_INFO_MAIL [U7.03.02].",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma [maillage] = LIRE_MAILLAGE",
+    "             (  ◊   UNITE =      /  20  ,                  [DEFAUT]",
+    "                                 /  i   ,                  [I]",
+    "                ◊   FORMAT=      /  ' MED ' ,              [DEFAUT]",
+    "                                 /  'ASTER',",
+    "                                 /  'GIBI',",
+    "                                 /  'GMSH',",
+    "                                 /  'IDEAS',",
+    "                # Si FORMAT='MED'",
+    "                    ◊  NOM_MED      =   mamed ,            [ K*]",
+    "                    ◊  INFO_MED     =   / 1,               [DEFAUT]",
+    "                                        / 2,",
+    "                                        / 3,",
+    "                    ◊  PARTITIONNEUR =  / ‘SANS’,          [DEFAUT]",
+    "                                        / ‘PTSCOTCH’",
+    "                # Si FORMAT='IDEAS'",
+    "                    ◊  CREA_GROUP_COUL  =  / 'NON',            [DEFAUT]",
+    "                                           / 'OUI',",
+    "                ◊   VERI_MAIL =  _F (",
+    "                          ◊   VERIF =   /  'OUI'  ,        [DEFAUT]",
+    "                                        /  'NON'  , ),",
+    "                          ◊   APLAT =   /  1.D-3  ,        [DEFAUT]",
+    "                                        /  ap     ,        [R]",
+    "                ◊   INFO =       /  1   ,                  [DEFAUT]",
+    "                                 /  2   ,",
+    "             )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande UNITE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  UNITE =   i"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Numéro d'unité logique du fichier maillage. Unité 20 par défaut.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande FORMAT",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  FORMAT    =  /  'MED'     [DEFAUT]",
+    "                /   'ASTER'",
+    "                /   'GMSH'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé sert à préciser le format du fichier à lire. Aujourd’hui trois formats sont supportés : 'MED', 'ASTER' et 'GMSH'. Le format 'ASTER' est décrit dans [U3.01.00]. Le format 'MED' qui signifie « Modélisation et Echanges de Données » est un format de données neutre développé par EDF R&D et le CEA pour les échanges de données entre codes de calcul. Les données que l’on peut échanger selon ce format sont les maillages et les champs de résultats : champs aux nœuds, champs par élément. Les fichiers MED sont des fichiers binaires et portables (s’appuyant sur la bibliothèque HDF, Hierarchical Data Format). La lecture d’un fichier MED par LIRE_MAILLAGE, permet de récupérer un maillage produit par tout autre code capable de créer un fichier MED. C'est le format conseillé dans code_aster et celui par défaut.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Quel que soit le format, les données lues sont :",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la liste des nœuds numéro, nom, coordonnées,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la liste des mailles numéro, nom, type, nom des nœuds,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la liste des groupes de nœuds numéro, nom, nombre de nœuds, noms des nœuds,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la liste des groupes de mailles numéro, nom, nombre de mailles, noms des mailles.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota :",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans un fichier MED, il y a partition des nœuds et des mailles en fonction des groupes. Une partition correspond à une famille MED. Dans un fichier MED, les groupes sont répartis au sein des familles : on y trouve donc des familles de nœuds et des familles de mailles. Lors de la lecture d’un fichier MED, les listes des groupes de nœuds et de mailles sont constituées à la volée par décomposition des familles.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Concernant GMSH, les fichiers aux formats ASCII 1.0 et 2.0 sont lus.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans GMSH, les groupes sont toujours numérotés. Ils sont également parfois nommés en version 2.0.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le format GMSH version 1, les groupes de nœuds et mailles sont lus de la façon suivante :",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "t ous les groupes d’éléments de numéros 1, 2, ... de GMSH sont transformés en groupes de mailles (GROUP_MA) portant le nom GM1, GM2,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l es groupes sont mutuellement exclusifs : une maille ne peut appartenir à plusieurs groupes.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le format GMSH version 2, les groupes de nœuds et mailles sont lus de la façon suivante :",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "seuls les groupes nommés dans GMSH (section PhysicalNames du format msh ) sont importés ;",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les groupes peuvent se recouvrir : une maille peut appartenir à plusieurs groupes ;",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le type GMSH de la maille doit être cohérent avec la dimension GMSH du groupe pour pouvoir appartenir à ce groupe (par exemple segment à 2 nœud pour un groupe 1D)",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande VERI_MAIL",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé VERI_MAIL déclenche 3 vérifications sur le maillage :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "absence de nœuds orphelins,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "absence de mailles \"en double\",",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "absence de mailles trop aplaties.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si ces vérifications ne sont pas satisfaites, le code émet une alarme.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut (c’est-à-dire en l’absence du mot clé VERI_MAIL), les vérifications sont faites. Si l’utilisateur veut éviter ces vérifications, il écrira :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VERI_MAIL = _F (VERIF = 'NON',),"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Un nœud est déclaré orphelin s'il ne fait partie de la connectivité d'aucune maille. Une maille est déclarée \"en double\", si 2 mailles (ou plus) ont des connectivités formées par la même liste de nœuds.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé APLAT = ap permet d’émettre des alarmes lorsque le maillage contient des mailles trop aplaties.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "L’aplatissement d’une maille est définie comme le rapport Amin/Amax où Amin et Amax sont les longueurs des arrêtes la plus courte et la plus longue de la maille. Le nom des mailles dont l’aplatissement est inférieur à ap sera imprimé sur le fichier 'MESSAGE'.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "D'autres critères de qualité pour le maillage sont disponibles via la commande MACR_INFO_MAIL [U7.03.02].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérandes pour le format 'MED'",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NOM_MED = mamed,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Un fichier MED peut contenir plusieurs maillages. Chaque maillage est repéré par son nom. Pour lire un maillage en particulier, il faut fournir son nom en argument de ce mot clé NOM_MED. En l’absence de mot-clé, le premier maillage trouvé dans le fichier sera lu. Lorsque le fichier ne contient qu’un maillage, il n'y a donc rien à préciser.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Dans un maillage, un groupe de mailles peut être composé d’éléments de différentes dimensions (bords, faces ou volumes).",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Ce genre de groupe s’affiche dans Salome (module Mesh) comme plusieurs groupes portant le même nom sous différentes catégories, mais en fait c’est un seul groupe dans code_aster.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO_MED =      /   1,        [DEFAUT]",
+    "                   /   2,",
+    "                   /   3,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Imprime des informations spécifiques sur le déroulement de la relecture du fichier de maillage MED (nombre de nœuds et de mailles relus, informations sur les familles MED, …) :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "INFO_MED = 1 : aucune impression,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "INFO_MED = 2 : uniquement des impressions relatives à la correspondance famille / groupe,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "INFO_MED = 3 : la totalité des informations sont imprimées.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PARTITIONNEUR = / ‘SANS’, :         [DEFAUT]",
+    "                    / ‘ PTSCOTCH’"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut ( SANS ), l e maillage n’est pas découpé (séquentiel et ancien parallèlisme).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Avec PTSCOTCH, cela permet de partitionner un maillage contenu dans un fichier pour le distribuer entre les différents sous-domaines lors d’un calcul parallèle. Le maillage est découpé en autant de sous-domaines que de processus MPI. En séquentiel, le mot-clé est ignoré. Attention, pour le moment, certaines mailles POI1 ne sont pas recopiées.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérandes pour le format 'IDEAS'",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CREA_GROUP_COUL"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisateur peut demander la création de groupes de mailles et de nœuds regroupant toutes les mailles et nœuds de même couleur en indiquant CREA_GROUP_COUL = 'OUI'. Ces groupes sont nommés COUL_n ou n est le numéro de la couleur dans IDEAS.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut ce n'est pas fait pour ne pas augmenter inutilement le nombre de groupes de mailles et de nœuds.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "On ne traite que des systèmes de coordonnées cartésiens.",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "On ne gère qu’un seul système de coordonnées cartésien.",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Lors de la conversion du fichier universel IDEAS, on vérifie si l’utilisateur a défini plusieurs systèmes de coordonnées. Si c’est le cas, un message d’alarme en avertit l’utilisateur, pour lui demander de vérifier que tous les systèmes de coordonnées sont identiques.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérande INFO",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   INFO =/   1  ,            [DEFAUT]",
+    "           /  2  ,"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Niveau d'impression.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Si:INFO = 1"
+   ],
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "titre du maillage,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de nœuds,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de mailles de chaque type,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de groupes de nœuds et pour chacun d’eux son nom et le nombre de nœuds du groupe",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "nombre de groupes de mailles et pour chacun d’eux son nom et le nombre de mailles du groupe.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Si : INFO = 2 on imprime en plus des informations de INFO = 1 :",
+   "page": 5
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "liste des nœuds",
+     "numéro, nom, coordonnées,"
+    ],
+    [
+     "liste des mailles",
+     "numéro, nom, type, nom des nœuds,"
+    ],
+    [
+     "liste des groupes de nœuds",
+     "numéro, nom, nombre de nœuds, noms des nœuds,"
+    ],
+    [
+     "liste des groupes de mailles",
+     "numéro, nom, nombre de mailles, noms des mailles."
+    ]
+   ],
+   "page": 5
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 30,
+   "chars": 4366,
+   "id": 1,
+   "section": "3.2 Opérande FORMAT"
+  },
+  {
+   "first": 31,
+   "last": 56,
+   "chars": 2764,
+   "id": 2,
+   "section": "3.3 Opérande VERI_MAIL"
+  },
+  {
+   "first": 57,
+   "last": 75,
+   "chars": 1464,
+   "id": 3,
+   "section": "3.5 Opérandes pour le format 'IDEAS'"
+  }
+ ]
+}

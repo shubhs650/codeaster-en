@@ -1,0 +1,892 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.44.03.pdf",
+  "source_sha256": "0a977571ddb2dd9d4bd1af51cce79a0c05031682772631cdebf21fe4778d6b54",
+  "source_bytes": 196422
+ },
+ "schema_version": 1,
+ "doc_id": "U4.44.03",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "04/11/2021",
+  "fascicle": "Manuel d'utilisation Fascicule u4.44: Conditions aux limites et chargements",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 11,
+  "pages": "11",
+  "pdf_keywords": "U4.44.03-H",
+  "pdf_title": "Opérateurs AFFE_CHAR_CINE et AFFE_CHAR_CINE_F",
+  "responsible": "ABBAS Mickaël",
+  "revision": "5cebe5bc8a69",
+  "title": "Opérateurs AFFE_CHAR_CINE et AFFE_CHAR_CINE_F",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateurs AFFE_CHAR_CINE et AFFE_CHAR_CINE_F",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Définir un chargement de type \"degrés de liberté imposés\".",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande peut être utilisée avec un modèle mécanique, thermique ou acoustique. Le traitement de ces conditions \"cinématiques\" se fera sans dualisation et donc sans ajout de degrés de liberté de Lagrange.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "1) Pour AFFE_CHAR_CINE (sauf pour le cas EVOL_IMPO) , les valeurs affectées ne dépendent d'aucun paramètre et sont définies par des valeurs réelles (mécanique ou thermique) ou des valeurs complexes (acoustique). Ces valeurs peuvent être nulles (blocage). 2) Pour AFFE_CHAR_CINE_F, les valeurs affectées sont des fonctions d’un (ou plusieurs) paramètres à choisir dans l’ensemble INST ,X ,Y ,Z.",
+   "page": 1,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type char_cine_* .",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe Générale",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch[char_cine_*] = AFFE_CHAR_CINE",
+    "             (  ♦  MODELE = mo   ,                            [modele]",
+    "                ♦  /   MECA_IMPO =            (voir mot clé MECA_IMPO),",
+    "                   /   THER_IMPO =            (voir mot clé THER_IMPO),",
+    "                   /   ACOU_IMPO =            (voir mot clé ACOU_IMPO),",
+    "                   /   EVOL_IMPO = evoimp     /  [evol_ther]",
+    "                                              /  [evol_elas]",
+    "                                              /  [evol_noli]",
+    "                        ◊  NOM_CMP = lcmp                     [l_TXM]",
+    "             )",
+    "si    MECA_IMPO           alors     [*]       meca",
+    "si    THER_IMPO                               ther",
+    "si    ACOU_IMPO                               acou",
+    "si    EVOL_IMPO           alors     [*]       meca ou ther (selon evoimp)"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch[char_cine_*] = AFFE_CHAR_CINE_F",
+    "             (  ♦  MODELE = mo   ,                            [modele]",
+    "                ♦  /   MECA_IMPO =            (voir mot clé MECA_IMPO),",
+    "                   /   THER_IMPO =            (voir mot clé THER_IMPO),",
+    "             )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "si    MECA_IMPO           alors     [*]    meca",
+    "si    THER_IMPO                            ther"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Généralités",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces deux commandes créent des concepts de type char_cine_* ( _meca/_ther ).",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "La commande AFFE_CHAR_CINE peut également créer des concepts de type char_cine_acou .",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces types sont différents du type charge créé par les commandes AFFE_CHAR_MECA [U4.44.01], AFFE_CHAR_THER [U4.44.02] ou AFFE_CHAR_ACOU [U4.44.04]).",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les objets créés ne sont donc pas interchangeables.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "L’avantage des charges “cinématiques” est qu’elles n’augmentent pas le nombre d’inconnues des systèmes à résoudre, contrairement à la méthode de dualisation par multiplicateurs de LAGRANGE, utilisée dans les commandes produisant un concept de type charge .",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "En revanche, l’utilisation de ces charges comporte les limitations suivantes :",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "on ne peut les utiliser que dans le cas de relation de type “ddl imposé” (et non pour des relations linéaires),",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "ces charges ne sont pas encore admises dans toutes les commandes globales. Aujourd’hui les commandes possibles sont :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "-  MECA_ STATIQUE, STAT_NON_LINE, DYNA_NON_LINE",
+    "-  THER_LINEAIRE"
+   ],
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un calcul n’utilisant pas les commandes globales : assemblage d’une matrice, puis résolution, la séquence de commandes à utiliser est plus compliquée qu’avec des charges “ordinaires” comme on peut le voir dans l’exemple 2 [§ 5.2].",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Généralités sur les opérandes",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes sous les mots clés facteurs MECA_IMPO , THER_IMPO et ACOU_IMPO sont de deux formes :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les opérandes spécifiant les entités géométriques sur lesquelles sont affectées les chargements (mots clés GROUP_MA , GROUP_NO…). Les arguments de ces opérandes sont identiques pour les deux opérateurs.",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les opérandes spécifiant les valeurs affectées ( DX , DY , DZ , etc …). La signification de ces opérandes est la même pour les deux opérateurs. Les arguments de ces opérandes sont tous du type réel pour l'opérateur AFFE_CHAR_CINE et du type fonction (ou formule ) pour l'opérateur AFFE_CHAR_CINE_F .",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ceci est vrai à une exception près : le mot clé facteur ACOU_IMPO (qui n’existe pas dans la commande AFFE_CHAR_CINE_F ) est toujours de type complexe.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nous ne distinguerons donc pas dans ce document, sauf mention expresse du contraire, les deux opérateurs AFFE_CHAR_CINE et AFFE_CHAR_CINE_F .",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "De façon générale, les entités sur lesquelles des valeurs doivent être affectées sont définies par nœuds :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "1) soit par l'opérande TOUT = 'OUI' qui permet de désigner tous les nœuds du maillage, 2) soit par l'opérande GROUP_NO permettant de désigner une liste de groupes de nœuds, 3) soit par l’opérande GROUP_MA permettant de désigner tous les nœuds portés par les mailles désignées par les listes de GROUP_MA .",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Comportement en cas de surcharge :",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.1",
+   "text": "Surcharge au sein d'une seule commande AFFE_CHAR_CINE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsqu'on utilise au sein d'une même commande, plusieurs occurrences de MECA_IMPO (ou THER_IMPO , ...) et que certains noeuds sont affectés plusieurs fois, c'est la dernière occurrence qui prime. Par exemple :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "chcine= AFFE_CHAR_CINE( MECA_IMPO=(",
+    "                 _F( TOUT='OUI',   DX= 1., ...)",
+    "                 _F( GROUP_NO='GN3',   DX= 3., ...)"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas, le déplacement imposé DX pour le noeud GN3 vaut : 3.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.2",
+   "text": "Surcharge entre plusieurs commandes AFFE_CHAR_CINE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on utilise plusieurs commandes différentes, le comportement est différent. Par exemple :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "chcin1= AFFE_CHAR_CINE( MECA_IMPO= _F( TOUT='OUI',   DX= 1., ...)",
+    "chcin2= AFFE_CHAR_CINE( MECA_IMPO= _F( GROUP_NO='GN3',   DX= 3., ...)"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas, le déplacement imposé DX pour le noeud GN3 vaut : 4 (car 1+3)",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.3",
+   "text": "Surcharge entre AFFE_CHAR_CINE et AFFE_CHAR_MECA",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on \"mixe\" les commandes AFFE_CHAR_MECA et AFFE_CHAR_CINE , le code s'arrêtera en erreur fatale ( FACTOR_41 ) en expliquant qu'il y a une relation de blocage sur-abondante ( NOEUD N3 / DX).",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Opérande MODELE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MODELE = mo"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Concept produit par l'opérateur AFFE_MODELE [U4.41.01] où sont définis les types d'éléments finis affectés sur le maillage.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.4",
+   "text": "Mot clé MECA_IMPO",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.1",
+   "text": "But",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur utilisable pour imposer, à des nœuds, une valeur de déplacement, définie composante par composante dans le repère global.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces conditions aux limites seront traitées, par la suite, par la méthode dite d'élimination des degrés de liberté imposés (c'est à dire sans dualisation, contrairement au traitement du même type de condition limite par l'utilisation des opérateurs AFFE_CHAR_MECA ou AFFE_CHAR_MECA_F [U4.44.01]).",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.2",
+   "text": "Syntaxe",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "AFFE_CHAR_CINE",
+    "   /  MECA_IMPO =  (_F (  ♦  /   TOUT =       'OUI'  ,",
+    "                                 | GROUP_NO = lgno   ,        [l_gr_noeud]",
+    "                                 | GROUP_MA = lgma   ,        [l_gr_maille]",
+    "                          ♦  |   DX =         ux     ,        [R]",
+    "                             |   DY =         uy     ,        [R]",
+    "                             |   ... (voir la liste complète ci-dessous)",
+    "                       ),),",
+    "AFFE_CHAR_CINE_F",
+    "   /  MECA_IMPO =  (_F (  ♦  /   TOUT =       'OUI'  ,",
+    "                                 | GROUP_NO = lgno   ,        [l_gr_noeud]",
+    "                                 | GROUP_MA = lgma   ,        [l_gr_maille]",
+    "                          ♦  |   DX =         u         ,",
+    "                                                              xf",
+    "   [fonction(                *)]",
+    "                             |   DY =         u         ,",
+    "                                                              yf",
+    "   [fonction(                *)]",
+    "                             |   ... (voir la liste complète ci-dessous)",
+    "                       ),),",
+    "fonction(             *):fonctionouformule"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des mots clés disponibles sous MECA_IMPO dans AFFE_CHAR_CINE :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DX              UO4              WO3              V22             HHO_U4",
+    "DY              UO5              WO4              V23             HHO_U5",
+    "DZ              UO6              WO5              V31             HHO_U6",
+    "DRX             VI2              WO6              V32             HHO_V1",
+    "DRY             VI3              WO               V33             HHO_V2",
+    "DRZ             VI4              WI1              PRES11          HHO_V3",
+    "GRX             VI5              WO1              PRES12          HHO_V4",
+    "PRES            VI6              GONF             PRES13          HHO_V5",
+    "PHI             VO2              H1X              PRES21          HHO_V6",
+    "TEMP            VO3              H1Y              PRES22          HHO_W1",
+    "PRE1            VO4              H1Z              PRES23          HHO_W2",
+    "PRE2            VO5              H1PRE1           PRES31          HHO_W3",
+    "UI2             VO6              K1               PRES32          HHO_W4",
+    "UI3             WI2              K2               PRES33          HHO_W5",
+    "UI4             WI3              K3               LH1             HHO_W6",
+    "UI5             WI4              V11              GLIS",
+    "UI6             WI5              V12              HHO_U1",
+    "UO2             WI6              V13              HHO_U2",
+    "UO3             WO2              V21              HHO_U3"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des mots clés disponibles sous MECA_IMPO dans AFFE_CHAR_CINE_F :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DX              UI4              VO4              WO1             V32",
+    "DY              UI5              VO5              GONF            V33",
+    "DZ              UI6              VO6              H1X             PRES11",
+    "DRX             UO2              WI2              H1Y             PRES12",
+    "DRY             UO3              WI3              H1Z             PRES13",
+    "DRZ             UO4              WI4              K1              PRES21",
+    "GRX             UO5              WI5              K2              PRES22",
+    "PRES            UO6              WI6              K3              PRES23",
+    "PHI             VI2              WO2              V11             PRES31",
+    "PSI             VI3              WO3              V12             PRES32",
+    "TEMP            VI4              WO4              V13             PRES33",
+    "PRE1            VI5              WO5              V21             LH1",
+    "PRE2            VI6              WO6              V22             GLIS",
+    "UI2             VO2              WO               V23",
+    "UI3             VO3              WI1              V31"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce sont les noms des degrés de liberté portés par les éléments finis du modèle. La signification de ces noms est à chercher dans la documentation de AFFE_CHAR_MECA [U4.44.01].",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.3",
+   "text": "Opérandes",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  MECA_IMPO"
+   ],
+   "page": 6
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "DX = ux ou uxf",
+     "Valeur de la composante de déplacement"
+    ],
+    [
+     "DY = uy ou uyf",
+     "en translation imposée"
+    ],
+    [
+     "DZ = uz ou uzf",
+     "sur les nœuds spécifiés"
+    ]
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Uniquement pour les nœuds d’un modèle 3D comportant des éléments de poutre, plaque, coque, discret :",
+   "page": 6
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "DRX = drx ou drxf",
+     "Valeur de la composante de déplacement"
+    ],
+    [
+     "DRY = dry ou dryf",
+     "en rotation imposée"
+    ],
+    [
+     "DRZ = drz ou drzf",
+     "sur les nœuds spécifiés"
+    ]
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les degrés de liberté plus \"exotiques\" : GRX , TEMP , PRES et PHI , on se reportera à la documentation de la commande AFFE_CHAR_MECA [U4.44.01 §3.9].",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "On vérifie que le degré de liberté spécifié existe en ce nœud pour au moins un des éléments du modèle (mot clé MODELE ) qui s’appuient sur ce nœud.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "De plus, la règle de surcharge est appliquée quand le même degré de liberté d'un même nœud est imposé plusieurs fois : on ne retient que la dernière valeur.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.5",
+   "text": "Mot clé THER_IMPO",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.1",
+   "text": "But",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur utilisable pour imposer, à des nœuds, une valeur de température nodale.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces conditions aux limites seront traitées, par la suite, par la méthode dite d'élimination des degrés de liberté imposés (c'est à dire : sans dualisation contrairement au traitement du même type de condition limite par l'utilisation des opérateurs AFFE_CHAR_THER ou AFFE_CHAR_THER_F [U4.44.02])",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.2",
+   "text": "Syntaxe",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "pourAFFE_CHAR_CINE",
+    " / THER_IMPO = (_F (   ♦   / TOUT =        'OUI' ,",
+    "                             | GROUP_NO =  lgno  ,         [l_gr_noeud]",
+    "                             | GROUP_MA =  lgma  ,         [l_gr_maille]",
+    "                       ♦  |  TEMP     =    t     ,         [R]",
+    "                          |  TEMP_SUP =    tsup  ,         [R]",
+    "                          |  TEMP_INF =    tinf  ,         [R]",
+    "                ), ),",
+    "pourAFFE_CHAR_CINE_F",
+    "/  THER_IMPO = (_F (   ♦  /  TOUT =        'OUI' ,",
+    "                             | GROUP_NO =  lgno  ,         [l_gr_noeud]",
+    "                             | GROUP_MA =  lgma  ,         [l_gr_maille]",
+    "                       ♦  |  TEMP     =    ft    ,         [fonction(                                                         *)]",
+    "                          |  TEMP_SUP =    ftsup ,         [fonction(                                                         *)]",
+    "                          |  TEMP_INF =    ftinf ,         [fonction(                                                         *)]",
+    "                ), ),",
+    "fonction(             *):fonctionouformule"
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.3",
+   "text": "Opérandes",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Température imposée sur les nœuds (ou sur le feuillet moyen pour les coques thermiques)",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP_INF"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Température imposée sur la face inférieure pour les éléments de coques thermiques.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP_SUP"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Température imposée sur la face supérieure pour les éléments de coques thermiques.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les coques, les faces inférieure et supérieure sont définies, maille par maille, par la direction de la normale extérieure déduite de la numérotation des nœuds : voir FACE_IMPO de AFFE_CHAR_MECA [U4.44.01].",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.6",
+   "text": "Mot clé ACOU_IMPO",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.1",
+   "text": "But",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur utilisable pour imposer, à des nœuds, une valeur de pression acoustique.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces conditions aux limites seront traitées, par la suite, par la méthode dite d'élimination des degrés de liberté imposés (c'est à dire : sans dualisation contrairement au traitement du même type de condition limite par l'utilisation de l'opérateur AFFE_CHAR_ACOU [U4.44.04]).",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.2",
+   "text": "Syntaxe",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PourAFFE_CHAR_CINE",
+    "    / ACOU_IMPO = (_F  (  ♦   /  TOUT =          'OUI'  ,",
+    "                                 | GROUP_NO = lgno   ,        [l_gr_noeud]",
+    "                                 | GROUP_MA = lgma   ,        [l_gr_maille]",
+    "                          ♦  PRES =              p      ,     [C]",
+    "                   ),  ),",
+    "PourAFFE_CHAR_CINE_F :"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Pas de mot clé ACOU_IMPO car il n'y a pas encore de fonction complexe.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.3",
+   "text": "Opérandes",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PRES"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur de la pression acoustique complexe imposée sur le(s) nœud(s) spécifié(s).",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.7",
+   "text": "Mot clé EVOL_IMPO",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  EVOL_IMPO = evoimp     /  [evol_ther]",
+    "                          /  [evol_elas]",
+    "                          /  [evol_noli]",
+    "   ◊   NOM_CMP = lcmp        [l_TXM]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet le \"zoom structural\" (voir par exemple le test zzzz230a ).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "L'effet de ce mot clé est d'imposer tous les ddls de l'évolution evoimp comme si c'étaient des fonctions du temps. Cette possibilité est offerte pour les structures de données evol_elas, evol_noli et evol_ther.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour faire un « zoom structural », il ne faut imposer les ddls que sur les nœuds du bord du modèle « zoom ». Cela veut dire qu'il faut en général projeter le calcul « grossier » sur les mailles du bord du modèle « zoom ».",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Si, de plus, on ne veut pas imposer toutes les composantes, il faut utiliser le mot clé NOM_CMP pour choisir les composantes à imposer (par défaut : toutes).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Attention à ne pas utiliser plusieurs EVOL_IMPO sur des zones communes (sinon il y aura cumul des valeurs imposées)",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Attention à l'usage de FONC_MULT avec EVOL_IMPO : le résultat ne sera peut être pas ce que l'on attend !",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "L'EVOL_IMPO sera utilisé pour toute valeur du temps comprise entre tmin et tmax (valeurs extrêmes des instants du transitoire EVOL_IMPO). En dehors de cet intervalle, on émet une erreur fatale (extrapolation interdite).",
+   "page": 10
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si l'EVOl_IMPO n'a qu'un instant, on permet le prolongement \"constant\" et on émet une alarme.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.1",
+   "text": "Degrés de liberté imposés en mécanique",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "chcine =  AFFE_CHAR_CINE  (MODELE = mo,",
+    "             MECA_IMPO=(",
+    "                _F (TOUT = 'OUI' , DRZ = 0.),",
+    "                _F (GROUP_NO = 'bord1',    DX =  0., DY =  0.,DZ =   0.,",
+    "                                           DRX = 0., DRY = 0.,)))"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour ce problème de plaque dans le plan XY , on bloque tous les degrés de liberté de rotation autour de Z et on encastre la plaque sur son bord bord1 .",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.2",
+   "text": "Utilisation comparée des charges cinématiques et \"ordinaires\"",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.1",
+   "text": "Commandes globales",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch1   =   AFFE_CHAR_THER  ( ... )",
+    "ch2   =   AFFE_CHAR_CINE_F( TEMP_IMPO =_F ( ... ))",
+    "evoth =   THER_LINEAIRE   (  ...",
+    "                             EXCIT = ( _F (CHARGE = ch1),",
+    "                                       _F (CHARGE = ch2),)",
+    "                             ...)"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Il n’y a pas de différence.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.2",
+   "text": "Calcul \"pas à pas\"",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Charges ordinaires",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch1    =  AFFE_CHAR_MECA ( ... )",
+    "mel    =  CALC_MATR_ELEM ( ... OPTION = 'RIGI_MECA'  , CHARGE = ch1)",
+    "matas  =  ASSE_MATRICE (  MATR_ELEM = mel ...)",
+    "matas  =  FACTORISER ( reuse = matas, MATR_ASSE = matas )",
+    "U      =  RESOUDRE (   MATR = matas ,  CHAM_NO = F )"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Charges cinématiques",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch1    =  AFFE_CHAR_CINE ( ... )",
+    "mel    =  CALC_MATR_ELEM ( ... OPTION = 'RIGI_MECA' )",
+    "matas  =  ASSE_MATRICE (  MATR_ELEM = mel, ..., CHAR_CINE = ch1 )",
+    "matas  =  FACTORISER ( reuse = matas, MATR_ASSE = matas, )",
+    "vcine  =  CALC_CHAR_CINE ( ..., CHAR_CINE = ch2, )",
+    "U      =  RESOUDRE (   MATR = matas ,  CHAM_NO = F,",
+    "                       CHAM_CINE = vcine)"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Les termes induits par les charges cinématiques sont reportés au second membre ce qui nécessite le calcul d’un champ aux nœuds supplémentaire vcine par la commande CALC_CHAR_CINE [U4.61.03].",
+   "page": 11
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 20,
+   "chars": 3187,
+   "id": 1,
+   "section": "3 Généralités"
+  },
+  {
+   "first": 21,
+   "last": 40,
+   "chars": 2425,
+   "id": 2,
+   "section": "4 Opérandes"
+  },
+  {
+   "first": 41,
+   "last": 63,
+   "chars": 5307,
+   "id": 3,
+   "section": "4.3 Opérande MODELE"
+  },
+  {
+   "first": 64,
+   "last": 77,
+   "chars": 2010,
+   "id": 4,
+   "section": "4.5 Mot clé THER_IMPO"
+  },
+  {
+   "first": 78,
+   "last": 98,
+   "chars": 2281,
+   "id": 5,
+   "section": "4.6 Mot clé ACOU_IMPO"
+  },
+  {
+   "first": 99,
+   "last": 112,
+   "chars": 1685,
+   "id": 6,
+   "section": "5 Exemples"
+  }
+ ]
+}

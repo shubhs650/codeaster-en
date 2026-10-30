@@ -1,0 +1,803 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.81.13.pdf",
+  "source_sha256": "eb19bc698b9f5e5efa01de6fcab3672006752605df9e854e6875b3780492fd55",
+  "source_bytes": 182061
+ },
+ "schema_version": 1,
+ "doc_id": "U4.81.13",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "09/09/2020",
+  "fascicle": "Manuel d'utilisation Fascicule u4.81: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 8,
+  "pages": "8",
+  "pdf_keywords": "U4.81.13-C",
+  "pdf_title": "Opérateur MACR_LIGN_COUPE",
+  "responsible": "YU Ting",
+  "revision": "cf7d88529335",
+  "title": "Opérateur MACR_LIGN_COUPE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur MACR_LIGN_COUPE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Extraction dans une table des valeurs d’un résultat sur des lignes de coupe définies par deux points et un intervalle ou des groupes de nœuds.",
+   "page": 1
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Le résultatpeutêtremécanique(evol_elas,evol_noli,  mode_meca,  comb_fourier,",
+    "mult_elas, fourier_elas, dyna_trans)outhermique(evol_ther)."
+   ],
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Principe : Cette macro-commande crée un maillage linéique, droit et régulier de segments à deux nœuds. Ce maillage peut être:",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "droit, défini par la donnée de ses extrémités et d’un nombre d’intervalles le composant ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "courbe, défini par la donnée du centre et de l'angle d'un cercle, du premier point de la ligne de coupe, du nombre de points désirés, et éventuellement d'un vecteur normal au plan contenant la ligne de coupe (en 3D uniquement) ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "quelconque, lorsque la ligne de coupe constitue un chemin reliant les nœuds d'un groupe de nœuds.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les champs du résultat fourni (par défaut déplacement ou température) sont projetés sur ce maillage grâce à la commande PROJ_CHAMP. Puis les valeurs nodales sur la ligne de coupe du champ à posttraiter sont récupérées dans une table par POST_RELEVE_T. C’est cette table qui est produite par la macro-commande.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Tab [table] = MACR_LIGN_COUPE(",
+    "♦  /  RESULTAT  =  resu,     [evol_elas, evol_noli, mode_meca, evol_ther,",
+    "                             comb_fourier, mult_elas, fourier_elas,",
+    "                             dyna_trans ]",
+    "      ◊   NOM_CHAM =   /  'SIGM_NOEU',               [DEFAUT si mécanique]",
+    "                       /  'TEMP',                    [DEFAUT si thermique]",
+    "      ♦   /  NUME_ORDRE   =  lordre,                    [l_I]",
+    "          /  NUME_MODE    =  lmode,                     [listis]",
+    "          /  LIST_ORDRE   =  lenti,                     [listis]",
+    "          /  INST         =  llinst,                    [l_R]",
+    "          /  LIST_INST    =  llinst,                    [listr8]",
+    "          ◊  PRECISION    =  /   prec,                  [R]",
+    "                             /   1.D-6,                 [DEFAUT]",
+    "          ◊  CRITERE      =  /   'RELATIF',             [DEFAUT]",
+    "                             /   'ABSOLU',",
+    "    / CHAM_GD      =   champ,          [cham_no_DEPL_R, cham_no_TEMP_R,",
+    "                                        cham_no_SIEF_R, cham_elno_SIEF_R]",
+    "◊  MODELE          =   mod,                             [modele]",
+    "◊  UNITE_MAILLAGE  =   25,                              [DEFAUT]",
+    "◊  VIS_A_VIS       =   _F(",
+    "      ♦   GROUP_MA_1   =  gma,                       [l_K8])"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  LIGN_COUPE   =  _F(",
+    "   ♦  INTITULE  =  txt,                                 [Kn]",
+    "   ♦  /   NOM_CMP  =   lcmp,                            [l_K8]",
+    "          ◊  REPERE    =  /'GLOBAL',[DEFAUT]",
+    "                          /'POLAIRE',",
+    "                          /'LOCAL',",
+    "                             ◊   VECT_Y=(Oy1,Oy2,[Oy3]),[l_R]",
+    "                          /'UTILISATEUR'",
+    "                             ♦   ANGL_NAUT=(a, b, g),      [l_R]",
+    "                          /'CYLINDRIQUE'",
+    "                             ◊   ORIGINE=(x0,y0,[z0]),     [l_R]",
+    "                             ◊   AXE_Z =(Oz1,Oz2,[Oz3]),   [l_R]",
+    "             ◊  /  TRAC_NOR  =   'OUI'",
+    "                /  TRAC_DIR  =   'OUI',",
+    "                   ♦   DIRECTION =  (x,y,[z]),             [l_R]",
+    "      /   INVARIANT       =  'OUI',",
+    "      /   ELEM_PRINCIPAUX =  'OUI',",
+    "      /   RESULTANTE      =  lcmp,                         [l_R]",
+    "   ◊  OPERATION =  |   'EXTRACTION',                    [DEFAUT]",
+    "                   |   'MOYENNE',",
+    "   ♦  TYPE   =  /  'GROUP_NO'",
+    "                   ♦   GROUP_NO  =  gno,                [l_K8]",
+    "                /  'GROUP_MA'",
+    "                   ♦   MAILLAGE  =  ma,                 [maillage]",
+    "                   ♦   GROUP_MA  =  gma,                [group_ma]",
+    "                   ◊   GROUP_NO_ORIG= gnoA ,         [group_no]",
+    "                   ◊   GROUP_NO_EXTR= gnoB ,         [group_no]",
+    "                   ◊   VECT_ORIE       = (vx, vy,[vz]), [l_R]",
+    "                /  'SEGMENT'",
+    "                   ♦   NB_POINTS =  nbpt,               [I]",
+    "                   ♦ / COOR_ORIG =  (x1,y1,[z1]),[l_R]",
+    "                     / GROUP_NO_ORIG   =   gnoA,        [group_no]",
+    "                   ♦ / COOR_EXTR =  (x2,y2,[z2]),[l_R]",
+    "                     / GROUP_NO_EXTR   =   gnoB,        [group_no]",
+    "                /  'ARC'",
+    "                   ♦   NB_POINTS =  nbpt,               [I]",
+    "                   ♦   COOR_ORIG =  (x1,y1,[z1]),    [l_R]",
+    "                   ♦   CENTRE    =  (x0,y0,[z0]),    [l_R]",
+    "                   ♦   ANGLE     =  q,                  [R]",
+    "                   ◊   DNOR      =  (xa,ya,[za]),    [l_R]"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊  DISTANCE_MAX     =  distmax,                      [R]",
+    "   ◊  DISTANCE_ALARME  =  distala,                      [R]",
+    ") , );"
+   ],
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande RESULTAT/CHAM_GD",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦   / RESULTAT  =  resu,     [evol_elas, evol_noli, mode_meca, evol_ther,",
+    "                             comb_fourier, mult_elas, fourier_elas,",
+    "                             dyna_trans]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept résultat de type evol contenant le champ à post-traiter",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  CHAM_GD   =  champ, [cham_no_DEPL_R, cham_no_TEMP_R,",
+    "                        cham_no_SIEF_R, cham_elno_SIEF_R]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept du champ à post-traiter. Le mot-clé facultatif MODELE doit être renseigné dès que CHAM_GD est présent.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérandes NUME_ORDRE / NUME_MODE / LIST_ORDRE / INST /",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIST_INST / PRECISION / CRITERE"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir documentation [U4.71.00]",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande NOM_CHAM",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM_CHAM        =   /  ’SIGM_NOEU’, [DEFAUT si mécanique]",
+    "                       /  ’TEMP’,             [DEFAUT si thermique]",
+    "                       /  champ,              [K16]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du champ du résultat resu dont on souhaite relever les valeurs sur une ligne de coupe. Si ce mot clé n’est pas renseigné, on projette par défaut le champ de contraintes aux nœuds calculé à partir des déplacements pour un résultat de type mécanique et la température pour un résultat de type thermique.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La macro-commande traite tous types de champs : NOEUD , ELEM , ELNO .",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est déconseillé d'utiliser pour le type de champ ELNO, car le résultat de la projection de champ ELNO par PROJ_CHAMP est parfois un peu déroutant. Pour un nœud, on récupérée sa valeur dans une des mailles qui contiennent ce nœud. Plus de détail dans Chapitre 3.13 [u4.72.05].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande MODELE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE    =  modele,   [modele]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du modèle associé au concept résultat evol_xxx. Le modèle est nécessaire lors de la projection du champ par PROJ_CHAMP.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérande UNITE_MAILLAGE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  UNITE_MAILLAGE  =   25,   [DEFAUT]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Précise le numéro d’unité logique dans laquelle est créé le maillage linéique de la ligne de coupe. Cette unité est par défaut 25 ; on offre à l’utilisateur la possibilité de la modifier au cas où l’unité 25 serait déjà affectée à un autre usage dans son étude.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérandes VIS_A_VIS",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VIS_A_VIS       =   _F(",
+    "      ♦   GROUP_MA_1   =  gma,   [l_K8]))"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé facteur est utilisé par l’opérateur PROJ_CHAMP et permet avec son opérande GROUP_MA_1 de restreindre l’entendue du champ à projeter. L’utilisateur est invité à consulter la documentation [U4.72.05] pour davantage d’informations.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Mot clé LIGN_COUPE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  LIGN_COUPE   =  _F("
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé répétable permettant de définir une ou plusieurs lignes de coupe. Une ligne de coupe est composée de segments à 2 nœuds pouvant décrire :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "soit une ligne droite,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "soit un arc de cercle ou un cercle,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "soit une ligne brisée quelconque.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le premier cas, la ligne de coupe est composée d’un segment droit, défini par ses deux extrémités et un nombre d’intervalles réguliers le découpant. Dans le second cas, la ligne de coupe est composée de segments droits homogènes, dont l’union forme un arc de cercle, ou cas particulier un cercle. Dans le troisième cas, la ligne de coupe est définie à partir de groupes de nœuds ou de groupes de mailles du maillage: la ligne de coupe est alors le chemin défini par la succession des nœuds du groupe.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.1",
+   "text": "Opérande INTITULE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  INTITULE  =      txt,  [Kn]"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Label d’intitulé dans la table permettant de distinguer les différentes lignes de coupe. Si ce mot clé n’est pas renseigné, le label d’intitulé vaut ‘l.coupe(n)’ où (n) est le numéro d’occurrence de la ligne de coupe.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.2",
+   "text": "Opérande TYPE",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet de définir le type de ligne de coupe que l’on souhaite créer. Il peut être identifié à SEGMENT , GROUP_NO , GROUP_MA ou ARC .",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.2.1",
+   "text": "TYPE='SEGMENT'",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "La ligne de coupe est identifiée à un segment droit, défini par ses deux extrémités et un nombre d’intervalles réguliers le découpant.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.2.2",
+   "text": "TYPE='GROUP_NO'",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "On définit la ligne de coupe par la donnée de groupes de nœuds dans le maillage supportant les champs : la ligne de coupe est alors le chemin défini par la succession des nœuds de ces groupes.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.2.3",
+   "text": "TYPE='GROUP_MA'",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "La ligne de coupe est construite à partir des nœuds d’un groupe de mailles constitué de mailles de type SEG . La ligne de coupe est alors le chemin défini par la succession des nœuds réordonnés de ce groupe. Si la ligne est fermée, il faut le préciser en désignant les nœuds origine et extrémité (par exemple avec les mots clés GROUP_NO_ORIG et GROUP_NO_EXTR). Ces 2 nœuds doivent être identiques. Pour imposer l'orientation de la ligne, on peut utiliser le mot clé VECT_ORIE. Pour plus de détails concernant ces mots clés, consulter la documentation du mot clé NOEUD_ORDO de la commande DEFI_GROUP.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.2.4",
+   "text": "TYPE='ARC'",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "La ligne de coupe s’apparente à un arc de cercle ou à un cercle complet. Elle est définie par les données suivantes:",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un premier point correspondant à l’origine de la ligne de coupe circulaire,",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un second point correspondant au centre du cercle,",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un angle (exprimé en degré) permettant de déterminer l’extrémité de la ligne de coupe,",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un nombre de points constituant la ligne de coupe,",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un vecteur normal au plan contenant la ligne de coupe en 3D uniquement.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.3",
+   "text": "Opérande NB_POINTS",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NB_POINTS    =   nb,   [I]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nombre de points de la ligne de coupe.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.4",
+   "text": "Opérande COOR_ORIG",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  COOR_ORIG    =   (x1,y1,[z1]),[l_R]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du premier point de la ligne de coupe : 2 réels dans le plan, 3 dans l’espace. Ce mot-clé est utilisé pour TYPE='SEGMENT' ou TYPE='ARC'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.5",
+   "text": "Opérande GROUP_NO_ORIG",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_ORIG=   gnoA,     [group_no]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe de nœud définissant le premier point de la ligne de coupe. Ce groupe ne doit contenir qu'un seul nœud. Ce mot-clé est utilisé pour TYPE='SEGMENT'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.6",
+   "text": "Opérande COOR_EXTR",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  COOR_EXTR    =   (x2,y2,[z2]),[l_R]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du dernier point de la ligne de coupe : 2 réels dans le plan, 3 dans l’espace. Ce mot-clé est utilisé pour TYPE='SEGMENT'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.7",
+   "text": "Opérande GROUP_NO_EXTR",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_EXTR=   gnoB,     [group_no]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe de nœud définissant le dernier point de la ligne de coupe. Ce groupe ne doit contenir qu'un seul nœud. Ce mot-clé est utilisé pour TYPE='SEGMENT'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.8",
+   "text": "Opérande GROUP_NO",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO  =  gno,   [grno]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’extraire les valeurs sur un groupe de nœuds donné. Dans le cas du traitement de champs aux nœuds, c’est parfaitement analogue à POST_RELEVE_T. Ce mot-clé est utilisé uniquement pour TYPE='GROUP_NO'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.9",
+   "text": "Opérandes GROUP_MA et MAILLAGE",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA  =  grma,  [l_grma]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de faire passer le groupe de mailles de type SEG utilisé pour y extraire les nœuds afin de les réordonner avant le post-traitement.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MAILLAGE  =  mail,  [maillage]"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "mail est le concept maillage contenant le groupe de mailles grma.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots-clés sont utilisés pour le TYPE='GROUP_MA'.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.10",
+   "text": "Opérande DNOR",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DNOR   =  (xa,ya,[za]),    [l_R]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le vecteur à transmettre à ce mot-clé doit être normal au plan contenant la ligne de coupe circulaire. En 2D : il est inutile (DNOR = vecteur Z du repère global) En 3D : il permet de définir le sens de parcourt de la ligne de coupe (sens direct). Ce mot-clé est utilisé pour le TYPE='ARC'.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.11",
+   "text": "Opérande CENTRE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  CENTRE    =  (x0,y0,[z0]),    [l_R]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Coordonnées du point correspondant au centre du cercle support de la ligne de coupe circulaire. Ce mot-clé est utilisé pour le TYPE='ARC'.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.12",
+   "text": "Opérande ANGLE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  ANGLE  =   theta ,  [R]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Il correspond à l’angle du cercle support de la ligne de coupe circulaire (exprimé en degré) qui à partir de son centre, du point origine et du plan contenant la ligne de coupe, détermine l’extrémité de la ligne de coupe . Ce mot-clé est utilisé pour le TYPE='ARC'.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.13",
+   "text": "Opérandes DISTANCE_MAX et DISTANCE_ALARME",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DISTANCE_MAX    =   distmax,  [R]",
+    "◊  DISTANCE_ALARME =   distala,  [R]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mot-clés sont utiles à l'opérateur PROJ_CHAMP. Si la distance entre un nœud de la ligne de coupe et le maillage coupé est supérieure à distmax , alors ce nœud sera ignoré (pas de relevé de valeur sur ce nœud). Si la distance entre un nœud de la ligne de coupe et le maillage coupé est supérieure à distala , une alarme sera émise. L’utilisateur est invité à consulter la documentation [U4.72.05] pour davantage d’informations.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.14",
+   "text": "Opérandes INVARIANT / ELEM_PRINCIPAUX / RESULTANTE / OPERATION /",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM_CMP / TRAC_NOR / TRAC_DIR / DIRECTION / VECT_Y/ REPERE"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir documentation [U4.81.21].",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemple",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "resu = STAT_NON_LINE (...);"
+   ],
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "tab1 = MACR_LIGN_COUPE (  RESULTAT = resu,",
+    "                          LIGN_COUPE =(",
+    "                             _F(TYPE= ‘SEGMENT’,",
+    "                                 NB_POINTS = 17,",
+    "                                 COOR_ORIG = (0.,0.,0.),",
+    "                                 COOR_EXTR = (10.,0.,0.),",
+    "                                 INTITULE = ‘ligne1’, ),",
+    "                             _F(TYPE= ‘SEGMENT’,",
+    "                                 NB_POINTS = 25,",
+    "                                 COOR_ORIG = (-10.,0.,0.),",
+    "                                 COOR_EXTR = (0.,20.,0.),",
+    "                                 INTITULE = ‘ligne2’,),",
+    "                              )",
+    "                       );"
+   ],
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IMPR_TABLE (TABLE = tab1 )"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans cet exemple, on relève les valeurs du déplacement obtenu dans le résultat resu à tous les instants de calcul sur deux lignes de coupe.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "La table tab1 contient les numéros d’ordre, les abscisses curvilignes, les coordonnées des points puis finalement les valeurs de la grandeur nodale (sur les nœuds de la ligne) du champ traité, ici par défaut le déplacement.",
+   "page": 8
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 12,
+   "chars": 4657,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 13,
+   "last": 36,
+   "chars": 2315,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 37,
+   "last": 100,
+   "chars": 5718,
+   "id": 3,
+   "section": "3.7 Mot clé LIGN_COUPE"
+  },
+  {
+   "first": 101,
+   "last": 106,
+   "chars": 1106,
+   "id": 4,
+   "section": "4 Exemple"
+  }
+ ]
+}

@@ -1,0 +1,577 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.52.12.pdf",
+  "source_sha256": "857dcf3c37b941f10e6f9c640816ac1693aa5960cda0064e97295c992fed126c",
+  "source_bytes": 160052
+ },
+ "schema_version": 1,
+ "doc_id": "U4.52.12",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "03/11/2021",
+  "fascicle": "Manuel d'utilisation Fascicule u4.52: Analyse modale",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 7,
+  "pages": "7",
+  "pdf_keywords": "U4.52.12-F1",
+  "pdf_title": "Opérateur EXTR_MODE",
+  "responsible": "ANDRIAMBOLOLONA Harinaivo",
+  "revision": "87ecd8639552",
+  "title": "Opérateur EXTR_MODE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur EXTR_MODE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Extraire sélectivement des modes des structures de données modale. Les modes sont sélectionnés selon un critère de valeur de paramètre modal supérieur à un certain seuil, puis sont concaténés en une seule structure de données finale.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut également imprimer dans le fichier MESSAGE un tableau récapitulatif sur les cumuls des masses modales effectives unitaires ou des masses généralisées des modes retenus.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type mode_meca ou mode_gene selon le type des modes en entrée.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "resu_mod [*]    =  EXTR_MODE     (",
+    "          ♦  FILTRE_MODE= _F (",
+    "                ♦  MODE   = mod                      /     [mode_gene]",
+    "                                                     /     [mode_meca]",
+    "                                                     /     [mode_meca_c]",
+    "                ♦  /   NUME_MODE       = l_mode            [l_I]",
+    "                   /   NUME_MODE_EXCLU = l_mod_ex          [l_I]",
+    "                   /   NUME_ORDRE      = l_ordre           [l_I]",
+    "                   /   TOUT_ORDRE      =   /  'OUI'",
+    "                                           /  'NON'",
+    "                   /   ♦  FREQ_MIN     =   f_min           [R]",
+    "                       ♦  FREQ_MAX     =   f_max           [R]",
+    "                       ◊  PRECISION    =   /  prec         [R]",
+    "                                           /  0.001        [DEFAUT]",
+    "                   /   ◊  CRIT_EXTR    =   /'MASS_GENE'",
+    "                                           /'MASS_EFFE'",
+    "                                           /'MASS_EFFE_UN' [DEFAUT]",
+    "                          /  ◊   SEUIL        =  rseuil    [R]",
+    "                          /  ◊   SEUIL_X      =  rseuil    [R]",
+    "                          /  ◊   SEUIL_Y   =  rseuil       [R]",
+    "                          /  ◊   SEUIL_Z   =  rseuil       [R]",
+    "                                 )",
+    "          ◊  IMPRESSION=  _F (",
+    "                ◊  CUMUL     =   /  'OUI'",
+    "                                 /  'NON'                  [DEFAUT]",
+    "                ◊  CRIT_EXTR =   /  'MASS_EFFE_UN'         [DEFAUT]",
+    "                                 /  'MASS_GENE'",
+    "                             )",
+    "          ◊  TITRE =   titre                               [l_Kn]",
+    "                                    );"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Si mod est de type [mode_gene]   alors resu_mod est de type [mode_gene]",
+    "Si mod est de type [mode_meca]   alors resu_mod est de type [mode_meca]",
+    "Si mod est de type [mode_meca_c] alors resu_mod est de type [mode_meca_c]."
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Mot clé FILTRE_MODE",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "On répète ce mot-clé autant de fois qu’il y a de structures de données de type mode_meca_* ou mode_gene à filtrer et à concaténer.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande MODE",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la structure de données mode_meca_* ou mode_gene à trier et à concaténer aux autres.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Filtrage des modes",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour filtrer les modes, trois possibilités s’offrent à l’utilisateur.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.1",
+   "text": "Opérandes NUME_MODE / NUME_ORDRE / TOUT_ORDRE",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des numéros d’ordre ou des positions modales des modes que l’on souhaite conserver.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.2",
+   "text": "Opérandes NUME_MODE_EXCLU",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des positions modales des modes que l’on souhaite supprimer.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.3",
+   "text": "Opérandes FREQ_MIN / FREQ_MAX / PRECISION",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "On garde tous les modes qui correspondent à des fréquences comprises entre f_min et f_max à la précision relative prec. On doit avoir f_min inférieure à f_max.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.4",
+   "text": "Opérande CRIT_EXTR",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Choix du paramètre qui sert de critère pour le filtrage des modes. Les paramètres sont définis dans la documentation de référence [R5.01.03].",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le critère est 'MASS_EFFE_UN' ou MASS_EFFE' un mode sera retenu dès qu’une de ses masses modales effectives unitaires, ou non, directionnelles est supérieure à un seuil fixé par l’utilisateur.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le critère est 'MASS_GENE' un mode sera retenu dès que le rapport de la masse généralisée sur la somme des masses généralisées des modes de la structure filtrée est supérieure à un seuil fixé par l'utilisateur.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces critères ont un sens seulement pour les structures de données de type mode_meca_*.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.5",
+   "text": "Opérandes SEUIL, SEUIL_X, SEUIL_Y, SEUIL_Z",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur limite du critère en dessous de laquelle on considère qu'on peut filtrer le mode.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette valeur, dans le cas des paramètres actuellement pris en compte, est une valeur relative adimensionnelle. On peut appliquer le même seuil dans toutes les directions (mot-clef SEUIL ) ou différencier les seuils selon les directions X, Y ou Z ( SEUIL_X, SEUIL_Y, SEUIL_Z)",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Mot clé IMPRESSION",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet d’imprimer un tableau de cumul de certains paramètres. Ces paramètres peuvent être différents de ceux choisis dans les mots clés FILTRE_MODE.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.1",
+   "text": "Opérande CUMUL",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Impression ou non impression des cumuls du paramètre modal retenu par CRIT_EXTR pour la structure de données résultat resu_mod.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.4.2",
+   "text": "Opérande CRIT_EXTR",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Choix du paramètre d’impression pour lequel on effectue l’opération de cumul. Si le critère est 'MASS_EFFE_UN' (masse effective unitaire), on cumule séparément les valeurs des paramètres 'MASS_EFFE_UN_DX', 'MASS_EFFE_UN_DY', 'MASSE_EFFE_UN_DZ' (masse modale effective unitaire dans la direction D*) des modes extraits.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le critère est 'MASS_GENE' on cumule les valeurs du paramètre MASS_GENE (masse généralisée) des modes extraits.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les paramètres mentionnés dans ce paragraphe sont définis plus précisément dans la documentation de référence [R5.01.03].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Mot clé TITRE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre attaché au concept produit par cet opérateur [U4.03.01].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exécution",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "On vérifie que le paramètre pour lequel on effectue le filtrage existe bien dans la structure de données d'entrée mod. Si ce paramètre n’est pas renseigné, on sort en erreur fatale. Par contre, pour le mot-clé IMPRESSION, si les paramètres MASS_EFFE_UN_* ne sont pas renseignés, on émet seulement une alarme.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "En sortie, le concept produit resu_mod ne doit pas être vide, sinon on sort en erreur fatale.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "On vérifie également que tous les concepts mode_meca_* ou mode_gene sont de même type et qu’ils proviennent du même problème initial (mêmes matrices).",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Après avoir filtré les modes intéressants, on vérifie qu’ils ont tous une position modale différente. Dans le cas contraire, on émet un message d’alarme. Pour supprimer ces modes dupliqués, il faut réutiliser la commande EXTR_MODE et activer l'opérande NUME_MODE_EXCLU.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "A ce jour, on ne vérifie pas que les structures de données de type mode_meca_* correspondent à une même norme.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples d'impression",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le mot-clé facteur IMPRESSION est présent, l'opérateur EXTR_MODE écrit dans le fichier MESSAGE un certain nombre de paramètrres sur les modes extraits.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple d'impression, avec les mot-clés CRIT_EXTR='MASS_EFFE_UN' et CUMUL='OUI' :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "--------------------------------------------------------------------",
+    "CONCEPT MODESX   DE TYPE MODE_MECA   ISSU DE L OPERATEUR EXTR_MODE",
+    "                                                  M A S S E      E F",
+    "NUME_ORDRE  NUME_MODE     FREQUENCE   MASS_EFFE_UN_DX   CUMUL_DX",
+    "         1          1    2.66902D-01    4.12685D-02    4.12685D-02",
+    "         2         11    6.49621D+01    1.18667D-01    1.59935D-01",
+    "         3         19    2.56692D+02    1.02927D-02    1.70228D-01",
+    "--------------------------------------------------------------------",
+    "----------------------------------------------------------"
+   ],
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    " F E C T I V E      U N I T A I R E",
+    "MASS_EFFE_UN_DY   CUMUL_DY    MASS_EFFE_UN_DZ   CUMUL_DZ",
+    "  2.22156D-25    2.22156D-25    3.80903D-01    3.80903D-01",
+    "  4.69363D-25    6.91519D-25    3.11195D-03    3.84015D-01",
+    "  4.22168D-27    6.95741D-25    7.06977D-03    3.91085D-01",
+    "----------------------------------------------------------"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Le NUME_ORDRE est la position du mode dans la structure de donnée, le NUME_MODE est la position modale dans le spectre (cf. opérateur CALC_MODES [U4.52.02]). FREQUENCE est la fréquence propre du mode. MASS_EFFE_UN_D* est la masse modale effective unitaire dans la direction * (* = X ou Y ou Z ). Ces grandeurs sont définies dans la documentation de référence [R5.01.03]. CUMUL_* sont les sommes cumulées des masses effectives unitaires par direction.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple d'impression, avec les mot-clés CRIT_EXTR='MASS_GENE' et CUMUL='OUI':",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "-------------------------------------------------------------------",
+    "CONCEPT MODESX   DE TYPE MODE_MECA   ISSU DE L OPERATEUR EXTR_MODE",
+    "                  MASSE  GENERALISEE",
+    "NUME_ORDRE  NUME_MODE     FREQUENCE      MASS_GENE  CUMUL_MASS_GENE",
+    "         1          1    2.66902D-01    1.00000D+00    1.00000D+00",
+    "         2         11    6.49621D+01    1.00000D+00    2.00000D+00",
+    "         3         19    2.56692D+02    1.00000D+00    3.00000D+00",
+    "-------------------------------------------------------------------"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "MASS_GENE est la masse généralisée du mode, définie dans la documentation de référence [ R5.01.03]. CUMUL_MASS_GENE est la somme cumulée des masses généralisées.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Exemple d'utilisation",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Voici un exemple présentant les différentes possibilités de la commande EXTR_MODE pour une analyse modale réalisées par 5 recherches de modes successives :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul de la masse totale de la stucture (pour vérification)",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "massestr  =  POST_ELEM (... MASS_INER = (...));"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul des 17 premières fréquences (NUME_ORDRE de 1 à 17 ; NUME_MODE de 1 à 17)",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode1 =   CALC_MODES ( MATR_RIGI = rigidité,",
+    "                       MATR_MASS = masse,",
+    "                       OPTION = 'PLUS_PETITE',",
+    "                       CALC_FREQ = _F( NMAX_FREQ = 17 ));",
+    "mode1     =  NORM_MODE    (  MODE = mode1,  reuse = mode1,",
+    "                             NORME = 'TRAN_ROTA'",
+    "                          );"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul d'autres fréquences (NUME_ORDRE de 1 à 5 ; NUME_MODE de 18 à 22)",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode2 =   CALC_MODES ( MATR_RIGI = rigidité,",
+    "                       MATR_MASS = masse,",
+    "                       OPTION = 'BANDE',",
+    "                       CALC_FREQ =_F( FREQ = (20. , 25.) ),",
+    "                      );",
+    "mode2     =  NORM_MODE    (  MODE = mode2,",
+    "                             reuse = mode2,",
+    "                             NORME = 'TRAN_ROTA'",
+    "                          );"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul d'autres fréquences ( NUME_ORDRE de 1 à 6 ; NUME_MODE de 23 à 28)",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode3 =   CALC_MODES ( MATR_RIGI = rigidité,",
+    "                       MATR_MASS = masse,",
+    "                        OPTION = 'BANDE',",
+    "                        CALC_FREQ   =_F( FREQ = (25. 30.) ),",
+    "                      );",
+    "mode3     =  NORM_MODE    (  MODE = mode3,",
+    "                             reuse = mode3,",
+    "                             NORME ='TRAN_ROTA',",
+    "                          );"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul d'autres fréquences ( NUME_ORDRE de 1 à 3 ; NUME_MODE de 28 à 30)",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode4 =   CALC_MODES ( MATR_RIGI = rigidité,",
+    "                       MATR_MASS = masse,",
+    "                       OPTION = 'BANDE',",
+    "                       CALC_FREQ =_F( FREQ = (29. , 32.) ),",
+    "                      );"
+   ],
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode4     =  NORM_MODE    (  MODE = mode4,",
+    "                             reuse = mode4,",
+    "                             NORME ='TRAN_ROTA',",
+    "                           );"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "# Calcul d'autres fréquences (NUME_ORDRE de 1 à 6 ; NUME_MODE de 31 à 34)",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode5 =   CALC_MODES ( MATR_RIGI = rigidité,",
+    "                       MATR_MASS = masse,",
+    "                       OPTION = 'BANDE',",
+    "                       CALC_FREQ =_F( FREQ = (32. , 35.) ),",
+    "                      );",
+    "mode5     =  NORM_MODE    (  MODE = mode5,",
+    "                             reuse = mode5,",
+    "                             NORME = 'TRAN_ROTA'",
+    "                          );"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "# Extraction des modes",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode  =   EXTR_MODE    (  FILTRE_MODE = _F (  MODE   =  mode1,",
+    "                                              TOUT_ORDRE   =  'OUI'  ),",
+    "                                           (  MODE   =  mode2,",
+    "                                              NUME_MODE = (18,19,20,21,22))",
+    "                                           (  MODE   =  mode3,",
+    "                                              FREQ_MIN  =  25.,",
+    "                                              FREQ_MAX  =  30.),",
+    "                                           (  MODE   =  mode4,",
+    "                                              NUME_MODE_EXCLU =   28 ),",
+    "                                           (  MODE   =  mode5,",
+    "                                              CRITERE   =  'MASS_EFFE_UN',",
+    "                                              SEUIL  =  0.005 ),",
+    "                          IMPRESSION   =_F (  CUMUL  =  'OUI' )",
+    "                       );"
+   ],
+   "page": 6
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 7,
+   "chars": 2452,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 8,
+   "last": 36,
+   "chars": 2720,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 37,
+   "last": 53,
+   "chars": 3395,
+   "id": 3,
+   "section": "3.5 Mot clé TITRE"
+  },
+  {
+   "first": 54,
+   "last": 70,
+   "chars": 3421,
+   "id": 4,
+   "section": "6 Exemple d'utilisation"
+  }
+ ]
+}

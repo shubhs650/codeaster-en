@@ -1,0 +1,1145 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.92.01.pdf",
+  "source_sha256": "79a020b78dcd6d90b4e8d4f5dc258202c8718239602d081deedbcd991f3140ca",
+  "source_bytes": 235802
+ },
+ "schema_version": 1,
+ "doc_id": "U4.92.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "11/01/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.92: Test",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 11,
+  "pages": "11",
+  "pdf_keywords": "U4.92.01-I",
+  "pdf_title": "Procédure TEST_RESU",
+  "responsible": "COURTOIS Mathieu",
+  "revision": "60acd907ad33",
+  "title": "Procédure TEST_RESU",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Procédure TEST_RESU",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Comparer une valeur extraite d’une structure de données à une valeur de référence fournie par l’utilisateur.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande permet de tester une valeur numérique : entier, réel ou complexe extraite d'un concept déjà calculé. Aujourd'hui, on peut tester une composante d'un cham_no ou d'un cham_elem, une composante d'un champ extrait d'un resultat, un paramètre d'un resultat, une valeur 'globale' extraite d’un champ ou bien le contenu d’un objet quelconque d’un concept utilisateur.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La procédure écrit alors un message conventionnel :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"OK\" (si c'est bon),",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"NOOK\" (sinon).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "suivi de la valeur trouvée, la valeur de référence et le pourcentage d’erreur. Systématiquement, on vérifie une valeur de non régression, et quand cela est possible, une valeur de référence analytique, provenant d'une source externe ou d'un autre calcul avec Code_Aster.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les commandes TEST_FONCTION [U4.92.02] et TEST_TABLE [U4.92.03] permettent de tester les valeurs extraites des fonctions et des tables.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TEST_RESU (",
+    "   ♦  /   CHAM_NO=(_F  (  ♦  CHAM_GD = chno,                  [cham_no]",
+    "                          /  TYPE_TEST =   /  'SOMM_ABS' ,",
+    "                                           /  'SOMM' ,",
+    "                                           /  'MAX' ,",
+    "                                           /  'MIN' ,",
+    "                             ◊   NOM_CMP =    ncmp,           [K8]",
+    "                          /  ♦   GROUP _NO =  grno,        [group_no]",
+    "                             ♦   NOM_CMP  =   nomcmp ,        [K8]",
+    "                             ◊   LEGENDE =    legende,        [K16]",
+    "                          #  Voir définition de la valeur de référence",
+    "                       ),)",
+    "      /   CHAM_ELEM=(_F(  ♦  CHAM_GD = chel,                  [cham_elem]",
+    "                          /  TYPE_TEST =   /  'SOMM_ABS' ,",
+    "                                           /  'SOMM' ,",
+    "                                           /  'MAX' ,",
+    "                                           /  'MIN' ,",
+    "                             ◊   NOM_CMP =    ncmp,           [K8]",
+    "                          /  ♦   GROUP_MA  =  gma1   ,     [group_ma]",
+    "                             ♦   /  POINT    = nupoint,       [I]",
+    "                                 /  GROUP_NO = grno,          [group_no]",
+    "                                 ◊  SOUS_POINT = nusp,",
+    "                             ♦   NOM_CMP  = nomcmp,           [K8]",
+    "                          ◊  LEGENDE =     legende,           [K16]",
+    "                          #  Voir définition de la valeur de référence",
+    "                       ),),",
+    "      /   CARTE=(_F(   ♦  CHAM_GD = chel,                  [cham_elem]",
+    "                       ♦  NOM_CMP = nomcmp,                [K8]",
+    "                       ♦  GROUP_MA  =  gma1 ,           [group_ma]",
+    "                       ◊  LEGENDE =    legende,            [K16]",
+    "                       #  Voir définition de la valeur de référence",
+    "                       ),),",
+    "      /   MAILLAGE=(_F(♦  MAILLAGE =   ma,                 [maillage]",
+    "                       ♦  CARA =",
+    "                             /   'NB_MAILLE'",
+    "                             /   'NB_NOEUD'",
+    "                             /   'NB_GROUP_MA'",
+    "                             /   'NB_NB_GROUP_NO'",
+    "                             /   'EXI_GROUP_MA'",
+    "                                 ♦  NOM_GROUP_MA  =  gma,  [group_ma]",
+    "                             /   'EXI_GROUP_NO'",
+    "                                 ♦  NOM_GROUP_NO  =  gno,  [group_no]",
+    "                       #  Voir définition de la valeur de référence",
+    "                       ),),",
+    "      /   RESU =(_F(   ♦  RESULTAT =   res ,            [resultat_sdaster]",
+    "                       ♦  /  NUME_ORDRE = nuor,               [I]",
+    "                          /  NUME_MODE  = numo,               [I]",
+    "                          /  INST       = inst,               [R]",
+    "                          /  FREQ       = freq,               [R]",
+    "                          /  NOEUD_CMP  = (noeud, cmp),       [l_Kn]",
+    "                          /  NOM_CAS    = nocas,              [Kn]",
+    "                          /  ANGLE       =   ,               [R]",
+    "                       ♦  /  PARA     = para,                 [K16]",
+    "                          /  NOM_CHAM = nosymb,               [K16]",
+    "                                 ◊ /NOM_CMP =    ncmp,        [K8]",
+    "                                   /NOM_VARI =   nvari,       [K16]",
+    "                             /   TYPE_TEST =  /  'SOMM_ABS' ,",
+    "                                              /  'SOMM' ,",
+    "                                              /  'MAX' ,",
+    "                                              /  'MIN' ,",
+    "                             /   ♦  GROUP_NO  = grno,      [group_no]",
+    "                                    /  ♦   GROUP_MA= gma1, [group_ma]",
+    "                                       ♦   /  POINT = nupoint,[I]",
+    "                                           /  GROUP_NO = grno,[group_no]",
+    "                                           ◊  SOUS_POINT = nusp,",
+    "                                 ♦  NOM_CMP  = nomcmp,        [K8]",
+    "                       #  Voir définition de la valeur de référence",
+    "                   ),),",
+    "      /   GENE =(_F(   ♦     RESU_GENE =   res,            [VECT_ASSE_GENE]",
+    "                             NUME_CMP_GENE = ncmp,            [I]",
+    "                            RESU_GENE =   res,               [MODE_GENE]",
+    "                             ♦   /  PARA     = para,          [K16]",
+    "                                 /  NOM_CHAM = nosymb,        [K16]",
+    "                                    NUME_CMP_GENE = ncmp,     [I]",
+    "                             ♦   /  NUME_ORDRE = nuor,        [I]",
+    "                                 /  NUME_MODE = numo,         [I]",
+    "                                 /  FREQ       = freq,        [R]",
+    "                             RESU_GENE =   res,               [HARM _GENE]",
+    "                             NOM_CHAM = nosymb,               [K16]",
+    "                             NUME_CMP_GENE = ncmp,            [I]",
+    "                             ♦   /  NUME_ORDRE = nuor,        [I]",
+    "                                 /  FREQ       = freq,        [R]",
+    "                             RESU_GENE =   res,                [TRAN_GENE]",
+    "                             NOM_CHAM = nosymb,               [K16]",
+    "                             NUME_CMP_GENE = ncmp,            [I]",
+    "                             ♦   /  NUME_ORDRE = nuor,        [I]",
+    "                                 /  INST       = inst,        [R]",
+    "                       #  Voir définition de la valeur de référence",
+    "                   ),),",
+    "      /   OBJET =(_F(",
+    "                       ♦  NOM    =  nomobj ,                  [K24]",
+    "                       #  Voir définition de la valeur de référence",
+    "                   ),),",
+    "      /   TEST_NAN =         /   ‘NON’ ,                      [DEFAUT]",
+    "                             /   ‘OUI’ ,",
+    "      )",
+    "# Définition de la valeur de référence",
+    "      ♦   /  VALE_CALC   = val   ,                            [R]",
+    "          /  VALE_CALC_C = val   ,                            [C]",
+    "          /  VALE_CALC_I = val   ,                            [I]",
+    "          /  VALE_CALC_K = val   ,                            [K*]",
+    "       # si VALE_CALC = 0.",
+    "      ◊   ORDRE_GRANDEUR =ordgrd ,                            [R]",
+    "      ◊   LEGENDE =    legende,                               [K16]",
+    "      ◊   VALE_ABS =   /  ‘NON’  ,                            [DEFAUT]",
+    "                       /  ‘OUI’  ,",
+    "      ◊   /  |  TOLE_MACHINE =   /  1.0D-6 ,                  [DEFAUT]",
+    "                                 /  prec   ,                  [R]",
+    "             |  CRITERE =    /   'RELATIF' ,                  [DEFAUT]",
+    "                             /   'ABSOLU'  ,",
+    "          # uniquement pour RESU ou GENE",
+    "          /  |  TOLE_MACHINE =   /  (prec1, prec2),           [l_R]",
+    "             |  CRITERE      =   /  (crit1, crit2),           [l_Kn]",
+    "      # sauf dans TEST_FICHIER",
+    "      ◊   REFERENCE =  /  'ANALYTIQUE' ,",
+    "                       /  'SOURCE_EXTERNE' ,",
+    "                       /  'AUTRE_ASTER' ,",
+    "      Si REFERENCE est renseigné",
+    "          ♦  /  VALE_REFE   = val   ,                         [R]",
+    "             /  VALE_REFE_C = val   ,                         [C]",
+    "             /  VALE_REFE_I = val   ,                         [I]",
+    "             /  VALE_REFE_K = val   ,                         [K*]",
+    "          ◊     PRECISION =  /   1.0D-3,                      [DEFAUT]",
+    "                             /   prec  ,                      [R]"
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque 1",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La définition de la valeur de référence est commune aux commandes TEST_RESU, TEST_TABLE, TEST_FONCTION et TEST_FICHIER. Tous les mots-clés ne sont pas disponibles dans toutes les commandes, voir les commentaires. Le type entier (_I) n'existe pas dans TEST_FONCTION et TEST_FICHIER. Le type complexe (_C) n'existe pas dans TEST_FICHIER et pour OBJET. Le type chaine (_K) n'existe que dans TEST_FICHIER et TEST_TABLE. VALE_ABS n'existe pas pour CARTE et TEST_FICHIER.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque 2",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés CHAM_NO, CHAM_ELEM et CARTE permettent de tester les cham_no , les cham_elem et les carte. Le mot clé RESU est réservé aux concepts de type resultat. Le mot clé MAILLAGE permet de tester quelques caractéristiques (entières) d'un maillage.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Généralités",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande permet de tester une valeur numérique scalaire récupérée dans un concept de type cham_no, cham_elem, carte ou resultat, par rapport à une valeur de non régression et, quand c'est possible, par rapport à une valeur de référence analytique, provenant d'une source externe ou d'un autre calcul avec Code_Aster.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Trois types de valeurs numériques peuvent être testées :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une composante d’un champ (cham_no, cham_elem, carte ou champ faisant partie d’un resultat),",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un paramètre contenu dans un concept de resultat ,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une valeur globale d’un champ [§4.4].",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour tester une composante de champ, il faut choisir un champ [§4.1] puis choisir une composante [§4.3].",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour tester un paramètre, il faut choisir un numéro d’ordre [§4.1.4] et choisir le nom du paramètre.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur numérique attendue (réelle, complexe ou entière) est fournie conformément à [§4.7].",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque concernant les tests de non régression On fait systématiquement un test de non régression par rapport à une valeur calculée précédemment. La tolérance associée à ce test (TOLE_MACHINE) doit être très faible et ne devrait pas être supérieure à la valeur par défaut. En particulier, la valeur devrait être la même (sur au moins 8 décimales) sur toutes les plates-formes. De plus, cette valeur calculée ne doit changer que lorsque de l'algorithme est modifié, corrigé. Tout autre variation doit alertée le développeur sur la fiabilité de la programmation.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques concernant les tests dans les structures de données \"généralisées\" :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut tester les composantes généralisées (déplacements, vitesses ou accélérations d'un transitoire dans l'espace modal). Il convient néanmoins d'être circonspect avec ce type de test. En effet la valeur d'une composante généralisée dépend entièrement de la norme du mode. Or celle-ci est déterminée de manière arbitraire. Donc sans normalisation préalable des normes, la valeur d'une grandeur généralisée est arbitraire. Enfin, il n'y pas de possibilité dans Code_Aster de fixer la direction d'un mode. Pour un mode multiple, cela veut dire que, même une fois les modes normés, une grandeur généralisée peut prendre une valeur quelconque. Dans le cas d'un mode simple, il peut être orienté dans une direction ou dans la direction opposée. On obtient alors une valeur généralisée ou son opposée.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Sélection d’un champ",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Afin de tester un champ qui peut être un champ isolé (cham_no ou cham_elem ou carte), ou un champ extrait d’un résultat, ou utilisera les mot-clés facteurs : CHAM_NO, CHAM_ELEM, CARTE ou RESU.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.1",
+   "text": "Champs “isolés”",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  CHAM_GD = champ"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du cham_no , cham_elem ou carte dont on veut extraire une valeur.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.2",
+   "text": "Opérande RESULTAT",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RESULTAT = res"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept resultat traité.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.3",
+   "text": "Opérande NOM_CHAM",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  NOM_CHAM = nosymb"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom symbolique du champ à sélectionner.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.4",
+   "text": "Sélection d’un numéro d’ordre",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  NUME_ORDRE = nuor,"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Numéro d'ordre du champ (ou du paramètre) recherché.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  NUME_MODE = numo,",
+    "/  INST      = inst,",
+    "/  FREQ      = freq,",
+    "/  NOEUD_CMP = (noeud, cmp),",
+    "/  NOM_CAS   = nocas,",
+    "/  ANGLE      =  ,"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots clés permettent d'identifier un numéro d'ordre dans un resultat [U4.71.00].",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On les appelle des \"variables d'accès\".",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ils ne sont pas tous valables pour tous les types de resultat.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque l'accès se fait pas une valeur réelle (ANGLE, FREQ, INST) la valeur donnée ne doit pas être ambigüe (cf [§4.7]).",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Sélection d’un paramètre dans un résultat",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour sélectionner un paramètre dans un résultat, il faut préciser le numéro d’ordre voulu [§4.1.4] et donner le nom du paramètre.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  PARA = para"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du paramètre cherché. Ce nom est attaché au type du concept resultat traité.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Sélection d’une composante d’un champ",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L’accès à une grandeur se fait pour un cham_no par :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "le nom d’un groupe de nœuds contenant le nœud qui porte cette grandeur (et lui seul).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L'accès à une grandeur se fait pour un cham_elem par :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "le nom d’un groupe de mailles contenant la maille qui supporte l'élément (et elle seule),",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "quelque chose qui précise :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "soit le nom d'un groupe contenant un nœud de cette maille pour les cham_elem \"aux nœuds\" (ELNO).",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "soit le numéro du point de GAUSS pour les cham_elem \"aux points de GAUSS\" (ELGA).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L'accès à une grandeur se fait pour une carte par :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "lle nom d’un groupe de mailles contenant la maille ,",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA  = gma1"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de désigner la maille pour laquelle on veut tester le cham_elem ou la carte. Le groupe ne doit contenir qu'une seule maille.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO = grno"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe contenant le nœud dont on veut vérifier une composante. Le groupe doit être réduit à un seul nœud.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  POINT = nupoint"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L'entier nupoint précise le numéro du point de GAUSS dont on veut tester la valeur (cas des cham_elem \"aux points de GAUSS\").",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊    SOUS_POIN T = nusp"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L'entier nusp précise le numéro du sous-point duquel on souhaite obtenir la valeur (cas des cham_elem à sous-points, utilisés par les éléments de structure : poutre, tuyaux, coques). Dans le cas des plaques et des coques multi-couches, le numéro du sous-point correspond au niveau dans l'ensemble des couches. Chaque couche est décrite par une peau inférieure, moyenne et supérieure. Par convention, pour N couches, ce numéro varie entre 1 et 3N où le premier point se situe au niveau de la peau inférieure de la première couche et le 3N ème point au niveau de la peau supérieure de la dernière couche (cf. [R3.07.03] et [R3.07.04] pour la numération des couches).",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des poutres multi-fibres, cet entier est le numéro de la fibre dont la numérotation est décrite dans la documentation [U4.26.01] et [R3.08.08].",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des tuyaux, il faut se référer à la description faite dans le document [R3.08.06].",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  NOM_CMP = ncmp"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la composante que l'on veut tester [U2.01.04].",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  NOM_VARI = nvari"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les champs des variables internes (VARI_*), on peut donner le nom de la variable interne (voir [U4.51.11] pour les règles de nommage des variables internes) au lieu du nom de la composante (V1, ...).",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.4",
+   "text": "Tester un champ \"globalement\"",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Une fois un champ sélectionné [§4.1], on peut tester une quantité calculée globalement sur tout le champ. Pour cela, NOM_CMP ne doit pas être renseigné pour permettre de prendre en compte toutes les composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TYPE_TEST = ‘SOMM_ABS’"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La somme des valeurs absolues des composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TYPE_TEST = ‘SOMM’"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La somme des valeurs des composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TYPE_TEST = ‘MAX’"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le maximum des valeurs des composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TYPE_TEST = ‘MIN’"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le minimum des valeurs des composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.5",
+   "text": "Tester le contenu d’un objet JEVEUX",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité est réservée aux développeurs du Code. Pour l’utiliser, il faut connaître les noms des objets JEVEUX composant les concepts de l’utilisateur. Elle est destinée à vérifier la non régression des structures de données autres que les RESULTAT, CHAMPS, TABLE et FONCTION.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.1",
+   "text": "Opérande NOM",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM = nomobj"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de l’objet jeveux que l’on veut tester.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "L'objectif de ce type de test ( NOM + VALE_CALC/_I ) est de tester globalement tout un vecteur. La \"somme\" qui est testée est malheureusement un mauvais \"check sum\" de l'objet : une permutation au sein du vecteur ne change pas cette somme. Un test plus prudent consiste à imprimer l'objet dans un fichier ( IMPR_CO ) puis à tester le contenu de ce fichier avec un vrai \"check sum\" ( TEST_FICHIER ).",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.2",
+   "text": "Opérandes CRITERE et PRECISON",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir ci-dessous [§4.7].",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.6",
+   "text": "Mot clé facteur MAILLAGE.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de valider les commandes du code qui produisent (ou modifient) des maillages. Il permet de tester quelques caractéristiques (entières) des maillages : nombre de mailles, de nœuds, de groupes de mailles, de groupes de nœuds, nombre de mailles dans un groupe de mailles et nombre de nœuds dans un groupe de nœuds.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.1",
+   "text": "Opérande MAILLAGE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MAILLAGE = mailla"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du maillage que l’on veut tester.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.2",
+   "text": "Opérande CARA",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de choisir la caractéristique du maillage à tester : 'NB_MAILLE', 'NB_NOEUD', 'NB_GROUP_MA', 'NB_GROUP_NO', 'EXI_GROUP_MA' ou 'EXI_GROUP_NO'.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.3",
+   "text": "Opérandes NOM_GROUP_MA et NOM_GROUP_NO",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes sont à utiliser pour CARA='EXI_GROUP_MA' (resp. CARA='EXI_GROUP_NO' ). Il permettent de désigner le groupe que l'on veut tester. Dans ce cas, la valeur testée (VALE_CALC_I ou VALE_REFE_I) doit contenir le nombre de mailles (ou de nœuds) du groupe.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.7",
+   "text": "Définition de la valeur de non régression et de référence",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "On fait systématiquement un test de non régression par rapport à une valeur précédemment calculée, avec une tolérance très faible : mots-clés VALE_CALC et TOLE_MACHINE. Aussi souvent que possible, on ajoute un test par rapport à une valeur de référence par rapport à une solution analytique, une valeur obtenue d'une source externe ou une autre modélisation : mots-clés REFERENCE, VALE_REFE, PRECISION.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  VALE_CALC = val"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur réelle de non régression. C'est la valeur calculée par Code_Aster. Lorsque cette valeur est nulle (inférieure à 1.e-16 en valeur absolue), il faut renseigner le mot-clé ORDRE_GRANDEUR = ordgrd. Il n'a de sens qu'en absolu. On vérifie alors que : |val|≤tole∗ordgrd Si ORDRE_GRANDEUR n'est pas fourni alors que VALE_CALC est nul, le test de non régression est ignoré (apparaît avec SKIP dans le fichier résultat). Attention dans ce cas, un test avec VALE_REFE est obligatoire.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE_CALC_C = val"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur complexe de non régression.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE_CALC_I = val"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur entière de non régression.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE_CALC_K = val"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Chaîne de caractères de non régression. Uniquement par TEST_FICHIER et TEST_TABLE.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TOLE_MACHINE = tole"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Précision demandée (par défaut 1.D–6) pour accepter la valeur calculée par rapport à la valeur de non régression (VALE_CALC). Voir ORDRE_GRANDEUR ci-dessus.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VALE_ABS"
+   ],
+   "page": 9
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "= ‘NON’",
+     "la valeur de référence et la valeur calculée par Aster sont comparées telles quelles."
+    ],
+    [
+     "= ‘OUI’",
+     "la valeur de référence et la valeur calculée par Aster sont comparées en valeurs"
+    ]
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "absolues.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CRITERE ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Type de test à effectuer. S'applique au test de non régression et au test par rapport à une valeur de référence le cas échéant.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Si v est la valeur extraite, le test portera pour :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "'RELATIF' sur : ∣val−v∣≤prec⋅∣val∣",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "'ABSOLU' sur : ∣val−v∣≤ prec",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  REFERENCE ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "/ 'ANALYTIQUE' :",
+     "la valeur de référence fournie est \"analytique\""
+    ],
+    [
+     "/ 'SOURCE_EXTERNE' :",
+     "la valeur de référence fournie provient d’un programme autre que Code_Aster , d’une référence bibliographique, d'une mesure, etc."
+    ],
+    [
+     "/ 'AUTRE_ASTER' :",
+     "la valeur de référence fournie est celle obtenue par un autre calcul avec Code_Aster (autre commande, autre modélisation, option de calcul, ...)"
+    ]
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "C'est la présence du mot-clé REFERENCE qui indique que l'on dispose d'une référence externe et conditionne la présence des mots-clés VALE_REFE[_I/_C] et PRECISION.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  VALE_REFE, VALE_REFE_C, VALE_REFE_I, VALE_REFE_K"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Similaires aux mots-clés VALE_CALC ci-dessus. Ils définissent la valeur obtenue par la source externe.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PRECISION ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Précision demandée (par défaut 1.D–3) pour accepter la valeur calculée par rapport à la valeur de référence (VALE_REFE).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque la définition du numéro d'ordre d'un RESULTAT se fait par une variable d'accès réelle ( FREQ , INST , ANGLE ), il ne faut pas qu'il y ait ambiguïté sur ce numéro d'ordre. Pour cela l'utilisateur définit un petit intervalle autour de la valeur demandée grâce aux mots clés CRITERE et TOLE_MACHINE .",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas (accès \"réel\") les mots clés CRITERE et TOLE_MACHINE attendront donc 2 valeurs chacun : ( crit1 , crit2 ) et ( prec1 , prec2 ).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "crit1 et prec1 concernent la valeur de non régression.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "crit2 et prec2 permettent de choisir l'intervalle de recherche du numéro d'ordre.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs par défaut de crit1 et prec1 sont 'RELATIF' et 1.D-6.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs par défaut de crit2 et prec2 sont 'RELATIF' et 1.D-3.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "On ne peut définir explicitement crit2 et prec2 sans définir crit1 et prec1.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Les tests de non-régression (mots-clés VALE_CALC*) sont systématiquement ignorés dans les tests de validation mais ils doivent quand même être renseignés (à une valeur quelconque) car requis par le catalogue de la commande. Les tests de validation sont identifiés comme tels par la présence de testlist validation dans leur fichier .export . I l y a toutefois une exception pour les tests sur les chaînes de caractères ( VALE_CALC_K ) qui ne sont pas ignorés car il n’y a pas de tolérance/précision sur ces tests.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.8",
+   "text": "Ajout d'une spécificité à la valeur testée",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  LEGENDE ="
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Chaîne de caractères d'au plus 16 caractères décrivant le test effectué. L'utilisateur a donc la possibilité de commenter son test.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.9",
+   "text": "Mot-clé TEST_NAN",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEST_NAN =          /  ‘NON’  ,                      [DEFAUT]",
+    "                       /  ‘OUI’  ,"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé sert à valider le fonctionnement du NaN (Not-a-Number) de Code_Aster. Ce mot-clé est à utiliser uniquement dans l'optique de mener des tests. Son utilisation doit provoquer une erreur fatale en FPE (Floating Point Exception) en mode debug dans TEST_RESU.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TEST_RESU(   CHAM_NO = _F (  CHAM_GD   = f,",
+    "                             GROUP_NO  = 'GN2',",
+    "                             NOM_CMP   = 'DX' ,",
+    "                             REFERENCE = 'ANALYTIQUE' ,",
+    "                             VALE_CALC = 1.1999996845E-5 ,",
+    "                             VALE_REFE = 1.2E-5 ,",
+    "                             PRECISION = 1D-4 ,))",
+    "TEST_RESU(   CARTE  =_F   (  CHAM_GD   = CART1,",
+    "                             GROUP_MA  = 'GM3',",
+    "                             NOM_CMP   = 'X4' ,",
+    "                             REFERENCE = 'AUTRE_ASTER',",
+    "                             VALE_CALC_I = 3,",
+    "                             VALE_REFE_I = 3,))",
+    "TEST_RESU(   CHAM_ELEM=(_F(  CHAM_GD   = SIGGA,",
+    "                              GROUP_MA   = ' G M3',",
+    "                             POINT     = 3,",
+    "                             NOM_CMP   = 'SIXX' ,",
+    "                             VALE_CALC = 3.4E6,      ),",
+    "                       _F (  CHAM_GD   = SIGNO,",
+    "                             GROUP_MA  = 'GM5',",
+    "                             GROUP_NO  = 'GN1',",
+    "                             NOM_CMP   = 'SIXX' ,",
+    "                              VALE_CALC = 3.4E6  ,   ),))"
+   ],
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TEST_RESU (  RESU =(_F    (  RESULTAT  = evolth,",
+    "                             NOM_CHAM  = 'FLUX_ELGA' ,",
+    "                             TYPE_TEST = 'MAX' ,",
+    "                             REFERENCE = 'ANALYTIQUE',",
+    "                             VALE_CALC = 154.35000201404,",
+    "                             VALE_REFE = 154.35),))",
+    "TEST_RESU (  OBJET =   _F (  NOM = 'CH1    .CHME.LIGREL.LIEL' ,",
+    "                             VALE_CALC_I = 1278484 ,))"
+   ],
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TEST_RESU (  MAILLAGE =(",
+    "                _F (   MAILLAGE= ma , CARA= 'NB_MAILLE'",
+    "                       VALE_CALC_I = 1000 ,),",
+    "                _F (   MAILLAGE= ma , CARA= 'NB_GROUP_NO'",
+    "                       VALE_CALC_I = 12 ,),",
+    "                _F (   MAILLAGE= ma , CARA= 'EXI_GROUP_MA'",
+    "                       NOM_GROUP_MA='GAUCHE',",
+    "                       VALE_CALC_I = 25 ,),",
+    "             ))"
+   ],
+   "page": 11
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 9,
+   "chars": 1003,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 10,
+   "last": 10,
+   "chars": 7358,
+   "id": 2,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 11,
+   "last": 26,
+   "chars": 3038,
+   "id": 3,
+   "section": "3 Généralités"
+  },
+  {
+   "first": 27,
+   "last": 74,
+   "chars": 3562,
+   "id": 4,
+   "section": "4 Opérandes"
+  },
+  {
+   "first": 75,
+   "last": 102,
+   "chars": 2272,
+   "id": 5,
+   "section": "4.4 Tester un champ \"globalement\""
+  },
+  {
+   "first": 103,
+   "last": 139,
+   "chars": 3994,
+   "id": 6,
+   "section": "4.7 Définition de la valeur de non régression et de référence"
+  },
+  {
+   "first": 140,
+   "last": 149,
+   "chars": 2557,
+   "id": 7,
+   "section": "4.8 Ajout d'une spécificité à la valeur testée"
+  }
+ ]
+}
