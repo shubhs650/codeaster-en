@@ -109,7 +109,7 @@ Produced in bulk by `caen translate messages` (LLM, glossary-locked, placeholder
 
 ### 4.4 Documentation — `en/docs/<DOC-ID>.md` and `en/guide/`
 
-- `en/docs/` — translations of official U-docs for in-scope commands (U4.xx.yy reference pages, plus the handful of U1/U2 usage docs an engineer needs). Input: PDFs attached by the owner, converted to text, chunked, translated with the glossary, re-assembled. Header keeps EDF attribution, doc ID, upstream doc version, our translation status.
+- `en/docs/` — translations of official U-docs for in-scope commands (U4.xx.yy reference pages, plus the handful of U1/U2 usage docs an engineer needs). Input: the French PDFs, fetched and converted to text and chunks by `caen docs fetch`/`ingest` (task 5.1, ADR-026, `en/docs/_src/`); `caen translate doc` translates the chunks in `en/docs/scope.yaml` with the glossary and the command's keywords, puts code blocks back verbatim, checks the structure and re-assembles (task 5.2, ADR-027). Header keeps EDF attribution, doc ID, document date and revision, GFDL notice, our translation status.
 - `en/guide/` — our own short English guide: "code_aster for a structural engineer": concepts (concept/SD, model, material field, element characteristics, loads vs boundary conditions, result objects and field names, logical units), a minimal linear-static walkthrough, a shell walkthrough, a modal walkthrough, reading the `.mess` log, reading results. Written from the command references, not translated.
 
 ### 4.5 Runtime: `.mess` parser and English renderer — `tools/codeaster_en/mess/`

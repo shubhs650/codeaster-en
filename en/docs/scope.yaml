@@ -1,0 +1,73 @@
+# Which official documents `caen translate doc` translates into en/docs/, and which chunks.
+# Human-edited data (CLAUDE.md §5); task 5.2, ADR-027.
+#
+# Keys are doc IDs of en/docs/_src/<DOC-ID>.fr.json. `chunks` lists the translated chunks
+# ("1-4, 107"; default: every chunk) by the chunk numbers of `<DOC-ID>.fr.md`
+# (`<!-- chunk N -->`). The other chunks keep their French headings, marked "not translated",
+# so section numbers still resolve. `reason` says why a document is cut, from the keywords of
+# docs/COMMAND-SET.md (CLAUDE.md §2 rule 7). Re-check the chunk numbers after a re-ingest.
+docs:
+  # ------------------------------------------------------------------ Tier 1 command documents
+  U4.11.01: {tier: 1}  # DEBUT
+  U4.11.02: {tier: 1}  # FIN
+  U4.11.03: {tier: 1}  # POURSUITE
+  U4.21.01: {tier: 1}  # LIRE_MAILLAGE
+  U4.22.01: {tier: 1}  # DEFI_GROUP
+  U4.23.02: {tier: 1}  # CREA_MAILLAGE
+  U4.23.04: {tier: 1}  # MODI_MAILLAGE
+  U4.31.01: {tier: 1}  # DEFI_CONSTANTE
+  U4.31.02: {tier: 1}  # DEFI_FONCTION
+  U4.41.01: {tier: 1}  # AFFE_MODELE
+  U4.42.01:  # AFFE_CARA_ELEM
+    tier: 1
+    chunks: "1-3, 5-6, 17-20"
+    reason: >-
+      general operands, COQUE (Tier 1) and DISCRET (Tier 2 springs, listed in the Tier 1 row);
+      bars, cables, beams, pipes, multifiber, solids, grids, membranes and soil springs are
+      outside docs/COMMAND-SET.md
+  U4.43.01:  # DEFI_MATERIAU
+    tier: 1
+    chunks: "1-5, 107"
+    reason: >-
+      syntax, TABLE, ELAS/ELAS_FO (Tier 1) and RCCM/RCCM_FO (material data of POST_RCCM);
+      the other material laws are outside docs/COMMAND-SET.md
+  U4.43.03: {tier: 1}  # AFFE_MATERIAU
+  U4.44.01:  # AFFE_CHAR_MECA (+ AFFE_CHAR_MECA_F, Tier 2)
+    tier: 1
+    chunks: "1-17, 19-20, 23, 26, 29-31, 33, 38"
+    reason: >-
+      generalities, DDL_IMPO, ARETE_IMPO, FACE_IMPO, LIAISON_DDL/OBLIQUE/UNIF/CHAMNO,
+      LIAISON_MAIL, LIAISON_SOLIDE, LIAISON_RBE3, FORCE_NODALE/ARETE/CONTOUR/FACE/INTERNE,
+      PRES_REP, PESANTEUR, ROTATION and FORCE_COQUE; the other loads are outside
+      docs/COMMAND-SET.md
+  U4.44.03: {tier: 1}  # AFFE_CHAR_CINE
+  U4.51.01: {tier: 1}  # MECA_STATIQUE
+  U4.72.04:  # CREA_CHAMP
+    tier: 1
+    chunks: "1-5, 8-11"
+    reason: >-
+      general operands and OPERATION = AFFE, ASSE, NORMALE and EXTR (Tier 1: EXTR, AFFE, ASSE);
+      COMB, EVAL, DISC and R2C/C2R are outside docs/COMMAND-SET.md
+  U4.81.04: {tier: 1}  # CALC_CHAMP
+  U4.81.13: {tier: 1}  # MACR_LIGN_COUPE
+  U4.81.21: {tier: 1}  # POST_RELEVE_T
+  U4.81.22:  # POST_ELEM
+    tier: 1
+    chunks: "1-3, 17-19"
+    reason: >-
+      syntax, common operands, MASS_INER and VOLUMOGRAMME with the examples; the energy,
+      Weibull, Rice-Tracey, limit-load and section-property options are outside
+      docs/COMMAND-SET.md
+  U4.83.11:  # POST_RCCM
+    tier: 1
+    chunks: "1-5, 24, 26-28"
+    reason: >-
+      syntax, common operands and TYPE_RESU_MECA = 'EVOLUTION' with OPTION = 'PM_PB'
+      (COMMAND-SET Tier 1); the B3200, B3600 and ZE200 fatigue methods and FATIGUE_ZH210
+      are outside docs/COMMAND-SET.md
+  U4.91.01: {tier: 1}  # IMPR_RESU (RESULTAT and ASTER formats)
+  U4.91.03: {tier: 1}  # IMPR_TABLE
+  U4.92.01: {tier: 1}  # TEST_RESU
+  # ------------------------------------------------------- Tier 1 usage documents (PLAN 5.1)
+  U1.03.01: {tier: 1}  # supervisor and command language (command-file syntax)
+  U7.05.21: {tier: 1}  # IMPR_RESU, MED format

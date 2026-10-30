@@ -33,6 +33,7 @@ import hashlib
 import json
 import re
 from collections import Counter
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
@@ -612,6 +613,52 @@ def _md_cell(text: str) -> str:
     return text.replace("|", "\\|").replace("\n", " ") or " "
 
 
+def render_blocks(
+    blocks: list[dict[str, Any]],
+    first: int,
+    last: int,
+    page: int = 0,
+    code: Callable[[dict[str, Any]], list[str]] | None = None,
+) -> tuple[list[str], int]:
+    """Markdown lines for ``blocks[first..last]`` and the page reached.
+
+    A ``<!-- page N -->`` marker precedes the first block of each page after ``page``. ``code``
+    renders a code block instead of the default fenced ``text`` block (task 5.2 replaces code
+    blocks by markers).
+    """
+    out: list[str] = []
+    for i in range(first, last + 1):
+        block = blocks[i]
+        if block["page"] != page:
+            page = block["page"]
+            out += [f"<!-- page {page} -->", ""]
+        kind = block["type"]
+        if kind == "title":
+            out += [f"# {block['text']}", ""]
+        elif kind == "heading":
+            out += [f"{'#' * min(6, block['level'] + 1)} {block['number']} {block['text']}", ""]
+        elif kind == "paragraph":
+            suffix = " <!-- equation -->" if block.get("equation") else ""
+            out += [block["text"] + suffix, ""]
+        elif kind == "list_item":
+            nxt = blocks[i + 1] if i + 1 < len(blocks) else None
+            out.append(f"{'  ' * block['depth']}- {block['text']}")
+            if nxt is None or nxt["type"] != "list_item":
+                out.append("")
+        elif kind == "code":
+            out += code(block) if code else ["```text", *block["lines"], "```", ""]
+        elif kind == "table":
+            width = max(len(r) for r in block["rows"])
+            rows = [r + [""] * (width - len(r)) for r in block["rows"]]
+            out.append("| " + " | ".join(_md_cell(c) for c in rows[0]) + " |")
+            out.append("|" + "---|" * width)
+            out += ["| " + " | ".join(_md_cell(c) for c in r) + " |" for r in rows[1:]]
+            out.append("")
+        elif kind == "figure":
+            out += [f"*[Figure, page {block['page']}: not extracted]*", ""]
+    return out, page
+
+
 def to_markdown(doc: dict[str, Any]) -> str:
     """Readable French rendering of an ingested document (for review and citation)."""
     meta = doc["meta"]
@@ -636,37 +683,10 @@ def to_markdown(doc: dict[str, Any]) -> str:
     ]
     out = head
     page = 0
-    chunk_starts = {c["first"]: c["id"] for c in doc["chunks"]}
-    for i, block in enumerate(doc["blocks"]):
-        if i in chunk_starts:
-            out += [f"<!-- chunk {chunk_starts[i]} -->", ""]
-        if block["page"] != page:
-            page = block["page"]
-            out += [f"<!-- page {page} -->", ""]
-        kind = block["type"]
-        if kind == "title":
-            out += [f"# {block['text']}", ""]
-        elif kind == "heading":
-            out += [f"{'#' * min(6, block['level'] + 1)} {block['number']} {block['text']}", ""]
-        elif kind == "paragraph":
-            suffix = " <!-- equation -->" if block.get("equation") else ""
-            out += [block["text"] + suffix, ""]
-        elif kind == "list_item":
-            nxt = doc["blocks"][i + 1] if i + 1 < len(doc["blocks"]) else None
-            out.append(f"{'  ' * block['depth']}- {block['text']}")
-            if nxt is None or nxt["type"] != "list_item":
-                out.append("")
-        elif kind == "code":
-            out += ["```text", *block["lines"], "```", ""]
-        elif kind == "table":
-            width = max(len(r) for r in block["rows"])
-            rows = [r + [""] * (width - len(r)) for r in block["rows"]]
-            out.append("| " + " | ".join(_md_cell(c) for c in rows[0]) + " |")
-            out.append("|" + "---|" * width)
-            out += ["| " + " | ".join(_md_cell(c) for c in r) + " |" for r in rows[1:]]
-            out.append("")
-        elif kind == "figure":
-            out += [f"*[Figure, page {block['page']}: not extracted]*", ""]
+    for item in doc["chunks"]:
+        out += [f"<!-- chunk {item['id']} -->", ""]
+        lines, page = render_blocks(doc["blocks"], item["first"], item["last"], page)
+        out += lines
     return "\n".join(out).rstrip() + "\n"
 
 

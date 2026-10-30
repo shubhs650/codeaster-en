@@ -1,0 +1,2015 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.81.21.pdf",
+  "source_sha256": "54614e62d8b0dd1a7a7af6a50120393dfb2e30a368f4953a99779d7adb51654c",
+  "source_bytes": 578840
+ },
+ "schema_version": 1,
+ "doc_id": "U4.81.21",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "09/09/2020",
+  "fascicle": "Manuel d'utilisation Fascicule u4.81: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 23,
+  "pages": "23",
+  "pdf_keywords": "U4.81.21-I",
+  "pdf_title": "Opérateur POST_RELEVE_T",
+  "responsible": "",
+  "revision": "4b15ed525526",
+  "title": "Opérateur POST_RELEVE_T",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur POST_RELEVE_T",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Extraire des valeurs de composantes de champs de grandeurs et effectuer des calculs de moyennes et d’invariants. Les valeurs sont relevées sur des nœuds, mailles, lignes brisées reliant des nœuds. Elles peuvent faire l’objet, par cette même procédure :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "de calculs de :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "moyennes,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "résultantes et moments de champs vectoriels,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "invariants de champs tensoriels,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "trace directionnelle de champs,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "extrema et moyenne arithmétique sur des nœuds ou des mailles",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "d’expression dans les repères GLOBAL, LOCAL, POLAIRE, UTILISATEUR ou CYLINDRIQUE.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "POST_RELEVE_T produit un concept de type table, qui peut être imprimé à l’aide de IMPR_TABLE [U4.91.03].",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe générale",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "tresu [tabl_sdaster]   =  POST_RELEVE_T(",
+    "   ♦  ACTION = _F  (",
+    "          ♦  INTITULE =   nom,                          [K8]",
+    "          ♦  OPERATION =   | 'EXTRACTION',              [K16]",
+    "                           | 'MOYENNE',",
+    "                           | 'EXTREMA',",
+    "                           | 'MOYENNE_ARITH',",
+    "          ♦  /  cas OPERATION = 'EXTRACTION' ou 'MOYENNE' :",
+    "                ♦  GROUP_NO = lgrno,                 [l_gr_noeud]",
+    "                ◊  /   TOUT =    'OUI',",
+    "                   /   GROUP_MA= lgrma,              [l_gr_maille]",
+    "             /  cas OPERATION = 'EXTREMA' ou 'MOYENNE_ARITH' :",
+    "                   |   TOUT =    'OUI',",
+    "                   |   GROUP_NO = lgrno,                [l_gr_noeud]",
+    "                   |   GROUP_MA= lgrma,                 [l_gr_maille]",
+    "           ◊ FORMAT_C =   /  'MODULE',               [DEFAUT]",
+    "                          /  'REEL'  ,",
+    "                          /  'IMAG'  ,",
+    "           ♦ /  CHAM_GD = chpgd,                 /      [cham_no_sdaster]",
+    "                                                 /      [cham_elem]",
+    "             /  RESULTAT = resu,                 /      [evol_elas]",
+    "                                                 /      [evol_ther]",
+    "                                                 /      [evol_noli]",
+    "                                                 /      [mode_flamb]",
+    "                                                 /      [dyna_trans]",
+    "                                                 /      [dyna_harmo]",
+    "                                                 /      [mode_meca]",
+    "                                                 /      [mode_stat]",
+    "                                                  /     [fourier_elas]",
+    "                                                 /      [fourier_ther]",
+    "                                                 /      [mult_elas]",
+    "                                                 /      [mode_acou]",
+    "                                                 /      [acou_harmo]",
+    "                                                 /      [base_modale]",
+    "                ♦  NOM_CHAM =    chpsymbo,                        [K16]",
+    "                ♦  /   TOUT_ORDRE   =  'OUI',",
+    "                   /   NUME_ORDRE   =  lordre,                    [l_I]",
+    "                   /   LIST_ORDRE   =  lenti,                     [listis]",
+    "                   /   NUME_MODE    =  lmode,                     [l_I]",
+    "                   /   LIST_MODE    =  lenti,                     [listis]",
+    "                   /   NOM_CAS      =  nomcas,                    [K24]",
+    "                   /   NOEUD_CMP    =  noeucmp,                   [K24]",
+    "                   /   /  FREQ      =  lfreq,                     [l_R]",
+    "                       /  LIST_FREQ =  lreel,                     [listr8]",
+    "                       /  INST      =  linst,                     [l_R]",
+    "                       /  LIST_INST =  lreel,                     [listr8]",
+    "                       ◊  |   PRECISION=/ prec,                   [R]",
+    "                                       / 1.D–6,                   [DEFAUT]",
+    "                       ◊  |  CRITERE=/ 'RELATIF',                 [DEFAUT]",
+    "                                     / 'ABSOLU',",
+    "                ♦  /   TOUT_CMP =   'OUI',",
+    "                   /   NOM_CMP   =  lcmp,                         [l_K8]",
+    "                       ◊  REPERE =  /  'GLOBAL' ,                 [DEFAUT]",
+    "                                    /  'POLAIRE',",
+    "                                    /  'LOCAL'  ,",
+    "                                        ◊  VECT_Y =(oy1,oy2,oy3), [l_R]",
+    "                                    /  'UTILISATEUR',",
+    "                                       ♦   ANGL_NAUT = (a,b,c),   [l_R]",
+    "                                    /  'CYLINDRIQUE',",
+    "                                       ♦   ORIGINE = (x,y,z),     [l_R]",
+    "                                       ♦   AXE_Z=(oz1,oz2,oz3),   [l_R]",
+    "                       |  TRAC_NOR   = 'OUI',",
+    "                       |  TRAC_DIR   = 'OUI',",
+    "                          ♦  DIRECTION   = (x,y,[z]),             [l_R]",
+    "                   /   INVARIANT      ='OUI',",
+    "                   /   ELEM_PRINCIPAUX='OUI',",
+    "                   /   RESULTANTE     =lcmp,                      [l_K8]",
+    "                       ◊  MOMENT      =lcmp,                      [l_K8]",
+    "                       ♦  POINT       =(x,y,[z]),                 [l_R]",
+    "                ◊  MOYE_NOEUD=   /  'OUI',                        [DEFAUT]",
+    "      )                          /  'NON',",
+    "      ◊   TITRE =  titre                                [l_Kn]",
+    "   )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Principes d'utilisation de POST_RELEVE_T : opérande ACTION",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le post-traitement réalisé par POST_RELEVE_T nécessite la donnée de trois informations :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "lieu,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "objet,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "nature.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Chaque occurrence du mot-clé facteur ACTION définit ce triplet.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le lieu du post-traitement désigne une figure géométrique reliant les points de post-traitement. Ce lieu est défini au moyen du mot-clé GROUP_NO.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "L'objet du post-traitement est défini par le choix d'un champ de grandeur, de composantes et éventuellement de quantités associées choisies par différents mots-clés.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les champs de grandeur sont choisis par un des mots-clés :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "RESULTAT et les mots-clés permettant de choisir les champs aux nœuds ou les champs aux éléments de la structure de données resultat.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "CHAM_GD champ de grandeur produit par un opérateur élémentaire, ou extrait d'un concept résultat par CREA_CHAMP [U4.72.04].",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "les composantes par :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TOUT_CMP",
+    "NOM_CMP"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "et les quantités associées par :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INVARIANT",
+    "ELEM_PRINCIPAUX",
+    "TRAC_NOR",
+    "TRAC_DIR etDIRECTION"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "RESULTANTE et, facultativement, MOMENT et POINT",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La nature du post-traitement correspond aux opérations : mot-clé OPERATION",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "d'extraction de valeurs : 'EXTRACTION'",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "de calcul de moyennes (au sens intégration), de minimum et de maximum sur un groupe ordonné de nœuds : 'MOYENNE'",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "de calcul de minimum et de maximum sur des groupes ou des entités : 'EXTREMA'",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "de calcul de moyennes au sens arithmétique sur des groupes ou des entités :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'MOYENNE_ARITH'"
+   ],
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Choix du lieu du post-traitement",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "4.1  OPERATION = 'EXTRACTION' ou 'MOYENNE'"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.1",
+   "text": "Syntaxe",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO = lgrno,                [l_gr_noeud]",
+    "   ◊  /   TOUT = 'OUI',",
+    "      /   GROUP_MA = lgrma,            [l_gr_maille]"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.2",
+   "text": "Opérandes GROUP_NO / TOUT / GROUP_MA",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "L’argument de GROUP_NO est une liste de groupes de nœuds. Les nœuds sont traités dans l’ordre fourni par l’utilisateur. Pour réordonner les nœuds d’une liste, il faut utiliser la commande DEFI_GROUP/OPTION =‘NOEUD_ORDO’ [U4.22.01]",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Le mot-clé GROUP_MA permet de limiter le post-traitement à une liste de groupes de mailles.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "TOUT = 'OUI' revient au cas standard (on considère toutes les mailles). Ces mots-clés ne sont utilisables qu’avec GROUP_NO.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques : Il est déconseillé d'utiliser GROUP_MA avec l'opération MOYENNE sauf si les éléments sont des segments. Rappelons que l'opération MOYENNE calcule des grandeurs suivant une longueur L. Pour de plus amples information, il faut se référer au paragraphe dédié au mot-clé OPERATION où sont présentées les quantités calculées à l'aide de cette option. Le mot clé TOUT='OUI' veut dire « toutes les mailles du maillage » Les éléments nodaux affectés directement sur les nœuds du maillage (AFFE_MODELE / NOEUD), par ailleurs déconseillés, sont ignorés du post-traitement.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.3",
+   "text": "Notions de points de post-traitement et exemples",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les points de post-traitement sont les points de  où les composantes (ou quantités dérivées) sont évaluées. L'opération d'extraction effectue cette évaluation.",
+   "page": 5,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.4",
+   "text": "Exemple de points de post-traitement spécifiés par le mot-clé GROUP_NO",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "N 47",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "N 427",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "N 104 N",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "61",
+   "text": "",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 4.3.3-a",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette figure visualise un lieu de post-traitement construit à partir d’une liste de nœuds.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Les points de post-traitement sont les nœuds représentés, le lieu de post-traitement est la ligne brisée les reliant suivant l'ordre fourni par l’utilisateur, ce qui permet de définir une abscisse curviligne. La valeur extraite sur ces lignes est interpolée linéairement entre les valeurs relevées sur les nœuds. Ainsi il faut remarquer que si l'opération de post-traitement est un calcul de moyenne, tout se passe comme si le segment [N N ] était contenu tout entier dans  . 47 61",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas, l'abscisse curviligne est calculée à partir du parcours des nœuds, tels que définis dans la liste de nœuds.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "4.2  OPERATION = 'EXTREMA' ou 'MOYENNE_ARITH'"
+   ],
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.1",
+   "text": "Syntaxe",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦    | TOUT =    'OUI',",
+    "     | GROUP_NO = lgrno,                [l_gr_noeud]",
+    "     | GROUP_MA =   lgrma,              [l_gr_maille]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.2",
+   "text": "Opérandes TOUT / GROUP_NO / GROUP_MA",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "L’argument de GROUP_NO est une liste de groupes de nœuds. Les nœuds ne sont pas ordonnés.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Le mot-clé GROUP_MA permet de limiter le post-traitement à une liste de groupes de mailles.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "TOUT = 'OUI' revient au cas standard (on considère toutes les mailles).",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Choix de l'objet du post-traitement",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots-clés permettent de définir l'objet du post-traitement. Ils désignent :",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un champ de grandeur : mots-clés CHAM_GD, RESULTAT (et ses mots-clés associés),",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une quantité associée aux composantes du champ : mots-clés TOUT_CMP, NOM_CMP, INVARIANT, ELEM_PRINCIPAUX, TRAC_NOR, TRAC_DIR, DIRECTION, REPERE, SOMME, RESULTANTE, MOMENT, POINT.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.1",
+   "text": "Champ de grandeur",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.1.1",
+   "text": "Syntaxe",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  CHAM_GD = chpgd,",
+    "   /  RESULTAT = resu,",
+    "   ♦  NOM_CHAM = chpsymbo,                              [K16]",
+    "   ♦  /   TOUT_ORDRE = 'OUI',",
+    "      /   NUME_ORDRE = lordre,                          [l_I]",
+    "      /   LIST_ORDRE = lenti,                           [listis]",
+    "      /   NUME_MODE  = lmode,                           [l_I]",
+    "      /   LIST_MODE  = lenti,                           [listis]",
+    "      /   NOM_CAS    = nomcas,                          [K24]",
+    "       /  /  FREQ =       lfreq,                        [l_R]",
+    "           / LIST_FREQ =  lreel,                        [listr8]",
+    "          /  INST      =  linst,                        [l_R]",
+    "           / LIST_INST =  lreel,                        [listr8]",
+    "           ◊ |  PRECISION   =     / prec,               [R]",
+    "                             / 1.D–6,                   [DEFAUT]",
+    "          ◊  |  CRITERE = / 'RELATIF',                  [DEFAUT]",
+    "                          / 'ABSOLU' ,",
+    "◊  FORMAT_C =   /  'MODULE',                            [DEFAUT]",
+    "                /  'REEL'  ,",
+    "                /  'IMAG'  ,"
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.1.2",
+   "text": "Opérande CHAM_GD",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument de CHAM_GD est le nom d'un concept de type cham_no_* ou cham_elem_*.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.1.3",
+   "text": "Opérandes RESULTAT / NOM_CHAM / TOUT_ORDRE / NUME_ORDRE / LIST_ORDRE /",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NUME_MODE/ LIST_MODE/ NOM_CAS/ FREQ /LIST_FREQ /INST /LIST_INST",
+    "/PRECISION/CRITERE"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir [U4.71.00].",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.1.4",
+   "text": "Opérande FORMAT_C",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des champs complexes, on peut extraire :",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "/ 'MODULE' le module",
+   "page": 8
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "/",
+     "'REEL'",
+     "la partie réelle"
+    ],
+    [
+     "/",
+     "'IMAG'",
+     "la partie imaginaire"
+    ]
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.2",
+   "text": "Composantes du champ et quantités dérivées",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les vecteurs et les tenseurs d’ordre 2, il est possible de demander l’évaluation des composantes dans un repère et de dériver des quantités obtenues par produit contracté. Les mots-clés REPERE, TRAC_NOR, TRAC_DIR et DIRECTION permettent de définir ces quantités.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.1",
+   "text": "Syntaxe",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT_CMP =   'OUI',",
+    "   /  NOM_CMP   =  lcmp,                         [l_K8]",
+    "      ◊   /  REPERE =  /  'GLOBAL' ,             [DEFAUT]",
+    "                       /  'POLAIRE',",
+    "                       /  'LOCAL'  ,",
+    "                        ◊ VECT_Y =(oy1,oy2,oy3), [l_R]",
+    "                       /  'UTILISATEUR',",
+    "                          ♦  ANGL_NAUT = (a,b,c),[l_R]",
+    "                       /  'CYLINDRIQUE',",
+    "                          ♦  ORIGINE = (x,y,z),  [l_R]",
+    "                          ♦  AXE_Z=(oz1,oz2,oz3),[l_R]",
+    "      ◊   /  TRAC_NOR       ='OUI',",
+    "          /  TRAC_DIR       ='OUI',",
+    "             ♦  DIRECTION   =(x,y,[z]),          [l_R]",
+    "   /  INVARIANT      = 'OUI',",
+    "   /  ELEM_PRINCIPAUX= 'OUI',",
+    "   /  RESULTANTE     = lcmp,                     [l_K8]",
+    "      ◊   MOMENT      =lcmp,                     [l_K8]",
+    "      ♦   POINT       =(x,y,[z]),                [l_R]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.2",
+   "text": "Opérande TOUT_CMP",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TOUT_CMP"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé n’admet pour argument que le texte 'OUI' et sélectionne toutes les composantes définies au catalogue des grandeurs pour la grandeur relative aux champs spécifiés par les mots-clés RESULTAT et CHAM_GD.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.3",
+   "text": "Opérandes NOM_CMP",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir les composantes de la grandeur du champ traité :",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "/ NOM_CMP : les composantes sont introduites par nom",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.4",
+   "text": "Opérande REPERE",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  REPERE"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet le choix d’un repère parmi les repères suivants :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "repère GLOBAL : repère cartésien de définition du maillage,",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "repère POLAIRE : repère polaire standard du plan (OXY ) (ordre des composantes : r, ,",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "repère LOCAL : repère du plan constitué des vecteurs tangents et normaux (dans cet ordre) au lieu de post-traitement. Le vecteur normal est défini en chaque point de post-traitement comme moyenne des normales à droite et à gauche.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Définition de la normale au lieu de post-traitement.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "En chaque point de post-traitement la normale est définie comme moyenne des normales à droite et à gauche.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "n n n g d",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "t N",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 5.2.4-a",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Le vecteur tangent est obtenu par une rotation de −/2 à partir du vecteur normal.",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas du repère LOCAL et d’une ligne 3D , il faudra fournir :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VECT_Y = (oy1,oy2,oy3)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Les coordonnées d’un vecteur dont la projection sur le plan orthogonal à l’axe directeur de la ligne sera prise comme la normale à la ligne. L’ordre des composantes dans un repère local est t,n,k .",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple d’utilisation :",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "y C Z x x y",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "z B z",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "x",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "O z Y y",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "A",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "X",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 5.2.4-b",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "On veut faire une extraction sur la ligne ABC suivant le repère local défini ci-dessus (axe local y dans la direction globale OX).",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ici, on peut trouver un vecteur constant en tout point de la ligne pour définir le vecteur VECT_Y = (1.,0.,0.).",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ceci est possible car en tout point ce vecteur est déjà dans le plan orthogonal à la ligne.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "y",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "y Z C x x",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "z y B z",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "x",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "A Y y",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "z",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "X",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 5.2.4-c Si par contre, on souhaite avoir l’axe local z dans la direction globale OX [Figure 5.2.4-c], le vecteur VECT_Y dépendra du point considéré :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "0.,0.,1. convient sauf en A (où 0.,−1.,0. convient) 0.,−1.0. convient sauf en C (où 0.,0.,1. convient)",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Il faudra donc dans ce cas découper la ligne en deux morceaux ( AB et BC) et définir un VECT_Y différent sur chaque morceau.",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "repère UTILISATEUR : défini par la donnée de 3 angles nautiques (en degrés) :",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ANGL_NAUT = (a, b, c)"
+   ],
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "repère CYLINDRIQUE défini par :",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "ORIGINE = (x,y,z) les coordonnées de l’origine O du repère AXE_Z=(oz1,oz2,oz3) les coordonnées d’un vecteur définissant l’axe Oz (axe du cylindre). L’ordre des composantes dans un repère cylindrique est r,z,.",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.5",
+   "text": "Opérande TRAC_NOR",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "/ TRAC_NOR : uniquement pour les modélisations 2D et 3D.",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Détermination de la trace normale d'un vecteur ou d'un tenseur d'ordre 2 : c’est le cas particulier de la trace directionnelle obtenue quand la direction u s'identifie à la normale n au lieu de post-traitement.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.6",
+   "text": "Opérandes TRAC_DIR / DIRECTION",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "/ TRAC_DIR : uniquement pour les modélisations 2D et 3D.",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  DIRECTION"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Détermination de la trace directionnelle d’un vecteur v=v ou d’un tenseur d’ordre 2 =  i i dans la direction u=u; c’est-à-dire du scalaire v u ou du vecteur  u i k k ik k.",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La direction u est définie au moyen du mot-clé DIRECTION dont les arguments sont les composantes du vecteur u données dans l’ordre X ,Y ,Z et évaluées dans le repère global. Si cette liste ne contient que deux valeurs alors, conventionnellement, la composante suivant Z du vecteur u est considérée comme nulle.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.7",
+   "text": "Opérande INVARIANT",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Post-traitement d'un tenseur de contrainte ou de déformation d'ordre 2 associées aux directions principales du tenseur :",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "2ou3 TRACE Tr=∑  ii i=1  2ou3 3 1 2 VON_MIS VM= ∑  − Tr 2 ij 3 ij i=1 ∣ ∣ TRESCA TR=max − avec  valeurs propres de  i j i DETER DET=déterminantde",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.8",
+   "text": "Opérande ELEM_PRINCIPAUX",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ELEM_PRINCIPAUX"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Détermination des valeurs principales d’un tenseur 2×2 ou 3×3 d’ordre 2. Elles sont rangées dans l'ordre croissant de leurs valeurs.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "5.2.9",
+   "text": "Opérandes RESULTANTE / MOMENT / POINT",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Détermination de la résultante et du moment d'un champ de torseur sur le lieu de post-traitement. RESULTANTE ne peut être utilisée que si OPERATION='EXTRACTION'.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Informatiquement, ces mots-clés peuvent s'appliquer à n'importe quel champ de grandeur mais pour que les résultats aient un sens physique, on devra se limiter aux champs de forces nodales et réactions nodales.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce dernier cas, 2 possibilités se présentent :",
+   "page": 14
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'utilisateur veut calculer la résultante de certaines composantes du champ : il entrera derrière le mot-clé RESULTANTE une liste de composantes à prendre parmi {' DX' ,' DY'} en 2D et {' DX' ,' DY' ,' DZ'} en 3D ou en éléments structuraux (la résultante de composantes de rotations n'ayant pas de sens physique),",
+   "page": 14
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'utilisateur veut calculer la résultante et le moment de certaines composantes du champ : il entrera derrière les mot-clés RESULTANTE et MOMENT 2 listes de composantes de même longueur à prendre parmi",
+   "page": 14
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "formule {' DX ' ,' DY ' ,' DZ'}",
+     "derrière le mot-clé RESULTANTE"
+    ],
+    [
+     "formule {' DRX ' ,' DRY ' ,' DRZ'}",
+     "derrière le mot-clé MOMENT"
+    ]
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "De plus, il introduira derrière le mot-clé POINT la liste des coordonnées du point par rapport auquel le moment est évalué.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on note P ce point et M les points de post-traitement, les quantités évaluées seront : i",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "F=∑ F=∑FX ,FY ,FZ ",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Résultante : i M M M i i i i i m=∑ PM ∧F ∑ mc",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Moment : i i i i i",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où mc désigne la liste des moments concentrés correspondants aux composantes de rotation i introduites par le mot-clé MOMENT, pertinentes seulement dans le cas des éléments de structure (poutres, coques, discrets).",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "1) En milieux continus, il ne faut pas introduire derrière MOMENT des composantes de translation qui seraient considérées comme des moments concentrés et donc sommées avec les véritables moments. 2) Le calcul de RESULTANTE et/ou de MOMENT est effectué par une somme sur un ensemble de nœuds. Cette somme n'a de sens que si toutes les forces nodales (ou moments) sont exprimées dans le même repère. Cela veut dire que le mot clé REPERE ne peut prendre comme valeur que 'GLOBAL' ou 'UTILISATEUR'.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Nature du post-traitement",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.1",
+   "text": "Opérande OPERATION",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  OPERATION =",
+    "   |  'EXTRACTION'"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "L'opération extraction d'un champ de grandeur permet de récupérer les valeurs d'une ou plusieurs composantes ou de quantités dérivées de ces composantes aux points du lieu de post-traitement.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une extraction sur un cham_elem, les valeurs des composantes extraites de ce champ sont calculées comme suit :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si le lieu de post-traitement est déterminé par le mot-clé GROUP_NO, pour chaque nœud les composantes sont moyennées sur tous les éléments concourant en ce nœud. Dans le cas de l'extraction d'un champ de type ELNO, on obtient les mêmes valeurs en donnant le champ de type NOEU.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Les moyennations aux nœuds de champs calculés dans des repères locaux ne sont licites que si les angles entre ces repères sont faibles. Dans le cas contraire, elles n’ont pas de sens.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le lieu de post-traitement est défini par GROUP_NO = (GN1,GN2,GN3,GN4,GN5), les valeurs sont moyennées sur tous les éléments du maillage ci-dessus.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le lieu de post-traitement est défini comme étant le segment d'origine N1 et d'extrémité N5 , les valeurs seront moyennées sur les éléments hachurés.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d’éléments quadratiques (présence de nœuds milieux), la moyenne aux nœuds sommets peut conduire à des poids plus importants de certains éléments (fonction du découpage) par rapport aux nœuds milieux qui moyennent sur 2 éléments (donc de même poids). On peut donc se trouver en présence d’oscillations entre les valeurs aux sommets et aux milieux.",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  'MOYENNE'"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opération est limitée à 6 composantes de champ à la fois. Etant donné un champ scalaire U (typiquement une composante d'une grandeur), l'opération 'MOYENNE' calcule les quantités suivantes ( L désignant la longueur du lieu de post-traitement C considéré) :",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "1 MOMENT_0 = ∫ Usds L c 12  L MOMENT_1 = ∫ Us s− ds L2 c 2 MinU",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MINIMUM      ="
+   ],
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "MaxU",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MAXIMUM      =",
+    "MOYE_INT     =  MOMENT_0 - ½ MOMENT_1",
+    "MOYE_EXT     =  MOMENT_0 + ½ MOMENT_1"
+   ],
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est important que le lieu de post-traitement soit parcouru dans un sens. Si on utilise un groupe de nœuds, on prendra soin de réordonner les nœuds, en utilisant la commande DEFI_GROUP OPTION 'NOEUD_ORDO', [U4.22.01]. Ainsi, l’abscisse curviligne est définie depuis le nœud origine du groupe, en suivant la ligne brisée constituée par les nœuds. Les intégrales ci-dessus sont évaluées en supposant U linéaire entre deux nœuds. Ainsi, en notant U les valeurs du champ aux nœuds (numérotés par i=1,...,N) d’abscisse s , on a : i i N−1 1 MOMENT_0= ∑s −s U U  2s −s  i1 i i i1 N 1 i=1 N−1 2 MOMENT_1= ∑ s −s U s 2sU 2s s  s −s 2 i1 i i i1 i i1 i1 i N 1 i=1 N−1 3",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "∑ s −s U U  s −s  i1 i i i1 N 1 i=1",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  'EXTREMA'"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "calcule les MIN, MAX, MINI_ABS, MAXI_ABS d'un champ réduit éventuellement sur une liste de nœuds ou de mailles, sur toutes les composantes ou une liste de composantes.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.1",
+   "text": "Opérande MOYE_NOEUD",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé permettant de choisir une impression détaillée ou moyennée en un point. Ce mot-clé n'est significatif que pour les grandeurs de type cham_elem et pour l'opération EXTRACTION.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MOYE_NOEUD = 'OUI'"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque point de post-traitement, la valeur affichée d'une composante ou d'une quantité déduite est obtenue comme moyenne des valeurs données par chaque maille concourante en ce point. La façon de faire la moyenne est la même que pour les champs XXXX_NOEU calculés par CALC_CHAMP [U4.81.04].",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MOYE_NOEUD = 'NON'"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "La liste des valeurs obtenues pour chaque maille concourante au point de post-traitement est affichée.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "7",
+   "text": "Opérandes d'accès et d'impression du contenu des tables créées par POST_RELEVE_T",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.1",
+   "text": "Principes d'adressage du contenu des tables",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Les relevés de valeurs sont rangés dans des concepts de type table. Les tables sont bi-indicées. Le premier indice est le paramètre, celui-ci est défini par l'opérateur suivant l'action envisagée (voir [Tableau 7.4-a]). Le deuxième indice est la variable, celle-ci est définie par l'utilisateur. Les variables peuvent être les noms des nœuds, les noms des composantes.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.2",
+   "text": "Opérande INTITULE",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  INTITULE = matable               [K8]"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la table de relevés de valeurs.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.3",
+   "text": "Opérande TITRE",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE = titre"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre que l’on veut donner à la table de relevés de valeurs. Pour plus de détails, voir [U4.03.01].",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.4",
+   "text": "Définition des paramètres et des variables",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "A l'impression sur le fichier RESULTAT, chaque paramètre s'imprime sur une colonne, les variables étant imprimées ligne par ligne.",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés Paramètres Variables",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "OPERATION ='MOYENNE'        MOMENT_0  MOMENT_1 MINIMUM  Nomsdescom posantes",
+    "(mots-clésTOUT_CMP,NOM_CMP) MAXIMUM MOYE_INT MOYE_EXT"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemple [§9.2.2])",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "OPERATION ='MOYENNE_ARITH'  MOYENNE                     Nomsdescom posantes"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(mots-clés TOUT_CMP, NOM_CMP) OPERATION = 'EXTREMA' VALE Noms des composantes (mots-clés TOUT_CMP, NOM_CMP)",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "OPERATION ='EXTRACTION'                  -              NomsdesG ROUP_NO",
+    "(mot-cléIMPR_NOEUD='OUI')",
+    "OPERATION ='EXTRACTION'                                 Noms desGROUP_NOconcaténés"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(mot-clé IMPR_NOEUD = 'NON') - aux noms des mailles",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TOUT_CMP NOM_CMP            ABSC_CURV  COOR_X   COOR_Y              -"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemples [§9.1] et [§9.2.1]) COOR_Z suivi du nom des composantes",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM_CMP TRAC_NOR TRAC_DIR   ABSC_CURV  COOR_X   COOR_Y              -"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemples [§9.3] et [§9.4]) COOR_Z",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                            DIR_1 DIR_2  DIR_3",
+    "INVARIANT                   ABSC_CURV  COOR_X   COOR_Y              -"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemple [§9.5]) COOR_Z VON_MIS TRESCA",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                            TRACE DETER",
+    "ELEM_PRINCIPAUX             ABSC_CURV  COOR_X   COOR_Y              -"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemple [§9.6]) COOR_Z VAL_PR_1 VAL_PR_2",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VAL_PR_3"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "RESULTANTE MOMENT Noms des composantes - (exemples [§9.7] et [§9.8])",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés Paramètres Variables",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "REPERE = 'POLAIRE'          ABSC_CURV  COOR_X   COOR_Y              -"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "(exemple [§9.9]) COOR_Z suivi du nom des composantes",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "REPERE = 'CYLINDRIQUE'      ABSC_CURV  COOR_X   COOR_Y"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "COOR_Z suivi du nom des composantes",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Tableau 7.4-a",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la signification du paramètre ABSC_CURV,voir §4.1.5 et §4.1.6 Pour les repères POLAIRE et CYLINDRIQUE, la signification des composantes est : DX : rayon r , DY : ordonnée sur l'axe du cylindre z, DZ : angle  (voir U2.07.01 §2 et §5.2)",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour l’expression des contraintes en repère cylindrique on fait les correspondances suivantes :",
+   "page": 18
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Contraintes en repère cartésien",
+     "Contraintes en repère cylindrique",
+     ""
+    ],
+    [
+     "vecteur",
+     "X",
+     "R"
+    ],
+    [
+     "Y",
+     "Z",
+     ""
+    ],
+    [
+     "Z",
+     "",
+     ""
+    ],
+    [
+     "tenseur",
+     "XX",
+     "RR"
+    ],
+    [
+     "YY",
+     "ZZ",
+     ""
+    ],
+    [
+     "ZZ",
+     "",
+     ""
+    ],
+    [
+     "XY",
+     "RZ",
+     ""
+    ],
+    [
+     "XZ",
+     "R",
+     ""
+    ],
+    [
+     "YZ",
+     "Z",
+     ""
+    ]
+   ],
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "8",
+   "text": "Phase de vérification",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "On vérifie que les intitulés sont tous différents.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.1",
+   "text": "Lors de l'exécution",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette phase vérifie la cohérence des arguments entre eux. Elle concerne toutes les occurrences du mot-clé facteur ACTION. On distingue 2 groupes de vérifications.",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Le premier groupe est commun aux arguments du mot-clé CHAM_GD et RESULTAT (qui s'excluent mutuellement) et se réduit aux vérifications suivantes :",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "acceptabilité des composantes : on vérifie que les composantes demandées sont bien présentes au catalogue de description de la grandeur à traiter,",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Le second groupe est spécifique au mot-clé RESULTAT, et se réduit aux vérifications :",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "vérification de l'acceptabilité du champ symbolique : on s'assure que le champ symbolique argument du mot-clé NOM_CHAM existe bien pour le type de concept resultat argument du mot-clé RESULTAT,",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "existence d'au moins une structure de données pour le champ symbolique à traiter.",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "A l'issue de la phase de vérification, en phase d'exécution l'alternative suivante se présente :",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "toutes les occurrences de ACTION sont correctes et les opérations sont lancées,",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "au moins une occurrence de ACTION est incorrecte, alors un message d'erreur fatale est produit avec arrêt de la commande. Des informations renseignent sur la nature des erreurs et le moyen de les corriger.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.2",
+   "text": "Lors du traitement",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Un nouveau filtre de vérification se présente mais ne provoque jamais l'arrêt de la commande. Ce filtre se réduit aux vérifications suivantes :",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "existence de la structure de données désigné par CHAM_GD ou RESULTAT et un des motsclés permettant l'accès dans une structure de données RESULTAT. En cas d'échec un message est émis et l'occurrence suivante est traitée,",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "dans le cas d'un calcul d'invariants tensoriels, on vérifie que l'objet du traitement désigne bien un tenseur d'ordre 2,",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "dans le cas d'un calcul de moyenne ou d'une demande d'extraction de valeurs, on vérifie que les composantes à traiter ont bien été calculées sur le lieu du post-traitement. En cas d'échec de cette vérification, un message détaille les composantes non disponibles en fonction des mailles ou nœuds du lieu de post-traitement.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas où ce dernier filtre ne détecte aucune impossibilité de calcul, le post-traitement est lancé et les résultats sont insérés dans la table.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "9",
+   "text": "Exemples",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Les exemples qui suivent s'appliquent au même problème physique (cas test SHLV100G).",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.1",
+   "text": "Mots-clés 'EXTRACTION' 'MOYENNE' 'EXTREMA'",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "     'MOYENNE_ARITH'",
+    "9.1.1 'EXTRACTION'"
+   ],
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.1.1",
+   "text": "Commandes",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#  extraction des CMP du tenseur des contraintes sur une liste de noeuds",
+    "#",
+    "   t2 = POST_RELEVE_T( ACTION = _F (",
+    "                        INTITULE  = 'ex_2',",
+    "                        GROUP_NO     =",
+    "                              ('GN1','GN347','GN21','GN432','GN39','GN229'),",
+    "                        CHAM_GD   = SIGMA,",
+    "                        NOM_CMP   = ('SIXX','SIYY','SIZZ','SIXY'),",
+    "                        OPERATION = 'EXTRACTION'    )  )"
+   ],
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.1.2",
+   "text": "Résultat",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "         --- POST_TRAITEMENT NUMERO : 1 - CHAMPNUMERO           : 1",
+    "          CHAMP PAR ELEMENT AUX NOEUDS",
+    "          EXTRACTION  TENSEUR CONTRAINTE",
+    "          CHEMIN DE NOEUDS",
+    "           CONCEPT T2 DE TYPE TABL_POST_RELECALCULE A PARTIR DU CONCEPT SIGMA",
+    "                  ABSC_CURV    COOR_X      COOR_Y       COOR_Z       SIXX        SIYY         SIZZ         SIXY",
+    "9.1.2 'MOYENNE'"
+   ],
+   "page": 20,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.2.1",
+   "text": "Commandes",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#  moyenne des CMP du tenseur des contraintes sur une liste de noeuds",
+    "#",
+    "   t3 = POST_RELEVE_T(ACTION=_F ( INTITULE  = 'ex_3',",
+    "                        NOEUD     = ('N1','N347','N21','N432','N39','N229'),",
+    "                        CHAM_GD   = SIGMA,",
+    "                        NOM_CMP   = ('SIXX','SIYY','SIZZ','SIXY'),",
+    "                        OPERATION = 'MOYENNE' ,      ) , )"
+   ],
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.2.2",
+   "text": "Résultat",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "          --- POST_TRAITEMENT NUMERO : 1 -CHAMP NUMERO           : 1",
+    "          CHAMP PAR ELEMENT AUX NOEUDS",
+    "          MOYENNE  TENSEUR CONTRAINTE",
+    "          CHEMIN RELIANT LES NOEUDS :",
+    "          N1       N347     N21      N432    N39      N229",
+    "           CONCEPT T3 DE TYPE TABL_POST_RELECALCULE A PARTIR DU CONCEPT SIGMA",
+    "                   MOMENT_0     MOMENT_1    MINIMUN      MAXIMUN      MOYE_INT   MOYE_EXT",
+    "             SIXX -9.83430E-02  1.17015E+00-9.96843E-01  3.34029E-01 -6.83419E-01 4.86733E-01",
+    "9.1.3 'EXTREMA'"
+   ],
+   "page": 20,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.3.1",
+   "text": "Commandes",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#  extrema des déplacements dx et drz",
+    "#",
+    "   t3 = POST_RELEVE_T(ACTION=_F (",
+    "                        INTITULE  = 'DEPL',",
+    "                        RESULTAT     = RESU1,",
+    "                        NOM_CHAM   = 'DEPL',",
+    "                        NOM_CMP   = ('DX','DRZ',),",
+    "                        OPERATION = 'EXTREMA' ,      ) , )"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.3.2",
+   "text": "Résultat",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INTITULE     RESU   NOM_CHAM     NUME_ORDRE   EXTREMA   NOEUD  CMP   VALE",
+    "DEPL         RESU1  DEPL                   1  MAX       D      DX    3.47E-03",
+    "DEPL         RESU1  DEPL                   1  MIN       D      DRZ  -6.27E-03",
+    "DEPL         RESU1  DEPL                   1  MAXI_ABS  D      DRZ   6.27E-03",
+    "DEPL         RESU1  DEPL                   1  MINI_ABS  A      DX    8.99E-22"
+   ],
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "9.1.4 'MOYENNE_ARITH'"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.4.1",
+   "text": "Commandes",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#  moyenne des déplacements dx et dz sur des noeuds",
+    "#",
+    "   t4 = POST_RELEVE_T(ACTION=_F (",
+    "                        INTITULE  = 'DEPL',",
+    "                        RESULTAT     = RESU1,",
+    "                        NOM_CHAM   = 'DEPL',",
+    "                        GROUP_NO   = ('GNAB',),",
+    "                        GROUP_NO   = ('C','D',),",
+    "                           NOM_CMP   = ('DX','DZ',),",
+    "                        OPERATION = 'MOYENNE_ARITH' ,      ) , )"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.1.4.2",
+   "text": "Résultat",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INTITULE     RESU   NOM_CHAM     NUME_ORDRE   CMP    MOYENNE",
+    "DEPL         RESU1  DEPL                   1  DX     9.47536E-04",
+    "DEPL         RESU1  DEPL                   1  DZ     0.00000E+00"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.2",
+   "text": "Opérande RESULTANTE",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.2.1",
+   "text": "Commandes",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "# calcul des résultantes des CMP citées sur un group_no",
+    "T8 =   POST_RELEVE_T( ACTION = _F(",
+    "          RESULTAT  =  resu,",
+    "          NOM_CHAM  =  'FORC_NODA',",
+    "          INTITULE  =  'RESULTANTE',",
+    "          REPERE    =  'GLOBAL',",
+    "          OPERATION =  'EXTRACTION',",
+    "          GROUP_NO  =  'su',",
+    "          RESULTANTE= ('DX','DY','DZ')))"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.2.2",
+   "text": "Résultat",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "---POST_TRAITEMENT NUMERO : 1 - CHAMP NUMERO         :  1",
+    "NUME_ORDRE             :  1",
+    "CHAMP AUX NOEUDS DE NOM SYMBOLIQUE FORC_NODA",
+    "NUMERO D'ODRDRE : 1 INST : 0.00000E+00",
+    "RESULTANTE_MOMENT   DEPLACEMENTS",
+    "REPERE GLOBAL",
+    "CHEMIN RELIANT LES NOEUDS :",
+    "N69 N70   N71 N87   N88 N89   N97   N98",
+    "CONCEPT T8 DE TABL_POST_RELE CALCULE A PARTIR DU CONCEPT RESU  TABLE :",
+    "RESULTAN_1          ISSUE DE LA TABLE T8                INST:0.00000E+00",
+    "RESULTANTE   -1.000000000E+01 -2.724281611E-117.218027734E-11"
+   ],
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.3",
+   "text": "Opérandes MOMENT et POINT",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.3.1",
+   "text": "Commandes",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "#  calcul des résultantes et des moments des CMP citées sur un group_no",
+    "   T9 =   POST_RELEVE_T( ACTION = _F",
+    "          (  RESULTAT  =  resu,               NOM_CHAM='FORC_NODA',",
+    "             INTITULE  =  'RESULTANTE-MOMENT',",
+    "             REPERE    =  'GLOBAL',           OPERATION = 'EXTRACTION',",
+    "             GROUP_NO  =  'su',",
+    "             MOMENT    =  ('DRX','DRY','DRZ'),   POINT= ( 0.,0.,0.) ,)",
+    "          )"
+   ],
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.3.2",
+   "text": "Résultat",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "    ---POST_TRAITEMENT NUMERO  : 1 - CHAMP NUMERO          :   1",
+    "    NUME_ORDRE            :   1",
+    "    CHAMP AUX NOEUDS DE NOM  SYMBOLIQUE FORC_NODA",
+    "    NUMERO D'ODRDRE : 1 INST  : 0.00000E+00",
+    "    RESULTANTE_MOMENT DEPLACE MENTS",
+    "    MOMENT PAR RAPPORT AU POIN T :   0.00000E+00    0.00000E+00       0.00000E+00",
+    "    REPERE GLOBAL",
+    "    CHEMIN RELIANT LES NOEUDS  :",
+    "    N69    N70     N71    N87    N88     N89    N97    N98",
+    "    CONCEPT T9 DE TYPE TABL_PO ST_RELE CALCULE A PARTIR DU CONCEPT RESU TABLE  :",
+    "    RESULTAN_1        ISSUE  DE LA TABLE T9                INST: 0.00000E+00",
+    "                           RESULT_X         RESU LT_Y      RESULT_Z       MOMENT_X",
+    "    RESULTANTE -1.000000000E+01  -2.724 281611E-11  7.218027734E-11  -9.744077883E-",
+    "12",
+    "    RESULTANTE -2.000000000E+00  -3.000 000000E+00"
+   ],
+   "page": 23
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 12,
+   "chars": 5168,
+   "id": 1,
+   "section": "2 Syntaxe générale"
+  },
+  {
+   "first": 13,
+   "last": 49,
+   "chars": 2971,
+   "id": 2,
+   "section": "3 Principes d'utilisation de POST_RELEVE_T : opérande ACTION"
+  },
+  {
+   "first": 50,
+   "last": 77,
+   "chars": 3054,
+   "id": 3,
+   "section": "61 "
+  },
+  {
+   "first": 78,
+   "last": 146,
+   "chars": 5854,
+   "id": 4,
+   "section": "5.2 Composantes du champ et quantités dérivées"
+  },
+  {
+   "first": 147,
+   "last": 177,
+   "chars": 4240,
+   "id": 5,
+   "section": "6.1 Opérande OPERATION"
+  },
+  {
+   "first": 178,
+   "last": 220,
+   "chars": 3529,
+   "id": 6,
+   "section": "6.1 Opérande MOYE_NOEUD"
+  },
+  {
+   "first": 221,
+   "last": 238,
+   "chars": 2255,
+   "id": 7,
+   "section": "8 Phase de vérification"
+  },
+  {
+   "first": 239,
+   "last": 259,
+   "chars": 3311,
+   "id": 8,
+   "section": "9 Exemples"
+  },
+  {
+   "first": 260,
+   "last": 269,
+   "chars": 2111,
+   "id": 9,
+   "section": "9.2 Opérande RESULTANTE"
+  }
+ ]
+}
