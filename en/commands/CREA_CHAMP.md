@@ -33,7 +33,7 @@ asked for is checked against the field actually built (`CALCULEL4_70`, `CALCULEL
 | Kind | `OPER` (Fortran operator 195, `upstream/bibfor/op/op0195.F90`) |
 | Result | `cham_no_sdaster` (`NOEU_*`), `carte_sdaster` (`CART_*`), `cham_elem` (`ELEM_*`, `ELNO_*`, `ELGA_*`), from `TYPE_CHAM` |
 | Can reuse its input (`reuse=`) | yes, only for `ASSE` and `COMB` (the object given in `CHAM_GD`); catalog `reentrant='f:CHAM_GD'` |
-| French reference | U4.72.04 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.72.04 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `OPERATION`, `EXTR`, `AFFE`, `ASSE`, `TYPE_CHAM`, `AFFE_VARC`, `NOM_VARC`, `TEMP`, `VALE_REF`, `CHAM_GD` (`AFFE_VARC`, `NOM_VARC`, `VALE_REF` are `AFFE_MATERIAU` keywords; they come from the temperature-load row of COMMAND-SET) |
 
@@ -265,7 +265,7 @@ CHNOR = CREA_CHAMP(
 
 ## See also
 
-- French reference: U4.72.04 (translation: `en/docs/U4.72.04.md` once task 5.x lands)
+- French reference: U4.72.04 (French text: `en/docs/_src/U4.72.04.fr.md`; translation: `en/docs/U4.72.04.md` once task 5.2 lands)
 - Catalog: `en/commands/CREA_CHAMP.json` (generated from `upstream/code_aster/Cata/Commands/crea_champ.py:41`)
 - Implementation: `upstream/bibfor/op/op0195.F90`
 - Uses of the field: [AFFE_MATERIAU](AFFE_MATERIAU.md) (`AFFE_VARC`), [POST_RELEVE_T](POST_RELEVE_T.md)

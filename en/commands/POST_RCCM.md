@@ -36,7 +36,7 @@ whether thermal (secondary) stresses are separated out (`TABL_SIGM_THER`).
 | Kind | `OPER` |
 | Result | `table_sdaster` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.83.11 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.83.11 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `TYPE_RESU_MECA`, `OPTION`, `PM_PB` |
 
@@ -194,7 +194,7 @@ Factor keywords of the other `TYPE_RESU_MECA` modes (sub-keywords are in
 
 - [`MACR_LIGN_COUPE`](MACR_LIGN_COUPE.md), which makes the input table;
   [`DEFI_MATERIAU`](DEFI_MATERIAU.md) for the `RCCM` block.
-- French reference: U4.83.11 (translation: `en/docs/U4.83.11.md` once task 5.x lands)
+- French reference: U4.83.11 (French text: `en/docs/_src/U4.83.11.fr.md`; translation: `en/docs/U4.83.11.md` once task 5.2 lands)
 - Catalog: `en/commands/POST_RCCM.json` (generated from `upstream/code_aster/Cata/Commands/post_rccm.py:26`)
 - Implementation: `upstream/bibfor/op/op0165.F90`; `EVOLUTION` in `upstream/bibfor/postrele/rcevol.F90`
   (`rcevo2.F90` reads the tables, `rc32my.F90` and `rc32axis.F90` linearize, `rcevom.F90` and

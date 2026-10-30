@@ -36,7 +36,7 @@ element (`_ELNO`, discontinuous between elements) or averaged at nodes (`_NOEU`,
 | Kind | `OPER` (Fortran operator 52, `upstream/bibfor/op/op0052.F90`) |
 | Result | `resultat_sdaster` (same type as `RESULTAT`) |
 | Can reuse its input (`reuse=`) | yes (the object given in `RESULTAT`); catalog `reentrant='f:RESULTAT'` |
-| French reference | U4.81.04 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.81.04 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `CONTRAINTE`, `SIGM_ELNO`, `SIGM_NOEU`, `SIEF_ELNO`, `CRITERES`, `SIEQ_ELNO`, `SIEQ_NOEU`, `DEFORMATION`, `EPSI_ELNO`, `EPSI_NOEU`, `FORCE`, `REAC_NODA`, `FORC_NODA`, `ENERGIE` |
 
@@ -286,7 +286,7 @@ STAT1 = CALC_CHAMP(
 
 ## See also
 
-- French reference: U4.81.04 (translation: `en/docs/U4.81.04.md` once task 5.x lands)
+- French reference: U4.81.04 (French text: `en/docs/_src/U4.81.04.fr.md`; translation: `en/docs/U4.81.04.md` once task 5.2 lands)
 - Catalog: `en/commands/CALC_CHAMP.json` (generated from `upstream/code_aster/Cata/Commands/calc_champ.py:38`)
 - Implementation: `upstream/code_aster/CodeCommands/calc_champ.py`; `upstream/bibfor/op/op0052.F90`,
   `upstream/bibfor/calculel/calcop.F90` (options and dependencies), `ccliop.F90`, `ccchno.F90`

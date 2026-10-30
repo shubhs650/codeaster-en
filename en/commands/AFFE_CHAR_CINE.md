@@ -36,7 +36,7 @@ It only imposes values: relations between DOFs (`LIAISON_*`) still need `AFFE_CH
 | Kind | `OPER` |
 | Result | `char_cine_meca`, `char_cine_ther`, `char_cine_acou` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.44.03 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.44.03 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MECA_IMPO` |
 
@@ -203,7 +203,7 @@ BND_TEMP = AFFE_CHAR_CINE(MODELE=MODEL, THER_IMPO=_F(GROUP_MA="END", TEMP=0))
 
 ## See also
 
-- French reference: U4.44.03 (translation: `en/docs/U4.44.03.md` once task 5.x lands)
+- French reference: U4.44.03 (French text: `en/docs/_src/U4.44.03.fr.md`; translation: `en/docs/U4.44.03.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_CHAR_CINE.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_cine.py:48`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_cine.py`;
   `upstream/bibfor/op/op0101.F90`, `upstream/bibfor/modelisa/charci.F90`,

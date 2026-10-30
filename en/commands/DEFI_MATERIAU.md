@@ -36,7 +36,7 @@ behaviors are listed under [Other keywords](#other-keywords).
 | Kind | `MACRO` |
 | Result | `mater_sdaster` |
 | Can reuse its input (`reuse=`) | yes (the object given in `MATER`); catalog `reentrant='f:MATER'` |
-| French reference | U4.43.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.43.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `ELAS`, `NU`, `RHO`, `ALPHA`, `ELAS_FO` |
 
@@ -502,7 +502,7 @@ acier = DEFI_MATERIAU(ELAS=_F(E=200000.0, NU=0.3), ECRO_LINE=_F(D_SIGM_EPSI=2000
 
 ## See also
 
-- French reference: U4.43.01 (translation: `en/docs/U4.43.01.md` once task 5.x lands)
+- French reference: U4.43.01 (French text: `en/docs/_src/U4.43.01.fr.md`; translation: `en/docs/U4.43.01.md` once task 5.2 lands)
 - Catalog: `en/commands/DEFI_MATERIAU.json` (generated from `upstream/code_aster/Cata/Commands/defi_materiau.py:51`)
 - Implementation: `upstream/code_aster/CodeCommands/defi_materiau.py` (conversion of `K`/`MU` and
   `CELE_P`/`CELE_S`); re-basing of `ALPHA` `upstream/bibfor/mate_util/alfint.F90`; thermal strain

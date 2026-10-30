@@ -35,7 +35,7 @@ assert, inside the run, that a result matches a hand calculation.
 | Kind | `PROC` (Fortran operator 23, `upstream/bibfor/op/op0023.F90`) |
 | Result | none (prints the test report) |
 | Can reuse its input (`reuse=`) | not applicable |
-| French reference | U4.92.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.92.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `RESU`, `VALE_CALC`, `VALE_REFE`, `REFERENCE`, `PRECISION` |
 
@@ -405,7 +405,7 @@ TEST_RESU(
 
 ## See also
 
-- French reference: U4.92.01 (translation: `en/docs/U4.92.01.md` once task 5.x lands)
+- French reference: U4.92.01 (French text: `en/docs/_src/U4.92.01.fr.md`; translation: `en/docs/U4.92.01.md` once task 5.2 lands)
 - Catalog: `en/commands/TEST_RESU.json` (generated from `upstream/code_aster/Cata/Commands/test_resu.py:26`)
 - Implementation: `upstream/bibfor/op/op0023.F90`; `upstream/bibfor/test/` (`trresu.F90` for
   `RESU`, `trchno.F90`, `trchel.F90`, `trcart.F90`, `trgene.F90`, `trjeve.F90`, `trmail.F90`);

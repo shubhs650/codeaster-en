@@ -32,7 +32,7 @@ compact the database.
 | Kind | `FIN_PROC` (operator 9999; Python: `upstream/code_aster/CodeCommands/fin.py`) |
 | Result | none |
 | Can reuse its input (`reuse=`) | not applicable |
-| French reference | U4.11.02 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.11.02 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `CODE`, `ERREUR`, `DEBUG`, `IGNORE_ALARM` (these are `DEBUT` keywords; COMMAND-SET lists `DEBUT`/`FIN` in one row) |
 
@@ -92,7 +92,7 @@ FIN(RETASSAGE="OUI")
 
 ## See also
 
-- French reference: U4.11.02 (translation: `en/docs/U4.11.02.md` once task 5.x lands)
+- French reference: U4.11.02 (French text: `en/docs/_src/U4.11.02.fr.md`; translation: `en/docs/U4.11.02.md` once task 5.2 lands)
 - Catalog: `en/commands/FIN.json` (generated from `upstream/code_aster/Cata/Commands/fin.py:44`)
 - Implementation: `upstream/code_aster/CodeCommands/fin.py`
 - Start: [DEBUT](DEBUT.md); restart: `POURSUITE`

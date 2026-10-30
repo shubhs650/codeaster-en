@@ -37,7 +37,7 @@ a known convention; the `NORM_MODE` keyword of `CALC_MODES` does the same inside
 | Kind | `OPER` |
 | Result | `mode_meca`, `mode_meca_c`, `mode_flamb` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | yes (the object given in `MODE`); catalog `reentrant='f:MODE'` |
-| French reference | U4.52.11 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.52.11 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MASS_INER`, `NORME`, `FILTRE_MODE`, `CRIT_EXTR`, `MASS_EFFE_UN`, `SEUIL` |
 
@@ -147,8 +147,8 @@ result's `NORME` parameter (`op0037.F90:750`), which `RECU_TABLE` can print.
 
 ## See also
 
-- French reference: U4.52.11 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.52.11.md` once task 5.x lands)
+- French reference: U4.52.11 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.52.11.fr.md`; translation: `en/docs/U4.52.11.md` once task 5.2 lands)
 - Catalog: `en/commands/NORM_MODE.json` (generated from `upstream/code_aster/Cata/Commands/norm_mode.py:40`)
 - Implementation: `upstream/bibfor/op/op0037.F90`, `upstream/bibfor/algeline/vpnorm.F90`
 - Before: [CALC_MODES](CALC_MODES.md)

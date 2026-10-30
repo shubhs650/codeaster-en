@@ -39,7 +39,7 @@ in `EXCIT`.
 | Kind | `OPER` |
 | Result | `char_meca` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.44.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.44.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `DDL_IMPO`, `FACE_IMPO`, `PRES_REP`, `FORCE_FACE`, `FORCE_NODALE`, `FORCE_ARETE`, `PESANTEUR`, `ROTATION`, `LIAISON_DDL`, `LIAISON_UNIF`, `LIAISON_SOLIDE`, `LIAISON_MAIL`, `LIAISON_RBE3`, `GROUP_NO_MAIT`, `GROUP_NO_ESCL`, `DDL_MAIT`, `COEF_ESCL`, `GROUP_MA_MAIT`, `GROUP_MA_ESCL`, `TYPE_RACCORD`, `FONC_MULT` |
 
@@ -549,7 +549,7 @@ Blocages = AFFE_CHAR_MECA(
 
 ## See also
 
-- French reference: U4.44.01 (translation: `en/docs/U4.44.01.md` once task 5.x lands)
+- French reference: U4.44.01 (French text: `en/docs/_src/U4.44.01.fr.md`; translation: `en/docs/U4.44.01.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_CHAR_MECA.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_meca.py:50`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_meca.py`;
   `upstream/bibfor/op/op0007.F90` → `upstream/bibfor/load/charme.F90`

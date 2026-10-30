@@ -37,7 +37,7 @@ itself when its `FILTRE_MODE` or `IMPRESSION` keyword is given
 | Kind | `OPER` |
 | Result | `mode_meca`, `mode_meca_c`, `mode_gene` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.52.12 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.52.12 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MASS_INER`, `NORME`, `FILTRE_MODE`, `CRIT_EXTR`, `MASS_EFFE_UN`, `SEUIL` |
 
@@ -154,8 +154,8 @@ occurrence that keeps no mode only warns (`ALGELINE4_56`, `:471`).
 
 ## See also
 
-- French reference: U4.52.12 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.52.12.md` once task 5.x lands)
+- French reference: U4.52.12 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.52.12.fr.md`; translation: `en/docs/U4.52.12.md` once task 5.2 lands)
 - Catalog: `en/commands/EXTR_MODE.json` (generated from `upstream/code_aster/Cata/Commands/extr_mode.py:41`)
 - Implementation: `upstream/bibfor/op/op0168.F90`
 - Before: [CALC_MODES](CALC_MODES.md), [NORM_MODE](NORM_MODE.md)

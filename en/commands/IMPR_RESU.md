@@ -32,7 +32,7 @@ fields (`SIGM_NOEU`, `SIEQ_NOEU`, `REAC_NODA`) must come from `CALC_CHAMP` first
 | Kind | `PROC` (operator 39; Python wrapper `upstream/code_aster/CodeCommands/impr_resu.py`) |
 | Result | none (writes a file) |
 | Can reuse its input (`reuse=`) | not applicable |
-| French reference | U4.91.01 — from en/doc-ids.yaml (status: proposed; docs/PLAN.md 5.1 says U4.81.01) |
+| French reference | U4.91.01 — from en/doc-ids.yaml (status: verified); the MED format is U7.05.21 |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `FORMAT`, `MED`, `RESU`, `RESULTAT`, `NOM_CHAM`, `GROUP_MA`, `UNITE` |
 
@@ -58,8 +58,8 @@ merges the `RESU` blocks and says in each row which formats accept the keyword.
 | `VERSION` | real, optional | `1.2` | One of `1.0`, `1.2`. Only when `equal_to("FORMAT", 'GMSH')`. Gmsh file format version. Not used in Tier 1. |
 | `RESU` | factor keyword, required, repeatable | — | Only when `equal_to("FORMAT", 'MED')`; or `equal_to("FORMAT", 'RESULTAT')`; or `equal_to("FORMAT", 'GMSH')`; or `equal_to("FORMAT", 'IDEAS')`; or `equal_to("FORMAT", 'ASTER')`. One block to write: a mesh, a field object or a result, with the fields, steps, components and region to keep. Repeat it to write several results or selections to the same file. The catalog defines one `RESU` per `FORMAT`; the keywords below say where they apply. |
 | `RESU / MAILLAGE` | `maillage_sdaster` or `squelette`, optional | — | *mesh*. The mesh to write. Alone, it writes the mesh only (`upstream/astest/hplv101b.comm:89`); with a result, mesh and fields. A mesh different from the model's mesh is refused (`RESULT3_66`). |
-| `RESU / CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Element properties. Give it for shells, beams and pipes so that fields with sub-points (layers, fibers) are written with their structure (`tests/fixtures/shell_static/input/run.comm:83`). TODO(verify) the effect on the MED file against U4.91.01. |
-| `RESU / VISU_SP` | text, optional | — | One of `'NON'`. Only when `not exists("CARA_ELEM")`. MED, without `CARA_ELEM`: `'NON'` writes no sub-point information (`upstream/bibfor/prepost/irmfac.F90:139`). TODO(verify) against U4.91.01. |
+| `RESU / CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Element properties. Give it for shells, beams and pipes so that fields with sub-points (layers, fibers) are written with their structure (`tests/fixtures/shell_static/input/run.comm:83`). TODO(verify) the effect on the MED file against U7.05.21. |
+| `RESU / VISU_SP` | text, optional | — | One of `'NON'`. Only when `not exists("CARA_ELEM")`. MED, without `CARA_ELEM`: `'NON'` writes no sub-point information (`upstream/bibfor/prepost/irmfac.F90:139`). TODO(verify) against U7.05.21. |
 | `RESU / CHAM_GD` | `cham_gd_sdaster`, optional | — | *field (physical quantity)*. A field object (for example from `CREA_CHAMP`) instead of a result. In MED it is named after its Python variable (`upstream/code_aster/CodeCommands/impr_resu.py:57`). |
 | `RESU / RESULTAT` | `resultat_sdaster`, optional | — | *result*. The result to write. The usual Tier 1 choice, with `NOM_CHAM`. |
 | `RESU / TYPE_NOM` | text, optional | `'NUME_ORDRE'` | One of `'NUME_ORDRE'`, `'NOM_CAS'`. Only when `is_type("RESULTAT") == mult_elas`. MED, `mult_elas` results: name the stored fields by step index or by load case name. Not used in Tier 1. |
@@ -82,7 +82,7 @@ merges the `RESU` blocks and says in each row which formats accept the keyword.
 | `RESU / CRITERE` | text, optional | `'RELATIF'` | *tolerance type*. One of `'RELATIF'`, `'ABSOLU'`. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST"))`. How `INST`/`FREQ`/`ANGLE` are matched. |
 | `RESU / PRECISION` | real, optional | `1e-06` | *tolerance*. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST")) and equal_to("CRITERE", 'RELATIF')`. Matching tolerance. |
 | `RESU / PRECISION` | real, required | — | *tolerance*. Only when `exists("RESULTAT") and (exists("ANGLE"))or(exists("FREQ"))or(exists("LIST_FREQ"))or(exists("INST"))or(exists("LIST_INST")) and equal_to("CRITERE", 'ABSOLU')`. Matching tolerance, required with `'ABSOLU'`. |
-| `RESU / NOM_PARA` | text, optional, list | — | *parameter name*. With `RESULTAT`: the result parameters (for example `INST`, `FREQ`) to print with the fields. Formats MED and RESULTAT. TODO(verify) the MED effect against U4.91.01. |
+| `RESU / NOM_PARA` | text, optional, list | — | *parameter name*. With `RESULTAT`: the result parameters (for example `INST`, `FREQ`) to print with the fields. Formats MED and RESULTAT. TODO(verify) the MED effect against U7.05.21. |
 | `RESU / TOUT_CMP` | text, optional | — | One of `'OUI'`. All components (formats MED and RESULTAT). |
 | `RESU / NOM_CMP` | text, optional, list | — | *component name*. Formats MED and RESULTAT (and GMSH with `TYPE_CHAM='SCALAIRE'`): write only these components, for example `('VMIS', 'TRSIG')`. In MED it cannot be combined with `NOM_RESU_MED` (`MED3_6`). |
 | `RESU / NOM_CHAM_MED` | text, optional, list | — | Only when `exists("CHAM_GD") or exists("RESULTAT")`. MED: the names to give the fields in the file, one per field (at most 64 characters), instead of the automatic `<result>_<field>` name (`upstream/astest/ahlv100a.comm:430`). Rule: not with `NOM_RESU_MED`. |
@@ -229,8 +229,8 @@ IMPR_RESU(FORMAT="GMSH", UNITE=37, RESU=_F(RESULTAT=RES_XFEM, NOM_CHAM="DEPL"))
 
 ## See also
 
-- French reference: U4.91.01 (translation: `en/docs/U4.91.01.md` once task 5.x lands). The ID
-  is not settled: docs/PLAN.md 5.1 names U4.81.01 (recorded in en/doc-ids.yaml).
+- French reference: U4.91.01 (French text: `en/docs/_src/U4.91.01.fr.md`; translation: `en/docs/U4.91.01.md` once task 5.2 lands). U4.91.01
+  covers the RESULTAT and ASTER formats; the MED format is U7.05.21 (`en/docs/_src/U7.05.21.fr.md`).
 - Catalog: `en/commands/IMPR_RESU.json` (generated from `upstream/code_aster/Cata/Commands/impr_resu.py:25`)
 - Implementation: `upstream/code_aster/CodeCommands/impr_resu.py`; `upstream/bibfor/prepost/irmfac.F90`
   (reads each `RESU` occurrence)

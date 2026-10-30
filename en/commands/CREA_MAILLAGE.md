@@ -36,7 +36,7 @@ the old mesh (model, fields) must be rebuilt on the new one.
 | Kind | `OPER` |
 | Result | `maillage_sdaster`, `maillage_p` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.23.02 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.23.02 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `QUAD_LINE`, `LINE_QUAD`, `COQU_VOLU` |
 
@@ -206,7 +206,7 @@ mesh = CREA_MAILLAGE(MAILLAGE=mesh_init, RAFFINEMENT=_F(TOUT="OUI", NIVEAU=2), I
 
 ## See also
 
-- French reference: U4.23.02 (translation: `en/docs/U4.23.02.md` once task 5.x lands)
+- French reference: U4.23.02 (French text: `en/docs/_src/U4.23.02.fr.md`; translation: `en/docs/U4.23.02.md` once task 5.2 lands)
 - Catalog: `en/commands/CREA_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/crea_maillage.py:38`)
 - Implementation: `upstream/bibfor/op/op0167.F90`, `upstream/code_aster/CodeCommands/crea_maillage.py`
 - Related: `LIRE_MAILLAGE`, `MODI_MAILLAGE`, `DEFI_GROUP`, `AFFE_MODELE` (modeling type decides

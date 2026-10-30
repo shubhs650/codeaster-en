@@ -33,7 +33,7 @@ node path along a line for result plots. The mesh is modified in place and retur
 | Kind | `OPER` |
 | Result | `maillage_sdaster`, `squelette`, `grille_sdaster`, `maillage_p` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | yes (the object given in `MAILLAGE`, `GRILLE`); catalog `reentrant='o:MAILLAGE|GRILLE'` |
-| French reference | U4.22.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.22.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `CREA_GROUP_MA`, `CREA_GROUP_NO`, `TOUT`, `UNION`, `INTERSEC`, `DIFFE`, `OPTION`, `NOEUD_ORDO`, `SPHERE`, `BANDE` |
 
@@ -303,7 +303,7 @@ MA = DEFI_GROUP(
 
 ## See also
 
-- French reference: U4.22.01 (translation: `en/docs/U4.22.01.md` once task 5.x lands)
+- French reference: U4.22.01 (French text: `en/docs/_src/U4.22.01.fr.md`; translation: `en/docs/U4.22.01.md` once task 5.2 lands)
 - Catalog: `en/commands/DEFI_GROUP.json` (generated from `upstream/code_aster/Cata/Commands/defi_group.py:42`)
 - Implementation: `upstream/bibfor/op/op0104.F90`, `upstream/bibfor/soustruc/sscgma.F90`,
   `upstream/bibfor/soustruc/sscgno.F90`

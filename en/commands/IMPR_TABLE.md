@@ -31,7 +31,7 @@ It is a Python macro: it creates no object.
 | Kind | `MACRO` (Python: `upstream/code_aster/MacroCommands/impr_table_ops.py`) |
 | Result | none (writes a file) |
 | Can reuse its input (`reuse=`) | not applicable |
-| French reference | U4.91.03 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.91.03 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `TABLE`, `FORMAT`, `TABLEAU`, `ASTER`, `SEPARATEUR`, `UNITE` |
 
@@ -196,7 +196,7 @@ Source: `upstream/astest/forma20b.comm:206`.
 
 ## See also
 
-- French reference: U4.91.03 (translation: `en/docs/U4.91.03.md` once task 5.x lands)
+- French reference: U4.91.03 (French text: `en/docs/_src/U4.91.03.fr.md`; translation: `en/docs/U4.91.03.md` once task 5.2 lands)
 - Catalog: `en/commands/IMPR_TABLE.json` (generated from `upstream/code_aster/Cata/Commands/impr_table.py:26`)
 - Implementation: `upstream/code_aster/MacroCommands/impr_table_ops.py`;
   `upstream/code_aster/Objects/table_py.py` (`Table.Impr`, `ReprTable`)

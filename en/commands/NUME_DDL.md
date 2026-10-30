@@ -3,7 +3,7 @@ command: NUME_DDL
 upstream: 17.4.26
 upstream_commit: 5d2a06d2a4afe589468f96617080e7aabac3e4f2
 source: code_aster/Cata/Commands/nume_ddl.py:24
-doc_fr: U4.63.11
+doc_fr: U4.61.11
 status: assisted
 method: assisted
 reviewed_by:
@@ -35,7 +35,7 @@ place to check that the supports were taken into account.
 | Kind | `MACRO` |
 | Result | `nume_ddl_sdaster` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.63.11 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.61.11 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MATR_ASSE`, `RIGI_MECA`, `MASS_MECA`, `CHARGE` |
 
@@ -97,8 +97,8 @@ NU = NUME_DDL(MODELE=MO, CHARGE=CHARGE)
 
 ## See also
 
-- French reference: U4.63.11 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.63.11.md` once task 5.x lands)
+- French reference: U4.61.11 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.61.11.fr.md`; translation: `en/docs/U4.61.11.md` once task 5.2 lands)
 - Catalog: `en/commands/NUME_DDL.json` (generated from `upstream/code_aster/Cata/Commands/nume_ddl.py:24`)
 - Implementation: `upstream/code_aster/MacroCommands/nume_ddl_ops.py`
 - Before: [CALC_MATR_ELEM](CALC_MATR_ELEM.md)

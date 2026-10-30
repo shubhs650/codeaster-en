@@ -36,7 +36,7 @@ von Mises, reactions) comes afterwards from `CALC_CHAMP`.
 | Kind | `MACRO` (Python: `code_aster.MacroCommands.meca_statique_ops`) |
 | Result | `evol_elas` |
 | Can reuse its input (`reuse=`) | yes (the object given in `RESULTAT`); catalog `reentrant='f:RESULTAT'` |
-| French reference | U4.51.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.51.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MODELE`, `CHAM_MATER`, `CARA_ELEM`, `EXCIT`, `CHARGE`, `FONC_MULT`, `SOLVEUR`, `METHODE`, `MUMPS`, `MULT_FRONT`, `RESI_RELA`, `OPTION` |
 
@@ -243,7 +243,7 @@ reslin1 = MECA_STATIQUE(
 
 ## See also
 
-- French reference: U4.51.01 (translation: `en/docs/U4.51.01.md` once task 5.x lands). The
+- French reference: U4.51.01 (French text: `en/docs/_src/U4.51.01.fr.md`; translation: `en/docs/U4.51.01.md` once task 5.2 lands). The
   `SOLVEUR` keywords have their own reference, U4.50.01 (agent recall, not yet in
   en/doc-ids.yaml); `FACTOR_9` points to the linear solver guide U2.08.03
 - Catalog: `en/commands/MECA_STATIQUE.json` (generated from `upstream/code_aster/Cata/Commands/meca_statique.py:33`)

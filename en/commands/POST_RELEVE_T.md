@@ -259,7 +259,7 @@ T3 = POST_RELEVE_T(
 
 ## See also
 
-- French reference: U4.81.21 (translation: `en/docs/U4.81.21.md` once task 5.x lands). The
+- French reference: U4.81.21 (French text: `en/docs/_src/U4.81.21.fr.md`; translation: `en/docs/U4.81.21.md` once task 5.2 lands). The
   catalog's `docu=` takes precedence over en/doc-ids.yaml.
 - Catalog: `en/commands/POST_RELEVE_T.json` (generated from `upstream/code_aster/Cata/Commands/post_releve_t.py:26`)
 - Implementation: `upstream/bibfor/op/op0051.F90`; `upstream/bibfor/postrele/rvpost.F90`
