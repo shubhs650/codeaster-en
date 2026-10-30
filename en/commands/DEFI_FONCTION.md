@@ -66,7 +66,7 @@ function of time. Neither is a keyword of `DEFI_FONCTION`; see the patterns belo
 | `PROL_DROITE` | text, optional | `'EXCLU'` | *right extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. What the function returns for a parameter above the last abscissa: `'EXCLU'` (the default) refuses, and the command that evaluates the function stops with `FONCT0_20` (`upstream/bibfor/utilitai/fointr.F90:216`); `'CONSTANT'` returns the last ordinate; `'LINEAIRE'` extends the last segment. Set `'CONSTANT'` for material data that may be evaluated a little outside the measured range (`upstream/astest/ssll06a.comm:49`); keep `'EXCLU'` when a value outside the range would mean an input error. |
 | `PROL_GAUCHE` | text, optional | `'EXCLU'` | *left extrapolation*. One of `'CONSTANT'`, `'LINEAIRE'`, `'EXCLU'`. Same, below the first abscissa (`FONCT0_19`, `upstream/bibfor/utilitai/fointr.F90:143`). |
 | `VERIF` | text, optional | `'CROISSANT'` | *check*. One of `'CROISSANT'`, `'NON'`. `'CROISSANT'` (the default) requires strictly increasing abscissas and stops otherwise (`FONCT0_44`); `'NON'` sorts the points by abscissa instead (`upstream/code_aster/CodeCommands/defi_fonction.py:96`). Keep the default: an unsorted list is more often a typing error than a choice. `'NON'` is for computed lists that are known to be unsorted (`upstream/astest/zzzz270b.comm:231`). |
-| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the function. Only the Fortran path (`NOEUD_PARA`) is seen to print at level 2 (`upstream/bibfor/op/op0003.F90:289`); the Python implementation that handles the other forms does not read `INFO` (`upstream/code_aster/CodeCommands/defi_fonction.py:45`). U4.31.02 §3.10 says level 2 prints the parameters and the first 10 values; TODO(verify) by a run that 17.4 still does so for `VALE`. |
+| `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints the function. Only the Fortran path (`NOEUD_PARA`) is seen to print at level 2 (`upstream/bibfor/op/op0003.F90:289`); the Python implementation that handles the other forms does not read `INFO` (`upstream/code_aster/CodeCommands/defi_fonction.py:45`). U4.31.02 §3.10 says level 2 prints the parameters and the first 10 values; our 17.4 run with `VALE` printed nothing more at level 2 (`docs/reference-checks/todo-verify/`). |
 | `TITRE` | text, optional | — | *title*. A free title stored with the function. |
 
 ## Rules
@@ -168,8 +168,8 @@ ACCE_T = DEFI_FONCTION(NOM_PARA="INST", VALE_PARA=LINST, VALE_FONC=ACCE)
   `FONC_MULT` that is 0 at time 0 then multiplies the load by zero.
 - **Wrong parameter name.** The calling command evaluates the function by the name it expects.
   `ELAS_FO` reads `'TEMP'` (with `AFFE_MATERIAU/AFFE_VARC`), `FONC_MULT` reads `'INST'`, a
-  space-varying load reads `'X'`, `'Y'` or `'Z'`. TODO(verify) the message raised when the name
-  does not match, against U4.31.02.
+  space-varying load reads `'X'`, `'Y'` or `'Z'`. A mismatch stops with `FONCT0_9`, which lists
+  the expected and supplied names (our run, `docs/reference-checks/todo-verify/`).
 - **Odd number of values in `VALE`.** The command stops, but with `UTILITAI2_67`, whose text
   says that triplets are needed (`upstream/code_aster/CodeCommands/defi_fonction.py:68`): the
   message meant for `VALE_C`. Read it as "`VALE` needs pairs". The `VALE_C` check in turn

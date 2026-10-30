@@ -1,0 +1,516 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u3/u3.14.01.pdf",
+  "source_sha256": "60695f2e7ff63b9f6d9e191797e881d245786da3e939f8b9ab6fe7a76ba87f58",
+  "source_bytes": 136583
+ },
+ "schema_version": 1,
+ "doc_id": "U3.14.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "21/12/2016",
+  "fascicle": "Manuel d'utilisation Fascicule u3.14: Eléments finis mécaniques 3D",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 4,
+  "pages": "4",
+  "pdf_keywords": "U3.14.01-F",
+  "pdf_title": "Modélisations 3D et 3D_SI mécaniques",
+  "responsible": "SELLENET Nicolas",
+  "revision": "441b9348d86f",
+  "title": "Modélisations 3D et 3D_SI mécaniques",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Modélisations 3D et 3D_SI mécaniques",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Résumé :",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce document décrit pour les modélisations mécaniques 3D et 3D_SI :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les degrés de liberté portés par les éléments finis qui supportent la modélisation,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les mailles supports afférentes,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les chargements supportés,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les possibilités non linéaires,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les cas-tests mettant en œuvre la modélisation.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modélisations 3D et 3D_SI (phénomène MECANIQUE) correspondent à des éléments finis dont les mailles supports sont volumiques.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le suffixe _SI signifie Sous-Intégré : l’intégration des termes relatifs aux lois de comportement se fait de façon réduite (schéma de points de Gauss d’ordre moins élevé que la modélisation à intégration complète).",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "Discrétisation",
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "1.1",
+   "text": "Degrés de libertés",
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisation Degrés de liberté (à chaque nœud sommet)",
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "3D, 3D_SI DX : déplacement suivant X DY : déplacement suivant Y DZ : déplacement suivant Z",
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "1.2",
+   "text": "Maille support des matrices de rigidité",
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mailles support des éléments finis peuvent être des tétraèdres, des pyramides, des prismes ou des héxaèdres. Les éléments sont iso-paramétriques.",
+   "page": 2
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Modélisation",
+     "Maille",
+     "Interpolation",
+     "Remarques"
+    ],
+    [
+     "3D",
+     "TETRA4",
+     "Linéaire",
+     ""
+    ],
+    [
+     "3D",
+     "TETRA10",
+     "Quadratique",
+     ""
+    ],
+    [
+     "3D_SI",
+     "TETRA10",
+     "Quadratique",
+     "intégration réduite"
+    ],
+    [
+     "3D",
+     "PYRAM5",
+     "Linéaire",
+     ""
+    ],
+    [
+     "3D",
+     "PYRAM13",
+     "Quadratique",
+     ""
+    ],
+    [
+     "3D",
+     "PENTA6",
+     "Bi-linéaire",
+     ""
+    ],
+    [
+     "3D",
+     "PENTA15",
+     "Serendip",
+     ""
+    ],
+    [
+     "3D",
+     "HEXA8",
+     "Tri-linéaire",
+     ""
+    ],
+    [
+     "3D_SI",
+     "HEXA8",
+     "Tri-linéaire",
+     "méthode « assumed"
+    ]
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "strain »",
+   "page": 2
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "3D",
+     "HEXA20",
+     "Serendip",
+     ""
+    ],
+    [
+     "3D_SI",
+     "HEXA20",
+     "Serendip",
+     "intégration réduite"
+    ],
+    [
+     "3D",
+     "HEXA27",
+     "Tri-Quadratique",
+     ""
+    ]
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "1.3",
+   "text": "Maille support des chargements",
+   "page": 2
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Modélisation",
+     "Maille",
+     "Interpolation",
+     "Remarques"
+    ],
+    [
+     "3D, 3D_SI",
+     "TRIA3",
+     "Linéaire ou Bi-Linéaire",
+     ""
+    ],
+    [
+     "TRIA6",
+     "Quadratique ou Serendip",
+     "",
+     ""
+    ],
+    [
+     "QUAD4",
+     "Bi-linéaire",
+     "",
+     ""
+    ],
+    [
+     "QUAD8",
+     "Serendip",
+     "",
+     ""
+    ],
+    [
+     "QUAD9",
+     "Quadratique",
+     "",
+     ""
+    ]
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Chargements supportés",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les chargements disponibles sont les suivants :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'FORCE_ARETE'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer des forces linéiques, à une arête d'élément volumique.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'FORCE_FACE'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer des forces surfaciques sur une face d'élément volumique.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  ' FORCE_INTERNE'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer des forces volumiques.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'PESANTEUR'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer un chargement de type pesanteur.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'PRES_REP'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer une pression à un domaine de milieu continu.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D , 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'PRE_EPSI'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer un champ de pré-déformation.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'ROTATION'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d'appliquer une vitesse de rotation et un vecteur de rotation.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  'EFFE_FOND'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer et d'appliquer l'effet de fond sur une branche de tuyauterie soumise à une pression interne.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Modélisations supportées : 3D, 3D_SI",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Possibilités non-linéaires",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Lois de comportements",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les lois de comportements (modèles classiques, modèles locaux avec endommagement, modèles pour le béton et les sols, …), utilisables sous COMPORTEMENT dans STAT_NON_LINE et DYNA_NON_LINE, sous le mot-clé RELATION, sont décrites en détails dans le document 'Comportement non linéaires' [U4.51.11].",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Déformations",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les déformations utilisables sous COMPORTEMENT dans STAT_NON_LINE et DYNA_NON_LINE, sous le mot-clé DEFORMATION, sont décrites en détails dans le document 'Comportement non linéaires' [U4.51.11].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemples de mise en œuvre : cas-tests",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  3D"
+   ],
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Statique linéaire",
+     "FORMA01C [V7.15.100] : Analyse quasi-statique d'une tuyauterie comportant un coude soumis à une force ponctuelle, à une pression interne et à un transitoire thermique."
+    ],
+    [
+     "Statique non-linéaire",
+     "HSNV121A : [V7.15.121] : Analyse quasi-statique en grandes déformations d'un barreau sous chargement thermique soumis à une force de traction."
+    ],
+    [
+     "Dynamique linéaire",
+     "SDLV100A [V2.04.100] : Recherche des fréquences et des modes de flexion associés d'une poutre élancée de section rectangulaire variable (encastrée-libre)."
+    ],
+    [
+     "Dynamique non-linéaire",
+     "SDNV100A [V5.03.100] : Analyse transitoire directe d'une poutre élancée animée d'une vitesse initiale venant heurter une paroi rigide."
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  3D_SI"
+   ],
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Statique non-linéaire",
+     "HSNV125D : Analyse quasi-statique d'un volume en traction soumis à une température variable et à un chargement en cisaillement avec une loi de comportement viscoplastique (cas-test n°2 PHI2AS \"Comportement non-linéaire des matériaux\", 2000 – Volume XXIV – N°1)."
+    ],
+    [
+     "Dynamique non-linéaire",
+     "SDNV103A [V5.03.103] : Analyse de l'impact d’une barre de Taylor élastoplastique sur un massif rigide. La modélisation prend en compte le contact avec frottement et un comportement élastoplasticité avec grandes déformations."
+    ]
+   ],
+   "page": 4
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 46,
+   "chars": 2788,
+   "id": 1,
+   "section": "2 Chargements supportés"
+  },
+  {
+   "first": 47,
+   "last": 56,
+   "chars": 1841,
+   "id": 2,
+   "section": "3 Possibilités non-linéaires"
+  }
+ ]
+}

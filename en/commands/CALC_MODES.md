@@ -328,8 +328,9 @@ masses are fractions of the total.
 - **Mode shapes are not mass-normalized by default.** See [NORM_MODE](NORM_MODE.md); the
   frequencies and effective masses do not depend on it.
 - **`CHAM_MATER` is optional but useful.** Without it the result carries no material field;
-  post-processing the modes (`CALC_CHAMP` stresses) then needs `CHAM_MATER` again.
-  TODO(verify) whether `CALC_CHAMP` finds the material from the matrices alone.
+  post-processing the modes (`CALC_CHAMP` stresses) then needs `CHAM_MATER` again: it does not
+  find the material from the matrices. Our run (`docs/reference-checks/todo-verify/`): `SIGM_ELNO` without it stops with a
+  program error (`DVP_1`, `contex_param.F90:147`); with `CALC_CHAMP(CHAM_MATER=...)` it works.
 - **Empty band is fatal.** `OPTION='BANDE'` with no mode in the band stops the run (`MODAL_1`)
   unless `STOP_BANDE_VIDE='NON'`.
 

@@ -536,11 +536,11 @@ Blocages = AFFE_CHAR_MECA(
   elements concerned, and the load is lost on those elements
   (`upstream/bibfor/calculel/verif_affe_carte.F90:318`). With the fixtures' setting
   `DEBUT(ERREUR=_F(ALARME='EXCEPTION'))` the warning stops the run.
-- **Over-constrained nodes.** The same DOF imposed by two loads, or by a `DDL_IMPO` and a
-  `LIAISON_*` that cannot both hold, gives redundant Lagrange conditions; the factorization
-  then reports a singular matrix (`FACTOR_10`, `FACTOR_42` advise checking for "blocage absent
-  ou surabondant", missing or redundant supports). TODO(verify) the exact message for each
-  case. Within one load, identical relations are merged (`upstream/bibfor/modelisa/ordlrl.F90:59`).
+- **Over-constrained nodes.** The same `DDL_IMPO` in two loads gives one `ASSEMBLA_26` per node
+  and component, then `DVP_1` (`upstream/bibfor/assembla/nudeeq.F90:229`); a `DDL_IMPO` plus a
+  `LIAISON_SOLIDE` on the same nodes gives a singular matrix at a Lagrange DOF (`FACTOR_11`
+  `MUMPS`, `FACTOR_10` `MULT_FRONT`), per our run (`docs/reference-checks/todo-verify/`).
+  Within one load, identical relations are merged (`upstream/bibfor/modelisa/ordlrl.F90:59`).
 - **`LIAISON_MAIL` ties nodes far from the interface.** Without `DISTANCE_MAX`, every secondary
   node is tied to its nearest main element, however far; the run then only warns
   (`CALCULEL5_48`). Read that warning: it counts the distant nodes and writes them to a MED

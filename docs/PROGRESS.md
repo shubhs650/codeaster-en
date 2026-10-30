@@ -14,6 +14,14 @@ Needs owner: …
 
 ---
 
+## 2026-10-30 — 2.3g settle the remaining TODO(verify) notes — agent
+Done: 15 of the 16 `TODO(verify)` left by 2.3f settled. Three from newly ingested French documents (`caen docs fetch U2.01.05 U3.14.01 R3.06.10 U4.72.05`, French only, not in `scope.yaml`): AFFE_CARA_ELEM shell-force axes, AFFE_MODELE `3D_SI`, MACR_LIGN_COUPE `DISTANCE_MAX` inside tolerance (from `pj3da1.F90:94`; U4.72.05 gives none). One from source: CALC_MATR_ELEM `DEPL` is read only by cable elements. Eleven from one solver study run in the pinned image (17.4.22; Docker Hub served the pull this time), kept in `docs/reference-checks/todo-verify/` with its `run.mess`.
+Findings: `NUME_DDL` and `NORM_MODE` `INFO=2` print the same as `INFO=1` (no column height, no scaling coefficient; the v16 docs differ); the same `DDL_IMPO` in two loads stops at numbering (`ASSEMBLA_26` then `DVP_1`), `DDL_IMPO` + `LIAISON_SOLIDE` at factorization (`FACTOR_11`/`FACTOR_10`); a `FORMULE` of an unknown name ends on a Python `NameError`, not a message ID; `CALC_CHAMP` on modes computed without `CHAM_MATER` stops with `DVP_1`; complex quadratic modes lack effective masses (`ALGELINE3_10` then `JEVEUX_26`); `MACR_LIGN_COUPE` `'LOCAL'` works with one-node groups; `IMPR_RESU` MED `NOM_PARA` writes `NUM_DATA` groups.
+Trimmed wording so the compact LLM bundle stays under 150k tokens.
+Open: POST_RCCM RCC-M edition (owner); 5.3 review (owner).
+Decisions: none.
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-30 — 5.2e translate the Tier 2 documents — agent
 Done: the nine Tier 2 command documents added to `en/docs/scope.yaml` (`tier: 2`) and translated, `method: machine`, `source: session:task-5.2-tier2`, 56 chunks, zero API tokens (export/answer/import as in 5.2b–d): CALC_MODES (U4.52.02), NORM_MODE, EXTR_MODE, THER_LINEAIRE, CALC_MATR_ELEM, NUME_DDL, ASSEMBLAGE, ASSE_MATRICE and AFFE_CHAR_THER (U4.44.02, cut to TEMP_IMPO, FLUX_REP, ECHANGE, SOURCE; chunk 7 also holds PRE_GRAD_TEMP). AFFE_CHAR_MECA_F and AFFE_VARC share Tier 1 documents. The sources were ingested in 5.1; a fresh `caen docs fetch` of the nine IDs was byte-identical. The nine assisted references now link their translation and no longer say "French only" for these documents.
 Tests: `test_tier1_and_tier2_documents_are_fully_translated` replaces the Tier 1 test.

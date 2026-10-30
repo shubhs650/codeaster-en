@@ -254,8 +254,8 @@ CARAC = AFFE_CARA_ELEM(
   `EFGE_ELNO`) are reported in each element's local axes. On a curved shell those axes rotate
   from element to element, so components such as `NXX` are not directly comparable across the
   model. Give one `VECTEUR` so that the local x axis is its projection on each element (U4.42.01
-  §8.3.4); changing the axes of results afterward is covered by U2.01.05, which is not
-  ingested (TODO(verify) the recommended `MODI_REPERE` use against it).
+  §8.3.4), as U2.01.05 §1.5.1 confirms; changing them afterward is `MODI_REPERE`
+  (`TYPE_CHAM='COQUE_GENE'`, `modi_repere.py:92`), outside Tier 1 and 2.
 - **Discrete matrix on the wrong element type.** `_N` matrices need `POI1` groups and `_L`
   matrices `SEG2` groups (`MODELISA_56` otherwise). A node group cannot be given directly:
   create `POI1` elements on it with `CREA_MAILLAGE/CREA_POI1`

@@ -1,0 +1,1351 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.72.05.pdf",
+  "source_sha256": "a4aa3df85f8cbee25f7dd47b9d43d6616f951a80608148bb99c22673e31f21ba",
+  "source_bytes": 399863
+ },
+ "schema_version": 1,
+ "doc_id": "U4.72.05",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "05/06/2023",
+  "fascicle": "Manuel d'utilisation Fascicule u4.72: Opérations algébriques",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 16,
+  "pages": "16",
+  "pdf_keywords": "U4.72.05-G",
+  "pdf_title": "Opérateur PROJ_CHAMP",
+  "responsible": "",
+  "revision": "43471f1d7e4d",
+  "title": "Opérateur PROJ_CHAMP",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur PROJ_CHAMP",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le but de l’opérateur est de projeter les champs d’une structure de données résultat sur un autre maillage. Cette commande peut servir par exemple à transférer sur un maillage “mécanique”, le résultat d’un calcul thermique réalisé sur un maillage “thermique” différent.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut également « poursuivre » un calcul thermique (ou mécanique) sur un autre maillage (plus ou moins raffiné).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La commande permet également de définir des “zones” (géométriques) que l’on projette les unes sur les autres ce qui permet de résoudre le problème d’une discontinuité voulue du champ projeté (par exemple le long des lèvres d’une fissure).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour des raisons de performances CPU, on peut dans un premier temps calculer l’appariement géométrique des deux maillages et stocker la structure de données produite dans un concept que l’on pourra réutiliser plus tard pour réaliser les projections des champs.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est possible de projeter un champ « isolé » ou un ensemble de champs issus d’une SD_RESULTAT.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données SD_RESULTAT ou un champ « isolé » ou une structure de données CORRESP_2_MAILLA.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Table des Matières",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "# Permet   de   fournir   une   correspondance   entre   deux   maillages",
+    "préalablement calculée",
+    "◊ MATR_PROJECTION = matproj,                           [corresp_2_mailla]",
+    "# Choix de la méthode de projection",
+    "◊ METHODE = [’AUTO’|’COLLOCATION’|’ECLA_PG’|’NUAGE_DEG_0’|",
+    "             ’NUAGE_DEG_1’|’COUPLAGE’|’SOUS_POINT’]              [DEFAUT]",
+    "# Renseignement des deux maillages ou modèles pour la projection",
+    "# M odè le ou maillage de référence :",
+    "♦ / MODELE_1   = mo1,                                            [modele]",
+    "  / MAILLAGE_1 = ma1,                                        / [maillage]",
+    "                                                            / [squelette]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "# Modèle ou maillage sur lequel on désire projeter :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ♦ / MODELE_2   = mo2,                                            [modele]",
+    "     / MAILLAGE_2 = ma1,                                          [maillage]",
+    "   # Que veut-on projeter: un champ isolé ou une SD_RESULTAT ?",
+    "   ♦ / CHAM_GD  = champ1                                  / [cham_gd_sdaster",
+    "     / RESULTAT = evo1,                                        / [evol_ther]",
+    "                                                            /   [evol_elas]",
+    "                                                            /   [evol_noli]",
+    "                                                            /   [evol_char]",
+    "                                                           /   [dyna_harmo]",
+    "                                                              / [dyna_trans]",
+    "                                                               / [mode_meca]",
+    "                                                          / [mode_stat_depl]",
+    "                                                             / [base_modale]",
+    "                                                                          /…",
+    "   # Mots clés supplémentaires pour les méthodes :",
+    "   #                           ’COLLOCATION’, ’ECLA_PG’, ’AUTO’",
+    "     ◊ CAS_FIGURE = [’3D’|’2D’|’2.5D’|’1.5D’],",
+    "     # Pour transformer la géométrie des nœuds des maillages",
+    "     ◊ TRANSF_GEOM_1 = (fx,fy,[fz])                               [fonction]",
+    "     ◊ TRANSF_GEOM_2 = (fx,fy,[fz])                               [fonction]",
+    "     ◊ DISTANCE_MAX  = d_max,                                 [R]",
+    "     ◊ DISTANCE_ALARME  = d_ala,                              [R]",
+    "     ◊ ALARME        = [’OUI’,’NON,]                                [DEFAUT]",
+    "     ◊ PROL_ZERO     = [’OUI’,’NON’]                                [DEFAUT]",
+    "     ◊ TYPE_CHAM     = ’NOEU’",
+    "   # Mot clé supplémentaire pour les méthodes ’NUAGE_DEG_0/1’",
+    "      ◊   CHAM_NO_REFE   =   chno2,                               [cham_no]",
+    "   # Mot clé supplémentaire pour la méthode ’SOUS_POINT’",
+    "     ◊ ♦ CARA_ELEM = carac,                                      [cara_elem]",
+    "     # Pour transformer la géométrie des nœuds des maillages",
+    "     ◊ TRANSF_GEOM_1 = (fx,fy,[fz])                               [fonction]",
+    "      ◊   TRANSF_GEOM_2   =   (fx,fy,[fz])                       [fonction]",
+    "   # Projette les champs d’une sd_resultat",
+    "      #  Sélection des champs",
+    "       ◊ / TOUT_CHAM = ’OUI’,                                       [DEFAUT]",
+    "          /   NOM_CHAM    =   l_noch,                                [l_Kn]",
+    "       # Sélection des numéros d’ordre",
+    "       ◊ / TOUT_ORDRE = ’OUI’,                                      [DEFAUT]",
+    "          /   NUME_ORDRE   =   l_nuor,                                [l_I]",
+    "          /  INST   =   l_inst,                                       [l_R]",
+    "         / FREQ = l_freq,                                              [l_R]",
+    "         / LIST_ INST   =   l_inst,                                [listr8]",
+    "         / LIST_ FREQ   =   l_freq,                                [listr8]",
+    "       ◊ / CRITERE   = ’RELATIF’,                                   [DEFAUT]",
+    "            P RECISION   =   /   1.0E-6 ,                        [ DEFAUT ]",
+    "                        /   prec,                                       [R]",
+    "         / CRITERE   = ’ABSOLU’,",
+    "           PRECISION = prec,",
+    "       # Imposer la numérotation des cham_no (modes)",
+    "       ◊ NUME_DDL = nu                                    [nume_ddl_sdaster]",
+    "   # Appariement “par zones” (interdit si METHODE=’ECLA_PG’)",
+    "   ◊ VIS_A_VIS = _F(",
+    "       ♦ | TOUT_1     = ’OUI’,",
+    "         | GROUP_MA_1 = lgma1,                                 [l_gr_maille]",
+    "          |   GROUP_NO_1   =   lgno1,                          [l_gr_noeud]",
+    "       ♦ | TOUT_2     = ’OUI’,",
+    "         | GROUP_MA_2 = lgma2,                                 [l_gr_maille]",
+    "          |   GROUP_NO_2    =   lgno2,                         [l_gr_noeud]",
+    "       # si méthode ’COLLOCATION’",
+    "       ◊ CAS_FIGURE = [’3D’|’2D’|’2.5D’|’1.5D’|’0D’],",
+    "          # si ‘0D’ :",
+    "          ♦ DISTANCE_0D = dist_max_0D                                   [R]",
+    "       ◊ TRANSF_GEOM_1 = (fx,fy,[fz])                             [fonction]",
+    "       ◊ TRANSF_GEOM_2 = (fx,fy,[fz])                             [fonction]",
+    "   ),",
+    "   ◊ NOM_PARA = lpara,                                                [l_Kn]",
+    "   ◊ TITRE    = titr,                                                 [l_Kn]",
+    "   ◊ INFO     = / 1,                                                [défaut]",
+    "                / 2,",
+    ");"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Type du résultat de l’opérateur :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "si on utilise le mot clé PROJECTION=’NON’, resu est une « matrice de projection » (type corresp_2_mailla),",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "si on utilise le mot clé CHAM_GD, resu est un champ de même nature que champ1,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "si on utilise le mot clé RESULTAT, resu est une SD_RESULTAT de même type que evo1.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérandes PROJECTION et MATR_PROJECTION",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L’opérateur peut être utilisé de trois manières différentes selon les usages des mots-clés PROJECTION et MATR_PROJECTION. Ces trois modes d'utilisation sont décrits ci-après.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.1.1",
+   "text": "Calcul « tout d’un coup »",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "C’est le mode par défaut. On calcule dans un premier temps une correspondance géométrique (appelée matrice de projection), puis on utilise cette matrice pour projeter les champs à projeter (PROJECTION='OUI'). La matrice de projection est perdue en fin d’opérateur.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.1.2",
+   "text": "Calcul de la matrice de projection",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On calcule la correspondance géométrique et on s’arrête (PROJECTION='NON'). La matrice de projection est le concept résultat de la commande. Remarque : ce type de calcul n’est actuellement possible qu’avec les méthodes ’COLLOCATION’ ou ’COUPLAGE’.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.1.3",
+   "text": "Utilisation d’une matrice de projection",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On utilise la matrice calculée précédemment pour projeter les champs (mot-clé MATR_PROJECTION). Remarque : si l’on veut projeter des champs par élément, il faut utiliser le mot clé MODELE_2.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.1.4",
+   "text": "Exemples",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour faire un calcul « tout d’un coup », on écrit par exemple :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TEMP2=PROJ_CHAMP(RESULTAT=TEMP1, METHODE=’COLLOCATION’,",
+    "                 MAILLAGE_1=MA1, MAILLAGE_2=MA2, NOM_CHAM=’TEMP’)"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour faire un calcul en deux temps, on écrit :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MATPROJ=PROJ_CHAMP(METHODE=’COLLOCATION’, PROJECTION=’NON’,",
+    "                   MAILLAGE_1=MA1, MAILLAGE_2=MA2,)",
+    "TEMP2=PROJ_CHAMP(RESULTAT=TEMP1, MATR_PROJECTION=MATPROJ,",
+    "                 NOM_CHAM=’TEMP’)"
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande METHODE",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Il existe cinq méthodes de projection.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Les méthodes ’COLLOCATION’ et ’NUAGE_DEG_0/1’ sont adaptées à la projection des champs aux nœuds. La méthode ’COLLOCATION’ est à utiliser en priorité : c’est la plus robuste et elle n’extrapole pas les valeurs du champ initial. Les deux méthodes ’NUAGE_DEG_0/1’ peuvent être utilisées si on ne peut pas faire autrement. Par exemple, quand le maillage initial ne contient pas de mailles, mais seulement des nœuds (un maillage contenant les positions de capteurs de mesures).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque sur la méthode collocation : Pour la projection de champs ’NOEU’ ou ’ELNO’, il existe une alternative à PROJ_CHAMP pour certaines configurations particulières de projection, rencontrées notamment en THM pour le posttraitement de la pression. Si l’utilisateur souhaite projeter un résultat d’un maillage quadratique sur le même maillage linéarisé, il peut utiliser :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MACR_ADAP_MAIL(",
+    "  ADAPTATION=’MODIFICATION’, DEGRE=’OUI’, MAJ_CHAM=_F(...),)"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "qui peut s’avérer parfois plus rapide sur les grosses études.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "La méthode ’ECLA_PG’ est adaptée aux champs aux points de Gauss (ELGA). Elle ne fonctionne que sur un champ « isolé » (mot clé CHAM_GD).",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Une autre méthode, nommée ’COUPLAGE’ a été introduite pour les calculs d’interaction fluidestructure lorsque Code_Aster est couplé au code de mécanique des fluides Code_Saturne. Cette méthode est assimilable à la collocation.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Une méthode nommée ’SOUS_POINT’, est utilisée pour construire des champs (variables de commandes du type TEMP, HYDR, NEUT ou de contraintes de type SIEF_R), sur des modèles mécaniques à sous-points à partir d’un champ ou d’un résultat issu d’un calcul sur un modèle 3D.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La méthode 'AUTO' permet de choisir la méthode la plus recommandée en fonction du type du champ : 'ECLA_PG' pour un champ 'ELGA', et 'COLLOCATION' pour les autres champs. Malheureusement, comme la méthode 'ECLA_PG' n'est autorisée que sur un champ isolé, il n'est pas possible d'imprimer avec la méthode 'AUTO' tous les champs d'une structure de données.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.1",
+   "text": "Méthode= ’COLLOCATION’",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La première méthode (COLLOCATION) est classique : pour calculer la valeur sur un nœud ( N2 ) du maillage ma2 , on cherche dans quel élément du maillage ma1 se trouve ce nœud, puis on interpole la valeur à l’aide des fonctions de forme de cet élément.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque le nœud n’est pas géométriquement à l’intérieur d’un des éléments de ma1 (c’est-à-dire, en dehors du domaine géométrique modélisé), la méthode met en relation le nœud et le point de l’élément le plus proche et interpole la valeur à l’aide des fonctions de forme de cet élément. Il y a donc (par défaut) un \"prolongement\" du champ à l’extérieur du maillage initial. L’opérande DISTANCE_MAX permet de modifier ce comportement.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Problème posé par les champs \"mixtes\" : Si les composantes portées par les différents nœuds de élément de ma1 ne sont pas toutes les mêmes, par exemple, si les nœuds sommets ne portent pas les mêmes composantes que les nœuds milieux, on ne peut utiliser “bêtement” l’interpolation par les fonctions de forme de l’élément.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le calcul de la valeur d’une composante sur le nœud N2 est fait de la façon suivante :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Étape géométrique (faite indépendamment des champs à projeter) : On détermine l’élément ima1 associée à N2 , puis on calcule, avec les fonctions de forme de cet élément, les coefficients de pondération pour tous les nœuds de ima1 . La somme de ces coefficients vaut 1.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Étape de projection d’une composante d’un champ :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si tous les nœuds de ima1 portent cette composante, il n’y a pas de problèmes, on applique la formule de pondération retenue.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si la composante n’est pas portée par tous les nœuds de ima1 :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si certains nœuds porteurs de la composante ont un “poids” 0 , on se sert de ceux-ci en modifiant la formule de pondération pour que la somme des coefficients retenus fasse 1.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si aucun des nœuds porteurs de la composante n’a un poids 0 , on se contente de faire une moyenne arithmétique des composantes présentes sur ima1 .",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.2",
+   "text": "Méthode= ’NUAGE_DEG_1/0’",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La deuxième famille de méthodes (NUAGE_DEG_1/0) (fortement déconseillée) utilise la notion de nuages de points, en oubliant les éléments finis présents dans les modèles. Elle est plus générale que la méthode ’COLLOCATION’ car elle permet de projeter un champ aux nœuds sans que ces nœuds soient portés par des éléments finis (par exemple un ensemble de capteurs). En revanche, cette méthode trouble souvent les utilisateurs familiers de la méthode des éléments finis, car elle est purement géométrique et ne voit pas les frontières matérielles ni les trous : la valeur calculée sur un nœud du nouveau maillage dépend de tous les nœuds qui lui sont proches. Dans les zones de fort gradient, les valeurs peuvent être obtenues avec une forte extrapolation, ce qui est rarement “physique”.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L’idée de ces méthodes est de faire passer « au mieux » un hyperplan de degré 1 ou 0 (NUAGE_DEG_1/0) parmi les points du maillage 1. Le poids des points est très fortement dépendant de leur distance au nœud N2 : le poids décroit comme une exponentielle décroissante de la distance. Une fois les coefficients de l’hyperplan calculé (pour un nœud N2), on évalue cet hyperplan avec les coordonnées du nœud N2 .",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.3",
+   "text": "Méthode= ’ECLA_PG’",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "La troisième méthode (ECLA_PG) permet de projeter des champs connus aux points de Gauss du maillage (appelés aussi points d’intégration). Par exemple, il est possible de projeter des champs de contraintes, de déformations ou de variables internes.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette méthode utilise la programmation de la commande MACR_ECLA_PG et de la méthode de ’COLLOCATION’ décrite précédemment. Chaque maille du maillage initial est éclatée en autant de sous-mailles que de points de Gauss contenus dans la maille, de la même manière que l’éclatement actuel de MACR_ECLA_PG. Dans un deuxième temps, on utilise la matrice de projection de la méthode ’COLLOCATION’ entre les points de Gauss du deuxième maillage et les mailles précédemment éclatées. Cette méthode est interdite avec le mot-clé VIS_A_VIS.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.4",
+   "text": "Méthode= ’COUPLAGE’",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "La quatrième méthode (COUPLAGE) est une variante très proche de la collocation et introduite spécifiquement pour le couplage avec le code de mécanique des fluides Saturne (en volumes finis). Elle est employée dans la macro-commande CALC_IFS_DNL qui permet ce couplage IFS. Elle n’est disponible que pour générer la structure de données CORRESP_2_MAILLA (cas PROJECTION=’NON’). Elle permet de projeter des champs aux nœuds entre un maillage aux éléments finis (structure) et des maillages venant du code aux volumes finis Code_Saturne. Ces maillages, importés dans Code_Aster, sont composés d’éléments ponctuels, car il n’y a pas de fonctions de formes associés.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.5",
+   "text": "Méthode= ’SOUS_POINT’",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette méthode se base sur la méthode de ’COLLOCATION’ et est semblable à la méthode ECLA_PG en supprimant l’étape d’éclatement du maillage. Les champs d’entrée sont des cham_no ou des CHAM_ELEM/ELNO sous forme de champ isolé ou contenus dans un résultat de type EVOL_THER. La première étape consiste à construire un maillage à partir des coordonnées des sous-points du MODELE_2 (modèle mécanique) pour tous les points des familles de la liste MATER (pour des champs de type TEMP, HYDR, NEUT) et pour tous les points de la famille RIGI (pour les champs de type SIEF_R). Les champs d’entrée sont ensuite projetés sur ce maillage par une méthode de ’COLLOCATION’ (en forçant le type des champs créés à cham_no). Enfin les valeurs obtenues pour chaque point sont recopiées dans un CHAM_ELEM/ELGA, sur les points et sous-points correspondants (voir V1.01.318, V1.01.365).",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette méthode est interdite avec le mot-clé VIS_A_VIS et avec PROJECTION = ’NON.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque n°1 : La projection des champs de type SIEF_R , ne modifie pas leur repère initial. La méthode SOUS_POINT appliquée à ce type de champ permet de projeter un champ de contrainte issu d’un calcul sur des éléments finis 3D sur des éléments de coque à sous-points ou multicouches. Un champ de contraintes de type SIEF_R sur des éléments de coques doit être exprimé dans le repère local des éléments. Il ne faut donc pas utiliser ce champ projeté sans lui changer de repère . La commande MODI_REPERE permet de faire cette opération. Pour les champs de type TEMP , HYDR et NEUT qui sont des champs scalaires indépendant du repère, la re marque précédente ne s’applique pas.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque n°2 : La version actuelle de Salomé_Meca ne peut pas visualiser les champs à sous-points. Or, dans la phase de vérification, il est peut être utile de vérifier la bonne concordance des maillages. Pour cela, il est possible lors de la phase de projection d’obtenir un maillage de POI1 correspondant à tous les sous-points. La vérification de la bonne concordance peut alors être réalisée dans le module PARAVIS ou SMESH en superposant le maillage 3D volumique et le maillage de POI1. Ce maillage est sauvegardé au format MED dans le répertoire “repe_out”, il faut donc indiquer ce répertoire dans le profil d’étude et utiliser le mot clef INFO=2.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Mot clé VIS_A_VIS",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur facultatif permet de projeter le champ “par morceaux”. Par défaut, c’est l’ensemble du champ qui est projeté. Ce mot clé permet de projeter des champs discontinus ou de résoudre le problème de la projection de modèles complexes (voir §[3.3.4]) ou d’améliorer les performances CPU des projections de modèle hétérogènes (voir §[3.3.5]).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "S’il est utilisé ce mot clé permet à l’utilisateur de projeter un champ (aux nœuds) a priori discontinu (sur une ligne ou une surface) et de conserver cette discontinuité pour le champ projeté :",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Z1",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "O A B",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Z2",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 3.3-a: structure fissurée.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple, soit la structure fissurée de la figure [3.3-a]. Le champ de déplacement est discontinu sur la fissure : la lèvre supérieure et la lèvre inférieure bien que confondues géométriquement possèdent chacune leur propre champ de déplacement. Supposons que l’on dispose de 2 maillages ( M et M' ) différents de cette structure et que pour chacun de ces maillages, les zones Z1 et Z2 soient représentées par deux GROUP_MA nommés Z1 et Z2 . On pourra écrire :",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VIS_A_VIS = (_F(GROUP_MA_1 = ’Z1’, GROUP_MA_2 = ’Z1’),",
+    "             _F(GROUP_MA_1 = ’Z2’, GROUP_MA_2 = ’Z2’) ),"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs du champ projeté sur la lèvre supérieure (appartenant à Z1 ) ne tiendront compte que des valeurs du champ initial sur Z1 . De même les valeurs obtenues sur la lèvre inférieure ne dépendent que du champ initial sur Z2 .",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque sur l’utilisation de VIS_A_VIS + champ ELNO : On pourrait croire que l’utilisation du mot clé VIS_A_VIS permet de projeter un champ ELNO en conservant une discontinuité sur l’interface entre deux zones. Il n’en est rien comme on l’explique au §[3.13.2].",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.1",
+   "text": "Opérandes TOUT_1 / GROUP_MA_1 / GROUP_NO_1",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes servent à définir l’ensemble des mailles (’COLLOCATION’, ’ECLA_PG’,) ou des nœuds (’NUAGE_DEG_1/0’) à prendre en compte dans le maillage initial.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.2",
+   "text": "Opérandes TOUT_2 / GROUP_MA_2 / GROUP_NO_2",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes servent à définir l’ensemble des nœuds ou des éléments où l’on évalue le(s) champ(s).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisation de TOUT_2 ou de GROUP_MA_2 active une vérification d’homogénéité des mailles avant la construction de la liste des nœuds correspondants. Par exemple, s’il existe au moins une maille 3D parmi les mailles renseignées alors les mailles 2D , 1D et 0D seront ignorées et les nœuds sous-jacents ne feront pas partie de la liste des nœuds s’ils n’appartenaient pas en même temps à une maille 3D . La même chose se produit dès qu’il y a une maille 2D (et en l’absence de maille 3D ) avec les mailles 1D et 0D . Par contre les mailles 0D ne sont pas ignorées quand une ou plusieurs mailles 1D sont présentes (et en l’absence de mailles 2D et 3D ).",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.3",
+   "text": "Précisions sur le recouvrement",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsqu’un nœud à projeter est présent dans plusieurs occurrences de VIS_A_VIS, c’est la projection de ce nœud déterminée dans la dernière occurrence qui est conservée. La seule exception à cela se produit quand la projection est jugée distante. Dans ce cas, si le nœud concerné a déjà été traité par une précédente occurrence, on conserve la projection précédemment calculée.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.4",
+   "text": "Utilisation du mot clé VIS_A_VIS pour projeter les modèles complexes",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé VIS_A_VIS permet par exemple de résoudre le problème de la projection d’un champ de température calculé sur un modèle contenant des éléments 3D et des éléments de coque (un solide dont la peau interne serait recouverte d’un \"liner\" maillé en éléments de coque). Le problème est le suivant : les éléments 3D portent sur leurs nœuds le seul degré de liberté TEMP, alors que les éléments de coque (thermiques) portent les 3 degré de liberté : TEMP_MIL, TEMP_INF et TEMP_SUP. Si on ne prend pas de précautions et que l’on projette tout le modèle d’un seul coup, les degré de liberté TEMP_MIL, TEMP_INF et TEMP_SUP seront \"perdus\" lors de la projection. En effet, comme le maillage initial contient des éléments volumiques, c’est la procédure \"3D\" qui est appliquée : pour chaque nœud du maillage 2, on cherche une maille volumique qui contienne ce nœud (ou qui en est proche). Une fois cette maille trouvée, on interpole les degrés de liberté portés par tous les nœuds de cette maille. Pratiquement, aucune maille 3D ne peut porter sur tous ses nœuds les degrés de liberté TEMP_MIL, TEMP_INF et TEMP_SUP ; ceux-ci sont donc perdus.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour résoudre ce problème il faut faire quelque chose comme :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "evo2= PROJ_CHAMP(RESULTAT=evo1,",
+    "     VIS_A_VIS = (_F(GROUP_MA_1: ’VOLU’  , GROUP_MA_2=’VOLU’,),",
+    "                  _F(GROUP_MA_1: ’LINER’ , GROUP_MA_2=’LINER’,),)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "De cette manière, les mailles de ’LINER’ du maillage 2 seront affectées par les valeurs portées par les mailles de ’LINER’ du maillage 1 et elles porteront les mêmes degrés de liberté.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.5",
+   "text": "Utilisation de VIS_A_VIS pour les maillages hétérogènes",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "La projection de maillages hétérogènes (présence de petites mailles et de grosses mailles) peut dégrader largement les performances CPU de l’opérateur.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour des raisons de performance, les éléments du maillage sont mis dans des \"boîtes\" de même taille (une grille cartésienne régulière). Lors de la projection, on ne teste alors que les éléments de la boîte qui contient le point à projeter. Si le maillage est très hétérogène, certaines boîtes sont vides et d'autres contiennent beaucoup d'éléments, ce qui cause une dégradation des performances.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas, l’utilisation de VIS_A_VIS peut améliorer considérablement les performances. Pour cela, il suffit de créer un groupe contentant les mailles fines et un autre les mailles grossières.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.3.6",
+   "text": "Mot-clé CAS_FIGURE et DISTANCE_OD",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Diffère du mot-clé CAS_FIGURE extérieur à VIS_A_VIS par la présence de la valeur ‘0D’. Ce cas de figure permet de projeter des éléments « 0D » d’un maillage à un autre. Cette projection fonctionne uniquement si chaque maille ponctuelle ou nœud du MAILLAGE_2 fourni se trouve à une distance inférieure à DISTANCE_0D d’une maille ponctuelle (POI1) du MAILLAGE_1 fournie (arrêt en erreur sinon). Si GROUP_MA_2 est présent, on ne conserve que les nœuds supportés par une maille ponctuelle.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "DISTANCE_0D n’a pas de valeur par défaut et doit donc obligatoirement être renseigné.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérandes MODELE_1, MAILLAGE_1",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ MODELE_1   = mo1,",
+    "/ MAILLAGE_1 = ma1,"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces deux mots clés permettent de préciser le maillage initial (ou squelette dans le cas de la sousstructuration). La projection va du maillage « 1 » vers le maillage « 2 ». Ce maillage est celui qui est associé aux champs à projeter (evol1 ou champ1).",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : il est préférable d’utiliser le mot clé MODELE_1, car cela permet de limiter les mailles candidates à la projection (si le modèle est plus restreint que le maillage).",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérandes MODELE_2, MAILLAGE_2",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ MODELE_2   = mo2,",
+    "/ MAILLAGE_2 = ma2,"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces deux mots clés permettent de préciser le maillage final. C’est le maillage sur lequel seront créés les champs projetés.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque importante : Là encore, il est préférable d’utiliser le mot clé MODELE_2, même si les éléments finis de MODELE_2 ne sont pas utilisés. On ne se sert que des coordonnées des nœuds du maillage ( ma2 ) associé à mo2 . Le fait d’utiliser le nom du modèle ( mo2 ) plutôt que le nom du maillage ( ma2 ) permet d’éviter certains nœuds de construction (situés très loin) qui détériorent parfois fortement les performances (CPU) de la projection.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérande RESULTAT",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "RESULTAT = evo1,"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept résultat que l’on veut projeter.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour un evol_noli , le concept résultat ne contiendra (par défaut) que les champs de déplacements. Pour calculer les champs de contraintes et de variables internes correspondants, il est préférable d’utiliser la commande STAT_NON_LINE en utilisant le mot clé PREDICTION :",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’DEPL_CALCULE’."
+   ],
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Opérande CHAM_GD",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé est utilisé pour désigner le champ à projeter (quand on ne projette pas une sd_resultat). Pour les méthodes ’NUAGE_DEG_1/2’ le champ doit être un cham_no. Pour la méthode ’ECLA_PG’, le champ doit être un cham_elem/ELGA",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Opérande CHAM_NO_REFE",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les méthodes ’NUAGE_DEG_1/2’ le champ fourni derrière CHAM_NO_REFE est un cham_no « modèle » pour les champs aux nœuds à créer lors de la projection. Ce mot clé est obligatoire.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Quand on projette un champ « isolé » (par exemple de TEMP_R), il faut fournir un cham_no de la même grandeur (TEMP_R). Quand on projette les champs d’une sd_resultat, puisque le mot clé CHAM_NO_REFE n’a qu’une valeur, on voit qu’on ne pourra pas (en général) projeter plusieurs NOM_CHAM différents",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.9",
+   "text": "Opérande CAS_FIGURE",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé (facultatif) sert à orienter la méthode ’COLLOCATION’ vers l’un des 4 cas suivants :",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"3D\" Les seuls éléments du maillage \"1\" qui serviront à la projection sont les éléments volumiques : hexaèdres, pentaèdres, tétraèdres et pyramides. Les nœuds ont 3 cordonnées X ,Y ,Z .",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"2D\" Les seuls éléments du maillage \"1\" qui serviront à la projection sont les éléments surfaciques : quadrangles et triangles. Le maillage est supposé plan. Les nœuds ont 2 cordonnées X ,Y  .",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"2.5D\" Les seuls éléments du maillage \"1\" qui serviront à la projection sont les éléments surfaciques : quadrangles et triangles. Le maillage est 3D. Les nœuds ont 3 cordonnées X ,Y ,Z . C’est le cas des \"coques\" plongées dans du 3D.",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "\"1.5D\" Les seuls éléments du maillage \"1\" qui serviront à la projection sont les éléments linéiques : segments. Le maillage peut être 2D ou 3D. Les nœuds ont 2 ou 3 cordonnées X ,Y ,Z .",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé peut aussi être utilisé sous le mot clé VIS_A_VIS. Il peut changer de valeur selon les occurrences. Dans ce cas, la valeur ‘0D’ est également disponible pour la projection de mailles ponctuelles sur mailles ponctuelles (voir 3.3.6).",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l’utilisateur ne renseigne pas ce mot clé, le programme parcourt la liste des mailles du modèle 1, candidates à être projetées (cette liste peut être filtrée grâce au mot clé VIS_A_VIS).",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "s’il existe au moins 1 maille 3D dans cette liste => CAS_FIGURE=’3D’ sinon : s’il existe au moins 1 maille 2D dans cette liste",
+   "page": 12
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "si la géométrie est ’2D’",
+     "=> CAS_FIGURE=’2D’"
+    ],
+    [
+     "si la géométrie est ’3D’",
+     "=> CAS_FIGURE=’2.5D’"
+    ]
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "sinon : s’il existe au moins 1 maille 1D dans cette liste => CAS_FIGURE=’1.5D’",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.10",
+   "text": "Opérandes TRANSF_GEOM_1 et TRANSF_GEOM_2",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Les 2 mots clés TRANSF_GEOM_1/2 = (fx,fy,[fz]) permettent d’effectuer une (ou deux) transformations géométriques sur les cordonnées des nœuds des maillages 1 et 2 avant de faire la projection. Cette transformation géométrique est temporaire (le temps de la phase d’appariement) : les maillages ne sont pas modifiés",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D par exemple, les 2 fonctions (ou formules) fx, fy sont des fonctions de X ,Y  qui seront appliquées pour calculer les 2 nouvelles coordonnées des nœuds : fx pour calculer le nouveau X et fy pour calculer le nouveau Y .",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les applications visées par ces mots clés sont par exemple :",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Projection d’un maillage (donné en mm) sur un autre maillage (donné en m). La transformation géométrique (TRANSF_GEOM_2) est une homothétie de rapport 1000.",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Projection d’un calcul thermique fait sur un modèle 2D axisymétrique sur un modèle 3D (mais axisymétrique !). La transformation géométrique (TRANSF_GEOM_2) est alors celle qui \"écrase\" le solide 3D dans un demi-plan méridien : Supposons que le maillage 3D soit un solide d’axe Oz , les fonctions fx, fy, fz à fournir sont : fx=  x2y2 fy=z fz=0.",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Un exemple d’utilisation du mot clé TRANSF_GEOM_2 est donné dans le cas test zzzz110a",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "En général, TRANSF_GEOM_2 est suffisant, mais il peut être commode de combiner les deux transformations pour passer par une géométrie intermédiaire plus simple. Si par exemple, on veut projeter un résultat calculé sur un aéro-réfrigérant de géométrie ( A ) vers une autre géométrie légèrement différente ( B ), il peut être plus simple de décomposer la transformation géométrique en passant par un cylindre intermédiaire.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Dans la phase de vérification, il est peut être utile de vérifier la bonne concordance des maillages. Pour cela, il est possible lors de la phase de projection d’obtenir les maillages après transformation géométrique. La vérification de la bonne concordance peut alors être réalisée dans le module PARAVIS ou SMESH de Salome_Meca en superposant les maillages. Ces maillages sont sauvegardés au format MED dans le répertoire “repe_out”, il faut donc indiquer ce répertoire dans le profil d’étude et utiliser le mot clef INFO=2 .",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.11",
+   "text": "Opérande CARA_ELEM",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérande est obligatoire pour la méthode SOUS_POINT et interdite pour les autres. Elle permet de renseigner l’objet CARA_ELEM lié au MODELE_2 afin de prendre en compte toutes les informations liées aux sous-points et nécessaires à la projection.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.12",
+   "text": "Sélection des noms des champs",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés TOUT_CHAMP = ’OUI’ ou NOM_CHAM = l_noch permettent de choisir quels sont les champs de la SD RESULTAT que l’on veut projeter (par défaut tous les champs aux nœuds). On peut aussi projeter les champs par éléments \"ELNO\" et \"ELEM\", pour cela il faut explicitement donner leurs noms via le mot clé NOM_CHAM.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.13",
+   "text": "Remarques sur la projection des champs par éléments pour la méthode ’COLLOCATION’",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette possibilité a été introduite initialement pour permettre de projeter les champs de pression calculés par le Code Saturne (constants par éléments) sur la peau d’un maillage mécanique Aster. Ce développement étant général, il est disponible pour tous les champs \"ELEM\" et \"ELNO\" mais le résultat de la projection est parfois un peu déroutant.",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme pour les champs aux nœuds, les champs par éléments projetés du concept evo1 dans le concept resu porteront les mêmes noms (par exemple : ’SIGM_ELNO’). Les champs projetés (resu) seront par défaut de même “nature” que les champs “origine” (evo1) : \"ELEM\" ou \"ELNO\".",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut toutefois modifier ce comportement par défaut en utilisant le mot clé TYPE_CHAM=’NOEU’ pour forcer les champs projetés à être des champs aux nœuds.",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Que fait-on numériquement ?",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Champs de type ELNO : pour chaque maille du maillage 2, on parcourt les nœuds de cette maille et on calcule la valeur de chaque nœud comme on le ferait pour un champ aux nœuds. Le résultat de cette projection est donc (par construction), un champ ELNO qui est continu entre les éléments alors que le champ initial ne l’est pas.",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si de plus, les maillages 1 et 2 ont des nœuds communs (par exemple, la projection d’un maillage quadratique sur un maillage linéaire), alors la valeur projetée sur un nœud ( N2 ) du maillage 2 a un côté imprévisible : la valeur portée par le nœud N2 sera celle portée par le nœud équivalent du maillage 1 dans l’une des mailles partageant ce nœud. Mais le choix de cette maille est arbitraire. Champs de type ELEM (constant par maille) : la valeur portée par une maille du maillage 2 est obtenue par moyenne arithmétique des valeurs portées par ses nœuds (calculées comme pour un champ ELNO).",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsqu’on n’utilise pas TYPE_CHAM=’NOEU’, la projection de champs par éléments n’a de sens que si les éléments projetés les uns sur les autres sont de même \"type\" (coque, poutre, iso-paramétriques). En effet, si on projetait par exemple un champ 3D de ’SIGM_ELNO’ sur un modèle linéique formé d’éléments de barre, on ne saurait pas stocker les valeurs de contraintes SIXX, ... sur ces éléments (qui ne connaissent que les efforts généralisés : N ,MX ,... )",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.1",
+   "text": "Opérande TYPE_CHAM=‘NOEU’",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé sert à forcer les champs projetés à être des champs « aux nœuds ». Ce mot clé est utilisé systématiquement par la commande MACR_LIGN_COUPE, car on ne sait pas créer des champs par éléments sur le modèle « fictif » de poutre créé par cette macro-commande de visualisation.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.2",
+   "text": "Comment projeter un champ ELNO discontinu sur une frontière ?",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Problème : Soit une structure formée de deux zones A et B ayant une frontière commune. Cette structure est modélisée deux fois MO1 et MO2 . Ces 2 modèles correspondent à 2 maillages différents MA1 et MA2 . Supposons également que les maillages respectent la frontière entre les zones A et B , c’est à dire qu’il existe dans chaque maillage deux GROUP_MA ( A et B ) correspondants aux zones A et B .",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit un champ par éléments \" ELNO \" (par exemple ’ HYDR_ELNO’ ) connu sur MO1 . On veut le projeter sur MO2 .",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Comment faire en sorte que les valeurs du champ sur A (respectivement B ) soit projetées sur A ( respectivement B ) ? On veut éviter que les valeurs de A ne \"polluent\" la zone B et réciproquement.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette situation peut se produire dès qu’il existe une discontinuité importante du champ sur la frontière entre A et B .",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Réponse : On ne peut pas résoudre ce problème avec un seul appel à PROJ_CHAMP .",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "En effet, la seule méthode pour projeter un champ ELNO est la méthode ’ COLLOCATION ’. Cette méthode est basée sur la localisation des nœuds du maillage MA2 dans les mailles du maillage MA1.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "La phase d’appariement géométrique de la méthode ’ COLLOCATION ’ conduit à la construction d’une structure de données permettant de répondre à la question :",
+   "page": 14
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour un nœud N2 de MA2 , dans quelle maille IMA1 de MA1 se trouve ce nœud et quelle est sa position dans cette maille ?",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les nœuds de la frontière entre A et B , il n’y a qu’une seule réponse possible : soit le nœud est associé à une maille de A soit il est associé à une maille de B .",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "En général, l’association est imprévisible par l’utilisateur. Il peut imposer que tous les nœuds de la frontière soient associés à A (ou à B ) en utilisant le mode clé VIS_A_VIS , mais cela ne résoudra pas le problème initial. En effet, s’il impose par exemple, que les nœuds soient associés à la zone A , les valeurs de A “pollueront” les mailles de B sur les éléments qui touchent la frontière. En utilisant VIS_A_VIS , il ne peut que choisir “Qui pollue qui ?”",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "En résumé, la méthode ’ COLLOCATION ’ est faite pour projeter des champs continus et elle sera toujours incapable de projeter facilement et correctement un champ fortement discontinu.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Solution de contournement : Pour résoudre le problème posé, il est nécessaire d’utiliser 2 fois PROJ_CHAMP pour projeter indépendamment les zones A et B . On obtient 2 champs CHA et CHB qu’il faut ensuite assembler avec la commande CREA_CHAMP / OPERATION=’ASSE’. Cette “solution” est illustrée dans le test zzzz304a.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.14",
+   "text": "Remarques sur la projection des champs ELGA d'un modèle X-FEM",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Un élément X-FEM peut être re-découpé en un nombre variable de sous-éléments. Le nombre de points de Gauss d'un tel élément est donc variable. Dans Code_Aster, on ne sait pas prendre en compte ce nombre variable de points : on surdimensionne le champ. Par convention, les points inutilisés sont positionnés géométriquement au point (0,0,0). Sur ces points, les valeurs du champ sont arbitraires.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Quand on projette un champ ELGA sur un modèle X-FEM, ces points fictifs, s'ils se retrouvent géométriquement en dehors du modèle origine, provoqueront une alarme CALCULEL5_48 indiquant que certains points ont été projetés sur des mailles lointaines. Si les coordonnées des points « lointains » sont (0,0,0), il ne faut pas s'en inquiéter.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.15",
+   "text": "Opérande DISTANCE_MAX",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour projeter le maillage MA1 sur le maillage MA2 , la méthode (COLLOCATION) cherche dans quel élément du maillage MA1 se trouve chaque nœud de MA2 , puis interpole la valeur à l’aide des fonctions de forme de l’élément. Lorsque qu’un nœud de MA2 n’est dans aucun élément du maillage MA1 , la méthode met en relation le nœud et le point (du bord) de l’élément le plus proche. Il interpole la valeur à l’aide des fonctions de forme de l’élément et cela même si le nœud est “loin” de cet élément.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l’on souhaite qu’un nœud qui n’est dans aucun des éléments du maillage MA1 , ne soit pas concerné par la projection, on utilise l’opérande DISTANCE_MAX. Cet opérande permet de donner la distance maximale que l’on autorise entre le nœud et l’élément le plus proche.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le nœud ne répond pas au critère de proximité le champ ne sera pas projeté sur ce nœud (i.e. le nœud ne portera aucune composante).",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Il n’y a pas de valeur par défaut pour DISTANCE_MAX. Ce qui veut dire que par défaut, le champ sera prolongé en dehors de la matière aussi loin qu’il le faudra.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.16",
+   "text": "Opérande ALARME= ’OUI’ / ’NON’",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsqu’un nœud du maillage « 2 »se retrouve « loin » des éléments du maillage « 1 », le code émet un message d’alarme (CALCULEL5_48). On peut éviter ces alarmes en utilisant ALARME=’NON’.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.17",
+   "text": "Opérande DISTANCE_ALARME = d_ala",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Un nœud du maillage « 2 » est considéré comme « loin » du maillage « 1 » si :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "La distance du nœud à la maille la plus proche du maillage \"1\" est supérieure à 10% de la taille de cette maille. C'est ce critère (relatif) qui est utilisé si DISTANCE_ALARME n'est pas fourni.",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "La distance du nœud à la maille la plus proche du maillage \"1\" est supérieure à d_ala si le mot clé DISTANCE_ALARME est utilisé (critère absolu).",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.18",
+   "text": "Opérande PROL_ZERO= ’NON’ / ’OUI’",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les champs aux nœuds :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si un nœud n'est pas concerné par la projection (DISTANCE_MAX non défini ou au-delà de cette distance), aucune valeur n'est affectée à ce nœud. L'utilisateur peut choisir PROL_ZERO='OUI' afin d'affecter 0 sur ce nœud.",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Lorsque l’utilisateur veut imposer une numérotation aux champs de la SD_RESULTAT, il doit utiliser le mot clé NUME_DDL. Si cette numérotation impose qu'un nœud donné porte des composantes et que le nœud se retrouve dans le cas précédent sans valeur à projeter, un message d'erreur est émis. Pour l'éviter, l'utilisateur peut choisir PROL_ZERO='OUI' afin d'affecter 0 sur ce nœud.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les champs aux éléments :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Le mot clé PROL_ZERO peut également être utilisé lors de la projection des champs par éléments. Il a le même sens : on affecte le champ à “zéro” là où la projection n’a pas pu être faite.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.19",
+   "text": "Opérande NUME_DDL = nu",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de “numéroter” les champs projetés (pour une structure de données de type « mode ») selon la numérotation (nu). Il est nécessaire si l’on souhaite utiliser le résultat de la commande dans des calculs ultérieurs (commandes REST_GENE_PHYS, PROJ_BASE, …).",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.20",
+   "text": "Sélection des numéros d’ordre",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "cf. [U4.71.00].",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.21",
+   "text": "Opérande NOM_PARA",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM_PARA = lpara,"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé est suivi d’une liste de noms de paramètres de la SD_RESULTAT evo1. Les paramètres de evo1 correspondant à ces noms seront recopiés dans la structure de données produite par la commande (resu). Exemple : lors de la projection de modes propres, on peut indiquer :",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM_PARA = (’AMOR_REDUIT’,’MASS_GENE’)"
+   ],
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.22",
+   "text": "Opérande TITRE",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TITRE = titr,"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre que l’on veut donner au concept résultat.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.23",
+   "text": "Opérande INFO",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INFO =/   1, [DEFAUT]",
+    "      /   2,"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Niveau d'impression.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemple",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Calculs thermique et mécanique sur deux maillages différents.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma1 = LIRE_MAILLAGE(...)",
+    "mo1 = AFFE_MODELE(MAILLAGE=ma1,",
+    "          AFFE=_F(TOUT=’OUI’, PHENOMENE=’THERMIQUE’, … ),)",
+    "evo1 = THER_LINEAIRE(MODELE = mo1, … )",
+    "ma2 = LIRE_MAILLAGE(...)  # maillage plus raffiné",
+    "mo2 = AFFE_MODELE  (MAILLAGE= ma2, … , PHENOMENE=’MECANIQUE’, … )",
+    "evo2 = PROJ_CHAMP(METHODE= ’COLLOCATION’ , RESULTAT= evo1,",
+    "                  NOM_CHAM= ’TEMP’, MODELE_1= mo1, MODELE_2= mo2,)",
+    "chmat2 = AFFE_MATERIAU( ...,",
+    "             AFFE_VARC=_F(NOM_VARC=’TEMP’, EVOL= evo2, … )",
+    "         )"
+   ],
+   "page": 16
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 10,
+   "chars": 1847,
+   "id": 1,
+   "section": "1 But"
+  },
+  {
+   "first": 11,
+   "last": 15,
+   "chars": 4733,
+   "id": 2,
+   "section": "1 But"
+  },
+  {
+   "first": 16,
+   "last": 51,
+   "chars": 5450,
+   "id": 3,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 52,
+   "last": 63,
+   "chars": 4964,
+   "id": 4,
+   "section": "3.2.5 Méthode= ’SOUS_POINT’"
+  },
+  {
+   "first": 64,
+   "last": 92,
+   "chars": 5998,
+   "id": 5,
+   "section": "3.3 Mot clé VIS_A_VIS"
+  },
+  {
+   "first": 93,
+   "last": 112,
+   "chars": 2345,
+   "id": 6,
+   "section": "3.8 Opérande CHAM_NO_REFE"
+  },
+  {
+   "first": 113,
+   "last": 132,
+   "chars": 3841,
+   "id": 7,
+   "section": "3.9 Opérande CAS_FIGURE"
+  },
+  {
+   "first": 133,
+   "last": 159,
+   "chars": 5734,
+   "id": 8,
+   "section": "3.11 Opérande CARA_ELEM"
+  },
+  {
+   "first": 160,
+   "last": 169,
+   "chars": 2087,
+   "id": 9,
+   "section": "3.14 Remarques sur la projection des champs ELGA d'un modèle X-FEM"
+  },
+  {
+   "first": 170,
+   "last": 187,
+   "chars": 2003,
+   "id": 10,
+   "section": "3.17 Opérande DISTANCE_ALARME = d_ala"
+  },
+  {
+   "first": 188,
+   "last": 196,
+   "chars": 707,
+   "id": 11,
+   "section": "3.22 Opérande TITRE"
+  }
+ ]
+}
