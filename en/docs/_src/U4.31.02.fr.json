@@ -1,0 +1,845 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.31.02.pdf",
+  "source_sha256": "c535746abb76741fe8c5d55c267f60a203e67ebbc60df0a095d7d9d87789561f",
+  "source_bytes": 379994
+ },
+ "schema_version": 1,
+ "doc_id": "U4.31.02",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "14/05/2020",
+  "fascicle": "Manuel d'utilisation Fascicule u4.31: Tables et fonctions",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 7,
+  "pages": "7",
+  "pdf_keywords": "U4.31.02-I",
+  "pdf_title": "Opérateur DEFI_FONCTION",
+  "responsible": "COURTOIS Mathieu",
+  "revision": "5563d26c3734",
+  "title": "Opérateur DEFI_FONCTION",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur DEFI_FONCTION",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Définir une fonction réelle ou complexe d’une variable réelle. Cet opérateur permet de définir, par exemple, des caractéristiques matériaux fonction de la température, ou des conditions aux limites qui dépendent d’une variable d’espace ou du temps.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le concept produit par cet opérateur est de type fonction.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "f  [fonction]   =  DEFI_FONCTION (",
+    "                ♦  NOM_PARA  =   np,",
+    "                ◊  NOM_RESU  =   /  ’TOUTRESU’,               [DEFAUT]",
+    "                                 /  nr,                       [K8]",
+    "                ♦  /   VALE         =  lv,                    [l_R]",
+    "                   /   VALE_C       =  lv,                    [l_C]",
+    "                   /   VALE_PARA    =  la,                    [listr8]",
+    "                       ♦  VALE_FONC    =   lo,                [listr8]",
+    "                   /   ABSCISSE     =  labs,                  [l_R]",
+    "                       ♦  ORDONNEE     =   lord,              [l_R]",
+    "                   /   NOEUD_PARA   =  lno,                   [l_noeud]",
+    "                       ♦  MAILLAGE     =   ma,                [maillage]",
+    "                       ♦  VALE_Y       =   ly,                [l_R]",
+    "                ◊  PROL_DROITE   =  /  ’CONSTANT’,",
+    "                                    /  ’LINEAIRE’,",
+    "                                    /  ’EXCLU’,               [DEFAUT]",
+    "                ◊  PROL_GAUCHE   =  /  ’CONSTANT’,",
+    "                                    /  ’LINEAIRE’,",
+    "                                    /  ’EXCLU’,               [DEFAUT]",
+    "                ◊  INTERPOL  =   |  ’LIN’,                    [DEFAUT]",
+    "                                 |  ’LOG’,",
+    "                ◊  INFO   =      /  1,                        [DEFAUT]",
+    "                                 /  2,",
+    "                ◊  VERIF  =  |   ’CROISSANT’,                 [DEFAUT]",
+    "                             |   ’NON’,",
+    "                ◊  TITRE  =  ti,                              [l_Kn]",
+    "                                 )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande NOM_PARA",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM_PARA = np"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Désigne le nom du paramètre (variable ou abscisse) de la fonction. Les valeurs possibles pour np sont :",
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’ABSC’ :",
+     "Abscisse curviligne"
+    ],
+    [
+     "’AMOR’ :",
+     "Amortissement"
+    ],
+    [
+     "’DRX’ :",
+     "Rotation autour de l’axe x"
+    ],
+    [
+     "’DRY’ :",
+     "Rotation autour de l’axe y"
+    ],
+    [
+     "’DRZ’ :",
+     "Rotation autour de l’axe z"
+    ]
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’DSP’ :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’DX’ :",
+     "Déplacement le long de l’axe x"
+    ],
+    [
+     "’DY’ :",
+     "Déplacement le long de l’axe x"
+    ],
+    [
+     "’DZ’ :",
+     "Déplacement le long de l’axe x"
+    ],
+    [
+     "’ENDO’ :",
+     "Endommagement"
+    ],
+    [
+     "’EPAIS’ :",
+     "Epaisseur"
+    ],
+    [
+     "’EPSI’ :",
+     "Déformation"
+    ],
+    [
+     "’FREQ’ :",
+     "Fréquence"
+    ],
+    [
+     "’HYDR’ :",
+     "Hydratation"
+    ],
+    [
+     "’INST’ :",
+     "Instant"
+    ]
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’META’ :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’NEUT1’ :",
+     "Paramètre neutre 1"
+    ],
+    [
+     "’NEUT2’ :",
+     "Paramètre neutre 2"
+    ],
+    [
+     "’NEUT3’ :",
+     "Paramètre neutre 3"
+    ]
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’NORM’ :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "’NUME_ORDRE’ : Numéro d’ordre",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’PAD’ :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’PCAP’ :",
+     "Pression capillaire"
+    ],
+    [
+     "’PGAZ’ :",
+     "Pression de gaz"
+    ],
+    [
+     "’PLIQ’ :",
+     "Pression de liquide"
+    ],
+    [
+     "’PORO’ :",
+     "Porosité"
+    ],
+    [
+     "’PULS’ :",
+     "Pulsation"
+    ],
+    [
+     "’PVAP’ :",
+     "Pression de vapeur"
+    ],
+    [
+     "’SAT’ :",
+     "Saturation"
+    ],
+    [
+     "’SECH’ :",
+     "Séchage"
+    ],
+    [
+     "’SIGM’ :",
+     "Contrainte"
+    ],
+    [
+     "’TEMP’ :",
+     "Température"
+    ]
+   ],
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’TSEC’ :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’VITE’ :",
+     "Vitesse"
+    ],
+    [
+     "’X’ :",
+     "Coordonnée x"
+    ],
+    [
+     "’Y’ :",
+     "Coordonnée y"
+    ],
+    [
+     "’Z’ :",
+     "Coordonnée z"
+    ],
+    [
+     "’XF’ :",
+     "Coordonnée x finale, dans le cas de chargement suiveur."
+    ],
+    [
+     "’YF’ :",
+     "Coordonnée y finale, dans le cas de chargement suiveur."
+    ],
+    [
+     "’ZF’ :",
+     "Coordonnée z finale, dans le cas de chargement suiveur."
+    ],
+    [
+     "VITE_[X|Y|Z]",
+     "Vitesse de la structure, dans le cas de chargement suiveur."
+    ],
+    [
+     "ACCE_[X|Y|Z]",
+     "Accélération de la structure, dans le cas de chargement suiveur."
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande NOM_RESU",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NOM_RESU = nr"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Désigne le nom du résultat (8 caractères). La fonction ainsi créée est nr = f(np). Remarque : Certaines commandes ( CALC_FONCTION , DEFI_MATERIAU …) vérifient la cohérence des noms du paramètre et du résultat en fonction de leur contexte. Par exemple, on attend une courbe de traction définie par une fonction dont NOM_PARA=’EPSI’ et NOM_RESU=’SIGM’.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande VALE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE = lv"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "lv est la liste de valeurs (x , y , …, x , y ) avec dans l’ordre :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "1    1       n    n"
+   ],
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "x , y (la première valeur du paramètre et la valeur correspondante du résultat), 1 1",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "... ,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "x , y (la dernière valeur du paramètre et la valeur correspondante du résultat). n n",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : La liste lv de valeurs doit être décrite dans l’ordre des abscisses (x) croissantes.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande VALE_C",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE_C = lv"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "lv est la liste des valeurs (x, y, z, …, x , y , z ) avec :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "n    n    n"
+   ],
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "x valeurs du paramètre",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "i"
+   ],
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "... ,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "y , z la partie réelle et la partie imaginaire de la fonction complexe pour ce paramètre. i i",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérandes ABSCISSE / ORDONNEE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ABSCISSE = labs",
+    "/  ORDONNEE = lord"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "On fournit les valeurs des abscisses et des ordonnées de la fonction séparément sous la forme de listes de valeurs réelles (x , x , …, x ) pour ABSCISSE et (y , y , …, y ) pour ORDONNEE. Les deux 1 2 n 1 2 n listes doivent avoir le même cardinal.",
+   "page": 4,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérande VALE_PARA / VALE_FONC",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE_PARA = la",
+    "/  VALE_FONC = lo  [ref 1]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Même fonctionnement que ABSCISSE, ORDONNEE sauf que les listes sont fournies sous la forme de concept listr8 produit par DEFI_LIST_REEL [U4.34.01].",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "VALE_PARA et VALE_FONC doivent être des cardinaux identiques sinon la commande s’arrête en erreur.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Opérande NOEUD_PARA",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  NOEUD_PARA = lno"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "lno liste de nœuds permettant de définir les valeurs des abscisses de la fonction à définir. Les abscisses seront égales aux abscisses curvilignes des nœuds sur la courbe qu’ils définissent.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Opérandes PROL_DROITE et PROL_GAUCHE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PROL_DROITEetPROL_GAUCHE ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Définissent le type de prolongement à droite (à gauche) du domaine de définition de la variable :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "’CONSTANT’ pour un prolongement avec la dernière (ou première) valeur de la fonction,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "’LINEAIRE’ pour un prolongement le long du premier segment défini (PROL_GAUCHE) ou du dernier segment défini (PROL_DROITE),",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "’EXCLU’ si l’extrapolation des valeurs en dehors du domaine de définition du paramètre est interdite (dans ce cas si un calcul demande une valeur de la fonction hors du domaine de définition, le code s’arrêtera en erreur fatale).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  PROL_DROITE = ’CONSTANT’ , PROL_GAUCHE = ’CONSTANT’",
+    "               y"
+   ],
+   "page": 5
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "",
+     "x 1 LINEA",
+     "",
+     "",
+     "",
+     ""
+    ],
+    [
+     "y",
+     "",
+     "",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  PROL_DROITE = ’LINEAIRE’, PROL_GAUCHE = ’EXCLU’"
+   ],
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "x  x      x    x       x",
+    "         1    2       n­1   n"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Le type de prolongement et d’interpolation sont indépendants l’un de l’autre.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.9",
+   "text": "Opérande INTERPOL",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INTERPOL ="
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Type d’interpolation de la fonction entre les valeurs du domaine de définition de la fonction : un type pour l’interpolation du paramètre et un pour l’interpolation de la fonction. Ceci est obtenu en fournissant une liste de textes parmi :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INTERPOL = (’LIN’, ’LOG’)"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "’LIN’ : linéaire,",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "’LOG’ : logarithmique,",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Si une seule valeur est précisée, elle est prise en compte à la fois par l’interpolation du paramètre et de la fonction. INTERPOL = ’LOG’ équivaut à ( ’LOG’, ’LOG’).",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.10",
+   "text": "Opérande INFO",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "◊ INFO = Précise les options d’impression sur le fichier MESSAGE. 1 : pas d’impression (option par défaut)",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "2 : impression des paramètres plus la liste des 10 premières valeurs dans l’ordre croissant du paramètre",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.11",
+   "text": "Opérande VERIF",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VERIF ="
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L’opérateur DEFI_FONCTION vérifie que les valeurs des abscisses sont strictement croissantes. Si ce n’est pas le cas, une erreur est déclenchée. Ceci est le comportement par défaut, VERIF vaut ’CROISSANT’. L’utilisateur a la possibilité de ne pas faire cette vérification en indiquant VERIF=’NON’. Dans ce cas, la fonction est réordonnée par abscisses croissantes. Une alarme est émise si les abscisses de la fonction n’étaient pas croissantes. En revanche, les abscisses doivent impérativement être strictement monotones.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.12",
+   "text": "Opérande TITRE",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE = ti"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre attaché au concept produit par cet opérateur [U4.03.01].",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.13",
+   "text": "Opérandes MAILLAGE et VALE_Y",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Il faut renseigner ces deux mots-clés si on définit la fonction à partir de NOEUD_PARA.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MAILLAGE = ma"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du maillage associé à la liste de nœud lno.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VALE_Y = lv"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des valeurs des ordonnées de la fonction à définir.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Définition d’une fonction dépendant du temps",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Fonction et variables sont entrées sous forme de réels",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Définition d’un fonction (linéaire par morceaux) dépend du temps (paramètre INST).",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "EX_1 = DEFI_FONCTION  (",
+    "               NOM_PARA=’INST’,",
+    "               VALE = (  0. ,­1.,­1.",
+    "                         1. , 0.,­1.",
+    "                                      2",
+    "                         3. , 1.,",
+    "                         6. , 2., ),  1",
+    "            PROL_GAUCHE=’CONSTANT’,    0",
+    "                                          1   3   6    t",
+    "                                     ­1",
+    "            PROL_DROITE=’LINEAIRE’,",
+    "                        ) ;"
+   ],
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Fonction et variables sont entrées sous forme de concepts listr8",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est possible de définir cette fonction à l’aide de concepts de type listr8 créés par l’intermédiaire de l’opérateur DEFI_LIST_REEL [U4.34.01] :",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ABSCISSE = DEFI_LIST_REEL (   DEBUT = 0. ,",
+    "                INTERVALLE =  ( _F ( JUSQU_A = 1., NOMBRE = 1,),",
+    "                                 _F ( JUSQU_A = 3., NOMBRE = 1,),",
+    "                                 _F ( JUSQU_A = 6., NOMBRE = 1,),)",
+    "                          )",
+    "ORDONNEE = DEFI_LIST_REEL (   DEBUT = -1. ,",
+    "                INTERVALLE =   ( _F (JUSQU_A = 0., NOMBRE = 1,),",
+    "                                 _F (JUSQU_A = 1., NOMBRE = 1,),",
+    "                                 _F (JUSQU_A = 2., NOMBRE = 1,),)",
+    "                          )",
+    "EX_2 = DEFI_FONCTION   (  NOM_PARA    = ’INST’,",
+    "                          VALE_PARA   = ABSCISSE,",
+    "                          VALE_FONC   = ORDONNEE,",
+    "                          PROL_DROITE = ’CONSTANT’,",
+    "                          PROL_GAUCHE = ’LINEAIRE’,",
+    "                       )"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Cet exemple est évidemment bien compliqué pour définir la fonction proposée. Nous n’avons voulu que mettre en évidence le principe d’utilisation de la possibilité offerte. Celle-ci devient intéressante lorsque l’on utilise des fonctions définies en un grand nombre de points. Une autre raison d’utiliser la définition par DEFI_LIST_REEL est lorsque les listes sont nécessaires comme argument pour un autre opérateur : (liste des instants d’un calcul évolutif THER_LINEAIRE , DYNA_LINE_TRAN , …), ceci évite alors la duplication d’informations.",
+   "page": 7
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 20,
+   "chars": 3441,
+   "id": 1,
+   "section": "3.1 Opérande NOM_PARA"
+  },
+  {
+   "first": 21,
+   "last": 61,
+   "chars": 2774,
+   "id": 2,
+   "section": "3.2 Opérande NOM_RESU"
+  },
+  {
+   "first": 62,
+   "last": 87,
+   "chars": 2242,
+   "id": 3,
+   "section": "3.9 Opérande INTERPOL"
+  },
+  {
+   "first": 88,
+   "last": 91,
+   "chars": 1578,
+   "id": 4,
+   "section": "4.2 Fonction et variables sont entrées sous forme de concepts listr8"
+  }
+ ]
+}

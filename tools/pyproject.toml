@@ -43,6 +43,7 @@ dev = [
     "markdown>=3.5",
     "weasyprint>=62",
     "pyvista>=0.44",
+    "pdfplumber>=0.11",
 ]
 
 # PDF output of `caen report` (task 4.6); needs the Pango system library.
@@ -53,6 +54,11 @@ report = [
 # Result images in `caen report --images` (task 4.7); needs off-screen OpenGL (OSMesa or EGL).
 images = [
     "pyvista>=0.44",
+]
+
+# PDF ingestion of the official French documents, `caen docs ingest` (task 5.1).
+docs = [
+    "pdfplumber>=0.11",
 ]
 
 # Claude API backend of `caen translate messages` (task 3.1); not needed for tests or CI.

@@ -85,7 +85,7 @@ Scope of translation is set by `docs/COMMAND-SET.md`: **Tier 1** (alpha: linear 
 
 | ID | Task | Acceptance |
 |---|---|---|
-| 5.1 | Owner attaches the French U4 PDFs for Tier 1 commands (and U1.03.01 command-file syntax, U4.81.01 `IMPR_RESU` MED notes). `caen docs ingest <pdf>` → text with structure preserved (`pdfplumber`/`pymupdf`), chunked, cached under `en/docs/_src/` (git-ignored if licence requires). | Text extraction reviewed for one doc; tables survive. |
+| 5.1 | Owner attaches the French U4 PDFs for Tier 1 commands (and U1.03.01 command-file syntax, U4.81.01 `IMPR_RESU` MED notes). *(2026-10-30, ADR-026: code-aster.org became reachable, so `caen docs fetch` downloads them; U4.81.01 does not exist, the MED notes are U7.05.21.)* `caen docs ingest <pdf>` → text with structure preserved (`pdfplumber`/`pymupdf`), chunked, cached under `en/docs/_src/` (git-ignored if licence requires). | Text extraction reviewed for one doc; tables survive. |
 | 5.2 | `caen translate doc <DOC-ID>`: chunked LLM translation with glossary + the command's `.json` as context; re-assembly; header with provenance. | Tier 1 U4 docs translated, status `machine`. |
 | 5.3 | Engineer skim-review of the four critical docs (same four as 2.3). | `reviewed`. |
 | 5.4 | `en/guide/` — "code_aster for structural engineers": concepts, three walkthroughs (built from the fixture cases), reading logs, reading results, FAQ of alarms seen in fixtures. | Owner can hand it to a colleague who completes `solid_static` unaided. |

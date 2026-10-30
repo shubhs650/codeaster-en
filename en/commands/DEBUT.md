@@ -32,7 +32,7 @@ study.
 | Kind | `MACRO` (operator 0; Python: `upstream/code_aster/CodeCommands/debut.py`) |
 | Result | none |
 | Can reuse its input (`reuse=`) | not applicable |
-| French reference | U4.11.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.11.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `CODE`, `ERREUR`, `DEBUG`, `IGNORE_ALARM` |
 
@@ -176,7 +176,7 @@ DEBUT(CODE="OUI", DEBUG=_F(SDVERI="NON"), RESERVE_CPU=_F(VALE=60))
 
 ## See also
 
-- French reference: U4.11.01 (translation: `en/docs/U4.11.01.md` once task 5.x lands)
+- French reference: U4.11.01 (French text: `en/docs/_src/U4.11.01.fr.md`; translation: `en/docs/U4.11.01.md` once task 5.2 lands)
 - Catalog: `en/commands/DEBUT.json` (generated from `upstream/code_aster/Cata/Commands/debut.py:45`)
 - Implementation: `upstream/code_aster/CodeCommands/debut.py`; `upstream/bibfor/supervis/ibtcpu.F90`
   (time reserve), `ibdbgs.F90` (memory), `ibbase.F90` (databases), `ibcata.F90` (catalogs)

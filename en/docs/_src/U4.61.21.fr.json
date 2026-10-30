@@ -1,0 +1,961 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.61.21.pdf",
+  "source_sha256": "7a12b3120f9dd8af28e222782c1625a5b1b9c13926622ad7a7ca2c7c4c1dd497",
+  "source_bytes": 198015
+ },
+ "schema_version": 1,
+ "doc_id": "U4.61.21",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "11/01/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.61: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 9,
+  "pages": "9",
+  "pdf_keywords": "U4.61.21-F",
+  "pdf_title": "Opérateur ASSEMBLAGE",
+  "responsible": "BÉREUX Natacha",
+  "revision": "0872cb06e0ca",
+  "title": "Opérateur ASSEMBLAGE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Macro-commande ASSEMBLAGE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Calculer une ou plusieurs matrices assemblées (rigidité, masse, amortissement …) ainsi que un ou plusieurs vecteurs assemblés.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette commande est recommandée pour créer les concepts nécessaires aux calculs dynamiques, qu'il s'agisse des matrices ou des vecteurs. Elle évite de fastidieux appels aux commandes \"de base\" : CALC_MATR_ELEM [U4.41.01], NUME_DDL [U4.61.01], ASSE_MATRICE [U4.61.22], CALC_VECT_ELEM [U4.61.02], ASSE_VECTEUR [U4.61.23].",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une ou plusieurs structures de données de type matr_asse_* et cham_no plus, éventuellement, une structure de données de type nume_ddl.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (",
+    "♦  MODELE    =  mo ,                                    [modele]",
+    "◊  CHAM_MATER   =  chmater,                             [cham_mater]",
+    "◊  CARA_ELEM =  carac  ,                                [cara_elem]",
+    "◊  CHARGE    =  l_char ,                             /  [l_char_meca]",
+    "                                                     /  [l_char_ther]",
+    "                                                     /  [l_char_acou]",
+    "   ◊  INST      =  /   tps,                             [R]",
+    "                   /   0. ,                             [DEFAUT]",
+    "◊  CHAR_CINE    =  l_chci ,                             [l_char_cine]",
+    "♦  NUME_DDL     =  nu  ,                                [nume_ddl]"
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "♦ # assemblage des matrices :",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  MATR_ASSE = (_F  (",
+    "   ♦   MATRICE  =   matas ,                          [matr_asse_*]",
+    "   ♦   OPTION   ="
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène mécanique :",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "    /  'RIGI_MECA' ,",
+    "       ◊  MODE_FOURIER =   /  nh  ,  [I]",
+    "                           /  0   ,  [DEFAUT]",
+    "    /  'RIGI_GEOM' ,",
+    "       ♦  SIEF_ELGA =         sig ,  [cham_elem_SIEF_R]",
+    "       ◊  MODE_FOURIER =   /  nh  ,  [I]",
+    "                           /  0   ,  [DEFAUT]",
+    "    /  'RIGI_ROTA' ,",
+    "    /  'IMPE_MECA' ,",
+    "        ◊  VNOR = vnor ,    [1. ou -1.]        [ R ]",
+    "                = 1. ,",
+    "    /  'ONDE_FLUI' ,",
+    "    /  'RIGI_MECA_HYST' ,",
+    "    /  'RIGI_FLUI_STRU' ,",
+    "     / 'AMOR_MECA' ,",
+    "        ◊ AMOR_FLUI = [“OUI” ou “NON”]     [txt]",
+    "                    = “OUI”                [DEFAUT]",
+    "        ◊ VNOR = vnor,  [1. ou -1.]        [R]",
+    "                = 1. ,",
+    "        ◊  TYPE_AMOR = [“ TOUT ” ou “ ABSO ”]   [txt]",
+    "                     = “ TOUT ”,           [DEFAUT]",
+    "    /  'MASS_FLUI_STRU' ,",
+    "    /  'MASS_MECA' ,",
+    "    /  'MASS_MECA_DIAG' ,",
+    "# Gyroscopie :",
+    "     / 'MECA_GYRO' ,",
+    "    /  'RIGI_GYRO' ,",
+    "       ◊  GROUP_MA =    grma"
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène thermique :",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  'RIGI_THER' ,",
+    "   ◊  MODE_FOURIER =   /  nh  ,  [I]",
+    "                       /  0   ,  [DEFAUT]",
+    "/  'RIGI_THER_CONV' ,",
+    "/  'RIGI_THER_CONV_D' ,"
+   ],
+   "page": 2
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène acoustique :",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "    /  'RIGI_ACOU' ,",
+    "    /  'MASS_ACOU' ,",
+    "    /  'AMOR_ACOU' ,",
+    "        ◊  VNOR = vnor ,    [1. ou -1.]        [ R ]",
+    "                = 1. ,",
+    "),),"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "# assemblage des vecteurs :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VECT_ASSE = (_F  (",
+    "    ♦  VECTEUR   =  vectas ,                         [cham_no]",
+    "    ♦  OPTION    ="
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène mécanique :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  'CHAR_MECA' ,",
+    "   ◊  CHARGE    =   l_char_v, /  [l_char_meca]",
+    "   ◊  MODE_FOURIER =   /  nh  ,  [I]",
+    "                       /   0  ,  [DEFAUT]"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène thermique :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  'CHAR_THER' ,",
+    "   ◊  CHARGE    =   l_char_v, /  [l_char_ther]"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "# phénomène acoustique :",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                       /  'CHAR_ACOU' ,",
+    "                          ◊   CHARGE    =  l_char_v, /  [l_char_acou]",
+    "                   ),),",
+    "◊  TITRE     =  titr   ,                                [l_Kn]",
+    "◊  INFO      =  /1                                      [DEFAUT]",
+    "                /2"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": ")",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Concepts créés par la macro-commande",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette macro-commande crée plusieurs concepts typés :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une matr_asse_* à chaque occurrence du mot clé facteur MATR_ASSE (mot clé MATRICE),",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une cham_no à chaque occurrence du mot clé facteur VECT_ASSE (mot clé VECTEUR),",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "éventuellement un nume_ddl (mot clé NUME_DDL) si celui-ci n'existe pas au préalable.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit par exemple la séquence :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "..."
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "# nu n'est pas un concept encore existant.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (MODELE = mo , ...",
+    "                NUME_DDL = CO( \" nu \" ),",
+    "                MATR_ASSE = ( _F( MATRICE= CO(\"K\"), OPTION='RIGI_MECA'),",
+    "                VECT_ASSE = ( _F( VECTEUR= CO(\"F\"), OPTION='CHAR_MECA'))",
+    "ASSEMBLAGE   (MODELE = mo , ...",
+    "                NUME_DDL = nu,",
+    "                MATR_ASSE = (_F(MATRICE=CO( \"M\") ,OPTION='MASS_MECA'),",
+    "                                 _F(MATRICE=CO( \"A\") ,OPTION='AMOR_MECA'),",
+    "),)"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "le 1er appel à ASSEMBLAGE crée 1 MATR_ASSE : K",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "1VECT_ASSE : F",
+    "1NUME_DDL : nu"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "le 2ème appel à ASSEMBLAGE crée 2 MATR_ASSE : M et A",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Lors du 2 ème appel, le concept nume_ddl est fourni (il existe, il a été créé par le 1 er appel). Dans ce cas, il est supposé convenir aux 2 matr_asse à créer ; il est donc important que le nume_ddl soit d'abord calculé pour une option de type \" RIGIDITE \" pour contenir les nœuds de Lagrange des charges de blocages (cf. CALC_MATR_ELEM [U4.61.01]).",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans l'exemple précédent, les 3 matr_asse K , M et A et le vecteur F s'appuient sur la même numérotation des inconnues ( nu ). C'est une condition nécessaire pour les algorithmes de recherche de modes propres.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérandes MODELE / CHAM_MATER / CARA_ELEM / INST",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MODELE = mo"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérande sert à indiquer les éléments pour lesquels doivent être effectués les calculs élémentaires : on rappelle que les éléments finis sont pour la plupart définis dans le modèle.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Il y a quelques exceptions :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "1) Les éléments de dualisation des conditions de DIRICHLET, c'est-à-dire les éléments permettant d'imposer des conditions sur les degrés de liberté de déplacement en mécanique, les degrés de liberté de température en thermique et les degrés de liberté de pression en acoustique. 2) Les éléments de chargement nodal, d’échange thermique entre parois, ...",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces éléments sont définis dans les concepts de type char_meca, char_ther ou char_acou.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "On doit donc fournir l'argument l_char pour le calcul des matrices assemblées de rigidité : RIGI_MECA, RIGI_THER, RIGI_ACOU, RIGI_MECA_HYST et RIGI_THER_CONV(_D).",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHAM_MATER = chmater"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du champ de matériau où sont définies les caractéristiques des matériaux des éléments.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet argument est presque toujours nécessaire.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "En pratique, on peut s'en passer :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour les éléments discrets dont les matrices élémentaires sont définies dans le concept cara_elem. Voir AFFE_CARA_ELEM [U4.42.01],",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour le calcul des rigidités dues à la dualisation des conditions aux limites.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CARA_ELEM = carac"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les caractéristiques élémentaires carac sont nécessaires s'il existe dans le modèle des éléments de structure (poutre, coque ou éléments discrets) ou des éléments de milieu continu non isotropes.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INST = tps"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument tps est utilisé lorsque les caractéristiques matérielles ou les chargements dépendent du temps. Un cas assez fréquent est celui d'un matériau mécanique dépendant de la température qui elle même dépend du temps.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérandes CHARGE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHARGE = l_char"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérande a plusieurs fonctions distinctes :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "1) préciser les éléments pour lesquels sont faits les calculs élémentaires de rigidité (conditions de DIRICHLET), 2) pour les options 'RIGI_THER_CONV(_D)' : donner la valeur de la vitesse de convection, 3) pour l'option 'IMPE_MECA' : donner la valeur de l'impédance acoustique des mailles du bord, 4) pour l'option 'ONDE_FLUI' : donner la valeur de la pression de l'onde incidente, 5) pour l'option 'RIGI_ROTA' : donner la valeur de la rotation imposée au modèle.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention pour les deux opérandes CHARGE : Celui sous VECT_ASSE ne peut pas remplacer celui sous ASSEMBLAGE. Si l’on ne renseigne que CHARGE sous VECT_ASSE, les chargements ne sont pas pris en compte dans les fonctions en dessous.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Lors d'un appel à la macro-commande pour l'assemblage des vecteurs dans le cas où le concept nume_ddl est entrant (sous le mot-clé NUME_DDL), la valeur du mot clé CHARGE l_char doit être identique à celle utilisée pour la création du nume_ddl.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit par exemple la séquence suivante :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "..."
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "# nu n'est pas un concept encore existant.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (MODELE = mo , CHARGE = (char_1,char_2),...",
+    "              NUME_DDL = CO( \" nu \" ),",
+    "              MATR_ASSE = ( _F( MATRICE= CO(\"K\"), OPTION='RIGI_MECA'))"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "# nu existe et est un concept entrant.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (MODELE = mo , CHARGE = (char_1,char_2),...",
+    "              NUME_DDL = nu,",
+    "              VECT_ASSE = (  _F(VECTEUR=CO( \"F\") ,OPTION='CHAR_MECA',",
+    "                                 CHARGE=CHAR_F),),)"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande CHAR_CINE",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHAR_CINE = lchci"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérande permet de ne pas \"dualiser\" certaines conditions aux limites de Dirichlet (blocages). Ceuxci seront éliminés.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérande NUME_DDL",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NUME_DDL  =  nu"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "L'utilisateur de la macro doit toujours donner un nom de concept derrière le mot clé NUME_DDL. Si le concept n'existe pas, il est créé.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le concept existe, il est utilisé pour numéroter les matrices.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Mot clé MATR_ASSE",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur permet de demander le calcul d'une matrice assemblée (à chaque occurrence).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nom de la matrice assemblée est donné par l'opérande MATRICE et la \"nature\" de la matrice est définie par l'opérande OPTION.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Les options possibles : 'RIGI_MECA', 'MASS_MECA', … sont décrites dans [U4.61.01].",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le choix de l'option détermine le type de la matr_asse_* résultat [U4.61.01].",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.1",
+   "text": "Opérandes particulières à certaines options",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.6.1.1",
+   "text": "Opérande MODE_FOURIER",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODE_FOURIER = nh"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Entier positif ou nul indiquant l'harmonique de FOURIER sur laquelle on calcule les matrices.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut : nh = 0",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.6.1.2",
+   "text": "Opérande SIEF_ELGA (option 'RIGI_GEOM')",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  SIEF_ELGA = sig"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le champ de contraintes sig donné pour le calcul de l'option 'RIGI_GEOM' doit avoir été calculé avec l'option 'SIEF_ELGA' (champ de contraintes aux points de GAUSS des éléments) (cf. commandes CALC_CHAM_ELEM [U4.81.03] ou CALC_CHAMP [U4.81.04]).",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.6.1.3",
+   "text": "Opérande GROUP_MA (options 'MECA_GYRO' et 'RIGI_GYRO')",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_MA =   grma"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut restreindre le calcul des options 'MECA_GYRO' et 'RIGI_GYRO' sur les mailles spécifiées par GROUP_MA.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.6.1.4",
+   "text": "Opérandes AMOR_FLUI, VNOR et TYPE_AMOR",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  AMOR_FLUI ="
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option nous permet de désactiver la contribution des frontières fluides absorbantes ('3D_FLUI_ABSO', '2D_FLUI_ABSO' et 'AXIS_FLUI_ABSO'). En particulier, si on utilise la formulation fluide u−p−φ dans un calcul harmonique, on a la possibilité de prendre en compte la contribution des frontières fluides absorbantes via le calcul d’une matrice de troisième ordre (avec l’option IMPE_MECA). Cette matrice de troisième ordre est utilisable seulement dans un calcul harmonique (opérande MATR_IMPE_PHI dans DYNA_VIBRA) et nous permet de symétriser la matrice (au contraire du calcul de cette contribution via AMOR_MECA). L’option AMOR_FLUI = ‘NON’ nous évite de calculer cette contribution deux fois. Par défaut, AMOR_FLUI = ‘OUI’. Cet opérande est disponible exclusivement pour l’option AMOR_MECA.",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  VNOR ="
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option nous permet de prendre en compte le cas d’une frontière émissive. Le cas le plus commun est celui radiative (ou partiellement radiatif si on définit un coefficient de réflexion α≠0 ). Dans le cas d’une frontière radiative VNOR = 1. (option activée par défaut). Dans le cas d’une frontière émissive VNOR = - 1 . Ce coefficient est multiplié à la valeur de l’impédance des frontières fluides absorbantes ('3D_FLUI_ABSO' , '2D_FLUI_ABSO' et 'AXIS_FLUI_ABSO'). Cet opérande est disponible exclusivement pour les options AMOR_MECA , IMPE_MECA et AMOR_ACOU.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TYPE_AMOR ="
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option nous permet de calculer toutes les sources d’amortissement présentes dans le modèle ou seulement la source liée aux éléments de frontière absorbante (fluide ou non). L’option par défaut ( TYPE_AMOR = ‘TOUT’ ) prend en compte l’éventuel amortissement de Rayleigh, l’amortissement venant des éléments discret et celui venant des éléments de frontière absorbante. Dans ce cas on est obligé de fournir soit les matrices de masse et rigidité pour l’amortissement de Rayleigh (et le champ matériau), soit les caractéristiques des éléments discrets. Si on est en présence du seul amortissement venant des éléments de frontière absorbante, il faut spécifier TYPE_AMOR = ‘ABSO’ et fournir en entrée seulement le champ matériau. Cet opérande est disponible exclusivement pour l’option AMOR_MECA .",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Mot clé VECT_ASSE",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur permet de demander le calcul d'un vecteur assemblé (à chaque occurrence).",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nom du vecteur assemblée est donné par l'opérande VECTEUR.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans les options possibles de calcul élémentaire et d'assemblage de vecteurs, seules certaines possibilités parmi toutes celles proposées dans les commandes CALC_VECT_ELEM et ASSE_VECTEUR sont proposées ici: 'CHAR_MECA' pour les phénomènes mécaniques, 'CHAR_THER' et 'CHAR_ACOU' pour les phénomènes thermiques et acoustiques respectivement.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L'ensemble d'options et opérandes associées sont décrites dans [u4.61.02] et [u4.61.23].",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L'option 'FORC_NODA' et la prise en compte d'un modèle contenant des sous-structures sous l'option 'CHAR_MECA', souvent utilisée dans le cas de la statique, ne sont pas disponibles dans cette macro-commande.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.1",
+   "text": "Opérandes particulières à certaines options",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.1.1",
+   "text": "Opérande MODE_FOURIER",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODE_FOURIER = nh"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Entier positif ou nul indiquant l'harmonique de FOURIER sur laquelle on calcule les vecteurs dans le cas des phénomènes mécaniques.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut : nh = 0",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.1.2",
+   "text": "Opérande CHARGE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHARGE = l_char_v"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande permet d'accéder aux informations de chargement spécifiques à chaque vecteur. Les valeurs de l_char_v complètent ( par addition ) les charges l_char spécifiées sous le mot-clé CHARGE en dehors du mot clé VECT_ASSE.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Les doublons dans les charges données dans l_char et dans l_char v sont interdits.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention pour les deux opérandes de CHARGE : Celui sous VECT_ASSE ne peut pas remplacer celui sous ASSEMBLAGE. Si l’on ne renseigne que CHARGE sous VECT_ASSE, les chargements ne sont pas pris en compte dans les fonctions mentionnées dans le chapitre 3.3.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple pour le traitement des chargements :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (MODELE = mo , …",
+    "             CHARGE = (char _1,char_2) ,",
+    "             NUME_DDL = CO( \" nu \" ),",
+    "             MATR_ASSE = ( _F( MATRICE= CO(\"K\"), OPTION='RIGI_MECA'),",
+    "             VECT_ASSE = ( _F( VECTEUR= CO(\"F1\"),",
+    "                               OPTION='CHAR_MECA',CHARGE=char_A ),",
+    "                           _F( VECTEUR= CO(\"F2\"),",
+    "                               OPTION='CHAR_MECA',CHARGE=char_B ),",
+    "                           _F( VECTEUR= CO(\"F3\"),OPTION='CHAR_MECA'),)"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans l'exemple ci-dessus, les charges assemblées pour chaque vecteur sont :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Vecteur                         Charges assemblées",
+    "  F1                       char_1, char_2, char_A",
+    "  F2                       char_1, char_2, char_B",
+    "  F3                       char_1, char_2"
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Opérande TITRE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre que l'on veut donner au résultat [U4.03.01].",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemples",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Calcul de modes propres mécaniques",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (  MODELE = mo  ,      CHARGE = ch_blocage ,",
+    "                CHAM_MATER = chmat  ,  CARA_ELEM = carac ,",
+    "                NUME_DDL = CO( \"nu\")   ,",
+    "      MATR_ASSE = (_F  (MATRICE = CO( \"K\") , OPTION = 'RIGI_MECA'),",
+    "                   _F  (MATRICE = CO( \"M\") , OPTION = 'MASS_MECA'),),)",
+    "modes = CALC_MODES ( MATR_RIGI = K,",
+    "                     MATR_MASS = M,",
+    "                     ...)"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Calcul de modes de flambement d'Euler",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "# chsief est le champ de contraintes lié au chargement",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (  MODELE = mo  ,      CHARGE = ch_blocage ,",
+    "                CHAM_MATER = chmat  ,  CARA_ELEM = carac ,",
+    "                NUME_DDL = CO( \"nu\") ,",
+    "        MATR_ASSE = (  _F(MATRICE= CO(\"K\"), OPTION='RIGI_MECA'),",
+    "                       _F(MATRICE= CO( \"KG\"), OPTION='RIGI_GEOM',",
+    "                       SIEF_ELGA=chsief),),)",
+    "modflamb = CALC_MODES ( MATR_RIGI = K,",
+    "                        MATR_MASS = KG,",
+    "                        …)"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Calcul de réponse forcée",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ASSEMBLAGE   (  MODELE = mo  ,      CHARGE = ch_blocage ,",
+    "                CHAM_MATER = chmat  ,  CARA_ELEM = carac ,",
+    "                NUME_DDL = CO( \"nu\")   ,",
+    "      MATR_ASSE = (_F  (MATRICE = CO( \"K\") , OPTION = 'RIGI_MECA'),",
+    "                   _F  (MATRICE = CO( \"M\") , OPTION = 'MASS_MECA'),),",
+    "      VECT_ASSE = ( _F( VECTEUR= CO(\"F\"),",
+    "                     OPTION='CHAR_MECA',CHARGE=char_A ),)",
+    "reponse = DYNA_VIBRA ( MATR_RIGI = K,  MATR_MASS = M,",
+    "                       EXCIT = _F( VECT_ASSE = F, ...)...)"
+   ],
+   "page": 9
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 23,
+   "chars": 3412,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 24,
+   "last": 56,
+   "chars": 3276,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 57,
+   "last": 99,
+   "chars": 5244,
+   "id": 3,
+   "section": "3.3 Opérandes CHARGE"
+  },
+  {
+   "first": 100,
+   "last": 121,
+   "chars": 2458,
+   "id": 4,
+   "section": "3.7 Mot clé VECT_ASSE"
+  },
+  {
+   "first": 122,
+   "last": 132,
+   "chars": 1572,
+   "id": 5,
+   "section": "3.8 Opérande TITRE"
+  }
+ ]
+}

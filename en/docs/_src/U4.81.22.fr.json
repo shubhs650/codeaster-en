@@ -1,0 +1,4355 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.81.22.pdf",
+  "source_sha256": "0754d5e6f0b7ee7ac7452771e10146fe15926c5591092be4ab8eab786e294429",
+  "source_bytes": 409526
+ },
+ "schema_version": 1,
+ "doc_id": "U4.81.22",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "04/09/2022",
+  "fascicle": "Manuel d'utilisation Fascicule u4.81: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 33,
+  "pages": "33",
+  "pdf_keywords": "U4.81.22-G",
+  "pdf_title": "Opérateur POST_ELEM",
+  "responsible": "YU Ting",
+  "revision": "9b0ca62f8c65",
+  "title": "Opérateur POST_ELEM",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur POST_ELEM",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Calculer des quantités sur tout ou partie de la structure. Les quantités calculées correspondent à des options de calcul particulières de la modélisation affectée.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les options disponibles actuellement sont :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de la masse, des inerties et de la position du centre de gravité,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l'énergie potentielle,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l'énergie cinétique,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l'énergie de dissipation (éléments DKTG),",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul du travail des efforts extérieurs,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul des indicateurs de perte de proportionnalité du chargement en élastoplasticité,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de la charge limite,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de la contrainte de Weibull,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul du taux de croissance d’une cavité sphérique (Rice - Tracey),",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l’énergie élastique et de l’énergie totale,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l’aire d’un trou dans un maillage 2D,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de l’intégrale et de la moyenne d’un champ,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de la distribution en surface/volume de la valeur d'une composante d'un champ,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul des extrema en espace d'une liste de composantes d'un champ,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "calcul de la norme d'un champ.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le concept retourné est une table.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "[table] = POST_ELEM     (",
+    "     # mot-clés simples",
+    "     ◊   MODELE                  =    mo,                [modele]",
+    "     ◊   CHAM_MATER              =    chmater,           [cham_mater]",
+    "     ◊   CARA_ELEM               =    carac,             [cara_elem]",
+    "     ◊   |    NUME_COUCHE        =    /    nume,         [I]",
+    "                                      /    l,            [DEFAUT]",
+    "         |    NIVE_COUCHE        =    /    'INF',",
+    "                                      /    'SUP',",
+    "                                      /    'MOY',        [DEFAUT]",
+    "     ◊   MODE_FOURIER            =    /    nh,           [I]",
+    "                                      /    0,            [DEFAUT]",
+    "     ◊   GEOMETRIE               =    /    'DEFORMEE',",
+    "                                      /    'INITIALE',   [DEFAUT]",
+    "     ♦   /    CHAM_GD            =    cham,         /    [cham_no_DEPL_R]",
+    "                                                    /    [cham_no_TEMP_R]",
+    "                                                    /    [cham_elem_ENER_R]",
+    "         /    RESULTAT           =    resu,         /    [evol_elas]",
+    "                                                    /    [evol_noli]",
+    "                                                    /    [evol_ther]",
+    "                                                    /    [evol_char]",
+    "                                                    /    [mult_elas]",
+    "                                                    /    [fourier_elas]",
+    "                                                    /    [mode_meca]",
+    "                                                    /    [dyna_trans]",
+    "     ◊   /    TOUT_ORDRE         =    'OUI',",
+    "         /    NUME_ORDRE         =    l_nuor,            [l_I]",
+    "         /    LIST_ORDRE         =    l_ordr,            [listis]",
+    "         /    NUME_MODE          =    l_numo,            [l_I]",
+    "         /    NOEUD_CMP          =    l_nomo,            [l_Kn]",
+    "         /    NOM_CAS            =    l_nocas,           [l_Kn]",
+    "         /    /    FREQ          =    l_freq,            [l_R]",
+    "              /    LIST_FREQ     =    lreel,             [listr8]",
+    "         /    /    INST          =    l_inst,            [l_R]",
+    "              /    LIST_INST     =    lreel,             [listr8]",
+    "              ◊ /  |CRITERE      =    /    'RELATIF',    [DEFAUT]",
+    "                   |PRECISION    =    /    prec,         [R]",
+    "                                      /    1.0D-6,       [DEFAUT]",
+    "              /    ♦ CRITERE     =    'ABSOLU',",
+    "                   ♦ PRECISION   =    prec,              [R]",
+    "# mots-clés facteur",
+    "     |MASS_INER    :    ( voir mot-clé MASS_INER    [§3.8]  )",
+    "     |ENER_POT     :    ( voir mot-clé ENER_POT     [§3.9] )",
+    "     |ENER_CIN     :    ( voir mot-clé ENER_CIN     [§3.10] )",
+    "     |ENER_ELAS    :    ( voir mot-clé ENER_ELAS    [§3.11] )",
+    "     |ENER_ELTR    :    ( voir mot-clé ENER_ELTR    [§3.12] )",
+    "     |ENER_TOTALE  :    ( voir mot-clé ENER_TOTALE  [§3.13] )",
+    "     |WEIBULL      :    ( voir mot-clé WEIBULL      [§3.14] )",
+    "     |RICE_TRACEY  :    ( voir mot-clé RICE_TRACEY  [§3.15] )",
+    "     |INDIC_ENER   :    ( voir mot-clé INDIC_ENER   [§3.16] )",
+    "     |INDIC_ SEUIL :    ( voir mot-clé INDIC_ SEUIL [§3.17] )",
+    "     |CHAR_LIMITE  :    ( voir mot-clé CHAR_LIMITE  [§3.18] )",
+    "     |CARA_GEOM    :    ( voir mot-clé CARA_GEOM    [§3.19] )",
+    "     |CARA_POUTRE  :    ( voir mot-clé CARA_POUTRE  [§3.20] )",
+    "     |AIRE_INTERNE :    ( voir mot-clé AIRE_INTERNE [§3.21] )",
+    "     |TRAV_EXT     :    ( voir mot-clé TRAV_EXT     [§3.22] )",
+    "     |INTEGRALE    :    ( voir mot-clé INTEGRALE    [§3.23] )",
+    "     |MINMAX       :    ( voir mot-clé MINMAX       [§3.24] )",
+    "     |ENER_DISS    :    ( voir mot-clé ENER_DISS    [§3.25] )",
+    "     |VOLUMOGRAMME :    ( voir mot-clé VOLUMOGRAMME [§3.26] )",
+    "     |NORME        :    ( voir mot-clé NORME        [§3.27] )",
+    "     ◊    INFO                   =    /    1,            [DEFAUT]",
+    "                                      /    2,",
+    "     ◊    TITRE                  =    ti,",
+    "                             )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes MODELE, CHAM_MATER et CARA_ELEM sont facultatifs si RESULTAT est renseigné, obligatoires si c’est CHAM_GD qui est donné.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MODELE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE = mo,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du modèle sur lequel est calculée l'option. Le nom du modèle est optionnel car il est contenu dans la structure de données resultat.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande CHAM_MATER",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHAM_MATER = chmater,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Champ de matériau associé au modèle mo, optionnel car contenu dans la structure de données resultat.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande CARA_ELEM",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CARA_ELEM = carac,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les caractéristiques élémentaires carac sont nécessaires s'il existe dans le modèle des éléments de structure (poutre, plaque, coque ou éléments discrets), optionnel car contenu dans la structure de données resultat.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérandes NUME_COUCHE / NIVE_COUCHE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NUME_COUCHE = nume,"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'un matériau multicouche, valeur entière comprise entre 1 et le nombre de couches, nécessaire pour préciser la couche où l'on désire effectuer le calcul élémentaire. Par convention, la couche 1 est la couche inférieure (selon la normale à l’élément) dans le cas des éléments de coque mécanique ou de coque thermique.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NIVE_COUCHE ="
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la couche nume définie par NUME_COUCHE, permet de préciser l'ordonnée où l'on désire effectuer le calcul élémentaire :",
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "'INF' ordonnée inférieure de la couche",
+     "(peau interne),"
+    ],
+    [
+     "'SUP' ordonnée supérieure de la couche",
+     "(peau externe),"
+    ],
+    [
+     "'MOY' ordonnée moyenne de la couche",
+     "(feuillet moyen par défaut)."
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérande MODE_FOURIER",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODE_FOURIER ="
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Numéro de l'harmonique de FOURIER : entier positif ou nul (défaut = 0).",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérande GEOMETRIE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GEOMETRIE =  /   'INITIALE',         [DEFAUT]",
+    "                /   'DEFORMEE',"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Indique si on travaille sur la géométrie initiale ou sur la déformée. Dans ce dernier cas, il faut fournir un champ de déplacements par CHAM_GD ou RESULTAT.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Opérandes CHAM_GD / RESULTAT",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les options ENER_POT et ENER_CIN sont calculées à partir d'un champ aux nœuds ou par éléments existant ou extrait d'un resultat.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.1",
+   "text": "Opérande CHAM_GD",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  CHAM_GD = cham,"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom d'un champ (pour les options ENER_POT et ENER_CIN).",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour l'option ENER_POT, il faut fournir un champ de déplacement ou un champ de température (voir [§3.9]). Pour l'option ENER_CIN, il faut fournir un champ de vitesse (sans fournir de fréquence) ou bien un champ de déplacements et une fréquence (voir [§3.9]).",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.7.2",
+   "text": "Opérande RESULTAT",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  RESULTAT = resu,"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom d'un concept résultat de type evol_elas, evol_ther, mode_meca, evol_noli, mult_elas, fourier_elas ou dyna_trans.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "OptionENER_POT: evol_elas  ,  evol_ther  , mode_meca  ,  mult_elas  ,",
+    "                fourier_elas evol_noli oudyna_trans.",
+    "OptionENER_CIN: mode_meca  , evol_elas , evol_ther  , evol_noli  , ou",
+    "                dyna_trans .",
+    "OptionENER_ELASetENER_TOTALE:evol_noli, evol_elas"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.7.2.1",
+   "text": "Opérandes TOUT_ORDRE / NUME_ORDRE / NUME_MODE / LIST_ORDRE / NOEUD_CMP / FREQ /",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIST_FREQ/INST /LIST_INST/PRECISION/CRITERE"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Voir [U4.71.00].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Mot clé MASS_INER",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.8.1",
+   "text": "But",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer la masse, les inerties et le centre de gravité. Cette option permet le calcul sur chaque élément des caractéristiques suivantes : ( désignant la masse volumique définie dans DEFI_MATERIAU [U4.43.01] par ELAS ou ELAS_FO).",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "m=∫dv Masse : v",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "1 1 1 Centre de gravité : x = ∫ xdv;y = ∫ ydv;z = ∫ zdv G m G m G m v v v",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Tenseur d'inertie au centre de gravité G dans le repère global de description du maillage : I G=∫ y−y 2 z−z 2 dv I G=∫x−x y−y dv xx G G xy G G v v I G=∫ x−x 2 z−z 2 dv I G=∫x−x z−z dv yy G G xz G G v v I G=∫ x−x 2 y−y 2 dv I G=∫y−y z−z dv zz G G yz G G v v",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Puis calcule par \"sommation\" les quantités relatives à la structure globale.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le tenseur principal d'inertie constitué des valeurs propres de la matrice d'inertie est calculé, ainsi que les 3 angles d'Euler associés au repère principal d'inertie. Ces composantes sont notées dans la table :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IX_PRIN_G IY_PRIN_G IZ_PRIN_G ALPHA BETA GAMMA."
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.8.2",
+   "text": "Syntaxe",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  MASS_INER =_F(",
+    "   ♦  /   TOUT    =' OUI',",
+    "      /   GROUP_MA=l grma,          [l_gr_maille]",
+    "   ◊  ORIG_INER= (xp, yp [,zp]),    [l_R]",
+    "          ),"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE =  mo,                 [modele]",
+    "◊  CHAM_MATER = c hmater,        [cham_mater]",
+    "◊  CARA_ELEM =  c arac,          [cara_elem]",
+    "◊  |   NUME_COUCHE =",
+    "   |   NIVE_COUCHE =",
+    "◊  MODE_FOURIER =",
+    "◊  GEOMETRIE    =",
+    "   ♦   /  CHAM_GD =",
+    "       /  RESULTAT ="
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota Pour le mot clé facteur MASS_INER , le modèle et le champ de matériaux sont obligatoires si RESULTAT et CHAM_GD sont absents.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.8.3",
+   "text": "Opérandes",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GEOMETRIE    =   /  'INTIALE',      [DEFAUT]",
+    "                    /  'DEFORMEE',"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Indique si on travaille sur la géométrie initiale ou sur la déformée. Dans ce dernier cas, il faut fournir un champ de déplacements par CHAM_GD ou RESULTAT.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT    = 'OUI',"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA =    lgrma,"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ORIG_INER = (xp, yp [,zp]),         [l_R]"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Point par rapport auquel sera calculé le tenseur d’inertie.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le tenseur d’inertie au point P de coordonnées (xp, yp, zp) s’obtient à partir du tenseur d’inertie au centre de gravité G, de la masse m de la structure et des coordonnées de G par les formules :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "I P=I Gmx2 xx xx PG I P=I Gmy2 yy yy PG I P=I Gmz2 zz zz PG I P=I Gmx y xy xy PG PG I P=I Gmx z xz xz PG PG I P=I Gmy z yz yz PG PG avec x =x −x PG G P y =y −y PG G P z =z −z PG G P",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.9",
+   "text": "Mot clé ENER_POT",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.9.1",
+   "text": "But",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "l’énergie potentielle de déformation à l'équilibre à partir des déplacements, en mécanique linéaire des milieux continus (thermoélasticité 2D et 3D) :",
+   "page": 7
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "1",
+     "1",
+     ""
+    ],
+    [
+     "EPOT=",
+     "∫ U⋅A Udv− ∫ U⋅A thTdv",
+     "∫ thT⋅A thTdv"
+    ],
+    [
+     "2",
+     "2",
+     ""
+    ]
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "élément élément élément où A désigne le tenseur d'élasticité,",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "l’énergie potentielle de déformation à l'équilibre à partir des déplacements, en mécanique linéaire pour les éléments de structures : 1 1 EPOT= UTK U−UTBTAth thAth 2 e 2",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où K désigne la matrice de rigidité Nota :",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "En toute rigueur, l'énergie potentielle d'une structure est l'opposé de ces quantités.",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "l’énergie dissipée thermiquement à l'équilibre en thermique linéaire à partir des températures (cham_no_TEMP_R) : 1 W =− ∫∇T⋅K⋅∇T d th 2  Nota :",
+   "page": 8,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans les deux premiers cas, on doit donner un champ de déplacement derrière l’opérande RESULTAT ou CHAM_GD . Dans le dernier cas un champ de température.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota :",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans l e cas du calcul de l’option sur un champ de température la dépendance des paramètres matériaux à la température est prise en compte via les variables de commande définies dans AFFE_MATERIAU .",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.9.2",
+   "text": "Syntaxe",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_POT =_F (",
+    "          ♦  /  TOUT         =   'OUI',",
+    "             /  GROUP_MA     =   lgrma,    [l_gr_maille]",
+    "          )"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE          =   mo,       [modele]",
+    "◊  CHAM_MATER      =   chmater,  [cham_mater]",
+    "◊  CARA_ELEM       =   carac,    [cara_elem]",
+    "◊  |  NUME_COUCHE  =",
+    "   |  NIVE_COUCHE  =",
+    "◊  MODE_FOURIER    =",
+    "♦  /  CHAM_GD      =",
+    "   /  RESULTAT     ="
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le mot-clé facteur ENER_POT , le modèle, le champ de matériaux et éventuellement le champ de caractéristiques d'éléments de structure sont obligatoires obligatoires (sauf si RESULTAT est fourni) pour déterminer au préalable les champs d’énergie par éléments.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.9.3",
+   "text": "Opérandes",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT      =   'OUI',"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =  l grma,"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.9.4",
+   "text": "Table produite",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie et du pourcentage sur le lieu géométrique concerné :",
+   "page": 8
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE",
+     "POUR_CENT"
+    ],
+    [
+     "5.50000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12",
+     "1.00000E+02"
+    ],
+    [
+     "5.50000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11",
+     "6.78151E+00"
+    ]
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.10",
+   "text": "Mot clé ENER_CIN",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.10.1",
+   "text": "But",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer l’énergie cinétique à partir d’un champ de vitesse ou à partir d’un champ de déplacement et d’une fréquence. 1 Si on a donné un champ de vitesse, E = VTMV. C 2 1 Si on a donné un champ de déplacement et une fréquence, E = 2 U T MU. C 2",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.10.2",
+   "text": "Syntaxe",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_CIN =_F (",
+    "   ◊ OPTION            =  /  'MASS_MECA',        [DEFAUT]",
+    "                          /  'MASS_MECA_DIAG',",
+    "   ♦ /TOUT             =  'OUI',",
+    "     /GROUP_MA         =  lgrma,                 [l_gr_maille]",
+    "            )"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,                    [modele]",
+    "◊  CHAM_MATER       =  chmater,               [cham_mater]",
+    "◊  CARA_ELEM        =  carac,                 [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊  MODE_FOURIER     =",
+    "♦  /   CHAM_GD      =",
+    "   /   RESULTAT     ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota 1",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le mot-clé facteur ENER_CIN , le modèle, le champ de matériaux et éventuellement le champ de caractéristiques d'éléments de structure sont obligatoires (sauf si RESULTAT est fourni) pour déterminer au préalable les champs d’énergie par éléments.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Nota 2",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque l’on souhaite calculer l’énergie en employant la masse diagonale (pour être en cohérence avec l’option que l’on a choisie dans le calcul élémentaire des matrices de masse), on peut préciser 'MASS_MECA_DIAG' derrière le mot clef OPTION (non disponible en 2D). Par défaut on utilise la matrice de masse complète.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.10.3",
+   "text": "Opérandes",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT      =   'OUI',"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =   lgrma,"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.10.4",
+   "text": "Table produite",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie et du pourcentage sur le lieu géométrique concerné :",
+   "page": 9
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE",
+     "POUR_CENT"
+    ],
+    [
+     "5.50000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12",
+     "1.00000E+02"
+    ],
+    [
+     "5.50000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11",
+     "6.78151E+00"
+    ]
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.11",
+   "text": "Mot clé ENER_ELAS",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.11.1",
+   "text": "But",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer l’énergie de déformation élastique pour chaque instant t après un calcul élastique ou élastoplastique, sur la sélection topologique choisie par l'utilisateur. L'utilisateur peut réaliser ce post-traitement à partir d'un concept résultat de type evol_noli ou evol_elas. Dans le cas d'un concept evol_noli, le calcul effectué dépend du choix de déformation fait durant le calcul.",
+   "page": 10
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "En petites déformations (DEFORMATION = PETIT ou DEFORMATION = PETIT_REAC), le calcul est effectué à partir du champ de contraintes de Cauchy SIEF_ELGA par l’expression de Hooke :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "E et= 1 ∫t tD −1tdv 2 v",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où D représente l’opérateur d’élasticité.",
+   "page": 10
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en grandes déformations multiplicatives (DEFORMATION = SIMO_MIEHE), le calcul est effectué à partir du jacobien J du gradient de transformation et de la mesure spécifique de déformation élastique be de SIMO_MIEHE (voir R5.03.21) :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Eet=∫t [ 1 E 1  J2t−1  −ln Jt   1   trbet−3  ] dv v 2 31−2 2 2 En présence de thermique, une correction spécifique est effectuée afin de gommer au mieux les effets de celle-ci sur le jacobien. Cette correction spécifique est détaillée en R5.03.21.",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en grandes déformations logarithmiques (DEFORMATION = GDEF_LOG), le calcul est effectué à partir du champ de contraintes spécifique T (voir R5.03.24) par l’expression :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "E et= 1 ∫t T tD −1 T tdv 2 v",
+   "page": 10,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.11.2",
+   "text": "Syntaxe",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_ELAS =_F(",
+    "   ♦  /   TOUT         =  'OUI',",
+    "      /   GROUP_MA     =  lgrma,    [l_gr_maille]",
+    "          )"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,       [modele]",
+    "◊  CHAM_MATER       =  chmater,  [cham_mater]",
+    "   ◊   CARA_ELEM    =  carac,    [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊  MODE_FOURIER     =",
+    "♦  RESULTAT         ="
+   ],
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.11.3",
+   "text": "Opérandes",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT    = 'OUI',"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA =   l grma,"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.11.4",
+   "text": "Table produite",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie totale et éventuellement de l'énergie de membrane, de l'énergie de flexion, de l'énergie de cisaillement et de l'énergie de couplage membrane - flexion sur le lieu géométrique concerné :",
+   "page": 11
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE",
+     "MEMBRANE",
+     "FLEXION",
+     "CISAILLE",
+     "COUPL_MF"
+    ],
+    [
+     "1.00000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00"
+    ],
+    [
+     "2.00000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00"
+    ],
+    [
+     "2.00000E+00",
+     "GMA2",
+     "GROUP_MA",
+     "2.71323E+11",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00"
+    ],
+    [
+     "2.00000E+00",
+     "UNION_ GROUP_ MA",
+     "GROUP_MA",
+     "5.42646E+11",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00",
+     "0.00E+00"
+    ]
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Les énergies de membrane, flexion, cisaillement et couplage membrane – flexion sont disponibles lorsque le lieu géométrique contient des éléments de plaque ou de coque. Les énergie de cisaillement et de couplage membrane – flexion sont calculés uniquement lorsque le concept résultat est de type evol_elas, sinon elles sont mises à 0.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.12",
+   "text": "Mot clé ENER_ELTR",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.12.1",
+   "text": "But",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer l’énergie de déformation élastique de traction pour chaque instant t après un calcul élastique ou élastoplastique, sur la sélection topologique choisie par l'utilisateur. L'utilisateur peut réaliser ce post-traitement à partir d'un concept résultat de type evol_noli ou evol_elas. Il est important de signaler que cette option n'est disponible qu'en petites déformations. Dans le cas d'un concept evol_noli, le calcul effectué doit obligatoirement utiliser (DEFORMATION = PETIT).",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Uniquement en petites déformations (DEFORMATION = PETIT), le calcul est effectué à partir de cette expression :",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "3 Etraction(t)=∫t λ H(tr(ε(t)))tr(ε(t))2+μ∑ H(ε(t))ε (t)2dv el v 2 i i i=1",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où H représente la fonction Heaviside, ε représente le tenseur des déformations élastiques, ε i représente les déformations élastiques principales.",
+   "page": 11,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.12.2",
+   "text": "Syntaxe",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_ELTR =_F(",
+    "   ♦  /   TOUT         =  'OUI',",
+    "      /   GROUP_MA     =  lgrma,    [l_gr_maille]",
+    "          )"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,       [modele]",
+    "◊  CHAM_MATER       =  chmater,  [cham_mater]",
+    "   ◊   CARA_ELEM    =  carac,    [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊  MODE_FOURIER     =",
+    "♦  RESULTAT         ="
+   ],
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.12.3",
+   "text": "Opérandes",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT    = 'OUI',"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA =   l grma,"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.12.4",
+   "text": "Table produite",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie élastique de traction (TOTALE):",
+   "page": 12
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE"
+    ],
+    [
+     "1.00000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12"
+    ],
+    [
+     "2.00000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11"
+    ],
+    [
+     "2.00000E+00",
+     "GMA2",
+     "GROUP_MA",
+     "2.71323E+11"
+    ],
+    [
+     "2.00000E+00",
+     "UNION_GROUP_MA",
+     "GROUP_MA",
+     "5.42646E+11"
+    ]
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.13",
+   "text": "Mot clé ENER_TOTALE",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.1",
+   "text": "But",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer l’énergie de déformation totale pour les éléments de milieux continus 2D ou 3D. Pour les comportements VMIS_ISOT_LINE ou VMIS_ISOT_TRAC (écrouissage isotrope), l’énergie est calculée à partir des champs de contraintes, de variables internes et du matériau :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "ET=EelEp= 1 ∫ T A−1dv∫  ∫p Rqdq  dv 2 v v 0",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "P étant la déformation plastique équivalente cumulée. Avec l’option SIMO_MIEHE, cette énergie vaut pour les deux modèles VMIS_ISOT_LINE ou VMIS_ISOT_TRAC :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "ET=∫ ( ρ Ψ+∫t Δd τ ) dv v 0 0 0 où  et  sont respectivement l’énergie libre et le potentiel de dissipation, V le volume initial. 0 Pour plus de précision, voir [R5.03.21].",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les autres comportements, l’énergie est obtenue par intégration incrémentale :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "ET=∫ ( ∫t σ.dε ) dv v 0",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "L’intégration incrémentale par la méthode des trapèzes implique :",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "que la discrétisation en temps soit suffisamment fine,",
+   "page": 12
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "que les contraintes et déformations initiales soient nulles,",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "et que le calcul soit demandé à partir du premier instant de calcul.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.2",
+   "text": "Syntaxe",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_TOTALE = _F (",
+    "    ♦ /   TOUT         =  'OUI',",
+    "      /   GROUP_MA     =  lgrma,    [l_gr_maille]",
+    "             )"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2)",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,       [modele]",
+    "◊  CHAM_MATER       =  chmater,  [cham_mater]",
+    "   ◊   CARA_ELEM    =  carac,    [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊  MODE_FOURIER     =",
+    "♦  RESULTAT         ="
+   ],
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.3",
+   "text": "Opérandes",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT     =    'OUI',"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA =    lgrma,"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.13.4",
+   "text": "Table produite",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie totale sur le lieu géométrique concerné :",
+   "page": 13
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE"
+    ],
+    [
+     "1.00000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12"
+    ],
+    [
+     "2.00000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11"
+    ],
+    [
+     "2.00000E+00",
+     "GMA2",
+     "GROUP_MA",
+     "2.71323E+11"
+    ],
+    [
+     "2.00000E+00",
+     "UNION_GROUP_MA",
+     "GROUP_MA",
+     "5.42646E+11"
+    ]
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.14",
+   "text": "Mot-clé WEIBULL",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.14.1",
+   "text": "But",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé permettant pour chaque instant défini, le calcul du champ élémentaire de la puissance m ième de la contrainte de Weibull dont l’expression sur la maille K est donnée, sans prise en compte de la déformation plastique, par :",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "1 mK= ∫ md K w V K 1 p ref p",
+   "page": 13,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "et, avec prise en compte de la déformation plastique par :",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "1 −m  mK= ∫ mexp p d K w V K 1 2 1 p ref p",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K désigne la partie de la maille K qui a plastifié, c’est-à-dire, la partie de K où la déformation p plastique cumulée dépasse un certain seuil ;  représente la contrainte principale maximale et p 1 1 représente la déformation plastique principale maximale.",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les paramètres matériau m , V et le seuil de plasticité sont définis dans DEFI_MATERIAU par la ref relation de comportement WEIBULL (cf. [R7.02.06]).",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Une fois déterminé ce champ élémentaire, l’option calcule par \"sommation\" la contrainte de Weibull d’un domaine D pour chaque instant défini : 1",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "D=C   mKm w w K∈D",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où C est un coefficient destiné à la prise en compte des symétries (cas bi et tri-dimensionnel) et de l’épaisseur (dans le cas bi-dimensionnel) de la structure contenant le domaine D (mot clé COEF_MULT).",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "La probabilité de rupture du domaine D est alors calculée par :",
+   "page": 14
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " m P D=1−exp − w w m u",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Le paramètre « contrainte de clivage »  est, lui aussi, défini dans la relation de comportement  WEIBULL.",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Enfin, les expressions précédentes de la contrainte de Weibull et de la probabilité de rupture ne sont valables que dans le cas d’un trajet de chargement monotone. Ce type de post-traitement peut néanmoins aussi être appliqué à un trajet de chargement plus général, y compris lorsque la contrainte de clivage dépend de la température (relation de comportement WEIBULL_FO). Les expressions de la contrainte de Weibull et de la probabilité de rupture sont alors différentes (cf [R7.02.06]). Nota :",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le mot clé facteur WEIBULL , le modèle et le champ de matériau sont obligatoires (sauf si RESULTAT est présent).",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Des conseils d'utilisation de ce modèle sont donnés dans la documentation [U2.05.08].",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.14.2",
+   "text": "Syntaxe",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  WEIBULL = _F (",
+    "   ♦  /   TOUT         =  'OUI',",
+    "      /   GROUP_MA     =  lgrma,           [l_gr_maille]",
+    "   ◊ OPTION            =  /  'SIGM_ELGA',  [DEFAUT]",
+    "                          /  'SIGM_ELMOY',",
+    "   ◊  CORR_PLAST       =  /  'OUI',",
+    "                          /  'NON',        [DEFAUT]",
+    "   ◊ COEF_MULT         =  /  coef,         [R]",
+    "                          /  1.,           [DEFAUT]",
+    "                )"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ MODELE            =  mo,              [modele]",
+    "◊ CHAM_MATER        =  chmater,         [cham_mater]",
+    "◊ CARA_ELEM         =  carac,           [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊ MODE_FOURIER      =",
+    "♦  /   CHAM_GD      =",
+    "   /   RESULTAT     ="
+   ],
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.14.3",
+   "text": "Opérandes",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.14.3.1",
+   "text": "Opérande OPTION",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  /  OPTION = 'SIGM_ELGA',"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur du champ élémentaire associée à la maille K est obtenue par intégration par 1 ∫ mdK. quadrature aux points de Gauss de l’expression V K 1 p p",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ OPTION = 'SIGM_ELMOY',"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur du champ élémentaire associée à la maille K est obtenue à partir de la 1 valeur principale maximale du tenseur ∫ dK dont la valeur est approchée par V K p p quadrature aux points de Gauss.",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.14.3.2",
+   "text": "Opérande CORR_PLAST",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  /  CORR_PLAST = 'OUI',"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le champ de la contrainte de Weibull est évalué avec prise en compte de la déformation plastique.",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  CORR_PLAST = 'NON',"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le champ de la contrainte de Weibull est évalué sans prise en compte de la déformation plastique.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.14.3.3",
+   "text": "Opérande COEF_MULT",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  COEF_MULT = valeur,"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur par défaut de ce coefficient est 1.0.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le tableau suivant, dans lequel l’épaisseur est notée e, indique des valeurs typiques du coefficient C en fonction du type de symétrie :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "symétrie simple : le plan de symétrie du maillage passe par le plan du défaut et le défaut est entièrement maillé,",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "symétrie double : le plan de symétrie du maillage passe également par le plan du défaut mais une seule moitié du défaut est maillé.",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "3Det3D_SI     AXIS et      D_PLAN et      C_PLAN",
+    "              AXIS_SI     D_PLAN_SI"
+   ],
+   "page": 15
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "SIMPLE",
+     "2",
+     "4",
+     "2e",
+     "2e"
+    ],
+    [
+     "DOUBLE",
+     "4",
+     "sans objet",
+     "sans objet",
+     "sans objet"
+    ],
+    [
+     "NON",
+     "1",
+     "2",
+     "e",
+     "e"
+    ]
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeurs du coefficient multiplicateur de symétrie-épaisseur",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.14.4",
+   "text": "Table produite",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de la contrainte de Weibull, de la probabilité de rupture et de la puissance m ième de la contrainte de Weibull sur le lieu géométrique concerné :",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "INST             ENTITE     SIGMA_WEIBULL PROBA_WEIBULL SIGMA_WEIBULL**M"
+   ],
+   "page": 15
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "1 . 0 0000E+00",
+     "TOUT",
+     "2.49298E+02",
+     "0.00E+00",
+     "3.32096E+57"
+    ],
+    [
+     "2.0 0000E+00",
+     "TOUT",
+     "2.50473E+02",
+     "0.00E+00",
+     "3.71756E+57"
+    ]
+   ],
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.15",
+   "text": "Mot clé RICE_TRACEY",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.15.1",
+   "text": "But",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Rt  Cette option permet, pour chaque instant de calcul t défini, le calcul du taux de croissance n n −R 0 d’une cavité sphérique par rapport à un domaine DRt  et R désignent respectivement le n 0 rayon courant et le rayon initial de la cavité). La loi d’évolution de Rice-Tracey s’exprime par la relation :",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "d  R     ∣ 2 ∣ dp log =0.283Signe M exp M eq dt R  2 dt 0 eq eq",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "1 ( = Trace ;  désigne la contrainte équivalente de von Mises et p désigne la M 3 eq eq déformation équivalente de von Mises).",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.15.2",
+   "text": "Syntaxe",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  RICE_TRACEY = _F(",
+    "   ♦  /   TOUT         = 'OUI',",
+    "      /   GROUP_MA     = lgrma,            [l_gr_maille]",
+    "   ◊ OPTION            =  /  'SIGM_ELGA',  [DEFAUT]",
+    "                          /  'SIGM_ELMOY',",
+    "   ◊ LOCAL             =  /  'OUI',        [DEFAUT]",
+    "          /  'NON',",
+    "          )"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,              [modele]",
+    "◊  CHAM_MATER       =  chmater,         [cham_mater]",
+    "◊  CARA_ELEM        =  carac,           [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "◊  MODE_FOURIER     =",
+    "♦  /   CHAM_GD      =",
+    "   /   RESULTAT      ="
+   ],
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.15.3",
+   "text": "Opérandes",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.15.3.1",
+   "text": "Opérande OPTION",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  OPTION =  /  'SIGM_ELGA',     [DEFAUT]"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Les champs élémentaires des contraintes et des déformations plastiques sont utilisés dans leurs représentations aux points de Gauss.",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  'SIGM_ELMOY',"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Les champs élémentaires des contraintes et des déformations plastiques sont moyennés par rapport aux points de Gauss avant d’être utilisés.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.15.3.2",
+   "text": "Opérande LOCAL",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  LOCAL  =  /  'OUI',           [DEFAUT]"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "La loi de Rice-Tracey est intégrée sur chaque maille K du domaine D et le résultat consiste en la valeur maximale obtenue sur l’ensemble des mailles du domaine.",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ 'NON',"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": " Les champs de triaxialité M t  et de variation de déformation plastique p t  sont",
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "n eq n eq calculés sur chaque maille. Puis, leurs moyennes respectives, pondérée par le volume des mailles du domaine, sont déterminées. Finalement, la loi de Rice-Tracey est intégrée sur ces valeurs moyennées.",
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.15.3.3",
+   "text": "Opérandes TOUT / GROUP_MA",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Le ou les domaines de calcul D sont spécifiés par :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TOUT = 'OUI',"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Un seul domaine est défini, il coïncide avec l’ensemble de la structure.",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA = lgrma,"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Chaque groupe de mailles de la liste lgrma défini un domaine de calcul.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.15.4",
+   "text": "Table produite",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs du taux de croissance d’une cavité sphérique et du volume concerné sur le lieu géométrique concerné :",
+   "page": 17
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "TX_CROIS_CAVITES",
+     "VOLUME_CONCERNE"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "MA101",
+     "1.00000E+00",
+     "3.75000E+00"
+    ],
+    [
+     "2.0 0000E+00",
+     "MA101",
+     "1.00000E+00",
+     "6.23719E-01"
+    ]
+   ],
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.16",
+   "text": "Mot clé INDIC_ENER",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.16.1",
+   "text": "But",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer un indicateur global de perte de proportionnalité du chargement en élastoplasticité, fondé sur la densité d’énergie. Cet indicateur est décrit en détail dans le document [R4.20.01]. On rappelle sa fonction et son expression. Cet indicateur est destiné à détecter si au cours de l’histoire de la structure et jusqu'à l’instant actuel t, et pour une zone de la structure choisie par le modélisateur, il y a eu perte de proportionnalité du chargement (i.e. il s’agit d’avoir une mesure globale du changement des directions principales du tenseur de contraintes pour chaque point de la zone définie par l’utilisateur). Cet indicateur n’est utilisable que pour des modèles dont le matériau présente un écrouissage isotrope et dont les éléments sont isoparamétriques 2D ou 3D. Cet indicateur a pour expression :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "",
+   "page": 17
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "1",
+     ""
+    ],
+    [
+     "I= ∫ 1−",
+     "dv"
+    ],
+    [
+     "V",
+     ""
+    ]
+   ],
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "V est le volume du domaine défini par l’utilisateur,",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " est la densité d’énergie élastique totale associée à la courbe de traction si on considérait le matériau élastique non-linéaire. Plus exactement son expression est la suivante :",
+   "page": 17
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "1",
+     "2",
+     "",
+     ""
+    ],
+    [
+     "= K⋅tr2",
+     "2",
+     "si  R p",
+     ""
+    ],
+    [
+     "2",
+     "3",
+     "eq",
+     "eq"
+    ],
+    [
+     "1",
+     "R2 p",
+     "p",
+     ""
+    ],
+    [
+     "= K⋅tr2",
+     "∫Rsds si  =R p",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "6 0",
+     "eq",
+     ""
+    ]
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "où :",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "K est le module de compressibilité,",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " est le coefficient de cisaillement de Lamé,",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "R p est le seuil de la courbe de traction associé à la déformation plastique cumulée p ,",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " est la densité d’énergie de déformation définie par :",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "t t=∫⋅˙d 0",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "on peut décomposer t en une partie élastique et une partie plastique :",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "t= t t élas plas",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "avec : 1",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "t= ⋅élas élas 2 t",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "t=∫ R pdp plas 0",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas où l’on a t=0 , on pose I=0 .",
+   "page": 18,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.16.2",
+   "text": "Syntaxe",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  INDIC_ENER = _F (",
+    "   ♦  /   TOUT     = ' OUI',",
+    "      /   GROUP_MA = l grma,        [l_gr_maille]",
+    "                   )"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE       =   mo,          [modele]",
+    "◊  CHAM_MATER   =   chmater,     [cham_mater]",
+    "♦  RESULTAT     =   resu,        [evol_noli]"
+   ],
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.16.3",
+   "text": "Opérandes",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "L’indicateur est calculé sur le domaine défini par les mots clés :",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   TOUT     = ' OUI',"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur tous les éléments du modèle mo.",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   GROUP_MA = l grma,"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur la liste lgrma des groupes de mailles du modèle mo. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.16.4",
+   "text": "Table produite",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, la valeur de l'indicateur global de perte de proportionnalité du chargement en élastoplasticité sur le lieu géométrique concerné :",
+   "page": 19
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "INDIC_ENER"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "MA",
+     "4.77299E-02"
+    ],
+    [
+     "2.0 0000E+00",
+     "MA",
+     "3.33763E-02"
+    ]
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.17",
+   "text": "Mot clé INDIC_SEUIL",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.17.1",
+   "text": "But",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant de calculer un indicateur global de perte de proportionnalité du chargement en élastoplasticité. Cet indicateur permet d’une part de savoir, en moyenne sur la zone considérée, si le tenseur des contraintes et celui des déformations plastiques ont les mêmes directions et si le seuil plastique est atteint à l’instant actuel, et d’autre part si au cours de l’histoire la déformation plastique a changé de direction. Cet indicateur a pour expression : 1  ⋅p  I= ∫ 1− dv V Rp⋅p V",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où :",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "V est le volume du domaine défini par l’utilisateur,",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " est le tenseur des contraintes à l’instant courant,",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": " p est le tenseur des déformations plastiques à l’instant courant,",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "R p est la fonction d’écrouissage (avec Ro= où  est la limite y y d’élasticité). i.e. c’est le seuil de la courbe de traction associé à la déformation plastique cumulée p .",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "p est la déformation plastique cumulée.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas où l’on a R p⋅p=0 , on pose I=0 .",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Le produit scalaire ⋅p est associé à la norme au sens de von Mises. Cet indicateur est normalisé et a une valeur comprise entre 0 et 1. Il est nul si le chargement a conservé son caractère proportionnel en chaque point de V tout au long de l’histoire écoulée. Cet indicateur est décrit en détail dans le document [R4.20.01].",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.17.2",
+   "text": "Syntaxe",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  INDIC_SEUIL = _F(",
+    "   ♦  /   TOUT      =  'OUI',",
+    "      /   GROUP_MA  =  lgrma,       [l_gr_maille]",
+    "          )"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE        =  mo,          [modele]",
+    "◊  CHAM_MATER   =   chmater,     [cham_mater]",
+    "♦  RESULTAT     = r esu,         [evol_noli]"
+   ],
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.17.3",
+   "text": "Opérandes",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "L’indicateur est calculé sur le domaine défini par les mots clés :",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   TOUT     = ' OUI',"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur tous les éléments du modèle mo.",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   GROUP_MA = l grma,"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur la liste lgrma des groupes de mailles du modèle mo. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.17.4",
+   "text": "Table produite",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, la valeur de l'indicateur global de perte de proportionnalité du chargement en élastoplasticité sur le lieu géométrique concerné :",
+   "page": 20
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "INDIC_SEUIL"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "MA",
+     "4.77299E-02"
+    ],
+    [
+     "2.0 0000E+00",
+     "MA",
+     "3.33763E-02"
+    ]
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.18",
+   "text": "Mot clé CHAR_LIMITE",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.18.1",
+   "text": "But",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Post-traitement du calcul de la charge limite [R7.07.01 §2.3]. Ce mot-clé facteur permet le calcul de la charge limite d’une structure par une approche cinématique. Son emploi nécessite au préalable d’avoir réalisé un calcul non linéaire (voir opérateur STAT_NON_LINE [U4.51.03]) renseigné par le mot-clé RESULTAT et dont les caractéristiques sont les suivantes :",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "loi de comportement NORTON_HOFF,",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "liste croissante d’instants de calcul correspondant à des valeurs de régularisation de la loi de NORTON_HOFF qui tendent vers 1 (en pratique, on recommande de se limiter à des instants compris entre 1 et 2 qui ne conduisent pas à des calculs trop longs tout en permettant d’obtenir une borne supérieure de la charge limite suffisamment précise),",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "chargement (unitaire) piloté correspondant au chargement par rapport auquel on cherche à estimer la charge limite, la méthode de pilotage étant TYPE = 'ANA_LIM',",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "éventuellement un chargement constant dont il faut alors impérativement rappeler l’existence par le mot-clé CHAR_CSTE = 'OUI'.",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "L’opérateur POST_ELEM produit alors une table qui donne pour chaque instant du calcul, c’est-à-dire pour des régularisations de plus en plus faibles, une borne supérieure CHAR_LIMI_SUP de la charge limite supportée par la structure. En outre, en l’absence de chargement constant, CHAR_CSTE = 'NON', la table contient également une estimation CHAR_LIMI_ESTIM d’une borne inférieure de la charge limite. En revanche, si un chargement constant est présent, CHAR_CSTE = 'OUI', une telle estimation de la borne inférieure n’est plus disponible mais la table contient alors la puissance PUIS_CHAR_CSTE du chargement constant dans le champ de vitesse solution du problème. Un exemple détaillé de calcul de charge limite est fourni en [U2.05.04].",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.18.2",
+   "text": "Syntaxe",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CHAR_LIMITE = _F(",
+    "   ◊  CHAR_CSTE     =  /  'NON', [DEFAUT]",
+    "                       /  'OUI',",
+    "          )"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE        =  mo,       [modele]",
+    "◊  CHAM_MATER    =  chmater,  [cham_mater]",
+    "♦  RESULTAT      =  resu,     [evol_noli]",
+    "   ◊   CARA_ELEM =  carac,    [cara_elem]",
+    "◊  MODE_FOURIER  =  nh,       [I]"
+   ],
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.18.3",
+   "text": "Opérandes",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHAR_CSTE =   /  'NON',  [DEFAUT]",
+    "                 /  'OUI',"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé indiquant si le chargement est constant ou non constant (valeur par défaut).",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.18.4",
+   "text": "Table produite",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, si CHAR_CSTE = 'OUI' :",
+   "page": 21
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "CHAR_LIMI_SUP",
+     "PUIS_CHAR_CSTE"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "1.46838E+01",
+     "-2.50000E-01"
+    ],
+    [
+     "2.0 0000E+00",
+     "1.46838E+01",
+     "-2.50000E-01"
+    ]
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, si CHAR_CSTE = 'NON' :",
+   "page": 21
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "CHAR_LIMI_SUP",
+     "CHAR_LIMI_ESTIM"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "1.46838E+01",
+     "-2.50000E-01"
+    ],
+    [
+     "2.0 0000E+00",
+     "1.46838E+01",
+     "-2.50000E-01"
+    ]
+   ],
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.19",
+   "text": "Mot clé CARA_GEOM",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.19.1",
+   "text": "But",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "CARA_GEOM est utilisé par la macro_commande MACR_CARA_POUTRE [U4.42.02] pour calculer les caractéristiques géométriques (centre d’inertie, moments d’inertie) d’une section de poutre maillée en éléments de milieu continu 2D.",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.19.2",
+   "text": "Syntaxe",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CARA_GEOM = _F   (",
+    "   ♦  /   TOUT      =  'OUI',",
+    "      /   GROUP_MA  =  lgma,     [l_gr_maille]",
+    "   ◊  SYME_X        =  /  'OUI',",
+    "                       /  'NON', [DEFAUT]",
+    "   ◊  SYME_Y        =  /  'OUI',",
+    "                       /  'NON', [DEFAUT]",
+    "   ◊  ORIG_INER     =  (xp, yp), [l_R]",
+    "          )"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots clés simples : (voir [§2])",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE        = mo,        [modele]",
+    "◊  CHAM_MATER    = chmater,   [cham_mater]"
+   ],
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.19.3",
+   "text": "Opérandes",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.19.3.1",
+   "text": "Opérandes TOUT / GROUP_MA",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Définissent le lieu du calcul. On peut en particulier faire le calcul des caractéristiques pour un ensemble de mailles, défini par GROUP_MA.",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.19.3.2",
+   "text": "Opérandes SYME_X / SYME_Y",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Prise en compte d’une symétrie par rapport à X ou à Y (ou les deux). Le maillage fourni par l’utilisateur correspond alors à la moitié de la section (ou le quart).",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.19.3.3",
+   "text": "Opérande ORIG_INER",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de donner les coordonnées d’un point par rapport auquel seront calculées les caractéristiques géométriques [U4.42.02].",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.19.4",
+   "text": "Table produite",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Cf [U4.42.02] §3.2",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.20",
+   "text": "Mot clé CARA_POUTRE",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.20.1",
+   "text": "But",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque Ce mot-clé n’est pas destiné à être appelé directement par l’utilisateur.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "CARA_POUTRE est utilisé exclusivement par la macro-commande MACR_CARA_POUTRE [U4.42.02] pour calculer les caractéristiques mécaniques (constante de torsion, rayon de torsion, constantes de cisaillement, position du centre de cisaillement, constante de gauchissement) d’une section maillée en éléments 2D.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Son emploi nécessite l’appel préalable de nombreuses commandes, spécifiques à chaque option calculée. Les opérandes ne seront donc pas détaillés ici. Pour plus de détail on se reportera à MACR_CARA_POUTRE [U4.42.02].",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.20.2",
+   "text": "Syntaxe",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  CARA_POUTRE = _F(",
+    "   ♦  / TOUT                     =  'OUI',",
+    "      / GROUP_MA                 =  lgma,                  [gr_maille]",
+    "   ◊  GROUP_MA_INTE              =  lgma_inte,             [l_gr_maille]",
+    "   ◊  CARA_GEOM                  =  tab,                   [tabl_cara_geom]",
+    "   ◊  LAPL_PHI                   =    ,                  [evol_ther]",
+    "   ◊  LAPL_PHI_Y                 =y    ,                 [evol_ther]",
+    "   ◊  LAPL_PHI_Z                 =z    ,                 [evol_ther]",
+    "   ◊  RT                         =  rt,                    [R]",
+    "          ◊        ♦   LIAISON   =  /  'ROTULE',",
+    "                                    /  'ENCASTREMENT',",
+    "                   ♦   LONGUEUR  =  L,                     [R]",
+    "                   ♦   MATERIAU  =  mat,                   [mater]",
+    "                   ◊   OPTION    =  /  'CARA_TORSION',",
+    "                                    /  'CARA_CISAILLEMENT',",
+    "                                    /  'CARA_GAUCHI',",
+    "          )"
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots clés simples : (voir [§2])",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE                        =  mo,                    [modele]",
+    "◊  CHAM_MATER                    =  chmater,               [cham_mater]"
+   ],
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.20.3",
+   "text": "Table produite",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Cf [U4.42.02] §3.2",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.21",
+   "text": "Mot clé AIRE_INTERNE",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.21.1",
+   "text": "But",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur permettant le calcul de l’aire d’un trou dans un maillage 2D à partir de son contour.",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.21.2",
+   "text": "Syntaxe",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  AIRE_INTERNE = _F(♦  GROUP_MA_BORD = lgma)"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé simple : ◊ MODELE = mo, [modele]",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.21.3",
+   "text": "Opérande",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA_BORD = lgma,"
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste de groupes de mailles de bord délimitant le trou (SEG2 ou SEG3)",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.21.4",
+   "text": "Table produite",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque groupe de mailles de bord, l'aire du trou et la longueur de son contour.",
+   "page": 23
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "GROUP_MA",
+     "AIRE",
+     "LONGUEUR"
+    ],
+    [
+     "GMA1",
+     "3.14128E-02",
+     "6.28303E-01"
+    ],
+    [
+     "GMA 2",
+     "3.14128E-02",
+     "6.28303E-01"
+    ]
+   ],
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.22",
+   "text": "Mot clé TRAV_EXT",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.22.1",
+   "text": "But",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot_clé facteur permettant de calculer le travail des efforts extérieurs réel TRAV_REEL ou élastique TRAV_ELAS tels que définis ci-dessous :",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "t t TRAV_REEL=∫∫⋅˙=∫ F ⋅U˙ éq 3.22.1-1 int t  t 0 0",
+   "page": 23,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "1 1 TRAV_ELAS= ∫⋅= F ⋅U 2 2 int éq 3.22.1-2  Le calcul s’effectue sur la base d’une SD résultat, renseignée sous le mot-clé RESULTAT, pour laquelle les forces nodales, c’est-à-dire les forces intérieures, ont été préalablement calculées par l’opérateur CALC_CHAMP, option 'FORC_NODA' [U4.81.04]. Dans le cas du travail réel, l’instant initial t correspond au premier instant archivé dans la SD résultat ; l’intégration en temps est effectuée 0 par une méthode de trapèzes :",
+   "page": 23,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "n−1t i1 n−1U i1 1 n−1 TRAV_REEL=∑∫ FUt .Ut dt=∑ ∫ FZdZ≈ ∑U −U F F  i i 2 i1 i i1 i i=0 t i=0 U i=0 i i 1n−1 ≈ ∑U .F U .F −U .F −U .F  2 i1 i1 i1 i i i1 i i i=0",
+   "page": 24,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les deux grandeurs TRAV_REEL et TRAV_ELAS sont calculées pour chaque instant archivé dans la SD résultat.",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces quantités peuvent s’interpréter graphiquement sur la courbe de réponse force – déplacement de la structure (à condition que la force soit duale du déplacement, par exemple la pression et le volume dans le cas d’une cavité sous pression).",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "F F",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "U U U 0 U 1 U n U 0 U n",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "TRAV_ELAS TRAV_REEL",
+   "page": 24
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.22.2",
+   "text": "Syntaxe",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TRAV_EXT = _F(  )"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé simple :",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  RESULTAT = resu     / [evol_elas]",
+    "             / [evol_noli]",
+    "             / [dyna_trans]"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la structure de données résultat du calcul.",
+   "page": 24
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.22.3",
+   "text": "Table produite",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, le travail élastique et le travail des forces extérieures réel.",
+   "page": 24
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "TRAV_ELAS",
+     "TRAV_REEL"
+    ],
+    [
+     "0.00000E+00",
+     "1.16070E+00",
+     "1.16070E+00"
+    ]
+   ],
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "1.00000E+00   4.64279E+00     4.64279E+00"
+   ],
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.23",
+   "text": "Opérande INTEGRALE",
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.23.1",
+   "text": "But",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer l’intégrale d’une composante d’un champ sur un domaine défini par les mots-clés TOUT, GROUP_MA. On produit une table contenant la valeur de l’intégrale ainsi que la moyenne (égale à l’intégrale divisée par le volume). Cette fonctionnalité est interdite pour les éléments de structure à l’exception des composantes N , VY , VZ , MT , MFY et MFZ sur les éléments POU_D_T .",
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.23.2",
+   "text": "Syntaxe",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  INTEGRALE =_F(",
+    "   ♦  / TOUT        =  'OUI',",
+    "      / GROUP_MA    =  lgrma,    [l_gr_maille]",
+    "    ◊ NOM_CMP       =  nocmp,                 [Kn]",
+    "    ◊ NOM_ VARI     =   novari ,              [Kn]",
+    "   ♦  TYPE_MAILLE   =  /'1D',",
+    "                       /'2D',",
+    "                       /'3D',",
+    "   ◊  DEJA_INTEGRE  =  /  'OUI'",
+    "                       /  'NON'",
+    "          )"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊  MODELE        =  mo,          [modele]",
+    "   ◊  CHAM_MATER    =  chmater,  [cham_mater]",
+    "   ♦  /   CHAM_GD   =  cham,     [cham_gd]",
+    "      /   RESULTAT  =  resu,     [resultat]",
+    "       /  NOM_CHAM     =  champ,    [Kn]",
+    "# sélection des instants de calcul",
+    "voirTOUT_ORDRE,NUME_ORDRE, LIST_ORDRE, INST, LIST_INST dans [U4.71.00]"
+   ],
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.23.3",
+   "text": "Opérandes",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT      =   'OUI',"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =   lgrma,"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  TYPE_MAILLE"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de filtrer selon la dimension des mailles (obligatoire afin d'assurer l’homogénéité des mailles en dimension).",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DEJA_INTEGRE =   /'OUI'",
+    "                    /'NON'"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Ne sert que pour les cham_elem constants par élément. Dans ce cas, ce mot-clé est obligatoire et sert à différencier les champs vraiment constants des champs intégrés sur l'élément (comme les énergies potentielle ou cinétique par exemple). Cette distinction est importante pour le calcul de l'intégrale car on ne fait pas la même « somme ».",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NOM_CMP   =     n ocmp,                 [Kn]"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la composante dont on souhaite calculer l 'intégrale .",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ NOM_ VARI  =      novari,               [Kn]"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les champs des variables internes (VARI_*), on peut donner le nom de la variable interne dont on souhaite calculer l'intégrale (voir [U4.51.11] pour les règles de nommage des variables internes).",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.23.4",
+   "text": "Table produite",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, l'intégrale et la moyenne :",
+   "page": 26
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "INTE_PRES",
+     "MOYE_PRES"
+    ],
+    [
+     "0.00000E+00",
+     "1.16070E+00",
+     "1.16070E+00"
+    ],
+    [
+     "1.00000E+00",
+     "4.64279E+00",
+     "4.64279E+00"
+    ]
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.24",
+   "text": "Opérande MINMAX",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.24.1",
+   "text": "But",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer les extremums en espace d'une liste de composantes d'un champ, pour tous les instants spécifiés sur un domaine défini par les mots-clés TOUT, GROUP_MA. On produit une table contenant la valeur du min, du max, et leur localisation : nom de la maille et du point de Gauss, nom du nœud.",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.24.2",
+   "text": "Syntaxe",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MINMAX  = _F(",
+    "   ♦  /   TOUT     =   'OUI',",
+    "      /   GROUP_MA =   lgrma,    [l_gr_maille]",
+    "   ◊  MODELE       =   mo,       [modele]",
+    "   ♦  /   CHAM_GD  =   cham,     [cham_gd]",
+    "      /   RESULTAT =   resu,     [resultat]",
+    "          NOM_CHAM =   champ,    [Kn]",
+    "      # sélection des instants de calcul",
+    "voirTOUT_ORDRE, NUME_ORDRE, LIST_ORDRE, INST, LIST_INST dans [U4.71.00]",
+    "    ♦     NOM_CMP  =   lcmp  )"
+   ],
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.24.3",
+   "text": "Opérandes",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT      =  ' OUI',"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Calcul des extremums sur toute la structure.",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =  l grma,"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Calcul des extremums sur une liste de groupe de mailles, S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.24.4",
+   "text": "Table produite",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Le table contient, pour chaque instant, les valeurs des max, min pour chaque composante ainsi que leur localisation :",
+   "page": 27
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CHAM_GD",
+     "INST",
+     "MAX_EPXX",
+     "MA_MAX_EPXX",
+     "PT_MAX_EPXX"
+    ],
+    [
+     "EPMAX",
+     "0.0",
+     "6.90232E+02",
+     "M121",
+     "4"
+    ]
+   ],
+   "page": 27
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "MIN_EPXX",
+     "MA_MIN_EPXX",
+     "PT_MIN_EPXX"
+    ],
+    [
+     "0.00000E+00",
+     "M1080",
+     "1"
+    ]
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.25",
+   "text": "Mot clé ENER_DISS",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.25.1",
+   "text": "But",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer l’énergie de dissipation (intégrale sur le domaine de la densité d'énergie DISS_ELGA calculée par CALC_CHAMP). Cette option n'est pour l'instant calculable que dans le cas suivant :",
+   "page": 27
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "élément DKTG et lois de comportement GLRC_DM et DHRC.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.25.2",
+   "text": "Syntaxe",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  ENER_DISS =_F(",
+    "   ♦  /   TOUT         =  'OUI',",
+    "      /   GROUP_MA     =  lgrma,    [l_gr_maille]",
+    "          )"
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODELE           =  mo,       [modele]",
+    "◊  CHAM_MATER       =  chmater,  [cham_mater]",
+    "   ◊   CARA_ELEM    =  carac,    [cara_elem]",
+    "◊  |   NUME_COUCHE  =",
+    "   |   NIVE_COUCHE  =",
+    "♦  RESULTAT         ="
+   ],
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.25.3",
+   "text": "Opérandes",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT    = 'OUI',"
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA =    lgrma,"
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles. S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.25.4",
+   "text": "Table produite",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient, pour chaque instant, les valeurs de l'énergie de dissipation sur le lieu géométrique concerné :",
+   "page": 27
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "LIEU",
+     "ENTITE",
+     "TOTALE"
+    ],
+    [
+     "1.00000E+00",
+     "MA",
+     "TOUT",
+     "4.00093E+12"
+    ],
+    [
+     "2.00000E+00",
+     "GMA1",
+     "GROUP_MA",
+     "2.71323E+11"
+    ],
+    [
+     "2.00000E+00",
+     "GMA2",
+     "GROUP_MA",
+     "2.71323E+11"
+    ]
+   ],
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "2.00000E+00      UNION_GROUP_MA   GROUP_MA         5.42646E+11"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : S’il y a plus d’un groupe de mailles dans la liste, alors une ligne est ajoutée à la table en sortie qui est le résultat sur l’union des mailles des groupes données en plus du résultat par groupe. Cette nouvelle ligne correspond au groupe de mailles ‘UNION_GROUP_MA’.",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.26",
+   "text": "Opérande VOLUMOGRAMME",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.26.1",
+   "text": "But",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer la distribution en surface ou en volume de la valeur d’une composante d’un champ à différents instants sur un domaine défini par les mots-clés TOUT ou GROUP_MA. On produit une table contenant :",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les bornes des intervalles définies par les valeurs minimum et maximum de la composante et du nombre d'intervalles désiré,",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le pourcentage de la structure correspondant à chaque intervalle.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque Le nombre d'intervalles est défini par l’utilisateur, les bornes sont déterminées par Code_Aster de la façon suivante : Soit n le nombre d'intervalles, et Vmin et Vmax les valeurs extrémales de la composante. Soit p=Vmax−Vmin/n la longueur de chaque intervalle. Les intervalles sont : [Vmin,Vminp],[Vminp,Vmin2p],...,[Vminn−1p,Vmax]",
+   "page": 28,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.26.2",
+   "text": "Syntaxe",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  VOLUMOGRAMME =_F(",
+    "   ♦  / TOUT       =   'OUI',",
+    "      / GROUP_MA   =   grma,        [gr_maille]",
+    "   ◊  TYPE_MAILLE  =   /'2D',",
+    "                       /'3D',",
+    "   ◊  NOM_CHAM     =   champ,       [Kn]",
+    "   ♦  NOM_CMP      =   cmp,         [Kn]",
+    "   ◊  BORNES       =   (bmin, bmax),[l_R]",
+    "   ◊  NORME        =   /'RELATIF'   [defaut]",
+    "                       /'ABSOLU'",
+    "   ◊  |   NB_INTERV    = nb_int     [I]",
+    "      |   SEUIL        = seuil      [R]",
+    "          )"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊  MODELE       =   mo,       [modele]",
+    "   ◊  CHAM_MATER   =   chmater,  [cham_mater]",
+    "   ◊  CARA_ELEM    =   carac,    [cara_elem]",
+    "   ♦  /   CHAM_GD  =   cham,     [cham_gd]",
+    "      /   RESULTAT =   resu,     [resultat]",
+    "# sélection des instants de calcul",
+    "voirTOUT_ORDRE,NUME_ORDRE, LIST_ORDRE, INST, LIST_INST dans [U4.71.00]"
+   ],
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.26.3",
+   "text": "Opérandes",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT      =  ' OUI',"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =  l grma,"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur un groupe de mailles.",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TYPE_MAILLE"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de filtrer selon la dimension des mailles.",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  |   NB_INTERV    =  nb_int    [I]"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Nombre d'intervalles désirés",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|   SEUIL        = seuil      [R]"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de choisir un seuil. Dans ce cas le nombre d'intervalles est égal à deux.",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NORME         =  /'RELATIF'   [defaut]",
+    "                    /'ABSOLU'"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Avec NORME='RELATIF', les résultats affichés dans la colonne DISTRIBUTION de la table produite sont des pourcentages (entre 0 et 100) du volume total calculé. Avec NORME='ABSOLU', on ne fait pas cette adimensionnalisation et les résultats affichés sont les volumes effectifs, intervalle par intervalle, exprimés dans l'unité définie par le maillage.",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  BORNES        =  (bmin, bmax),[l_R]"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de borner les valeurs du champs utilisées pour le calcul du volumogramme.",
+   "page": 29
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.26.4",
+   "text": "Table produite",
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient les bornes des intervalles et le pourcentage de la structure correspondant à chaque intervalle.",
+   "page": 29
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "INST",
+     "NOM_CMP",
+     "GROUP_MA",
+     "BORNE_INF",
+     "BORNE_SUP",
+     "DISTRIBUTION"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "M 11",
+     "GAUCHE",
+     "-9.99990E-07",
+     "-8.99947E-07",
+     "1.95000E+01"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "M 11",
+     "GAUCHE",
+     "-8.99947E-07",
+     "-7.99947E-07",
+     "2 . 000 00E+0 1"
+    ],
+    [
+     "1 . 0 0000E+00",
+     "M 11",
+     "GAUCHE",
+     "-7.99947E-07",
+     "- 6 .99947E-07",
+     "2 . 0 5 0 00E+0 1"
+    ]
+   ],
+   "page": 29
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.27",
+   "text": "Opérande NORME",
+   "page": 29
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.27.1",
+   "text": "But",
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de calculer la norme d’un champ sur un domaine défini par les mots-clés TOUT, GROUP_MA pour des éléments milieux continus uniquement. Actuellement, on peut calculer la norme L et la 2 norme de Frobenius (voir la documentation de CALC_CHAMP). On produit une table contenant la norme du champ.",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.27.2",
+   "text": "Syntaxe",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  NORME =_F (",
+    "   ◊  TYPE_NORM     =  |'L2',    [Kn]",
+    "                        |'FROBENIUS'",
+    "   ♦  / TOUT        =  'OUI',",
+    "      / GROUP_MA    =  lgrma,    [l_gr_maille]",
+    "   ◊  TYPE_MAILLE   =  / '2D',   [Kn]",
+    "                       / '3D',",
+    "   ♦  NOM_CHAM      =  champ,    [Kn]",
+    "   #Si CHAM_GD est renseigné",
+    "   ◊  COEF_MULT     =  coef,     [l_R]",
+    "          )"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots-clés simples : (voir [§2])",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊  MODELE    =  m o,          [modele]",
+    "   ◊  CHAM_MATER   =   chmater,  [cham_mater]",
+    "    ♦ / CHAM_GD    =   cham,     [cham_gd]",
+    "      / RESULTAT   =   resu,     [resultat]",
+    "# sélection des instants de calcul",
+    "voirTOUT_ORDRE,NUME_ORDRE, LIST_ORDRE, INST, LIST_INST dans [U4.71.00]"
+   ],
+   "page": 30
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.27.3",
+   "text": "Opérandes",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  TOUT   =  'OUI',"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toute la structure.",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  GROUP_MA  =  l grma,"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur une liste de groupe de mailles.",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TYPE_MAILLE"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de filtrer selon la dimension des mailles.",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  / CHAM_GD    =  c ham,    [cham_gd]"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Les champs cham acceptés sont les champs DEPL, TEMP, NEUT_R, FLUX, SIEF et EPSI.",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  COEF_MULT    =  c oef,"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de donner une liste de coefficients réels pour pondérer les composantes d'un champ de type NEUT_R . Si cette liste n'est pas indiquée, ces coefficients sont mis à 1. Si la taille de cette liste est inférieure au nombre de composantes du champ, cette liste est complétée par des valeurs nulles.",
+   "page": 30
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.27.4",
+   "text": "Table produite",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "La table contient le type de la norme (L2 actuellement) et sa valeur :",
+   "page": 30
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "GROUP_MA",
+     "TYPE_NORM",
+     "VALE_NORM"
+    ],
+    [
+     "GMA1",
+     "L2",
+     "4.64719E-03"
+    ],
+    [
+     "GMA 2",
+     "L2",
+     "2.71323E -02"
+    ]
+   ],
+   "page": 30
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.28",
+   "text": "Opérande TITRE",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE =   ti,"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre attaché au concept produit par cet opérateur [U4.03.01].",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.29",
+   "text": "Opérande INFO",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO = / 1,              [DEFAUT]",
+    "          / 2,"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Paramètre d’impression.",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemple",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "L'exemple qui suit s'applique au calcul de quantités globales sur une modélisation dynamique d’un bâtiment réacteur. Sont modélisés : l'enceinte extérieure, l'enceinte intérieure, les structures internes, le puits de cuve.",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "La modélisation d'un demi bâtiment est réalisée par des éléments de poutres, des éléments discrets représentant les liaisons au sol, les masses additionnelles et les liaisons entre nœuds.",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "C'est sur ce modèle de poutres que l'opérateur POST_ELEM va calculer :",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la masse de la structure,",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les coordonnées du centre de gravité,",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le tenseur d'inertie,",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'énergie potentielle de certains modes et sa répartition dans la structure,",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'énergie cinétique de certains modes et sa répartition dans la structure.",
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Calcul de la masse, du centre de gravité et des inerties",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour toute la structure (TOUT = 'OUI')",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les poutres ( GROUP_MA = 'pou_d_t' )",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons au sol ( GROUP_MA = 'liai_sol')",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les masses additionnelles ( GROUP_MA = 'masses' )",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons entre nœuds ( GROUP_MA = 'liai_noe' )",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Commande",
+   "page": 32
+  },
+  {
+   "type": "code",
+   "lines": [
+    "massestr = POST_ELEM ( MODELE=   stickmod,",
+    "                       CHAM_MATER = chmater,",
+    "                       CARA_ELEM = caraelem,",
+    "                       MASS_INER = _F(GROUP_MA=( 'pou_d_t', 'liai_sol',",
+    "                                                 'masses', 'liai_noe' ),",
+    "                       TOUT= 'OUI',),",
+    "                       TITRE='masse, centre de gravite et inerties de la",
+    "structure');"
+   ],
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Calcul de l'énergie potentielle des modes 1, 2 et 7",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour toute la structure (TOUT = 'OUI')",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les poutres ( GROUP_MA = 'pou_d_t' )",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons au sol ( GROUP_MA = 'liai_sol')",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les masses additionnelles ( GROUP_MA = 'masses' )",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons entre nœuds ( GROUP_MA = 'liai_noe')",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Commande",
+   "page": 32
+  },
+  {
+   "type": "code",
+   "lines": [
+    "enerpot = POST_ELEM (  RESULTAT = modes,",
+    "                       MODELE = stickmod,",
+    "                       NUME_MODE = ( 1,2,7,),",
+    "                       CHAM_MATER = chmater,",
+    "                       CARA_ELEM = caraelem,",
+    "                       ENER_POT = _F(  TOUT = 'OUI',",
+    "                                       GROUP_MA = (  'pou_d_t', 'liai_sol',",
+    "                                                     'masses', 'liai_noe'),",
+    "                                                ),",
+    "                       TITRE= 'energies potentielles des modes 1, 2 et 7',",
+    "                    )"
+   ],
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Calcul de l'énergie cinétique des modes 1, 2 et 7",
+   "page": 33
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour toute la structure ( TOUT= 'OUI' )",
+   "page": 33
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les poutres ( GROUP_MA = 'POU_D_T' )",
+   "page": 33
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons au sol ( GROUP_MA = 'LIAI_SOL' )",
+   "page": 33
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les masses additionnelles ( GROUP_MA = 'MASSES' )",
+   "page": 33
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour le groupe de mailles contenant les liaisons entre nœuds ( GROUP_MA = 'LIAI_NOE')",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Commande",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "enercin = POST_ELEM (  RESULTAT= modes,",
+    "                       MODELE= stickmod,",
+    "                       NUME_MODE= ( 1,2,7,),",
+    "                       CHAM_MATER= chmater,",
+    "                       CARA_ELEM= caraelem,",
+    "                       ENER_CIN= _F(   TOUT= 'OUI',",
+    "                                       GROUP_MA=('pou_d_t', 'liai_sol',",
+    "                                                 'masses', 'liai_noe',),",
+    "                                    ),",
+    "                       TITRE= '  energies cinetiques des modes 1, 2 et 7',",
+    "                    )"
+   ],
+   "page": 33
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 21,
+   "chars": 4988,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 22,
+   "last": 57,
+   "chars": 2860,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 58,
+   "last": 82,
+   "chars": 2717,
+   "id": 3,
+   "section": "3.8 Mot clé MASS_INER"
+  },
+  {
+   "first": 83,
+   "last": 109,
+   "chars": 2241,
+   "id": 4,
+   "section": "3.9 Mot clé ENER_POT"
+  },
+  {
+   "first": 110,
+   "last": 152,
+   "chars": 5270,
+   "id": 5,
+   "section": "3.10 Mot clé ENER_CIN"
+  },
+  {
+   "first": 153,
+   "last": 171,
+   "chars": 2212,
+   "id": 6,
+   "section": "3.12 Mot clé ENER_ELTR"
+  },
+  {
+   "first": 172,
+   "last": 196,
+   "chars": 2432,
+   "id": 7,
+   "section": "3.13 Mot clé ENER_TOTALE"
+  },
+  {
+   "first": 197,
+   "last": 241,
+   "chars": 4588,
+   "id": 8,
+   "section": "3.14 Mot-clé WEIBULL"
+  },
+  {
+   "first": 242,
+   "last": 271,
+   "chars": 2589,
+   "id": 9,
+   "section": "3.15 Mot clé RICE_TRACEY"
+  },
+  {
+   "first": 272,
+   "last": 307,
+   "chars": 3062,
+   "id": 10,
+   "section": "3.16 Mot clé INDIC_ENER"
+  },
+  {
+   "first": 308,
+   "last": 333,
+   "chars": 2630,
+   "id": 11,
+   "section": "3.17 Mot clé INDIC_SEUIL"
+  },
+  {
+   "first": 334,
+   "last": 353,
+   "chars": 2647,
+   "id": 12,
+   "section": "3.18 Mot clé CHAR_LIMITE"
+  },
+  {
+   "first": 354,
+   "last": 380,
+   "chars": 3009,
+   "id": 13,
+   "section": "3.19 Mot clé CARA_GEOM"
+  },
+  {
+   "first": 381,
+   "last": 412,
+   "chars": 2214,
+   "id": 14,
+   "section": "3.21 Mot clé AIRE_INTERNE"
+  },
+  {
+   "first": 413,
+   "last": 436,
+   "chars": 2877,
+   "id": 15,
+   "section": "3.23 Opérande INTEGRALE"
+  },
+  {
+   "first": 437,
+   "last": 469,
+   "chars": 3363,
+   "id": 16,
+   "section": "3.24 Opérande MINMAX"
+  },
+  {
+   "first": 470,
+   "last": 497,
+   "chars": 2917,
+   "id": 17,
+   "section": "3.26 Opérande VOLUMOGRAMME"
+  },
+  {
+   "first": 498,
+   "last": 533,
+   "chars": 2684,
+   "id": 18,
+   "section": "3.27 Opérande NORME"
+  },
+  {
+   "first": 534,
+   "last": 557,
+   "chars": 2784,
+   "id": 19,
+   "section": "4.1 Calcul de la masse, du centre de gravité et des inerties"
+  }
+ ]
+}

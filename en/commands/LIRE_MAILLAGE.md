@@ -33,7 +33,7 @@ are what later commands use in `GROUP_MA` / `GROUP_NO`.
 | Kind | `OPER` |
 | Result | `maillage_sdaster`, `maillage_p` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.21.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.21.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `FORMAT`, `MED`, `UNITE`, `VERI_MAIL` |
 
@@ -134,7 +134,7 @@ MAIL0 = LIRE_MAILLAGE(FORMAT="MED", VERI_MAIL=_F(VERIF="NON"))
 
 ## See also
 
-- French reference: U4.21.01 (translation: `en/docs/U4.21.01.md` once task 5.x lands)
+- French reference: U4.21.01 (French text: `en/docs/_src/U4.21.01.fr.md`; translation: `en/docs/U4.21.01.md` once task 5.2 lands)
 - Catalog: `en/commands/LIRE_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/lire_maillage.py:87`)
 - Implementation: `upstream/code_aster/CodeCommands/lire_maillage.py`; mesh checks
   `upstream/bibfor/modelisa/chckma.F90`

@@ -35,7 +35,7 @@ gives the assembled matrices `CALC_MODES` needs; `ASSEMBLAGE` runs the three ste
 | Kind | `MACRO` |
 | Result | `matr_elem_depl_r`, `matr_elem_depl_c`, `matr_elem_temp_r`, `matr_elem_pres_c` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.61.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.61.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MATR_ASSE`, `RIGI_MECA`, `MASS_MECA`, `CHARGE` |
 
@@ -131,8 +131,8 @@ MELM2 = CALC_MATR_ELEM(MODELE=MO, CARA_ELEM=CARELEM, CHAM_MATER=CHMAT, OPTION="M
 
 ## See also
 
-- French reference: U4.61.01 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.61.01.md` once task 5.x lands)
+- French reference: U4.61.01 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.61.01.fr.md`; translation: `en/docs/U4.61.01.md` once task 5.2 lands)
 - Catalog: `en/commands/CALC_MATR_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/calc_matr_elem.py:68`)
 - Implementation: `upstream/code_aster/MacroCommands/calc_matr_elem_ops.py`
 - Before: [AFFE_MODELE](AFFE_MODELE.md), [AFFE_MATERIAU](AFFE_MATERIAU.md),

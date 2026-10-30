@@ -37,7 +37,7 @@ extrapolation.
 | Kind | `OPER` |
 | Result | `fonction_sdaster`, `fonction_c` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.31.02 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.31.02 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `NOM_PARA`, `VALE`, `PROL_DROITE`, `GAUCHE`, `INTERPOL`, `PRES_REP`, `FONC_MULT` |
 
@@ -181,7 +181,7 @@ ACCE_T = DEFI_FONCTION(NOM_PARA="INST", VALE_PARA=LINST, VALE_FONC=ACCE)
 
 ## See also
 
-- French reference: U4.31.02 (translation: `en/docs/U4.31.02.md` once task 5.x lands)
+- French reference: U4.31.02 (French text: `en/docs/_src/U4.31.02.fr.md`; translation: `en/docs/U4.31.02.md` once task 5.2 lands)
 - Catalog: `en/commands/DEFI_FONCTION.json` (generated from `upstream/code_aster/Cata/Commands/defi_fonction.py:43`)
 - Implementation: `upstream/code_aster/CodeCommands/defi_fonction.py`; `upstream/bibfor/op/op0003.F90`
   (`NOEUD_PARA` only); evaluation `upstream/bibfor/utilitai/fointr.F90`

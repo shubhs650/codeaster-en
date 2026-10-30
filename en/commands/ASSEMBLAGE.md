@@ -36,7 +36,7 @@ explicit three-command form instead, as the modal fixture does.
 | Kind | `MACRO` |
 | Result | `nume_ddl_sdaster`, `matr_asse_depl_r`, `matr_asse_pres_c`, `matr_asse_temp_r`, `matr_asse_depl_c`, `cham_no_sdaster` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.61.21 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.61.21 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MATR_ASSE`, `RIGI_MECA`, `MASS_MECA`, `CHARGE` |
 
@@ -132,8 +132,8 @@ give the same matrices (`assemblage_ops.py:143`–`:163` calls exactly these com
 
 ## See also
 
-- French reference: U4.61.21 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.61.21.md` once task 5.x lands)
+- French reference: U4.61.21 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.61.21.fr.md`; translation: `en/docs/U4.61.21.md` once task 5.2 lands)
 - Catalog: `en/commands/ASSEMBLAGE.json` (generated from `upstream/code_aster/Cata/Commands/assemblage.py:80`)
 - Implementation: `upstream/code_aster/MacroCommands/assemblage_ops.py`
 - Same steps one by one: [CALC_MATR_ELEM](CALC_MATR_ELEM.md), [NUME_DDL](NUME_DDL.md),

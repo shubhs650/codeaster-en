@@ -34,7 +34,7 @@ and its reference value are assigned here.
 | Kind | `MACRO` |
 | Result | `cham_mater` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.43.03 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.43.03 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `AFFE`, `GROUP_MA`, `MATER`, `AFFE_VARC`, `NOM_VARC`, `TEMP`, `VALE_REF`, `CHAM_GD` |
 
@@ -169,7 +169,7 @@ CHMAT1 = AFFE_MATERIAU(
 
 ## See also
 
-- French reference: U4.43.03 (translation: `en/docs/U4.43.03.md` once task 5.x lands)
+- French reference: U4.43.03 (French text: `en/docs/_src/U4.43.03.fr.md`; translation: `en/docs/U4.43.03.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_MATERIAU.json` (generated from `upstream/code_aster/Cata/Commands/affe_materiau.py:26`);
   `AFFE_VARC` from `upstream/code_aster/Cata/Commons/c_affe_varc.py:25`
 - Implementation: `upstream/code_aster/MacroCommands/affe_materiau_ops.py`;

@@ -33,7 +33,7 @@ given as `DEFI_CONSTANTE(VALE=0.0)` in `AFFE_CHAR_MECA_F` gave the fixture's rea
 | Kind | `OPER` |
 | Result | `fonction_sdaster` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.31.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.31.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `NOM_PARA`, `VALE`, `PROL_DROITE`, `GAUCHE`, `INTERPOL` |
 
@@ -106,7 +106,7 @@ BETON = DEFI_MATERIAU(
 
 - [`DEFI_FONCTION`](DEFI_FONCTION.md) for values that vary; [`AFFE_CHAR_MECA_F`](AFFE_CHAR_MECA_F.md)
   for loads defined by functions.
-- French reference: U4.31.01 (translation: `en/docs/U4.31.01.md` once task 5.x lands)
+- French reference: U4.31.01 (French text: `en/docs/_src/U4.31.01.fr.md`; translation: `en/docs/U4.31.01.md` once task 5.2 lands)
 - Catalog: `en/commands/DEFI_CONSTANTE.json` (generated from `upstream/code_aster/Cata/Commands/defi_constante.py:26`)
 - Example: `upstream/astest/sslp100a.comm` (lines 28, 48)
 - Example: `upstream/astest/ssla103a.comm` (lines 26, 28, 30)

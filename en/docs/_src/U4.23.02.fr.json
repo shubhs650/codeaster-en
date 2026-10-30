@@ -1,0 +1,1571 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.23.02.pdf",
+  "source_sha256": "7b8ba03e0ecddc1b04d2ad64d98cedfe41c43605d7ac03489b3170ff9f380a44",
+  "source_bytes": 414075
+ },
+ "schema_version": 1,
+ "doc_id": "U4.23.02",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "10/03/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.23: Modification et création du maillage",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 18,
+  "pages": "18",
+  "pdf_keywords": "U4.23.02-F",
+  "pdf_title": "Opérateur CREA_MAILLAGE",
+  "responsible": "PIGNET Nicolas",
+  "revision": "dcf6595bdffc",
+  "title": "Opérateur CREA_MAILLAGE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur CREA_MAILLAGE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Créer une structure de données de type maillage à partir d’un autre maillage. Le nouveau maillage est créé à partir d’un maillage existant en dupliquant, en détruisant, en transformant ou en éclatant des mailles ou en recopiant un maillage (cas de GEOM_FIBRE).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données maillage.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma_2 (maillage) =  CREA_MAILLAGE    (",
+    "          ◊  MAILLAGE =   ma_1,                            [maillage]",
+    "          ♦  |  CREA_MAILLE      =     _F(",
+    "                       ♦  NOM=   noma,                     [K8]",
+    "                       ♦  |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                          |  TOUT      =   'OUI',",
+    "                       ♦  PREF_MAILLE  =   /  ‘E’,         [DEFAUT]",
+    "                                           /  pre_ma,      [Kn]",
+    "                       ◊  PREF_NUME    =   ind,            [I]",
+    "                                           ),",
+    "             |  MODI_MAILLE      =  _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                       ♦  /  OPTION    =   /  'TRIA6_7' ,",
+    "                                           /  'QUAD8_9' ,",
+    "                                           /  'SEG3_4' ,",
+    "                                           /  'QUAD_TRIA3' ,",
+    "                             ◊   PREF_NOEUD   =  / 'NS',   [DEFAUT]",
+    "                                                 / pre_nd, [Kn]",
+    "                             ◊   PREF_NUME    =  / ind  ,  [I]",
+    "                                                 / 1,      [DEFAUT]",
+    "                          /  OPTION    =      'QUAD_TRIA3',",
+    "                             ◊   PREF_MAILLE  =  / 'MS',   [DEFAUT]",
+    "                                                 / pre_ma, [Kn]",
+    "                             ◊   PREF_NUME    =  / ind  ,  [I]",
+    "                                                 / 1,      [DEFAUT]",
+    "                                           ),",
+    "             |  REPERE =     _F(",
+    "                       ♦  TABLE     =  tab,                [tabl_cara_geom]",
+    "                       ◊  NOM_ORIG  =  /   'CDG',          [DEFAUT]",
+    "                                       /   'TORSION',",
+    "                       ◊  NOM_ROTA  =  /   'INERTIE',      [DEFAUT]",
+    "                       ◊  GROUP_MA  =  gma ,               [group_ma]",
+    "                                    ),",
+    "             |  CREA_POI1 =  _F(",
+    "                       ♦  |  TOUT          =  'OUI',",
+    "                          |  GROUP_MA      =  lgma,        [l_group_ma]",
+    "                          |  GROUP_NO      =  lno,         [l_group_no]",
+    "                          ♦  NOM_GROUP_MA  =  nom_ma ,     [group_ma]",
+    "                                    ),",
+    "             |  LINE_QUAD =  _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                       ),",
+    "             |  PENTA15_18   =   _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                 ),",
+    "             |  HEXA20_27 =  _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                 ),",
+    "             |  MODI_HHO  =  _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                 ),",
+    "             |  COQUE_SOLIDE =   _F(",
+    "                       ♦  GROUP_MA     =   lgma,           [l_group_ma]",
+    "                       ◊  GROUP_MA_SURF=   lgma,           [l_group_ma]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                 ),",
+    "             |  RAFFINEMENT  =   _F(",
+    "                       ◊   TOUT     =  'OUI',           [DEFAUT]",
+    "                       ◊   NIVEAU      =   /  ind,         [I]",
+    "                                       /   1,           [DEFAUT]",
+    "                                 ),",
+    "             |  QUAD_LINE =  _F(",
+    "                       ♦  |  TOUT      =   'OUI',",
+    "                          |  GROUP_MA  =   lgma,           [l_group_ma]",
+    "                                       ),",
+    "             |  COQU_VOLU =  _F(",
+    "                       ♦  NOM= noma,                       [TXM]",
+    "                       ♦  GROUP_MA = gma,                  [group_ma]",
+    "                       ♦  EPAIS = ep,                      [R8]",
+    "                       ◊  PREF_MAILLE  =   /  'V',         [DEFAUT]",
+    "                                           /  pre_ma ,     [Kn]",
+    "                       ◊  PREF_NOEUD   =   /  'NS',        [DEFAUT]",
+    "                                           /  pre_nd ,     [Kn]",
+    "                       ◊  PREF_NUME =      /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                       ♦  /  PLAN   =  /   'SUP',          [TXM]",
+    "                                       /   'INF',",
+    "                          /  PLAN   =      'MOY',",
+    "                          ♦  TRANSLATION   =  /  'SUP',    [TXM]",
+    "                                              /  'INF',    [DEFAUT]",
+    "                                       ),",
+    "                |  CREA_FISS =   _F(",
+    "                       ♦  NOM          = nogma,            [TXM]",
+    "                       ♦  GROUP_NO_1   = gno1,             [group_no]",
+    "                       ♦  GROUP_NO_2   = gno2,             [group_no]",
+    "                       ♦  PREF_MAILLE  =   /  ‘ MS ’,          [DEFAUT]",
+    "                                           /  pre_ma,      [Kn]",
+    "                       ◊  PREF_NUME    =   /  ind,         [I]",
+    "                                           /  1,           [DEFAUT]",
+    "                                       ),",
+    "                |  RESTREINT =   _F(",
+    "                       ♦  GROUP_MA  = lgma,             [l_group_ma]",
+    "                       ◊  GROUP_NO     = lgno,             [l_group_no]",
+    "                       ◊  TOUT_GROUP_MA=   / 'NON',        [DEFAUT]",
+    "                                           / 'OUI',",
+    "                       ◊  TOUT_GROUP_NO=   / 'NON',        [DEFAUT]",
+    "                                           / 'OUI',",
+    "                                       ),",
+    "                |  ECLA_PG   =   _F(...) # utilisé par [U4.44.14]",
+    "                |  GEOM_FIBRE    =  gfibre,                [gfibre]",
+    "          ♦   | DECOUPE _LAC     =     _F(",
+    "                          ♦  GROUP_MA_ESCL =  lgma,           [l_group_ma]",
+    "                          ◊  DECOUPE_HEXA  =  / 'PYRA',       [DEFAUT]",
+    "                                              / 'HEXA',",
+    "                                           ),",
+    "          ◊  INFO  =   /  1,                               [DEFAUT]",
+    "                       /  2,",
+    "          ◊  TITRE =   tit,                                [TXM]",
+    "                                     )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Risque de produire un maillage non conforme",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Un certain nombre de fonctionnalités de la commande CREA_MAILLAGE peuvent conduire à produire un maillage non conforme. Pour cette raison, l'utilisateur doit être particulièrement vigilant lorsqu'il emploie CREA_MAILLAGE pour transformer des mailles. Un maillage est non conforme lorsque les fonctions de forme de 2 éléments adjacents n'ont pas la même trace sur leur frontière commune.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "2 pentaèdres assemblés pour former un hexaèdre et posés sur un autre hexaèdre (1 quadrangle en vis-à-vis de 2 triangles).",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "1 QUAD8 partageant une arrête avec 1 QUAD4 ou 1 TRIA3",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "1 TRIA6 partageant une arrête avec 2 TRIA3",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Les maillages non conformes conduisent en général à des résultats faux (au moins localement).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Parmi les possibilités de CREA_MAILLAGE, plusieurs situations sont potentiellement dangereuses :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Utilisation de l'un des mots clés QUAD_TRIA3 [§4.4.1], LINE_QUAD [§4.5], QUAD_LINE [§4.11], HEXA20_27 [§4.7], PENTA15_18 [§4.6] avec le mot clé GROUP_MA. Si par exemple on transforme partiellement un maillage linéaire en maillage quadratique, le maillage sera non conforme sur la frontière entre les éléments linéaires et les éléments quadratiques. Lors de l'utilisation du mot-clé GROUP_MA , il faut veiller à fournir toutes les mailles impliquées dans la transformation , en particulier les mailles de peau faute de quoi, un HEXA27 pourrait par exemple être bordé de mailles de peau QUAD8 .",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Utilisation du mot clé HEXA20_27 [§4.7](ou PENTA15_18 [§4.6] s'il existe dans le maillage des éléments volumiques à faces quadrangulaires de type différent des éléments que l'on modifie. Par exemple, s'il existe des pentaèdres ou des pyramides quand on modifie des hexaèdres. Le risque est que, par exemple, une face quadrangulaire d'HEXA27 (9 nœuds) soit accolée à une face quadrangulaire à 8 nœuds d'un PENTA15 adjacent.",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Utilisation du mot clé QUAD_TRIA3 s'il existe dans le maillage des éléments TRIA6. Dans ce cas, les quadrangles transformés en TRIA3 seront incompatibles avec les TRIA6.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Opérande MAILLAGE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MAILLAGE = ma_1"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "ma_1 est le nom du maillage initial que l'on veut reproduire avant de “l'enrichir\" par de nouvelles mailles ou nœuds, ou de \"l’appauvrir\".",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Le mot clé MAILLAGE est obligatoire sauf pour l’utilisation des mots-clés ECLA_PG et GEOM_FIBRE.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Mot clé CREA_MAILLE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CREA_MAILLE"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de définir un nouveau groupe de mailles constitué de nouvelles mailles, s’appuyant elles-mêmes sur des nœuds existants. Pour dupliquer plusieurs groupes de mailles, on répétera le mot clé facteur CREA_MAILLE. Contrairement à la commande DEFI_GROUP [U4.22.01] pour laquelle le concept maillage conserve toujours le même nombre de mailles et de nœuds, ici le nombre de mailles du nouveau maillage est augmenté (le nombre de nœuds reste identique car les nouvelles mailles s'appuient sur des nœuds déjà existants). Ceci peut faciliter la création de nouveaux lieux géométriques pour pouvoir appliquer des modélisations différentes sur le même groupe de mailles.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.1",
+   "text": "Opérande NOM",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM = noma"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "On donne ici le nom du nouveau groupe de mailles qui sera créé.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.2",
+   "text": "Opérandes GROUP_MA / TOUT",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  |  GROUP_MA  = lgma,",
+    "   |  TOUT      = 'OUI',"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L’ensemble des mailles fournies par l’utilisateur avec ces deux mots-clés sera dupliqué et les nouvelles mailles seront rassemblées dans un groupe de mailles portant le nom stipulé par le mot clé NOM. Si l’ensemble des mailles à dupliquer contient des mailles en double, elles sont éliminées.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.2.1",
+   "text": "Opérandes PREF_MAILLE / PREF_NUME",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PREF_MAILLE = pre_ma"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur de ce mot-clé permet de définir le préfixe des nouvelles mailles. On obtient le nom de la nouvelle maille en remplaçant le premier caractère du nom de la maille à dupliquer par le texte spécifié sous le mot clé PREF_MAILLE. Dans le cas où ce nouveau nom a une longueur supérieure à huit caractères, on s'arrête en erreur fatale avec un message d'erreur. Cela ne doit normalement jamais arriver si le préfixe fourni fait un seul caractère. Ce mot-clé est facultatif : le préfixe par défaut est alors « E »",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PREF_NUME =  /  ind"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Si un entier ind est donné sous le mot clé PREF_NUME, le numéro des nouvelles mailles est construit en concaténant le texte majuscule donné sous le mot clé PREF_MAILLE et un entier obtenu en incrémentant ind de 1 à chaque création de nouvelles mailles.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : l'utilisateur doit être prudent dans le choix de son préfixe pour éviter que les mailles nouvelles aient le même nom que des mailles anciennes. Cette collision de noms est détectée par la commande et conduit à un arrêt de Code_Aster.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Mot clé CREA_POI1",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CREA_POI1"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de définir des mailles de type 'POI1' (maille à un seul nœud) à partir de nœuds ou de nœuds de mailles.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.3.1",
+   "text": "Opérandes TOUT / GROUP_MA /GROUP_NO",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  |  TOUT      =  'OUI',",
+    "   |  GROUP_MA  =  lgma,",
+    "   |  GROUP_NO  =  lno,"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Tous les nœuds qui appartiennent à des entités stipulées par l’utilisateur avec ces cinq mots clés, génèrent une maille de type POI1. La maille créée aura le même nom que le nœud qui la supporte.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.3.2",
+   "text": "Opérande NOM_GROUP_MA",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM_GROUP_MA = nom_ma"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Toutes les mailles POI1 ainsi créées peuvent être regroupées dans un même groupe de mailles nommé nom_ma.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.3.3",
+   "text": "Comment créer plusieurs mailles POI1 sur chaque nœud ?",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mailles POI1 créées par le mot clé CREA_POI1 ont les mêmes noms que les nœuds à partir desquels elles ont été créées. Il n'est donc pas possible de créer plusieurs mailles POI1 sur un même nœud en utilisant plusieurs occurrences du mot clé CREA_POI1.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Une solution de contournement possible est de combiner l'usage de CREA_MAILLAGE / CREA_POI1 avec CREA_MAILLAGE / CREA_MAILLE. Par exemple, pour créer 2 mailles POI1 sur chaque nœud du groupe 'GNO1', on pourra faire :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MA2=CREA_MAILLAGE(MAILLAGE=MA1,",
+    "      CREA_POI1 =  _F(NOM_GROUP_MA='GM1', GROUP_NO='GNO1'))",
+    "MA3=CREA_MAILLAGE(MAILLAGE=MA2,",
+    "      CREA_MAILLE =_F(NOM_GROUP_MA='GM2', GROUP_MA='GM1', PREF_MAIL='S'))"
+   ],
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.4",
+   "text": "Mot clé MODI_MAILLE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  MODI_MAILLE"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de transformer un ensemble de mailles.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.1",
+   "text": "Opérande OPTION",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  OPTION =  /  'SEG3_4'",
+    "             /  'TRIA6_7'",
+    "             /  'QUAD8_9'",
+    "             /  'QUAD_TRIA3'"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé indique la transformation à effectuer :",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "1) transformation des segments à trois nœuds en segments à quatre nœuds (utilisables par exemple pour la modélisation 'TUYAU' [U3.11.06], 2) transformation des triangles à six nœuds en triangles à sept nœuds, 3) transformation des quadrangles à huit nœuds en quadrangles à neuf nœuds, 4) transformation des quadrangles en triangles à 3 nœuds :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "transformation de mailles de type QUAD4 en deux mailles de type TRIA3",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "transformation de mailles de type QUAD8 en six mailles de type TRIA3",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "transformation de mailles de type QUAD9 en huit mailles de type TRIA3",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.2",
+   "text": "Opérandes PREF_NOEUD / PREF_MAILLE / PREF_NUME",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PREF_NOEUD = /  pre_nd,",
+    "                /  'NS',"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur de ce mot-clé permet de définir le préfixe des nouveaux nœuds. On obtient le nom du nouveau nœud en rajoutant devant son ancien nom, le texte spécifié sous le mot clé PREF_NOEUD. Dans le cas où ce nouveau nom a une longueur supérieure à huit caractères, on s'arrête en erreur fatale avec un message d'erreur.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PREF_MAILLE = pre_ma",
+    "   VoirCREA_MAILLE.",
+    "◊  PREF_NUME =  /  ind,",
+    "                /  1,"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Si un entier ind est donné sous le mot clé PREF_NUME, le numéro des nouveaux nœuds (nouvelles mailles) est construit en concaténant le texte majuscule donné sous le mot clé PREF_NOEUD (PREF_MAILLE) et un entier obtenu en incrémentant ind de 1 à chaque création de nouveaux nœuds (nouvelles mailles).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques : L'utilisateur doit être prudent dans le choix de son préfixe pour éviter que les nouveaux nœuds (nouvelles mailles) aient le même nom que des anciens nœuds (nouvelles mailles). Cette collision de noms est détectée par la commande et conduit à un arrêt de Code_Aster.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Une procédure automatique de découpage des mailles quadrangles en triangles peut générer une sorte de \"polarisation\" du maillage : à partir d'un maillage QUAD donné, toutes les diagonales se retrouvent orientées dans la même direction.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention : l'usage de l'option 'QUAD_TRIA3' peut conduire à un maillage non conforme. Voir [§3].",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.5",
+   "text": "Mot-clé LINE_QUAD",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  LINE_QUAD"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité permet de créer un maillage quadratique à partir d’un maillage linéaire.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut ne l’appliquer qu’à une partie du maillage (mot-clé GROUP_MA), mais c'est déconseillé. Voir [§3].",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Les groupes de mailles sont conservés, les groupes de nœuds aussi (sans changement). Comme lors du raffinement d'un maillage, les nœuds créés ne sont pas introduits dans les groupes de nœuds existants. Si un groupe de nœuds correspond à un bord, après LINE_QUAD, ce groupe ne contient pas les nœuds milieux d'arêtes. Pour obtenir un GROUP_NO complet, on peut utiliser par exemple la commande DEFI_GROUP / OPTION = 'APPUI'.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.1",
+   "text": "Opérandes GROUP_MA / TOUT",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  |  GROUP_MA  = lgma,",
+    "   |  TOUT      = 'OUI',"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "L’ensemble des mailles stipulé par l’utilisateur avec ces deux mots clés seront transformées en mailles quadratiques.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, l'utilisation du mot-clé GROUP_MA est déconseillée. Voir [§3].",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.2",
+   "text": "Opérandes PREF_NOEUD / PREF_NUME",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme pour MODI_MAILLE.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.6",
+   "text": "Mot-clé PENTA15_18",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur fonctionne comme le mot clé facteur LINE_QUAD (même syntaxe). Il sert à transformer des PENTA15 en PENTA18 en ajoutant des nœuds aux milieux des faces quadrangulaires.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, l'utilisation de ce mot clé est déconseillé si le maillage contient d'autres types de mailles volumiques (HEXA et PYRAM). Voir [§3].",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.7",
+   "text": "Mot-clé HEXA20_27",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur fonctionne comme le mot clé facteur PENTA15_18 avec les hexaèdres. Il sert à transformer des HEXA20 en HEXA27 en ajoutant des nœuds aux milieux des faces et au centre de chaque hexaèdre.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, l'utilisation de ce mot clé est déconseillé si le maillage contient d'autres types de mailles volumiques (PENTA et PYRAM). Voir [§3].",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.8",
+   "text": "Mot-clé MODI_HHO",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de créer un maillage compatible avec les éléments HHO à partir de n’importe quel maillage. Cette option est indispensable pour utiliser la méthode HHO sur des tétraèdres, prismes et pyramides. Le maillage crée est composé de SEG3, QUAD9, TRIA7, HEXA27, TETRA15, PENTA21 et PYRAM19.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, l'utilisation de ce mot clé est déconseillé s’il est appliqué que sur une partie du maillage car cela peut générer des maillages non-conformes. Voir [§ 3 ].",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.9",
+   "text": "Mot-clé COQUE_SOLIDE",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de créer un maillage compatible avec les éléments COQUE_SOLIDE à partir d'un maillage d’éléments HEXA8 ou PENTA6. Cette option est indispensable pour utiliser la modélisation COQUE_SOLIDE, les nouvelles mailles HEXA9 et PENTA7 contiennent un nœud au milieu du support qui permet de prendre en compte le degré de liberté de pincement. Le maillage créé est donc composé de SEG2, QUAD4, HEXA9, PENTA7 et TRIA3.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d’éléments hexaédriques, il est nécessaire de renseigner le mot-clef GROUP_MA_SURF qui identifie la surface pour orienter les mailles. Cette surface peut-être celle du haut ou celle du bas. Ce n'est pas nécessaire pour les prismes puisque dans cette configuration, c'est le fait d'avoir des TRIA3 qui identifie les surfaces supérieures et inférieures de la coque.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option créant des nouveaux nœuds, les mots clefs PREF_NOEU et PREF_NUME peuvent être utilisés (voir §4.4.2).",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.10",
+   "text": "Mot-clé RAFFINEMENT",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette option permet de créer un maillage raffiné uniformément à partir d’un maillage donnée. L’option s’applique sur tout le maillage pour éviter tout problème de conformité. Le principe du raffinement uniforme est de découper en deux chaque arête puis de propager la découpe aux autres mailles. C’est un équivalent à l’adaptation ‘RAFFINEMENT_UNIFORME’ de la macro MACR_ADAP_MAIL. Attention, la taille du maillage augmente très rapidement et la qualité de celui-ci peut diminuer si le maillage de départ n’est pas d’assez bonne qualité. Il est conseillé de partir d’un maillage qui représente déjà bien la géométrie, en particulier si elle est courbe, avant de raffiner.",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TOUT   =  ‘OUI’ ,             [DEFAUT]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le raffinement s’applique à tout le maillage.",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NIVEAU    =  /   ind   ,            [I]",
+    "             /  1,               [DEFAUT]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé NIVEAU permet de préciser le nombre de raffinements successifs souhaités.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.11",
+   "text": "Mot-clé QUAD_LINE",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  QUAD_LINE"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce fonctionnalité permet de créer un maillage linéaire à partir d’un maillage quadratique, on peut ne l’appliquer qu’à une partie du maillage (attention dans ce cas au raccord des zones linéaires et quadratiques). Voir [§3].",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.11.1",
+   "text": "Opérandes GROUP_MA / TOUT",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  |  GROUP_MA  = lgma,",
+    "   |  TOUT      = 'OUI',"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mailles stipulé par l’utilisateur avec ces deux mots clés seront transformées en mailles quadratiques.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, l'utilisation du mot-clé GROUP_MA est déconseillée. Voir [§3].",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.12",
+   "text": "Mot clé REPERE",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  REPERE"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Une occurrence de ce mot clé facteur permet de définir un nouveau maillage à partir de l’ancien maillage en effectuant un changement de repère.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité est utilisée en particulier dans la macro-commande MACR_CARA_POUTRE [U4.42.02] pour le calcul de la constante de gauchissement.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.12.1",
+   "text": "Opérandes TABLE / NOM_ORIG / NOM_ROTA / GROUP_MA",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  TABLE = tab"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On donne ici le nom de la table de concept « caractéristiques géométriques » qui contient en particulier, les coordonnées du centre d’inertie et du centre de torsion, les angles nautiques définissant le repère principal d’inertie,... Cette table peut être obtenue par la commande POST_ELEM avec les mots clés facteurs CARA_GEOM ou CARA_POUTRE [U4.81.22].",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NOM_ORIG =   /   'CDG',",
+    "                /  'TORSION',"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On indique le centre du nouveau repère : le centre de gravité ou le centre de torsion.",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  NOM_ROTA =   /  'INERTIE',"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "On indique la direction du nouveau repère. Une seule solution est possible : les directions sont celles du repère principal d’inertie.",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_MA =   gma"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Si NOM_ORIG = 'CDG', on peut indiquer le nom du groupe de mailles dont le centre de gravité sera l’origine du nouveau repère. Si on n’utilise pas GROUP_MA, le centre de gravité de l’ensemble du MODELE sera l’origine du nouveau repère. Si NOM_ORIG = 'TORSION', le mot clé GROUP_MA est inopérant.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.13",
+   "text": "Mot-clé COQU_VOLU",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  COQU_VOLU"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "A partir de la donnée d’un groupe de mailles surfaciques (QUAD, TRIA3), on construit le maillage volumique (HEXA8, PENTA6) par extrusion selon la normale des éléments (en un nœud, on prend la moyenne des normales des éléments concourants). Une seule couche d’éléments est créée. L’opération ne s’applique qu’à des maillages linéaires ; si l’on souhaite créer un maillage quadratique, il suffit d’utiliser ensuite CREA_MAILLAGE/LINE_QUAD.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.1",
+   "text": "Opérandes NOM",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NOM= noma,"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe de mailles constitué des mailles volumiques créées lors de cette opération.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.2",
+   "text": "Opérandes GROUP_MA",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA  = lgma,"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de mailles constituant le maillage surfacique à extruder.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.3",
+   "text": "Opérandes EPAIS",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  EPAIS  = ep,"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Épaisseur de la couche d’éléments créée (épaisseur de la coque).",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.4",
+   "text": "Opérandes PLAN",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  PLAN   =  /‘SUP’,",
+    "             /‘INF’,",
+    "             /‘MOY’,"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "On précise ici que la surface constituée de lgma sera le plan SUPérieur, INFérieur ou MOYen de la coque.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.5",
+   "text": "Opérandes TRANSLATION",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  TRANSLATION  =  /‘SUP’,",
+    "                   /‘INF’,"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas où PLAN=’MOY’, on précise si la surface initiale constituée de lgma est translatée en peau SUPérieure ou INFérieure.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.6",
+   "text": "Opérandes PREF_MAILLE / PREF_NOEUD / PREF_NUME",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme pour CREA_MAILLE, sauf la valeur par défaut qui est ‘V’.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.14",
+   "text": "Mot clé CREA_FISS",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     CREA_FISS =  _F(",
+    "                ♦  NOM= nogma,                       [TXM]",
+    "                ♦  GROUP_NO_1 = gno1,                [group_no]",
+    "                ♦  GROUP_NO_2 = gno2,                [group_no]",
+    "                ♦  PREF_MAILLE   =  pre_ma ,         [Kn]",
+    "                ◊  PREF_NUME =   /  ind,             [I]",
+    "                                 /  1,               [DEFAUT]",
+    "                                 ),"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de créer une fissure avec des éléments de joint [R3.06.09] ou des éléments à discontinuité [R7.02.12] le long d’une ligne définie par deux groupes de nœuds disposés en regard. Les deux groupes de nœud devront avoir le même nombre de nœuds et être au préalable ordonnés (par exemple avec DEFI_GROUP/CREA_GROUP_NO/OPTION=’NŒUD_ORDO’) de telle sorte que leur numérotation « commence » du même côté (voir Illustration 1). On pourra, ensuite affecter une modélisation de type « joint » sur ces nouvelles mailles QUAD4 (par exemple ‘PLAN_JOINT’).",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mailles créées porteront un nom formé à partir du préfixe pre_ma suivi d’un numéro. Par exemple, si PREF_MAILE=’FS’ et PREF_NUME=7, les mailles crées s’appelleront : FS7, FS8, …",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "On créera aussi un nouveau GROUP_MA (appelé nogma) contenant l’ensemble des mailles QUAD4 créées.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.1",
+   "text": "Opérande NOM",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe de mailles constitué des mailles volumiques créées lors de cette opération.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.2",
+   "text": "Opérandes GROUP_NO_1 / GROUP_NO_2",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de nœud constituant les lèvres de la fissure. Le groupe de nœud GROUP_NO_1 porte les nœuds locaux 1 et 2 (le premier nœud du groupe a une numérotation locale égale à 1), le GROUP_NO_2 porte les nœuds locaux 3 et 4 (le premier nœud du groupe a une numérotation locale égale à 4). Il faut choisir ces groupes de nœuds en fonction de la géométrie de telle sorte que la numérotation locale des éléments soit effectuée dans le sens trigonométrique.",
+   "page": 13
+  },
+  {
+   "type": "figure",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Illustration 1: Ordonnancement des segments",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.1",
+   "text": "Opérandes PREF_MAILLE / PREF_NUME",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme pour MODI_MAILLE.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.15",
+   "text": "Mot clé ECLA_PG",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ECLA_PG"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur n’a pas à être utilisé directement. Il est utilisé par la commande MACR_ECLA_PG [U4.44.14].",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.16",
+   "text": "Mot clé GEOM_FIBRE",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GEOM_FIBRE"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet d’obtenir le maillage créé par DEFI_GEOM_FIBRE [U4.26.01]. Ce maillage contient l’ensemble des groupes de fibres de l’étude ainsi que le maillage contenant toutes les fibres.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.17",
+   "text": "Mot clé RESTREINT",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur (non-répétable) permet d'engendrer un « sous » maillage extrait d'un maillage existant. Le maillage ma_2 extrait (ou « restreint ») est formé à partir d'une liste de mailles fournies par l'utilisateur.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.1",
+   "text": "Mailles",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé GROUP_MA permet de définir les mailles du maillage restreint.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.2",
+   "text": "Nœuds",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Les nœuds retenus sont ceux des mailles retenues. De plus, si le mot clé GROUP_NO=lgno est utilisé, les nœuds des groupes de lgno sont ajoutés.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.3",
+   "text": "Groupes de mailles",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Le maillage ma_2 contiendra tous les GROUP_MA de lgma. De plus, si le mot clé TOUT_GROUP_MA='OUI' est utilisé, les groupes de mailles de ma_1 non vides sont ajoutés.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.4",
+   "text": "Groupes de nœuds",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le maillage ma_2 contiendra tous les GROUP_NO de lgno. De plus, si le mot clé TOUT_GROUP_NO='OUI' est utilisé, les groupes de nœuds de ma_1 non vides sont ajoutés.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.18",
+   "text": "Mot clé DECOUPE_LAC",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  DECOUPE_LAC"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet d’obtenir un maillage contenant des « patchs » créés sur le groupe de maille spécifié dans GROUP_MA_ESCL. C'est une opération de pré-traitement des mailles esclaves pour le traitement du contact par la méthode mortar LAC. A noter que la maille sous-jacente aux mailles de GROUP_MA_ESCL sont aussi découpées. Les découpes des éléments PYRA5 PYRA13, PENTA6, PENTA15 et HEXA8 HEXA20 dans le cas DECOUPE_HEXA=' PYRA ' sont des découpes « non-conforme s » dans le sens où elles introduisent des éléments différents de l’élément découp é (pyramides et/ou tétraèdre s ) de manière à n'ajouter qu'un nœud par éléments découpés dans le maillage.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "La découpe de PENTA18 n'est pas prise en charge.",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention : DECOUPE_LAC doit être la dernière commande à agir sur le maillage. Les opérations MODI_MAILLAGE doivent être effectuées avant.",
+   "page": 15
+  },
+  {
+   "type": "figure",
+   "page": 15
+  },
+  {
+   "type": "figure",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "Cas 2D (Thèse G. Drouet)                  Cas 3D (DECOUPE_HEXA='HEXA')"
+   ],
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DECOUPE_HEXA"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet de définir le type de découpe utilisée sur les HEXA8 et les HEXA20. Par défaut, ces éléments sont découper en pyramides pour limiter le nombre de nœuds ajoutés. Cependant en utilisant la valeur HEXA, ils sont découpés en HEXA ce qui peut être utile si l'introduction de pyramides dans le maillage pose problème.",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.19",
+   "text": "Opérande INFO",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO = inf"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Précise les informations imprimées dans le fichier message (1 : pas d’impression, 2 : détails sur le nombre de mailles crées, modifiées…).",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.20",
+   "text": "Opérande TITRE",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE = tit"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de spécifier un titre.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.1",
+   "text": "Duplication de mailles",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Soit ma_1 un maillage contenant déjà les mailles :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M1   M2   M3"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "et le groupe de mailles :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "coque : M1   M2"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Chaque maille s'appuie sur les nœuds suivants :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   M1 : N1   N2   N3",
+    "   M2 : N3   N4   N5",
+    "   M3 : N4   N5   N6",
+    "ma_2 = CREA_MAILLAGE   (  MAILLAGE = ma_1,",
+    "             CREA_MAILLE =_F( NOM          = sol,",
+    "                              GROUP_MA     = 'coque',",
+    "                              PREF_MAILLE  = 'A',",
+    "                              PREF_NUME    = 100,    ),",
+    "                       )"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Après appel à la commande CREA_MAILLAGE , le nouveau maillage contient alors :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les groupes de mailles :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "coque (initial)",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "sol = (mailles : A100 A101)",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les mailles s'appuient sur les nœuds suivants :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•   M1 : N1   N2   N3",
+    "•   M2 : N3   N4   N5",
+    "•   M3 : N4   N5   N6",
+    "•   A100  : N1   N2   N3",
+    "•   A101  : N3   N4   N5"
+   ],
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.2",
+   "text": "Transformation de triangles à 6 nœuds en triangles à 7 nœuds",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma_2 = CREA_MAILLAGE   (  MAILLAGE = ma_1,",
+    "          MODI_MAILLE  =  _F( GROUP_MA   = 'triangle',",
+    "                              OPTION     = 'TRIA6_7',",
+    "                              PREF_NOEUD = 'NMI',",
+    "                              PREF_NUME  = 10,    ),",
+    "                       )"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Supposons que dans ma_1 le GROUP_MA triangle soit composé de deux mailles M1, M2 ayant les nœuds suivants :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M1 : N1 N2 N3 N4 N5 N6",
+    "M2 : N1 N2 N7 N4 N8 N9"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le maillage ma_2, les deux mailles M1, M2 auront les nœuds suivants :",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M1 : N1 N2 N3 N4 N5 N6 NMI10",
+    "M2 : N1 N2 N7 N4 N8 N9 NMI11"
+   ],
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.3",
+   "text": "Transformation de quadrangles à 4 nœuds en triangles à 3 nœuds",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet exemple est issu du test SSLV04E :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "La géométrie, représentant un quart de disque, est maillée en quadrangle. On souhaite qu'un huitième du disque soit maillé en triangle.",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma = CREA_MAILLAGE (   MAILLAGE = m0,",
+    "             MODI_MAILLE  =  _F( GROUP_MA    = 'S2',",
+    "                                 OPTION      = 'QUAD_TRIA3',",
+    "                                 PREF_MAILLE = 'MS',",
+    "                                 PREF_NUME   = 1,    ),",
+    "                          )"
+   ],
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.4",
+   "text": "Exemple d'utilisation de DECOUPE_LAC",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet exemple est issu des cas-tests zzzz383.",
+   "page": 18
+  },
+  {
+   "type": "figure",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Maillage initial",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Maillage avec patch",
+   "page": 18
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 4,
+   "chars": 335,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 5,
+   "last": 5,
+   "chars": 7726,
+   "id": 2,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 6,
+   "last": 16,
+   "chars": 2030,
+   "id": 3,
+   "section": "3 Risque de produire un maillage non conforme"
+  },
+  {
+   "first": 17,
+   "last": 36,
+   "chars": 2571,
+   "id": 4,
+   "section": "4 Opérandes"
+  },
+  {
+   "first": 37,
+   "last": 67,
+   "chars": 3606,
+   "id": 5,
+   "section": "4.3 Mot clé CREA_POI1"
+  },
+  {
+   "first": 68,
+   "last": 87,
+   "chars": 2166,
+   "id": 6,
+   "section": "4.5 Mot-clé LINE_QUAD"
+  },
+  {
+   "first": 88,
+   "last": 104,
+   "chars": 2389,
+   "id": 7,
+   "section": "4.9 Mot-clé COQUE_SOLIDE"
+  },
+  {
+   "first": 105,
+   "last": 137,
+   "chars": 2627,
+   "id": 8,
+   "section": "4.12 Mot clé REPERE"
+  },
+  {
+   "first": 138,
+   "last": 153,
+   "chars": 2085,
+   "id": 9,
+   "section": "4.14 Mot clé CREA_FISS"
+  },
+  {
+   "first": 154,
+   "last": 176,
+   "chars": 2343,
+   "id": 10,
+   "section": "4.16 Mot clé GEOM_FIBRE"
+  },
+  {
+   "first": 177,
+   "last": 206,
+   "chars": 2201,
+   "id": 11,
+   "section": "4.19 Opérande INFO"
+  },
+  {
+   "first": 207,
+   "last": 211,
+   "chars": 114,
+   "id": 12,
+   "section": "5.4 Exemple d'utilisation de DECOUPE_LAC"
+  }
+ ]
+}

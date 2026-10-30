@@ -1,0 +1,5378 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.42.01.pdf",
+  "source_sha256": "c967246b6e57706da8d42af2d72824c21e58f5ae48c5d13ce29e2060c4d6b539",
+  "source_bytes": 964698
+ },
+ "schema_version": 1,
+ "doc_id": "U4.42.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "16/01/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.42: Eléments de structure",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 64,
+  "pages": "64",
+  "pdf_keywords": "U4.42.01-I",
+  "pdf_title": "Opérateur AFFE_CARA_ELEM",
+  "responsible": "FLÉJOU Jean-Luc",
+  "revision": "55b85dabbb93",
+  "title": "Opérateur AFFE_CARA_ELEM",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur AFFE_CARA_ELEM",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Affecter à des éléments de structure des caractéristiques géométriques et matérielles. Les données géométriques affectées sont complémentaires aux données de maillage.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Parmi les caractéristiques traitées, citons :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les éléments de type coque : l’épaisseur, une direction de référence dans le plan tangent,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les éléments de type poutre : les caractéristiques de la section transversale et l’orientation des axes principaux d’inertie autour de la fibre neutre, la courbure des éléments courbes,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les éléments de type discret (ressort, masse/inertie, amortisseur) : les valeurs des matrices de rigidité, de masse ou d’amortissement à affecter directement ou après orientation,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les éléments de type barre ou de type câble : l’aire de la section transversale,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les éléments de milieux continus 3D et 2D : des axes locaux par rapport auxquels l’utilisateur pourra définir des directions d’anisotropie.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La commande doit être exhaustive pour tous les éléments de structure du modèle.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérateur produit une structure de type cara_elem.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Table des Matières",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "cara [cara_elem] = AFFE_CARA_ELEM(",
+    "    ♦ MODELE           = mo                                         [modèle]",
+    "    ◊ INFO             = [1, 2]                                     [défaut]",
+    "    ◊ VERIF            = ’MAILLE’,",
+    "    ♦ | BARRE          = voir mot clé BARRE                             [§6]",
+    "      | CABLE          = voir mot clé CABLE                             [§7]",
+    "      | COQUE          = voir mot clé COQUE                             [§8]",
+    "      | POUTRE         = voir mot clé POUTRE                            [§9]",
+    "        ◊ ORIENTATION  = voir mot clé ORIENTATION                      [§10]",
+    "      | MULTIFIBRE     = voir mot clé MULTI_FIBRE                    [§11.3]",
+    "        ◊ GEOM_FIBRE   = voir mot clé GEOM_FIBRE                     [§11.4]",
+    "      | DISCRET        = voir mot clé DISCRET                          [§12]",
+    "        ◊ ORIENTATION  = voir mot clé ORIENTATION                      [§10]",
+    "      | DISCRET_2D     = voir mot clé DISCRET_2D                       [§12]",
+    "        ◊ ORIENTATION  = voir mot clé ORIENTATION                      [§10]",
+    "      | MASSIF         = voir mot clé MASSIF                           [§13]",
+    "      | POUTRE_FLUI    = voir mot clé POUTRE_FLUI                      [§14]",
+    "      | GRILLE         = voir mot clé GRILLE                           [§15]",
+    "      | MEMBRANE       = voir mot clé MEMBRANE                         [§16]",
+    "      | RIGI_PARASOL   = voir mot clé RIGI_PARASOL                     [§17]",
+    "      | RIGI_MISS_3D   = voir mot clé RIGI_MISS_3D                     [§18]",
+    "      | MASS_AJOU      = voir mot clé MASS_AJOU                        [§19]",
+    "      | MASS_REP       = voir mot clé MASS_REP                         [§20]",
+    ")"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes généraux MODELE et VERIF",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MODELE",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ MODELE = mo"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Concept du type modele, produit par l’opérateur AFFE_MODELE [U4.41.01] sur lequel sont affectées les caractéristiques des éléments. Notons que le modèle doit contenir explicitement au moins un des éléments de structure, sur lequel va porter l’affectation (sinon le calcul s’arrête).",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande VERIF",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ VERIF = / ’MAILLE’"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Argument Signification Vérifie que le type d’élément supporté par les mailles, auxquelles on veut affecter une caractéristique, est compatible avec cette caractéristique (y ’MAILLE’ compris les orientations). Dans le cas contraire, arrêt avec message d’erreur.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande INFO",
+   "page": 6
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "◊ INFO = / 1",
+     "N’imprime rien"
+    ],
+    [
+     "/ 2",
+     "Imprime sur le fichier \"MESSAGE\", pour tous les éléments, la liste de valeurs affectées aux éléments : • angles d’orientation en degrés (poutres et discrets), • caractéristiques des sections transversales de poutres et de barres, • impressions des matrices élémentaires (discrets)."
+    ]
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Définition du domaine d’affectation",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Le choix des éléments du modèle mo sur lesquels porte l’affectation se fait en deux étapes :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le choix du type d’élément concerné par l’affectation (POUTRE, DISCRET, …),",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les mailles (du type d’élément défini) à affecter. Le choix du mot clé facteur définissant le type d’éléments (POUTRE, DISCRET, ...) implique qu’il existe dans le modèle les types d’éléments adaptés (vérification effectuée systématiquement).",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Les types d’éléments concernés dépendent de la modélisation :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "phénomène MECANIQUE Mot clé Modélisation",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "BARRE         BARRE, CABLE_GAINE",
+    "CABLE         CABLE, CABLE_POULIE",
+    "              COQUE_AXIS, COQUE_C_PLAN, COQUE_D_PLAN,  DKT, DST,  DKQ, DSQ,",
+    "COQUE",
+    "              Q4G, COQUE_3D, DKTG, Q4GG",
+    "DISCRET       DIS_T, DIS_TR, 2D_DIS_T, 2D_DIS_TR",
+    "              POU_D_E, POU_D_T, POU_D_TG,  POU_D_T_GD, FLUI_STRU, TUYAU_3M,",
+    "POUTRE",
+    "              TUYAU_6M, POU_D_EM, POU_D_TGM",
+    "MASSIF        3D, AXIS, AXIS_FOURIER, C_PLAN, D_PLAN, TUYAU_3M, TUYAU_6M",
+    "GRILLE        GRILLE_EXCENTRE, GRILLE_MEMBRANE",
+    "MEMBRANE      MEMBRANE",
+    "POUTRE_FLUI   3D_FAISCEAU",
+    "MULTI_FIBRE   POU_D_EM, POU_D_TGM",
+    "RIGI_PARASOL  DIS_TR",
+    "RIGI_MISS_3D  DIS_T"
+   ],
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "phénomène THERMIQUE Mot clé Modélisation",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COQUE         COQUE_AXIS, COQUE_PLAN, COQUE",
+    "MASSIF        3D, AXIS, PLAN"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "L’affectation des caractéristiques aux éléments finis se fait à l’aide du mot-clé : ’GROUP_MA’.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si VERIF n’est pas présent : dans un groupe de mailles (ou de nœuds), on affecte effectivement les caractéristiques aux seuls éléments pour lesquels elles ont un sens. Pour les autres éléments, les caractéristiques ne sont pas affectées.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si VERIF est présent : on vérifie de plus que tous les éléments du groupe sont du bon type, sinon un message d’erreur est émis.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Opérande GROUP_MA",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Opérandes Signification",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "GROUP_MA = lgma Affectation à tous les éléments des groupes de mailles spécifiés.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Comme dans les autres commandes, la règle de surcharge s’applique [U1.03.00].",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Affectation de valeurs",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Deux méthodes sont utilisables pour affecter des valeurs de caractéristiques :",
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la méthode classique : opérande dont le nom évoque la caractéristique traitée suivi d’une valeur ou d’une liste de valeurs. Exemples :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COQUE = _F(EPAIS = 1.E-2, GROUP_MA = ’G1’),",
+    "COQUE = _F(ANGL_REP = (0., 90.), GROUP_MA = ’G2’),"
+   ],
+   "page": 8
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour les affectations concernant BARRE, POUTRE et DISCRET, ainsi que ORIENTATION pour les éléments de poutre et les éléments discrets, le grand nombre de caractéristiques pouvant être affectés a conduit à une syntaxe mieux adaptée : CARA = (…) # liste de noms de caractéristiques VALE = (…) # liste des valeurs correspondant aux caractéristiques",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "On donne ci-dessous un exemple pour illustrer ce cas.",
+   "page": 8
+  },
+  {
+   "type": "figure",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Description des mailles :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SEG2",
+    "  M1 N1 N2",
+    "  M2 N2 N3",
+    "  M3 N3 N4",
+    "  M4 N5 N4",
+    "  M5 N5 N6",
+    "  M6 N6 N7",
+    "FINSF"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Fichier de commandes :",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "cara = AFFE_CARA_ELEM(",
+    "   POUTRE = (",
+    "      _F( SECTION=’CERCLE’,CARA=(’R’,’EP’),VALE=(0.1,0.02),G ROUP_MA=(’M1’,’M5’)),",
+    "      _F( SECTION=’CERCLE’,CARA=(’R’,’EP’),VALE=(0.2,0.05),G ROUP_MA= ’M3’),",
+    "      _F( SECTION=’CERCLE’,CARA=(’R’,’EP’),VALE=(0.09,0.01), GROUP_MA= ’M6’),",
+    "      _F( SECTION=’CERCLE’,CARA=(’R1’,’R2’),VALE=(0.1,0.2),G ROUP_MA=(’M2’,’M4’)),",
+    "       _F(SECTION=’CERCLE’,C ARA=(’EP1’,’EP2’),VALE=(0.02,0.05),GROUP_MA=(’M2’ ,’M4’)",
+    "),",
+    "      ),",
+    ")"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est possible d’utiliser les fonctionnalités du langage python. L’exemple ci-dessous récupère des grandeurs calculées par la commande MACR_CARA_POUTRE, pour ensuite les affecter. L’utilisation de python nécessite de mettre PAR_LOT=’NON’ dans la commande DEBUT.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PRE_GIBI()",
+    "SECTION = MACR_CARA_POUTRE( NOEUD= ’N1’, GROUP_MA_BORD= ’BORD’ )",
+    "ii = 2",
+    "alpha0 = SECTION[ ’ALPHA’ , ii ]",
+    "cdgx0  = SECTION[ ’CDG_X’ , ii ]",
+    "cdgy0  = SECTION[ ’CDG_Y’ , ii ]",
+    "AIRE0  = SECTION[ ’AIRE’ , ii ]",
+    "IY0    = SECTION[ ’IY_PRIN_G’, ii ]",
+    "IZ0    = SECTION[ ’IZ_PRIN_G’, ii ]",
+    "EY0    = SECTION[ ’EY’ , ii ]",
+    "EZ0    = SECTION[ ’EZ’ , ii ]",
+    "JX0    = SECTION[ ’CT’ , ii ]",
+    "JG0    = SECTION[ ’JG’ ,ii ]",
+    "AY0    = SECTION[ ’AY’ , ii ]",
+    "AZ0    = SECTION[ ’AZ’ , ii ]",
+    "IYR20  = SECTION[ ’IYR2_PRIN_G’ , ii ]",
+    "IZR20  = SECTION[ ’IZR2_PRIN_G’, ii ]"
+   ],
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "carelem=AFFE_CARA_ELEM( MODELE=mod,",
+    "  POUTRE = (",
+    "    _F(GROUP_MA=(’POUT1’,’POUT2’), SECTION=’GENERALE’,",
+    "       CARA= ( ’A’,  ’IY’,’IZ’,’AY’,’AZ’,’EY’,’EZ’,’JX’,’JG’,’IYR2’,’IZR2’),",
+    "       VALE= (  AIRE0,IY0, IZ0, AY0, AZ0, EY0, EZ0, JX0, JG0, IYR20, IZR20),),",
+    "    )",
+    ")"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le maillage SECTION contient un groupe de maille surfacique nommé ‘CARRE’, il est possible d’utiliser directement la table issue de MACR_CARA_POUTRE de la façon suivante :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SECTION = MACR_CARA_POUTRE(MAILLAGE=mail, NOEUD= ’N1’, GROUP_MA_BORD= ’BORD’ )",
+    "carelem=AFFE_CARA_ELEM( MODELE=mod,",
+    "  POUTRE = (",
+    "    _F(GROUP_MA=(’POUT1’,’POUT2’), SECTION=’GENERALE’,",
+    "       TABLE_CARA=SECTION, NOM_SEC=’CARRE’,",
+    "    )",
+    ")"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Mot clé BARRE",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.1",
+   "text": "Caractéristiques affectables",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d’affecter les caractéristiques des sections transversales d’éléments de type BARRE ou CABLE_GAINE. On peut traiter trois types de sections transversales définies par l’opérande SECTION. À chaque type de section, il est possible d’affecter différentes caractéristiques identifiées par un ou plusieurs noms (opérande CARA) auxquels on associe autant de valeurs (opérande VALE). Il est également possible de donner les caractéristiques par l’intermédiaire d’une table dans le cas de la section générale, voir la documentation de la commande MACR_CARA_POUTRE.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.2",
+   "text": "Syntaxe",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "BARRE = _F(",
+    "    ♦ GROUP_MA    = lgma,                                      [l_gr_maille]",
+    "    # section constante générale",
+    "    ♦ / SECTION     = ’GENERALE’,",
+    "    ♦ / TABLE_CARA  = tb_cara,                                    [sd_table]",
+    "        NOM_SEC     = nom_sec,                                          [K8]",
+    "      / CARA        = ’A’,",
+    "        VALE        = va,                                           [l_réel]",
+    "    # section constante rectangle",
+    "    / SECTION       = ’RECTANGLE’,",
+    "      ♦ CARA        = / [’H’|’EP’],",
+    "                      / [’HY’|’HZ’|’EPY’|’EPZ’],",
+    "      ♦ VALE        = va,                                           [l_réel]",
+    "    # section constante cercle",
+    "    / SECTION       = ’CERCLE’,",
+    "      ♦ CARA        = [’R’|’EP’],",
+    "      ♦ VALE        = va,                                           [l_réel]",
+    "    ◊ FCX           = fv,                                         [FONCTION]",
+    "),"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Règle d’utilisation : On ne peut pas surcharger un type de section (CERCLE, RECTANGLE, GENERALE) par un autre.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.3",
+   "text": "Opérandes",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "6.3.1",
+   "text": "Opérande SECTION = ’GENERALE’",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "La seule caractéristique à fournir dans ce cas est l’aire de la section transversale de la barre ’A’. Elle peut être lue dans une table (mots-clés TABLE_CARA et NOM_SEC, voir §9.4.3.1).",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "6.3.2",
+   "text": "Opérande SECTION = ’CERCLE’",
+   "page": 10
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CARA",
+     "Signification",
+     "Valeur par défaut"
+    ],
+    [
+     "R",
+     "Rayon extérieur du tube",
+     "Obligatoire"
+    ],
+    [
+     "EP",
+     "Épaisseur dans le cas d’un tube creux",
+     "Tube plein (EP=R)"
+    ]
+   ],
+   "page": 10
+  },
+  {
+   "type": "figure",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 6.3.2-1 : Section de type CERCLE.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces valeurs sont utilisées pour calculer l’aire A de la section.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "6.3.3",
+   "text": "Opérande SECTION = ’RECTANGLE’",
+   "page": 11
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CARA",
+     "Signification",
+     "Valeur par défaut"
+    ],
+    [
+     "/ HY",
+     "Dimension du rectangle suivant GY",
+     "Obligatoire"
+    ],
+    [
+     "HZ",
+     "Dimension du rectangle suivant GZ",
+     "Obligatoire"
+    ],
+    [
+     "/ H",
+     "Longueur de l’arête (si le rectangle est carré)",
+     "Obligatoire"
+    ],
+    [
+     "/ EPY",
+     "Épaisseur suivant GY dans le cas d’un tube creux",
+     "HY/2"
+    ],
+    [
+     "EPZ",
+     "Épaisseur suivant GZ dans le cas d’un tube creux",
+     "HZ/2"
+    ],
+    [
+     "/ EP",
+     "Épaisseur suivant les deux axes dans le cas d’un tube creux Tube plein",
+     ""
+    ]
+   ],
+   "page": 11
+  },
+  {
+   "type": "figure",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 6.3.3-1 : Section de type RECTANGLE.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Règles d’utilisation : pour une maille donnée",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "’H’ est incompatible avec ’HZ’ et ’HY’",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "’EP’ est incompatible avec ’EPY’ et ’EPZ’.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "6.4",
+   "text": "Opérande ‘FCX‘",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ FCX = fv"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Affectation d’une fonction décrivant la dépendance de la force répartie vis-à-vis de la vitesse de vent relative (voir par exemple [V6.02.118]).",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "7",
+   "text": "Mot clé CABLE",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.1",
+   "text": "Caractéristiques affectables",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d’affecter une section constante aux éléments de type câble ou câble-poulie.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.2",
+   "text": "Syntaxe",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CABLE = _F(",
+    "    ♦ GROUP_MA    = lgma,                                      [l_gr_maille]",
+    "    ♦ SECTION       = aire,                                           [réel]",
+    "    ◊ FCX           = fv,                                         [fonction]",
+    "    ♦ N_INIT        = ninit,                                          [réel]",
+    "),"
+   ],
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.3",
+   "text": "Opérande ‘SECTION‘",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ SECTION = aire"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir l’aire de la section transversale du câble.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.4",
+   "text": "Opérande ‘FCX‘",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ FCX = fv"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Affectation d’une fonction décrivant la dépendance de la force répartie vis-à-vis de la vitesse de vent relative (HM-77/01/046) voir par exemple test SDNL102 [V5.02.102].",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.5",
+   "text": "Opérande N_INIT",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir la tension initiale dans le câble.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "8",
+   "text": "Mot clé COQUE",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.1",
+   "text": "Caractéristiques affectables",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Les caractéristiques que l’on peut affecter sur les éléments de plaque ou de coque sont :",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour tous les éléments de ce type, une épaisseur constante sur chaque maille, puisque le maillage ne représente que le feuillet moyen (ou d’épure pour les excentrées),",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour tous les éléments de ce type, le nombre de couches utilisées pour l’intégration dans l’épaisseur,",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour tous les éléments de ce type, l’orientation du repère local propre à chaque maille,",
+   "page": 13
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour certains modèles de coque, des caractéristiques particulières : coefficient de cisaillement, métrique, excentrement, etc.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.2",
+   "text": "Syntaxe",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COQUE = _F(",
+    "    ♦  GROUP_MA      = lgma,                                   [l_gr_maille]",
+    "    ♦ / EPAIS         = ep,                                           [réel]",
+    "      / EPAIS_FO      = epfct                                     [fonction]",
+    "    ◊ / ANGL_REP      = / (0.0, 0.0),                               [défaut]",
+    "                        / ( ,  ),                                 [l_réel]",
+    "      / VECTEUR       = (vx ,vy ,vz),                               [l_réel]",
+    "    ◊ MODI_METRIQUE   = [’NON’|’OUI’],                             [défaut)]",
+    "    ◊ COEF_RIGI_DRZ   = KRZ (1.E-5),                         [réel (défaut)]",
+    "    ◊ EXCENTREMENT    = e (0.0),                             [réel (défaut)]",
+    "      EXCENTREMENT_FO = efct                                      [fonction]",
+    "    ◊ INER_ROTA       = ’OUI’,",
+    "    ◊ A_CIS           = kappa (0.8333333),                   [réel (défaut)]",
+    "    ◊ COQUE_NCOU      = n (1),                             [entier (défaut)]",
+    ")"
+   ],
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.3",
+   "text": "Opérandes",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.1",
+   "text": "Opérande EPAIS",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / EPAIS    = ep",
+    "  / EPAIS_FO = epfct"
+   ],
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "EPAIS représente l’épaisseur de la coque qui doit être exprimée dans les mêmes unités que les coordonnées des nœuds du maillage. EPAIS_FO est une fonction qui donne l’épaisseur de la coque, dans les mêmes unités que les coordonnées des nœuds du maillage. Cette fonction dépend de la géométrie (X,Y,Z) et est évaluée au centre de gravité de la maille.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.2",
+   "text": "Opérandes EXCENTREMENT / EXCENTREMENT_FO",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ EXCENTREMENT     = / e (0.0),                              [réel (défaut)]",
+    "   EXCENTREMENT_F0  = efct                                     [ fonction ]"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "EXCENTREMENT : définir la distance entre la surface maillée et la surface moyenne, dans le sens de la normale (modélisations DKT, DST, GRILLE_EXCENTRE). EXCENTREMENT_FO : Fonction qui donne la distance entre la surface maillée et la surface moyenne, dans le sens de la normale (modélisations DKT, DST, GRILLE_EXCENTRE). Cette fonction dépend de la géométrie (X,Y,Z) et est évaluée au centre de gravité de la maille.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "La prise en compte de l’excentrement influe sur le comportement de flexion et éventuellement sur le comportement de membrane en présence de couplage (il n’y a pas d’effet sur le cisaillement).",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.3",
+   "text": "Opérandes MODI_METRIQUE / COEF_RIGI_DRZ / INER_ROTA",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ MODI_MET RIQUE = ’NON’"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Fait l’hypothèse que l’épaisseur de l’élément est faible. Lors des intégrations dans l’épaisseur on ne tient pas compte de la variation du rayon de courbure (option par défaut pour toutes les coques).",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ MODI_MET RIQUE = ’OUI’"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la modélisation : COQUE_AXIS, les intégrations se font en prenant en compte les variations du rayon de courbure en fonction de l’épaisseur, voir par exemple [R3.07.02]",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ INER_ROTA = ’OUI’"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Prise en compte de l’inertie de rotation pour la modélisation DKT, DST et Q4G. Elle est obligatoire en cas d’excentrement. On peut omettre ce mot clé pour des coques minces, où les termes d’inertie de rotation sont négligeables par rapport aux autres dans la matrice de masse [R3.07.03].",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ COEF_RIGI_DRZ = KRZ,"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "KRZ est un coefficient de rigidité fictive (nécessairement petit) sur le degré de liberté de rotation autour de la normale à la coque. Il est nécessaire pour empêcher que la matrice de rigidité soit singulière, mais doit être choisi le plus petit possible. La valeur par défaut de 10−5 convient pour la plupart des situations (c’est une valeur relative : la rigidité autour de la normale est égale à KRZ fois le plus petit terme diagonal de la matrice de rigidité de l’élément). Pour les DKT, il y a deux modes de fonctionnement. COEF_RIGI_DRZ négatif et COEF_RIGI_DRZ positif. Dans le cas COEF_RIGI_DRZ positif, le degré de liberté DRZ a toujours un sens de rotation fictive qui empêche la matrice d'être singulière dans le repère global. Dans le cas d'un COEF_RIGI_DRZ négatif, on renforce par une écriture variationnelle la cinématique de rotation de l'élément plaque autour de sa normale. Le degré de liberté DRZ a donc un sens physique. On conseille une valeur de 10−8 .",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Attention, dans STAT/DYNA_NON_LINE, ce coefficient peut entraîner des itérations de Newton supplémentaires (plus d’une itération pour un problème linéaire par exemple).",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.4",
+   "text": "Opérande ANGL_REP / VECTEUR",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés ANGL_REP ou VECTEUR permettent de renseigner le repère « utilisateur » en chaque élément de coque. C’est dans ce repère que sont exprimées par exemple les contraintes dans la coque ou les efforts généralisés [U2.01.05]. L’utilisateur fournit à l’aide de ces mots clés un vecteur V qui permettra de définir entièrement le repère. La construction de ce repère « utilisateur » à partir de V est effectuée en tout point P de la façon suivante (cf. Figure 8.3.4-1) :",
+   "page": 14
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la projection de V sur le plan tangent fournit l’axe x , l",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le vecteur z est colinéaire à la normale n au plan de la coque qui est connue pour chaque l élément, son orientation peut être changée par MODI_MAILLAGE/ORIE_NORM_COQUE [U4.23.04],",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le vecteur y est construit de manière à avoir un repère orthonormé. l",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "(P,x , y ,z ) z =n y =z ^x Le repère « utilisateur » est donc : l l l avec : l et l l l",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 8.3.4-1: Définition du repère utilisateur d’une coque",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés ANGL_REP et VECTEUR sont exclusifs, le vecteur V est défini à l’aide de l’un ou de l’autre.",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ ANGL_REP  = (  , )"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé ANGL_REP définit le vecteur V dans le repère global O,X ,Y ,Z à partir de deux angles nautiques  et  comme expliqué Figure 8.3.4-2 et Figure 8.3.4-3.",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 15
+  },
+  {
+   "type": "figure",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 8.3.4-2 : Représentation de l’angle  Figure 8.3.4-3 : Représentation de l’angle ",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La rotation  autour de OZ transforme La rotation  autour de OY transforme OX 1 1 OXYZ en OX 1 Y 1 Z avec Z 1 ≡Z. en OX 2 . Remarque : sur la figure l’angle  est négatif.",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En représentation tridimensionnelle, le vecteur est obtenu comme suit [Figure 8.3.4-4].",
+   "page": 16
+  },
+  {
+   "type": "figure",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 8.3.4-4 : Représentation 3D du vecteur V défini par ANGL_REP",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "◊ VECTEUR = vx,vy,vz Le vecteur V est défini par ses coordonnées dans le repère global O,X ,Y ,Z.",
+   "page": 16,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 16
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si aucun des mots clés ci-dessus n’est renseigné, c’est donc l’axe global X qui détermine, par projection sur le plan tangent de la coque, le repère « utilisateur » de chaque maille.",
+   "page": 16
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Le repère « utilisateur » sert également à la définition de l’orientation des fibres dans les coques composites ( DEFI_COMPOSITE , [U4.42.03] ).",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.5",
+   "text": "Opérande COQUE_NCOU",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ COQUE_NCOU =  / n (1),                                    [entier, défaut]"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Il s’agit du nombre de couches utilisées pour l’intégration dans l’épaisseur de la coque. Le nombre de couches détermine également le nombre de sous-points du champ de contraintes : 2n+1. En non-linéaire, il est nécessaire d’utiliser plus d’une couche pour intégrer correctement les contraintes dans l’épaisseur, cf. [U2.02.01].",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.6",
+   "text": "Opérande A_CIS",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ A_CIS =  / kappa (0.8333333),                               [réel, défaut]"
+   ],
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce paramètre est à utiliser si on souhaite, pour une coque épaisse se situer dans le cadre du modèle Love-Kirchhoff. Il n’est applicable que pour les modélisations COQUE_C_PLAN, COQUE_D_PLAN, COQUE_AXIS et COQUE_3D. Pour plus de détail l’utilisateur se reportera à la notice [U2.02.01].",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "8.3.7",
+   "text": "Remarque sur l'utilisation de ELAS_COQUE",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsqu'on utilise ELAS_COQUE les raideurs de flexion et de membrane sont rentrées à la main par l'utilisateur dans DEFI_MATERIAU. Dans ce cas, l'épaisseur renseigné dans AFFE_CARA_ELEM ne sert qu'à calculer la masse en dynamique et ne contribue pas à la raideur.",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "9",
+   "text": "Mot clé POUTRE",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.1",
+   "text": "Caractéristiques affectables",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’affecter les caractéristiques des sections transversales d’éléments de type poutre (modélisations POU_D_E, POU_D_EM, POU_D_T, POU_D_TG, POU_D_TGM, POU_D_T_GD, TUYAU_3M, TUYAU_6M). On peut traiter plusieurs types de sections définies par l’opérande SECTION :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "GENERALE : Les caractéristiques mécaniques sont données.",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "RECTANGLE : Les dimensions de la section sont données. Code_Aster calcule les caractéristiques mécaniques nécessaires : aire, inerties, ...",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "CERCLE : Les dimensions de la section sont données. Code_Aster calcule les caractéristiques mécaniques nécessaires : aire, inerties, ...",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "COUDE : Sert à définir les coefficients de correction des inerties et d’amplification des contraintes dans le cas où l’on souhaite tenir compte de l’ovalisation de la section, qui ne peut pas être pris en compte par la théorie des poutres. Les caractéristiques mécaniques sont données par SECTION qui peut prendre la valeur GENERALE ou RECTANGLE ou CERCLE.",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "À chaque type de section, il est possible d’affecter différentes caractéristiques identifiées par un ou plusieurs noms (opérande CARA) auxquels on associe autant de valeurs (opérande VALE). Il est également possible de donner les caractéristiques par l’intermédiaire d’une table dans le cas de la section générale, voir la documentation de la commande MACR_CARA_POUTRE. Il est possible de traiter des poutres de section constante (nom de caractéristique sans suffixe) ou de section variable (nom de caractéristique avec suffixe 1 ou 2). Le mode de variation de la section est défini par le mot-clé VARI_SECT (cf. [§9.4.1]). On donne alors les caractéristiques de la section au nœud initial (nom avec suffixe 1) et au nœud final (nom avec suffixe 2) (“initial” et “final” relativement à la numérotation de la maille support). On doit également utiliser ce mot clé pour définir la constante de torsion pour la modélisation (POU_D_EM).",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.2",
+   "text": "Syntaxe",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "POUTRE = _F(",
+    "    ♦ GROUP_MA    = lgma,                                      [l_gr_maille]",
+    "    # section générale",
+    "    ♦ / SECTION        = ’GENERALE’,",
+    "        ◊ VARI_SECT    = [’CONSTANT’,’HOMOTHETIQUE’]                [défaut]",
+    "        # section générale constante",
+    "        / ♦ TABLE_CARA = tb_cara,                                [sd_table]",
+    "          ♦ NOM_SEC    = nom_sec,                                      [K8]",
+    "        / ♦ CARA       = |’A’|’IY’|’IZ’|’AY’|’AZ’|’EY’|’EZ’,",
+    "                         |’JX’|’AI’|’RY’|’RZ’|’RT’,",
+    "                         |’JG’|’IYR2’|’IZR2’,",
+    "          ♦ VALE       = va,                                        [l_réel]",
+    "        # section générale homothétique",
+    "        / ♦ CARA       = |’A1’|’A2’|’IY1’|’IY2’|’IZ1’|’IZ2’,",
+    "                         |’JX1’|’JX2’|’AY1’|’AY2’|’AZ1’|’AZ2’,",
+    "                         |’JG1’|’JG2’|’EY1’|’EY2’|’EZ1’|’EZ2’,",
+    "                         |’RY1’|’RY2’|’RZ1’|’RZ2’,",
+    "                         |’RT1’|’RT2’|’IYR21’|’IZR21’,",
+    "                         |’IYR22’|’IZR22’,",
+    "          ♦ VALE       = va,                                        [l_réel]",
+    "     # section rectangle",
+    "      / SECTION        = ’RECTANGLE’,",
+    "        ◊ VARI_SECT    = [’CONSTANT’,’HOMOTHETIQUE’’AFFINE’],       [défaut]",
+    "       # section rectangle constante",
+    "       / ♦ CARA        = / |’H’|’EP’,",
+    "                         / |‘HY’|’HZ’|’EPY’|’EPZ’,",
+    "         ♦ VALE        = va,                                        [l_réel]",
+    "       # section rectangle homothétique",
+    "       / ♦ CARA        = / |’H1’|’H2’|’EP1’|’EP2’,",
+    "                         / |’HY1’|’HZ1’|’HY2’|’HZ2’,",
+    "                           |’EPY1’|’EPY2’|’EPZ1’|’EPZ2’,",
+    "         ♦ VALE        = va,                                        [l_réel]",
+    "       # section rectangle affine",
+    "       / ♦ CARA        = |’HY’|’EPY’|’HZ1’,|’EPZ1’|’HZ2’|’EPZ2’,",
+    "         ♦ VALE        = va,                                        [l_réel]",
+    "    # section cercle",
+    "      / SECTION        = ’CERCLE’,",
+    "        ◊ VARI_SECT    = [’CONSTANT’,’HOMOTHETIQUE’],               [défaut]",
+    "        # section cercle constante",
+    "        / ♦ CARA       = |’R’|’EP’,",
+    "          ♦ VALE       = va,                                        [l_réel]",
+    "        # section cercle homothétique sur GROUP_MA",
+    "        / ♦ CARA       = |’R_DEBUT’|’R_FIN’|’EP_DEBUT’|’EP_FIN’,",
+    "          ♦ VALE       = va,                                        [l_réel]",
+    "    # section coude",
+    "      / SECTION             = ’COUDE’,",
+    "        ◊ / ◊ COEF_FLEX     = cflex,                                  [réel]",
+    "          / ♦ COEF_FLEX_XY  = cflex_xy,                               [réel]",
+    "            ♦ COEF_FLEX_XZ  = cflex_xz,                               [réel]",
+    "        ◊ / ◊ INDI_SIGM     = isigm,                                  [réel]",
+    "          / ♦ INDI_SIGM_XY  = isigm_xy,                               [réel]",
+    "            ♦ INDI_SIGM_XZ  = isigm_xz,                               [réel]",
+    "    ◊ MODI_METRIQUE  = [’OUI’,’NON’],                               [défaut]",
+    "    ◊ TUYAU_NSEC     = nsec (16),                          [entier (défaut)]",
+    "    ◊ TUYAU_NCOU     = ncou (3),                           [entier (défaut)]",
+    "    ◊ FCX            = fv,                                        [fonction]",
+    "),"
+   ],
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.3",
+   "text": "Règles d’utilisation",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : L’orientation des éléments de poutres se fait par le mot clé ORIENTATION [§10]. L’angle de vrille (qui permet d’orienter la section transverse de la poutre autour de sa fibre neutre) est toujours donné pour orienter les axes principaux de la section ce qui est peu pratique, car ces axes sont en général inconnus avant le calcul des caractéristiques géométriques de la section, cf. MACR_CARA_POUTRE [U4.42.02].",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Il est possible de fournir via des variables python, les caractéristiques des sections (générale) issues d’un calcul avec MACR_CARA_POUTRE (Cf. le test SSLL107F ).",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les différents noms de caractéristiques des arguments de l’opérande CARA sont décrits plus loin pour chaque argument de l’opérande SECTION.",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour une maille donnée :",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "On ne peut pas surcharger un type de variation de section (constante ou variable) par un autre.",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "On ne peut pas surcharger un type de section ( CERCLE , RECTANGLE , GENERALE ) par un autre.",
+   "page": 18
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour les poutres de section variable, les noms avec suffixe 1 ou 2 sont incompatibles avec les noms sans suffixe. Exemple : A est incompatible avec A1 et A2 .",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "H est incompatible avec HZ et HY (ainsi que H1 , H2 , …)",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "EP est incompatible avec EPY et EPZ (ainsi que EP1 , EP2 , …).",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "RY , RZ et RT n’interviennent que pour le calcul des contraintes.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.4",
+   "text": "Opérandes",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.1",
+   "text": "Opérande VARI_SECT",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir le type de variation de section entre les deux nœuds extrémités de l’élément de poutre, éléments POU_D_E et POU_D_T [R3.08.01]. Les possibilités sont :",
+   "page": 19
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Section",
+     "Affine",
+     "Homothétique"
+    ],
+    [
+     "cercle",
+     "non",
+     "oui"
+    ],
+    [
+     "rectangle",
+     "oui (suivant y )",
+     "oui"
+    ],
+    [
+     "générale",
+     "non",
+     "oui"
+    ]
+   ],
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "“Affine” signifie que l’aire de la section varie de façon linéaire entre les deux nœuds. Les dimensions dans la direction y sont constantes ( HY , EPY ) et celle dans la direction z varient linéairement ( HZ1 , HZ2 , EPZ1 , EPZ2 ).",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "“Homothétique” signifie que les dimensions de la section varient linéairement entre les valeurs données aux deux nœuds extrémités. Dans ce cas, l’aire de la section évolue de façon quadratique. Dans le cas des sections creuses circulaires, pour que la section soit considérée comme homothétique, il faut que EP /R =EP /R . Dans le cas de non respect de l’homothétie DEBUT DEBUT FIN FIN la solution donnée par Code_Aster est approchée [R3.08.01].",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.2",
+   "text": "Opérande MODI_METRIQUE",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir pour les éléments TUYAU le type d’intégration dans l’épaisseur (modélisations TUYAU_3M, TUYAU_6M) :",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "MODI_METRIQUE = ’NON’ conduit à assimiler dans les intégrations le rayon au rayon moyen. Ceci est donc valable pour les tuyaux de faible épaisseur (relativement au rayon),",
+   "page": 19
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "MODI_METRIQUE = ’OUI’ implique une intégration complète, plus précise pour des tuyauteries épaisses, mais pouvant dans certains cas conduire à des oscillations de la solution.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.3",
+   "text": "Opérande SECTION = ’GENERALE’",
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.4.3.1",
+   "text": "Section constante",
+   "page": 20
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CARA",
+     "Signification",
+     "Valeur par défaut"
+    ],
+    [
+     "A",
+     "Aire de la section",
+     "Obligatoire"
+    ],
+    [
+     "IZ",
+     "Moment d’inertie géométrique principal par rapport à GZ",
+     "Obligatoire"
+    ],
+    [
+     "IY",
+     "Moment d’inertie géométrique principal par rapport à GY",
+     "Obligatoire Obligatoire si POU_D_T,"
+    ],
+    [
+     "AY",
+     "Coefficient de cisaillement dans la direction GY",
+     "POU_D_TG."
+    ]
+   ],
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "0.siPOU_D_E"
+   ],
+   "page": 20
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "AZ",
+     "Coefficient de cisaillement dans la direction GZ Excentrement du centre de torsion (composante de CG",
+     "idem"
+    ],
+    [
+     "EY suivant GY ) Excentrement du centre de torsion (composante de CG",
+     "0.",
+     ""
+    ],
+    [
+     "EZ suivant GZ )",
+     "0.",
+     ""
+    ],
+    [
+     "JX",
+     "Constante de torsion",
+     "Obligatoire"
+    ],
+    [
+     "RY",
+     "Distance d’une fibre externe mesurée suivant y",
+     "1."
+    ],
+    [
+     "RZ",
+     "Distance d’une fibre externe mesurée suivant z",
+     "1."
+    ],
+    [
+     "RT",
+     "Rayon de torsion efficace",
+     "1."
+    ],
+    [
+     "JG",
+     "Constante de gauchissement (POU_D_TG, POU_D_TGM) Nécessaire au calcul de la rigidité géométrique (POU_D_TG et",
+     ""
+    ]
+   ],
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IYR2",
+    "       POU_D_TGM)"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Nécessaire au calcul de la rigidité géométrique (POU_D_TG et",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IZR2",
+    "       POU_D_TGM)"
+   ],
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Aire de la section de passage du fluide à l’intérieur de la obligatoire pour une AI poutre. modélisation FLUI_STRU",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans ce cas précis, les caractéristiques de section peuvent être données par les mots clés TABLE_CARA et NOM_SEC au lieu de CARA et VALE. On peut également donner à TABLE_CARA une table issue de la macro-commande MACR_CARA_POUTRE en renseignant dans le mot-clé NOM_SEC :",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le nom du maillage donné à MACR_CARA_POUTRE , si la section correspond à tout le maillage.",
+   "page": 20
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le nom du groupe de mailles auquel correspond la section. On peut également lui donner une table issue de l’opérateur LIRE_TABLE . Pour cela la table doit être définie de la façon suivante :",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "NOM_SEC A IY IZ AY AZ SEC_1 a1 iy1 iz1 ay1 az1 SEC_2 a2 iy2 iz2 ay2 az1",
+   "page": 20
+  },
+  {
+   "type": "paragraph",
+   "text": "Les noms des colonnes sont les noms des caractéristiques de la section. Si une colonne contient des valeurs non réelles (excepté dans la colonne NOM_SEC ), elle sera ignorée. Si le nom d’une colonne n’est pas dans la liste des caractéristiques possibles elle sera ignorée. Dans ce cas NOM_SEC peut prendre la valeur sec ou sec . 1 2",
+   "page": 20,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.4.3.2",
+   "text": "Section homothétique",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "On définit les caractéristiques pour chaque maille, aux deux nœuds.",
+   "page": 21
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CARA",
+     "Signification",
+     "Valeur par défaut"
+    ],
+    [
+     "A1 , A2",
+     "Aire de la section Moment d’inertie géométrique principal par rapport à",
+     "Obligatoire"
+    ],
+    [
+     "IZ1 , IZ2 GZ Moment d’inertie géométrique principal par rapport à",
+     "Obligatoire",
+     ""
+    ],
+    [
+     "IY1, IY2 GY",
+     "Obligatoire Obligatoire si POU_D_T,",
+     ""
+    ],
+    [
+     "AY1, AY2",
+     "Coefficient de cisaillement dans la direction GY",
+     "POU_D_TG."
+    ]
+   ],
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "0.siPOU_D_E"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "AZ1, AZ2 Coefficient de cisaillement dans la direction GZ idem Excentrement du centre de torsion (composante de EY1, EY2 0. CG suivant GY) Excentrement du centre de torsion (composante de EZ1, EZ2 0. CG suivant GZ)",
+   "page": 21,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "JX1, JX2",
+     "Constante de torsion",
+     "Obligatoire"
+    ],
+    [
+     "RY1, RY2",
+     "Distance d’une fibre externe mesurée suivant y",
+     "1."
+    ],
+    [
+     "RZ1, RZ2",
+     "Distance d’une fibre externe mesurée suivant z",
+     "1."
+    ],
+    [
+     "RT1, RT2",
+     "Rayon de torsion efficace",
+     "1."
+    ],
+    [
+     "JG1, JG2",
+     "Constante de gauchissement (POU_D_TG) Nécessaire au calcul de la rigidité géométrique",
+     ""
+    ]
+   ],
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IYR21,IYR22",
+    "             (POU_D_TGetPOU_D_TGM)"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Nécessaire au calcul de la rigidité géométrique IZR21, IZR22",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "(POU_D_TGetPOU_D_TGM)"
+   ],
+   "page": 21
+  },
+  {
+   "type": "figure",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 9.4.3.2-1 : Section GENERALE.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Définition des caractéristiques : IZ=∫ y2ds IY=∫z2ds s s y z 2 2 ∫ m2(y) ∫ m2(z) A A A A AY= = y dy AZ= = z dz A' IZ2 b (y) A' IY2 b (z) y y z z y z 1 1 R R y z ∫ ∫ avec m (y)= t.b (t)dt m (z)= t.b (t)dt y y z z y z b t épaisseur suivant z , en z=t b t épaisseur suivant y, en y=t y z",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Avec : A' A' , : aires réduites cisaillées. y z A 1 A' = avec AY≥1 ou encore A' =k A avec k = ≤1 y AY y y y AY",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "A ,A",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les coefficients de cisaillement sont utilisés par les éléments POU_D_T, et POU_D_TG, y z POU_D_TGM, pour le calcul des matrices de rigidité et de masse et pour le calcul des contraintes [R3.08.01]. En particulier, les contraintes de cisaillement transverse s’expriment par : V A A τ = z =V z τ =V y xz K A z A xy y A z",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "dans le cas des poutres d’Euler (POU_D_E) qui ne tiennent pas compte du cisaillement transverse, on néglige les termes correspondants dans le calcul de la rigidité et de la masse en prenant A =A =0 . Par contre, les contraintes [R3.08.01] de cisaillement sont calculées par : y z V V",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "= z  = y xz A xy A",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les caractéristiques RY , RZ, RT servent au calcul des contraintes de flexion et de torsion [R3.08.01] pour les options ’SIGM_ELNO’ ou ’SIPO_ELNO’ de CALC_CHAMP [U4.81.04]. M M En flexion σ = y.RZ− z.RY xx I I y z MT En torsion τ =τ = .RT xz xy JX",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.4",
+   "text": "Opérande SECTION = ’RECTANGLE’",
+   "page": 23
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "CARA",
+     "Signification",
+     "Valeurs par défaut"
+    ],
+    [
+     "Section constante",
+     "",
+     ""
+    ],
+    [
+     "HY",
+     "Dimension du rectangle suivant GY",
+     "Obligatoire"
+    ],
+    [
+     "HZ",
+     "Dimension du rectangle suivant GZ",
+     "Obligatoire"
+    ],
+    [
+     "H",
+     "Dimension du carré (si le rectangle est carré)",
+     "Obligatoire"
+    ],
+    [
+     "EPY",
+     "Épaisseur suivant GY dans le cas d’un tube creux",
+     "HY/2"
+    ],
+    [
+     "EPZ",
+     "Épaisseur suivant GZ dans le cas d’un tube creux",
+     "HZ/2"
+    ],
+    [
+     "EP",
+     "Épaisseur suivant les deux axes dans le cas d’un tube creux",
+     "Tube plein"
+    ],
+    [
+     "Section homothétique",
+     "",
+     ""
+    ],
+    [
+     "H1, H2",
+     "Dimension du carré à chaque extrémité pour une section variable",
+     "H1 = H2 = H"
+    ],
+    [
+     "HY1 , HY2",
+     "Dimension du rectangle suivant GY à chaque extrémité pour une section variable",
+     "HY1 = HY2 = HY"
+    ],
+    [
+     "HZ1, HZ2",
+     "Dimension du rectangle suivant GZ à chaque extrémité pour une section variable",
+     "HZ1 = HZ2 = HZ"
+    ],
+    [
+     "EP1, EP2",
+     "Épaisseur suivant les deux axes dans le cas d’un tube creux, à chaque extrémité dans le cas d’une section variable",
+     "EP1 = EP2 = EP"
+    ],
+    [
+     "EPY1, EPY2",
+     "Épaisseur suivant GY dans le cas d’un tube creux, à chaque extrémité dans le cas d’une section variable",
+     "EPY1 = EPY2 = EPY"
+    ],
+    [
+     "EPZ1, EPZ2",
+     "Épaisseur suivant GZ dans le cas d’un tube creux, à chaque extrémité dans le cas d’une section variable",
+     "EPZ1 = EPZ2 = EPZ"
+    ]
+   ],
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des sections creuses rectangulaires, l’homothétique ne peut être que dans la direction y [R3.08.01].",
+   "page": 23
+  },
+  {
+   "type": "figure",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 9.4.4-1 : Section RECTANGLE.",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Les caractéristiques calculées par Code_Aster sont [R3.08.03] :",
+   "page": 23
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "HY HZ3 (HY−2EPY).(HZ−2EPZ)3",
+     "HY",
+     ""
+    ],
+    [
+     "Iy=",
+     "−",
+     "RY="
+    ],
+    [
+     "12",
+     "12",
+     "2"
+    ],
+    [
+     "HZ HY 3 (HZ−2EPZ)(HY−2EPY )3",
+     "HZ",
+     ""
+    ],
+    [
+     "Iz=",
+     "−",
+     "RZ="
+    ],
+    [
+     "12",
+     "12",
+     "2"
+    ]
+   ],
+   "page": 23
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si le tube est creux : 2EPY EPZ(HY−EPY)2(HZ−EPZ)2 JX= HY EPY+HZEPZ−EPY2−EPZ2 JX RT= 2EPZ(HY−EPY)(HZ−EPZ)",
+   "page": 23,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si le tube est plein, on pose :",
+   "page": 24
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "HY",
+     "HZ",
+     "",
+     "",
+     ""
+    ],
+    [
+     "a=",
+     ", b=",
+     "si HY >HZ",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "2",
+     "(16",
+     "b",
+     "b5)"
+    ],
+    [
+     "J=ab3",
+     "−3.36 +0.28",
+     "",
+     "",
+     ""
+    ],
+    [
+     "HZ",
+     "HY",
+     "3",
+     "a",
+     "a5"
+    ],
+    [
+     "a=",
+     ", b=",
+     "si HZ>HY",
+     "",
+     ""
+    ],
+    [
+     "2",
+     "2",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "J(3a+1.8b) RT= 8a2b2",
+   "page": 24,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Coefficients de cisaillement Ay et Az HY−2EPY HZ−2EPZ on pose α = α = y HY z HZ Les valeurs de AY et AZ sont données par le tableau ci-dessous : Tab(colonne, ligne) AY=Tab(α ,α ) AZ=Tab(α ,α ) y z z y",
+   "page": 24,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    " Tab   0.00   0.05   0.10   0.20     0.30    0.40    0.50    0.60   0.70   0.80   0.90   0.95",
+    "0.00  1,200  1,200  1,200   1,200   1,200   1,200    1,200  1,200  1,200  1,200  1,200  1,200",
+    "0.05  1,200  1,209  1,212   1,217   1,220   1,221    1,220  1,217  1,212  1,207  1,202  1,201",
+    "0.10  1,200  1,229  1,236   1,247   1,252   1,253    1,249  1,241  1,230  1,217  1,206  1,202",
+    "0.20  1,200  1,300  1,317   1,339   1,348   1,345    1,332  1,309  1,280  1,247  1,217  1,206",
+    "0.30  1,200  1,413  1,442   1,477   1,489   1,479    1,451  1,408  1,354  1,295  1,238  1,214",
+    "0.40  1,200  1,577  1,621   1,671   1,683   1,662    1,614  1,545  1,460  1,366  1,272  1,230",
+    "0.50  1,200  1,803  1,866   1,936   1,949   1,913    1,838  1,733  1,608  1,469  1,325  1,256",
+    "0.60  1,200  2,115  2,207   2,309   2,324   2,267    2,154  2,000  1,818  1,619  1,409  1,301",
+    "0.70  1,200  2,561  2,704   2,866   2,894   2,810    2,640  2,409  2,140  1,848  1,541  1,378",
+    "0.80  1,200  3,265  3,520   3,830   3,907   3,790    3,524  3,154  2,720  2,252  1,771  1,517",
+    "0.90  1,200  4,715  5,358   6,216   6,536   6,401    5,916  5,186  4,300  3,331  2,338  1,841",
+    "0.95  1,200  6,689  8,194  10,294   11,236  11,189  10,375  9,014  7,296  5,372  3,367  2,371"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les valeurs du tableau sont déterminées à l’aide d’une étude paramétrique réalisée avec la commande MACR_CARA_POUTRE .",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les interpolations sur les valeurs du tableau sont linéaires.",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour des valeurs de 0.95 , l’utilisateur doit calculer lui-même les valeurs des coefficients de cisaillement.",
+   "page": 24
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les valeurs calculées peuvent être imprimées avec le mot clé INFO = 2 .",
+   "page": 24
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.5",
+   "text": "Opérande SECTION = ’CERCLE’",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "CARA Signification Valeur par défaut Section constante",
+   "page": 24
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "R",
+     "Rayon extérieur du tube",
+     "Obligatoire"
+    ],
+    [
+     "EP",
+     "Épaisseur dans le cas d’un tube creux",
+     "Tube plein (EP=R)"
+    ]
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Section variable affectée sur une maille Rayons extérieurs aux deux extrémités pour une section",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "R1,R2                                                       R1= R2= R"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "variable Épaisseurs aux deux extrémités dans le cas d’une section",
+   "page": 24
+  },
+  {
+   "type": "code",
+   "lines": [
+    "EP1,EP2                                                     EP1= EP2= EP"
+   ],
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "variable.",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Section variable affectée sur un groupe de mailles R_DEBUT, Rayons extérieurs aux deux extrémités de la poutre définie par le AUCUNE",
+   "page": 25
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "R_FIN",
+     "groupe de mailles"
+    ],
+    [
+     "EP_DEBUT,",
+     "Épaisseurs aux deux extrémités de la poutre définie par le"
+    ]
+   ],
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "AUCUNE"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "EP_FIN groupe de mailles Dans le cas d’une section variable affectée sur un groupe de mailles, les caractéristiques sont calculées automatiquement à partir des valeurs aux extrémités. Pour cela les mailles doivent être correctement orientées et contiguës dans le groupe.",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des sections creuses circulaires, pour que la section soit homothétique il faut que EP1/R1=EP2/R2 . Dans le cas de non respect de cette condition la solution donnée par Code_Aster est approchée [R3.08.01], un message d’alarme est émis pour prévenir l’utilisateur.",
+   "page": 25
+  },
+  {
+   "type": "figure",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 9.4.5-1 : Section CERCLE.",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "JX πR4 π(R−EP)4 I =I = = − Les valeurs calculées par Aster sont [R3.08.03] : y z 2 4 4 RT=RY=RZ=R Ay=Az R−EP",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Coefficients de cisaillement . avec α= R",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "         0.00    0.05   0.10   0.20   0 .30   0.40   0.50   0.60    0.70   0.80   0.90    1.00",
+    "  Ay=Az   1,167  1,174  1,199   1,289  1,419  1,563   1,700  1,815  1,902   1,960  1,991  2,000"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 25
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les valeurs du tableau sont déterminées à l’aide d’une étude paramétrique réalisée avec la commande MACR_CARA_POUTRE .",
+   "page": 25
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les interpolations sont linéaires.",
+   "page": 25
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Les valeurs calculées peuvent être imprimées avec le mot clé INFO = 2 .",
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "9.4.6",
+   "text": "Opérande SECTION = ’COUDE’",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque l’on souhaite tenir compte des coefficients de correction de flexibilité ou des coefficients d’amplification des contraintes, la modélisation des coudes doit être faite par la modélisation POU_D_T. Pour obtenir des résultats corrects, il est conseillé de modéliser un coude de 90° avec 20 à 40 mailles de POU_D_T. Les caractéristiques ne sont affectables que sur les éléments POU_D_T. L’affectation des caractéristiques mécaniques (section, inerties, …) est réalisée par SECTION qui peut prendre la valeur GENERALE ou RECTANGLE ou CERCLE.",
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.4.6.1",
+   "text": "Opérande COEF_FLEX, COEF_FLEX_XZ, COEF_FLEX_XY : coefficients de flexibilité",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ COEF_FLEX     =cflex",
+    "◊ COEF_FLEX_XZ  =cflex",
+    "◊ COEF_FLEX_XY  =cflex"
+   ],
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour la modélisation des coudes de tuyauteries la représentation par éléments d’une poutre circulaire est insuffisante pour représenter la flexibilité d’une coque mince. Le coefficient de flexibilité corrige les données géométriques (moments d’inertie géométriques) conformément aux règles de construction. Certaines règles conduisent à faire le calcul de rigidité de flexion avec un moment d’inertie géométrique corrigé : I tube I = y,z avec cflex1.0 y,z cflex",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Une valeur classique de cflex , pour une tuyauterie d’épaisseur e et de rayon moyen R , est moy donné par : 1.65 eR cflex= avec = courb",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "R2 moy Cette valeur peut être calculée directement dans le fichier de commandes, voir par exemple le test FORMA01A [V7.15.100]. I (tube) I (tube) Dans le cas où 2 coefficients sont donnés, on obtient : I = y ,I = z y cflex z cflex xy xz Par défaut, cflex=cflex =cflex =1 (pas de modification des inerties géométriques). xz xy",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : cflex est appliqué à I , cfle est appliqué à I . xy y xz z",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "9.4.6.2",
+   "text": "Opérandes INDI_SIGM, INDI_SIGM_XZ, INDI_SIGM_XY : Intensification des contraintes",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ INDI_SIGM    =isigm",
+    "◊ INDI_SIGM_XZ =isigm",
+    "◊ INDI_SIGM_XY =isigm"
+   ],
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le calcul des contraintes de flexion dans les éléments de poutres de section tubulaire, on peut tenir compte d’un coefficient d’intensification dû à l’ovalisation. Les contraintes s’écrivent alors : M .R M .R",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "= y ×isigm ou  = z ×isigm avec isgim≥1 xx I xx I y z",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas où 2 indices sont donnés, on a : M .R M .R σ = y ×isigm ou σ = z ×isigm xx I xy xx I xz y z Par défaut, isigm=isigm =isigm =1 (pas de modification des inerties géométriques). xz xy",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : isigm est appliqué à M , isigm est appliqué à M . xy y xz z",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.5",
+   "text": "Opérande FCX",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ FCX = fv"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Affectation d’une fonction décrivant la dépendance de la force répartie vis-à-vis de la vitesse de vent relative (voir test SSNL118 [V6.02.118]). Le chargement de type vent est applicable sur les éléments de barre de câble et de poutre (modélisations POU_D_E, POU_D_T, POU_D_TG, POU_D_T_GD, POU_D_TGM).",
+   "page": 26
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.6",
+   "text": "Opérandes TUYAU_NSEC / TUYAU_NCOU",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ TUYAU_NSEC = nsec (16)                                   [entier (défaut)]",
+    "◊ TUYAU_NCOU = ncou (3)                                    [entier (défaut)]"
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Nombre de couches dans l’épaisseur (ncou, par défaut 3) et de secteurs (nsec, par défaut 16) sur la circonférence utilisée pour les intégrations dans les éléments TUYAU [R3.08.06]. Les valeurs par défaut (3 couches et 16 secteurs) correspondent à un minimum requis pour avoir une précision correcte.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "10",
+   "text": "Mot clé ORIENTATION",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.1",
+   "text": "Caractéristiques affectables",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’affecter les orientations :",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "des axes principaux des sections transversales des éléments de type poutre,",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "des éléments discrets affectés à des nœuds ou des mailles de type POI1 (éléments discrets nodaux) ou à des mailles de type SEG2 (éléments discrets de liaison).",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "de la position de la génératrice pour les éléments tuyaux.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les éléments de type TUYAU, le mot clé ORIENTATION doit systématiquement être renseigné afin de spécifier une ligne génératrice continue définissant pour chaque section l’origine angulaire..",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.2",
+   "text": "Syntaxe",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ORIENTATION = _F(",
+    "    ♦ CARA        = [’VECT_Y’|’ANGL_VRIL’|’VECT_X_Y’|",
+    "                    ’ANGL_NAUT’|’GENE_TUYAU’],",
+    "    # si CARA = ’VECT_Y’",
+    "    ♦ VALE        = vecteur,                                       [3 réels]",
+    "    ♦ GROUP_MA    = lgma,                                      [l_gr_maille]",
+    "    ◊ PRECISION   = eps,                                              [réel]",
+    "    # si CARA = ’ANGL_VRIL’",
+    "    ♦ VALE        = angle,                                          [1 réel]",
+    "    ♦ GROUP_MA  = lgma,                                        [l_gr_maille]",
+    "    ◊ PRECISION   = eps,                                              [réel]",
+    "    # si CARA = ’VECT_X_Y’",
+    "    ♦ VALE        = 2 vecteurs,                                    [6 réels]",
+    "    ♦ GROUP_MA  = lgma,                                        [l_gr_maille]",
+    "    ◊ PRECISION   = eps,                                              [réel]",
+    "    # si CARA = ’ANGL_NAUT’",
+    "    ♦ VALE        = angles,                                        [3 réels]",
+    "    ♦ GROUP_MA  = lgma,                                        [l_gr_maille]",
+    "    ◊ PRECISION   = eps,                                              [réel]",
+    "    # si CARA = ’GENE_TUYAU’",
+    "    ♦ VALE        = vecteur,                                       [3 réels]",
+    "    ♦ GROUP_NO  = lgno,                                         [l_gr_noeud]",
+    "    ◊ CRITERE     = ’RELATIF’|’ABSOLU’                              [défaut]",
+    "    ◊ PRECISION   = eps (1.E-4),                             [réel (défaut)]",
+    ")"
+   ],
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.3",
+   "text": "Règles d’utilisation",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "La règle de surcharge est appliquée. L’orientation prise est la dernière affectée. Exemple :",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ORIENTATION=(",
+    "    _F(CARA = ’ANGL_NAUT’, VALE = (1.0, 1.0, 1.0), GROUP_MA = ’GP1’),",
+    "    _F(CARA = ’ANGL_VRIL’, VALE = 45.0,            GROUP_MA = ’GM1’),",
+    "    _F(CARA = ’ANGL_VRIL’, VALE = 90.0,            GROUP_MA = ’GM2’),",
+    ")"
+   ],
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour définir le repère local associé à une maille de type POI1 ou un nœud (élément discret), il faut utiliser soit ANGL_NAUT, soit VECT_X_Y,",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour définir le repère local autour de l’axe défini par une maille SEG2 (poutre ou discret), il faut utiliser soit ANGL_VRIL, soit VECT_Y,",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour définir une ligne génératrice sur les éléments tuyau, il faut utiliser GENE_TUYAU.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques : Il existe toujours un repère local par défaut attaché aux éléments de type POUTRE ou DISCRET même si l’on n’utilise pas l’opérande ORIENTATION. Il correspond à ANGL_VRIL = 0 pour les éléments attachés à une maille SEG2 (poutres ou discret) et ANGL_NAUT = (0.0,0.0,0.0) pour les éléments discrets nodaux.",
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas o ù l’angle α [figure 10.4-4] est soit nul soit indéfini (comme pour un SEG2 sur l’axe z ) les axes y1,y2 sont parallèles à l’axe Y . Dans ce cas l’axe y3 est par défaut parallèle à l’axe Y , car ANGL_VRIL est nul par défaut.",
+   "page": 29
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.4",
+   "text": "Opérande CARA = ’ANGL_NAUT’",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE = ( ,  ,  )"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Les angles nautiques ,  ,  fournis en degrés, sont les angles permettant de passer du repère (P,x ) y z (P,x,y,z) global de définition des coordonnées des nœuds au repère local . Celui- 3, 3, 3 ci est obtenu par 3 rotations :",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une rotation d’angle  autour de Z , transformant (x , y ,z) en (x y z ) avec z ≡z 1, 1, 1 1 [Figure 10.4-1]",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une rotation d’angle  autour de y , transformant (x y z ) en (x y z ) avec y ≡y 1 1, 1, 1 2, 2, 2 2 1 [Figure 10.4-2]",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une rotation d’angle  autour de x , transformant (x y z ) en (x y z ) avec x ≡x 2 2, 2, 2 3, 3, 3 3 2 [Figure 10.4-3]",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 29
+  },
+  {
+   "type": "figure",
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 10.4-1 : angle . Figure 10.4-2 : angle  .",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : pour la figure 10.4-2, l’angle de rotation  est négatif.",
+   "page": 29,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 10.4-3 : angle  .",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "X Y Z  Le repère local est : 3 3 3",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 10.4-4 : Représentation des repères global et local.",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "ANGL_NAUT permet de définir le repère local associé à une maille de type POI1 (pour un élément discret). Il est également possible de définir l’orientation d’un segment, mais dans ce cas, le segment doit être de longueur nulle, car sinon les 2 premiers angles sont déterminés (cf ANGL_VRIL ).",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PRECISION = eps"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet de définir la longueur en dessous de laquelle la maille est considérée comme de taille nulle. Ce mot clef est facultatif et est quelquefois nécessaire, dû à la précision des coordonnées des nœuds, dans le fichier de maillage.",
+   "page": 30
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.5",
+   "text": "Opérande CARA = ’VECT_X_Y’",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "(xl ,xl ,xl ,yd,yd,yd)",
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE ="
+   ],
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "xl ,xl ,xl sont les 3 composantes, dans le repère global, d’un vecteur définissant l’axe local X . 1 2 3 3 yd, yd,yd sont les 3 composantes, dans le repère global, d’un vecteur Yd , dont la projection sur le 1 2 3 X Y Z plan orthogonal à 3 fournira l’axe local 3. L’axe local 3 complète alors le repère pour que le trièdre (P ,X ,Y ,Z ) soit direct [Figure 10.5-1]. 3 3 3",
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "X3 Yd",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Y3",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 10.5-1 : Définition de VECT_X_Y.",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "VECT_X_Y permet de définir le repère local associé à une maille de type POI1 ou un nœud (pour un élément discret). Il est également possible de définir l’orientation d’un segment, mais dans ce cas, le segment doit être de longueur nulle, car sinon les 2 premiers angles sont déterminés (cf ANGL_VRIL).",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PRECISION = / eps"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet de définir la longueur en dessous de laquelle la maille est considérée comme de taille nulle. Ce mot clef est facultatif et est quelquefois nécessaire, dû à la précision des coordonnées des nœuds, dans le fichier de maillage.",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.6",
+   "text": "Opérande CARA = ’ANGL_VRIL’",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE ="
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des mailles SEG2, l’axe x est déjà porté par la maille (le sens de x est défini par la 3 3 numérotation de deux nœuds de la maille, il peut être changé par MODI_MAILLAGE/ORIE_LIGNE, [U4.23.04]. Il est donc possible de définir y et z par rotation autour de x . 3 3 3",
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "est l’angle (en degrés) de rotation autour de x , transformant (P, x , y ,z ) en (P ,x , y , z ) 2 2 2 2 3 3 3",
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "avec x ≡x [Figure 10.4-3]. 3 2",
+   "page": 31,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ANGL_VRIL permet de définir le repère local autour de l’axe défini par une maille SEG2 (poutre ou discret). Les 2 angles α et β sont définis par l’orientation du segment qui doit donc être de longueur non nulle.",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PRECISION = eps"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet de définir la longueur en dessous de laquelle la maille est considérée comme de taille nulle. Ce mot clef est facultatif et est quelquefois nécessaire, dû à la précision des coordonnées des nœuds, dans le fichier de maillage.",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.7",
+   "text": "Opérande CARA = ’VECT_Y’",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "yd ,yd,yd",
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE ="
+   ],
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas des mailles SEG2, l’axe x est déjà porté par la maille (le sens de x est défini par la 3 3 numérotation de deux nœuds de la maille, il peut être changé par MODI_MAILLAGE/ORIE_LIGNE, [U4.23.04]. Il est donc possible de définir y et z en définissant un vecteur. 3 3 yd ,yd ,yd sont les 3 composantes d’un vecteur Yd dont la projection sur le plan orthogonal à x 1 2 3 3 fournira l’axe local y [Figure 10.5-1]. L’axe z est tel que (P,x , y ,z ) soit direct. 3 3 3 3 3",
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "VECT_Y permet de définir le repère local autour de l’axe défini par une maille SEG2 (poutre ou discret). Les 2 angles α et β sont définis par l’orientation du segment qui doit donc être de longueur non nulle.",
+   "page": 32
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PRECISION = eps"
+   ],
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clef permet de définir la longueur en dessous de laquelle la maille est considérée comme de taille nulle. Ce mot clef est facultatif et est quelquefois nécessaire, dû à la précision des coordonnées des nœuds, dans le fichier de maillage.",
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.8",
+   "text": "Opérande CARA = ’GENE_TUYAU’",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "(z ) z z",
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE="
+   ],
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Cela ne concerne que les éléments TUYAU (modélisations TUYAU_3M ou TUYAU_6M). Il convient de donner les 3 composantes d’un vecteur z orientant la génératrice du tuyau (ligne continue tracée sur le tuyau, définissant pour chaque élément l’origine de l’angle  utilisé pour exprimer l’ovalisation et le gauchissement). Ce vecteur doit être défini en un nœud ou un GROUP_NO extrémité du tuyau. La géométrie est alors construite automatiquement pour tous les éléments connexes de TUYAU.",
+   "page": 32,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Lors de la détection de la ligne de tuyauterie, à partir d’un des nœuds extrémités, les mailles doivent toutes être orientées dans le même sens. Si ce n’est pas le cas, une erreur concernant la cohérence des angles entre 2 mailles voisines, peut être émise.",
+   "page": 32
+  },
+  {
+   "type": "figure",
+   "page": 32
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PRECISION = eps",
+    "◊ CRITERE   = [’RELATIF’,’ABSOLU’]                                  [défaut]"
+   ],
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette précision est utilisée pour la construction de la génératrice ainsi que pour définir la limite entre un élément de tuyau droit et un élément courbe (distinction basée sur l’alignement des 3 ou 4 nœuds de l’élément).",
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "11",
+   "text": "Mots clés GEOM_FIBRE / MULTIFIBRE",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.1",
+   "text": "Syntaxe",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "GEOM_FIBRE = gfibre                                             [geom_fibre]",
+    "MULTIFIBRE = _F(",
+    "    ♦ GROUP_MA    = lgrma,                                     [l_gr_maille]",
+    "    ♦ GROUP_FIBRE   = gfbr,                                     [l_gr_fibre]",
+    "    ◊ PREC_AIRE     = precis (0.01),                         [réel (défaut)]",
+    "    ◊ PREC_INERTIE  = precis (0.10),                         [réel (défaut)]",
+    ")"
+   ],
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Mots clés utilisés pour définir la section des poutres multifibres, (modélisations POU_D_EM ou POU_D_TGM ) en affectant à l’élément poutre (maille SEG2 ) des groupes de fibres définis à l’aide de l’opérateur DEFI_GEOM_FIBRE (U4-26.01).",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.2",
+   "text": "But",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cadre d’une modélisation de type multifibres, il y a deux “niveaux” de modélisation. Il y a la modélisation dite “longitudinale” qui sera représentée par une poutre (de support géométrique SEG2) et une modélisation plane de la section (perpendiculairement au SEG2). Le mot-clé MULTIFIBRE permet d’associer des groupes de fibres (préalablement définis par l’opérateur DEFI_GEOM_FIBRE) à un élément poutre. GEOM_FIBRE permet de donner le nom du concept créé par DEFI_GEOM_FIBRE contenant la description de tous les groupes de fibres.",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Pour les éléments POU_D_EM, il est nécessaire d’affecter tous les groupes de fibres définissant la section droite sur un seul élément poutre (voir R3.08.08). En revanche pour les éléments POU_D_TGM, on ne peut affecter actuellement qu’un seul groupe de fibre par élément poutre. Si l’on veut traiter des cas de section hétérogène avec des éléments POU_D_TGM, l’opérateur CREA_MAILLAGE permet de dupliquer le support SEG2 afin qu’il n’y ait qu’un seul matériau par support.",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention : Les informations contenues dans les groupes de fibres permettent de calculer certaines des caractéristiques intégrées des sections droites (aire, moments statiques et quadratiques). Malgré cela, pour les éléments POU_D_TGM, il est nécessaire de donner des valeurs cohérentes pour les opérandes A,IY ,IZ sous le mot clé POUTRE. Une vérification est réalisée sur la cohérence de ces grandeurs. Si l’erreur relative est trop importante (Confer mots clés PREC_AIRE, PREC_INERTIE) une erreur fatale est émise.",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.3",
+   "text": "Mot clé MULTIFIBRE",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ MULTIFIBRE"
+   ],
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Définir les entités du maillage de poutres concernées et les sections qui leur sont affectées.",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "11.3.1",
+   "text": "Opérandes GROUP_MA",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA"
+   ],
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande permet de définir les entités du maillage de poutres (éléments SEG2 ) qui sont concernées par l’occurrence du mot clé facteur :",
+   "page": 33
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Opérandes",
+     "Contenu / Signification"
+    ],
+    [
+     "GROUP_MA",
+     "Affectation à une liste de groupes de mailles"
+    ]
+   ],
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "11.3.2",
+   "text": "Opérande GROUP_FIBRE",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_FIBRE"
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes permettent de définir les groupes de fibres (parmi tous ceux définis dans le concept géométrie des fibres donné par le mot clé GEOM_FIBRE ) qui sont affectés aux éléments poutres de cette occurrence de",
+   "page": 34
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.4",
+   "text": "Mot clé GEOM_FIBRE",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GEOM_FIBRE"
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Concept créé par DEFI_GEOM_FIBRE [U4.26.01], contenant la description de l’ensemble des groupes de fibres de l’étude.",
+   "page": 34
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.5",
+   "text": "Opérandes PREC_AIRE / PREC_INERTIE",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ PREC_AIRE    = precis (0.01),                              [réel (défaut)]",
+    "◊ PREC_INERTIE = precis (0.10),                              [réel (défaut)]"
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisation des poutres multifibres (POU_D_EM ou POU_D_TGM) nécessite de fournir des informations supplémentaires, par rapport aux mots clés VALE et CARA, sous POUTRE. L’objectif est de vérifier la cohérence des informations (AIRE et INERTIE) fournies d’une part par le mot clé POUTRE et d’autre part par le mot clef MULTIFIBRE. Le critère d’erreur est basé sur l’erreur relative et est comparé soit à la valeur par défaut soit à celle donnée par l’utilisateur via les mots clés PREC_AIRE et PREC_INERTIE.",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le critère n’est pas satisfait une erreur fatale est générée. L’erreur relative est calculée de la manière suivante : AIRE −(AIRE +AIRE ) POUTRE SECTION FIBRE ≤ PREC_AIRE AIRE POUTRE INERTIE −(INERTIE +INERTIE ) POUTRE SECTION FIBRE ≤ PREC_INERTIE INERTIE POUTRE",
+   "page": 34,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  AIRE(FIBRE), AIRE(SECTION),INERTIE(SECTION), INERTIE(FIBRE) sontcalculésà"
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "partir de la structure de données décrivant les fibres et définie sous le mot clef GEOM_FIBRE. Cette structure de données est créée par la commande DEFI_GEOM_FIBRE [U4.26.01].",
+   "page": 34
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "AIRE(FIBRE) est calculée en faisant la somme des aires des fibres, pour tous les groupes de fibres définis par le mot clé GROUP_FIBRE de l’opérande FIBRE de la commande DEFI_GEOM_FIBRE.",
+   "page": 34
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "AIRE(SECTION) est calculée en faisant la somme des aires des fibres définies par le mot clef GROUP_FIBRE de l’opérande SECTION de la commande DEFI_GEOM_FIBRE.",
+   "page": 34
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "INERTIE(FIBRE) est calculée en faisant la somme des s.d2 des fibres définies dans l’ensemble des groupes de fibres définis par le mot clef GROUP_FIBRE de l’opérande FIBRE de la commande DEFI_GEOM_FIBRE. s : représente la surface d’une fibre et d la distance entre la fibre et l’axe défini par le mot clé CARA_AXE_POUTRE de l’opérande FIBRE de la commande DEFI_GEOM_FIBRE.",
+   "page": 34
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "INERTIE(SECTION) est calculée en faisant la somme des s.d² des éléments définis par le mot clef GROUP_FIBRE de l’opérande SECTION de la commande DEFI_GEOM_FIBRE. s : représente la surface d’un élément et d la distance entre le centre de gravité de l’élément et l’axe défini par le mot clé CARA_AXE_POUTRE de l’opérande SECTION de la commande DEFI_GEOM_FIBRE.",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques : Lorsque la section est définie par un maillage (mot clé MAILLAGE_SECT sous l’opérande SECTION de la commande DEFI_GEOM_FIBRE) le calcul de l’inertie globale de l’ensemble des éléments surfaciques ne tient pas compte de l’inertie propre à chacun des éléments. Il faut donc définir un nombre suffisant de fibres pour que cette erreur soit faible et reste inférieure à PREC_INERTIE. Par exemple une section rectangulaire découpée uniformément dans la hauteur en n éléments conduit aux erreurs suivantes, sur les valeurs des inerties.",
+   "page": 35
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Découpage",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    [
+     "Erreur Inertie",
+     "25%",
+     "11.11%",
+     "6.25%",
+     "4.00%",
+     "2.77%"
+    ]
+   ],
+   "page": 35
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "12",
+   "text": "Mot clé DISCRET et DISCRET_2D",
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "12.1",
+   "text": "Caractéristiques affectables",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots clés permettent d’affecter directement à des entités (mailles ou nœuds), qui supportent des éléments de type DIS_T, DIS_TR (DISCRET) ou 2D_DIS_T, 2D_DIS_TR (DISCRET_2D), des matrices de rigidité, de masse ou d’amortissement.",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Sur toutes les entités on peut affecter des matrices correspondant aux degrés de liberté de translation T seulement ou aux degrés de liberté de translation et rotation TR. Les matrices peuvent être diagonales D ou pleines (symétriques ou non symétriques). Dans tous les cas (matrices symétriques, diagonales, complètes) la convention de numérotation des termes est imposée :",
+   "page": 36,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour des matrices symétriques, on ne fournira que la triangulaire supérieure, avec une convention imposée pour la numérotation des termes (voir exemples).",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour des matrices diagonales, on ne fournira que les termes de la diagonale, avec une convention imposée pour la numérotation des termes (voir exemples).",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour des matrices non-symétrique, on fournira tous les termes, avec une convention imposée pour la numérotation des termes (voir exemples).",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Les matrices peuvent être affectées :",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à des nœuds ou à des mailles de types POI1; elles sont alors dites matrices nodales N ,",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à des mailles de type SEG2; elles sont alors dites matrices de liaison L .",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "En cas d’affectation de matrices à des mailles ou à des nœuds, le type d’élément DISCRET doit être affecté, au préalable, à ces mailles ou à ces nœuds par l’opérateur AFFE_MODELE [U4.41.01].",
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "12.2",
+   "text": "Syntaxe",
+   "page": 36
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DISCRET et DISCRET_2D = _F(",
+    "    ♦ GROUP_MA   = lgma,                                       [l_gr_maille]",
+    "      ◊ SYME       = [’OUI’|’NON’]                                  [défaut]",
+    "    # matrices de rigidité",
+    "    ♦ / CARA       = |’K_T_D_N’|’K_TR_D_N’|’K_T_D_L’|’K_TR_D_L’,",
+    "                     |’K_T_N’|’K_TR_N’|’K_T_L’|’K_TR_L’,",
+    "    # matrices de masse",
+    "      / CARA       = |’M_T_D_N’|’M_TR_D_N’,|’M_T_D_L’,|’M_TR_D_L’",
+    "                     |’M_T_N’|’M_TR_N’|’M_T_L’|’M_TR_L’,",
+    "    # matrices d’amortissement",
+    "      / CARA       = |’A_T_D_N’|’A_TR_D_N’|’A_T_D_L’|’A_TR_D_L’,",
+    "                     |’A_T_N’|’A_TR_N’|’A_T_L’|’A_TR_L’,",
+    "    ♦ / VALE       = lva,                                           [l_réel]",
+    "    ◊ REPERE       = [’LOCAL’,’GLOBAL’]                             [défaut]",
+    "    ◊ AMOR_HYST    = amnh (0.0),                             [réel (défaut)]",
+    ")"
+   ],
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "12.3",
+   "text": "Opérandes",
+   "page": 37
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.1",
+   "text": "Règles d’utilisation",
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  RIGIDITEou AMORTISSEMENTetSYME = ’OUI’ (valeurpardéfaut)",
+    "                                          DIS_*           2D_DIS_*",
+    "CARA          CARA         ENTITE",
+    "                                          VALE            VALE"
+   ],
+   "page": 37
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’K_T_D_N’",
+     "’A_T_D_N’",
+     "nœud ou POI1",
+     "3 termes",
+     "2 termes"
+    ],
+    [
+     "’K_T_D_L’",
+     "’A_T_D_L’",
+     "SEG2",
+     "3 termes",
+     "2 termes"
+    ],
+    [
+     "’K_TR_D_N’",
+     "’A_TR_D_N’",
+     "nœud ou POI1",
+     "6 termes",
+     "3 termes"
+    ]
+   ],
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "’K_TR_D_L’    ’A_TR_D_L’   SEG2           6termes         3 termes"
+   ],
+   "page": 37
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’K_T_N’",
+     "’A_T_N’",
+     "nœud ou POI1",
+     "6 termes",
+     "3 termes"
+    ],
+    [
+     "’K_T_L’",
+     "’A_T_L’",
+     "SEG2",
+     "21 termes",
+     "10 termes"
+    ],
+    [
+     "’K_TR_N’",
+     "’A_TR_N’",
+     "nœud ou POI1",
+     "21 termes",
+     "6 termes"
+    ],
+    [
+     "’K_TR_L’",
+     "’A_TR_L’",
+     "SEG2",
+     "78 termes",
+     "21 termes"
+    ]
+   ],
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  RIGIDITEou AMORTISSEMENTetSYME = ’NON’",
+    "                                          DIS_*           2D_DIS_*",
+    "CARA          CARA         ENTITE",
+    "                                          VALE            VALE"
+   ],
+   "page": 37
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’K_T_N’",
+     "’A_T_N’",
+     "nœud ou POI1",
+     "9 termes",
+     "4 termes"
+    ],
+    [
+     "’K_T_L’",
+     "’A_T_L’",
+     "SEG2",
+     "36 termes",
+     "16 termes"
+    ],
+    [
+     "’K_TR_N’",
+     "’A_TR_N’",
+     "nœud ou POI1",
+     "36 termes",
+     "9 termes"
+    ],
+    [
+     "’K_TR_L’",
+     "’A_TR_L’",
+     "SEG2",
+     "144 termes",
+     "36 termes"
+    ]
+   ],
+   "page": 37
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "MASSE et SYME = ’OUI’ (valeur par défaut)",
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                                DIS_*                2D_DIS_*",
+    "CARA            ENTITE",
+    "                                VALE                 VALE"
+   ],
+   "page": 37
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "’M_T_D_N’",
+     "nœud ou POI1",
+     "1 (masse)",
+     "1 (masse)"
+    ],
+    [
+     "’M_TR_D_N’",
+     "nœud ou POI1",
+     "10 (masse/inertie)",
+     "non disponible"
+    ],
+    [
+     "’M_T_N’",
+     "nœud ou POI1",
+     "6 (masse/inertie)",
+     "3 (masse/inertie)"
+    ],
+    [
+     "’M_T_L’",
+     "SEG2",
+     "21 (masse/inertie)",
+     "10 (masse/inertie)"
+    ],
+    [
+     "’M_T_D_L’",
+     "SEG2",
+     "1 (masse/inertie)",
+     "1 (masse/inertie)"
+    ],
+    [
+     "’M_TR_N’",
+     "nœud ou POI1",
+     "21 (masse/inertie)",
+     "6 (masse/inertie)"
+    ],
+    [
+     "’M_TR_D_L’",
+     "SEG2",
+     "4 (masse/inertie)",
+     "4 (masse/inertie)"
+    ],
+    [
+     "’M_TR_L’",
+     "SEG2",
+     "78 (masse/inertie)",
+     "21 (masse/inertie)"
+    ]
+   ],
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  MASSEetSYME = ’NON’",
+    "                                DIS_*                2D_DIS_*",
+    "CARA            ENTITE",
+    "                                VALE                 VALE",
+    "’M_T_N’         nœud ou POI1    9 (masse/inertie)    4 (masse/inertie)",
+    "’M_T_L’         SEG2            36 (masse/inertie)   16 (masse/inertie)",
+    "’M_TR_N’        nœud ou POI1    36 (masse/inertie)   9 (masse/inertie)",
+    "’M_TR_L’        SEG2            144 (masse/inertie)  36 (masse/inertie)"
+   ],
+   "page": 37
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.2",
+   "text": "Opérandes VALE",
+   "page": 37
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / VALE = lva"
+   ],
+   "page": 37
+  },
+  {
+   "type": "paragraph",
+   "text": "On trouve dans VALE la liste des valeurs permettant de définir la matrice élémentaire de l’élément discret. La taille de cette liste dépend du type d’élément.",
+   "page": 37
+  },
+  {
+   "type": "paragraph",
+   "text": "On utilise le mot clé VALE si on veut effecteur un calcul standard. Les arguments de ce mot clé sont des réels.",
+   "page": 37
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.3",
+   "text": "Opérandes K_( matrices de rigidité) ou A_ (matrices d’amortissement)",
+   "page": 38
+  },
+  {
+   "type": "paragraph",
+   "text": "K_T_D_N / A_T_D_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 3 valeurs k , x k , k en DIS_T et 2 valeurs k , k en 2D_DIS_T telles que : y z x y",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "U",
+     "U",
+     "U",
+     "",
+     ""
+    ],
+    [
+     "x",
+     "y",
+     "z",
+     "U",
+     "U"
+    ],
+    [
+     "[k",
+     "0",
+     "0]",
+     "x",
+     "y"
+    ],
+    [
+     "x",
+     "[k",
+     "0]",
+     "",
+     ""
+    ],
+    [
+     "K ouA= 0",
+     "k",
+     "0",
+     "K ouA= x",
+     ""
+    ],
+    [
+     "y",
+     "0",
+     "k",
+     "",
+     ""
+    ],
+    [
+     "0",
+     "0",
+     "k",
+     "y",
+     ""
+    ]
+   ],
+   "page": 38
+  },
+  {
+   "type": "paragraph",
+   "text": "z",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_T_D_L / A_T_D_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, K étant la matrice précédemment définie : Noeud1 Noeud2 [ ] K −K −K K il suffit donc de fournir les 3 valeurs k k k x, y, z",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_TR_D_N / A_TR_D_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou nœud, on trouve en correspondance dans VALE 6 valeurs k , k , x y k , k , k , k en DIS_TR ou 3 valeurs k , k , k en 2D_DIS_TR telles que : z rx ry rz x y rz U U U R R R x y z x y z [ ] k 0 0 0 0 0 x U U R x y z 0 k 0 0 0 0 y [ k 0 0 ] 0 0 k 0 0 0 x KouA= z KouA= 0 k 0 0 0 0 k 0 0 y rx 0 0 k 0 0 0 0 k 0 rz ry 0 0 0 0 0 k rz",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_TR_D_L / A_TR_D_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, K étant la matrice précédemment définie : Noeud1 Noeud2 [ ] K −K −K K il suffit de donner les 6 valeurs ci-dessus.",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_T_N / A_T_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 6 valeurs k , 1 k … k en DIS_T ou 3 valeurs k , k , k en 2D_DIS_T telles que : 2 6 1 2 3",
+   "page": 38,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "U",
+     "U",
+     "U",
+     "",
+     ""
+    ],
+    [
+     "x",
+     "y",
+     "z",
+     "U U",
+     ""
+    ],
+    [
+     "[",
+     "]",
+     "x",
+     "y",
+     ""
+    ],
+    [
+     "k",
+     "k",
+     "k",
+     "",
+     ""
+    ],
+    [
+     "1",
+     "2",
+     "4",
+     "[k",
+     "k]"
+    ],
+    [
+     "K ouA=",
+     "k",
+     "k",
+     "K ouA= 1",
+     "2"
+    ],
+    [
+     "3",
+     "5",
+     "k",
+     "",
+     ""
+    ],
+    [
+     "k 6",
+     "3",
+     "",
+     "",
+     ""
+    ]
+   ],
+   "page": 38
+  },
+  {
+   "type": "code",
+   "lines": [
+    "K_T_N/A_T_N etSYME = ’NON’"
+   ],
+   "page": 39
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 9 valeurs k , 1 k … k en DIS_T ou 4 valeurs k , k , … k en 2D_DIS_T telles que : 2 9 1 2 4",
+   "page": 39,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "U",
+     "U",
+     "U",
+     "",
+     ""
+    ],
+    [
+     "x",
+     "y",
+     "z",
+     "U",
+     "U"
+    ],
+    [
+     "[",
+     "]",
+     "x",
+     "y",
+     ""
+    ],
+    [
+     "k",
+     "k",
+     "k",
+     "",
+     ""
+    ],
+    [
+     "1",
+     "4",
+     "7",
+     "[k",
+     "k]"
+    ],
+    [
+     "K ou A= k",
+     "k",
+     "k",
+     "K ouA= 1",
+     "3"
+    ],
+    [
+     "2",
+     "5",
+     "8",
+     "k",
+     "k"
+    ],
+    [
+     "k",
+     "k",
+     "k",
+     "2",
+     "4"
+    ]
+   ],
+   "page": 39
+  },
+  {
+   "type": "paragraph",
+   "text": "3 6 9",
+   "page": 39,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_T_L / A_T_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 21 valeurs k , k ... k 1 2 21 en DIS_T ou 10 valeurs k , k ... k en 2D_DIS_T et la matrice de rigidité suivante sera 1 2 10 affectée : U U U U U U x1 y1 z1 x2 y2 z2 U U U U [ ] x1 y1 x2 y2 k k k k k k [ ] 1 2 4 7 11 16 k k k k 1 2 4 7 k k k k k 3 5 8 12 17 k k k KouA= 3 5 8 k k k k KouA= 6 9 13 18 k k 6 9 k k k 10 14 19 k 10 k k 15 20 k 21",
+   "page": 39,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "K_T_L/A_T_L etSYME = ’NON’"
+   ],
+   "page": 39
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type SEG2, on trouve en correspondance dans VALE 36 valeurs k , k ... k 1 2 36 en DIS_T ou 16 valeurs k , k ... k en 2D_DIS_T et la matrice de rigidité suivante sera 1 2 16 affectée : U U U U U U x1 y1 z1 x2 y2 z2 U U U U [ ] x1 y1 x2 y2 K K K K K K [ ] 1 7 13 19 25 31 k k k k 1 5 9 13 K K K K K K 2 8 14 20 26 32 k k k k Kou A= 2 6 10 14 K K K K K K KouA= 3 9 15 21 27 33 k k k k 3 7 11 15 K K K K K K 4 10 16 22 28 34 k k k k 4 8 12 16 K K K K K K 5 11 17 23 29 35 K K K K K K 6 12 18 24 30 36",
+   "page": 39,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_TR_N / A_TR_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 21 valeurs k , 1 k ... k en DIS_TR ou 6 valeurs k , k ... k en 2D_DIS_TR telles que : 2 21 1 2 6 U U U R R R x y z x y z [ ] k k k k k k 1 2 4 7 11 16 U U R k k k k k x y z 3 5 8 12 17 [ k k k ] k k k k 1 2 4 Kou A= 6 9 13 18 KouA= k k k k k 3 5 10 14 19 k k k 6 15 20 k 21",
+   "page": 39,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "K_TR_N/A_TR_N etSYME = ’NON’"
+   ],
+   "page": 40
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 36 valeurs k , 1 k ... k en DIS_TR ou 9 valeurs k , k ... k en 2D_DIS_TR telles que : 2 36 1 2 9 U U U R R R x y z x y z [ ] k k k k k k 1 7 13 19 25 31 U U R x y z k k k k k k [ ] 2 8 14 20 26 32 k k k k k k k k k 1 4 7 KouA= 3 9 15 21 27 33 Kou A= k k k k k k k k k 2 5 8 4 10 16 22 28 34 k k k k k k k k k 3 6 9 5 11 17 23 29 35 k k k k k k 6 12 18 24 30 36",
+   "page": 40,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "K_TR_L / A_TR_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 78 valeurs k , k ... k 1 2 78 en DIS_TR. U U U R R R U U U R R R x1 y1 z1 x1 y1 z1 x2 y2 z2 x2 y2 z2 [ ] k k k k k k k k k k k k 1 2 4 7 11 16 22 29 37 46 56 67 k k k k k k k k k k k 3 5 8 12 17 23 30 38 47 57 68 k k k k k k k k k k 6 9 13 18 24 31 39 48 58 69 k k k k k k k k k 10 14 19 25 32 40 49 59 70 k k k k k k k k 15 20 26 33 41 50 60 71 k k k k k k k KouA= 21 27 34 42 51 61 72 k k k k k k 28 35 43 52 62 73 k k k k k 36 44 53 63 74 k k k k 45 54 64 75 k k k 55 65 76 k k 66 77 k 78",
+   "page": 40,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ou 21 valeurs k , k ... k en 2D_DIS_TR telles que : 1 2 21 U U R U U R x1 y1 z1 x2 y2 z2 [ ] k k k k k k 1 2 4 7 11 16 k k k k k 3 5 8 12 17 k k k k KouA= 6 9 13 18 k k k 10 14 19 k k 15 20 k 21",
+   "page": 40,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "K_TR_L/A_TR_L etSYME= ’NON’"
+   ],
+   "page": 41
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type SEG2, on trouve en correspondance dans VALE 144 valeurs k , k ... k 1 2 144 en DIS_TR. U U U R R R U U U R R R x1 y1 z1 x1 y1 z1 x2 y2 z2 x2 y2 z2 [ ] k k k k k k k k k k k k 1 13 25 37 49 61 73 85 97 109 121 133 k k k k k k k k k k k k 2 14 26 38 50 62 74 86 98 110 122 134 k k k k k k k k k k k k 3 15 27 39 51 63 75 87 99 111 123 135 k k k k k k k k k k k k 4 16 28 40 52 64 76 88 100 112 124 136 k k k k k k k k k k k k 5 17 29 41 53 65 77 89 101 113 125 137 k k k k k k k k k k k k KouA= 6 18 30 42 54 66 78 90 102 114 126 138 k k k k k k k k k k k k 7 19 31 43 55 67 79 91 103 115 127 139 k k k k k k k k k k k k 8 20 32 44 56 68 80 92 104 116 128 140 k k k k k k k k k k k k 9 21 33 45 57 69 81 93 105 117 129 141 k k k k k k k k k k k k 10 22 34 46 58 70 82 94 106 118 130 142 k k k k k k k k k k k k 11 23 35 47 59 71 83 95 107 119 131 143 k k k k k k k k k k k k 12 24 36 48 60 72 84 96 108 120 132 144",
+   "page": 41,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ou 36 valeurs k , k ... k en 2D_DIS_TR telles que : 1 2 36 U U R U U R x1 y1 z1 x2 y2 z2 [ ] k k k k k k 1 7 13 19 25 31 k k k k k k 2 8 14 20 26 32 k k k k k k KouA= 3 9 15 21 27 33 k k k k k k 4 10 16 22 28 34 k k k k k k 5 11 17 23 29 35 k k k k k k 6 12 18 24 30 36",
+   "page": 41,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.4",
+   "text": "Opérandes M_ Matrices de masse",
+   "page": 42
+  },
+  {
+   "type": "paragraph",
+   "text": "M_T_D_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE 1 valeur m . La matrice de masse suivante sera affectée : U U U x y z [ ] m 0 0 M= 0 m 0 0 0 m",
+   "page": 42,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "M_TR_D_N et SYME = ’OUI’ (valeur par défaut, non disponible en 2D_DIS_TR ) pour une maille de type POI1 ou un nœud, on trouve en correspondance dans VALE une valeur de masse m , 6 valeurs du tenseur d’inertie (massique) : I xx ,I yy ,I zz ,I xy ,I yz ,I xz et 3 composantes du vecteur d’excentrement de la masse par rapport à son nœud : e ,e ,e . La matrice de masse x y z suivante sera affectée : U U U R R R x y z x y z [ ] m 0 0 0 m.e −m.e z y m 0 −m.e 0 m.e z x m m.e −m.e 0 M= y x V V V xx xy xz V V yy yz v zz",
+   "page": 42,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "V =I +m(e2+e2) xx xx y z V =I +m(e2+e2) yy yy x z V =I +m(e2+e2) zz zz x y V =I −me e xy xy x y V =I −me e yz yz y z V =I −me e xz xz x z",
+   "page": 42,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 42
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention : L’excentrement doit être exprimée dans le repère global : coordonnées du vecteur NG (excentrement) dirigé du nœud vers la masse.",
+   "page": 42
+  },
+  {
+   "type": "paragraph",
+   "text": "M_T_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou nœud, on trouve en correspondance dans VALE 6 valeurs M , 1 M , … M en DIS_T ou 3 valeurs M , M , M en 2D_DIS_T et la matrice de masse 2 6 1 2 3 suivante sera affectée : U U U x y z U U [ M M M ] x y 1 2 4 [ M M ] M= M M M= 1 2 3 5 M M 3 6 Voir par exemple le test SDLD27 [V2.01.027].",
+   "page": 43,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M_T_N etSYME = ’NON’"
+   ],
+   "page": 43
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type POI1 ou nœud, on trouve en correspondance dans VALE 9 valeurs M , 1 M , … M en DIS_T ou 4 valeurs M , M , ... M en 2D_DIS_T et la matrice de masse 2 9 1 2 4 suivante sera affectée :",
+   "page": 43,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "U",
+     "U",
+     "U",
+     "",
+     ""
+    ],
+    [
+     "x",
+     "y",
+     "z",
+     "U",
+     "U"
+    ],
+    [
+     "[",
+     "]",
+     "x",
+     "y",
+     ""
+    ],
+    [
+     "M",
+     "M",
+     "M",
+     "",
+     ""
+    ],
+    [
+     "[",
+     "]",
+     "",
+     "",
+     ""
+    ],
+    [
+     "1",
+     "4",
+     "7",
+     "M",
+     "M"
+    ]
+   ],
+   "page": 43
+  },
+  {
+   "type": "paragraph",
+   "text": "M= M M M M= 1 3 2 5 8 M M M M M 2 4 3 6 9",
+   "page": 43,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "M_TR_N et SYME = ’OUI’ (valeur par défaut) pour une maille de type POI1 ou nœud, on trouve en correspondance dans VALE 21 valeurs M , 1 M , … M en DIS_TR ou 6 valeurs M , M , … M en 2D_DIS_TR et la matrice de masse 2 21 1 2 6 suivante sera affectée : U U U R R R x y z x y z [ ] M M M M M M 1 2 4 7 11 16 U U R x y z M M M M M [ ] 3 5 8 12 17 M M M M M M M 1 2 4 M= 6 9 13 18 M= M M M M M 3 5 10 14 19 M M M 6 15 20 M 21",
+   "page": 43,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M_TR_N etSYME =’ NON’"
+   ],
+   "page": 43
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type POI1 ou nœud, on trouve en correspondance dans VALE 36 valeurs M , 1 M , … M en DIS_TR ou 9 valeurs M , M , … M en 2D_DIS_TR et la matrice de masse 2 36 1 2 9 suivante sera affectée : U U U R R R x y z x y z [ ] M M M M M M 1 7 13 19 25 31 U U R x y z M M M M M M [ ] 2 8 14 20 26 32 M M M M M M M M M 1 4 7 M= 3 9 15 21 27 33 M= M M M M M M M M M 2 5 8 4 10 16 22 28 34 M M M M M M M M M 3 6 9 5 11 17 23 29 35 M M M M M M 6 12 18 24 30 36 M_T_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 21 valeurs M , M , … 1 2 M en DIS_T ou 10 valeurs M , M , … M en 2D_DIS_T et la matrice de masse suivante 21 1 2 10 sera affectée : U U U U U U x1 y1 z1 x2 y2 z2 [ ] M M M M M M U U U U 1 2 4 7 11 16 x1 y1 x2 y2 [ ] M M M M M M M M M 3 5 8 12 17 1 2 4 7 M M M M M M M M= 6 9 13 18 M= 3 5 8 M M M M M 10 14 19 6 9 M M M 15 20 10 M 21",
+   "page": 43,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "M_T_D_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 1 valeur, en DIS_T et en 2_DIS_T, la matrice de masse suivante sera affectée : Noeud1 Noeud2 [ ] M= M la matrice M a la même définition que celle donné pour les M_T_D_N. M",
+   "page": 44,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M_T_L etSYME = ’NON’"
+   ],
+   "page": 44
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type SEG2, on trouve en correspondance dans VALE 36 valeurs M , M , … 1 2 M en DIS_T ou 16 valeurs M , M , … M en 2D_DIS_T et la matrice de masse suivante 36 1 2 16 sera affectée : U U U U U U x1 y1 z1 x2 y2 z2 [ ] M M M M M M 1 7 13 19 25 31 M M M M M M 2 8 14 20 26 32 M M M M M M M= 3 9 15 21 27 33 M M M M M M 4 10 16 22 28 34 M M M M M M 5 11 17 23 29 35 M M M M M M 6 12 18 24 30 36",
+   "page": 44,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "U U U U x1 y1 x2 y2 [ ] M M M M 1 5 9 13",
+   "page": 44,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "M",
+     "M",
+     "M",
+     "M",
+     ""
+    ],
+    [
+     "M=",
+     "2",
+     "6",
+     "10",
+     "14"
+    ],
+    [
+     "M",
+     "M",
+     "M",
+     "M",
+     ""
+    ]
+   ],
+   "page": 44
+  },
+  {
+   "type": "paragraph",
+   "text": "3 7 11 15 M M M M 4 8 12 16 M_TR_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 78 valeurs M , M , … 1 2 M en DIS_TR et la matrice de masse suivante sera affectée : 78 U U U R R R U U U R R R x1 y1 z1 x1 y1 z1 x2 y2 z2 x2 y2 z2 [ ] M M M M M M M M M M M M 1 2 4 7 11 16 22 29 37 46 56 67 M M M M M M M M M M M 3 5 8 12 17 23 30 38 47 57 68 M M M M M M M M M M 6 9 13 18 24 31 39 48 58 69 M M M M M M M M M 10 14 19 25 32 40 49 59 70 M M M M M M M M 15 20 26 33 41 50 60 71 M M M M M M M M= 21 27 34 42 51 61 72 M M M M M M 28 35 43 52 62 73 M M M M M 36 44 53 63 74 M M M M 45 54 64 75 M M M 55 65 76 M M 66 77 M 78",
+   "page": 44,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ou 21 valeurs M 1 , M 2 , … M 21 en 2D_DIS_TR U U R U U R x1 y1 z1 x2 y2 z2 [ ] M M M M M M 1 2 4 7 11 16 M M M M M 3 5 8 12 17 M M M M M= 6 9 13 18 M M M 10 14 19 M M 15 20 M 21 M_TR_D_L et SYME = ’OUI’ (valeur par défaut) pour une maille de type SEG2, on trouve en correspondance dans VALE 4 valeurs M1 , M2, … M4 en DIS_TR et la matrice de masse suivante sera affectée : U U U R R R U U U R R R x1 y1 z1 x1 y1 z1 x2 y2 z2 x2 y2 z2 [ ] M 1 M 1 M 1 M 2 M 3 M M= 4 M 1 M 1 M 1 M 2 M 3 M 4",
+   "page": 45,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ou 2 valeurs M1 , M2 en 2D_DIS_TR U U R U U R x1 y1 z1 x2 y2 z2 [ ] M 1 M 1 M M= 2 M 1 M 1 M 2",
+   "page": 46,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "M_TR_L etSYME =’ NON’"
+   ],
+   "page": 47
+  },
+  {
+   "type": "paragraph",
+   "text": "pour une maille de type SEG2, on trouve en correspondance dans VALE 144 valeurs M , M , … 1 2 M en DIS_TR et la matrice de masse suivante sera affectée : 144 U U U R R R U U U R R R x1 y1 z1 x1 y1 z1 x2 y2 z2 x2 y2 z2 [ ] M M M M M M M M M M M M 1 13 25 37 49 61 73 85 97 109 121 133 M M M M M M M M M M M M 2 14 26 38 50 62 74 86 98 110 122 134 M M M M M M M M M M M M 3 15 27 39 51 63 75 87 99 111 123 135 M M M M M M M M M M M M 4 16 28 40 52 64 76 88 100 112 124 136 M M M M M M M M M M M M 5 17 29 41 53 65 77 89 101 113 125 137 M M M M M M M M M M M M M= 6 18 30 42 54 66 78 90 102 114 126 138 M M M M M M M M M M M M 7 19 31 43 55 67 79 91 103 115 127 139 M M M M M M M M M M M M 8 20 32 44 56 68 80 92 104 116 128 140 M M M M M M M M M M M M 9 21 33 45 57 69 81 93 105 117 129 141 M M M M M M M M M M M M 10 22 34 46 58 70 82 94 106 118 130 142 M M M M M M M M M M M M 11 23 35 47 59 71 83 95 107 119 131 143 M M M M M M M M M M M M 12 24 36 48 60 72 84 96 108 120 132 144",
+   "page": 47,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ou 36 valeurs M 1 , M 2 , … M 36 en 2D_DIS_TR U U R U U R x1 y1 z1 x2 y2 z2 [ ] M M M M M M 1 7 13 19 25 31 M M M M M M 2 8 14 20 26 32 M M M M M M M= 3 9 15 21 27 33 M M M M M M 4 10 16 22 28 34 M M M M M M 5 11 17 23 29 35 M M M M M M 6 12 18 24 30 36",
+   "page": 47,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Les options M_T_L, M_TR_L, M_T_D_L, M_TR_D_L ne correspondent pas en général à une option de modélisation ayant une signification mécanique. Elles sont disponibles pour importer dans Code_Aster des matrices de masses discrétisées sur une maille de type SEG2 déterminées par un autre logiciel. En effet, on affecte habituellement des valeurs de masse et d’inertie ponctuelles (maille POI1 ) par M_T_D_N ou M_TR_D_N.",
+   "page": 47
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.5",
+   "text": "Opérande AMOR_HYST",
+   "page": 47
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ AMOR_HYST = amorh"
+   ],
+   "page": 47
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d’affecter à un élément discret un coefficient pour construire une matrice de rigidité complexe (modélisation de l’amortissement hystérétique) la matrice construite est : 1j.amor .K h où K est la matrice K_* dont les valeurs sont fournies dans la même occurrence du mot clé DISCRET. La matrice de rigidité complexe sera effectivement construite lors d’un appel à CALC_MATR_ELEM [U4.61.01] avec l’option AMOR_HYST (voir test SDLD313) et [R5.05.04].",
+   "page": 47,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "12.3.6",
+   "text": "Opérande REPERE",
+   "page": 48
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ REPERE  = / ’LOCAL’,",
+    "            / ’GLOBAL’,"
+   ],
+   "page": 48
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut les valeurs des matrices fournies pour les éléments discrets sont utilisées pour exprimer les quantités correspondantes dans le REPERE = ’GLOBAL’.",
+   "page": 48
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on souhaite définir un repère particulier en un nœud (ou maille de type POI1) on précisera REPERE = ’LOCAL’ en définissant ce repère par le mot clé ORIENTATION [§10].",
+   "page": 48
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour une matrice définie sur une maille de type SEG2 l’opérande REPERE = ’LOCAL’ permet de faire référence au repère local attaché à la maille (nœud initial, nœud final) complété si nécessaire d’un angle de vrille défini par le mot clé ORIENTATION [§10].",
+   "page": 48
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "13",
+   "text": "Mot clé MASSIF",
+   "page": 49
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.1",
+   "text": "Caractéristiques affectables",
+   "page": 49
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet d’affecter à des éléments 3D ou 2D des axes locaux (qui peuvent être par exemple utilisés pour définir des directions d’orthotropie (cf. DEFI_MATERIAU [U4.43.01], DEFI_COMPOR [U4.43.06]. Ces axes locaux par les mots clés :",
+   "page": 49
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "ANGL_REP (3 angles nautiques) ou (ANGL_AXE et ORIG_AXE) ou ANGL_EULER (3 angles) en 3D.",
+   "page": 49
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "ANGL_REP (1 seul angle) en 2D.",
+   "page": 49
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.2",
+   "text": "Syntaxe",
+   "page": 49
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MASSIF = _F(",
+    "    ♦ GROUP_MA    = lgma,                                      [l_gr_maille]",
+    "      / TOUT = ‘OUI’,                      [uniquement si mot-clé CHAM_ORIE]",
+    "    ♦ / ANGL_REP    = (α ,β  ,γ  ),                                 [l_réel]",
+    "      / ANGL_EULER  = (Ψ ,θ  ,φ  ),                                 [l_réel]",
+    "      / ♦ ANGL_AXE  = (α ,β  ),                                     [l_réel]",
+    "        ♦ ORIG_AXE  = (x1, x2, x3),                                 [l_réel]",
+    "      / CHAM_ORIE ,                                  [sd_cara_elem.carmassi]",
+    ")"
+   ],
+   "page": 49
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.3",
+   "text": "Opérande ANGL_REP",
+   "page": 49
+  },
+  {
+   "type": "paragraph",
+   "text": "α , β , γ sont les 3 angles nautiques (comme pour le mot clé ORIENTATION, cf [§10]) définissant les axes locaux (x,y,z) , qui correspondent au repère d’orthotropie (N ,L,T) . En 2D, il faut donner seulement α ce qui définit le repère (LT) dans le plan.",
+   "page": 49
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.4",
+   "text": "Opérande ANGL_EULER",
+   "page": 49
+  },
+  {
+   "type": "paragraph",
+   "text": "Définition des 3 angles d’Euler qui permettent d’orienter le repère local à l’élément. Le passage du Ox y z référentiel fixe O XYZ au référentiel lié au solide 3 3 3 est fait par trois rotations successives :",
+   "page": 49,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 49
+  },
+  {
+   "type": "paragraph",
+   "text": "La précession Ψ , autour de l’axe OZ , fait passer de OXYZ au référentiel Ox y z . 1 1 1",
+   "page": 49,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La nutation θ , autour de l’axe Ox , fait 1 passer de Ox y z à Ox y z . 1 1 1 2 2 2",
+   "page": 49,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La rotation propre φ , autour de l’axe Oz , 2 fait passer de Ox y z au référentiel lié au 2 2 2 solide Ox y z . 3 3 3",
+   "page": 49,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, il faut donner seulement un angle de rotation.",
+   "page": 49
+  },
+  {
+   "type": "figure",
+   "page": 50
+  },
+  {
+   "type": "paragraph",
+   "text": "La précession Ψ , autour de l’axe OZ , fait passer de OXYZ au référentiel Ox y z . 1 1 1",
+   "page": 50,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La nutation θ , autour de l’axe Ox , fait 1 passer de Ox y z à Ox y z . 1 1 1 2 2 2",
+   "page": 50,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La rotation propre φ , autour de l’axe Oz , 2 fait passer de Ox y z au référentiel lié au 2 2 2 solide Ox y z . 3 3 3",
+   "page": 50,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, il faut donner seulement un angle de rotation.",
+   "page": 50
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.5",
+   "text": "Opérandes ANGL_AXE/ORIG_AXE",
+   "page": 50
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots clés sont à donner pour définir des axes locaux pour lesquels on utilisera une propriété de symétrie de révolution, ou d’isotropie transverse (par exemple : structure à symétrie cylindrique orthotrope). En 3D, ANGL_AXE = (,  ) définit l’axe de révolution x1 , , étant les deux premiers angles nautiques, ORIG_AXE = (x1 , x2 , x3) définit un point O1 de l’axe.",
+   "page": 50,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En 2D, il suffit de renseigner un angle pour le mot-clé ANGL_AXE et ORIG_AXE = (x1 , x2).",
+   "page": 50
+  },
+  {
+   "type": "figure",
+   "page": 50
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.6",
+   "text": "Opérande CHAM_ORIE",
+   "page": 50
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé CHAM_ORIE permet de définir les orientations à partir d’un champ d’orientation dont le support est le maillage. En entrée de ce mot-clé, on attend un champ (une carte) de la quantité CAMA_R qui possède 7 composantes : un scalaire (sans importance pour l’utilisateur), les 3 angles nautiques et les 3 angles d’Euler.",
+   "page": 50
+  },
+  {
+   "type": "paragraph",
+   "text": "A noter que ce mot-clé a été introduit pour exploiter des champs d’orientation générés automatiquement à partir de la topologie du maillage par un utilitaire appelé « Local Frames Generator » disponible dans la plateforme Salome (à partir de la version 9.11). Cet utilitaire produit un fichier MED contenant le maillage et le champ d’orientation à 7 composantes. L’objet attendu en entrée du mot-clé CHAM_ORIE est donc ce champ d’orientation lu à partir du fichier MED avec un LIRE_CHAMP / TYPE_CHAM = CART_CAMA_R. Un exemple d’utilisation est donné dans le cas test SSLV002.",
+   "page": 51
+  },
+  {
+   "type": "paragraph",
+   "text": "On notera que si on fait appel au mot-clé CHAM_ORIE , alors on ne peut avoir qu’une seule occurrence du mot-clé AFFE_CARA_ELEM/MASSIF , et on doit avoir l’opérande TOUT=’OUI’. Le champ d’orientation doit avoir pour support le maillage complet.",
+   "page": 51
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "13.7",
+   "text": "Exemple d'utilisation",
+   "page": 51
+  },
+  {
+   "type": "paragraph",
+   "text": "On cherche à modéliser un cylindre constitué d'un matériau élastique transverse isotrope de type ELAS_ISTR, de telle sorte que l'axe d’orthotropie du matériau soit dans la direction du cylindre. Les caractéristiques d'un tel matériau sont à définir dans les repères locaux des éléments, avec la convention que l'axe d'orthotropie doit être porté par N (cf. DEFI_MATERIAU [U4.43.01] [§3.5]).",
+   "page": 51
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut imaginer deux cas de figure :",
+   "page": 51
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'axe du cylindre a été défini selon Z dans le repère global. Dans ce cas, sans effectuer de rotation des repères locaux, on a par défaut (X ,Y ,Z)=(L,T ,N) et N // Z comme on le souhaite.",
+   "page": 51
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "l'axe du cylindre a été défini selon Y dans le repère global. Il est alors nécessaire d'effectuer une rotation des repères locaux pour amener N selon Y comme on le souhaite. On utilise AFFE_CARA_ELEM(MASSIF=_F(ANGLE_REP=(0.,0.,-90.),),) ce qui produit la transformation (L,T ,N)=(X ,−Z ,Y), et on a alors bien N // Y .",
+   "page": 51,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "En deux dimensions, on utilisera ELAS_ORTH car ELAS_ISTR est interdit. Si l’axe d’anisotropie n’est pas parallèle à X ou Y , on fera pivoter le repère local comme dans l’exemple 3D à l’aide du motclé ANGLE_REP (qui cette fois ne contient qu’un seul angle) de façon à amener L ou T dans la direction désirée.",
+   "page": 51
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "14",
+   "text": "Mot clé POUTRE_FLUI",
+   "page": 52
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "14.1",
+   "text": "Syntaxe",
+   "page": 52
+  },
+  {
+   "type": "code",
+   "lines": [
+    "POUTRE_FLUI = _F(",
+    "    ♦ GROUP_MA   = lgma,                                       [l_gr_maille]",
+    "    ♦ B_T          = bt,                                              [réel]",
+    "    ♦ B_N          = bn,                                              [réel]",
+    "    ♦ B_TN         = btn,                                             [réel]",
+    "    ♦ A_FLUI       = aflui,                                           [réel]",
+    "    ♦ A_CELL       = acell,                                           [réel]",
+    "    ♦ COEF_ECHELLE = ech,                                             [réel]",
+    ")"
+   ],
+   "page": 52
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "14.2",
+   "text": "Caractéristiques affectables",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur permet de définir les caractéristiques des éléments finis (hexaèdre à 8 ou 20 nœuds) associés à la modélisation ’3D_FAISCEAU’, cf. la commande AFFE_MODELE [U4.41.01]. Cette modélisation concerne la représentation d’un réseau périodique de tubes baigné par un fluide incompressible [R4.07.05]. Un exemple est donné dans le test SDLV111 [V2.04.111].",
+   "page": 52
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "14.3",
+   "text": "Opérande GROUP_MA",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "Lieu d’affectation des caractéristiques élémentaires :",
+   "page": 52
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "liste de groupes de mailles (mot clé GROUP_MA).",
+   "page": 52
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "14.4",
+   "text": "Opérandes A_FLUI / A_CELL / COEF_ECHELLE",
+   "page": 52
+  },
+  {
+   "type": "figure",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "La cellule périodique du milieu à homogénéiser est bidimensionnelle. La cellule périodique de base qui sert à calculer les coefficients homogénéisés est obtenue par homothétie à partir de la cellule périodique réelle du milieu.",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "♦ A_FLUI : Aire de la partie occupée par le fluide dans la cellule périodique de base",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "♦ A_CELL : Aire de la cellule périodique de base",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "♦ COEF_ECHELLE : Coefficient d’homothétie permettant de transformer la cellule périodique réelle en la cellule périodique de base",
+   "page": 52
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "14.5",
+   "text": "Opérandes B_T / B_N / B_TN",
+   "page": 52
+  },
+  {
+   "type": "paragraph",
+   "text": "Coefficients homogénéisés du problème fluide-structure calculés dans le repère T ,N [R4.07.05]. L’orientation de ce repère est fixée par le mot clé facteur ORIENTATION. La direction L est forcément parallèle à l’axe du faisceau de tubes.",
+   "page": 52,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "15",
+   "text": "Mot clé GRILLE",
+   "page": 53
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "15.1",
+   "text": "Syntaxe",
+   "page": 53
+  },
+  {
+   "type": "code",
+   "lines": [
+    "GRILLE = _F(",
+    "     ♦ GROUP_MA         = lgma,                                [l_gr_maille]",
+    "     ♦ / SECTION          = S1,                                       [réel]",
+    "       / SECTION_FO       = S1fct                                 [fonction]"
+   ],
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "α",
+   "page": 53,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "     ♦ / ANGL_REP_1       = (  ,β )                                 [l_réel]",
+    "       / ANGL_REP_2       = (α ,β )                                 [l_réel]",
+    "       / VECT_1           = (vx, vy, vz)                            [l_réel]",
+    "       / VECT_2           = (vx, vy, vz)                            [l_réel]",
+    "     ◊ / EXCENTREMENT     = ez,                                       [réel]",
+    "       / EXCENTREMENT_FO  = ezfct                                 [fonction]",
+    "     ◊ COEF_RIGI_DRZ      = kz (1.E-10),                     [réel (défaut)]",
+    ")"
+   ],
+   "page": 53
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "15.2",
+   "text": "Caractéristiques affectables",
+   "page": 53
+  },
+  {
+   "type": "figure",
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 15.2-1 : remplacement des armatures par une nappe équivalente",
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir des caractéristiques d’une nappe caractérisée par une rigidité dans une seule direction, utilisée notamment pour modéliser des nappes d’armatures dans les coques en béton armé, (voir par exemple le test SSNS100 [V6.05.100]), affecté aux modélisations GRILLE_EXCENTRE ou GRILLE_MEMBRANE. Pour décrire un « treillis » d’armatures, il suffit de superposer deux éléments GRILLE_EXCENTRE ou GRILLE_MEMBRANE dont les orientations (et donc les rigidités) sont orthogonales (voir exemple au paragraphe suivant).",
+   "page": 53
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "15.3",
+   "text": "Description des opérandes",
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "Les données géométriques suivantes sont nécessaires pour modéliser la nappe d’armatures : S",
+   "page": 53,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / SECTION     =              1",
+    "  / SECTION_F0  = S1fct"
+   ],
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "SECTION : section des armatures dans la direction 1, par unité de longueur. Elle correspond donc à la section cumulée sur une largeur unité. S’il y a une section s tous les 1/5ème d’unité, la section cumulée est 5×s . SECTION_FO : fonction donnant la section des armatures dans la direction 1, par unité de longueur. Elle correspond donc à la section cumulée sur une largeur unité. Cette fonction dépend de la géométrie (X ,Y ,Z) et est évaluée au centre de gravité de la maille.",
+   "page": 53
+  },
+  {
+   "type": "paragraph",
+   "text": "e",
+   "page": 54,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    " ◊ / EXCENTREMENT        =                  z",
+    "/ EXCENTREMENT_F0 = ezfct"
+   ],
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "EXCENTREMENT : valeur de l’excentrement e (constant pour tous les nœuds de la maille) de la z nappe d’armatures par rapport à la maille support (distance mesurée sur la normale de la maille support), (modélisation GRILLE_EXCENTRE uniquement). EXCENTREMENT_F0 : fonction qui donne l’excentrement (constant pour tous les nœuds de la maille) de la nappe d’armatures par rapport à la maille support (distance mesurée sur la normale de la maille support), (modélisation GRILLE_EXCENTRE uniquement). Cette fonction dépend de la géométrie (X,Y,Z) et est évaluée au centre de gravité de la maille.",
+   "page": 54,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "◊ COEF_RIGI_DRZ = voir mot clé COQUE [§8].",
+   "page": 54
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / ANGL_REP_1 = voirANGL_REPdumotcléCOQUE[§8]."
+   ],
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de définir l’axe de référence x du repère local à partir de deux angles nautiques. Il définit aussi le repère dans lequel sont calculés les déformations, contraintes, courbures, etc.",
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "/ ANGL_REP_2 = voir ANGL_REP du mot clé COQUE [§8]. Ce mot clé permet de définir l’axe de référence y du repère local à partir de deux angles nautiques. Il définit aussi le repère dans lequel sont calculés les déformations, contraintes, courbures, etc.",
+   "page": 54
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ VECT_1= (vx, vy, vz)"
+   ],
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet également de fixer le repère local de l’élément. La projection du vecteur renseigné via le mot-clé VECT_1 définit le vecteur x local.",
+   "page": 54
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ VECT_2 = (vx, vy, vz)"
+   ],
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet également de fixer le repère local de l’élément. La projection du vecteur renseigné via le mot-clé VECT_2 définit le vecteur y local. Par exemple, dans le cas d’une géométrie cylindrique, il permet de définir les directions des armatures circonférentielles.",
+   "page": 54
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour définir une grille contenant des armatures dans le sens longitudinal et dans le sens transversal, il faut créer deux couches d’éléments (commande CREA_MAILLAGE, mot clé CREA_GROUP_MA), une couche d’élément pour la direction longitudinale et une deuxième couche d’éléments pour la direction transversale :",
+   "page": 54
+  },
+  {
+   "type": "code",
+   "lines": [
+    "GRILLE=(",
+    "   _F(GROUP_MA = ’GEOL’,",
+    "      SECTION = 0.02,",
+    "      ANGL_REP_1 = (0.0, 0.0,),",
+    "      EXCENTREMENT = 0.0,",
+    "   ),",
+    "   _F(GROUP_MA = ’GEOT’,",
+    "      SECTION = 0.01,",
+    "      ANGL_REP_1 = (90.0, 0.0,),",
+    "      EXCENTREMENT = 0.01,",
+    "   ),",
+    ")"
+   ],
+   "page": 54
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "16",
+   "text": "Mot clé MEMBRANE",
+   "page": 55
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "16.1",
+   "text": "Syntaxe",
+   "page": 55
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MEMBRANE= _F(",
+    "    ♦ GROUP_MA     = lgma,                                     [l_gr_maille]",
+    "    ♦ / EPAIS      = ep                                               [réel]"
+   ],
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "α β",
+   "page": 55,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / ANGL_REP_1 = (  ,  )                                           [l_R]"
+   ],
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "α β",
+   "page": 55,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "      / ANGL_REP_2 = (  ,  )                                           [l_R]",
+    "      / VECT_1     = (vx, vy, vz)                                      [l_R]",
+    "      / VECT_2     = (vx, vy, vz)                                      [l_R]",
+    "    ◊ / N_INIT     = / ninit                                          [réel]",
+    "                     / 0.                                           [défaut]",
+    ")"
+   ],
+   "page": 55
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "16.2",
+   "text": "Caractéristiques affectables",
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "On distingue deux comportement pour la membrane. On dispose d'un comportement linéaire pour les petites déformations et d'un comportement non linéaire pour les grandes déformations.",
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le comportement linéaire :",
+   "page": 55
+  },
+  {
+   "type": "figure",
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 16.2-1: remplacement des armatures par une membrane",
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé MEMBRANE permet de définir des caractéristiques d’une nappe anisotrope lorsque la modélisation MEMBRANE, est utilisée (voir par exemple le test SSLS138 [V3.03.138]). Elle peut notamment être utilisée pour modéliser des nappes d’armatures élastiques dans les coques en béton armé. Cette modélisation peut être associée à des éléments d’interface pour modéliser la décohésion de cette nappe. La rigidité de cette membrane est renseignée sous DEFI_MATERIAU/ELAS_MEMBRANE, cf. [U4.43.01].",
+   "page": 55
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour le comportement non linéaire : Le mot clé MEMBRANE permet de définir des caractéristiques d'une membrane isotrope lorsque la modélisation MEMBRANE, est utilisée (voir par exemple le test SSNS115A [V6.05.115]). La rigidité et le coefficient de Poisson de cette membrane sont renseignés sous DEFI_MATERIAU/ELAS et la loi de comportement sous STAT_NON_LINE/RELATION/ELAS_MEMBRANE_SV ou ELAS_MEMBRANE_NH [U4.51.11]. On ne dispose que de deux lois de comportements hyperélastiques : la loi de Saint Venant – Kirchhoff et la loi Néo-Hookéenne.",
+   "page": 55
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "16.3",
+   "text": "Description des opérandes",
+   "page": 56
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / EPAIS    = ep"
+   ],
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "EPAIS représente l’épaisseur de la membrane qui doit être exprimée dans les mêmes unités que les coordonnées des nœuds du maillage. Cette épaisseur n'est pas prise en compte en petites déformations et n'a donc de l'influence qu'avec un comportement non linéaire.",
+   "page": 56
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / ANGL_REP_1 = voirANGL_REPdumotcléCOQUE[§8]."
+   ],
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "Avec un comportement linéaire, ce mot clé définit le repère local lié au comportement anisotrope de la membrane, dans lequel sont calculées les déformations et les contraintes. Il permet de définir l’axe de référence x du repère local à partir de deux angles nautiques. Si on se place en non linéaire, comme la membrane ne peut avoir qu'un comportement isotrope le mot clé ne servira qu'à modifier le repère d'affichage des contraintes.",
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "/ ANGL_REP_2 = voir ANGL_REP du mot clé COQUE [§8]. Fonctionnement identique à ANGL_REP_1 mais il permet de définir l’axe de référence y du repère local à partir de deux angles nautiques.",
+   "page": 56
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ VECT_1 = (vx, vy, vz)"
+   ],
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "Tout comme ANGL_REP_1 et ANGL_REP_2, ce mot-clé permet de fixer le repère local de l’élément. La projection du vecteur renseigné via le mot-clé VECT_1 définit le vecteur x local.",
+   "page": 56
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/ VECT_2 = (vx, vy, vz)"
+   ],
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "Tout comme ANGL_REP_1 et ANGL_REP_2, ce mot-clé permet de fixer le repère local de l’élément. La projection du vecteur renseigné via le mot-clé VECT_2 définit le vecteur y local. Par exemple, dans le cas d’une géométrie cylindrique, il permet de définir l’orientation des membranes de manière circonférentielle.",
+   "page": 56
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ / N_INIT= / ninit   [réel]",
+    "            / 0.       [défaut]"
+   ],
+   "page": 56
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet de définir une pré-tension initiale permettant la convergence du calcul en non linéaire (elle est donc inutile en linéaire). Elle n'est appliquée qu'au premier pas de temps. Elle s'exprime en unité de force par unité de longueur.",
+   "page": 56
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "17",
+   "text": "Mot clé RIGI_PARASOL",
+   "page": 57
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "17.1",
+   "text": "Syntaxe",
+   "page": 57
+  },
+  {
+   "type": "code",
+   "lines": [
+    "RIGI_PARASOL = _F(",
+    "    # Mailles servant à répartir les caractéristiques des discrets",
+    "    ♦ GROUP_MA           = l_gma,                               [l_group_ma]",
+    "    # Mailles de type POI1 correspondant aux discrets",
+    "    ◊ / GROUP_MA_POI1    = gmapoi1,                               [group_ma]",
+    "    # Mailles de type SEG2 correspondant aux discrets",
+    "     / GROUP_MA_SEG2     = l_gma,                               [l_group_ma]",
+    "    # Fonctions de répartition",
+    "    ♦ / FONC_GROUP       = l_fg,                                [l_fonction]",
+    "      / COEF_GROUP       = l_cg,                                    [l_réel]",
+    "    # Raideurs globales à répartir",
+    "    ♦ CARA               = /.|’K_TR_D_N’|’K_T_D_N’|",
+    "                             |’K_TR_D_L’|’K_T_D_L’|",
+    "                           / |’A_TR_D_N’|’A_T_D_N’|",
+    "                             |’A_TR_D_L’|’A_T_D_L’                   [l_txm]",
+    "    ♦ VALE              = l_val,                                    [l_réel]",
+    "    ◊ REPERE            = [’LOCAL’|’GLOBAL’],                       [défaut]",
+    "    # Centre de gravite",
+    "    ♦ GROUP_NO_CENTRE = gno,                                      [group_no]",
+    "      / COOR_CENTRE     = l_xyz,                                    [l_réel]",
+    "    # Unité de sortie",
+    "    ◊ UNITE             = unit,                                     [entier]",
+    "),"
+   ],
+   "page": 57
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "17.2",
+   "text": "Caractéristiques affectables",
+   "page": 57
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette fonctionnalité correspond à une méthodologie utilisée pour déterminer les caractéristiques d’éléments discrets (ressorts de translation et/ou de rotation) à appliquer aux nœuds d’un radier à partir de résultats obtenus par le code PARASOL. Cette option est disponible en 3D et en 2D. Dans le cas 3D le radier sera modélisé par une surface, dans le cas 2D il sera modélisé par une ligne (test SSNL130 [V6.02.130]). Dans le cas 2D les discrets sont des ’2D_DIS_TR’ ou ’2D_DIS_T’.",
+   "page": 57
+  },
+  {
+   "type": "paragraph",
+   "text": "On doit affecter la modélisation ’DIS_TR|DIS_T’ en 3D ou ’2D_DIS_TR|2D_DIS_T’ en 2D, sur le groupe de nœuds qui composent le radier. Les mailles qui composent le radier (appartenant aux groupes l_gma) portent une modélisation de plaque (DKT, DST) ou une modélisation de face de 3D (test SDLS108 [V2.03.108]).",
+   "page": 57
+  },
+  {
+   "type": "paragraph",
+   "text": "Il faut distinguer un groupe de mailles pour le radier, à déclarer derrière le mot clé GROUP_MA du mot clé facteur RIGI_PARASOL, et un groupe de mailles à 1 nœud s’appuyant sur les nœuds de ce radier qu’il faut modéliser et déclarer dans AFFE_MODELE sous forme de mailles ponctuelles de type POI1. Si les mailles sont de type POI1, il faut l’indiquer à l’aide du mot clé GROUP_MA_POI1 du mot clé facteur RIGI_PARASOL. L’utilisation de mailles ponctuelles de type POI1 est nécessaire pour l’affectation de lois de comportement dans les opérateurs de calcul non linéaire.",
+   "page": 57
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "17.3",
+   "text": "Description des opérandes",
+   "page": 58
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des groupes de mailles qui composent le radier.",
+   "page": 58
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ GROUP_MA_POI1"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste des groupes de points comprenant les nœuds des groupes de mailles définis par GROUP_MA. Cela permet de déclarer les nœuds d’une fondation définie par des mailles comme mailles ponctuelles POI1 afin de leur affecter les caractéristiques RIGI_PARASOL. Cela permet de leur affecter des matériaux ou des comportements en vue de l’utilisation d’un opérateur non linéaire. S’il n’est pas présent, les nœuds sont considérés comme des mailles tardives pour une étude strictement linéaire.",
+   "page": 58
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ FONC_GROUP / COEF_GROUP"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste de fonctions ou de coefficients réels. Il y a autant d’arguments dans cette liste qu’il y a de groupes de mailles qui composent le radier (définis sous le mot-clé GROUP_MA). Les fonctions doivent avoir pour abscisse la distance au centre de gravité (mot-clé défini par GROUP_NO_CENTRE / COOR_CENTRE).",
+   "page": 58
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ CARA / VALE"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Les raideurs globales de sol, issues du code PARASOL sont fournies par l’utilisateur à l’aide des motsclés CARA et VALE comme pour les éléments discrets. On peut aussi sélectionner la nature du repère (global ou local) dans lequel on définit les caractéristiques des ressorts (mot-clé REPERE). Des raideurs ou des amortissements définis uniquement en translation peuvent également être répartis (K_T_D_N ou A_T_D_N , pas de raideur en rotation), dans ce cas il est seulement nécessaire :",
+   "page": 58
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en 3D de donner 3 valeurs derrière VALE=(k ,k ,k ) . x y z",
+   "page": 58,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en 2D de donner 2 valeurs derrière VALE=(k ,k ) . x y",
+   "page": 58,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ / GROUP_NO_CENTRE  = gno",
+    "  / COOR_CENTRE      = l_xyz"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour définir le centre du radier (calculé par le code PARASOL), on peut soit donner les coordonnées (trois réels donnés derrière le mot-clé COOR_CENTRE), soit donner le nom d’un groupe contenant un seul nœud du maillage (mot-clé GROUP_NO_CENTRE).",
+   "page": 58
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ UNITE"
+   ],
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Si ce mot clef est présent, Code_Aster crée un fichier, correspondant au numéro d’unité, qui contient les raideurs des discrets affectées aux différents nœuds.",
+   "page": 58
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "17.4",
+   "text": "Principe de détermination des caractéristiques des éléments discrets",
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "Le document [R4.05.01] “Réponse sismique par analyse transitoire” donne des informations théoriques sur la méthode employée.",
+   "page": 58
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "17.4.1",
+   "text": "Discrets en translation",
+   "page": 58
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, le radier est représenté par un ensemble d’éléments surfaciques de centre de gravité O . On a donc 3 grandeurs globales qui caractérisent le couplage entre le sol et le radier : 3 raideurs de translation K ,K ,K . x y z En 2 D, le radier est représenté par un ensemble d’éléments linéiques de centre de gravité O . On a donc 2 grandeurs globales qui caractérisent le couplage entre le sol et le radier : 2 raideurs de translation K ,K . x y",
+   "page": 58,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : C’est le même raisonnement pour les discrets de type “amortissement”.",
+   "page": 58
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "17.4.2",
+   "text": "Discrets en translation et rotation",
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "En 3D, le radier est représenté par un ensemble d’éléments surfaciques de centre de gravité O . On a donc 6 grandeurs globales qui caractérisent le couplage entre le sol et le radier : 3 raideurs de translation K ,K ,K , 3 raideurs en rotation Kr ,Kr ,Kr . x y z x y z En 2D, le radier est représenté par un ensemble d’éléments linéiques de centre de gravité O . On a donc 3 grandeurs globales qui caractérisent le couplage entre le sol et le radier : 2 raideurs de translation K ,K , 1 raideur en rotation Kr . x y z",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : C’est le même raisonnement pour les discrets de type “amortissement”.",
+   "page": 59
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "17.4.3",
+   "text": "Répartition de discret en raideur et en amortissement",
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "S i l’on souhaite répartir à la fois des raideurs et des amortissements, il faut le préciser sous le mot clef CARA , par exemple : CARA = ( ‘K_T_D_N’, ‘A_T_D_N’ ), aussi bien en 2D qu’en 3D. L es valeurs à répartir seront données sous VALE . Par exemple :",
+   "page": 59
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  en 3Davec  CARA = (‘K_T_D_N’, ‘A_T_D_N’),"
+   ],
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "VALE = ( K , K , K , A , A , A ). x Y Z X Y Z",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  en 2Davec  CARA = (‘K_T_D_N’, ‘A_T_D_N’),"
+   ],
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "VALE = ( K , K , A , A ). x Y X Y",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  en 3Davec  CARA = (‘K_TR _D_N’, ‘A_TR _D_N’),"
+   ],
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "VALE = ( K , K , K , Kr , Kr , Kr , x Y Z x y z A , A , A , Ar , Ar , Ar ). X Y Z x y z",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en 2D avec CARA = ( ‘K_T R _D_N’, ‘A_T R _D_N’ ), VALE = ( K , K , Kr , A , A , Ar ). x Y z X Y z",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Si dans CARA on donne le discret d’amortissement puis celui de la raideur, il faut donner les caractéristiques d’amortissement puis celles de raideur, par exemple en 2D :",
+   "page": 59
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CARA = (‘A _T_D_N’, ‘K _T_D_N’)"
+   ],
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "VALE = ( A , A , K , K ) X Y x Y",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "17.4.4",
+   "text": "Méthode de répartition",
+   "page": 59
+  },
+  {
+   "type": "paragraph",
+   "text": "En chaque nœud du maillage du radier, Code_Aster cherche les caractéristiques en raideur d’un élément discret de type K_TR_D_N (k ,k ,k ,kr ,kr ,kr ) cf. [R4.05.01]. x y z x y z Pour déterminer les raideurs de translation, on impose qu’elles soient proportionnelles à la surface représentée par le nœud et à une fonction de répartition dépendant de la distance au centre de gravité du radier. Soit SP la surface attachée au nœud P et f r la fonction de répartition où r est la distance du nœud P au nœud O. Pour les raideurs de rotation, on répartit le reliquat (ce qui reste après avoir enlevé les contributions dues aux translations) de la même façon que les translations.",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on calcule les efforts et les moments résultants au point O dus à la répartition des ressorts en chaque nœud du maillage du radier et si on les identifie aux valeurs obtenues par PARASOL, on obtient les formules suivantes : k =K /(∑ S(p) f (op)) ; k (p)=k S(p) f (op) x x x x p k =K /(∑ S(p) f (op)) ; k (p)=k S( p) f (op) y y y y p k =K /(∑ S(p) f (op)) ; k (p)=k S(p) f (op) z z z z p k =(K −∑(k (p)y2 +k (p)z2 ))/(∑S(p) f (op)) ; k (p)=k S(p) f (op) rx rx z op y op rx rx p p k =(K −∑(k (p)z2 +k (p)x2 ))/(∑S(p) f (op)) ; k (p)=k S(p) f (op) ry ry x op z op ry ry p p k =(K −∑(k (p)y2 +k (p)x2 ))/(∑S(p) f (op)) ; k (p)=k S(p) f (op) rz rz x op y op rz rz p p",
+   "page": 59,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque 1 : Calcul de la surface attachée au point P . Pour chaque maille surfacique du radier, on calcule la surface en 3D, la longueur de la ligne en 2D, on la divise par le nombre de sommets de la maille et on affecte cette contribution à chaque nœud de S =∑ Sp la maille. On assure alors : radier . p",
+   "page": 60,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque 2 : On considère que l’on peut appliquer les mêmes formules pour effectuer une répartition d’éléments discrets d’amortissement.",
+   "page": 60
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "17.5",
+   "text": "Exemple d’utilisation",
+   "page": 60
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple n°1 :",
+   "page": 60
+  },
+  {
+   "type": "code",
+   "lines": [
+    "RIGI_PARASOL = _F(GROUP_MA = radier, COEF_GROUP = 2., NOEUD_CENTRE = ’P1’,",
+    "    CARA = ( ’K_TR_D_N’ , ’A_TR_D_N’ ), VALE = ( 6 réels , 6 réels ),)"
+   ],
+   "page": 60
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple n°2 :",
+   "page": 60
+  },
+  {
+   "type": "code",
+   "lines": [
+    "RIGI_PARASOL=_F(GROUP_MA=’DALLE’, COEF_GROUP=1.0, GROUP_NO_CENTRE=’PCDG’,",
+    "    GROUP_MA_POI1=’RESSORT’, REPERE=’GLOBAL’,",
+    "    CARA=’K_T_D_N’, VALE=( 3 réels ), ),"
+   ],
+   "page": 60
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "18",
+   "text": "Mot clé RIGI_MISS_3D",
+   "page": 61
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "18.1",
+   "text": "Syntaxe",
+   "page": 61
+  },
+  {
+   "type": "code",
+   "lines": [
+    "RIGI_MISS_3D = _F(",
+    "    ♦ GROUP_MA_POI1    = l_gma,                                 [l_group_ma]",
+    "    ◊ GROUP_MA_SEG2    = l_gma,                                 [l_group_ma]",
+    "    ♦ FREQ_EXTR        = freq,                                        [réel]",
+    "    ◊ UNITE_RESU_IMPE  = unit (30),                        [entier (défaut)]",
+    ")"
+   ],
+   "page": 61
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "18.2",
+   "text": "Caractéristiques affectables",
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisation de ce mot-clé est dédiée à des problèmes de décollement de fondation afin de prendre mieux en compte le tapis de ressorts de sol que ne le fait RIGI_PARASOL qui répartit 6 raideurs globales sous une fondation proportionnellement aux surfaces des éléments entourant ses nœuds.",
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé va affecter les termes exacts d’une matrice d’impédance calculée par MISS3D pour tous les degrés de liberté d’interface (3 fois le nombre de nœuds) et pour une fréquence d’extraction donnée. L’affectation de ces termes (modélisation ’DIS_T’ ) se fait alors aux mailles ponctuelles POI1 des nœuds de la fondation surfacique et éventuellement aux lignes du réseau de SEG2 superposé à la fondation pour représenter les liaisons transversales entre nœuds.",
+   "page": 61
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "18.3",
+   "text": "Description des opérandes",
+   "page": 61
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA_POI1"
+   ],
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupe de mailles ponctuelles des nœuds de la fondation.",
+   "page": 61
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ GROUP_MA_SEG2"
+   ],
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupe de mailles de SEG2 reliant transversalement les nœuds de la fondation.",
+   "page": 61
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ FREQ_EXTR"
+   ],
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "Fréquence d’extraction de la matrice d’impédance.",
+   "page": 61
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ UNITE_RESU_IMPE"
+   ],
+   "page": 61
+  },
+  {
+   "type": "paragraph",
+   "text": "Unité logique de la matrice d’impédance calculée par CALC_MISS option FICHIER.",
+   "page": 61
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "19",
+   "text": "Mot clé MASS_AJOU",
+   "page": 62
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "19.1",
+   "text": "Syntaxe",
+   "page": 62
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MASS_AJOU = _F(",
+    "    ♦ GROUP_MA      = gma,                                        [group_ma]",
+    "    ♦ GROUP_MA_POI1 = gma,                                        [group_ma]",
+    "    ♦ FONC_GROUP    = fg,                                         [fonction]",
+    ")"
+   ],
+   "page": 62
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "19.2",
+   "text": "Caractéristiques affectables",
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "L’objectif de ce mot-clé est de prendre en compte simplement la masse ajoutée de fluide dans les problèmes de barrages sans avoir à modéliser le fluide comme dans MACRO_MATR_AJOU et de ne conserver que la structure pour des études dynamiques non linéaires. L’idée est donc, dans une nouvelle option de AFFE_CARA_ELEM, de répartir des caractéristiques de masse ponctuelle aux nœuds de l’interface fluide-structure du parement amont sans ajouter de degrés de liberté en dehors de la structure.",
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "On s’inspire ainsi de la répartition de caractéristiques globales de rigidité ou amortissement par l’option RIGI_PARASOL de AFFE_CARA_ELEM.",
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans cette nouvelle option MASS_AJOU, on répartit aux nœuds de l’interface fluide-structure avec des caractéristiques ’M_T_N’ des valeurs élémentaires de masse directionnelle obtenues par intégration de la pression normale à chaque élément à partir de fonctions de répartition de cette pression normale dépendant des coordonnées - en particulier de l’altitude - afin d’exprimer des relations de Westergaard par exemple ou plus simplement l’expression de la pression hydrostatique.",
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "L’affectation de ces termes (modélisation à déclarer dans AFFE_MODELE : ’DIS_T’ pour une interface fluide-structure surfacique en 3D et ’2D_DIS_T’ pour une interface fluide-structure linéique en 2D) se fait alors aux mailles ponctuelles POI1 des nœuds de l’interface fluide-structure à l’aide du mot clé GROUP_MA_POI1 du mot clé facteur MASS_AJOU.",
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "Il faut distinguer ces mailles ponctuelles des groupes de mailles surfaciques ou linéiques pour l’interface fluide-structure, à déclarer derrière le mot clé GROUP_MA .",
+   "page": 62
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "19.3",
+   "text": "Description des opérandes",
+   "page": 62
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA"
+   ],
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupe de mailles surfaciques (en 3D) ou linéiques (en 2D) de l’interface fluide-structure.",
+   "page": 62
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA_POI1"
+   ],
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupe de mailles ponctuelles des nœuds de l’interface fluide-structure.",
+   "page": 62
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ FONC_GROUP"
+   ],
+   "page": 62
+  },
+  {
+   "type": "paragraph",
+   "text": "Fonction de répartition de la pression normale dépendant des coordonnées du groupe de mailles composant l’interface fluide-structure (défini sous les mots-clés GROUP_MA ou GROUP_MA_POI1). La fonction doit être homogène à une densité surfacique de masse.",
+   "page": 62
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "20",
+   "text": "Mot clé MASS_REP",
+   "page": 63
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "20.1",
+   "text": "Syntaxe",
+   "page": 63
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MASS_REP = _F(",
+    "    # Surface ou ligne servant à répartir la masse",
+    "    ♦ GROUP_MA      = gr_ma,                                      [group_ma]",
+    "    # Mailles de type POI1 correspondant aux masses",
+    "    ♦ GROUP_MA_POI1 = gr_poi1,                                    [group_ma]",
+    "    # Masse à répartir sur les mailles de GROUP_MA",
+    "    ♦ VALE          = masse,                                          [réel]",
+    "    ♦ TYPE          = [‘SURFACIQUE’, ‘LINEIQUE’, ‘TOTALE’],            [txt]",
+    "    # Fonction de répartition de la masse",
+    "    ◊ FONC_MULT     = fonction_mult,                              [fonction]",
+    "),"
+   ],
+   "page": 63
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "20.2",
+   "text": "Caractéristiques affectables",
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "L’objectif de ce mot-clé est de prendre en compte simplement une masse et de la répartir sur une surface. L’option MASS_REP, permet de répartir aux nœuds des discrets de caractéristique ‘M_T_D_N’ des valeurs de masse obtenues au prorata de l’aire des mailles surfaciques ou de la longueur des mailles linéiques. L’affectation (modélisation ‘DIS_T’ à déclarer dans AFFE_MODELE ) se fait aux mailles ponctuelles POI1 données à GROUP_MA_POI1 . Il faut distinguer les mailles ponctuelles et les mailles surfaciques à déclarer derrière le mot clé GROUP_MA. La règle de surcharge s’applique [ U1.03.00 ]. Si une maille POI1 est présente dans plusieurs occurrences de MASS_REP c’est la dernière affectation qui est prise en compte. En cas de surcharge une information est écrite dans le fichier de ‘messages’, indiquant le nombre de surcharges réalisées.",
+   "page": 63
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "20.3",
+   "text": "Description des opérandes",
+   "page": 63
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA"
+   ],
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupes de mailles surfaciques.",
+   "page": 63
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ GROUP_MA_POI1"
+   ],
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "Groupe de mailles ponctuelles, de type ‘DIS_T’ à déclarer dans AFFE_MODELE.",
+   "page": 63
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ VALE = masse"
+   ],
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur de la masse à répartir pour la surface concernée par GROUP_MA. Son unité est homogène à surface−1 , longueur−1 en fonction de la valeur de TYPE.",
+   "page": 63,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦ TYPE = [‘SURFACIQUE’, ‘LINEIQUE’, ‘TOTALE’]"
+   ],
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir la masse à affecter à des discrets de type ‘M_T_D_N’ . Cette masse est fonction de la surface des mailles qui sont connectées au nœud du discret. On peut soit donner :",
+   "page": 63
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une MASSE de TYPE= ‘SURFACIQUE’ : cette masse est répartie au prorata de l’aire des mailles surfaciques connectés au nœud des discrets. Les mailles de type POI1 sont affectées par la masse : Masse =Masse ∗ Surface POI1 Surfacique Noeud",
+   "page": 63,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une MASSE de TYPE= ‘LINEIQUE’ : cette masse est répartie au prorata de la longueur des mailles linéiques connectés au nœud des discrets. Les mailles de type POI1 sont affectées par la masse : Masse =Masse ∗ Longueur POI1 Linéique Noeud",
+   "page": 63,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "une MASSE avec TYPE= ‘TOTALE’ : c’est la masse totale à répartir soit au prorata de l’aire des mailles surfaciques soit au prorata de la longueur des mailles linéiques, connectés au nœud des discrets. Les mailles de type POI1 sont affectées par la masse :",
+   "page": 63
+  },
+  {
+   "type": "paragraph",
+   "text": "Masse ∗ Surface Masse ∗ Longueur Masse = Totale Noeud ou Masse = Totale Noeud POI1 Surface POI1 Longueur Totale Totale",
+   "page": 64,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ FONC_MULT = fonction_mult"
+   ],
+   "page": 64
+  },
+  {
+   "type": "paragraph",
+   "text": "On peut donner une fonction (X,Y,Z) qui multiplie la masse à répartir de la maille. Cette fonction est évaluée au centre de gravité de la maille.",
+   "page": 64
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 12,
+   "chars": 2777,
+   "id": 1,
+   "section": "1 But"
+  },
+  {
+   "first": 13,
+   "last": 33,
+   "chars": 2700,
+   "id": 2,
+   "section": "3 Opérandes généraux MODELE et VERIF"
+  },
+  {
+   "first": 34,
+   "last": 53,
+   "chars": 2988,
+   "id": 3,
+   "section": "4.1 Opérande GROUP_MA"
+  },
+  {
+   "first": 54,
+   "last": 74,
+   "chars": 2762,
+   "id": 4,
+   "section": "6 Mot clé BARRE"
+  },
+  {
+   "first": 75,
+   "last": 99,
+   "chars": 2570,
+   "id": 5,
+   "section": "6.4 Opérande ‘FCX‘"
+  },
+  {
+   "first": 100,
+   "last": 144,
+   "chars": 5789,
+   "id": 6,
+   "section": "8.3 Opérandes"
+  },
+  {
+   "first": 145,
+   "last": 155,
+   "chars": 2526,
+   "id": 7,
+   "section": "9.1 Caractéristiques affectables"
+  },
+  {
+   "first": 156,
+   "last": 157,
+   "chars": 3215,
+   "id": 8,
+   "section": "9.2 Syntaxe"
+  },
+  {
+   "first": 158,
+   "last": 202,
+   "chars": 5984,
+   "id": 9,
+   "section": "9.3 Règles d’utilisation"
+  },
+  {
+   "first": 203,
+   "last": 239,
+   "chars": 5762,
+   "id": 10,
+   "section": "9.4.5 Opérande SECTION = ’CERCLE’"
+  },
+  {
+   "first": 240,
+   "last": 264,
+   "chars": 3537,
+   "id": 11,
+   "section": "9.4.6.2 Opérandes INDI_SIGM, INDI_SIGM_XZ, INDI_SIGM_XY : Intensification des contraintes"
+  },
+  {
+   "first": 265,
+   "last": 279,
+   "chars": 2889,
+   "id": 12,
+   "section": "9.5 Opérande FCX"
+  },
+  {
+   "first": 280,
+   "last": 305,
+   "chars": 2668,
+   "id": 13,
+   "section": "10.3 Règles d’utilisation"
+  },
+  {
+   "first": 306,
+   "last": 330,
+   "chars": 2954,
+   "id": 14,
+   "section": "10.5 Opérande CARA = ’VECT_X_Y’"
+  },
+  {
+   "first": 331,
+   "last": 346,
+   "chars": 3319,
+   "id": 15,
+   "section": "10.8 Opérande CARA = ’GENE_TUYAU’"
+  },
+  {
+   "first": 347,
+   "last": 372,
+   "chars": 3715,
+   "id": 16,
+   "section": "11.3 Mot clé MULTIFIBRE"
+  },
+  {
+   "first": 373,
+   "last": 385,
+   "chars": 2379,
+   "id": 17,
+   "section": "12 Mot clé DISCRET et DISCRET_2D"
+  },
+  {
+   "first": 386,
+   "last": 418,
+   "chars": 5982,
+   "id": 18,
+   "section": "12.3 Opérandes"
+  },
+  {
+   "first": 419,
+   "last": 441,
+   "chars": 5935,
+   "id": 19,
+   "section": "12.3.4 Opérandes M_ Matrices de masse"
+  },
+  {
+   "first": 442,
+   "last": 459,
+   "chars": 4581,
+   "id": 20,
+   "section": "12.3.6 Opérande REPERE"
+  },
+  {
+   "first": 460,
+   "last": 480,
+   "chars": 2127,
+   "id": 21,
+   "section": "13 Mot clé MASSIF"
+  },
+  {
+   "first": 481,
+   "last": 494,
+   "chars": 2913,
+   "id": 22,
+   "section": "13.5 Opérandes ANGL_AXE/ORIG_AXE"
+  },
+  {
+   "first": 495,
+   "last": 515,
+   "chars": 2698,
+   "id": 23,
+   "section": "14 Mot clé POUTRE_FLUI"
+  },
+  {
+   "first": 516,
+   "last": 536,
+   "chars": 3490,
+   "id": 24,
+   "section": "15.2 Caractéristiques affectables"
+  },
+  {
+   "first": 537,
+   "last": 562,
+   "chars": 3813,
+   "id": 25,
+   "section": "16 Mot clé MEMBRANE"
+  },
+  {
+   "first": 563,
+   "last": 569,
+   "chars": 2727,
+   "id": 26,
+   "section": "17 Mot clé RIGI_PARASOL"
+  },
+  {
+   "first": 570,
+   "last": 584,
+   "chars": 2004,
+   "id": 27,
+   "section": "17.3 Description des opérandes"
+  },
+  {
+   "first": 585,
+   "last": 609,
+   "chars": 4136,
+   "id": 28,
+   "section": "17.4 Principe de détermination des caractéristiques des éléments discrets"
+  },
+  {
+   "first": 610,
+   "last": 632,
+   "chars": 2109,
+   "id": 29,
+   "section": "17.5 Exemple d’utilisation"
+  },
+  {
+   "first": 633,
+   "last": 645,
+   "chars": 2133,
+   "id": 30,
+   "section": "19.2 Caractéristiques affectables"
+  },
+  {
+   "first": 646,
+   "last": 665,
+   "chars": 3068,
+   "id": 31,
+   "section": "20 Mot clé MASS_REP"
+  }
+ ]
+}

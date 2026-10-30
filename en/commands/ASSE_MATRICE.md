@@ -34,7 +34,7 @@ element matrices (`matr_asse_depl_r` for mechanical real matrices).
 | Kind | `MACRO` |
 | Result | `matr_asse_depl_r`, `matr_asse_depl_c`, `matr_asse_temp_r`, `matr_asse_pres_c` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.61.22 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.61.22 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MATR_ASSE`, `RIGI_MECA`, `MASS_MECA`, `CHARGE` |
 
@@ -82,8 +82,8 @@ MATASSM2 = ASSE_MATRICE(MATR_ELEM=MELM2, NUME_DDL=NUM2, CHAR_CINE=(CH2, CH3))
 
 ## See also
 
-- French reference: U4.61.22 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.61.22.md` once task 5.x lands)
+- French reference: U4.61.22 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.61.22.fr.md`; translation: `en/docs/U4.61.22.md` once task 5.2 lands)
 - Catalog: `en/commands/ASSE_MATRICE.json` (generated from `upstream/code_aster/Cata/Commands/asse_matrice.py:42`)
 - Implementation: `upstream/code_aster/MacroCommands/asse_matrice_ops.py`
 - Before: [CALC_MATR_ELEM](CALC_MATR_ELEM.md), [NUME_DDL](NUME_DDL.md),

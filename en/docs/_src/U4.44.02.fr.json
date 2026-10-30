@@ -1,0 +1,2805 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.44.02.pdf",
+  "source_sha256": "58499f822fc96298c3f1affb274d083f3a8538af183c50708125d8ba83efd5f4",
+  "source_bytes": 419804
+ },
+ "schema_version": 1,
+ "doc_id": "U4.44.02",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "04/11/2021",
+  "fascicle": "Manuel d'utilisation Fascicule u4.44: Conditions aux limites et chargements",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 36,
+  "pages": "36",
+  "pdf_keywords": "U4.44.02-I",
+  "pdf_title": "Opérateurs AFFE_CHAR_THER et AFFE_CHAR_THER_F",
+  "responsible": "ABBAS Mickaël",
+  "revision": "ae947d46bac7",
+  "title": "Opérateurs AFFE_CHAR_THER et AFFE_CHAR_THER_F",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateurs AFFE_CHAR_THER et AFFE_CHAR_THER_F",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Affecter des chargements et des conditions aux limites thermiques sur un modèle.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour l'opérateur AFFE_CHAR_THER, les valeurs affectées ne dépendent d'aucun paramètre et sont définies par des valeurs réelles.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour l'opérateur AFFE_CHAR_THER_F, les valeurs sont des fonctions d'un ou plusieurs paramètres à choisir dans l'ensemble (INST, X, Y, Z). Pour les chargements utilisés en thermique non-linéaire, les fonctions dépendent uniquement de la température (TEMP) et doivent être tabulées. De plus, pour certains chargements (par exemple SOURCE), les valeurs peuvent dépendre des variables de commande.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces fonctions doivent préalablement être définies par l'appel à un des opérateurs :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "DEFI_CONSTANTE [U4.31.01] ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "DEFI_FONCTION [U4.31.02] ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "DEFI_NAPPE [U4.31.03] ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "FORMULE [U4.31.0 5 ] ;",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "CALC_FONC_INTERP [U4.32.01].",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le concept produit est de type char_ther.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Table des Matières",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch [char_ther]  =  AFFE_CHAR_THER",
+    "          (  ♦  MODELE =  mo,                                     [modele]",
+    "             ◊  DOUBLE_LAGRANGE  =  /’OUI’,                       [défaut]",
+    "                                    /'NON'",
+    "             ♦  |  TEMP_IMPO =      (voir mot-clé TEMP_IMPO       )",
+    "                |  FLUX_REP =       (voir mot-clé FLUX_REP        )",
+    "                |  RAYONNEMENT =    (voir mot-clé RAYONNEMENT     )",
+    "                |  ECHANGE =        (voir mot-clé ECHANGE         )",
+    "                |  SOURCE =         (voir mot-clé SOURCE          )",
+    "                |  PRE_GRAD_TEMP =  (voir mot-clé PRE_GRAD_TEMP   )",
+    "                |  LIAISON_DDL =    (voir mot-clé LIAISON_DDL     )",
+    "                |  LIAISON_GROUP =  (voir mot-clé LIAISON_GROUP   )",
+    "                |  LIAISON_MAIL =   (voir mot-clé LIAISON_MAIL    )",
+    "                |  ECHANGE_PAROI =  (voir mot-clé ECHANGE_PAROI   )",
+    "                |  LIAISON_UNIF =   (voir mot-clé LIAISON_UNIF    )",
+    "                |  LIAISON_CHAMNO=  (voir mot-clé LIAISON_CHAMNO  )",
+    "                |  CONVECTION=      (voir mot-clé CONVECTION      )",
+    "                |  EVOL_CHAR=       (voir mot-clé EVOL_CHAR       )",
+    "           )"
+   ],
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ch [char_ther]  =  AFFE_CHAR_THER_F",
+    "           ( ♦  MODELE =  mo,                                     [modele]",
+    "             ◊  DOUBLE_LAGRANGE  =  /’OUI’,                       [défaut]",
+    "                                    /'NON'",
+    "             ♦  |  TEMP_IMPO =      (voir mot-clé TEMP_IMPO       )",
+    "                |  FLUX_REP =       (voir mot-clé FLUX_REP        )",
+    "                |  FLUX_NL =        (voir mot-clé FLUX_NL         )",
+    "                |  RAYONNEMENT =    (voir mot-clé RAYONNEMENT     )",
+    "                |  ECHANGE =        (voir mot-clé ECHANGE         )",
+    "                |  SOURCE =         (voir mot-clé SOURCE          )",
+    "                |  PRE_GRAD_TEMP=   (voir mot-clé PRE_GRAD_TEMP   )",
+    "                |  LIAISON_DDL =    (voir mot-clé LIAISON_DDL     )",
+    "                |  LIAISON_GROUP =  (voir mot-clé LIAISON_GROUP   )",
+    "                |  ECHANGE_PAROI =  (voir mot-clé ECHANGE_PAROI   )",
+    "                |  LIAISON_UNIF =   (voir mot-clé LIAISON_UNIF    )",
+    "                |  CONVECTION =     (voir mot-clé CONVECTION      )",
+    "                |  SOUR_NL =        (voir mot-clé SOUR_NL         )",
+    "          )"
+   ],
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Généralités",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Messages d'erreur possibles liés à la commande AFFE_CHAR_THER",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Il arrive parfois qu'une commande de calcul thermique (THER_LINEAIRE, THER_NON_LINE, ...) s'arrête en erreur fatale lors du calcul des seconds membres élémentaires dus aux chargements définis dans les commandes AFFE_CHAR_THER_*.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Lorsque le code s'arrête pendant ces calculs élémentaires, une information importante du message d'erreur est le nom de l'option de calcul demandée par le code. Le nom de cette option est en général inconnu de l'utilisateur et il lui est donc difficile de comprendre le message.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le tableau ci-dessous, on donne en vis-à-vis des noms des options de calcul, le nom de la commande et du mot clé facteur qui permettent d'activer cette option.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Option de calcul élémentaire Commande Mot clé facteur",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CHAR_THER_FLUNL               AFFE_CHAR_THER_F          FLUX_NL",
+    "CHAR_THER_FLUN_F              AFFE_CHAR_THER_F          FLUX_REP",
+    "CHAR_THER_FLUN_R              AFFE_CHAR_THER            FLUX_REP",
+    "CHAR_THER_FLUTNL              AFFE_CHAR_THER            CONVECTION",
+    "CHAR_THER_FLUTNL              AFFE_CHAR_THER_F          CONVECTION",
+    "CHAR_THER_FLUX_F              AFFE_CHAR_THER_F          FLUX_REP",
+    "CHAR_THER_FLUX_R              AFFE_CHAR_THER            FLUX_REP",
+    "CHAR_THER_GRAI_F              AFFE_CHAR_THER_F          PRE_GRAD_TEMP",
+    "CHAR_THER_GRAI_R              AFFE_CHAR_THER            PRE_GRAD_TEMP",
+    "CHAR_THER_PARO_F              AFFE_CHAR_THER_F          ECHANGE_PAROI",
+    "CHAR_THER_PARO_R              AFFE_CHAR_THER            ECHANGE_PAROI",
+    "CHAR_THER_SOUR_F              AFFE_CHAR_THER_F          SOURCE",
+    "CHAR_THER_SOUR_R              AFFE_CHAR_THER            SOURCE",
+    "CHAR_THER_TEXT_F              AFFE_CHAR_THER_F          ECHANGE",
+    "CHAR_THER_TEXT_R              AFFE_CHAR_THER            ECHANGE",
+    "CHAR_THER_SOURNL              AFFE_CHAR_THER_F          SOUR_NL"
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Généralités sur les opérandes",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.1",
+   "text": "Les deux formes d'opérandes sous un mot clé facteur",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes sous un mot clé facteur sont de deux formes :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les opérandes spécifiant les entités topologiques où sont affectés les chargements (mots-clés GROUP_NO et GROUP_MA, etc ...). Les arguments de ces opérandes sont identiques pour les deux opérateurs.",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "le ou les opérandes spécifiant les valeurs affectées (TEMP, COEF_H, etc ...). La signification de ces opérandes est la même pour les deux opérateurs mais les arguments de ces opérandes sont tous du type réel pour l'opérateur AFFE_CHAR_THER et du type fonction (créé par l'un des opérateurs DEFI_FONCTION, DEFI_NAPPE, DEFI_CONSTANTE, FORMULE ou CALC_FONC_INTERP) pour l'opérateur AFFE_CHAR_THER _F.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Nous ne distinguerons donc pas dans ce document, sauf mention expresse du contraire, les deux opérateurs AFFE_CHAR_THER et AFFE_CHAR_THER_F.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.2",
+   "text": "Entités topologiques d'affectation des chargements",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "De façon générale, les entités topologiques sur lesquelles des valeurs doivent être affectées sont définies :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par des nœuds en utilisant l'opérande GROUP_NO permettant d'introduire une liste de groupe de nœuds,",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par maille en utilisant l’opérande GROUP_MA permettant d'introduire une liste de groupes de mailles,",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Règle :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour définir le domaine d'affectation le plus simplement possible, on utilise la règle de surcharge, c'est la dernière affectation qui prime.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Opérande MODELE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MODELE =  mo,"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Concept produit par l'opérateur AFFE_MODELE [U4.41.01] où sont définis les types d'éléments finis affectés sur le maillage.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.3",
+   "text": "Opérande DOUBLE_LAGRANGE",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DOUBLE_LAGRANGE = ’OUI’/’NON’"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet de dire si l'utilisateur souhaite ou non dédoubler les multiplicateurs de Lagrange utilisés pour définir dualiser les conditions aux limites dans la matrice assemblée. Concrètement, dédoubler les multiplicateurs de Lagrange permet d'utiliser des solveurs linéaires ne permettant pas le pivotage. Ne pas dédoubler les Lagrange permet de réduire le nombre de degré de liberté du problème (et donc la taille du problème à résoudre) mais son usage est limité aux solveurs MUMPS et Petsc.",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Notons que les deux multiplicateurs de Lagrange associés à la relation seront tels que le premier sera situé avant tous les termes impliqués dans la relation et le second après, dans la matrice assemblée. Ce choix présente l’avantage d’avoir une matrice assemblée dont l’encombrement est plus faible mais a le désavantage de pouvoir faire apparaître une singularité dans la matrice. La numérotation étant de toute façon susceptible d'être modifiée par le renuméroteur du solveur externe choisi, ce détail reste donc purement technique.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.4",
+   "text": "Mot-clé TEMP_IMPO",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.1",
+   "text": "But",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur utilisable pour imposer, sur des nœuds ou des groupes de nœuds, une température.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé, les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept de type fonction (AFFE_CHAR_THER_F).",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.2",
+   "text": "Syntaxe",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   TEMP_IMPO = _F( ♦   |  TOUT     =       'OUI',",
+    "                       |  GROUP_NO =       lgno,              [l_gr_noeud]",
+    "                       |  GROUP_MA =       lgma,              [l_gr_maille]",
+    "                   ♦   /  TEMP        =    t,                 [R]",
+    "                       /  |  TEMP_MIL =    tinf,              [R]",
+    "                          |  TEMP_INF =    tinf,              [R]",
+    "                          |  TEMP_SUP =    tsup,              [R]",
+    "                )",
+    "•  pourAFFE_CHAR_THER_F",
+    "   TEMP_IMPO = _F( ♦   |  TOUT     =       'OUI',",
+    "                       |  GROUP_NO =       lgno,              [l_gr_noeud]",
+    "                       |  GROUP_MA =       lgma,              [l_gr_maille]",
+    "                   ♦   /  TEMP         =   tf,                [fonction]",
+    "                       /  |  TEMP_MIL  =   tf,                [fonction]",
+    "                          |  TEMP_INF  =   tinf,              [fonction]",
+    "                          |  TEMP_SUP  =   tsupf,             [fonction]",
+    "                )"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.4.3",
+   "text": "Opérandes",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TEMP ="
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur de la température imposée sur le(s) nœud(s) spécifié(s).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "/ Pour les éléments de coque thermique uniquement (Modélisation : 'COQUE') :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP_MIL"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Température sur le feuillet moyen imposée sur le(s) nœud(s) spécifié(s).",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP_INF"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Température imposée sur la paroi inférieure de la coque.",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  TEMP_SUP"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Température imposée sur la paroi supérieure de la coque.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces options permettent de représenter une variation parabolique de la température dans l'épaisseur.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "La coque est orientée par la connectivité des nœuds de la maille associée (cf. [U3.01.00]). Soit n le vecteur normal orientant la coque :",
+   "page": 10
+  },
+  {
+   "type": "figure",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.5",
+   "text": "Mot clé FLUX_REP",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.1",
+   "text": "But",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot clé facteur utilisable pour appliquer des flux normaux, à une face d'élément volumique ou de coque thermique définie par une ou plusieurs mailles de type triangle ou quadrangle. Ce mot clé permet également d'appliquer un flux normal à une arête (en 2D PLAN ou AXIS ou AXIS_FOURIER) sur des mailles de type segment.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé, les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept de type fonction (AFFE_CHAR_THER_F).",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.2",
+   "text": "Syntaxe",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "    FLUX_REP = _F  (    ♦ /  TOUT     =       'OUI',",
+    "                          /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                    ♦   /  FLUN        =         fl,              [R]",
+    "                        /  |  FLUN_INF =      flin,           [R]",
+    "                           |  FLUN_SUP =      flsup,          [R]",
+    "                )"
+   ],
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pour AFFE_CHAR_THER_F",
+    "   FLUX_REP = _F(",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]"
+   ],
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ♦   /  FLUN =              flf,            [fonction]",
+    "       /  |  FLUN_INF =       flinf,          [fonction]",
+    "          |  FLUN_SUP =       flsupf,         [fonction]",
+    "       /  |  FLUX_X   =       flx,            [fonction]",
+    "          |  FLUX_Y   =       fly,            [fonction]",
+    "          |  FLUX_Z   =       flz,            [fonction]",
+    ")"
+   ],
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.3",
+   "text": "Opérandes",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "/ FLUN : fl flux imposé normal à la maille.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 11
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   TRIA3, TRIA6,               3D, 3D_DIAG",
+    "QUAD4, QUAD8, QUAD9",
+    "    SEG2, SEG3          PLAN, AXIS, AXIS_FOURIER,",
+    "                          PLAN_DIAG, AXIS_DIAG"
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Plus précisément la condition aux limites appliquée est : gradT⋅n= fl",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où  est la conductivité thermique et n est la normale orientée dans le sens de la numérotation des nœuds de la maille. La convention d’orientation est celle utilisée dans AFFE_CHAR_MECA [U4.44.01].",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  |  FLUN_INF = flin",
+    "   |  FLUN_SUP = flsup"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Flux normal imposé sur les parois inférieure et supérieure d’une coque thermique.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces chargements s'appliquent aux types de mailles et aux modélisations suivantes :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TRIA3, TRIA6                  COQUE"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "n étant la normale orientant la surface [U4.44.01], la condition aux limites appliquée est :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n = flin où flin est le flux normal imposé sur la paroi inférieure de la coque,",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n = flsup où flsup est le flux normal imposé sur la paroi supérieure de la coque.",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "figure",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  |  FLUX_X = flx",
+    "   |  FLUX_Y = fly",
+    "   |  FLUX_Z = flz"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Flux vectoriel fl dans le repère global (uniquement pour AFFE_CHAR_THER_F) que l'on projette sur la normale à l'élément (pour la définition de la normale [U4.44.01]).",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n=fl⋅n=flx.nx fly.ny flz.nz",
+   "page": 12,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations :",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   TRIA3, TRIA6,            3D, 3D_DIAG",
+    "QUAD4, QUAD8, QUAD9",
+    "     SEG2, SEG3                PLAN",
+    "                             PLAN_DIAG"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : la règle de rémanence (voir U1.03.00) s'applique entre les différentes quantités que l'on peut affecter : FLUN, FLUN_INF, ... FLUX_Z.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.5.4",
+   "text": "Remarque",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé simple CARA_TORSION de ce mot-clé facteur FLUX_REP n'est pas documenté ici et ne doit pas être employé par l'utilisateur. Il ne sert qu'à la macro-commande MACR_CARA_POUTRE. Celle-ci sert à identifier les caractéristiques géométriques des sections de poutres. Pour les caractéristiques de torsion, la commande résout un problème de laplacien en employant de façon indirecte les opérateurs de thermique linéaire.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.6",
+   "text": "Mot-clé FLUX_NL",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.1",
+   "text": "But",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer des flux normaux fonctions de la température, à une face d'élément volumique définie par une ou plusieurs mailles de type triangle ou quadrangle. Ce mot clé permet également d'appliquer un flux normal à une arête (en 2D PLAN ou AXIS) sur des mailles de type segment. On peut ainsi modéliser une condition de rayonnement du type loi de Stefan. Ce type de flux n'est disponible que dans la commande AFFE_CHAR_THER_F et n'est utilisé que par les commandes THER_NON_LINE [U4.54.02] et THER_NON_LINE_MO [U4.54.03].",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs sont fournies par un concept de type fonction. La fonction dépend de la température, à l’exclusion de tout autre paramètre. En outre, il s’agit nécessairement d’une fonction tabulée et non d'une formule.",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.2",
+   "text": "Syntaxe",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  PourAFFE_CHAR_THER_F",
+    "    FLUX_NL = _F(",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                   ♦      FLUN     =          fl,             [fonction]",
+    "                )"
+   ],
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.6.3",
+   "text": "Opérandes",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "FLUN : flux imposé normal à la maille.",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 14
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   TRIA3, TRIA6,               3D, 3D_DIAG",
+    "QUAD4, QUAD8, QUAD9",
+    "    SEG2, SEG3                 PLAN, AXIS",
+    "                          PLAN_DIAG, AXIS_DIAG"
+   ],
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "Plus précisément la condition aux limites appliquée est :",
+   "page": 14
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n = fl",
+   "page": 14,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où n est la normale orientée dans le sens de la numérotation des nœuds de la maille. Orientation utilisée dans AFFE_CHAR_MECA document [U4.44.01].",
+   "page": 14
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.7",
+   "text": "Mot-clé RAYONNEMENT",
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.7.1",
+   "text": "But",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé permettant de définir le flux rayonné à l’infini suivant la formule :",
+   "page": 15
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "=[T273,15]4−[T 273,15]4 ray ∞",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "par la donnée de l’émissivité  , la constante de Boltzmann  et la température à l’infini T ∞ exprimée en Celsius. La température T sera elle aussi exprimée en Celsius, il faut donc veiller, par cohérence, à n’utiliser que des degrés Celsius pour toute l’étude.",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.7.2",
+   "text": "Syntaxe",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   RAYONNEMENT = _F(",
+    "                       ♦  /  TOUT     =       'OUI',",
+    "                          /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                        ♦    SIGMA   =        sigma,          [R8]",
+    "                        ♦    EPSILON =        epsilon,        [R8]",
+    "                        ♦    TEMP_EXT=        tex,            [R8]",
+    "                   )",
+    "•  pourAFFE_CHAR_THER_F",
+    "    RAYONNEMENT = _F   (",
+    "                       ♦  /  TOUT     =       'OUI',",
+    "                          /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                       ♦     SIGMA   =        sigma,          [fonction]",
+    "                       ♦     EPSILON =        epsilon,        [fonction]",
+    "                       ♦     TEMP_EXT=        tex,            [fonction]",
+    "                   )"
+   ],
+   "page": 15
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.7.3",
+   "text": "Opérandes",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  SIGMA    =   sigma",
+    "♦  EPSILON  =   epsilon",
+    "♦  TEMP_EXT =   tex"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s’applique aux modélisations suivantes :",
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 15
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   TRIA3, TRIA6,               3D, 3D_DIAG",
+    "QUAD4, QUAD8, QUAD9",
+    "    SEG2, SEG3                 PLAN, AXIS",
+    "                          PLAN_DIAG, AXIS_DIAG"
+   ],
+   "page": 15
+  },
+  {
+   "type": "paragraph",
+   "text": "sigma : constante de Boltzmann, =5.6710−8 en unités SI ( W/m2.K4 ) (attention à cette valeur si les unités de maillage changent), epsilon : émissivité, tex : température à l’infini en degrés Celsius.",
+   "page": 15,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.8",
+   "text": "Mot-clé ECHANGE",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.8.1",
+   "text": "But",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer des conditions d'échange avec une température extérieure à une face d'éléments volumiques ou de coques, définie par une ou plusieurs mailles de type triangle ou quadrangle. Ce mot clé permet également d'appliquer des conditions d'échange à une arête (en 2D PLAN ou AXIS ou AXIS_FOURIER) sur des mailles de type segment.",
+   "page": 16
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé, les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept de type fonction (AFFE_CHAR_THER_F).",
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.8.2",
+   "text": "Syntaxe",
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   ECHANGE = _F (",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]"
+   ],
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                   ♦   /  ♦  COEF_H   =          h,           [R]",
+    "                          ♦  TEMP_EXT =          tex,         [R]",
+    "                       /  |  ♦   COEF_H_INF   =  hin,         [R]",
+    "                             ♦   TEMP_EXT_INF =  texin,       [R]",
+    "                          |  ♦   COEF_H_SUP   =  hsup,        [R]",
+    "                             ♦   TEMP_EXT_SUP =  texsup,      [R]",
+    "                )",
+    "•  pourAFFE_CHAR_THER_F",
+    "   ECHANGE = _F (",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]"
+   ],
+   "page": 16
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ♦   /  ♦  COEF_H   =          hf,          [fonction]",
+    "          ♦  TEMP_EXT =          texf,        [fonction]",
+    "       /  |  ♦   COEF_H_INF   =  hinf,        [fonction]",
+    "             ♦   TEMP_EXT_INF =  texinf,      [fonction]",
+    "          |  ♦   COEF_H_SUP   =  hsupf,       [fonction]",
+    "             ♦   TEMP_EXT_SUP =  texsupf,     [fonction]",
+    ")"
+   ],
+   "page": 16
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.8.3",
+   "text": "Opérandes",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   ♦  COEF_H = h,",
+    "    ♦  TEMP_EXT = tex,"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   TRIA3, TRIA6,               3D, 3D_DIAG",
+    "QUAD4, QUAD8, QUAD9",
+    "    SEG2, SEG3               PLAN, PLAN_DIAG",
+    "                           AXIS, AXIS_FOURIER,",
+    "                               AXIS_DIAG"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Plus précisément la condition aux limites appliquée est :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n=htex−T h0",
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "où n est la normale orientée dans le sens de la numérotation des nœuds sommets (orientation utilisée dans AFFE_CHAR_MECA [U4.44.01]).",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/   |  ♦   COEF_H_INF     = hin,",
+    "       ♦   TEMP_EXT_INF   = texin,",
+    "    |  ♦   COEF_H_SUP     = hsup,",
+    "       ♦   TEMP_EXT_SUP   = texsup,"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 17
+  },
+  {
+   "type": "code",
+   "lines": [
+    "TRIA3, TRIA6                   COQUE"
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "n étant la normale orientant la surface [U2.03.03], la condition aux limites appliquée est :",
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n=hintexin−T",
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "où hin",
+     "coefficient d'échange sur la paroi inférieure de la coque,"
+    ],
+    [
+     "et texin",
+     "température extérieure, coté paroi inférieure."
+    ]
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "gradT⋅n=hsuptexsup−T",
+   "page": 17,
+   "equation": true
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "où hsup",
+     "coefficient d'échange sur la paroi supérieure de la coque,"
+    ],
+    [
+     "et texsup",
+     "température extérieure, coté paroi extérieure."
+    ]
+   ],
+   "page": 17
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "la règle de rémanence (voir U1.03.00) s'applique entre les différentes quantités que l'on peut affecter : COEF_H, COEF_H_INF, ... TEMP_EXT_SUP.",
+   "page": 17
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Dans le cas des chargements fonctions (AFFE_CHAR_THER_F), comme il y a deux composantes distinctes (le coefficient d'échange et la température), qui sont a priori indépendantes, on ne peut pas utiliser simultanément ce chargement avec une fonction multiplicatrice dans l'opérateur de résolution (THER_LINEAIRE ou THER_NON_LINE). Un message d'erreur vous avertira.",
+   "page": 17
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.9",
+   "text": "Mot-clé SOURCE",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.9.1",
+   "text": "But",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer des sources volumiques (2D ou 3D) à un domaine défini par une ou plusieurs mailles de type volumique.",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé, les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept de type fonction (AFFE_CHAR_THER_F). Ce chargement accepte des fonctions dépendant des variables de commande.",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.9.2",
+   "text": "Syntaxe",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   SOURCE=_F (",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                    ♦ / SOUR          =         s,    [R]",
+    "                       /  SOUR_CALCULEE =        chs,   [cham_elem]",
+    "             )",
+    "•  pourAFFE_CHAR_THER_F",
+    "   SOURCE=_F (",
+    "                ♦  /   TOUT     =      'OUI',",
+    "                   /   GROUP_MA =      lgma,            [l_gr_maille]",
+    "                ♦  SOUR        =           sf,          [fonction]",
+    "             )"
+   ],
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.9.3",
+   "text": "Opérandes",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "        HEX A8, HEXA20, HEXA27           3D, 3D_DIAG",
+    "            PYRA5, PYRA13,",
+    "            PENTA6, PENTA15",
+    "            TETRA4, TETRA10",
+    "             TRIA3, TRIA6,            PLAN, PLAN_DIAG,",
+    "          QUAD4, QUAD8, QUAD9        AXIS, AXIS_FOURIER",
+    "                                          AXIS_DIAG",
+    "/  ♦  SOUR = s,"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur de la source supposée constante sur l'élément.",
+   "page": 18
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ♦  SOUR_CALCULEE = chs,"
+   ],
+   "page": 18
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du cham_elem_sour_R contenant sur chaque élément les valeurs de la source discrétisée aux points de Gauss (1ère famille).",
+   "page": 18
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.10",
+   "text": "Mot-clé PRE_GRAD_TEMP",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.10.1",
+   "text": "But",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer à un élément 3D ou 2D (PLAN, AXIS) un gradient de température supposé uniforme dans l'élément. Ce gradient de température \"initial\" est utilisable par exemple pour résoudre les problèmes élémentaires déterminant les correcteurs de thermique linéaire stationnaire dans la cellule de base (2D, 3D), en homogénéisation périodique.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Les coefficients de conductibilité homogénéisée sont obtenus en calculant par l’opérateur POST_ELEM [U4.81.22] mot-clé ENER_POT l’énergie dissipée thermiquement à l’équilibre en thermique linéaire à partir des correcteurs.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "A cause de l’analogie thermique, cette démarche peut être exploitée pour obtenir les correcteurs en élasticité antiplane dans la cellule de base 2D, aussi bien qu’en conduction électrique.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Le calcul utilise la conductivité du matériau. Celle-ci est supposée être isotrope et indépendante de la température.",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "L'affectation peut se faire sur une ou plusieurs mailles ou sur tous les éléments du modèle.",
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.10.2",
+   "text": "Syntaxe",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   PRE_GRAD_TEMP = _F  (",
+    "                   ♦   /  TOUT     =       'OUI',",
+    "                       /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                   ♦   |  FLUX_X =         flx,               [R]",
+    "                       |  FLUX_Y =         fly,               [R]",
+    "                       |  FLUX_Z =         flz,               [R]",
+    "                       )"
+   ],
+   "page": 19
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.10.3",
+   "text": "Opérandes",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 19
+  },
+  {
+   "type": "code",
+   "lines": [
+    "             TRIA3, TRIA6,               PLAN, AXIS,",
+    "          QUAD4, QUAD8, QUAD9       PLAN_DIAG, AXIS_DIAG",
+    "            HEXA8, HEXA20,",
+    "                HEXA27",
+    "                                         3D, 3D_DIAG",
+    "           PENTA6, PENTA15,",
+    "            TETRA4, TETRA10",
+    "             PYRA5, PYRA13",
+    "♦  |  FLUX_X = flx (flxf)",
+    "   |  FLUX_Y = fly (flyf)",
+    "   |  FLUX_Z = flz (flzf) (en 3D seulement)"
+   ],
+   "page": 19
+  },
+  {
+   "type": "paragraph",
+   "text": "Composantes du gradient de température gradT dans le repère global. ini",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Le second membre élémentaire calculé est : ∫ gradT K gradT*dV où K est le tenseur des V ini e e conductivités thermiques.",
+   "page": 19,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les gradients peuvent être fonction de la géométrie et/ou du temps.",
+   "page": 20
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER_F",
+    "   PRE_GRAD_TEMP = _F  (",
+    "                       ♦  /  TOUT     =       'OUI',",
+    "                          /  GROUP_MA =       lgma,           [l_gr_maille]",
+    "                          ♦  |   FLUX_X =        flxf,        [fonction]",
+    "                             |   FLUX_Y =        flyf,        [fonction]",
+    "                             |   FLUX_Z =        flzf,        [fonction]",
+    "                       )"
+   ],
+   "page": 20
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.11",
+   "text": "Mot-clé LIAISON_DDL",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.11.1",
+   "text": "But",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour définir une relation linéaire entre des degrés de liberté de deux ou plusieurs nœuds.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé, les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept fonction (AFFE_CHAR_THER_F).",
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.11.2",
+   "text": "Syntaxe",
+   "page": 21
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   LIAISON_DDL = _F(♦  GROUP_NO =      lgno,            [l_gr_noeud]",
+    "                    ◊  DDL =      |           'TEMP',      [DEFAUT]",
+    "                                  |           'TEMP_MIL',",
+    "                                  |           'TEMP_INF',",
+    "                                  |           'TEMP_SUP',",
+    "                                  |           'H1',",
+    "                    ♦ COEF_MULT =              ai,         [l_R]",
+    "                    ♦  COEF_IMPO =             b ,         [R]",
+    "                )",
+    "•  pourAFFE_CHAR_THER_F",
+    "   LIAISON_DDL = _F(   ♦  GROUP_NO =       lgno,        [l_gr_noeud]",
+    "                    ◊  DDL =      |           'TEMP',      [DEFAUT]",
+    "                                  |           'TEMP_MIL',",
+    "                                  |           'TEMP_INF',",
+    "                                  |           'TEMP_SUP',",
+    "                                  |           'H1',",
+    "                   ♦   COEF_MULT =            ai ,         [l_R]",
+    "                   ♦   COEF_IMPO =            bf ,         [fonction]",
+    "                )"
+   ],
+   "page": 21
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.11.3",
+   "text": "Opérandes",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "La liste des nœuds N (i=1,r) définie par GROUP_NO est ordonnée de façon naturelle, c’est-à-dire i dans l'ordre de la liste de groupe de nœuds, et pour chaque groupe de nœuds, dans l'ordre de définition du groupe par GROUP_NO.",
+   "page": 21,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument de DDL doit être une liste de degrés de liberté T (i=1,r) de r textes pris parmi : i",
+   "page": 21,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'TEMP','TEMP_MIL', 'TEMP_SUP',   'TEMP_INF',  'H1'"
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le mot clé DDL est omis, par défaut la relation linéaire portera sur les degrés de liberté 'TEMP'.",
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument de COEF_MULT doit être une liste a (i=1,r) de coefficients (de type réel pour i",
+   "page": 21,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "AFFE_CHAR_THERetAFFE_CHAR_THER_F)."
+   ],
+   "page": 21
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument de COEF_IMPO est un coefficient  pour AFFE_CHAR_THER, une fonction de l’espace pour AFFE_CHAR_THER_F.",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "r La condition cinématique suivante est appliquée : ∑ T = i i i=1",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarques :",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Les composantes 'TEMP_MIL', 'TEMP_SUP' et 'TEMP_INF' ne peuvent intervenir que dans des combinaisons affectées uniquement à des nœuds qui appartiennent à des éléments de coque (modélisation 'COQUE' ).",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "La composante 'H1' ne peut intervenir que dans des combinaisons affectées uniquement à des nœuds qui appartiennent à des éléments X-FEM. Dans ce cas, seuls les degrés de liberté 'TEMP' et 'H1' peuvent figurer dans la relation linéaire.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une relation linéaire entre les degrés de liberté d'un même nœud, on répétera derrière le mot clé GROUPE_NO le nom du groupe définissant le nœud autant de fois qu'il y a de degrés de liberté dans la relation. Exemple : pour imposer T =T sur le nœud de groupe sup inf GN1, on écrira :",
+   "page": 22,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIAISON_DDL = _F (  GROUP_NO  =  (GN1,GN1),",
+    "                    DDL       =  ('TEMP_SUP', 'TEMP_INF'),",
+    "                    COEF_MULT =  (1.,-1.),",
+    "                    COEF_IMPO =  0.,",
+    "                )"
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est important de noter qu'à une occurrence du mot clé facteur LIAISON_DDL correspond une et une seule relation linéaire. Si on veut imposer la même relation entre 2 groupes de nœuds GRN01 et GRN02 (même température nœud à nœud par exemple) on ne peut pas écrire :",
+   "page": 22
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIAISON_DDL = _F    ( GROUP_NO  =   (GRN01, GRN02),",
+    "                    DDL         =   ('TEMP', 'TEMP'),",
+    "                   COEF_MULT =  (1.,-1.),",
+    "                   COEF_IMPO =  0.,                        )"
+   ],
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette écriture n'a de sens que si GRN01 et GRN02 ne contiennent chacun qu'un seul nœud. Il faudra dans le cas ci-dessus expliciter chaque relation linéaire, nœud par nœud.",
+   "page": 22
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé LIAISON_GROUP permet par contre de condenser l'écriture des relations linéaires entre 2 groupes de nœuds en vis-à-vis.",
+   "page": 22
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.12",
+   "text": "Mot-clé LIAISON_GROUP",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.12.1",
+   "text": "But",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour définir des relations linéaires entre des couples de nœuds, ces couples de nœuds étant obtenus en mettant en vis-à-vis deux listes de mailles ou de nœuds.",
+   "page": 23
+  },
+  {
+   "type": "paragraph",
+   "text": "Suivant le nom de l'opérateur appelé N , les valeurs sont fournies directement (AFFE_CHAR_THER) ou par l'intermédiaire d'un concept fonction (AFFE_CHAR_THER_F).",
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.12.2",
+   "text": "Syntaxe",
+   "page": 23
+  },
+  {
+   "type": "code",
+   "lines": [
+    "    •  pourAFFE_CHAR_THER",
+    "       LIAISON_GROUP=_F(   ♦  /  ♦   GROUP_MA_1   =  lgma1, [l_gr_maille]",
+    "                                 ♦   GROUP_MA_2   =  lgma2, [l_gr_maille]",
+    "                              /  ♦   GROUP_NO_1   =  lgno1, [l_gr_noeud]",
+    "                                 ♦   GROUP_NO_2   =  lgno2, [l_gr_noeud]",
+    "                           ◊  SANS_GROUP_NO       =  lgno,  [l_gr_noeud]",
+    "                            ◊  DDL_1 =   |     'TEMP',         [DEFAUT]",
+    "                                         |     'TEMP_MIL',",
+    "                                         |     'TEMP_INF',",
+    "                                         |     'TEMP_SUP',",
+    "                                         |     'H1',",
+    "                            ◊  DDL_2 =   |     'TEMP',         [DEFAUT]",
+    "                                         |     'TEMP_MIL',",
+    "                                         |     'TEMP_INF',",
+    "                                         |     'TEMP_SUP',",
+    "                                         |     'H1',",
+    "                            ♦  COEF_MULT_1 =      a1i,         [l_R]",
+    "                            ♦  COEF_MULT_2 =      a2i,         [l_R]",
+    "                            ♦  COEF_IMPO       =  b  ,         [R]",
+    "                           ◊  |  CENTRE    =   lr ,            [l_R]",
+    "                              |  ANGL_NAUT =   lr ,            [l_R]",
+    "                              |  TRAN      =   lr ,            [l_R]",
+    "                       )",
+    "•   pourAFFE_CHAR_THER_F",
+    "       LIAISON_GROUP=_F(   ♦  /  ♦   GROUP_MA_1   =  lgma1, [l_gr_maille]",
+    "                                 ♦   GROUP_MA_2   =  lgma2, [l_gr_maille]",
+    "                              /  ♦   GROUP_NO_1   =  lgno1, [l_gr_noeud]",
+    "                                 ♦   GROUP_NO_2   =  lgno2, [l_gr_noeud]",
+    "                           ◊  SANS_GROUP_NO       =  lgno,  [l_gr_noeud]",
+    "                            ◊  DDL_1 =   |     'TEMP',         [DEFAUT]",
+    "                                         |     'TEMP_MIL',",
+    "                                         |     'TEMP_INF',",
+    "                                         |     'TEMP_SUP',",
+    "                                         |     'H1',",
+    "                            ◊  DDL_2 =   |     'TEMP',         [DEFAUT]",
+    "                                         |     'TEMP_MIL',",
+    "                                         |     'TEMP_INF',",
+    "                                         |     'TEMP_SUP',",
+    "                                         |     'H1',",
+    "                           ♦   COEF_MULT_1 =    a1i  ,         [l_R]",
+    "                           ♦   COEF_MULT_2 =    a2i  ,         [l_R]",
+    "                           ♦  COEF_IMPO    =    bf,            [fonction]",
+    "                           ◊  |  CENTRE    =   lr ,            [l_R]",
+    "                              |  ANGL_NAUT =   lr ,            [l_R]",
+    "                              |  TRAN      =   lr ,            [l_R]",
+    "                       )"
+   ],
+   "page": 23
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.12.3",
+   "text": "Opérandes",
+   "page": 24
+  },
+  {
+   "type": "figure",
+   "page": 24
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 4.11.3-a : Transformation géométrique d'une frontière en une autre NDDL1 NDDL2 Condition cinématique \"générale\" : ∑  T ∣  ∑  T ∣ = 1i i  2i i i=1 1 i=1 2",
+   "page": 24,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ♦  GROUP_MA_1 ="
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande définit  par l'intermédiaire des mailles qui le composent. 1",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA_2 ="
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande définit  par l'intermédiaire des mailles qui le composent. 2",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  ♦  GROUP_NO_1 ="
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande définit  par l'intermédiaire des nœuds qui le composent. 1",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_NO_2 ="
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande définit  par l'intermédiaire des nœuds qui le composent. 2",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  SANS_GROUP_NO ="
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande permet de supprimer de la liste des couples de nœuds en vis-à-vis tous les couples dont au moins un des nœuds appartient à la liste de nœuds donnée.",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Cela permet d'éviter l'accumulation de relations linéaires sur un même nœud au cours de différentes itérations sur le mot clé facteur LIAISON_GROUP ce qui conduit la plupart du temps à une matrice singulière.",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  COEF_MULT_1 (resp.COEF_MULT_2)"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste de réels exactement dimensionnée au nombre de degrés de liberté déclarés dans DDL_1 (resp. DDL_2) correspondant aux coefficients multiplicateurs de la relation linéaire.",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "♦ COEF_IMPO : coefficient de blocage de la relation linéaire :",
+   "page": 25
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": ": réel pour AFFE_CHAR_THER",
+   "page": 25
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": ": fonction pour AFFE_CHAR_THER_F f",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "◊ CENTRE : coordonnées du centre de rotation ◊ ANGL_NAUT : angles nautiques en degrés définissant la rotation (voir AFFE_CARA_ELEM [U4.42.01] mot clé ORIENTATION ) ◊ TRAN : composantes du vecteur translation",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes permettent de définir une transformation virtuelle (rotation et/ou translation) approximative de  en  afin d'assurer la bijectivité de la fonction vis-à-vis. 1 2",
+   "page": 25,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  DDL_1 ( resp.DDL_2):"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste de textes pris parmi :",
+   "page": 25
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'TEMP', 'TEMP_MIL', 'TEMP_INF', 'TEMP_SUP', 'H1'"
+   ],
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "'TEMP_MIL', 'TEMP_INF' et 'TEMP_SUP' ne peuvent être utilisés que pour des éléments de coque thermique (modélisation : 'COQUE').",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "'H1' ne peut être utilisé que pour des éléments X-FEM. Dans ce cas, seuls les degrés de liberté 'TEMP' et 'H1' peuvent figurer dans les relations linéaires.",
+   "page": 25
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut, le degré de liberté considéré pour tous les nœuds des relations linéaires est 'TEMP'.",
+   "page": 25
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.12.4",
+   "text": "Utilisation de LIAISON_GROUP",
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "LIAISON_GROUP ne génère des relations linéaires qu'entre 2 nœuds (un sur  , un sur  1 2 )",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour générer des relations linéaires sur plus de 2 nœuds, utiliser le mot clé LIAISON_DDL.",
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "détermination des couples de nœuds en vis-à-vis :",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "dans un premier temps, on établit les deux listes de nœuds à mettre en vis-à-vis (ie à apparier), pour chaque occurrence du mot-clé facteur LIAISON_GROUP :",
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour les mots-clés GROUP_NO_1 et GROUP_NO_2, ce sont les nœuds constituant les groupes de nœuds,",
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour les mots-clés GROUP_MA_1 et GROUP_MA_2, ce sont les nœuds des mailles constituant les groupes de mailles.",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Les redondances étant éliminées, les deux listes de nœuds obtenues doivent avoir la même longueur.",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "La détermination des couples de nœuds en vis-à-vis se fait en plusieurs étapes :",
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour chaque nœud N1 de la première liste, on cherche le nœud image N2= f N1 de la deuxième liste. Si f n'est pas injective (un nœud N2 est l'image de deux nœuds distincts N1 et N1' ), le message d'erreur suivant est émis :",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "<F> <AFFE_CHAR_THER> <PACOAP> CONFLIT DANS LES VIS-A-VIS",
+    "DES NOEUDS",
+    "LE NOEUD N2 EST LE VIS-A-VIS DES NOEUDS N1 ET N1'"
+   ],
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "pour chaque nœud N2 de la deuxième liste, on cherche le nœud image N1=gN2 de la première liste. Si g n'est pas injective (un nœud N1 est l'image de deux nœuds distincts N2 et N2'), le message d'erreur suivant est émis :",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "<F> <AFFE_CHAR_MECA> <PACOAP> CONFLIT DANS LES VIS-A-VIS",
+    "DES NOEUDS",
+    "LE NOEUD N1 EST LE VIS-A-VIS DES NOEUDS N2 ET N2'"
+   ],
+   "page": 26
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "on vérifie que g= f −1 , c'est-à-dire que les couples obtenus par les étapes a) et b) sont les mêmes (on veut avoir une bijection f entre les deux listes de nœuds). Si f n'est pas surjective, le message d'erreur suivant est émis :",
+   "page": 26
+  },
+  {
+   "type": "code",
+   "lines": [
+    "<F> <AFFE_CHAR_MECA> <PACOAP> CONFLIT DANS LES VIS-A-VIS GENERES",
+    "SUCCESSIVEMENT A PARTIR DES LISTES LIST1 ET LIST2",
+    "LE NOEUD DE LA PREMIERE LISTE N1 N'EST L'IMAGE D'AUCUN NOEUD PAR",
+    "LA CORRESPONDANCE INVERSE"
+   ],
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour un nœud N donné, on appelle nœud image f N le nœud de l'autre liste de nœuds qui réalise le minimum de la distance avec N . Pour faciliter l'appariement, notamment dans le cas de géométries particulières (où les frontières  et  pourraient \"presque\" se 1 2 déduire l'une de l'autre par la composition d'une translation et d'une rotation), on offre la possibilité de faire une transformation géométrique virtuelle du premier groupe de nœuds (translation et rotation (cf. [Figure 4.11.3-a]) avant de calculer les distances (mots-clés TRAN, CENTRE et ANGL_NAUT).",
+   "page": 26,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque occurrence du mot-clé facteur LIAISON_GROUP, on construit ainsi la liste des nouveaux couples en vis-à-vis. Lorsqu'on a balayé toutes les occurrences, on supprime de la liste les couples en double.",
+   "page": 26
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans les couples de nœuds en vis-à-vis, l'ordre des nœuds est important. Si pour la première occurrence de LIAISON_GROUP , un nœud N appartenait au premier groupe de nœuds et un nœud M au deuxième groupe de nœuds, et que pour la seconde occurrence de LIAISON_GROUP , c'est l'inverse, on obtiendra à l'issue de l'appariement les couples N ,M et M ,N. Ils ne seront pas éliminés lors de la détection des redondances ; par contre, la matrice obtenue sera singulière. Ainsi, on conseille de garder la même logique lors de la description des bords en vis-à-vis.",
+   "page": 27,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.13",
+   "text": "Mot-clé LIAISON_MAIL",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.1",
+   "text": "But",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur permettant de \"recoller thermiquement\" deux bords d’une structure. Ces bords peuvent être maillés différemment (maillages incompatibles) mais doivent se déduire l’un de l’autre par rotation et/ou translation.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.2",
+   "text": "Syntaxe",
+   "page": 27
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "dans AFFE_CHAR_THER seulement",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIAISON_MAIL =_F(   ♦  GROUP_MA_MAIT =        lgma_mait,",
+    "                    ♦  |  GROUP_MA_ESCL =         lgma_escl,",
+    "                       |  GROUP_NO_ESCL =         lgno_escl,",
+    "                    ◊      DISTANCE_MAX   =       d_max,       [R]",
+    "                    ◊  |  ♦   TRAN   =     (tx, ty, [tz]),        [l_R]",
+    "                       |  ♦   CENTRE =     (xc, yc, [zc]),        [l_R]",
+    "                          ♦   ANGL_NAUT =  (alpha, [beta, gamma]),[l_R]",
+    "                )"
+   ],
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "La face 1 est appelée face \"maître\" ; la face 2 est appelée face \"esclave\".",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.13.3",
+   "text": "Opérandes",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "4.13.3.1",
+   "text": "GROUP_MA_ESCL / GROUP_NO_ESCL",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces mots-clés permettent de définir l’ensemble des nœuds de la face esclave. On prend tous les nœuds spécifiés par le mot-clé GROUP_NO_ESCL plus éventuellement les nœuds portés par les mailles spécifiées par le mot-clé GROUP_MA_ESCL.",
+   "page": 27
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "4.13.3.2",
+   "text": "GROUP_MA_MAIT",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet de définir l’ensemble des mailles où l’on cherchera les vis-à-vis des nœuds de la face esclave.",
+   "page": 27
+  },
+  {
+   "type": "paragraph",
+   "text": "Il ne faut pas donner les mailles de surface (en 3D) composant la face maître, mais les mailles volumiques adjacentes à la face maître. Les mailles spécifiées sont des candidates pour la recherche des vis-à-vis. On peut en donner trop.",
+   "page": 27
+  },
+  {
+   "type": "code",
+   "lines": [
+    "4.13.3.3 DISTANCE_MAX"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour projeter le maillage MA1 sur le maillage MA2 , la méthode cherche dans quel élément du maillage MA1 se trouve chaque nœud de MA2 , puis interpole la valeur à l’aide des fonctions de forme de l'élément. Lorsque qu'un nœud de MA2 n'est dans aucun élément du maillage MA1 , la méthode met en relation le nœud et le point (du bord) de l'élément le plus proche. Il interpole la valeur à l'aide des fonctions de forme de l'élément et cela même si le nœud est “loin” de cet élément.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l'on souhaite qu'un nœud qui n'est dans aucun des éléments du maillage MA1 , ne soit pas concerné par la projection, on utilise l'opérande DISTANCE_MAX. Cet opérande permet de donner la distance maximale que l'on autorise entre le nœud et l'élément le plus proche.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le nœud ne répond pas au critère de proximité le champ ne sera pas projeté sur ce nœud (i.e. le nœud ne portera aucune composante).",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Il n'y a pas de valeur par défaut pour DISTANCE_MAX. Ce qui veut dire que par défaut, le champ sera prolongé en dehors de la matière aussi loin qu'il le faudra.",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "4.13.3.4 DISTANCE_ALARME = d_ala"
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Le code émet une alarme lorsqu'un nœud de MA2 est jugé «éloigné » des mailles de MA1 . Soit d la distance séparant un nœud de MA2 de la maille de MA1 la plus proche. Par défaut, le critère pour juger si un nœud est éloigné est relatif : d > 1/10 ème de la taille de la maille la plus proche. Mais si l'utilisateur utilise DISTANCE_ALARME = d_ala , le message d'alarme est émis si d > d_ala (critère absolu).",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "4.13.3.5",
+   "text": "CENTRE / ANGL_NAUT / TRAN",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes permettent de définir la transformation géométrique (rotation et/ou translation) permettant de passer de la face esclave à la face maître. La commande effectue d’abord la rotation puis la translation.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention : la transformation est dans le sens esclave-maître.",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette condition aux limites s’applique aux modélisations planes ('PLAN' ou 'AXIS') ou volumiques ('3D').",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.14",
+   "text": "Mot-clé ECHANGE_PAROI",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.1",
+   "text": "But",
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer des conditions d'échange thermique entre 2 parois. Ces parois peuvent être définies de deux manières :",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "chacune séparément, par une ou plusieurs mailles (cas de parois maillées) ;",
+   "page": 28
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à partir d'une liste de fissures X-FEM, les deux parois correspondant alors aux deux lèvres de chaque fissure. Dans ce cas il est également possible d'imposer la continuité du champ de températire à travers les lèvres de chaque fissure.",
+   "page": 28
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.2",
+   "text": "Syntaxe",
+   "page": 28
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THER",
+    "   ECHANGE_PAROI=_F("
+   ],
+   "page": 28
+  },
+  {
+   "type": "paragraph",
+   "text": "# si la paroi est maillée",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA_1 =        lgma,     [l_gr_maille]",
+    "♦  GROUP_MA_2 =        lgma,     [l_gr_maille]",
+    "♦     COEF_H =            h,        [R]",
+    "◊     TRAN =              lr,       [l_R]"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "# si la paroi est définie avec des fissures X-FEM ♦ FISSURE = lfiss, [l_fiss_xfem] ♦ / COEF_H = h, [R] / TEMP_CONTINUE = 'OUI'",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "                   )",
+    "•  pourAFFE_CHAR_THER_F",
+    "   ECHANGE_PAROI=_F("
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "# si la paroi est maillée",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  GROUP_MA_1 =        lgma,     [l_gr_maille]",
+    "♦  GROUP_MA_2 =        lgma,     [l_gr_maille]",
+    "♦     COEF_H =            h,        [fonction]",
+    "◊     TRAN =              lr,       [l_R]"
+   ],
+   "page": 29
+  },
+  {
+   "type": "paragraph",
+   "text": "# si la paroi est définie avec des fissures X-FEM ♦ FISSURE = lfiss, [l_fiss_xfem] ♦ / COEF_H = h, [fonction] / TEMP_CONTINUE = 'OUI'",
+   "page": 29
+  },
+  {
+   "type": "code",
+   "lines": [
+    ")"
+   ],
+   "page": 29
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.3",
+   "text": "Opérandes",
+   "page": 30
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "4.14.3.1",
+   "text": "Cas de parois maillées",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     COEF_H"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Coefficient d'échange entre les 2 parois. Réel pour l'opérateur AFFE_CHAR_THER, fonction pour l'opérateur AFFE_CHAR_THER_F.",
+   "page": 30
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     GROUP_MA_1",
+    "♦     GROUP_MA_2"
+   ],
+   "page": 30
+  },
+  {
+   "type": "figure",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Figure 4.13.3-a",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes permettent de définir les 2 listes de mailles représentant pour la liste indicée « _1 » la paroi  pour la liste indicée « _2 » la paroi  . 1 2",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les parois sont en correspondance et doivent comporter le même nombre de mailles et de nœuds.",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "La condition limite appliquée entre ces 2 parois est :",
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "∂T sur  : k 1=hT −T  n normale extérieure à  1 ∂n 2 1 1 1 1 ∂T sur  : k 2=hT −T  n normale extérieure à  2 ∂n 1 2 2 2 2",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "T ∣ =T T ∣ =T° f 1 2  où 1 1 T ∣ =T ° f−1 T ∣ =T 1 2 2 2",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "f représentant la bijection qui met en vis-à-vis un nœud de  et un nœud de  . 1 2",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     TRAN"
+   ],
+   "page": 30
+  },
+  {
+   "type": "paragraph",
+   "text": "Composantes du vecteur translation. Cette opérande permet de définir une transformation virtuelle (de translation) approximative de  en  afin d'assurer la bijectivité de la fonction en vis-à-vis. TRAN caractérise une 1 2 translation :",
+   "page": 30,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "en 2D on a donc : TRAN = (tx, ty)",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "en3D ona        :  TRAN = (tx, ty, tz)"
+   ],
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "4.14.3.2",
+   "text": "Cas d'une ou plusieurs fissures X-FEM",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     FISSURE"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Liste de fissures X-FEM. Pour chaque fissure donnée dans cette liste, les deux parois en vis à vis sont définies comme la lèvre supérieure et la lèvre inférieure de la fissure. Il y a donc autant de couple de parois en vis-à-vis que de fissures présentes dans cette liste.",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /  COEF_H"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Coefficient d'échange entre les lèvres de la fissure. Réel pour l'opérateur AFFE_CHAR_THER , fonction pour l'opérateur AFFE_CHAR_THER_F . Si ce mot-clé est présent, la condition d'échange imposée entre les lèvres de chaque fissure donnée sous le mot-clé FISSURE est la même que dans le cas d'une paroi maillée (voir § précédent), en prenant l'identitié pour la bijection f puisque les lèvres supérieure et inférieure de chaque fissure sont géométriquement confondues.",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  TEMP_CONTINUE"
+   ],
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé ne peut être renseigné qu'avec le valeur 'OUI'. Si ce mot-clé est présent, on impose la continuité du champ de température à travers les lèvres de chaque fissure donnée sous le mot-clé FISSURE, en annulant les degrés de liberté d'enrichissement (“Heaviside” et “crack-tip”).",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.4",
+   "text": "Utilisation de ECHANGE_PAROI",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une paroi maillée :",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "L'utilisateur donne deux listes de mailles dont seront issus les couples de nœuds appariés. Ces listes sont d'abord triées par type de maille : les nœuds appariés proviendront de mailles de type identique. Pour chaque maille de la première liste, on détermine la maille la plus proche dans la deuxième liste en calculant toutes les distances des nœuds pris deux à deux (on parcourt toutes les permutations possibles). La distance minimum obtenue définit à la fois la maille en vis-à-vis et les couples de nœuds appariés pour les deux mailles concernées. Comme dans LIAISON_GROUP [§4.11], il est possible d'effectuer une transformation géométrique virtuelle (rotation et/ou translation) avant de calculer les distances.",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une ou plusieurs fissures X-FEM :",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "On définit autant de couples de parois en vis à vis qu'il y a de fissures dans la liste renseignée pour le mot-clé FISSURE.",
+   "page": 31
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si le mot-clé COEF_H est présent, toutes les fissures contenues dans cette liste se verront affectées le même coefficient d'échange (réel ou fonction). Pour affecter une valeur du coefficient d'échange propre à chaque fissure, il faut utiliser le caractère répétable du mot-clé facteur ECHANGE_PAROI.",
+   "page": 31
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Si le mot-clé TEMP_CONTINUE est présent, on impose la continuité du champ de température à travers toutes les fissures contenues dans cette liste.",
+   "page": 31
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.14.1",
+   "text": "Mailles et modélisations supportant ce chargement :",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas de parois maillées :",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Les listes de mailles données par l'utilisateur doivent être constituées de mailles de bord, des mailles de couplage sont alors automatiquement générées. Le tableau ci-dessous fournit un récapitulatif des mailles de bords ainsi que des modélisations pour lesquelles ce type de chargement est supporté.",
+   "page": 31
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille de bord Modélisation Maille de couplage générée",
+   "page": 31
+  },
+  {
+   "type": "code",
+   "lines": [
+    "    SEG2, SEG3            PLAN, PLAN_DIAG            SEG22, SEG33",
+    "                          AXIS, AXIS_DIAG",
+    "   TRIA3, TRIA6,            3D, 3D_DIAG            TRIA33, TRIA66,",
+    "QUAD4, QUAD8, QUAD9                             QUAD44, QUAD88, QUAD99"
+   ],
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une ou plusieurs fissures X-FEM :",
+   "page": 32
+  },
+  {
+   "type": "paragraph",
+   "text": "Les fissures doivent préalablement être créées avec l'opérateur DEFI_FISS_XFEM [U4.82.08], et le modèle (renseigné pour le mot-clé MODELE) avec l'opérateur MODI_MODELE_XFEM [U4.41.11], ce qui n'est possible que dans les cas suivants :",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "modélisation 3D pour les mailles support HEXA8, PENTA6, PYRA5, TETRA4",
+   "page": 32
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "modélisations PLAN et AXI pour les mailles support QUAD4 et TRIA3",
+   "page": 32
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.15",
+   "text": "Mot-clé LIAISON_UNIF",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.15.1",
+   "text": "But",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur permettant d'imposer une même valeur (inconnue) aux températures d'un ensemble de nœuds.",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces nœuds sont définis par les groupes de mailles ou les groupes de nœuds auxquels ils appartiennent.",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.15.2",
+   "text": "Syntaxe",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "•  pourAFFE_CHAR_THERetAFFE_CHAR_THER_F",
+    "   LIAISON_UNIF =_F(",
+    "                       ♦  /  GROUP_MA  =   lgma,           [l_gr_maille]",
+    "                          /  GROUP_NO  =   lgno,           [l_gr_noeud]",
+    "                        ♦  DDL = |  'TEMP' ,               [DEFAUT]",
+    "                                 |  'TEMP_MIL',",
+    "                                 |  'TEMP_INF',",
+    "                                 |  'TEMP_SUP',",
+    "                   )"
+   ],
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.15.3",
+   "text": "Opérandes",
+   "page": 33
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  /   GROUP_MA",
+    "   /   GROUP_NO"
+   ],
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces opérandes permettent de définir une liste de n nœuds N dont on a éliminé les i redondances (pour GROUP_MA, il s'agit des connectivités des mailles).",
+   "page": 33,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  DDL"
+   ],
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérande permet de définir une liste de degrés de liberté T i=1,r de r textes pris i parmi : 'TEMP', 'TEMP_MIL', 'TEMP_INF', 'TEMP_SUP'.",
+   "page": 33,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Les r×n−1 conditions 'cinématiques' résultantes sont :",
+   "page": 33,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "T N =T N  pour k∈2,...,n, i∈1,...,r i 1 i k",
+   "page": 33,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 33
+  },
+  {
+   "type": "paragraph",
+   "text": "Les composantes 'TEMP_MIL' , 'TEMP_SUP' , 'TEMP_INF' ne peuvent intervenir que pour des nœuds d'éléments de coque.",
+   "page": 33
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.16",
+   "text": "Mot-clé LIAISON_CHAMNO",
+   "page": 34
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.16.1",
+   "text": "But",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour définir une relation linéaire entre toutes les températures présentes dans un concept CHAM_NO.",
+   "page": 34
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.16.2",
+   "text": "Syntaxe",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "LIAISON_CHAMNO = _F (  ♦  CHAM_NO   =   chamno,            [cham_no]",
+    "                       ♦  COEF_IMPO =    b,                [R]",
+    "             )"
+   ],
+   "page": 34
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.16.3",
+   "text": "Opérandes",
+   "page": 34
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CHAM_NO ="
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du chamno qui sert à définir la relation linéaire. Les températures reliées sont toutes celles présentes dans le chamno. Les coefficients à appliquer aux températures sont les valeurs de ces températures dans le chamno.",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple :",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Supposons que l’on ait un chamno portant sur 3 nœuds de noms N01 , N02 et N03 .",
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "Supposons que les valeurs des températures en ces 3 nœuds dans le chamno soient respectivement 2., 5.4 et 9.1. La relation linéaire que l’on va imposer est : 2.TNO15.4TNO29.1T NO3=",
+   "page": 34,
+   "equation": true
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COEF_IMPO ="
+   ],
+   "page": 34
+  },
+  {
+   "type": "paragraph",
+   "text": "C’est la valeur du coefficient réel  au second membre de la relation linéaire.",
+   "page": 34,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.17",
+   "text": "Mot-clé CONVECTION",
+   "page": 35
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.1",
+   "text": "But",
+   "page": 35
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé utilisable pour prendre en compte le terme de transport de chaleur par convection dont l’expression est C .V gradT , apparaissant dans l’expression de la dérivée particulaire p dT dT ∂T C :C =C C V gradT . p dt p dt p ∂t p",
+   "page": 35,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d’un milieu liquide, V désigne la vitesse imposée de la particule fluide au point courant.",
+   "page": 35
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d’un milieu solide mobile, V désigne la vitesse du solide. Dans tous les cas, on suppose que le champ de vitesse est connu a priori. Le cas d’un solide mobile est assez fréquent en pratique. Il concerne en particulier les applications de soudage ou de traitement de surface qui mettent en jeu une source de chaleur se déplaçant dans une direction et à une vitesse données.",
+   "page": 35
+  },
+  {
+   "type": "paragraph",
+   "text": "Le problème thermique est alors étudié dans un référentiel lié à la source (cf. THER_NON_LINE_MO [U4.54.03]).",
+   "page": 35
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.2",
+   "text": "Syntaxe",
+   "page": 35
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CONVECTION = _F (   ♦  VITESSE   =  v                [cham_no_sdaster])"
+   ],
+   "page": 35
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.17.3",
+   "text": "Opérande",
+   "page": 35
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PourAFFE_CHAR_THERetAFFE_CHAR_THER_F,",
+    "VITESSE ="
+   ],
+   "page": 35
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du champ de vitesse à l’instant où l’on réalise le calcul.",
+   "page": 35
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce champ est un concept cham_no de type cham_no_depl_r. Il doit avoir été défini sur tout le modèle pour lequel on réalise le calcul.",
+   "page": 35
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.18",
+   "text": "Mot-clé SOUR_NL",
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.18.1",
+   "text": "But",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Mot-clé facteur utilisable pour appliquer des sources volumiques dépendant de la température (2D ou 3D) à un domaine défini par une ou plusieurs mailles de type volumique. Ce type de flux n'est disponible que dans la commande AFFE_CHAR_THER_F et n'est utilisé que par les commandes THER_NON_LINE [U4.54.02] et THER_NON_LINE_MO [U4.54.03].",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs sont fournies par un concept de type fonction. La fonction dépend de la température, à l’exclusion de tout autre paramètre. En outre, il s’agit nécessairement d’une fonction tabulée et non d'une formule.",
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.18.2",
+   "text": "Syntaxe",
+   "page": 36
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SOUR_NL=_F   (",
+    "             ♦  /   TOUT     =          'OUI',",
+    "                /   GROUP_MA =          lgma,        [l_gr_maille]",
+    "             ♦  SOUR        =           sf,          [fonction]",
+    "          )"
+   ],
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.18.3",
+   "text": "Opérandes",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce chargement s'applique aux types de mailles et aux modélisations suivantes :",
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Maille Modélisation",
+   "page": 36
+  },
+  {
+   "type": "code",
+   "lines": [
+    "        HEX A8, HEXA20, HEXA27               3D",
+    "            PYRA5, PYRA13,",
+    "            PENTA6, PENTA15",
+    "            TETRA4, TETRA10",
+    "             TRIA3, TRIA6,               PLAN, AXIS",
+    "          QUAD4, QUAD8, QUAD9",
+    "         HEXA8, PYRA5, PENTA6,             3D_DIAG",
+    "                TETRA4",
+    "             TRIA3, QUAD4           PLAN_DIAG, AXIS_DIAG",
+    "/  ♦  SOUR = s,"
+   ],
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Valeur de la source dépendant de la température et supposée constante sur l'élément.",
+   "page": 36
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.19",
+   "text": "Mot-clé EVOL_CHAR",
+   "page": 36
+  },
+  {
+   "type": "code",
+   "lines": [
+    "EVOL_CHAR =  evch"
+   ],
+   "page": 36
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé facteur EVOL_CHAR est utilisable pour appliquer des chargements évolutifs dans le temps de type evol_char produits par LIRE_RESU [U7.02.01] ou CREA_RESU [U4.44.12] et contenant des champs de coefficients correspondant soit :",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à un chargement de type ECHANGE (voir § 4.8 ) : le champ T_EXT correspond au paramètre TEMP_EXT et le champ COEF_H correspond au paramètre COEF_H .",
+   "page": 36
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à un chargement de type FLUX_REP (voir § 4.5 ) : le champ FLUN correspond au paramètre du même nom.",
+   "page": 36
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 14,
+   "chars": 3233,
+   "id": 1,
+   "section": "1 But"
+  },
+  {
+   "first": 15,
+   "last": 34,
+   "chars": 3241,
+   "id": 2,
+   "section": "3 Généralités"
+  },
+  {
+   "first": 35,
+   "last": 61,
+   "chars": 3200,
+   "id": 3,
+   "section": "4.2 Opérande MODELE"
+  },
+  {
+   "first": 62,
+   "last": 94,
+   "chars": 3559,
+   "id": 4,
+   "section": "4.5 Mot clé FLUX_REP"
+  },
+  {
+   "first": 95,
+   "last": 121,
+   "chars": 3276,
+   "id": 5,
+   "section": "4.6 Mot-clé FLUX_NL"
+  },
+  {
+   "first": 122,
+   "last": 149,
+   "chars": 3387,
+   "id": 6,
+   "section": "4.8 Mot-clé ECHANGE"
+  },
+  {
+   "first": 150,
+   "last": 179,
+   "chars": 4165,
+   "id": 7,
+   "section": "4.9 Mot-clé SOURCE"
+  },
+  {
+   "first": 180,
+   "last": 203,
+   "chars": 3879,
+   "id": 8,
+   "section": "4.11 Mot-clé LIAISON_DDL"
+  },
+  {
+   "first": 204,
+   "last": 242,
+   "chars": 5892,
+   "id": 9,
+   "section": "4.12 Mot-clé LIAISON_GROUP"
+  },
+  {
+   "first": 243,
+   "last": 255,
+   "chars": 2751,
+   "id": 10,
+   "section": "4.12.4 Utilisation de LIAISON_GROUP"
+  },
+  {
+   "first": 256,
+   "last": 279,
+   "chars": 3378,
+   "id": 11,
+   "section": "4.13 Mot-clé LIAISON_MAIL"
+  },
+  {
+   "first": 280,
+   "last": 334,
+   "chars": 5974,
+   "id": 12,
+   "section": "4.14 Mot-clé ECHANGE_PAROI"
+  },
+  {
+   "first": 335,
+   "last": 362,
+   "chars": 2162,
+   "id": 13,
+   "section": "4.15 Mot-clé LIAISON_UNIF"
+  },
+  {
+   "first": 363,
+   "last": 385,
+   "chars": 2515,
+   "id": 14,
+   "section": "4.17 Mot-clé CONVECTION"
+  },
+  {
+   "first": 386,
+   "last": 390,
+   "chars": 516,
+   "id": 15,
+   "section": "4.19 Mot-clé EVOL_CHAR"
+  }
+ ]
+}

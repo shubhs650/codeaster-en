@@ -37,7 +37,7 @@ generated.
 | Kind | `OPER` |
 | Result | `char_ther` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.44.02 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.44.02 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `TEMP_IMPO`, `FLUX_REP`, `ECHANGE`, `SOURCE` |
 
@@ -228,7 +228,7 @@ CH_FIN1 = AFFE_CHAR_THER(MODELE=MOTHER, TEMP_IMPO=_F(TOUT="OUI", TEMP_INF=-0.5, 
 
 - [`THER_LINEAIRE`](THER_LINEAIRE.md), which solves with these loads;
   [`AFFE_CHAR_MECA`](AFFE_CHAR_MECA.md) for the same `LIAISON_*` keywords in mechanics.
-- French reference: U4.44.02 (translation: `en/docs/U4.44.02.md` once task 5.x lands)
+- French reference: U4.44.02 (French text: `en/docs/_src/U4.44.02.fr.md`; translation: `en/docs/U4.44.02.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_CHAR_THER.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_ther.py:26`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_ther.py` (operator 34)
 - Verification run: `docs/reference-checks/README.md` (thermal slab)

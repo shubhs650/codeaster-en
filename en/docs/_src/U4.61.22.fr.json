@@ -1,0 +1,277 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.61.22.pdf",
+  "source_sha256": "a9d901705cc270136c63c682861b6c97df4547f93853e5b59da2f8948cfac147",
+  "source_bytes": 160843
+ },
+ "schema_version": 1,
+ "doc_id": "U4.61.22",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "20/04/2009",
+  "fascicle": "Manuel d'utilisation Fascicule u4.61: Outils généraux",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 4,
+  "pages": "4",
+  "pdf_keywords": "U4.61.22-I",
+  "pdf_title": "Opérateur ASSE_MATRICE",
+  "responsible": "PELLET Jacques",
+  "revision": "cb37b9c38910",
+  "title": "Opérateur ASSE_MATRICE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur ASSE_MATRICE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Créer une matrice par assemblage de matrices élémentaires.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La matrice produite est \"creuse\" ; elle est stockée sous forme \"morse\".",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type matr_asse_*.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ma [matr_asse_*] = ASSE_MATRICE",
+    "   (  ♦   MATR_ELEM =  mel,                      /   [matr_elem_DEPL_R]",
+    "                                                 /   [matr_elem_DEPL_C]",
+    "                                                 /   [matr_elem_TEMP_R]",
+    "                                                 /   [matr_elem_PRES_C]",
+    "      ♦   NUME_DDL  =  nu,                           [nume_ddl]",
+    "      ◊   CHAR_CINE =  cha,                      /   [char_cine_meca]",
+    "                                                 /   [char_cine_ther]",
+    "                                                 /   [char_cine_acou]",
+    "      ◊   SYME     =   'OUI',"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   ◊   INFO     =   /  1,                         [DEFAUT]",
+    "                    /  2,",
+    ")"
+   ],
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "si MATR_ELEM    [matr_elem_DEPL_R]         alors     [*]         DEPL_R",
+    "                [matr_elem_DEPL_C]                                DEPL_C",
+    "                [matr_elem_TEMP_R]                                TEMP_R",
+    "                [matr_elem_PRES_C]                                PRES_C"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MATR_ELEM",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MATR_ELEM = mel,"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept matr_elem_* à assembler.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Numérotation et stockage",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  NUME_DDL = nu,"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Précise la numérotation des équations du système assemblé et le stockage de la matrice.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande CHAR_CINE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  CHAR_CINE = cha,"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la charge cinématique à prendre en compte dans la matrice assemblée pour un traitement par élimination des degrés de liberté imposés (voir commande AFFE_CHAR_CINE [U4.44.03]).",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande SYME",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "à  SYME = 'OUI'"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet argument ne peut prendre que la valeur 'OUI'. Dans ce cas, on force la symétrisation de la matrice après assemblage. Ainsi, si la matrice créée par assemblage K est non-symétrique, le mot clé SYME = 'OUI' permet de la symétriser et de la remplacer par :",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "1 ma= KKT 2",
+   "page": 3,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérande INFO",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet l'impression d'information sur la matrice assemblée",
+   "page": 3
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "1 :",
+     "pas d'impression,"
+    ],
+    [
+     "2 :",
+     "impression du nombre de termes stockés et du coefficient de conditionnement des degrés de liberté de type 'LAGR',"
+    ]
+   ],
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Exemple",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "matas =   ASSE_MATRICE    (  NUME_DDL = nu ,",
+    "                              MATR_ELEM = mel,",
+    "                          )"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les matrices élémentaires de mel seront assemblées suivant la numérotation nu .",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Il faut donc que cette numérotation prenne en compte tous les degrés de liberté de ces matrices élémentaires (en particulier les degrés de liberté correspondant à la dualisation des conditions aux limites). On fera donc :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mel = CALC_MATR_ELEM(OPTION = 'RIGI_MECA',",
+    "                     MODELE = mo, CHARGE = condlim,)",
+    "nu = NUME_DDL(MATR_RIGI = mel)",
+    "matas = ASSE_MATRICE (NUME_DDL = nu, MATR_ELEM = mel,)"
+   ],
+   "page": 4
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 26,
+   "chars": 2179,
+   "id": 1,
+   "section": "3.5 Opérande INFO"
+  },
+  {
+   "first": 27,
+   "last": 32,
+   "chars": 619,
+   "id": 2,
+   "section": "4 Exemple"
+  }
+ ]
+}

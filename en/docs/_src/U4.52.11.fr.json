@@ -1,0 +1,881 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.52.11.pdf",
+  "source_sha256": "82d36d21b90590231e5c7bfc030a2e73c857a2a486f4f9bdd5e6de0e48543bd5",
+  "source_bytes": 184874
+ },
+ "schema_version": 1,
+ "doc_id": "U4.52.11",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "07/12/2017",
+  "fascicle": "Manuel d'utilisation Fascicule u4.52: Analyse modale",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 9,
+  "pages": "9",
+  "pdf_keywords": "U4.52.11-H",
+  "pdf_title": "Opérateur NORM_MODE",
+  "responsible": "ANDRIAMBOLOLONA Harinaivo",
+  "revision": "ff9f617dc9b5",
+  "title": "Opérateur NORM_MODE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur NORM_MODE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le rôle de la commande est de normer des modes propres en fonction d’un critère choisi par l’utilisateur.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "L'opérateur de calcul modal CALC_MODES [U4.52.02] produit un concept de type mode_meca ou mode_meca_c dont les modes propres réels ou complexes sont normalisés de telle façon que la plus grande des composantes qui n'est pas un multiplicateur de LAGRANGE, soit égale à 1.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "L’opérateur NORM_MODE permet à l’utilisateur de choisir une autre méthode de normalisation, par exemple masse généralisée, rigidité généralisée ...",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "En fonction de la normalisation choisie, les paramètres modaux (facteur de participation, masse effective, ...) sont réactualisés.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Opérateur ré-entrant.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "m_out = NORM_MODE  (",
+    "      ◊   reuse    =   m_out ,",
+    "      ♦   MODE     =   m_in ,                        /  [mode_meca]",
+    "                                                     /  [mode_meca_c]",
+    "                                                     /  [mode_flamb]",
+    "      ◊   /  NORME     =  /  'MASS_GENE',",
+    "                          /  'RIGI_GENE',",
+    "                          /  'TRAN',",
+    "                          /  'TRAN_ROTA',",
+    "                          /  'EUCL',",
+    "                          /  'EUCL_TRAN',",
+    "          /  GROUP_NO  =  grno,                      [group_no]",
+    "              # Si GROUP_NO",
+    "             ♦  NOM_CMP   =  cmp,                       [Kn]",
+    "          /  SANS_CMP  =  s_cmp,                        [l_Kn]",
+    "          /  AVEC_CMP  =  a_cmp,                        [l_Kn]",
+    "      ◊   MODE_SIGNE   =  _F (",
+    "             ♦  GROUP_NO= grno,                      [group_no]",
+    "             ♦  NOM_CMP   =  cmp,                       [Kn]",
+    "             ◊  SIGNE  =  /  ‘POSITIF’,                 [DEFAUT]",
+    "                          /  ‘NEGATIF’,",
+    "                          )",
+    "      ◊   MASSE    =   masse ,                          [matr_asse_depl_r]",
+    "                                                     ou [matr_asse_gene_r]",
+    "                                                     ou [matr_asse_pres_r]",
+    "      ◊   RAIDE    =   masse ,                          [matr_asse_depl_r]",
+    "                                                     ou [matr_asse_depl_c]",
+    "                                                     ou [matr_asse_gene_r]",
+    "                                                     ou [matr_asse_pres_r]",
+    "      ◊   AMOR     =   masse ,                          [matr_asse_depl_r]",
+    "                                                     ou [matr_asse_gene_r]",
+    "      ◊   TITRE =      t,                               [l_Kn]",
+    "      ◊   INFO  =      /  1,                            [DEFAUT]",
+    "                       /  2,",
+    "                                 );",
+    "      si m_in est de type [ mode_meca ]",
+    "      alors m_out est de type [ mode_meca ]",
+    "      idem avec [ mode_meca_c ]",
+    "      idem avec [ mode_flamb ]"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MODE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MODE = m_in"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du concept de type mode_* dont on veut changer la normalisation des modes propres. Si m_out est identique à m_in et si le mot-clé 'reuse' est activé avec la valeur m_out, la renormalisation se fait en place.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande NORME",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ /NORME ="
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom symbolique de la norme choisie.",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'MASS_GENE' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normalisés à la masse généralisée unitaire.",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'RIGI_GENE' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normés à la rigidité généralisée unitaire.",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'TRAN' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normés à 1. pour la plus grande des composantes de translation : (composantes : DX, DY, DZ).",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'TRAN_ROTA' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normés à 1. pour la plus grande des composantes de translation et de rotation (composantes : DX, DY, DZ, DRX, DRY, DRZ).",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'EUCL' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normalisés à la norme euclidienne des composantes qui ne sont pas des multiplicateurs de LAGRANGE (composante : LAGR).",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "'EUCL_TRAN' :"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normalisés à la norme euclidienne des composantes qui sont des composantes de translation (composantes : DX, DY, DZ).",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérandes GROUP_NO et NOM_CMP",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  GROUP_NO = grno"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du du groupe d'un nœud grno où on normalise. | Attention : le groupe de nœuds grno doit contenir un unique nœud. ♦ NOM_CMP = cmp",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la composante de normalisation au nœud no ou au groupe d'un nœud grno . Cet opérande est obligatoire si GROUP_NO est renseigné.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normés à 1. pour la composante cmp du nœud no ou du groupe d'un nœud grno .",
+   "page": 3,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérandes AVEC_CMP / SANS_CMP",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  /  AVEC_CMP = a_cmp"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "a_cmp liste des noms des composantes utilisées pour la normalisation.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modes sont normés à 1. pour la plus grande des composantes de la liste a_cmp quelque soit le nœud.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  SANS_CMP = s_cmp"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "s_cmp liste des noms des composantes qui ne sont pas utilisées pour la normalisation. Les modes sont normés à 1. pour la plus grande des composantes qui n'est pas dans la liste s_cmp.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Mot-clé facteur MODE_SIGNE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé facteur permet d'imposer pour tous les modes le signe d'une composante d'un nœud stipulée par l'utilisateur. Ce mot-clé facteur ne peut être utilisé que pour les modes réels (problème généralisé).",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦    GROUP_NO = grnd"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du groupe d'un nœud où on impose le signe d'une composante. | Attention : le groupe de nœuds grnd doit contenir un unique nœud. ♦ NOM_CMP = cmp",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de la composante du groupe d'un nœud grnd où le signe est imposé.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     SIGNE =   / 'POSITIF'",
+    "                / 'NEGATIF'"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Signe imposé de la composante : 'POSITIF' ou 'NEGATIF'.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Cas de la normalisation d’une collection de modes issue de",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DEFI_BASE_MODALE"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Si on veut normer une collection de modes (base modale) issue de DEFI_BASE_MODALE , il faut renseigner les deux matrices, de masse et de raideur, permettant d'actualiser les paramètres modaux :",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   MASSE    =   masse                  [matr_asse_depl_r]",
+    "                                 ou     [matr_asse_gene_r]",
+    "                                 ou     [matr_asse_pres_r]",
+    "◊   RAIDE    =   masse                  [matr_asse_depl_r]",
+    "                                 ou     [matr_asse_depl_c]",
+    "                                 ou     [matr_asse_gene_r]",
+    "                                 ou     [matr_asse_pres_r]"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "En effet, dans ce cas, les informations sur les matrices de masse et de rigidité (et éventuellement d’amortissement) sur lesquelles s’appuie la base modale ont été perdues, ou les modes peuvent être issus de différents jeux de matrices. Il est donc nécessaire de les rappeler à l’opérateur NORM_MODE.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas d'une base de modes complexes, il faut de plus donner une matrice d'amortissement si on veut normer par rapport à la masse généralisée ou à la raideur généralisée (cf paragraphe 4.2). ◊ AMOR = masse [matr_asse_depl_r] ou [matr_asse_gene_r]",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Opérande TITRE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE =   t"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre associé au concept produit par cet opérateur [U4.03.01].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Opérande INFO",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INFO = 1 ou 2"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque mode, le nom de l’ancienne norme et le nom de la nouvelle norme sont indiqués dans le fichier MESSAGE . Les noms imprimés des normes correspondent aux mot-clés décrits aux paragraphes 3.2 , 3.3 , 3.4 .",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Formulation des règles de normalisation",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Les différentes normes utilisées ainsi que la définition des différents paramètres modaux sont recensées dans la documentation de référence [R5.01.03].",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Modes propres réels",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modes de type mode_meca_r (modes propres réels) le problème généralisé aux valeurs propres associé est : K−2Mx=K−2 f 2Mx=0 où K ,M sont respectivement la matrice de masse et la matrice de rigidité du système mécanique.",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modélisations ‘MECANIQUE’, on définit les composantes du vecteur propre :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "composantes de translation uT",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "composantes de rotation uR",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "composantes des multiplicateurs de LAGRANGE ",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "autres composantes (pression et potentiel fluide) p f",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "On appelle :",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "uTR composantes de translation et rotation,",
+   "page": 6
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "u composantes autres que multiplicateurs de LAGRANGE.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "ce qui conduit à :",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "[ ] uT [u] uR u*= =",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "p f ",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modèles avec composantes de translation et de rotation, le mode propre  fourni par les i algorithmes d’analyse modale est par défaut :",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "u * u *",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "= = = TR i maxu maxuTR i",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ce qui est équivalent à la normalisation obtenue par le mot clé ‘TRAN_ROTA’.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Avec le mot clé ‘TRAN’ le mode obtenu est défini par :",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "u * = =T i maxuT i",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modèles avec composantes de translation uniquement, la normalisation est par défaut :",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "u * u *",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "T= = i maxu maxuT",
+   "page": 6,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "ce qui est équivalent à la normalisation obtenue par le mot clé ‘TRAN’.",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "La normalisation par défaut conduit aux paramètres généralisés suivants :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "rigidité généralisée T K  = i i i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "masse généralisée T M  = i i i  2= i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "d’où la pulsation propre i  i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La normalisation à la masse généralisée unitaire est obtenue par le mot clé ‘MASS_GENE’ :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "M= i d’où T M M  M=1. et T M K  M= 2 i  i i i i i i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Celle à la rigidité généralisée unitaire est obtenue par le mot clé ‘RIGI_GENE’ :",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "1",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "K= i d’où T K M  K= et T K K  K=1. i  i i 2 i i i i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La normalisation du mode propre à la norme euclidienne ‘EUCL’ est obtenue naturellement par :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "u * u * ∥u∥= = i ∥u∥ ∑u 2 j j",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "La normalisation du mode propre à la norme euclidienne ‘EUCL_TRAN’ est :",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "u * u * ∥uT∥= = i ∥uT∥ ∑uT2 j j",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Modes propres complexes",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modes de type mode_meca_c (modes propres complexes) issus d'une résolution d'un problème quadratique aux valeurs propres 2MCK=0 où C est la matrice d'amortissement du système mécanique, on norme les modes  par rapport au problème linéarisé associé :",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "[ 0 M] [−M 0]",
+   "page": 7
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": " =0 M C 0 K ",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mode propre est normé à la masse généralisée unitaire (‘MASS_GENE’), si  satisfait : i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "[ ]   T T  0 M  i =1. i i M C  i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "à la rigidité généralisée unitaire (‘RIGI_GENE’), si  satisfait : i",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "[ ]   T T  −M 0  i =1. i i 0 K  i Pour les autres normes, les définitions sont équivalentes à celles définies pour les modes réels, il suffit de remplacer le produit scalaire par le produit hermitien.",
+   "page": 7,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Paramètres modaux mis à jour",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Un concept de type mode_meca peut contenir, pour chaque mode, les paramètres modaux suivants (visibles par exemple en imprimant le concept avec la commande IMPR_RESU au FORMAT='RESULTAT' avec l'option TOUT_PARA='OUI') :",
+   "page": 8
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Intitulé du paramètre dans Code_Aster",
+     "Définition"
+    ],
+    [
+     "FREQ",
+     "Fréquence propre (amortie, le cas échéant)"
+    ],
+    [
+     "AMOR_GENE",
+     "Amortissement modal généralisé"
+    ],
+    [
+     "AMOR_REDUIT",
+     "Amortissement modal réduit"
+    ],
+    [
+     "FACT_PARTICI_D* (* = X ou Y ou Z)",
+     "Facteur de participation du mode dans la direction D*"
+    ],
+    [
+     "MASS_EFFE_D* (* = X ou Y ou Z)",
+     "Masse modale effective dans la direction D*"
+    ],
+    [
+     "MASS_EFFE_UN_D* (* = X ou Y ou Z)",
+     "Masse modale effective unitaire dans la direction D*"
+    ],
+    [
+     "MASS_GENE",
+     "Masse généralisée du mode"
+    ],
+    [
+     "OMEGA2",
+     "Pulsation propre (amortie, le cas échéant) au carré"
+    ],
+    [
+     "RIGI_GENE",
+     "Raideur généralisée du mode"
+    ]
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Tableau 5.1 : liste des paramètres modaux.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces paramètres sont définis mathématiquement dans la documentation de référence [R5.01.03].",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "L'opérateur NORM_MODE calcule ou met à jour les paramètres modaux suivants, qui dépendent de la normalisation choisie : FACT_PARTICI_D*, MASS_GENE et RIGI_GENE. Il enrichit également la structure de donnée avec les paramètres MASS_EFFE_UN_D* (indépendants de la normalisation). Les autres paramètres sont indépendants de la normalisation.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Exemples pour des modes réels",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les modes de type mode_meca (modes propres réels) issus d'une résolution d'un problème généralisé aux valeurs propres K−Mx=0 :",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "normer un vecteur propre x à la rigidité généralisée unitaire équivaut à ce que x satisfasse",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "xTK x=1",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Normalisation avec duplication du concept mode_meca :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mo_2   = NORM_MODE (   MODE =mo_1,",
+    "                       NORME='RIGI_GENE'",
+    "                   );"
+   ],
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "normer un vecteur propre x à la masse généralisée unitaire équivaut à ce que x satisfasse",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "xTM x=1",
+   "page": 9,
+   "equation": true
+  },
+  {
+   "type": "paragraph",
+   "text": "Normalisation à la masse généralisée unitaire, avec écrasement du concept mode_meca :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mo  = NORM_MODE        (  reuse = mo,",
+    "                          MODE  = mo,",
+    "                          NORME = 'MASS_GENE'",
+    "                       );"
+   ],
+   "page": 9
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 8,
+   "chars": 2786,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 9,
+   "last": 45,
+   "chars": 2415,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 46,
+   "last": 96,
+   "chars": 3611,
+   "id": 3,
+   "section": "3.6 Cas de la normalisation d’une collection de modes issue de"
+  },
+  {
+   "first": 97,
+   "last": 110,
+   "chars": 2046,
+   "id": 4,
+   "section": "4.2 Modes propres complexes"
+  },
+  {
+   "first": 111,
+   "last": 120,
+   "chars": 742,
+   "id": 5,
+   "section": "6 Exemples pour des modes réels"
+  }
+ ]
+}

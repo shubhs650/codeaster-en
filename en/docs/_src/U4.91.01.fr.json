@@ -1,0 +1,912 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.91.01.pdf",
+  "source_sha256": "7761015dc35ec465cc1c59c0e64eaea6fc1bdccbe21aab9244c177ed0151840d",
+  "source_bytes": 193460
+ },
+ "schema_version": 1,
+ "doc_id": "U4.91.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "02/06/2020",
+  "fascicle": "Manuel d'utilisation Fascicule u4.91: Impression",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 10,
+  "pages": "10",
+  "pdf_keywords": "U4.91.01-I",
+  "pdf_title": "Procédure IMPR_RESU aux formats 'RESULTAT' et 'AST[...]",
+  "responsible": "YU Ting",
+  "revision": "39de40e59476",
+  "title": "Procédure IMPR_RESU aux formats 'RESULTAT' et 'ASTER'",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Procédure IMPR_RESU aux formats 'RESULTAT' et 'ASTER'",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Écrire le maillage ou les résultats d’un calcul dans un fichier au format 'RESULTAT' ou le maillage au format 'ASTER'.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Actuellement cette procédure permet d’écrire au choix :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un maillage,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "des champs aux nœuds (de déplacements, de températures, de modes propres, de modes statiques, …),",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "des champs par éléments aux nœuds ou aux points de GAUSS (de contraintes, d’efforts généralisés, de variables internes…).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La procédure IMPR_RESU permet également d’écrire un maillage et/ou des résultats sur un fichier en vue, en particulier de leur visualisation graphique (cf. documents [U7.05.01] (format 'IDEAS'), [U7.05.21] (format 'MED') et [U7.05.32] (format 'GMSH')).",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les concepts de type resultat, on peut n’imprimer qu’une partie de l’information, en sélectionnant les champs et les numéros d’ordre que l’on désire exploiter.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les impressions au format 'RESULTAT', il est possible de sélectionner les entités topologiques (groupes de nœuds et groupes de mailles) sur lesquelles on veut imprimer les résultats. On peut également réduire le nombre des informations imprimées en ne demandant que l’impression de certaines composantes, de valeurs comprises dans un intervalle choisi par l’utilisateur ou de valeurs extrémales. On peut combiner toutes les possibilités, par exemple pour obtenir la valeur maximale d’une composante donnée, sur une entité topologique particulière et dans un intervalle de valeurs choisi par l’utilisateur.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le format 'RESULTAT' ne doit pas servir de base pour stocker ou échanger des résultats, son format n’est pas figé.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IMPR_RESU    (",
+    "◊  MODELE = mo,                                         [modele]",
+    "◊  UNITE = unit,                                        [I]",
+    "◊  FORMAT =  / ’RESULTAT’,",
+    "             / ’ASTER’,",
+    "◊  PROC0 =   / ’OUI’,                                   [DEFAUT]",
+    "             / ’NON’,",
+    "◊  INFO =    / 1,                                       [DEFAUT]",
+    "             / 2,",
+    "/  RESU =(_F (",
+    "   #  Syntaxe de la procédure IMPR_RESU au format ’RESULTAT’",
+    "   ♦  |   MAILLAGE = MA,                                [maillage]",
+    "      |   /  CHAM_GD      =  CH_GD,                     [cham_gd]",
+    "          /  RESULTAT     =  RESU,                      [resultat]",
+    "      # Extraction d’un champ de grandeur de resu",
+    "          ◊  /     TOUT_CHAM     =  /’OUI’,             [DEFAUT]",
+    "                                    /’NON’,",
+    "             /     NOM_CHAM         =  L_NOMSYMB,       [l_K16]",
+    "          ◊  /     TOUT_ORDRE       =  ’OUI’,           [DEFAUT]",
+    "             /     NUME_ORDRE       =  LORDRE,          [l_I]",
+    "             /     LIST_ORDRE       =  LENTI,           [listis]",
+    "             /     NUME_MODE        =  LMODE,           [l_I]",
+    "             /     NOEUD_CMP        =  LNOECMP,         [l_K16]",
+    "             /     NOM_CAS          =  NCAS,            [l_K16]",
+    "             /  /  ANGLE            =  LANGL,           [l_R]",
+    "                /  FREQ             =  LFREQ,           [l_R]",
+    "                /  LIST_FREQ        =  LREEL,           [listr8]",
+    "                /  INST             =  LINST,           [l_R]",
+    "                /  LIST_INST     =  LREEL,              [listr8]",
+    "                 ◊ |   PRECISION =  / PREC,             [R]",
+    "                                       / 1.0D-3,        [DEFAUT]",
+    "                   |   CRITERE      =  / ’RELATIF’,     [DEFAUT]",
+    "                                       / ’ABSOLU’ ,",
+    "          # Paramètres",
+    "          ◊  /  TOUT_PARA    =   /’OUI’,",
+    "                                 /’NON’,                [DEFAUT]",
+    "             /  NOM_PARA     =   L_NOMPARA,             [l_K16]",
+    "          ◊  FORM_TABL       =   /’OUI’,",
+    "                                 /’EXCEL’,",
+    "                                 /’NON’,                [DEFAUT]",
+    "          ◊  PARTIE=   /  ‘REEL’,",
+    "                       /  ‘IMAG’,",
+    "                       /  ‘MODULE’,",
+    "                       /  ‘PHASE’,",
+    "      # Sélection des composantes",
+    "      ◊   /  TOUT_CMP        =   ’OUI’,                 [DEFAUT]",
+    "          /  NOM_CMP         =   L_NOMCMP,              [l_K8]",
+    "      # Sélection des entités topologiques",
+    "      ◊   /     TOUT         =   ’OUI’,                 [DEFAUT]",
+    "          /  |  GROUP_NO     =   L_GRNO,                [l_gr_noeud]",
+    "             |  GROUP_MA     =   L_GRMA,                [l_gr_maille]",
+    "      # Sélection sur les valeurs",
+    "      ◊      VALE_MAX        =   /’OUI’,",
+    "                                 /’NON’,                [DEFAUT]",
+    "      ◊      VALE_MIN        =   /’OUI’,",
+    "                                 /’NON’,                [DEFAUT]",
+    "      ◊      BORNE_SUP    =  VSUP,                      [R]",
+    "      ◊      BORNE_INF    =  VINF,                      [R]",
+    "      # Impression des coordonnées",
+    "      ◊      IMPR_COOR    =  /’OUI’,",
+    "                             /’NON’,                    [DEFAUT]",
+    "      # Choix du format d’écriture des valeurs réelles",
+    "      ◊      FORMAT_R  =  /  FORM,",
+    "                          /  ’1PE21.14’,                [DEFAUT]",
+    "      ◊      SOUS_TITRE   =  ST,                        [Kn]",
+    "   #  Syntaxe de la procédure IMPR_RESU au format ’ASTER’",
+    "   ♦  |   MAILLAGE     =  MA,                        /  [maillage]",
+    "                                                     /  [squelette]",
+    "      ◊   SOUS_TITRE   =  ST,                           [Kn]",
+    "   )),",
+    ")"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Typographie dans la documentation IMPR_RESU",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour bien comprendre la documentation de IMPR_RESU, il faut noter que le terme ’RESULTAT’ regroupe dans Code_Aster trois notions assez différentes :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un type de concept,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un type de fichier,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un format d’écriture.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "En effet, d’une part, on désigne par résultat, les quantités produites par un opérateur de calcul Aster produisant plusieurs champs (calcul évolutif, calcul de modes propres, etc...).",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ces données (résultats) sont contenues dans une structure de données Aster de type générique dit resultat. Ce type générique se décline en sous types, par exemple mode_meca, evol_elas, etc., dont le mode de stockage diffère quelque peu. Un concept de type resultat n’a qu’un sous type. Dans la documentation Aster les noms des types de concept sont en minuscules Courier.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "D’autre part, les résultats destinés à l’impression, notamment ceux issus de IMPR_RESU, sont versés dans un fichier désigné par fichier RESULTAT (associé à l’unité 8, type resu dans astk). Le format d’écriture associé à ce fichier destiné à l’impression est lui aussi baptisé RESULTAT.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "En résumé :",
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "résultat",
+     "données issues de la résolution du système,"
+    ],
+    [
+     "resultat",
+     "désignation générique du type de concept (de la structure de donnée) qui contient le résultat,"
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "evol_ther"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "nom du sous type du résultat de type resultat,",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mode_meca"
+   ],
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "FICHIER",
+     "(sans quote) désignation du fichier qui contient les résultats, indépendamment du format de son contenu,"
+    ],
+    [
+     "’RESULTAT’",
+     "(avec quotes) désignation du format (Aster) du fichier qui contient les résultats."
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes FORMAT, PROC0, UNITE et INFO",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La procédure IMPR_RESU permet d’écrire un maillage et/ou des valeurs de résultats dans différents formats en vue, en particulier, d’une visualisation graphique [U7.05.01], [U7.05.11], [U7.05.21] et [U7.05.31].",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "L’opérande FORMAT permet de spécifier le format d’impression d’un résultat. Le format par défaut est 'MED' (cf. [U7.05.21]). Il permet d’imprimer le maillage et/ou les résultats sous forme listing.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "L'opérande PROC0 dont la valeur par défaut est 'OUI', permet de restreindre l'impression sur le processeur de rang 0. Si on lui affecte la valeur 'NON', les impressions seront effectuées sur tous les processeurs.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "On précise dans quel fichier les données seront écrites via le mot clé UNITE (cf. commande DEFI_FICHIER). Par défaut, on utilise le fichier d'unité logique 8 au format ’RESULTAT’ et 26 au format 'ASTER'.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot-clé INFO lorsqu’il est égal à 2 permet d’obtenir des informations sur les impressions réalisées par la commande.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Mot clé RESU",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur permet de spécifier les résultats à imprimer et le format selon lequel on veut les imprimer.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Opérandes CHAM_GD et RESULTAT",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les valeurs des champs calculés sont stockées dans des structures de données appelées champs de grandeur. Ces champs de grandeur peuvent être directement accessibles (concept cham_gd) ou se trouver dans une structure de données regroupant plusieurs champs de grandeur (concept resultat).",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un champ de grandeur est une structure de données qui permet de stocker des champs définis aux nœuds (cham_no_*) ou des champs définis par éléments (cham_elem_*). Pour les champs par éléments, on distingue les champs définis aux nœuds des éléments et les champs définis aux points de GAUSS des éléments,",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "un concept resultat se compose d’un ou plusieurs champs de grandeur. Par exemple, à chaque pas de calcul on stocke dans la structure de données resultat, le champ de grandeur déplacement. Cette structure est donc indexée par une structure matricielle d’ordre 2, dont un indice est, par exemple, la liste des instants de calcul et l’autre l’ensemble des champs calculés (déplacements, contraintes, déformations, ...). On accède dans ce cas à un champ de grandeur en spécifiant la valeur d’une variable d’accès (numéro d’ordre, instant, fréquence, numéro de mode ...) et un nom de champ (’DEPL’, ’SIGM_ELNO’,...). Il existe plusieurs types de concept resultat : evol_elas, evol_noli, mode_meca,.... A chacun correspond une liste de champs et une liste de variables d’accès licites. D’autre part, à un concept resultat est également associé un certain nombre de résultats complémentaires (par exemple la masse généralisée ou les facteurs de participation modaux dans un calcul modal (concept resultat de type mode_meca)), différents pour chaque valeur de la variable d’accès. Ces résultats complémentaires sont appelés paramètres. Compte-tenu de la structure de donnée resultat, on comprend aisément que les possibilités d’impression dont on dispose sont celles des champs de grandeur, complétées par des possibilités spécifiques :",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "information sur la structure de données (par exemple : liste des variables d’accès, liste des champs effectivement calculés,...),",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "accès sélectif à un champ de grandeur (par exemple, impression du champ de déplacements à l’instant t=15.),",
+   "page": 5
+  },
+  {
+   "type": "list_item",
+   "depth": 1,
+   "text": "impression des valeurs de paramètres. L’opérande RESULTAT permet d’imprimer les champs contenus dans un concept resultat. On peut par exemple choisir de n’imprimer que certains champs (confer le mot clé suivant : NOM_CHAM) sur certaines composantes de certains nœuds (cf. NOEUD_CMP).",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "7",
+   "text": "Extraction d’un champ de grandeur",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.1",
+   "text": "Opérandes TOUT_CHAM / NOM_CHAM",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cf. document [U4.71.00].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "7.1",
+   "text": "Opérandes TOUT_ORDRE / NUME_ORDRE / LIST_ORDRE /",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NUME_MODE /  INST /  LIST_INST  / FREQ  / LIST_FREQ  /",
+    "NOEUD_CMP / NOM_CAS / ANGLE / PRECISION / CRITERE"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cf. document [U4.71.00].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "8",
+   "text": "Paramètres",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.1",
+   "text": "Opérande TOUT_PARA",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique si l’on veut ou non imprimer toutes les valeurs des paramètres attachés au concept de type resultat. Exemple :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IMPR_RESU(RESU=(_F(RESULTAT= resu,",
+    "       TOUT_PARA= ’OUI’, NUME_ORDRE= 3)))"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On imprime dans le fichier RESULTAT les valeurs de tous les paramètres mais seulement pour le troisième pas de calcul d’un concept resultat de type mode_meca : Impression des paramètres du concept resu pour le numero d’ordre 3 :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NOM_MODE         3",
+    "FREQ             1.09787E+4",
+    "OMEGA2           4.75843E+09",
+    "AMOR_REDUIT      0.00000E+00",
+    "ERREUR           2.76853E-10",
+    "MASS_GENE        1.50009E-07",
+    "RIGI_GENE        7.13806E+02",
+    "........",
+    "........",
+    "NORME            SANS_CMP: LAGR"
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.2",
+   "text": "Opérande NOM_PARA",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de choisir une liste de noms symboliques de paramètres parmi l’ensemble des possibles. Les mots-clés TOUT_PARA et NOM_PARA ne peuvent être utilisés simultanément. Exemple :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "IMPR_RESU(RESU=(_F( RESULTAT= resu,",
+    "                 NOM_PARA= (’NORME’), NUME_ORDRE= 3)))"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "On imprime dans le fichier RESULTAT la valeur du paramètre de nom ’NORME’ mais seulement pour le troisième pas de calcul d’un concept resultat de type mode_meca : Impression des paramètres du concept resu pour le numero d’ordre 3 :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "NORME           SANS_CMP: LAGR"
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "8.3",
+   "text": "Opérande FORM_TABL",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de choisir le format d’impression des valeurs des paramètres. Soit sous forme d’un tableau dont chaque ligne est limité à 80 caractères (FORM_TABL = ’OUI’), soit sous forme d’un tableau dont chaque ligne peut atteindre 2000 caractères (FORM_TABL = ’EXCEL’), soit sous forme d’une liste (un paramètre par ligne) (FORM_TABL = ’NON’). Par défaut les paramètres sont imprimés sous forme d’un tableau. Exemple :",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "1/ FORM_TABL = ’OUI’",
+    "       NUME_ORDRE   NUME_MODE       ITER_QR             ITER_BATHE",
+    "             FREQ                OMEGA2           AMOR_REDUIT",
+    "             MASS_GENE        RIGI_GENE       AMOR_GENE",
+    "             MASS_EFFE_DY     MASS_EFFE_DZ    FACT_PARTICI_DX",
+    "             FACT_PARTICI_DZ  MASS_EFFE_UN_DX MASS_EFFE_UN_DY",
+    "              NORME              METHODE",
+    "2/ FORM_TABL = ’EXCEL’",
+    "NUME_ORDRE   NUME_MODE        ITER_QR             ITER_BATHE"
+   ],
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "9",
+   "text": "Sélection sur les composantes",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Une autre manière de réduire le volume des impressions est de n’imprimer que les valeurs de certaines composantes (par exemple que le déplacement suivant l’axe X : composante DX). Remarque : la sélection des composantes ne fonctionne pas pour les champs à sous-points.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.1",
+   "text": "Opérande TOUT_CMP",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’indiquer que l’on désire imprimer toutes les composantes du champ.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "9.2",
+   "text": "Opérande NOM_CMP",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de choisir la liste des composantes du cham_gd ou de tous les champs du concept résultat que l’on désire imprimer. Les mots-clés TOUT_CMP et NOM_CMP ne peuvent être utilisés simultanément. Ces composantes sont décrites dans la documentation spécifique des éléments.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "10",
+   "text": "Sélection des entités topologiques",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Afin de réduire le volume des impressions, il est parfois nécessaire de n’imprimer qu’une partie du résultat. Pour ce faire on peut n’imprimer un champ aux nœuds qu’en certains nœuds, ou un champ par élément qu’en certains éléments. Remarque : la sélection des entités topologiques ne fonctionne pas pour les champs à sous-points.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.1",
+   "text": "Opérande TOUT",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique que l’on désire imprimer le champ sur toute la structure (tous les nœuds pour un champ aux nœuds, tous les éléments pour un champ par élément).",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.2",
+   "text": "Opérande GROUP_NO",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’indiquer la liste des groupes de nœuds sur lesquels on désire imprimer un cham_no. Si ce mot clé est utilisé dans le cas de l’impression d’un cham_elem, il est ignoré, et le cham_elem est imprimé en toutes les mailles, spécifiées par aillleurs.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "10.3",
+   "text": "Opérande GROUP_MA",
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d’indiquer la liste des groupes de mailles sur lesquelles on désire imprimer un cham_elem. Pour un cham_no, il permet d’indiquer la liste des nœuds, sommets des mailles auxquels on désire imprimer le cham_no.",
+   "page": 7
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "11",
+   "text": "Sélection sur les valeurs",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Il est également intéressant de n’imprimer que les valeurs extrémales de toutes ou certaines composantes, sur tout ou partie de la structure.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.1",
+   "text": "Opérande VALE_MAX",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique que l’on désire imprimer la valeur maximale de chaque composante du champ, éventuellement dans un intervalle donné spécifié par les arguments BORNE_SUP et/ou BORNE_INF.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.2",
+   "text": "Opérande VALE_MIN",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique que l’on désire imprimer la valeur minimale de chaque composante du champ, éventuellement dans un intervalle donné spécifié par les arguments BORNE_SUP et/ou BORNE_INF.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.3",
+   "text": "Opérande BORNE_SUP",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique la borne supérieure de l’intervalle sur lequel on désire imprimer le champ. On imprime toutes les valeurs du champ inférieures à cette borne supérieure.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "11.4",
+   "text": "Opérande BORNE_INF",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé indique la borne inférieure de l’intervalle sur lequel on désire imprimer le champ. On imprime les valeurs du champ supérieures à cette borne inférieure.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "12",
+   "text": "Impression des coordonnées : opérande IMPR_COOR",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet de préciser si l’on désire imprimer les coordonnées d’un nœud lors de l’écriture d’un cham_no au format ’RESULTAT’.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "13",
+   "text": "Opérande FORMAT_R",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  FORMAT_R  =  /  FORM,",
+    "                /  ’1PE21.14’              [DEFAUT]"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de spécifier le format d’écriture des valeurs réelles au format ’RESULTAT’.",
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : le choix du format d’écriture des valeurs réelles ne fonctionne pas pour les champs à sous-points.",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "14",
+   "text": "Opérande PARTIE",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  PARTIE =  /  ‘REEL’,",
+    "             /  ‘IMAG’,",
+    "             /  ‘MODULE’,",
+    "             /  ‘PHASE’,"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de spécifier le format d'impression des compelxes. SI on ne précise rien, on imprimera le complexe. Sinon on peut imprimer la partie réelle ( PARTIE=’REEL’ ) , la partie complexe ( PARTIE=’IMAG’ ), le module ( PARTIE='MODULE' ) ou la phase ( PARTIE='PHASE' ).",
+   "page": 8
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "15",
+   "text": "Remarque concernant les champs à sous-points",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans Aster, il existe des cham_elem avec des sous points (aussi bien pour des cham_elem aux nœuds que pour des cham_elem aux points de Gauss). Au format ’RESULTAT’, IMPR_RESU permet l’impression des cham_elem avec sous points. Si un même cham_elem possède des sous points sur certaines mailles et pas sur d’autres, l’impression du cham_elem se fera en deux temps :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "d’abord l’impression du cham_elem sur toutes les mailles sur lesquelles il n’y a pas de sous points,",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "puis l’impression du cham_elem sur toutes les mailles sur lesquelles il y a des sous points.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Un format spécifique est utilisé pour chacune de ces impressions. L’impression des champs à souspoints est « basique » : on imprime systématiquement toutes les entités géométriques, toutes les composantes et tous les sous-points (une ligne pas sous-point). Les nombres réels sont toujours imprimés avec 10 chiffres significatifs.",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Une astuce pour imprimer plus de chiffres significatifs pour un champ à sous-points consiste à appeler la commande POST_CHAMP pour extraire le champ sur un sous-point particulier puis à imprimer la nouvelle structure de données avec le mot clé FORMAT_R.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "16",
+   "text": "Impression du maillage : opérandes MAILLAGE / MODELE",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet argument permet d’imprimer le maillage aux FORMAT = ’ASTER’ ou ’RESULTAT’. On retrouve alors le format utilisé pour LIRE_MAILLAGE [U4.21.01] et défini dans [U3.01.00]. Par défaut, on imprime tout le maillage. Le concept de type modele est facultatif dans la majorité des impressions. Cependant, il peut être utilisé dans le cas de l’impression d’un maillage aux formats ’ASTER’ ou ’RESULTAT’, afin de n’imprimer que la partie du maillage dont les mailles sont affectées dans le modèle. Si l’on choisit format ’ASTER’, le maillage est écrit dans un fichier de type .mail qui peut ensuite être relu par LIRE_MAILLAGE. Si l’on choisit format ’RESULTAT’, le maillage est écrit, par défaut, dans le fichier .resu et ne peut être relu par LIRE_MAILLAGE tel quel car le fichier .resu contient par ailleurs des titres, des sous titres et éventuellement d’autres informations.",
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "17",
+   "text": "Opérande SOUS_TITRE",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet argument permet d’imprimer un sous titre de commentaire, pour plus de détails consulter le document [U4.03.01]. Le SOUS_TITRE par défaut est :",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un cham_gd",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un cham_no",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SOUS_TITRE =     (’CHAMP AUX NOEUDS’ )"
+   ],
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un cham_elem",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SOUS_TITRE =     (’CHAMP PAR ELEMENT &LOC(cham_elem)’)",
+    "Exem ple:\"CHAMPPAR ELEMENT AUX POINTS DE GAUSS\""
+   ],
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un resultat",
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un cham_no",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   SOUS_TITRE =",
+    "      (   ’CHAMP AUX NOEUDS DE NOM SYMBOLIQUE &NOM_SYMB(Resultat cham_no)&RL",
+    "NUMERO D’’ORDRE &NUM_ORDRE(Resultat cham_no) &ACCES(Resultat cham_no) ’)"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple d’impression :",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CHAMP AUX NOEUDS DE NOM SYMBOLIQUE DEPL",
+    "NUMERO D’ORDRE 2 NUME_MODE 3",
+    "FREQ  5.52739E+00"
+   ],
+   "page": 9
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "pour un cham_elem",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   SOUS_TITRE =",
+    "      (   ’CHAMP PAR ELEMENT &LOC(Resultat cham_elem) DE NOM SYMBOLIQUE",
+    "&NOM_SYMB(Resultat cham_elem)&RL NUMERO D’’ORDRE &NUM_ORDRE(Resultat",
+    "cham_elem) &ACCES(Resultat cham_elem) ’)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Exemple d’impression :",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "CHAMP PAR ELEMENT AUX NOEUDS DE NOM SYMBOLIQUE  EPSI_ELNO",
+    "NUMERO D’ORDRE 1",
+    "INST   0.00000E+00"
+   ],
+   "page": 10
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 12,
+   "chars": 5278,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 13,
+   "last": 32,
+   "chars": 2524,
+   "id": 2,
+   "section": "3 Typographie dans la documentation IMPR_RESU"
+  },
+  {
+   "first": 33,
+   "last": 41,
+   "chars": 2589,
+   "id": 3,
+   "section": "5 Mot clé RESU"
+  },
+  {
+   "first": 42,
+   "last": 61,
+   "chars": 2425,
+   "id": 4,
+   "section": "7 Extraction d’un champ de grandeur"
+  },
+  {
+   "first": 62,
+   "last": 79,
+   "chars": 2132,
+   "id": 5,
+   "section": "9 Sélection sur les composantes"
+  },
+  {
+   "first": 80,
+   "last": 100,
+   "chars": 2602,
+   "id": 6,
+   "section": "11.2 Opérande VALE_MIN"
+  },
+  {
+   "first": 101,
+   "last": 118,
+   "chars": 1914,
+   "id": 7,
+   "section": "16 Impression du maillage : opérandes MAILLAGE / MODELE"
+  }
+ ]
+}

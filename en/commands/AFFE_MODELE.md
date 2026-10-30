@@ -37,7 +37,7 @@ and a mechanical analysis of the same mesh need two `AFFE_MODELE` calls
 | Kind | `OPER` |
 | Result | `modele_sdaster` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.41.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.41.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `AFFE`, `TOUT`, `GROUP_MA`, `PHENOMENE`, `MECANIQUE`, `MODELISATION`, `DKT`, `DST`, `COQUE_3D`, `AXIS`, `C_PLAN`, `D_PLAN`, `DISCRET`, `DIS_T`, `DIS_TR`, `CARA`, `K_T_D_N`, `K_TR_D_N`, `VALE`, `REPERE` |
 
@@ -234,7 +234,7 @@ MO = AFFE_MODELE(MAILLAGE=M, AFFE=_F(TOUT="OUI", PHENOMENE="MECANIQUE", MODELISA
 
 ## See also
 
-- French reference: U4.41.01 (translation: `en/docs/U4.41.01.md` once task 5.x lands)
+- French reference: U4.41.01 (French text: `en/docs/_src/U4.41.01.fr.md`; translation: `en/docs/U4.41.01.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_MODELE.json` (generated from `upstream/code_aster/Cata/Commands/affe_modele.py:26`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_modele.py`; `upstream/bibfor/op/op0018.F90`;
   checks `upstream/bibfor/modelisa/modelCheck.F90`; modeling → element table

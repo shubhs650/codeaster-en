@@ -34,7 +34,7 @@ mean values of a field on a region (`MINMAX`, `INTEGRALE`). The table then goes 
 | Kind | `OPER` (Fortran operator 107, `upstream/bibfor/op/op0107.F90`) |
 | Result | `table_sdaster` (the catalog also allows `table_container`) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.81.22 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.81.22 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `MASS_INER`, `VOLUMOGRAMME`, `NORME`, `FILTRE_MODE`, `CRIT_EXTR`, `MASS_EFFE_UN`, `SEUIL` (all but the first two come from the modal row of COMMAND-SET; see Pitfalls) |
 
@@ -400,7 +400,7 @@ TCARS = POST_ELEM(MODELE=MO, CHAM_MATER=CHMAT, CARA_GEOM=_F(TOUT="OUI", SYME_X="
 
 ## See also
 
-- French reference: U4.81.22 (translation: `en/docs/U4.81.22.md` once task 5.x lands)
+- French reference: U4.81.22 (French text: `en/docs/_src/U4.81.22.fr.md`; translation: `en/docs/U4.81.22.md` once task 5.2 lands)
 - Catalog: `en/commands/POST_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/post_elem.py:39`)
 - Implementation: `upstream/bibfor/op/op0107.F90`; options in `upstream/bibfor/utilitai/`
   (`pemain` mass, `peepot` potential energy, `peecin` kinetic energy, `peeint`/`peecal`

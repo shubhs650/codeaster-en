@@ -38,7 +38,7 @@ this reference details `PRES_REP` only.
 | Kind | `OPER` |
 | Result | `char_meca` |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.44.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.44.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `PRES_REP`, `FONC_MULT` |
 

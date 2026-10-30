@@ -37,7 +37,7 @@ time scheme.
 | Kind | `MACRO` |
 | Result | `evol_ther` |
 | Can reuse its input (`reuse=`) | yes (the object given in `RESULTAT`); catalog `reentrant='f:RESULTAT'` |
-| French reference | U4.54.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.54.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `TEMP_IMPO`, `FLUX_REP`, `ECHANGE`, `SOURCE` |
 
@@ -204,7 +204,7 @@ TEMPE = THER_LINEAIRE(
 - [`AFFE_CHAR_THER`](AFFE_CHAR_THER.md) for the loads; [`AFFE_MATERIAU`](AFFE_MATERIAU.md)
   (`AFFE_VARC`) to use the result in a mechanical analysis; [`MECA_STATIQUE`](MECA_STATIQUE.md)
   for the `SOLVEUR` keywords.
-- French reference: U4.54.01 (translation: `en/docs/U4.54.01.md` once task 5.x lands)
+- French reference: U4.54.01 (French text: `en/docs/_src/U4.54.01.fr.md`; translation: `en/docs/U4.54.01.md` once task 5.2 lands)
 - Catalog: `en/commands/THER_LINEAIRE.json` (generated from `upstream/code_aster/Cata/Commands/ther_lineaire.py:50`)
 - Implementation: `upstream/code_aster/MacroCommands/ther_lineaire_ops.py`
 - Verification runs: `docs/reference-checks/README.md` (thermal slab)

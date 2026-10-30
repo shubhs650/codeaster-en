@@ -41,7 +41,7 @@ and then, if asked, `NORM_MODE` and `EXTR_MODE`
 | Kind | `MACRO` |
 | Result | `mode_flamb`, `mode_meca`, `mode_meca_c`, `mode_acou`, `mode_gene`, `DataStructure` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.52.02 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.52.02 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 2 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `OPTION`, `PLUS_PETITE`, `BANDE`, `CENTRE`, `CALC_FREQ`, `NMAX_FREQ`, `FREQ`, `SOLVEUR_MODAL`, `MATR_RIGI`, `MATR_MASS`, `MODELE`, `CHAM_MATER` |
 
@@ -333,8 +333,8 @@ masses are fractions of the total.
 
 ## See also
 
-- French reference: U4.52.02 (from en/doc-ids.yaml, status: proposed; translation:
-  `en/docs/U4.52.02.md` once task 5.x lands)
+- French reference: U4.52.02 (from en/doc-ids.yaml, status: verified; French text:
+  `en/docs/_src/U4.52.02.fr.md`; translation: `en/docs/U4.52.02.md` once task 5.2 lands)
 - Catalog: `en/commands/CALC_MODES.json` (generated from `upstream/code_aster/Cata/Commands/calc_modes.py:70`)
 - Implementation: `upstream/code_aster/MacroCommands/Modal/calc_modes_ops.py` and its
   `calc_modes_*.py` helpers; `upstream/bibfor/op/op0045.F90` (`MODE_ITER_SIMULT`),

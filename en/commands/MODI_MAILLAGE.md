@@ -34,7 +34,7 @@ to orient. The command is re-entrant: write `MA = MODI_MAILLAGE(reuse=MA, MAILLA
 | Kind | `OPER` |
 | Result | `maillage_sdaster` |
 | Can reuse its input (`reuse=`) | yes (the object given in `MAILLAGE`); catalog `reentrant='o:MAILLAGE'` |
-| French reference | U4.23.04 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.23.04 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `ORIE_PEAU`, `ORIE_NORM_COQUE` |
 
@@ -205,7 +205,7 @@ MA[2] = MODI_MAILLAGE(MAILLAGE=MA[2], ROTATION=_F(POIN_1=(0.0, 0, 0), ANGLE=45, 
 
 ## See also
 
-- French reference: U4.23.04 (translation: `en/docs/U4.23.04.md` once task 5.x lands)
+- French reference: U4.23.04 (French text: `en/docs/_src/U4.23.04.fr.md`; translation: `en/docs/U4.23.04.md` once task 5.2 lands)
 - Catalog: `en/commands/MODI_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/modi_maillage.py:51`)
 - Implementation: `upstream/bibfor/op/op0154.F90`; orientation `upstream/bibfor/modelisa/orilgm.F90`,
   `upstream/bibfor/mesh/mesh_modification_module.F90`

@@ -1,0 +1,691 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.54.01.pdf",
+  "source_sha256": "343a6c9afaf2621b9b1078aabd0f27c35aafcf98335fc9d6904c29f42cc693b0",
+  "source_bytes": 181046
+ },
+ "schema_version": 1,
+ "doc_id": "U4.54.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "11/01/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.54: Thermique",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 6,
+  "pages": "6",
+  "pdf_keywords": "U4.54.01-I1",
+  "pdf_title": "Opérateur THER_LINEAIRE",
+  "responsible": "ABBAS Mickaël",
+  "revision": "73506c9ccbbb",
+  "title": "Opérateur THER_LINEAIRE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur THER_LINEAIRE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Résoudre un problème de thermique linéaire en régime stationnaire ou évolutif.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le chargement thermique est défini par le mot clé EXCIT.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La discrétisation temporelle est fournie par la liste d’instants définie sous le mot clé LIST_INST. Ce calcul évolutif peut être initialisé, au premier instant, de trois manières différentes (mot clé ETAT_INIT) :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par une température constante,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par un champ de température, défini au préalable, ou extrait d'un calcul précédent,",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "par un calcul stationnaire préalable.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Le concept produit par cet opérateur est de type evol_ther.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "temper [evol_ther] = THER_LINEAIRE",
+    " ( RESULTAT = temper,",
+    "   ♦   MODELE       =  mo,              [modele]",
+    "   ♦   CHAM_MATER   =  chmat,           [cham_mater]",
+    "   ◊   CARA_ELEM    =  carac,           [cara_elem]",
+    "   ♦   EXCIT        =_F(",
+    "          ♦  CHARGE    =  char,         [charge]",
+    "             FONC_MULT =  fonc,         [fonction, formule]",
+    "                    ),",
+    "   ◊    TYPE_CALCUL =     /   ‘TRAN’ ,               [ DEFAUT]",
+    "                          /   ‘STAT’,",
+    "   Si TYPE_CALCUL = ‘TRAN’",
+    "       ♦  ETAT_INIT    =_F(",
+    "                    /  STAT             = 'OUI',",
+    "                    /  VALE             = tinit,     [R]",
+    "                    /  CHAM_NO          = tinit,     [cham_no]",
+    "                    /  EVOL_THER        = temp,      [evol_ther]",
+    "                       ◊  / NUME_ORDRE  = nuini,     [I]",
+    "                          / INST        = instini,   [R]",
+    "                       ◊  PRECISION     = /1.0E-3,   [DEFAUT]",
+    "                                          /prec,     [R]",
+    "                       ◊  CRITERE       = /'RELATIF',[DEFAUT]",
+    "                                          /'ABSOLU',",
+    "                    ),",
+    "       ◊  SCHEMA_TEMPS =_F(",
+    "                    /   SCHEMA             = ' HHT ',       [DEFAUT]",
+    "          Si SCHEMA = ‘HHT’",
+    "                       ◊  THETA  =  /   theta,       [R]",
+    "                                    /   0.57,        [DEFAUT]",
+    "                    ),",
+    "   ◊   INCREMENT    =_F(",
+    "          ... voirSTAT_NON_LINE [U4.51.03] mot-cléINCREMENT...",
+    "                     ),",
+    "   ◊   SOLVEUR      =_F(  . . . voir [U4.50.01] . . .   ),",
+    "   ◊   ARCHIVAGE    =_F(",
+    "          ... voirSTAT_NON_LINE [U4.51.03] mot-cléARCHIVAGE...",
+    "                       ),",
+    "   ◊   TITRE        =         titre,                 [l_Kn]",
+    ")"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande RESULTAT",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  RESULTAT= mo"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom de l'objet résultat à enrichir en cas de poursuite de calcul (voir aussi ETAT_INIT).",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Opérande MODELE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  MODELE = mo"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du modèle dont les éléments font l'objet du calcul thermique.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Opérande CHAM_MATER",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  CHAM_MATER = chmat"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du champ de matériau affecté sur le modèle.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande CARA_ELEM",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   CARA_ELEM = carac"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le concept carac contient les caractéristiques des éléments de coque thermique, s'ils existent dans le modèle.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Mot clé EXCIT",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  EXCIT ="
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Opérande permettant de définir plusieurs chargements. Pour chaque occurrence du mot clé facteur, on définit une charge éventuellement multipliée par une fonction de temps.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.1",
+   "text": "Opérande CHARGE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  CHARGE = char"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Concept de type charge produit par AFFE_CHAR_THER ou par AFFE_CHAR_THER_F [U4.44.02]. Comme pour la mécanique, il est également possible de définir une charge de type «degré de liberté imposé », ici la température, par AFFE_CHAR_CINE [U4.44.03].",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque importante :",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour chaque occurrence du mot clé facteur EXCIT les différents concepts char utilisés doivent être construits sur le même modèle mo .",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.2",
+   "text": "Opérande FONC_MULT",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  FONC_MULT = fonc"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Coefficient multiplicatif fonction du temps (concept de type fonction, nappe ou formule) appliqué à la charge.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque importante :",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "L’utilisation concomitante de FONC_MULT avec une charge contenant des chargements thermiques dépendant de la température est interdite ; c’est-à-dire pour des chargements de type ECHANGE_* .",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.5.3",
+   "text": "Opérande TYPR_CALCUL",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊   TYPE_CALCUL =      /   ‘TRAN’ ,               [ DEFAUT]",
+    "                        / ‘ STAT’ ,"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le calcul est évolutif si TYPE_CALCUL = ‘TRAN’ ou stationnaire si TYPE_CALCUL=’STAT’. Dans le cas d’un calcul évolutif, il faut préciser le calcul de l’état initial.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Mot clé ETAT_INIT",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "SiTYPE_CALCUL = ‘TRAN’",
+    "   ♦  ETAT_INIT ="
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir le champ initial à partir duquel le calcul évolutif est effectué.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.1",
+   "text": "Opérande STAT",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  STAT = 'OUI'"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur initiale du champ de température est alors le résultat d'un calcul stationnaire préalable.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.2",
+   "text": "Opérande VALE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  VALE = tinit"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur initiale de température est prise constante sur toute la structure.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.3",
+   "text": "Opérande CHAM_NO",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  CHAM_NO = tinit"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur initiale est définie par un cham_no de température (résultat de l'opérateur CREA_CHAMP [U4.72.04]).",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.4",
+   "text": "Opérande EVOL_THER",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  EVOL_THER = temp"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La valeur initiale est extraite d'une structure de données de type evol_ther.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.5",
+   "text": "Opérande NUME_ORDRE/INST",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  /NUME_ORDRE = nuini_evol",
+    "   /INST       = instini_evol"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Numéro d'ordre du champ à extraire de cette structure de donnée. Extraction de l’état thermique initial dans l'evol_ther_temp à partir du numéro d’archivage NUME_ORDRE ou de l’instant d’archivage INST pour effectuer la poursuite du calcul. Si NUME_ORDRE ou INST ne sont pas remplis, on prend le dernier numéro archivé existant dans evol.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention, il s’agit du numéro d’ordre dans la structure de donnée lue en reprise par le mot clé EVOL_THER précédent. Si cette structure de donnée a été calculée avec une liste d’instants différente de celle utilisée sous le mot clé facteur INCREMENT de la résolution courante, il est impératif de renseigner NUME_ORDRE sous INCREMENT, la même valeur de numéro d’ordre correspondant à des instants physiques différents. Dans le cas où les deux listes d’instants sont identiques, on peut se dispenser de renseigner deux fois le même NUME_ORDRE, sous ETAT_INIT et sous INCREMENT.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.6.6",
+   "text": "Opérande PRECISION/CRITERE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Cf. [U4.71.00].",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Mot clé INCREMENT",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  INCREMENT ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Permet de définir les instants de calcul qui déterminent les intervalles de temps pris pour intégrer l'équation différentielle.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes du mot clé INCREMENT ont la même signification que dans l'opérateur STAT_NON_LINE, voir le document [U4.51.03].",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Si le mot clé INCREMENT est absent, on crée une liste d'instants réduite au seul réel 0 dans le cas d’un calcul stationnaire.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Opérande SCHEMA_TEMPS",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette opérande n’est disponible que dans le cas TYPE_CALCUL = ‘TRAN’.",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  THETA = / theta,                 [R]",
+    "          /  0.57,                  [DEFAUT]"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "L'argument theta est le paramètre de la thêta-méthode appliquée au problème évolutif. Il doit être compris entre 0 (méthode explicite) et 1 (méthode totalement implicite). En l’absence du mot clé, la valeur utilisée est =0.57 , un peu supérieure à =0.5 correspondant au schéma de Crank- Nicholson. L’incidence du choix de theta sur la stabilité de la méthode est détaillée dans [R5.02.02].",
+   "page": 5,
+   "equation": true
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.9",
+   "text": "Mot clé SOLVEUR",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  SOLVEUR ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé facteur est facultatif : il permet de définir la méthode de résolution des systèmes linéaires. Cet opérande est commun à l'ensemble des commandes globales [U4.50.01].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.10",
+   "text": "Mot clé ARCHIVAGE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  ARCHIVAGE ="
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé est facultatif : par défaut, l'ensemble des champs calculés pour tous les pas calculés est archivé dans le concept resultat issu de la commande. Il sert à stocker certains numéros d'ordre dans une structure de données resultat et/ou exclure du stockage certains champs.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé est identique à son équivalent pour l'opérateur STAT_NON_LINE, se référer à la documentation [U4.51.03] pour la description des sous mots-clés.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "En cas d’arrêt du calcul par manque de temps CPU, les pas de temps précédemment calculés sont sauvegardés dans la base.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.11",
+   "text": "Opérande TITRE",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊  TITRE = titre"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Titre que l'on veut donner au résultat temp stocké dans la structure de données de type evol_ther [U4.03.01].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Modélisation",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les problèmes de thermique linéaire peuvent être traités avec des modèles utilisant les éléments finis 3D, 2D, AXIS ou COQUE décrits dans les documents [U3.22.01], [U3.23.01], [U3.23.02] et [U3.24.01].",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemple",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "5.1",
+   "text": "Calcul transitoire",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "lr8=  DEFI_LIST_REEL   (  DEBUT = 0.E0 ,",
+    "                       INTERVALLE =(",
+    "                          _F(JUSQU_A   =   2.E-4 ,   NOMBRE=  2   ),",
+    "                          _F(JUSQU_A   =   1.E-3 ,   NOMBRE=  10  ),",
+    "                          _F(JUSQU_A   =   1.E-2 ,   NOMBRE=  9   ),",
+    "                          _F(JUSQU_A   =   1.E-1 ,   NOMBRE=  9   ),",
+    "                          _F(JUSQU_A   =   1.E+0 ,   NOMBRE=  9   ),",
+    "                          _F(JUSQU_A   =   2.0,  NOMBRE =  10 ),))",
+    "tempe = THER_LINEAIRE  (  MODELE    =  moth,",
+    "                       CHAM_MATER   =  chmat,",
+    "                       EXCIT        =  _F( CHARGE       =  chth),",
+    "                        TYPE_CALCUL  = ‘TRAN’,",
+    "                       ETAT_INIT =  _F(STAT   =  'OUI'),",
+    "                       INCREMENT =  _F(LIST_INST     =  lr8,",
+    "                                              NUME_INST_FIN=  30)",
+    "                       )",
+    "tempe = THER_LINEAIRE  (  reuse  =  tempe,",
+    "                        RESULTAT =  tempe,",
+    "                       MODELE    =  moth,",
+    "                       CHAM_MATER   =  chmat,",
+    "                       EXCIT        =  _F( CHARGE=   chth),",
+    "                       TYPE_CALCUL  = ‘TRAN’,",
+    "                       ETAT_INIT =  _F(EVOL_THER     =  tempe",
+    "                                              NUME_ORDRE      =   30),",
+    "                       INCREMENT =  _F(LIST_INST     =  lr8),",
+    "                       )"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le premier appel à la commande THER_LINEAIRE permet d'effectuer un calcul stationnaire à l'instant 0. et d'enchaîner un calcul évolutif jusqu'à l'instant 0.1s (31 instants de calcul soit 30 calculs d'évolution).",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "Le second appel permet d'enrichir le concept tempe précédent, le calcul évolutif est poursuivi à partir du 31ième instant de calcul.",
+   "page": 6
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "6",
+   "text": "Remarque",
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "La commande CALC_CHAMP [U4.81.04] permet de calculer les flux de chaleur, aux points d’intégration ou aux nœuds, à partir du champ aux nœuds de température ainsi obtenu par THER_LINEAIRE.",
+   "page": 6
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 10,
+   "chars": 2331,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 11,
+   "last": 61,
+   "chars": 3411,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 62,
+   "last": 85,
+   "chars": 2138,
+   "id": 3,
+   "section": "3.7 Mot clé INCREMENT"
+  },
+  {
+   "first": 86,
+   "last": 92,
+   "chars": 1966,
+   "id": 4,
+   "section": "5 Exemple"
+  }
+ ]
+}

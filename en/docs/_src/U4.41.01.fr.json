@@ -1,0 +1,1301 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.41.01.pdf",
+  "source_sha256": "57cc0149ad2c2309017b59431d0805a477f78120fb2e833d31aed3d766a95bb5",
+  "source_bytes": 242985
+ },
+ "schema_version": 1,
+ "doc_id": "U4.41.01",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "11/01/2024",
+  "fascicle": "Manuel d'utilisation Fascicule u4.41: Eléments finis",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 13,
+  "pages": "13",
+  "pdf_keywords": "U4.41.01-I",
+  "pdf_title": "Opérateur AFFE_MODELE",
+  "responsible": "ABBAS Mickaël",
+  "revision": "1f54feb5a1bf",
+  "title": "Opérateur AFFE_MODELE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Opérateur AFFE_MODELE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Définir le phénomène physique modélisé (mécanique, thermique ou acoustique) et le type d’éléments finis.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérateur permet d'affecter des modélisations sur tout ou partie du maillage, ce qui définit :",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les degrés de liberté sur les nœuds (et l’équation ou les équations de conservation associées),",
+   "page": 1
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les types d’éléments finis sur les mailles,",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les possibilités des éléments finis pouvant être choisis sont décrits dans les fascicules [U3].",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Les types de mailles sont décrites dans le document « Description du fichier de maillage de code_aster » [U3.01.00].",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Cet opérateur permet également de définir une répartition des éléments finis en vue de paralléliser les calculs élémentaires et les assemblages.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Produit une structure de données de type modele.",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mo   [modele] = AFFE_MODELE        (",
+    "           ♦     MAILLAGE    =     ma,",
+    "                                         /[maillage]",
+    "                                         /[squelette]",
+    "           ♦     |     AFFE        =     _F(",
+    "                 ♦     /     TOUT        =     'OUI',",
+    "                       /     GROUP_MA    =     g_mail,           [l_gr_maille]",
+    "                 ♦     /♦    PHENOMENE         =     'MECANIQUE',",
+    "                       ♦     MODELISATION      = (voir [§3.2.1])",
+    "           Si MODELISATION = '3D_HHO' ou  'MODELISATION = 'D_PLAN_HHO'",
+    "                       ◊     FORMULATION =     /'LINEAIRE'       [DEFAUT]",
+    "                                               /'QUADRATIQUE'    [TXT]",
+    "           FinSi",
+    "           Si MODELISATION contient = 'FLU I D E' ou 'FLUI_STRU'",
+    "                        ◊    FORMULATION =     /'U_P_PHI'        [DEFAUT]",
+    "                                               /'U_P'            [TXT]",
+    "                                               /'U_PSI'          [TXT]",
+    "           FinSi",
+    "                       /♦    PHENOMENE         =     'THERMIQUE'",
+    "                        ♦    MODELISATION      = (voir [§3.2.1])",
+    "           Si MODELISATION = '3D_HHO' ou  'PLAN_HHO' ou ‘AXIS_HHO’",
+    "                        ◊    FORMULATION =     /'LINEAIRE'       [DEFAUT]",
+    "                                               /'QUADRATIQUE'    [TXT]",
+    "            FinSi",
+    "                       /♦    PHENOMENE         =     'ACOUSTIQUE',",
+    "                        ♦    MODELISATION      = (voir [§3.2.1])",
+    "                                                           ),",
+    "                 |     AFFE_SOUS_STRUC   =     _F(",
+    "                 ♦     /     TOUT              =     'OUI',",
+    "                       /     SUPER_MAILLE      =     l_mail,     [l_maille]",
+    "                                                            )",
+    "           ◊     VERI_JACOBIEN                 =     /'OUI'      [DEFAUT]",
+    "                                                     /'NON'",
+    "           ◊     VERI_NORM_IFS                 =     /'OUI'      [DEFAUT]",
+    "                                                     /'NON'",
+    "           ◊     GRANDEUR_CARA                 =     _F(",
+    "                       ◊     LONGUEUR          =     lcara,            [R]",
+    "                       ◊     PRESSION          =     pcara,            [R]",
+    "                       ◊     TEMPERATURE       =     tcara,            [R]",
+    "           ◊     DISTRIBUTION                  =     _F(",
+    "                       ◊     METHODE =",
+    "                                         /'SOUS_DOMAINE'         [DEFAULT]",
+    "                       ◊ NB_SOUS_DOMAINE = / nb_proc             [DEFAUT]",
+    "                                           / nb_sous_dom",
+    "                       ◊ PARTITIONNEUR   = / 'METIS'             [DEFAUT]",
+    "                                           / 'SCOTCH'",
+    "                                         /'MAIL_CONTIGU'",
+    "                       ◊ CHARGE_PROC0_MA = / 100                 [DEFAUT]",
+    "                                           / pct",
+    "                                         /'MAIL_DISPERSE'",
+    "                       ◊ CHARGE_PROC0_MA = / 100                 [DEFAUT]",
+    "                                           / pct",
+    "                                           /'GROUP_ELEM'",
+    "                                           /'CENTRALISE'",
+    "                                                     )",
+    "           ◊     INFO  =     /     1                             [DEFAUT]",
+    "                             /     2,",
+    "                                                     )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Opérandes",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.1",
+   "text": "Opérande MAILLAGE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     MAILLAGE = ma"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom du maillage associé à l'étude sur lequel on affecte les éléments finis.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Pour les modélisations axisymétriques, l’axe de révolution est l’axe Y du maillage. Toute la structure doit être maillée en X≥0 . L ‘ axe Ox désigne donc la direction radiale. Les composantes des champs calculés seront donc : X pour la direction radiale, Y pour la direction axiale, Z pour la direction orthoradiale (circonférentielle).",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.2",
+   "text": "Mot clé AFFE",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     |     AFFE"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Définit les types d'éléments finis qui seront affectés sur les entités du maillage choisies. Pour chaque occurrence, on spécifie une modélisation.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : o n rappelle q ue Code_Aster applique la règle de surcharge (cf. § 3.4 [ U1.03.00 ]) :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "les affectations se font en superposant les effets des différents mot_clé s ,",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "en cas de conflit, le dernier mot_clé renseigné l’e mporte sur les précédents.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les entités du maillage sont précisées par les opérandes :",
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Opérandes",
+     "Contenu / signification"
+    ],
+    [
+     "TOUT = 'OUI'",
+     "Affectation à la totalité des mailles"
+    ],
+    [
+     "GROUP_MA = g_mail",
+     "Affectation à une liste de groupes de mailles"
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le type d’élément fini est précisé par les opérandes :",
+   "page": 4
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Opérandes",
+     "Contenu / signification"
+    ],
+    [
+     "PHENOMENE",
+     "Phénomène physique modélisé (équation de conservation associée)"
+    ],
+    [
+     "MODELISATION",
+     "Type d’interpolation et de discrétisation"
+    ],
+    [
+     "FORMULATION",
+     "Type de formulation dans certains cas"
+    ]
+   ],
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "3.2.1",
+   "text": "Opérandes PHENOMENE, MODELISATION et FORMULATION",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     PHENOMENE",
+    "♦     MODELISATION",
+    "◊     FORMULATION"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les deux premiers mot-clefs PHENOMENE et MODELISATION sont obligatoires pour chaque occurrence du mot clé facteur AFFE. Ce couple de mots-clés définit de façon bijective le type d'élément affecté à un type de maille.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans certains cas, il peut être nécessaire de préciser la FORMULATION employée :",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour la discrétisation de type HHO (3D_HHO, AXIS_HHO ou D_PLAN_HHO), on peut préciser si c'est une approche linéaire ( FORMULATION='LINEAIRE' ) ou quadratique ( FORMULATION='QUADRATIQUE' ) ;",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour les discrétisations en fluide ou en interaction fluide-structure, on peut préciser si c'est une formulation à trois variables (U,P,ϕ) à deux variables (U,P) ou (U,ψ), voir la documentation [R4.02.02].",
+   "page": 4
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "Pour les modélisations de second gradient en mécanique, on peut préciser si c’est la formulation historique du modèle de second gradient qui doit être utilisée (FORMULATION='DIL') ou la formulation incompressible (FORMULATION='DIL_INCO').",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : le mot-clef PHENOMENE doit avoir la même valeur pour toutes les occurrences du mot-clef facteur AFFE .",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : e n affect a nt les éléments finis sur les mailles de v olume ( et/ou de surface) du groupe de mailles g_mail , si ce groupe de mailles contient aus si les mailles de bords ( et/ou d’arêtes ) des mailles de v olume ( et/ou de surface) , alors Code_Aster affecte aussi automatiquement sur ces dernières les éléments finis nécessaires à certaines options de calcul (affectation de chargements extérieurs par exemple). Si on a besoin d’affecter sur ces interfaces de s modélisations supplémentaires, il convient alors de prévoir dans le maillage des mailles dédoublées : c’est par exemple le cas en interaction fluide-structure.",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Les modélisations possibles sont indiquées ci-dessous en les listant par « paquets » :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "ACOUSTIQUE"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "ACOUSTIQUE 2D milieux continus",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PLAN                                                  U3.33.01 et R4.02.01"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "ACOUSTIQUE 3D milieux continus",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "      3D                                                    U3.33.01 et R4.02.01",
+    "THERMIQUE",
+    "THERMIQUE 2D coque",
+    "      COQUE_AXIS                                            U3.22.01 et R3.11.01",
+    "      COQUE_PLAN                                            U3.22.01 et R3.11.01"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "THERMIQUE 2D milieux continus",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "      AXIS_DIAG                                             U3.23.01et R3.06.07",
+    "      AXIS_FOURIER                                                      U3.23.02",
+    "      AXIS                                                  U3.23.01 et R3.06.02",
+    "      PLAN_DIAG                                             U3.23.01 et R3.06.07",
+    "      PLAN                                                  U3.23.01 et R3.06.02",
+    "      PLAN_HHO                                                          R3.06.14",
+    "       AXIS_ HHO                                                         R3.06.14",
+    "THERMIQUE 3D coque",
+    "      COQUE                                                 U3.22.01 et R3.11.01"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "THERMIQUE 3D milieux continus",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "      3D_DIAG                                               U3.24.01 et R3.06.07",
+    "      3D                                                    U3.24.01 et R3.06.02",
+    "      3D_HHO                                                            R3.06.14",
+    "MECANIQUE 2D"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D éléments discrets",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "2D_DIS_TR",
+    "2D_DIS_T"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D fluide-structure vibroacoustique",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "2D_FLUIDE                                                U3.13.03 et R4.02.02",
+    "2D_FLUI_ABSO                                             U3.13.13 et R4.02.05",
+    "2D_FLUI_PESA                                             U3.14.02 et R4.02.04",
+    "2D_FLUI_STRU                                             U3.13.03 et R4.02.02",
+    "AXIS_FLUIDE                                              U3.13.03 et R4.02.02",
+    "AXIS_FLUI_ABSO                                           U3.13.13 et R4.02.05",
+    "AXIS_FLUI_STRU                                           U3.13.03 et R4.02.02",
+    "D_PLAN_ABSO                                              U3.13.12 et R4.02.05"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D milieux continus",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "AXIS                                                     U3.13.01 et R3.01.01",
+    "AXIS_FOURIER                                                         U3.13.02",
+    "AXIS_SI                                                  U3.13.05 et R3.06.10",
+    "C_PLAN_SI                                                U3.13.05 et R3.06.10",
+    "C_PLAN                                                   U3.13.01 et R3.01.01",
+    "D_PLAN_SI                                                U3.13.05 et R3.06.10",
+    "D_PLAN                                                   U3.13.01 et R3.01.01"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D quasi incompressible",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   AXIS_INCO_UP                                                         R3.06.08",
+    "   D_PLAN_INCO_UP                                                       R3.06.08",
+    "   AXIS_INCO_UPG                                            U3.13.07 et R3.06.08",
+    "   D_PLAN_INCO_UPG                                          U3.13.07 et R3.06.08",
+    "MECANIQUE 2D HHO",
+    "   D_PLAN_HHO                                                           R3.06.14"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D non local",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "D_PLAN_GRAD_VARI",
+    "D_PLAN_GVNO                                                          R5.04.04",
+    "AXIS_GVNO                                                            R5.04.04",
+    "D_PLAN_GRAD_SIGM                                                     R5.03.24",
+    "D_PLAN_DIL                                                           R5.04.03"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D plaques et coques",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COQUE_AXIS                                               U3.12.02 et R3.07.02"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D éléments joints pour la propagation de fissure",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "PLAN_JOINT                                               U3.13.14 et R3.06.09",
+    "AXIS_JOINT                                               U3.13.14 et R3.06.09",
+    "PLAN_JOINT_HYME                                          R3.06.09 et R3.06.09",
+    "PLAN_INTERFACE                                                       R3.06.13",
+    "PLAN_INTERFACE_S                                                     R3.06.13",
+    "AXIS_INTERFACE                                                       R3.06.13",
+    "AXIS_INTERFACE_S                                                     R3.06.13"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D thermo-hydro-mécanique",
+   "page": 6
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   AXIS_HH2MD                                                           R7.01.10",
+    "   AXIS_HH2MS                                                           R7.01.10",
+    "   AXIS_HHMD                                                            R7.01.10",
+    "   AXIS_HHMS                                                            R7.01.10",
+    "   AXIS_HHM                                                 U3.13.08 et R7.01.10",
+    "   AXIS_HMD                                                             U3.13.08",
+    "   AXIS_HMS                                                             R7.01.10",
+    "   AXIS_HM                                                              R7.01.10",
+    "   AXIS_THH2D                                                           R7.01.10",
+    "   AXIS_THH2S                                                           R7.01.10",
+    "   AXIS_THH2MD                                                          R7.01.10",
+    "   AXIS_THH2MS                                                          R7.01.10",
+    "   AXIS_THHD                                                            R7.01.10",
+    "   AXIS_THHS                                                            R7.01.10",
+    "   AXIS_THHMD                                                           R7.01.10",
+    "   AXIS_THHMS                                                           R7.01.10",
+    "   AXIS_THMD                                                            R7.01.10",
+    "   AXIS_THMS                                                            R7.01.10",
+    "   AXIS_THM                                                 U3.13.08 et R7.01.10",
+    "   AXIS_HHD                                                             R7.01.10",
+    "   AXIS_HHS                                                             R7.01.10",
+    "   AXIS_HH2D                                                            R7.01.10",
+    "   AXIS_HH2S                                                            R7.01.10",
+    "   D_PLAN_HH2MD                                                         R7.01.10",
+    "   D_PLAN_HH2MS                                                         R7.01.10",
+    "   D_PLAN_HHMD                                                          R7.01.10",
+    "   D_PLAN_HHMS                                                          R7.01.10",
+    "   D_PLAN_HHM                                               U3.13.08 et R7.01.10",
+    "   D_PLAN_HMD                                                           R7.01.10",
+    "   D_PLAN_HMS                                                           R7.01.10",
+    "   D_PLAN_HM                                                U3.13.08 et R7.01.10",
+    "   D_PLAN_THH2D                                                         R7.01.10",
+    "   D_PLAN_THH2S                                                         R7.01.10",
+    "   D_PLAN_THH2MD                                                        R7.01.10",
+    "   D_PLAN_THH2MS                                                        R7.01.10",
+    "   D_PLAN_THHD                                                          R7.01.10",
+    "   D_PLAN_THHS                                                          R7.01.10",
+    "   D_PLAN_THHMD                                                         R7.01.10",
+    "   D_PLAN_THHMS                                                         R7.01.10",
+    "   D_PLAN_THMD                                                          R7.01.10",
+    "   D_PLAN_THMS                                                          R7.01.10",
+    "   D_PLAN_THM                                               U3.13.08 et R7.01.10",
+    "   D_PLAN_HHD                                                           R7.01.10",
+    "   D_PLAN_HHS                                                           R7.01.10",
+    "   D_PLAN_HS                                                            R7.01.10",
+    "   D_PLAN_HH2D                                                          R7.01.10",
+    "   D_PLAN_HH2S                                                          R7.01.10",
+    "    D_PLAN_HMS_DIL                                                  R7. 01 .  10 et",
+    "R5.04.03",
+    "     D_PLAN_HM_SI_DIL                                               R7. 01 .  10 et",
+    "R5.04.03",
+    "   D_PLAN_THMS_DIL                                          R7.01.10 et R5.04.03",
+    "   D_PLAN_HH2MS_DIL                                         R7.01.10 et R5.04.03"
+   ],
+   "page": 6
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D hydraulique non saturé en volumes finis",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "D_PLAN_HH2SUDA                                                       R7.01.34"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 2D éléments joints avec couplage hydromécanique",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "AXIS_JHMS",
+    "PLAN_JHMS"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les maillages 2D, permet de renseigner les groupes de mailles ou les mailles susceptibles d’être coupées par la fissure lorsque le contact est défini sur les lèvres de la fissure. Sont permis les types de mailles suivants : les QUAD8 et TRIA6 et les mailles de bord de ces éléments, soient les SEG3. Si les mailles sont linéaires, il faut au préalable les transformer en mailles quadratiques (avec LINE_QUAD de l’opérateur CREA_MAILLAGE).",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MECANIQUE 3D"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D barres et câbles",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "2D_BARRE                                                             R3.08.01",
+    "BARRE                                                    U3.11.01 et R3.08.01",
+    "CABLE_POULIE                                             U3.11.03 et R3.08.02",
+    "CABLE                                                    U3.11.03 et R3.08.02",
+    "CABLE_GAINE                                                          R3.08.10"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D éléments discrets",
+   "page": 7
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DIS_TR                                                               U3.11.02",
+    "DIS_T                                                                U3.11.02"
+   ],
+   "page": 7
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D fluide-structure",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    " 3D_FAISCEAU                                                         R4.07.05",
+    "3D_FLUIDE                                                U3.14.02 et R4.02.02"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D frontière absorbante",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "3D_ABSO                                                  U3.14.09 et R4.02.05",
+    "3D_FLUI_ABSO                                             U3.14.10 et R4.02.05"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D grilles d'armatures de béton",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "GRILLE_MEMBRANE                                          U3.12.04 et R3.08.07",
+    "GRILLE_EXCENTRE                                          U3.12.04 et R3.08.07"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D milieux continus",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "3D_SI                                                    U3.14.01 et R3.06.10",
+    "3D                                                       U3.14.01 et R3.01.01"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D non local",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "3D_GRAD_VARI",
+    "3D_GVNO                                                              R5.04.04",
+    "3D_DIL                                                               R5.04.03"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D plaques, coques et membranes",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "COQUE_3D                                                 U3.12.03 et R3.07.04",
+    "DKT                                                      U3.12.01 et R3.07.03",
+    "DST                                                      U3.12.01 et R3.07.03",
+    "Q4G                                                      U3.12.01 et R3.07.03",
+    "DKTG                                                     U3.12.01 et R3.07.03",
+    "Q4GG                                                     U3.12.01 et R3.07.09",
+    "MEMBRANE                                                 U3.12.04 et R3.08.07",
+    "COQUE_SOLIDE                                                         R3.07.10"
+   ],
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "MECANIQUE 3D poutres",
+    "   FLUI_STRU                                                            U3.14.02",
+    "   POU_FLUI_STRU                                                        U3.14.02",
+    "   POU_D_E                                                  U3.11.01 et R3.08.01",
+    "   POU_D_EM                                                 U3.11.07 et R3.08.08",
+    "   POU_D_SQUE                                               U3.11.07 et R3.08.08",
+    "   POU_D_T                                                  U3.11.01 et R3.08.01",
+    "   POU_D_TGM                                                            U3.11.04",
+    "   POU_D_TG                                                             U3.11.04",
+    "   POU_D_T_GD                                                           U3.11.05"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D quasi incompressible",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   3D_INCO_UP                                                           R3.06.08",
+    "   3D_INCO_UPG                                                          U3.14.06",
+    "et R3.06.08",
+    "   3D_INCO_UPO                                                          R3.06.08",
+    "MECANIQUE 3D HHO",
+    "   3D_HHO                                                               R3.06.14"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D thermo-hydro-mécanique",
+   "page": 8
+  },
+  {
+   "type": "code",
+   "lines": [
+    "   3D_HHMD",
+    "   3D_HHM                                                   U3.14.07 et R7.01.10",
+    "   3D_HMD",
+    "   3D_HM                                                    U3.14.07 et R7.01.10",
+    "   3D_THHD",
+    "   3D_THHMD",
+    "   3D_THHM                                                  U3.14.07 et R7.01.10",
+    "   3D_THMD",
+    "   3D_THM                                                   U3.14.07 et R7.01.10",
+    "   3D_THVD",
+    "   3D_THH2MD",
+    "   3D_THH2M",
+    "   3D_HH2MD",
+    "   3D_HH2MS",
+    "   3D_THH2S",
+    "   3D_THH2D",
+    "   3D_HHD                                                               R7.01.10",
+    "   3D_HHS                                                               R7.01.10",
+    "   3D_HS                                                                R7.01.10",
+    "   3D_HH2D                                                              R7.01.10",
+    "   3D_HH2S                                                              R7.01.10",
+    "   3D_HMS_DIL                                               R7.01.10 et R5.04.03",
+    "    3D_ HM_SI_DIL                                                      R7.01.10  et",
+    "R5.04.03",
+    "   3D_THMS_DIL                                              R7.01.10 et R5.04.03",
+    "   3D_HH2MS_DIL                                             R7.01.10 et R5.04.03"
+   ],
+   "page": 8
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D hydraulique non saturé en volumes finis",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "      3D_HH2SUDA                                                        R7.01.34",
+    "MECANIQUE 3D tuyaux",
+    "   TUYAU_3M                                                 U3.11.06 et R3.08.06",
+    "   TUYAU_6M                                                 U3.11.06 et R3.08.06"
+   ],
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour les maillages 3D, permet de renseigner les groupes de mailles ou les mailles susceptibles d’être coupées par la fissure lorsque le contact est défini sur les lèvres de la fissure. Sont permis les types de mailles suivants : HEXA20, PENTA15, TETRA10, et les mailles de bords de ces éléments, soient les QUAD8 et TRIA6. Si les mailles sont linéaires, il faut au préalable les transformer en mailles quadratiques (avec LINE_QUAD de l’opérateur CREA_MAILLAGE).",
+   "page": 9
+  },
+  {
+   "type": "paragraph",
+   "text": "MECANIQUE 3D éléments joints pour la propagation de fissure",
+   "page": 9
+  },
+  {
+   "type": "code",
+   "lines": [
+    "3D_JOINT                                                 U3.13.14 et R3.06.09",
+    "3D_JOINT_HYME                                            R3.06.09 et R3.06.09",
+    "3D_INTERFACE                                                         R3.06.13",
+    "3D_INTERFACE_S                                                       R3.06.13"
+   ],
+   "page": 9
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.3",
+   "text": "Mot clé AFFE_SOUS_STRUC",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     |     AFFE_SOUS_STRUC"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "N'est utilisable que pour un modèle utilisant des sous-structures statiques [U1.01.04].",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦     /     SUPER_MAILLE = l_mail"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "l_mail est la liste des super-mailles que l'on veut affecter dans le modèle. Comme pour les éléments finis, il n'est pas obligatoire d'affecter toutes les mailles du maillage. C'est AFFE_MODELE qui confirme quelles sont les sous-structures qui seront utilisées dans le modèle. La différence avec les éléments finis classiques est que sur les super-mailles, on ne choisit ni la MODELISATION ni le PHENOMENE car le macro-élément (construit par l'opérateur MACR_ELEM_STAT [U4.62.01]) qui sera affecté sur la super-maille possède sa propre modélisation et son propre phénomène (ceux qui ont servi à le calculer).",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Attention ! Votre modèle doit contenir au moins un élément fini (mot-clef AFFE au §3.2) quand vous utilisez des sous-structures statiques définies à partir d'un maillage physique (lu par LIRE_MAILLAGE ) car il n'est pas possible de n'avoir que des macro-éléments dans ce cas.",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/     TOUT = 'OUI'"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Toutes les (super) mailles sont affectées.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.4",
+   "text": "Opérande VERI_JACOBIEN",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     VERI_JACOBIEN = 'OUI' / 'NON'"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé sert à vérifier que les mailles du modèle ne sont pas trop distordues. On calcule le jacobien de la transformation géométrique qui transforme l'élément de référence en chaque maille réelle du modèle. Si sur les différents points d'intégration d'une maille, le jacobien change de signe, c'est que cette maille est très « mal fichue ». Une alarme est alors émise.",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.5",
+   "text": "Opérande VERI_NORM_IFS",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     VERI_NORM_IFS = 'OUI' / 'NON'"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé sert à vérifier que toutes les normales sur les interfaces fluide-structure (modélisation en FLUI_STRU) sont bien orientées dans le même sens. SI ce n'est pas le cas, une alarme est émise et l’utilisateur est invité à ré-orienter ces normales soit dans son maillage directement, soit via l'opérateur MODI_MAILLAGE (mots-clefs ORIE_PEAU_2D et ORIE_PEAU_3D par exemple).",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.6",
+   "text": "Opérande GRANDEUR_CARA",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     GRANDEUR_CARA = _F( LONGUEUR = lcara, ...)"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé sert à définir quelques grandeurs physiques caractéristiques du problème traité. Ces grandeurs sont utilisées actuellement pour « a-dimensionner » certains termes des estimateurs d'erreur en « HM ». Voir [R4.10.05].",
+   "page": 10
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.7",
+   "text": "Mot-clé DISTRIBUTION",
+   "page": 10
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊     DISTRIBUTION = _F( METHODE = methode, … )"
+   ],
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot-clé permet de répartir les éléments finis du modèle pour le parallélisme des calculs élémentaires, des assemblages et de certains solveurs linéaires. Cf. [U2.08.06] « Notice d'utilisation du parallélisme ».",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Il définit comment seront distribués (ou non) les mailles/éléments pour les phases parallélisées de Code_Aster. L'utilisateur a donc la possibilité de piloter cette distribution entre les processeurs.",
+   "page": 10
+  },
+  {
+   "type": "paragraph",
+   "text": "Le parallélisme opère :",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "sur les calculs élémentaires et sur les assemblages de matrices et vecteurs (c'est ce que le mot-clé facteur DISTRIBUTION permet de contrôler),",
+   "page": 11
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "à la résolution du système linéaire si le solveur est parallélisé (cf. [U4.50.01]).",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Dans le cas du nouveau mode de parallélisme (maillage parallèle de type maillage_p), le mode de distribution est obligatoirement CENTRALISE car le maillage a déjà était distribué et il n’est pas possible de redistribuer à nouveau les calculs. Si un autre mode de distribution est choisi pour ce mode de parallélisme, il sera automatiquement basculé en mode CENTRALISE sans en avertir l’utilisateur.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Il est possible de modifier le mode de distribution au cours de son étude. Il suffit d'utiliser la commande MODI_MODELE [U4.41.02].",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque : Il peut être pratique de poursuivre un calcul parallèle avec un nombre de processeurs différents de celui utilisé pour le calcul initial. En particulier, on peut vouloir réaliser certains post-traitements en séquentiel. Il est recommandé d'utiliser la commande MODI_MODELE pour définir la distribution à utiliser en poursuite. Plus précisément, lorsque le calcul initial a utilisé le parallélisme \"par groupes d'éléments\" ( ' GROUP_ELEM ' ou ' SOUS_DOMAINE ' ), la commande MODI_MODELE est inutile. En revanche, lorsque le calcul initial a utilisé le parallélisme \"par éléments\" ( 'MAIL_CONTIGU' ou 'MAIL_DISPERSE' ), la commande MODI_MODELE est obligatoire. Si on l'oublie, on est arrêté lors du calcul par un message d'erreur.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "3.8",
+   "text": "Mot-clé METHODE",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.1",
+   "text": "METHODE = / 'CENTRALISE'",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Le parallélisme ne commence qu'au niveau du solveur linéaire. Chaque processeur construit et fournit au solveur l'intégralité du système à résoudre. Les calculs élémentaires ne sont pas parallélisés. C’est la méthode de distribution obligatoire dans le cas d’un maillage parallèle de type maillage_p.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.2",
+   "text": "METHODE = / 'GROUP_ELEM'",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mode de distribution permet un équilibrage de charge parfait (en terme de nombres de calculs élémentaires) a priori, c’est-à-dire que chaque processeur effectuera, pour un type d'élément donné, le même nombre de calculs élémentaires (à un près). Bien évidemment cela ne préjuge en rien de l'équilibrage de charge final en particulier dans les calculs non-linéaires où le coût d'un calcul élémentaire dépend d'autres paramètres que le type d'élément. Dans ce mode, les éléments du modèle sont regroupés par « groupe » afin de mutualiser certains calculs ce qui permet de gagner en efficacité. Le nombre d'éléments par groupe peut être choisi dans la commande DEBUT [U4.11.01]. Par ailleurs, il s'agit du seul mode en mesure de répartir les calculs élémentaires induits par les éléments tardifs, c’est-à-dire par les chargements tels que les conditions aux limites dualisées ou le contact continu.",
+   "page": 11
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.3",
+   "text": "METHODE = / 'MAIL_DISPERSE'",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "La distribution s'opère sur les mailles. Elles sont réparties équitablement sur les différents processeurs disponibles. Les mailles sont réparties sur les différents processeurs comme on le fait quand on distribue des cartes à plusieurs joueurs. On parle aussi de distribution « cyclique ».",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple, avec un modèle comportant 8 mailles, effectué sur 4 processeurs, on obtient la répartition suivante :",
+   "page": 11
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Mode de distribution",
+     "Maille 1",
+     "Maille 2",
+     "Maille 3",
+     "Maille 4",
+     "Maille 5",
+     "Maille 6",
+     "Maille 7",
+     "Maille 8"
+    ],
+    [
+     "MAIL_DISPERSE",
+     "Proc. 0",
+     "Proc. 1",
+     "Proc. 2",
+     "Proc. 3",
+     "Proc. 0",
+     "Proc. 1",
+     "Proc. 2",
+     "Proc. 3"
+    ]
+   ],
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "On voit qu'avec ce mode de distribution, un processeur traitera des mailles régulièrement espacées dans l'ordre des mailles du maillage. L'avantage de cette répartition est que « statistiquement », chaque processeur traitera autant d'hexaèdres, de pentaèdres, …, et de triangles.",
+   "page": 11
+  },
+  {
+   "type": "paragraph",
+   "text": "La charge de travail pour les calculs élémentaires sera en général bien répartie. En revanche, la matrice assemblée sur un processeur sera très « dispersée », à l'inverse de ce qui se passe pour le mode 'MAIL_CONTIGU'.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.4",
+   "text": "METHODE = /'MAIL_CONTIGU'",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "La distribution s'opère sur les mailles. Elles sont réparties en paquets de mailles contiguës sur les différents processeurs disponibles.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple, avec un modèle comportant 8 mailles, une machine de 4 processeurs disponibles, on obtient la répartition suivante :",
+   "page": 12
+  },
+  {
+   "type": "table",
+   "rows": [
+    [
+     "Mode de distribution",
+     "Maille 1",
+     "Maille 2",
+     "Maille 3",
+     "Maille 4",
+     "Maille 5",
+     "Maille 6",
+     "Maille 7",
+     "Maille 8"
+    ],
+    [
+     "MAIL_CONTIGU",
+     "Proc. 0",
+     "Proc. 0",
+     "Proc. 1",
+     "Proc. 1",
+     "Proc. 2",
+     "Proc. 2",
+     "Proc. 3",
+     "Proc. 3"
+    ]
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour ce mode de distribution, la charge de travail pour les calculs élémentaires peut être moins équilibrée. Par exemple, un processeur peut n'avoir à traiter que des mailles « faciles » de bord. En revanche, la matrice assemblée sur un processeur est en général plus compacte.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.5",
+   "text": "Mot clé CHARGE_PROC0_MA",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊ CHARGE_PROC0_MA = / 100 [DEFAUT]",
+    "                    / pct"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé n'est accessible que pour les modes de distribution 'MAIL_DISPERSE' et 'MAIL_CONTIGU'. En effet ces modes de distribution ne répartissent en général pas équitablement la charge des calculs à cause des conditions aux limites dualisées dont les calculs élémentaires sont traités par le processeur 0.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Si l'on souhaite soulager le processeur 0 (ou au contraire le surcharger), on peut utiliser le mot clé CHARGE_PROC0_MA. Ce mot clé permet à l'utilisateur de choisir le pourcentage de charge que l'on souhaite affecter au processeur 0.",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Par exemple, si l'utilisateur choisit CHARGE_PROC0_MA = 80, le processeur 0 traitera 20% d'éléments de moins que les autres processeurs, soit 80% de la charge qu'il devrait supporter si le partage était équitable entre les processeurs.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 4,
+   "number": "3.8.1.6",
+   "text": "METHODE = / 'SOUS_DOMAINE' [DEFAULT]",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette distribution des mailles se base sur une décomposition du maillage en sous-domaines, construite par un outil externe de partitionnement défini par le mot-clé PARTITIONNEUR :",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊PARTITION NEUR               =  / 'METIS'            [DEFAULT ]",
+    "                                                / 'SCOTCH'"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Le nombre de sous-domaines peut être déterminé par l'utilisateur, via le mot-clé NB_SOUS_DOMAINE :",
+   "page": 12
+  },
+  {
+   "type": "code",
+   "lines": [
+    "◊NB_SOUS_DOMAINE         =          / nbproc          [DEFAULT ]",
+    "                                                      / nb_sous_dom"
+   ],
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Par défaut, le nombre de sous-domaines est pris égal au nombre de processeurs impliqués dans le calcul ( nbproc ).",
+   "page": 12
+  },
+  {
+   "type": "paragraph",
+   "text": "Les éléments du modèle éléments finis portés par les mailles de chaque sous-domaine sont ensuite répartis par groupes d'éléments semblables (comme dans la distribution correspondant à la méthode GROUP_ELEM), afin d'équilibrer au mieux les calculs élémentaires. Le partitionnement préalable du maillage en sous-domaines permet d'assurer que tous les éléments d'un groupe d'éléments finis appartiennent à un seul sous-domaine.",
+   "page": 12
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Phase d'exécution",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "À partir des mots clés PHENOMENE, MODELISATION et FORMULATION on crée une structure de données spécifiant le type d'élément attaché à chaque maille.",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Un rappel succinct des affectations est imprimé systématiquement (INFO=1) dans le fichier message.",
+   "page": 13
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemple",
+   "page": 13
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour une modélisation du phénomène 'MECANIQUE', on affecte sur le groupe de mailles gma du maillage ma des éléments finis 3D isoparamétriques. Si le groupe de mailles gma contient aus si les mailles de bords et/ou d’arêtes des mailles de v olume, alors on affecte aussi sur celles-ci les éléments finis isoparamétriques nécessaires à certaines options de calcul (affectation de chargements extérieurs par exemple, cf. [U4.44.01]).",
+   "page": 13
+  },
+  {
+   "type": "code",
+   "lines": [
+    "mo    = AFFE_MODELE     (     MAILLAGE =  ma,",
+    "                              AFFE  = (   _F(   GROUP_MA    =     gma,",
+    "                                                PHENOMENE   =     'MECANIQUE',",
+    "                                                MODELISATION      =     '3D'  ),",
+    "                                          ) )"
+   ],
+   "page": 13
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 11,
+   "chars": 4277,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 12,
+   "last": 52,
+   "chars": 5987,
+   "id": 2,
+   "section": "3 Opérandes"
+  },
+  {
+   "first": 53,
+   "last": 65,
+   "chars": 5883,
+   "id": 3,
+   "section": "3.2.1 Opérandes PHENOMENE, MODELISATION et FORMULATION"
+  },
+  {
+   "first": 66,
+   "last": 92,
+   "chars": 5883,
+   "id": 4,
+   "section": "3.2.1 Opérandes PHENOMENE, MODELISATION et FORMULATION"
+  },
+  {
+   "first": 93,
+   "last": 107,
+   "chars": 2295,
+   "id": 5,
+   "section": "3.5 Opérande VERI_NORM_IFS"
+  },
+  {
+   "first": 108,
+   "last": 120,
+   "chars": 2306,
+   "id": 6,
+   "section": "3.6 Opérande GRANDEUR_CARA"
+  },
+  {
+   "first": 121,
+   "last": 148,
+   "chars": 5137,
+   "id": 7,
+   "section": "3.8 Mot-clé METHODE"
+  },
+  {
+   "first": 149,
+   "last": 154,
+   "chars": 1023,
+   "id": 8,
+   "section": "4 Phase d'exécution"
+  }
+ ]
+}

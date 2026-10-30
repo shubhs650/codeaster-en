@@ -35,7 +35,7 @@ which shell stresses and forces are reported.
 | Kind | `OPER` |
 | Result | `cara_elem` (depends on the keywords given) |
 | Can reuse its input (`reuse=`) | no |
-| French reference | U4.42.01 — from en/doc-ids.yaml (status: proposed) |
+| French reference | U4.42.01 — from en/doc-ids.yaml (status: verified) |
 | Scope tier | 1 (docs/COMMAND-SET.md) |
 | Key keywords (COMMAND-SET) | `COQUE`, `EPAIS`, `VECTEUR`, `ANGL_REP`, `COQUE_NCOU`, `DISCRET`, `DIS_T`, `DIS_TR`, `CARA`, `K_T_D_N`, `K_TR_D_N`, `VALE`, `REPERE` |
 
@@ -262,7 +262,7 @@ CARAC = AFFE_CARA_ELEM(
 
 ## See also
 
-- French reference: U4.42.01 (translation: `en/docs/U4.42.01.md` once task 5.x lands)
+- French reference: U4.42.01 (French text: `en/docs/_src/U4.42.01.fr.md`; translation: `en/docs/U4.42.01.md` once task 5.2 lands)
 - Catalog: `en/commands/AFFE_CARA_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/affe_cara_elem.py:481`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_cara_elem.py`; `upstream/bibfor/op/op0019.F90`;
   `COQUE` in `upstream/bibfor/modelisa/aceaco.F90`; `DISCRET` in `upstream/bibfor/modelisa/aceadi.F90`;

@@ -1,0 +1,424 @@
+{
+ "_generated_from": {
+  "extractor": "codeaster_en.docs.ingest",
+  "extractor_version": "1",
+  "source_url": "https://code-aster.org/doc/v16/man_u/u4/u4.11.03.pdf",
+  "source_sha256": "c209ca64225a5e3596ce23c168339d3ad8896f018a2734147b756fd1a5327333",
+  "source_bytes": 179939
+ },
+ "schema_version": 1,
+ "doc_id": "U4.11.03",
+ "language": "fr",
+ "copyright": "EDF R&D",
+ "licence": "GFDL (GNU Free Documentation License; see en/docs/_src/README.md)",
+ "meta": {
+  "date": "04/11/2021",
+  "fascicle": "Manuel d'utilisation Fascicule u4.11:",
+  "licence_notice": "Document diffusé sous licence GNU FDL (http://www.gnu.org/copyleft/fdl.html)",
+  "page_count": 5,
+  "pages": "5",
+  "pdf_keywords": "U4.11.03-I",
+  "pdf_title": "Procédure POURSUITE",
+  "responsible": "COURTOIS Mathieu",
+  "revision": "04c6ef195364",
+  "title": "Procédure POURSUITE",
+  "version_label": "default"
+ },
+ "blocks": [
+  {
+   "type": "title",
+   "text": "Procédure POURSUITE",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "1",
+   "text": "But",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "Poursuivre une étude à partir de la sauvegarde au format JEVEUX.",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "La syntaxe apparemment complexe de cette procédure ne doit pas inquiéter l'utilisateur, l’appel avec les opérandes par défaut, est suffisant dans la plupart des cas : POURSUITE ( )",
+   "page": 1
+  },
+  {
+   "type": "paragraph",
+   "text": "L’usage de cette commande est tout à fait semblable à celui de DEBUT. Les mots-clés dont le comportement est identique dans DEBUT et POURSUITE sont uniquement décrits dans [U4.11.01].",
+   "page": 1
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "2",
+   "text": "Syntaxe",
+   "page": 2
+  },
+  {
+   "type": "code",
+   "lines": [
+    "POURSUITE",
+    "      (   ◊  IMPR_MACRO = /  'NON',                           [DEFAUT]",
+    "                          /  'OUI',",
+    "          ◊  LANG = lang,                                     [TXM]",
+    "          ◊  BASE = _F (  ♦  FICHIER = 'VOLATILE',",
+    "                          ◊  /    | LONG_ENRE= lenr,          [I]",
+    "                                  | NMAX_ENRE= nenr,          [I]",
+    "                                  | LONG_REPE= lrep,          [I]",
+    "                          ),",
+    "          ◊  CODE =    /  'NON',                              [DEFAUT]",
+    "                       /  'OUI',",
+    "          ◊  ERREUR = _F  (  ERREUR_F  =   /  'ABORT',        [DEFAUT]",
+    "                                           /  'EXCEPTION',",
+    "                          ),",
+    "             IGNORE_ALARM =  l_vale,                          [l_Kn]",
+    "          ◊  DEBUG = _F(  ◊  JXVERI =      /  'OUI',",
+    "                                           /  'NON',",
+    "                          ◊  ENVIMA =         'TEST',         [l_Kn]",
+    "                          ◊  JEVEUX =      /  'OUI',",
+    "                                           /  'NON',",
+    "                          ◊  SDVERI =      /  'OUI',",
+    "   ),",
+    "          ◊  MESURE_TEMPS = _F (… voir commande DEBUT),",
+    "          ◊  MEMOIRE = _F( … voir commande DEBUT),",
+    "          ◊  RESERVE_CPU =_F(/ VALE =  vale                   [R]",
+    "                                 / POURCENTAGE = pcent        [R]",
+    "                                  ◊ BORNE  =  /  bv,          [R]",
+    "                                              /  900.         [DEFAUT]",
+    "                          ),",
+    "       )"
+   ],
+   "page": 2
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "3",
+   "text": "Principe de fonctionnement",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Cette procédure affecte, en outre, les ressources mémoire nécessaires à la poursuite du calcul.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes de la commande sont homologues de ceux de la procédure DEBUT [U4.11.01]. Ils permettent de préciser certaines ressources affectées à la nouvelle exécution.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "L'étude engagée précédemment se poursuit par un ensemble de commandes commençant par POURSUITE et se terminant par FIN [U4.11.02].",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "La procédure POURSUITE qui est exécutée effectue les tâches suivantes :",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "définition des unités logiques des fichiers utilisés en impression,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "allocation des fichiers associés aux bases de données gérées par JEVEUX,",
+   "page": 3
+  },
+  {
+   "type": "list_item",
+   "depth": 0,
+   "text": "lecture des catalogues de commandes mais pas des catalogues des éléments qui ont été recopiés sur la base de données lors de la première exécution.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les opérandes sont à utiliser pour dérouter les différents fichiers sur des numéros d'unité logique différents des numéros affectés par défaut ou pour ajuster certains paramètres de fichiers.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les concepts de python simples (de type variable) créés lors d’une exécution précédente sont conservés dans un fichier associé à la base JEVEUX (pick.*). Lors de l’exécution de la procédure POURSUITE ces concepts sont regénérés et peuvent donc être utilisés sous le nom sous lequel ils ont été créés.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque Ne sont pas sauvegardés dans le pickle, les objets python de type classe, fonction et type. Voir le paragraphe Exemples pour un mode d'utilisation possible.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "4",
+   "text": "Opérandes",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Les mots clés LANG et DEBUG sont identiques à ceux de la procédure DEBUT [U4.11.01].",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot clé BASE est différent pour la procédure POURSUITE.",
+   "page": 3
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.1",
+   "text": "Mot clé BASE",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "BASE ="
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "La fonctionnalité de ce mot clé est de redéfinir les valeurs des paramètres des fichiers d’accès direct associés aux «base de données» dans le cas où l’on ne désire pas utiliser ceux fixés par défaut. La taille maximum du ou des fichiers associés, et par conséquent le nombre maximum d’enregistrements, peut être redéfini à l’aide du paramètre passé sur la ligne de commande derrière le mot clé",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "En mode POURSUITE, certaines caractéristiques de la base GLOBALE ne peuvent plus être modifiées. Valeurs par défaut des paramètres associés aux bases de données",
+   "page": 3
+  },
+  {
+   "type": "code",
+   "lines": [
+    "VOLATILE",
+    "   NMAX_ENRE       62914",
+    "   LONG_ENRE        100    K mots",
+    "   LONG_REPE       2000"
+   ],
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Le mot vaut 8 octets sur plate-forme 64 bits et 4 octets sur plate-forme 32 bits.",
+   "page": 3
+  },
+  {
+   "type": "paragraph",
+   "text": "Sous Linux 64, la procédure POURSUITE, avec les valeurs par défaut, allouera un fichier d'accès direct d'au plus 62914 enregistrements de 100Kmot (le K vaut 1024) pour la base 'VOLATILE'.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "La taille réelle du fichier est dynamique ; elle dépend du volume d'informations à stocker effectivement. Cette taille est limitée par les conditions d'exploitation et un paramètre défini parmi les valeurs caractérisant la plate-forme. Sur la plate-forme de référence Linux 64 bits, la taille initiale est fixée à 48 Go. Cette valeur est utilisée pour dimensionner 2 objets utilisés par le gestionnaire de mémoire, elle sera modifiée automatiquement en cours d 'exécution si besoin. Il est possible de modifier cette valeur en passant un argument sur la ligne de commande de l’exécutable derrière le mot clé « --max_base taille » où taille est une valeur réelle mesurée en Mo. Pour la base Globale, qui peut être sauvegardée et ré-utilisée en donnée d’un calcul, la taille maximum initiale en « POURSUITE » est conservée telle quelle si le paramètre « --max_base » n’est pas utilisé, mais peut-être redéfini au besoin de cette manière.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.1",
+   "text": "Opérande FICHIER",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "♦  FICHIER ="
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Nom symbolique de la base considérée.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Seul le paramètre de la base de données 'VOLATILE' peut être redéfini.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 3,
+   "number": "4.1.2",
+   "text": "Opérandes LONG_ENRE / NMAX_ENRE / LONG_REPE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Définition des paramètres de la base de données (fichiers d'accès direct).",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "/  |  LONG_ENRE = lenr"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "lenr est la longueur des enregistrements en Kmots des fichiers d'accès directs utilisés.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Le gestionnaire de mémoire JEVEUX utilise ce paramètre pour déterminer deux types d'objets : les gros objets qui seront découpés en autant d'enregistrements que nécessaire, et les petits objets qui seront accumulés dans un tampon de la taille d'un enregistrement avant d'être déchargé.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  NMAX_ENRE = nenr"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "nenr est le nombre d'enregistrements par défaut, cette valeur est déterminée à partir de LONG_ENRE et d'un paramètre d'exploitation sous LINUX64 fixé à 12Go (51 539 607 552 octets) pour la taille maximale du fichier associé à une base de données.",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Remarque :",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Les deux opérandes LONG_ENRE et NMAX_ENRE doivent être utilisés avec précaution, un mauvais usage pouvant conduire à l'arrêt brutal du programme par saturation des fichiers d'accès direct. La cohérence entre la taille maximale du fichier et la valeur résultant du produit des deux paramètres LONG_ENRE et NMAX _ENRE est vérifiée en début d’exécution.",
+   "page": 4
+  },
+  {
+   "type": "code",
+   "lines": [
+    "|  LONG_REPE = lrep"
+   ],
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "lrep est la longueur initiale du répertoire (nombre maximal d’objets adressables par JEVEUX), elle est gérée dynamiquement par le gestionnaire de mémoire qui étend la taille du répertoire et de tous les objets système associés au fur et à mesure des besoins.",
+   "page": 4
+  },
+  {
+   "type": "heading",
+   "level": 2,
+   "number": "4.2",
+   "text": "Mot clé CODE",
+   "page": 4
+  },
+  {
+   "type": "paragraph",
+   "text": "Ce mot clé permet d'activer la génération du fichier .code. Réservé aux cas-tests, ce mot clé est une version simplifié du mot clé CODE de DEBUT.",
+   "page": 5
+  },
+  {
+   "type": "heading",
+   "level": 1,
+   "number": "5",
+   "text": "Exemples d’utilisation",
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "L'utilisation standard de cette procédure est :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "POURSUITE()"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Python ne sauvegarde pas les fonctions et classes définies dans le fichier principal (il se souvient simplement dans quel module Python elles ont été définies). C'est donc le cas du fichier de commandes de code_aster. Pour utiliser des fonctions ou classes et les retrouver en poursuite, il faut les définir dans un module externe : - Soit le module userpkg/usermod.py :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "def pyfunc(x) :",
+    "    return x * 2"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "- On ferait dans le premier jeu de commandes :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "DEBUT()",
+    "from userpkg import usermod",
+    "form = FORMULE(NOM_PARA='X', VALE='pyfunc(X)', pyfunc=usermod.pyfunc)",
+    "assert form(2) == 4",
+    "FIN()"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "- Puis :",
+   "page": 5
+  },
+  {
+   "type": "code",
+   "lines": [
+    "POURSUITE(PAR_LOT='NON')",
+    "assert form(2) == 4",
+    "FIN()"
+   ],
+   "page": 5
+  },
+  {
+   "type": "paragraph",
+   "text": "Pour cela, il suffit d'ajouter dans l'étude le répertoire userpkg de type nom. Il faut bien comprendre que, lors de la relecture, Python va chercher à importer le module userpkg.usermod. Il doit donc le retrouver au même endroit. De plus, en important ce module, Python exécute les instructions qu'il y trouve. Pour cette raison, il est déconseillé de créer des concepts dans le corps principal d'un module importé (car ils seront créés à chaque import et encombreront la base). Il faut le faire dans des fonctions qui seront uniquement exécutées sur demande.",
+   "page": 5
+  }
+ ],
+ "chunks": [
+  {
+   "first": 0,
+   "last": 6,
+   "chars": 2005,
+   "id": 1,
+   "section": "2 Syntaxe"
+  },
+  {
+   "first": 7,
+   "last": 45,
+   "chars": 5025,
+   "id": 2,
+   "section": "3 Principe de fonctionnement"
+  },
+  {
+   "first": 46,
+   "last": 57,
+   "chars": 1437,
+   "id": 3,
+   "section": "4.2 Mot clé CODE"
+  }
+ ]
+}
