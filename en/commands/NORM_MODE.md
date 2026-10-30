@@ -150,7 +150,7 @@ result's `NORME` parameter (`op0037.F90:750`), which `RECU_TABLE` can print.
 ## See also
 
 - French reference: U4.52.11 (from en/doc-ids.yaml, status: verified; French text:
-  `en/docs/_src/U4.52.11.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+  `en/docs/_src/U4.52.11.fr.md`; translation: `en/docs/U4.52.11.md`)
 - Catalog: `en/commands/NORM_MODE.json` (generated from `upstream/code_aster/Cata/Commands/norm_mode.py:40`)
 - Implementation: `upstream/bibfor/op/op0037.F90`, `upstream/bibfor/algeline/vpnorm.F90`
 - Before: [CALC_MODES](CALC_MODES.md)

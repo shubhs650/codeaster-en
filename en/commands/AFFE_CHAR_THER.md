@@ -70,7 +70,7 @@ adiabatic gave 10.0 (s·L²/(2λ)).
 | `FLUX_REP / FLUN` | real, optional | — | The normal flux, power per unit area (W/mm² with lengths in mm), positive into the body. |
 | `FLUX_REP / FLUN_INF` | real, optional | — | For thermal shells: the normal flux on the lower face. |
 | `FLUX_REP / FLUN_SUP` | real, optional | — | For thermal shells: the normal flux on the upper face. |
-| `FLUX_REP / CARA_TORSION` | `table_sdaster`, optional | — | Reserved for `MACR_CARA_POUTRE`, which computes the torsion properties of a beam section by solving a Laplace problem with the linear thermal operators; not for users (U4.44.02 §4.5, French only). Not a heat load; outside Tier 2. |
+| `FLUX_REP / CARA_TORSION` | `table_sdaster`, optional | — | Reserved for `MACR_CARA_POUTRE`, which computes the torsion properties of a beam section by solving a Laplace problem with the linear thermal operators; not for users (U4.44.02 §4.5). Not a heat load; outside Tier 2. |
 | `ECHANGE` | factor keyword, optional, repeatable | — | *convective heat exchange*. Heat exchange with a fluid at `TEMP_EXT` through a film coefficient `COEF_H`: the flux into the body is h·(T_ext − T) (our slab run: 50.0 against the hand value). The usual condition for a surface cooled or heated by air or water. |
 | `ECHANGE / GROUP_MA` | element group, optional, list | — | *element group*. The faces in contact with the fluid. Exactly one of `TOUT`, `GROUP_MA`. |
 | `ECHANGE / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. All face elements. |
@@ -131,7 +131,7 @@ adiabatic gave 10.0 (s·L²/(2λ)).
 | `ECHANGE_PAROI / TRAN` | real, list of 2 or 3 | — | A translation that maps wall 1 onto wall 2 for the pairing. |
 | `ECHANGE_PAROI / FISSURE` | `fiss_xfem`, optional, list of up to 100 | — | An XFEM crack instead of meshed walls. Outside scope. |
 | `ECHANGE_PAROI / TEMP_CONTINUE` | text, optional | — | One of `'OUI'`. With `FISSURE`: temperature continuous across the crack. Outside scope. |
-| `PRE_GRAD_TEMP` | factor keyword, optional, repeatable | — | An initial temperature gradient, uniform in each element, given by its global components `FLUX_X`, `FLUX_Y`, `FLUX_Z` (right-hand side ∫ grad T_ini · K · grad T* dV). It serves periodic homogenization: the corrector problems of the periodic unit, the homogenized conductivity then coming from `POST_ELEM` `ENER_POT` (U4.44.02 §4.10, French only). Outside Tier 2. |
+| `PRE_GRAD_TEMP` | factor keyword, optional, repeatable | — | An initial temperature gradient, uniform in each element, given by its global components `FLUX_X`, `FLUX_Y`, `FLUX_Z` (right-hand side ∫ grad T_ini · K · grad T* dV). It serves periodic homogenization: the corrector problems of the periodic unit, the homogenized conductivity then coming from `POST_ELEM` `ENER_POT` (U4.44.02 §4.10). Outside Tier 2. |
 | `PRE_GRAD_TEMP / GROUP_MA` | element group, optional, list | — | *element group*. |
 | `PRE_GRAD_TEMP / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. |
 | `PRE_GRAD_TEMP / FLUX_X` | real, optional | — | X component. |
@@ -230,7 +230,7 @@ CH_FIN1 = AFFE_CHAR_THER(MODELE=MOTHER, TEMP_IMPO=_F(TOUT="OUI", TEMP_INF=-0.5, 
 
 - [`THER_LINEAIRE`](THER_LINEAIRE.md), which solves with these loads;
   [`AFFE_CHAR_MECA`](AFFE_CHAR_MECA.md) for the same `LIAISON_*` keywords in mechanics.
-- French reference: U4.44.02 (French text: `en/docs/_src/U4.44.02.fr.md`; no English translation yet (Tier 2, not in `en/docs/scope.yaml`))
+- French reference: U4.44.02 (French text: `en/docs/_src/U4.44.02.fr.md`; translation: `en/docs/U4.44.02.md`)
 - Catalog: `en/commands/AFFE_CHAR_THER.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_ther.py:26`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_ther.py` (operator 34)
 - Verification run: `docs/reference-checks/README.md` (thermal slab)

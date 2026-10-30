@@ -14,6 +14,14 @@ Needs owner: …
 
 ---
 
+## 2026-10-30 — 5.2e translate the Tier 2 documents — agent
+Done: the nine Tier 2 command documents added to `en/docs/scope.yaml` (`tier: 2`) and translated, `method: machine`, `source: session:task-5.2-tier2`, 56 chunks, zero API tokens (export/answer/import as in 5.2b–d): CALC_MODES (U4.52.02), NORM_MODE, EXTR_MODE, THER_LINEAIRE, CALC_MATR_ELEM, NUME_DDL, ASSEMBLAGE, ASSE_MATRICE and AFFE_CHAR_THER (U4.44.02, cut to TEMP_IMPO, FLUX_REP, ECHANGE, SOURCE; chunk 7 also holds PRE_GRAD_TEMP). AFFE_CHAR_MECA_F and AFFE_VARC share Tier 1 documents. The sources were ingested in 5.1; a fresh `caen docs fetch` of the nine IDs was byte-identical. The nine assisted references now link their translation and no longer say "French only" for these documents.
+Tests: `test_tier1_and_tier2_documents_are_fully_translated` replaces the Tier 1 test.
+How formulas were kept: lines with private-use glyphs from the PDF fonts must be copied byte-exact (the identifier check sees the glyphs as word breaks); prose on such lines was translated by substring replacement on the French line.
+Open: 5.3 review (owner). Untranslated French slips are flagged in the review queue.
+Decisions: none beyond ADR-027.
+Needs owner: nothing blocking; review-queue entry added.
+
 ## 2026-10-30 — 2.3f settle command-reference TODO(verify) against the French docs — agent
 Done: 108 of the 124 `TODO(verify)` notes in 28 `en/commands/*.md` references settled, each now citing a section of the French document (`U4.44.01 §5.13.3`, from `en/docs/_src/`, or its translation) or a solver line. Fetched and ingested U4.50.01 (`SOLVEUR`, French only, not in `scope.yaml`) for the nine `MECA_STATIQUE` solver rows. The banner of the 25 edited references now says what a `§` citation points to and that the 17.4 code wins over the v16 documents. "See also" lines no longer say "once task 5.2 lands" (33 files; Tier 2 documents say they have no translation yet).
 Corrections forced by the documents or the source: `DEBUT` `BASE/CAS` is a size preset (`'PETIT'`/`'MOYEN'`/`'GROS'`, `ibbase.F90:81`), not a study name; `CALC_MODES` `NIVEAU_PARALLELISME='PARTIEL'` keeps only the `MUMPS` level (the reference said the reverse); `MECA_STATIQUE` `INST_INIT` computes only times strictly after it, and with no `RESULTAT` every time (`time_stepper.py:103`); `DDL_IMPO` duplicates are compared without their value, so the last value wins (`ordlrl.F90`); `SYMETRIE` mirrors coordinates only (`symema.F90`), so orientation is reversed; `IMPR_RESU` without `CARA_ELEM` stops with `MED2_14` on sub-point fields; `TEST_RESU` `CHAM_NO` `GROUP_NO` of several nodes stops with `CALCULEL5_20`; `AFFE_VARC` `PROL_DROITE='EXCLU'` stops with `UTILITAI8_33` + `UTILITAI8_37`.
