@@ -27,6 +27,7 @@ from codeaster_en.extract import inventory as inventory_extractor
 from codeaster_en.extract import messages as messages_extractor
 from codeaster_en.mess import render as mess_render
 from codeaster_en.translate import command as command_drafts
+from codeaster_en.translate import doc as doc_translate
 from codeaster_en.translate import gettext_po
 from codeaster_en.translate import messages as messages_translate
 from codeaster_en.upstream import bump as bump_module
@@ -377,10 +378,115 @@ def translate_gettext(
 
 
 @translate_app.command("doc")
-def translate_doc() -> None:
-    """Chunked translation of a U4 document [not implemented yet: task 5.2]."""
-    typer.echo("caen translate doc: not implemented yet (PLAN.md task 5.2).", err=True)
-    raise typer.Exit(code=2)
+def translate_doc(
+    doc_id: Annotated[
+        list[str] | None,
+        typer.Argument(help="Document IDs, e.g. U4.41.01 (default: every --tier document)."),
+    ] = None,
+    tier: Annotated[
+        int | None,
+        typer.Option(help="Every document of en/docs/scope.yaml at this tier or below."),
+    ] = None,
+    dry_run: Annotated[
+        bool,
+        typer.Option(help="Print chunks, token and cost estimate; call nothing, write nothing."),
+    ] = False,
+    responses: Annotated[
+        Path | None,
+        typer.Option(help="Take answers from <DIR>/<DOC-ID>/<chunk>.md instead of the Claude API."),
+    ] = None,
+    export_requests: Annotated[
+        Path | None,
+        typer.Option(help="Write <DIR>/<DOC-ID>/<chunk>.request.md and SYSTEM.md; call nothing."),
+    ] = None,
+    assemble_only: Annotated[
+        bool, typer.Option(help="Only rewrite en/docs/<DOC-ID>.md from what is there.")
+    ] = False,
+    chunks: Annotated[
+        str | None, typer.Option(help="Only these chunks, e.g. '1-3,7' (one document).")
+    ] = None,
+    model: Annotated[str, typer.Option(help="Claude model ID.")] = messages_translate.DEFAULT_MODEL,
+    effort: Annotated[
+        str, typer.Option(help="low | medium | high | xhigh | max.")
+    ] = messages_translate.DEFAULT_EFFORT,
+    retries: Annotated[
+        int, typer.Option(min=0, help="Re-asks for chunks that fail validation.")
+    ] = 2,
+    method: Annotated[
+        str, typer.Option(help="Recorded method: machine (default) or assisted.")
+    ] = "machine",
+    source: Annotated[
+        str | None,
+        typer.Option(help="Source label recorded for --responses (default: replay:<dir>)."),
+    ] = None,
+    force: Annotated[
+        bool, typer.Option(help="Also redo translated chunks (never 'reviewed' ones).")
+    ] = False,
+) -> None:
+    """Translate official French documents into en/docs/<DOC-ID>.md, chunk by chunk.
+
+    Scope (documents and chunks) is en/docs/scope.yaml. Without --responses, --dry-run,
+    --export-requests or --assemble-only this calls the Claude API and spends API credit
+    (credentials from the environment, e.g. ANTHROPIC_API_KEY).
+    """
+    root = _repo_root()
+    try:
+        src = doc_translate.load_sources(root)
+        names = list(doc_id or []) or (doc_translate.tier_docs(src, tier) if tier else [])
+        if not names:
+            raise doc_translate.TranslateError("give DOC-ID arguments or --tier N")
+        only = doc_translate.parse_ranges(chunks) if chunks else None
+        if only and len(names) != 1:
+            raise doc_translate.TranslateError("--chunks needs exactly one document")
+        if dry_run or export_requests:
+            totals = [0, 0, 0, 0, 0.0]
+            for name in names:
+                if export_requests:
+                    doc_translate.export_requests(src, name, export_requests, force, only)
+                est = doc_translate.estimate(src, name, model, force)
+                cost = "n/a" if est.cost_usd is None else f"${est.cost_usd:.2f}"
+                typer.echo(
+                    f"{name}: {est.chunks} chunk(s), {est.french_chars} French characters, "
+                    f"~{est.input_tokens} input / ~{est.output_tokens} output tokens, {cost}"
+                )
+                totals[0] += est.chunks
+                totals[1] += est.french_chars
+                totals[2] += est.input_tokens
+                totals[3] += est.output_tokens
+                totals[4] += est.cost_usd or 0.0
+            typer.echo(
+                f"translate doc: {len(names)} document(s), {totals[0]} chunk(s), "
+                f"{totals[1]} French characters, ~{totals[2]} input / ~{totals[3]} output "
+                f"tokens, ~${totals[4]:.2f} with {model} (estimate, no thinking, no re-asks)"
+            )
+            if export_requests:
+                typer.echo(f"translate doc: requests written under {export_requests}")
+            return
+        translator: doc_translate.DocTranslator | None = None
+        if responses:
+            translator = doc_translate.ReplayDocTranslator(responses, source)
+        elif not assemble_only:
+            translator = doc_translate.AnthropicDocTranslator(model=model, effort=effort)
+        failed = 0
+        for name in names:
+            rep = doc_translate.translate_doc(
+                src, name, translator, retries=retries, method=method, force=force, only=only
+            )
+            for number, problems in rep.failed.items():
+                for problem in problems:
+                    typer.echo(f"{name} chunk {number}: {problem}", err=True)
+            failed += len(rep.failed)
+            typer.echo(
+                f"{name}: {rep.translated}/{rep.pending} pending chunk(s) translated "
+                f"({rep.in_scope} in scope), {len(rep.failed)} failed, {rep.requests} "
+                f"request(s), {rep.input_tokens} input / {rep.output_tokens} output tokens "
+                f"-> {rep.path}"
+            )
+    except (OSError, ValueError, doc_translate.TranslateError) as exc:
+        typer.echo(f"translate doc: {exc}", err=True)
+        raise typer.Exit(code=1) from exc
+    if failed:
+        raise typer.Exit(code=1)
 
 
 mess_app = typer.Typer(
@@ -967,6 +1073,14 @@ def _validate_gettext(root: Path) -> bool:
     return _report("gettext", gettext_po.check(root), "en/messages/codeaster_en.po current")
 
 
+def _validate_docs(root: Path) -> bool:
+    if not (root / doc_translate.SCOPE_RELPATH).is_file():
+        typer.echo("docs: skipped (no en/docs/scope.yaml)")
+        return True
+    issues, files, translated = doc_translate.validate_dir(root)
+    return _report("docs", issues, f"{files} document(s), {translated} translated chunk(s)")
+
+
 def _validate_commands(root: Path) -> bool:
     issues, files = commands_validator.validate_dir(root / COMMANDS_RELPATH)
     return _report("commands", issues, f"{files} reference(s)")
@@ -983,6 +1097,7 @@ def validate_all(ctx: typer.Context) -> None:
         _validate_messages(root),
         _validate_synonyms(root),
         _validate_commands(root),
+        _validate_docs(root),
         _validate_gettext(root),
     ]
     raise typer.Exit(code=0 if all(results) else 1)
@@ -1026,6 +1141,13 @@ def validate_gettext() -> None:
 def validate_commands() -> None:
     """Check that keyword tables in en/commands/*.md only name keywords in the .json."""
     if not _validate_commands(_repo_root()):
+        raise typer.Exit(code=1)
+
+
+@validate_app.command("docs")
+def validate_docs() -> None:
+    """Check en/docs/<DOC-ID>.md translations against their French chunks."""
+    if not _validate_docs(_repo_root()):
         raise typer.Exit(code=1)
 
 

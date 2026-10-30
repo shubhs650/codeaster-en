@@ -90,25 +90,47 @@ Rules:
 
 ## 5. Documents (`en/docs/<DOC-ID>.md`)
 
-- Keep the French document's section numbering and headings (translated) so cross-references (`§4.3`) still work.
-- Keep all code blocks and keyword tables verbatim except for the descriptive column.
-- Equations: keep as in the PDF extraction (LaTeX if the extractor yields it; otherwise an image reference or a plain-text rendering with a `TODO(equation)`).
-- Header:
+Produced by `caen translate doc` (task 5.2, ADR-027) from the French text ingested by `caen docs ingest`/`fetch` (task 5.1, `en/docs/_src/`). Scope (documents, and chunks inside the large ones) is `en/docs/scope.yaml`.
+
+- Keep the French document's section numbering and headings (translated) so cross-references (`§4.3`) still work. Out-of-scope chunks keep their French headings, marked *(not translated)*.
+- Code blocks (syntax trees, listings, `.comm` examples) are never translated: the request shows them as `[[CODE n]]` markers and the tool puts the French block back verbatim. Tables keep their rows and cells; translate the cell text, not keyword names or values.
+- Equations: the extraction marks formula lines `<!-- equation -->` and they are often garbled; copy them as they are. Figures stay `*[Figure, page N: not extracted]*`.
+- Every answer is checked (markers, headings, list items, table shape, catalog identifiers, glossary synonyms, French left); `caen validate docs` re-runs the checks on the committed files.
+- Header (generated; do not edit except `reviewed_by`/`reviewed_on`, owner only):
 
 ```markdown
 ---
 doc_id: U4.41.01
-title_fr: Opérateur AFFE_MODELE
-title_en: AFFE_MODELE operator
-doc_version: "16.0"        # as printed on the French PDF
-source: EDF R&D, code_aster documentation, https://code-aster.org
-licence: see docs/LICENSING.md
+title_fr: "Opérateur AFFE_MODELE"
+title_en: "AFFE_MODELE operator"
+commands: [AFFE_MODELE]
+tier: 1
+doc_date: 11/01/2024
+doc_revision: 1f54feb5a1bf
+source: https://code-aster.org/doc/v16/man_u/u4/u4.41.01.pdf
+copyright: EDF R&D
+licence: GFDL-1.3
+checked_against_upstream: 17.4.26
 method: machine
+translation_source: session:task-5.2
+chunks: {total: 8, translated: 8, stale: 0, pending: 0, out_of_scope: 0}
 reviewed_by:
+history: [...]
 ---
 ```
 
-- The translation must carry a one-line notice in the body: *"Unofficial English translation of EDF R&D document U4.41.01 (vX). The French original prevails."*
+- The body opens with the notice *"Unofficial English translation of EDF R&D document U4.41.01 … The French original prevails."* and the GFDL 1.3 permission notice (docs/LICENSING.md).
+- Each chunk starts with `<!-- chunk N fr=<sha> method=… source=… on=… -->`. An owner review sets `method=reviewed` on the chunks read; the tool never redoes those.
+
+Usage:
+
+```bash
+caen translate doc --tier 1 --dry-run                     # chunks, tokens, cost; writes nothing
+caen translate doc U4.41.01                               # Claude API (needs credentials; spends credit)
+caen translate doc U4.41.01 --export-requests req/        # in-session path, step 1: req/U4.41.01/<n>.request.md
+caen translate doc U4.41.01 --responses ans/ --source session:<task>   # step 2: ans/U4.41.01/<n>.md
+caen translate doc --tier 1 --assemble-only               # rewrite headers, flag stale chunks
+```
 
 ## 6. Batch translation prompt (for `caen translate`)
 
