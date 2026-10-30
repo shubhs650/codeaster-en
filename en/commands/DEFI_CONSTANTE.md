@@ -106,7 +106,7 @@ BETON = DEFI_MATERIAU(
 
 - [`DEFI_FONCTION`](DEFI_FONCTION.md) for values that vary; [`AFFE_CHAR_MECA_F`](AFFE_CHAR_MECA_F.md)
   for loads defined by functions.
-- French reference: U4.31.01 (French text: `en/docs/_src/U4.31.01.fr.md`; translation: `en/docs/U4.31.01.md` once task 5.2 lands)
+- French reference: U4.31.01 (French text: `en/docs/_src/U4.31.01.fr.md`; translation: `en/docs/U4.31.01.md`)
 - Catalog: `en/commands/DEFI_CONSTANTE.json` (generated from `upstream/code_aster/Cata/Commands/defi_constante.py:26`)
 - Example: `upstream/astest/sslp100a.comm` (lines 28, 48)
 - Example: `upstream/astest/ssla103a.comm` (lines 26, 28, 30)

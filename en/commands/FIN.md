@@ -17,6 +17,8 @@ examples: [zzzz103b, sdld33a, supv002a]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation and upstream test cases. Every behavior claim cites its source. Not reviewed by
 > an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `FIN` is the last command of a command file. It saves the objects of the study (their Python
 side is pickled and their data saved in the `glob.*` database files) so that a later run can
@@ -87,12 +89,13 @@ FIN(RETASSAGE="OUI")
 - **`FIN` ends the study.** It closes the memory manager, and a second call returns at once (`upstream/code_aster/CodeCommands/fin.py:72`). Put
   post-processing before it.
 - **Python objects that cannot be pickled are not saved.** Only objects that exist in the
-  command file's context are saved for `POURSUITE`; TODO(verify) what happens to unpicklable
-  Python objects against U4.11.02 and `upstream/code_aster/Supervis/Serializer.py`.
+  command file's context are saved for `POURSUITE`. Classes, functions and types are never
+  saved (U4.11.02 §3); any other object that fails to pickle is skipped with the log warning
+  "object can not be pickled" (`upstream/code_aster/Supervis/Serializer.py:190`).
 
 ## See also
 
-- French reference: U4.11.02 (French text: `en/docs/_src/U4.11.02.fr.md`; translation: `en/docs/U4.11.02.md` once task 5.2 lands)
+- French reference: U4.11.02 (French text: `en/docs/_src/U4.11.02.fr.md`; translation: `en/docs/U4.11.02.md`)
 - Catalog: `en/commands/FIN.json` (generated from `upstream/code_aster/Cata/Commands/fin.py:44`)
 - Implementation: `upstream/code_aster/CodeCommands/fin.py`
 - Start: [DEBUT](DEBUT.md); restart: `POURSUITE`

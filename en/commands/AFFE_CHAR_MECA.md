@@ -17,6 +17,8 @@ examples: [ssls147a, sslv114a, ssll106a, hsns102a, sdnv108a, ssnv147l, ssls111a,
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `AFFE_CHAR_MECA` builds a mechanical load (`char_meca`) on a model: forces (pressure, surface,
 edge and nodal forces, gravity, rotation) and boundary conditions (imposed DOFs and linear
@@ -87,7 +89,7 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Read only for `FORCE_COQUE_FO`, to get the shell thickness (`upstream/bibfor/load/char_eval_fonc.F90:158`); not needed in Tier 1. |
 | `CHAM_MATER` | `cham_mater`, optional | — | *material field*. Read only for `FORCE_COQUE_FO`, to get the density (`upstream/bibfor/load/char_eval_fonc.F90:176`); not needed in Tier 1. Gravity and rotation take the density from the analysis's `CHAM_MATER`, not from here. |
 | `EVOL_CHAR` | `evol_char`, optional | — | A pressure field from another calculation (catalog translation): a result of type `evol_char`, typically read from a file. Out of Tier 1 scope. |
-| `DOUBLE_LAGRANGE` | text, optional | `'OUI'` | *double Lagrange multipliers*. One of `'OUI'`, `'NON'`. How many Lagrange multipliers each condition gets: two (the default) or one (`'NON'` marks the load `LAG1`, `upstream/bibfor/load/charme.F90:340`). Keep the default. TODO(verify) the trade-off (two multipliers keep the matrix factorizable without pivoting) against U4.44.01; the one test we saw that sets `'NON'` uses the PETSc solver (`upstream/astest/petsc05a.comm:61`). |
+| `DOUBLE_LAGRANGE` | text, optional | `'OUI'` | *double Lagrange multipliers*. One of `'OUI'`, `'NON'`. How many Lagrange multipliers each condition gets: two (the default) or one (`'NON'` marks the load `LAG1`, `upstream/bibfor/load/charme.F90:340`). Two multipliers let solvers that do not pivot factorize the matrix; one multiplier makes the problem smaller but works only with `MUMPS` and `PETSC` (U4.44.01 §4.2; `upstream/astest/petsc05a.comm:61`). Keep the default. |
 | `PESANTEUR` | factor keyword, optional | — | *gravity*. Gravity field (catalog translation). A body force RHO × `GRAVITE` × unit(`DIRECTION`) on every element (`upstream/bibfor/te/te0015.F90:81`); the material must give `RHO` (`DEFI_MATERIAU/ELAS`). One occurrence only. |
 | `PESANTEUR / GROUP_MA` | element group, optional, list | — | *element group*. Restrict gravity to these elements; without it, the whole model. |
 | `PESANTEUR / GRAVITE` | real, required | — | *gravitational acceleration*. The magnitude g, in the units of the model: 9.81 with m and s (`upstream/astest/hsns102a.comm:163`), 9810 with mm and s. |
@@ -98,7 +100,7 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `ROTATION / VITESSE` | real, required | — | *rotational speed*. The angular speed ω in radians per unit of time: the element routine squares it directly (`upstream/bibfor/te/te0014.F90:102`). Convert from rpm with ω = rpm × π / 30 (`upstream/astest/sdnv108a.comm:43`). |
 | `ROTATION / AXE` | real, required, list of up to 3, at least 2 | — | The direction of the rotation axis in global axes; normalized by the command, must not be zero (`CHARGES2_53`, `upstream/bibfor/load/carota.F90:100`). |
 | `ROTATION / CENTRE` | real, optional, list of up to 3, at least 2 | — | A point on the rotation axis. Default: the origin (`upstream/bibfor/load/char_read_vect.F90:52`). |
-| `DDL_IMPO` | factor keyword, optional, repeatable | — | *imposed DOF*. Imposes one or more values of displacement (or of some associated quantities) on nodes (catalog translation). The usual supports: each given component of each selected node is set to the value, by a Lagrange multiplier. Repeat it for each support. A node and DOF given twice in one load keeps one relation, the last (`upstream/bibfor/modelisa/ordlrl.F90:59`; listed under `CHARGES2_34` with `INFO=2`); TODO(verify) that the comparison includes the value. |
+| `DDL_IMPO` | factor keyword, optional, repeatable | — | *imposed DOF*. Imposes one or more values of displacement (or of some associated quantities) on nodes (catalog translation). The usual supports: each given component of each selected node is set to the value, by a Lagrange multiplier. Repeat it for each support. A node and DOF given twice in one load keeps one relation, the last (`upstream/bibfor/modelisa/ordlrl.F90:59`; listed under `CHARGES2_34` with `INFO=2`). The comparison looks at the nodes, DOFs and coefficients, not at the imposed value, so the last value wins (`ordlrl.F90:381`–`:413`; the overloading rule of U4.44.01 §3.8). |
 | `DDL_IMPO / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. Every node of the mesh. |
 | `DDL_IMPO / GROUP_NO` | node group, optional, list | — | *node group*. These nodes: points and node sets (`tests/fixtures/shell_static/input/run.comm:47`). |
 | `DDL_IMPO / GROUP_MA` | element group, optional, list | — | *element group*. The nodes of these elements: the usual way to fix a face or an edge (`tests/fixtures/solid_static/input/run.comm:29`). |
@@ -111,17 +113,17 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `DDL_IMPO / DRX` | real, optional | — | Rotation about global X, in radians. Exists only on nodes with rotational DOFs (shells, beams, discrete `DIS_TR`). |
 | `DDL_IMPO / DRY` | real, optional | — | Rotation about global Y, in radians. |
 | `DDL_IMPO / DRZ` | real, optional | — | Rotation about global Z, in radians. |
-| `DDL_IMPO / GRX` | real, optional | — | A beam DOF not described in the catalog comment. TODO(verify) its meaning (cross-section warping of the `POU_D_TG` beam) against U4.44.01. Not used in Tier 1. |
+| `DDL_IMPO / GRX` | real, optional | — | Warping of the `POU_D_TG` beam (U4.44.01 §5.1). Not used in Tier 1. |
 | `DDL_IMPO / DRGX` | real, optional | — | Rotation of the grids of the fuel-assembly beam element, about X (catalog comment). Out of scope. |
 | `DDL_IMPO / DRGY` | real, optional | — | Same, about Y. Out of scope. |
 | `DDL_IMPO / DRGZ` | real, optional | — | Same, about Z. Out of scope. |
-| `DDL_IMPO / PRES` | real, optional | — | A pressure DOF; not described in the catalog comment. TODO(verify) which modelings carry it (fluid, incompressible formulations) against U4.44.01. Not used in Tier 1. Not the `PRES_REP` load. |
+| `DDL_IMPO / PRES` | real, optional | — | A pressure DOF: acoustic pressure of `3D_FLUIDE` (u–p–φ and u–p formulations), pore pressure of `3D_JOINT_CT`, or the Lagrange multiplier of the second-gradient mixed formulation (U4.44.01 §5.1). Not used in Tier 1. Not the `PRES_REP` load. |
 | `DDL_IMPO / PSI` | real, optional | — | Fluid velocity potential (catalog comment). Out of scope. |
 | `DDL_IMPO / PHI` | real, optional | — | Depending on the modeling, a fluid displacement potential, a crack angle or a shear angle of the `PLAQ_MITC` plate (catalog comment). Out of scope. |
 | `DDL_IMPO / TEMP` | real, optional | — | *temperature*. A temperature DOF of the mechanical quantity (catalog comment «DDL de temperature»), carried by coupled modelings such as THM. Not a thermal load: a temperature field acting on the structure goes in `AFFE_MATERIAU/AFFE_VARC`. |
 | `DDL_IMPO / PRE1` | real, optional | — | First pressure DOF of coupled hydro-mechanical (THM) modelings (catalog comment: «DDL de pression»). Out of scope. |
 | `DDL_IMPO / PRE2` | real, optional | — | Second pressure DOF of THM modelings. Out of scope. |
-| `DDL_IMPO / GONF` | real, optional | — | Not described in the catalog comment. TODO(verify) its meaning (swelling DOF of incompressible formulations) against U4.44.01. Out of scope. |
+| `DDL_IMPO / GONF` | real, optional | — | Swelling DOF of the incompressible (`_INCO_UPG`) and second-gradient formulations (U4.44.01 §5.1). Out of scope. |
 | `DDL_IMPO / GLIS` | real, optional | — | Relative tangential displacement (slip), in a local basis (catalog comment). Out of scope. |
 | `DDL_IMPO / LH1` | real, optional | — | Lagrange multiplier of the pressure across a crack in HM-XFEM (catalog comment). Out of scope. |
 | `DDL_IMPO / LAG_GV` | real, optional | — | A Lagrange multiplier of some formulations (catalog comment: «méthode plaq_mitc»). Out of scope. |
@@ -153,7 +155,7 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `LIAISON_DDL / COEF_MULT` | real, required, list | — | *multiplying coefficients*. The coefficient of each term, one per DOF (`MODELISA8_46` otherwise). |
 | `LIAISON_DDL / COEF_IMPO` | real, required | — | *imposed value*. The right-hand side of the relation; 0 for a homogeneous relation. |
 | `LIAISON_MAIL` | factor keyword, optional, repeatable | — | *mesh tie (bonded)*. Defines linear relations that join two boundaries of a structure (catalog translation). Each secondary node is projected onto the main elements, and its DOFs are tied to the interpolated DOFs of the element it falls in, so the two parts move together without sharing nodes (`upstream/bibfor/load/LoadKinematic_module.F90:84`). Use it to bond parts meshed separately (`upstream/astest/ssnv106a.comm:119`) or a shell to a solid. Tier 2. |
-| `LIAISON_MAIL / GROUP_MA_MAIT` | element group, optional, list | — | *main element group*. The elements the secondary nodes are projected onto. For `TYPE_RACCORD='MASSIF'`, the elements of the main part (the projection is element to element in the model dimension, `upstream/bibfor/load/LoadKinematic_module.F90:542`); TODO(verify) whether a group of face elements is accepted. |
+| `LIAISON_MAIL / GROUP_MA_MAIT` | element group, optional, list | — | *main element group*. The elements the secondary nodes are projected onto. For `TYPE_RACCORD='MASSIF'`, the elements of the main part (the projection is element to element in the model dimension, `upstream/bibfor/load/LoadKinematic_module.F90:542`); Give the solid elements next to the interface, not its faces: in 3D volume elements, in 2D surface elements (U4.44.01 §5.3.2). Giving too many candidates is harmless. |
 | `LIAISON_MAIL / GROUP_MA_ESCL` | element group, optional, list | — | *secondary element group*. The nodes of these elements are the tied nodes. Usually the contact face of the secondary part. |
 | `LIAISON_MAIL / GROUP_NO_ESCL` | node group, optional, list | — | *secondary node group*. The tied nodes, given directly. |
 | `LIAISON_MAIL / DISTANCE_MAX` | real, optional | — | *maximum distance*. Nodes farther than this from every main element are not tied. Without it, every secondary node is tied, however far (message `CALCULEL5_48`). Set it to a small multiple of the gap between the meshes so that nodes that are not on the interface are not tied by mistake (`upstream/astest/sslv200a.comm:440`). |
@@ -162,13 +164,13 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `LIAISON_MAIL / TRANSF_GEOM_MAIT` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional, list of up to 3, at least 3 | — | Three functions fx, fy, fz that define the geometric transformation applied to the nodes of the main (MAITRE) elements before the connection (catalog translation). Only when `equal_to("TYPE_RACCORD", 'COQUE')`. For shells whose mid-surfaces do not meet. |
 | `LIAISON_MAIL / TRANSF_GEOM_ESCL` | `fonction_sdaster` or `nappe_sdaster` or `formule`, optional, list of up to 3, at least 3 | — | Three functions fx, fy, fz that define the geometric transformation applied to the nodes of the secondary (ESCLAVE) elements before the connection (catalog translation). Only when `equal_to("TYPE_RACCORD", 'COQUE')`. |
 | `LIAISON_MAIL / DDL` | text, optional, list of up to 6 | — | The DOFs included in the connection (default: all the shell DOFs) (catalog translation). One of `'DX'`, `'DY'`, `'DZ'`, `'DRX'`, `'DRY'`, `'DRZ'`. Only when `equal_to("TYPE_RACCORD", 'COQUE')`. |
-| `LIAISON_MAIL / TRAN` | real, optional, list of up to 3 | — | Only when `equal_to("TYPE_RACCORD", 'MASSIF')`. With `ANGL_NAUT` and `CENTRE`, a rigid transformation that maps the secondary nodes onto the main side before projection (the read is `kineLoadReadTransf`, `upstream/bibfor/load/LoadKinematic_module.F90:184`). Here `TRAN` is the translation. For periodic or repeated parts. TODO(verify) the order of rotation and translation against U4.44.01. |
+| `LIAISON_MAIL / TRAN` | real, optional, list of up to 3 | — | Only when `equal_to("TYPE_RACCORD", 'MASSIF')`. With `ANGL_NAUT` and `CENTRE`, a rigid transformation that maps the secondary nodes onto the main side before projection (the read is `kineLoadReadTransf`, `upstream/bibfor/load/LoadKinematic_module.F90:184`). Here `TRAN` is the translation. For periodic or repeated parts. The rotation is applied first, then the translation, and the transformation goes from the secondary side to the main side (U4.44.01 §5.13.3). |
 | `LIAISON_MAIL / ANGL_NAUT` | real, optional, list of up to 3 | — | Only when `equal_to("TYPE_RACCORD", 'MASSIF')`. The rotation of that transformation, as nautical angles in degrees. |
 | `LIAISON_MAIL / CENTRE` | real, optional, list of up to 3 | — | Only when `equal_to("TYPE_RACCORD", 'MASSIF')`. The center of that rotation. |
 | `LIAISON_MAIL / DDL` | text, optional, list | — | One of `'DX'`, `'DY'`, `'DZ'`, `'DRX'`, `'DRY'`, `'DRZ'`, `'PRES'`, `'PHI'`, `'GONF'`, `'TEMP'`, `'PRE1'`, `'PRE2'`, … (78 values; see the .json). Only when `equal_to("TYPE_RACCORD", 'MASSIF')`. The DOFs to tie (default: all DOFs of the secondary nodes). `'DNOR'` ties only the normal displacement and must be the only one (`CHARGES7_2`). |
 | `LIAISON_MAIL / EPAIS` | real, required | — | *thickness*. Only when `equal_to("TYPE_RACCORD", 'COQUE_MASSIF')`. The shell thickness, over which the shell edge is spread onto the solid. |
 | `LIAISON_MAIL / CHAM_NORMALE` | `cham_no_sdaster`, required | — | Only when `equal_to("TYPE_RACCORD", 'COQUE_MASSIF')`. A nodal field of the shell normals at the secondary nodes (`upstream/astest/ssls101m.comm:97`). |
-| `LIAISON_MAIL / ELIM_MULT` | text, optional | `'OUI'` | *skip already tied nodes*. One of `'OUI'`, `'NON'`. With `'OUI'`, a node already tied by an earlier occurrence is not tied again (`kineLoadElimMult`, `upstream/bibfor/load/LoadKinematic_module.F90:180`), which avoids redundant relations where two interfaces meet. TODO(verify) the exact rule against U4.44.01. |
+| `LIAISON_MAIL / ELIM_MULT` | text, optional | `'OUI'` | *skip already tied nodes*. One of `'OUI'`, `'NON'`. With `'OUI'`, a node already tied by an earlier occurrence is not tied again (`kineLoadElimMult`, `upstream/bibfor/load/LoadKinematic_module.F90:180`), which avoids redundant relations where two interfaces meet. With `'NON'` each occurrence is processed on its own, so a node shared by two secondary groups is tied twice and the factorization will probably stop on a zero pivot (U4.44.01 §5.13.3). |
 | `LIAISON_SOLIDE` | factor keyword, optional, repeatable | — | *rigid-body coupling*. Models a rigid part of a structure (catalog translation): the selected nodes keep their relative distances, as if joined by a rigid body. Use it for a stiff insert or a loading plate. The catalog help also mentions a `TRAN` keyword for imposing the rigid part's displacement, but there is none in 17.4.26 (`upstream/code_aster/Cata/Commands/affe_char_meca.py:673`). |
 | `LIAISON_SOLIDE / GROUP_NO` | node group, optional, list | — | *node group*. The nodes of the rigid part. |
 | `LIAISON_SOLIDE / GROUP_MA` | element group, optional, list | — | *element group*. The nodes of these elements. |
@@ -207,7 +209,7 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `FORCE_ARETE / FX` | real, optional | — | Force per unit length along global X (N/mm with N and mm). |
 | `FORCE_ARETE / FY` | real, optional | — | Force per unit length along global Y. |
 | `FORCE_ARETE / FZ` | real, optional | — | Force per unit length along global Z. |
-| `FORCE_ARETE / MX` | real, optional | — | Moment per unit length about global X; shell edges only. TODO(verify) which edge elements carry moments, against U4.44.01. |
+| `FORCE_ARETE / MX` | real, optional | — | Moment per unit length about global X; shell edges only. `FORCE_ARETE` applies to `DKT`, `DST`, `Q4G`, `COQUE_3D` and `3D`; only the shells have rotations to carry the moments (U4.44.01 §7.2). |
 | `FORCE_ARETE / MY` | real, optional | — | Moment per unit length about global Y. |
 | `FORCE_ARETE / MZ` | real, optional | — | Moment per unit length about global Z. |
 | `PRES_REP` | factor keyword, optional, repeatable | — | *distributed pressure*. Applies a pressure to a 2D or 3D continuum domain, or to a domain of shells and pipes (catalog translation). A pressure normal to the surface: on the boundary faces of a solid (`tests/fixtures/solid_static/input/run.comm:31`) or directly on shell elements (`tests/fixtures/shell_static/input/run.comm:53`). A positive value pushes against the normal (see [Signs and directions](#what-the-solver-does-with-it)). The normals are checked (`VERI_NORM`). |
@@ -215,7 +217,7 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `PRES_REP / GROUP_MA` | element group, optional, list | — | *element group*. The face elements of a solid (oriented with `MODI_MAILLAGE/ORIE_PEAU`), or the shell elements. |
 | `PRES_REP / FISSURE` | `fiss_xfem`, optional, list of up to 100 | — | A pressure on the lips of XFEM cracks. Out of scope (XFEM). |
 | `PRES_REP / PRES` | real, optional | — | The pressure, in the stress unit of the model (MPa with N and mm). Positive pushes against the face normal. |
-| `PRES_REP / CISA_2D` | real, optional | — | *in-plane shear*. A shear stress along the edge, for 2D models (`upstream/astest/sslp01a.comm:52`, with a function). TODO(verify) its sign convention against U4.44.01. |
+| `PRES_REP / CISA_2D` | real, optional | — | *in-plane shear*. A shear stress along the edge, for 2D models (`upstream/astest/sslp01a.comm:52`, with a function). Positive along the tangent of the edge, which runs from its first node to its second; for `AXIS`, `D_PLAN`, `C_PLAN` and `AXIS_FOURIER` (U4.44.01 §7.6, §3.9.1). |
 | `INFO` | integer, optional | `1` | *verbosity*. One of `1`, `2`. `2` prints more detail, for example the redundant relations that were removed (`CHARGES2_34`, `upstream/bibfor/modelisa/aflrch.F90:468`). |
 
 4 hidden keyword(s) (`statut='c'`, set by the code, not by users) are not listed.
@@ -549,7 +551,7 @@ Blocages = AFFE_CHAR_MECA(
 
 ## See also
 
-- French reference: U4.44.01 (French text: `en/docs/_src/U4.44.01.fr.md`; translation: `en/docs/U4.44.01.md` once task 5.2 lands)
+- French reference: U4.44.01 (French text: `en/docs/_src/U4.44.01.fr.md`; translation: `en/docs/U4.44.01.md`)
 - Catalog: `en/commands/AFFE_CHAR_MECA.json` (generated from `upstream/code_aster/Cata/Commands/affe_char_meca.py:50`)
 - Implementation: `upstream/code_aster/CodeCommands/affe_char_meca.py`;
   `upstream/bibfor/op/op0007.F90` → `upstream/bibfor/load/charme.F90`

@@ -17,6 +17,8 @@ examples: [gcpc002c, ssll118a, ssll101a, erreu02a, hsns102b, hsnv100a]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `CALC_CHAMP` adds fields to a result, computed from the fields the analysis stored: stresses at
 element nodes and averaged at nodes, equivalent stresses (von Mises, Tresca, principal
@@ -55,7 +57,7 @@ next table.
 | `CHAM_MATER` | `cham_mater`, optional | — | *material field*. Overrides the stored material field (`RESULT1_39`). Leave it out unless the result has none, for example a result read from a file. |
 | `CARA_ELEM` | `cara_elem`, optional | — | *element properties*. Overrides the stored element properties (`RESULT1_38`). Same advice. |
 | `RESULTAT` | `resultat_sdaster`, required | — | *result*. The result to complete (catalog: result of a global command). |
-| `TOUT_ORDRE` | text, optional | — | *all steps*. One of `'OUI'`. Compute at every step of the result. This is also what happens when no step is selected (TODO(verify) the default in `upstream/bibfor/calculel/cclord.F90`). |
+| `TOUT_ORDRE` | text, optional | — | *all steps*. One of `'OUI'`. Compute at every step of the result. This is also what happens when no step is selected (`TOUT_ORDRE` is the default of `upstream/bibfor/resu_util/rsutnu.F90:53`, called by `upstream/bibfor/op/op0052.F90:74`). For many steps, several calls on sub-lists can save memory (U4.81.04 §2.3). |
 | `NUME_ORDRE` | integer, optional, list | — | *step index*. Compute only at these steps (1-based storage indices). |
 | `NUME_MODE` | integer, optional, list | — | Compute only for these mode numbers of a modal result. |
 | `NOEUD_CMP` | text, optional, list | — | Selects static modes of a `MODE_STATIQUE` result by node and component name. Not used in Tier 1. |
@@ -85,12 +87,12 @@ next table.
 | `CHAM_UTIL` | factor keyword, optional, repeatable | — | *user-defined field*. Linear, dynamic, nonlinear, thermal and drying results. Builds a new field `UTnn_<location>` from an existing field, with a formula, a predefined criterion or a norm. To get a quantity code_aster does not provide, for example a resultant moment of a beam (`upstream/astest/ssll101a.comm:164`). |
 | `CHAM_UTIL / NOM_CHAM` | text, required | — | *field name*. The input field (catalog help), for example `'EFGE_ELNO'`; it must already exist or be computed in the same call (`upstream/astest/ssll101a.comm:165`). |
 | `CHAM_UTIL / FORMULE` | `formule`, optional, list | — | One or more `FORMULE` objects whose parameters are components of the input field (catalog help: formula that gives the criterion); each gives one component of the output (`upstream/astest/ssll101a.comm:114`). |
-| `CHAM_UTIL / CRITERE` | text, optional | — | One of `'TRACE'`, `'VMIS'`, `'INVA_2'`: a predefined criterion of the input tensor (catalog help). The glossary term for `CRITERE` (*tolerance type*) does not apply here. No upstream test case uses it; TODO(verify) against U4.81.04. |
-| `CHAM_UTIL / NORME` | text, optional | — | *norm*. One of `'L2'`, `'FROBENIUS'`: a predefined norm of the input field (catalog help). No upstream test case; TODO(verify). |
+| `CHAM_UTIL / CRITERE` | text, optional | — | One of `'TRACE'`, `'VMIS'`, `'INVA_2'`: a predefined criterion of the input tensor (catalog help). The glossary term for `CRITERE` (*tolerance type*) does not apply here. `'VMIS'` is for stress fields, `'INVA_2'` for strain fields, `'TRACE'` for either; the result is one component `X1` (U4.81.04 §2.10.2). No upstream test case uses it. |
+| `CHAM_UTIL / NORME` | text, optional | — | *norm*. One of `'L2'`, `'FROBENIUS'`: a predefined norm of the input tensor, integrated over each element, so the result is an `ELEM` field with one component `X1`; the two norms differ only by the off-diagonal terms (U4.81.04 §2.10.4). No upstream test case. |
 | `CHAM_UTIL / NUME_CHAM_RESU` | integer, required | — | Number of the output field: `1` gives `UT01_ELNO` for an `ELNO` input (catalog help; `upstream/astest/ssll101a.comm:173`). Range: ≥ 1, ≤ 20. |
 | `ACOUSTIQUE` | text, optional, list | — | *acoustic*. Dynamic and acoustic results. Acoustic intensity and pressure options. Out of scope. |
 | `EXCIT / PHAS_DEG` | real, optional | `0.0` | Harmonic results. Phase of the load, in degrees. Out of scope. |
-| `EXCIT / PUIS_PULS` | integer, optional | `0` | Harmonic results. Power of the angular frequency that multiplies the load. TODO(verify) against U4.81.04. Out of scope. |
+| `EXCIT / PUIS_PULS` | integer, optional | `0` | Harmonic results. Power of the angular frequency that multiplies the load (catalog; U4.81.04 §2.1.3 refers to the harmonic commands). Out of scope. |
 | `EXCIT / FONC_MULT_C` | `fonction_c` or `formule_c`, optional | — | Harmonic results. Complex multiplier function. Out of scope. |
 | `EXCIT / COEF_MULT_C` | complex, optional | — | Harmonic results. Complex constant multiplier. Out of scope. |
 | `SOUS_POINT` | text, optional, list | — | Nonlinear results. One of `'DEPL_ELGA'`, `'TEMP_ELGA'`: fields at the sub-points of multilayer shells or multifiber beams (catalog help). Out of scope. |
@@ -286,7 +288,7 @@ STAT1 = CALC_CHAMP(
 
 ## See also
 
-- French reference: U4.81.04 (French text: `en/docs/_src/U4.81.04.fr.md`; translation: `en/docs/U4.81.04.md` once task 5.2 lands)
+- French reference: U4.81.04 (French text: `en/docs/_src/U4.81.04.fr.md`; translation: `en/docs/U4.81.04.md`)
 - Catalog: `en/commands/CALC_CHAMP.json` (generated from `upstream/code_aster/Cata/Commands/calc_champ.py:38`)
 - Implementation: `upstream/code_aster/CodeCommands/calc_champ.py`; `upstream/bibfor/op/op0052.F90`,
   `upstream/bibfor/calculel/calcop.F90` (options and dependencies), `ccliop.F90`, `ccchno.F90`

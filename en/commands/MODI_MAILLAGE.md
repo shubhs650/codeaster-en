@@ -17,6 +17,8 @@ examples: [cont202a, cont203a, cont204a, sdlv127b, ssnv128e, sslx300a, zzzz164c,
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `MODI_MAILLAGE` changes an existing mesh in place and returns it. It does two kinds of work.
 The first, and the one a structural model nearly always needs, is **orientation**: making the
@@ -48,7 +50,7 @@ the orientations (`ORIE_PEAU`, `ORIE_NORM_COQUE`, `ORIE_LIGNE`), then `ABSC_CURV
 | Keyword | Type / cardinality | Default | Meaning and when to use |
 |---|---|---|---|
 | `MAILLAGE` | `maillage_sdaster`, required | — | *mesh*. The mesh to modify. It is modified in place and is also the result (`upstream/code_aster/CodeCommands/modi_maillage.py:38`), so pass the same name with `reuse=`. |
-| `ORIE_FISSURE` | factor keyword, optional | — | Orients the elements of a single-layer band, such as a band of joint or crack elements, so that their transverse direction is consistent. The band must be one element thick and rest on elements of the same dimension; otherwise the command stops with `ALGORITH2_30`. Use it on the interface band of joint elements (example: `upstream/astest/mfron07a.comm:34`). TODO(verify): the list of joint modeling types that require it, against U4.23.04. |
+| `ORIE_FISSURE` | factor keyword, optional | — | Orients the elements of a single-layer band, such as a band of joint or crack elements, so that their transverse direction is consistent. The band must be one element thick and rest on elements of the same dimension; otherwise the command stops with `ALGORITH2_30`. Use it on the interface band of joint elements (example: `upstream/astest/mfron07a.comm:34`). It serves the joint and interface modeling types `AXIS_xxx`, `PLAN_xxx` and `3D_xxx` with `xxx` = `JOINT` or `INTERFACE`; the band elements must be QUAD in 2D, HEXA or PENTA in 3D (U4.23.04 §3.3). |
 | `ORIE_FISSURE / GROUP_MA` | element group, required, list | — | *element group*. The element groups that form the band. |
 | `DEFORME` | factor keyword, optional | — | Moves the nodes: adds a displacement field to the coordinates, or perturbs them randomly. Use it to continue a study on a deformed geometry, or to shift a mesh (message `MAILLAGE1_3` suggests it to move an axisymmetric mesh into the half-plane X ≥ 0). |
 | `DEFORME / OPTION` | text, required | — | *option*. One of `'TRAN'`. The only option: the nodes are translated. |
@@ -79,7 +81,7 @@ the orientations (`ORIE_PEAU`, `ORIE_NORM_COQUE`, `ORIE_LIGNE`), then `ABSC_CURV
 | `ROTATION / ANGLE` | real, optional | `0.0` | Rotation angle in degrees (`upstream/bibfor/algorith/rotama.F90:64` converts it to radians). |
 | `ROTATION / POIN_2` | real, optional, list of up to 3, at least 2 | — | 3D only: a second point on the axis; the axis runs from `POIN_1` to `POIN_2`. Give this or `DIR`. |
 | `ROTATION / DIR` | real, optional, list of up to 3, at least 2 | — | 3D only: direction of the rotation axis through `POIN_1`. Give this or `POIN_2`. |
-| `SYMETRIE` | factor keyword, optional | — | Mirrors the mesh about a plane in 3D or a line in 2D. Use it to build the other half of a symmetric part. TODO(verify): whether element orientation (normals) is restored after mirroring, against U4.23.04. |
+| `SYMETRIE` | factor keyword, optional | — | Mirrors the mesh about a plane in 3D or a line in 2D. Use it to build the other half of a symmetric part. Only the node coordinates are mirrored; the connectivity is kept (`upstream/bibfor/op/op0154.F90:260`, `symema.F90`), so every mirrored element has its orientation reversed. Re-orient skins and shells afterward with `ORIE_PEAU` or `ORIE_NORM_COQUE`. Cannot be combined with `TRANSLATION`, `ROTATION`, `ECHELLE` or `MODI_BASE` (U4.23.04 §3.13). |
 | `SYMETRIE / POINT` | real, required, list of up to 3, at least 2 | — | *reference point*. Point on the line or on the plane. |
 | `SYMETRIE / AXE_1` | real, required, list of up to 3, at least 2 | — | Direction vector of the line, or first vector in the plane. It must have as many components as `POINT` (`MESH1_62`). |
 | `SYMETRIE / AXE_2` | real, optional, list of up to 3, at least 3 | — | Second vector in the plane. Required in 3D (`MESH1_64`); ignored with a warning in 2D (`MESH1_63`). |
@@ -205,7 +207,7 @@ MA[2] = MODI_MAILLAGE(MAILLAGE=MA[2], ROTATION=_F(POIN_1=(0.0, 0, 0), ANGLE=45, 
 
 ## See also
 
-- French reference: U4.23.04 (French text: `en/docs/_src/U4.23.04.fr.md`; translation: `en/docs/U4.23.04.md` once task 5.2 lands)
+- French reference: U4.23.04 (French text: `en/docs/_src/U4.23.04.fr.md`; translation: `en/docs/U4.23.04.md`)
 - Catalog: `en/commands/MODI_MAILLAGE.json` (generated from `upstream/code_aster/Cata/Commands/modi_maillage.py:51`)
 - Implementation: `upstream/bibfor/op/op0154.F90`; orientation `upstream/bibfor/modelisa/orilgm.F90`,
   `upstream/bibfor/mesh/mesh_modification_module.F90`

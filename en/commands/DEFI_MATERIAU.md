@@ -17,6 +17,8 @@ examples: [zzzz503g, zzzz505d, forma12b, zzzz118a, hplv102a, zzzz239a]
 > **Assisted reference.** Written in session from the pinned catalog, the command's Python
 > implementation, the solver source it calls, the message catalog, upstream test cases and the
 > committed fixture runs. Every behavior claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `DEFI_MATERIAU` defines one material (`mater_sdaster`): a named set of parameter groups, one
 factor keyword per behavior (`ELAS` for linear elasticity, `THER` for heat conduction,
@@ -59,10 +61,10 @@ below; the other factor keywords are listed under [Other keywords](#other-keywor
 | `ELAS / ALPHA` | real, optional | — | *thermal expansion coefficient*. In 1/°C (or 1/K). Gives a thermal strain ALPHA × (T − T_ref) wherever `AFFE_MATERIAU/AFFE_VARC` supplies a temperature T and its reference value T_ref (`VALE_REF`) (`upstream/bibfor/modelisa/verift.F90:264`). With no temperature assigned there is no thermal strain (`upstream/bibfor/modelisa/verift.F90:104`), so `ALPHA` alone changes nothing. |
 | `ELAS / AMOR_ALPHA` | real, optional | — | *stiffness-proportional damping coefficient*. Rayleigh damping: the element damping matrix is AMOR_ALPHA × K + AMOR_BETA × M (`upstream/bibfor/te/te0121.F90:174`; catalog translation "Stiffness damping"). Note the order: in code_aster the **alpha** coefficient multiplies the **stiffness**, the reverse of the common textbook notation C = αM + βK. For a damping ratio ξ at two frequencies f1 and f2, `upstream/astest/forma12b.comm:44` uses AMOR_ALPHA = ξ / (π (f1 + f2)). Used by dynamic analyses that build a damping matrix (`AMOR_MECA`). |
 | `ELAS / AMOR_BETA` | real, optional | — | *mass-proportional damping coefficient*. Multiplies the mass matrix in the Rayleigh damping matrix (catalog translation "Mass damping"); `upstream/astest/forma12b.comm:46` uses AMOR_BETA = 4 π ξ f1 f2 / (f1 + f2). |
-| `ELAS / AMOR_HYST` | real, optional | — | Hysteretic damping coefficient (catalog translation "Hysteretic damping"). TODO(verify) how it enters the complex stiffness of harmonic analyses, against U4.43.01. |
-| `ELAS / K_DESSIC` | real, optional | `0.0` | Drying-shrinkage coefficient ("retrait de dessiccation", `upstream/bibfor/comport/nmisot.F90:266`). Concrete only; leave at 0. TODO(verify) the strain law and the drying variable (`SECH`) against U4.43.01. |
-| `ELAS / B_ENDOGE` | real, optional | `0.0` | Autogenous-shrinkage coefficient ("retrait endogène", same source). Concrete only; leave at 0. TODO(verify) the strain law and the hydration variable (`HYDR`) against U4.43.01. |
-| `ELAS / LONG_CARA` | real, optional | — | *characteristic length*. Range: ≥ 0.0. Read with `COEF_AMOR` by the absorbing-boundary elements (`*_ABSO` modelings, `upstream/bibfor/te/te0553.F90:64`). Not used in Tier 1. TODO(verify) its role against U4.43.01. |
+| `ELAS / AMOR_HYST` | real, optional | — | Hysteretic damping coefficient (catalog translation "Hysteretic damping"). It defines a complex Young's modulus (viscoelastic material), from which the complex stiffness matrix of harmonic responses is built (U4.43.01 §4.1.5; theory in R5.05.04). |
+| `ELAS / K_DESSIC` | real, optional | `0.0` | Drying-shrinkage coefficient ("retrait de dessiccation", `upstream/bibfor/comport/nmisot.F90:266`). Concrete only (U4.43.01 §4.1.7); leave at 0. The strain is −`K_DESSIC` × (`SREF` − `SECH`), with `SECH` the drying external state variable, added to the thermal strain (`upstream/bibfor/comport/nmisot.F90:399`). |
+| `ELAS / B_ENDOGE` | real, optional | `0.0` | Autogenous-shrinkage coefficient ("retrait endogène", same source). Concrete only (U4.43.01 §4.1.7); leave at 0. The strain is −`B_ENDOGE` × `HYDR`, with `HYDR` the hydration external state variable, added to the thermal strain (`upstream/bibfor/comport/nmisot.F90:399`). |
+| `ELAS / LONG_CARA` | real, optional | — | *characteristic length*. Range: ≥ 0.0. Read with `COEF_AMOR` by the absorbing-boundary elements (`*_ABSO` modelings, `upstream/bibfor/te/te0553.F90:64`). The characteristic length L of the springs spread along an absorbing boundary (stiffness from λ + 2μ and μ divided by L); without it no stiffness is added there (U4.43.01 §4.1.6; theory in R4.02.05). Not used in Tier 1. |
 | `ELAS / COEF_AMOR` | real, optional | `1.0` | *damping coefficient*. Read by the absorbing-boundary elements with `LONG_CARA` (same source). Not used in Tier 1. |
 | `ELAS_FO` | factor keyword, optional | — | *linear elastic (temperature-dependent)*. Isotropic linear elasticity whose parameters are functions, usually of temperature (`DEFI_FONCTION(NOM_PARA='TEMP', ...)`) or constants from `DEFI_CONSTANTE`. The function is evaluated at the value of its parameter, which `AFFE_MATERIAU/AFFE_VARC` supplies. Use it when the properties vary over the temperature range of the analysis. |
 | `ELAS_FO / E` | `fonction_sdaster` or `nappe_sdaster` or `formule`, required | — | *Young's modulus*. Function of the state variable(s). |
@@ -502,7 +504,7 @@ acier = DEFI_MATERIAU(ELAS=_F(E=200000.0, NU=0.3), ECRO_LINE=_F(D_SIGM_EPSI=2000
 
 ## See also
 
-- French reference: U4.43.01 (French text: `en/docs/_src/U4.43.01.fr.md`; translation: `en/docs/U4.43.01.md` once task 5.2 lands)
+- French reference: U4.43.01 (French text: `en/docs/_src/U4.43.01.fr.md`; translation: `en/docs/U4.43.01.md`)
 - Catalog: `en/commands/DEFI_MATERIAU.json` (generated from `upstream/code_aster/Cata/Commands/defi_materiau.py:51`)
 - Implementation: `upstream/code_aster/CodeCommands/defi_materiau.py` (conversion of `K`/`MU` and
   `CELE_P`/`CELE_S`); re-basing of `ALPHA` `upstream/bibfor/mate_util/alfint.F90`; thermal strain

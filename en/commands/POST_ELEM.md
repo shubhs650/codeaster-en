@@ -17,6 +17,8 @@ examples: [adlv312a, forma20a, perfe03a, petsc02f, ssll111a, cont006c, ssll107b]
 > **Assisted reference.** Written in session from the pinned catalog, the solver source it
 > calls, the message catalog, upstream test cases and the committed fixture runs. Every behavior
 > claim cites its source. Not reviewed by an engineer.
+> Citations such as "U4.44.01 §3.8" are sections of the official French documents (v16
+> edition, `en/docs/_src/`); where one disagrees with the pinned catalog or solver source, the code wins.
 
 `POST_ELEM` computes one global quantity over all or part of the model and writes it to a
 table (`table_sdaster`): mass and inertia, an energy, the integral or mean of a field, its
@@ -83,7 +85,7 @@ once per option group, in catalog order.
 | `NUME_MODE` | integer, optional, list | — | Only when `exists("ENER_POT")`; or `exists("ENER_CIN")`. These modes only. |
 | `NOEUD_CMP` | text, optional, list | — | Only when `exists("ENER_POT")`; or `exists("ENER_CIN")`. These static modes. Not used in Tier 1. |
 | `NOM_CAS` | text, optional, list | — | Only when `exists("ENER_POT")`; or `exists("ENER_CIN")`. These load cases. Not used in Tier 1. |
-| `ENER_CIN` | factor keyword, optional, repeatable | — | Kinetic energy, from a velocity field or, for a modal result, from the mode shape and its frequency (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:202`). TODO(verify) the output columns and the modal convention against U4.81.22. |
+| `ENER_CIN` | factor keyword, optional, repeatable | — | Kinetic energy, from a velocity field or, for a modal result, from the mode shape and its frequency (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:202`). From a velocity V it is ½ VᵀMV; from a displacement or mode shape U with a frequency it is ½ ω² UᵀMU, ω the angular frequency. Columns `INST`, `LIEU`, `ENTITE`, `TOTALE`, `POUR_CENT` (U4.81.22 §3.10, French only). |
 | `ENER_CIN / OPTION` | text, optional | `'MASS_MECA'` | *option*. One of `'MASS_MECA'`, `'MASS_MECA_DIAG'`. The mass matrix used: consistent (`'MASS_MECA'`) or lumped (`'MASS_MECA_DIAG'`). |
 | `ENER_CIN / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `ENER_CIN / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
@@ -92,7 +94,7 @@ once per option group, in catalog order.
 | `ENER_DISS / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `ENER_DISS / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `RESULTAT` | `evol_noli`, required | — | *result*. Only when `exists("ENER_DISS")`; or `exists("ENER_TOTALE")`; or `exists("INDIC_ENER")`; or `exists("INDIC_SEUIL")`; or `exists("CHAR_LIMITE")`. The nonlinear result (`evol_noli`) to post-process. |
-| `ENER_ELAS` | factor keyword, optional, repeatable | — | Elastic strain energy (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:289`). For linear results it matches `ENER_POT`; for nonlinear results it is the elastic part only. TODO(verify) against U4.81.22. |
+| `ENER_ELAS` | factor keyword, optional, repeatable | — | Elastic strain energy (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:289`). For linear results it matches `ENER_POT`; for nonlinear results it is the elastic part only (½ ∫ σ : D⁻¹ : σ in small strains). Columns `TOTALE` and, on plates and shells, `MEMBRANE`, `FLEXION`, `CISAILLE`, `COUPL_MF`; several groups add a `UNION_GROUP_MA` row (U4.81.22 §3.11, French only). |
 | `ENER_ELAS / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `ENER_ELAS / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `RESULTAT` | `evol_noli` or `evol_elas`, required | — | *result*. Only when `exists("ENER_ELAS")`; or `exists("ENER_ELTR")`. The result (`evol_elas` or `evol_noli`) to post-process. |
@@ -108,7 +110,7 @@ once per option group, in catalog order.
 | `INTEGRALE / NOM_CHAM` | text, optional | — | *field name*. One of `'ACCE'`, `'ACCE_ABSOLU'`, `'COEF_H'`, `'COMPORTEMENT'`, `'COMPORTHER'`, `'CONT_ELEM'`, `'CONT_NOEU'`, `'DEGE_ELGA'`, `'DEGE_ELNO'`, `'DEGE_NOEU'`, `'DEPL'`, `'DEPL_ABSOLU'`, … (233 values; see the .json). The field of `RESULTAT` to integrate; required with `RESULTAT` (`POSTELEM_4`). `FORC_NODA` and `REAC_NODA` are refused: nodal forces are not a distributed quantity (`POSTELEM_5`, `upstream/bibfor/utilitai/peeint.F90:297`). |
 | `INTEGRALE / NOM_CMP` | text, optional, list | — | *component name*. The components to integrate, for example `'SIZZ'` (`upstream/astest/perfe03a.comm:260`). A component absent on the selected elements is fatal (`UTILITAI7_12`). |
 | `INTEGRALE / NOM_VARI` | text, optional, list | — | Internal variables to integrate, by name instead of `V1`, `V2`, …. Only with `RESULTAT`, not with `CHAM_GD` (`POSTELEM_6`). |
-| `INTEGRALE / DEJA_INTEGRE` | text, optional | — | One of `'OUI'`, `'NON'`. For element fields (`_ELEM`) only, and then required (`UTILITAI7_13`, `upstream/bibfor/utilitai/peecal.F90:157`): `'OUI'` if the element value is already an integral over the element (it is summed), `'NON'` if it is a density (it is weighted by the element measure) (`upstream/bibfor/utilitai/chpond.F90:221`). TODO(verify) the weighting against U4.81.22. |
+| `INTEGRALE / DEJA_INTEGRE` | text, optional | — | One of `'OUI'`, `'NON'`. For element fields (`_ELEM`) only, and then required (`UTILITAI7_13`, `upstream/bibfor/utilitai/peecal.F90:157`): `'OUI'` if the element value is already an integral over the element (it is summed), `'NON'` if it is a density (it is weighted by the element measure) (`upstream/bibfor/utilitai/chpond.F90:221`). It tells truly constant fields from fields already integrated over the element, such as energies (U4.81.22 §3.23.3, French only). |
 | `INTEGRALE / TYPE_MAILLE` | text, required | — | One of `'1D'`, `'2D'`, `'3D'`. Keep only the elements of this dimension among those selected: `'3D'` volumes, `'2D'` faces, `'1D'` edges (`upstream/bibfor/utilitai/peeint.F90:160`). The count removed is printed (`PREPOST2_7`); none left is fatal (`PREPOST2_8`). Required, so that skin elements do not dilute a volume mean. |
 | `RESULTAT` | `evol_noli` or `evol_ther` or `evol_elas` or `evol_char` or `evol_sech`, optional | — | *result*. Only when `exists("INTEGRALE")`; or `exists("VOLUMOGRAMME")`. The result that holds the field to integrate or bin. |
 | `VOLUMOGRAMME` | factor keyword, optional, repeatable | — | *volume distribution of a component*. Distribution of the volume of the selected elements over intervals of one component: how much of the structure is above a stress level (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:432`). Table columns `INTERVALLE`, `BORNE_INF`, `BORNE_SUP`, `DISTRIBUTION` per interval (`upstream/bibfor/utilitai/pevolu.F90:190`). |
@@ -121,17 +123,17 @@ once per option group, in catalog order.
 | `VOLUMOGRAMME / NB_INTERV` | integer, optional | — | Number of equal intervals between the bounds. |
 | `VOLUMOGRAMME / SEUIL` | real, optional | — | *threshold*. A single threshold: two intervals, below and above it (`upstream/bibfor/utilitai/pevolu.F90:408`). |
 | `VOLUMOGRAMME / BORNES` | real, optional, list of up to 2, at least 2 | — | Lower and upper bound of the intervals; by default the minimum and maximum of the component (`upstream/bibfor/utilitai/pevolu.F90:414`). |
-| `VOLUMOGRAMME / NORME` | text, optional | `'RELATIF'` | *norm*. One of `'RELATIF'`, `'ABSOLU'`. `'RELATIF'`: the distribution as a percentage of the total volume; `'ABSOLU'`: as a volume. TODO(verify) against U4.81.22. |
+| `VOLUMOGRAMME / NORME` | text, optional | `'RELATIF'` | *norm*. One of `'RELATIF'`, `'ABSOLU'`. `'RELATIF'`: the `DISTRIBUTION` column is a percentage (0 to 100) of the total volume; `'ABSOLU'`: the volume of each interval, in mesh units (U4.81.22 §3.26.3). |
 | `NORME` | factor keyword, optional | — | *norm*. Computes the spatial extrema of one component of a field, for every requested time step. The catalog help ("spatial extrema of one component") is copied from `MINMAX` and is wrong here: the command writes a norm of the field over the selected elements, column `VALE_NORM`, with `TYPE_NORM` (`upstream/bibfor/utilitai/penorm.F90:225`). Used to measure the difference between two fields (`upstream/astest/cont006c.comm:302`). |
 | `NORME / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `NORME / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `NORME / TYPE_MAILLE` | text, optional | — | One of `'2D'`, `'3D'`. Keep only elements of this dimension. |
-| `NORME / TYPE_NORM` | text, optional | — | One of `'L2'`, `'FROBENIUS'`. `'L2'`: square root of the integral of the squared components; `'FROBENIUS'`: Frobenius norm of a tensor field. TODO(verify) against U4.81.22. |
+| `NORME / TYPE_NORM` | text, optional | — | One of `'L2'`, `'FROBENIUS'`. `'L2'`: square root of the integral of the squared components; `'FROBENIUS'`: Frobenius norm of a tensor field; as in `CALC_CHAMP`, the two differ by the off-diagonal terms. Continuum elements only; the fields accepted are `DEPL`, `TEMP`, `NEUT_R`, `FLUX`, `SIEF` and `EPSI` (U4.81.22 §3.27). |
 | `NORME / RESULTAT` | `evol_noli` or `evol_ther` or `evol_elas` or `evol_sech`, optional | — | *result*. The result that holds the field. |
 | `NORME / NOM_CHAM` | text, optional | — | *field name*. One of `'DEPL'`, `'TEMP'`, `'SECH'`, `'NEUT_R'`, `'FLUX_ELGA'`, `'FLUX_ELNO'`, `'FLUX_NOEU'`, `'EPSI_ELGA'`, `'EPSI_ELNO'`, `'EPSI_NOEU'`, `'SIEF_ELGA'`, `'SIEF_ELNO'`, … (13 values; see the .json). The field of `RESULTAT`; required with `RESULTAT` (rule). |
 | `NORME / CHAM_GD` | `cham_no_sdaster` or `cham_elem`, optional | — | *field (physical quantity)*. A field object instead of a result; then `MODELE` is required (rule). |
 | `NORME / MODELE` | `modele_sdaster`, optional | — | *model*. The model, required with `CHAM_GD`. |
-| `NORME / COEF_MULT` | real, optional, list of up to 30 | — | *multiplying coefficients*. Only when `exists("CHAM_GD")`. Weights applied to the components before the norm, one per component. TODO(verify) against U4.81.22. |
+| `NORME / COEF_MULT` | real, optional, list of up to 30 | — | *multiplying coefficients*. Only when `exists("CHAM_GD")`. Weights of the components of a `NEUT_R` field, one per component; default 1, and a short list is padded with zeros (U4.81.22 §3.27.3). |
 | `NORME / CRITERE` | text, optional | `'RELATIF'` | *tolerance type*. One of `'RELATIF'`, `'ABSOLU'`. Only when `exists("RESULTAT")`. How `INST` is matched. |
 | `NORME / PRECISION` | real, optional | `1e-06` | *tolerance*. Only when `exists("RESULTAT") and equal_to("CRITERE", 'RELATIF')`. Matching tolerance. |
 | `NORME / PRECISION` | real, required | — | *tolerance*. Only when `exists("RESULTAT") and equal_to("CRITERE", 'ABSOLU')`. Matching tolerance, required with `'ABSOLU'`. |
@@ -160,14 +162,14 @@ once per option group, in catalog order.
 | `WEIBULL / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `WEIBULL / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `WEIBULL / OPTION` | text, optional | `'SIGM_ELGA'` | *option*. One of `'SIGM_ELGA'`, `'SIGM_ELMOY'`. Stress at Gauss points (`'SIGM_ELGA'`) or averaged per element (`'SIGM_ELMOY'`). |
-| `WEIBULL / CORR_PLAST` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Plastic strain correction. TODO(verify) against U4.81.22. |
-| `WEIBULL / COEF_MULT` | real, optional | `1.0` | *multiplying coefficients*. Multiplier applied to the result (for example for symmetry). TODO(verify) against U4.81.22. |
+| `WEIBULL / CORR_PLAST` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. `'OUI'`: the Weibull stress accounts for the plastic strain (U4.81.22 §3.14.3.2). |
+| `WEIBULL / COEF_MULT` | real, optional | `1.0` | *multiplying coefficients*. Symmetry and thickness coefficient: for `3D`, 2 with the defect plane on a symmetry plane, 4 with half the defect meshed, 1 without symmetry; 2D values involve the thickness (U4.81.22 §3.14.3.3). |
 | `RESULTAT` | `evol_noli`, optional | — | *result*. Only when `exists("WEIBULL")`; or `exists("RICE_TRACEY")`. The nonlinear result to post-process. |
 | `RICE_TRACEY` | factor keyword, optional, repeatable | — | Growth rate of a spherical cavity (Rice and Tracey ductile fracture model) over a domain (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:614`). Not used in Tier 1. |
 | `RICE_TRACEY / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `RICE_TRACEY / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `RICE_TRACEY / OPTION` | text, optional | `'SIGM_ELGA'` | *option*. One of `'SIGM_ELGA'`, `'SIGM_ELMOY'`. Stress at Gauss points or averaged per element. |
-| `RICE_TRACEY / LOCAL` | text, optional | `'OUI'` | *local axes*. One of `'OUI'`, `'NON'`. Local (per point) or averaged computation. TODO(verify) against U4.81.22. |
+| `RICE_TRACEY / LOCAL` | text, optional | `'OUI'` | *local axes*. One of `'OUI'`, `'NON'`. `'OUI'`: the law is integrated on each element and the largest result is kept; `'NON'`: on the volume-weighted means of triaxiality and plastic strain over the domain (U4.81.22 §3.15.3.2). |
 | `INDIC_ENER` | factor keyword, optional, repeatable | — | Global indicator of loss of load proportionality, energy based (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:651`). Not used in Tier 1. |
 | `INDIC_ENER / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `INDIC_ENER / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
@@ -175,19 +177,19 @@ once per option group, in catalog order.
 | `INDIC_SEUIL / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole model. |
 | `INDIC_SEUIL / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
 | `CHAR_LIMITE` | factor keyword, optional | — | Post-processing of a limit load analysis (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:706`). Not used in Tier 1. |
-| `CHAR_LIMITE / CHAR_CSTE` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Whether a constant (non-piloted) load is present. TODO(verify) against U4.81.22. |
+| `CHAR_LIMITE / CHAR_CSTE` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Whether the load is constant (`'OUI'`) or not (U4.81.22 §3.18.3). |
 | `CARA_GEOM` | factor keyword, optional, repeatable | — | Geometric properties of a beam cross-section meshed in 2D (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:739`): area `A`, center of gravity, second moments `IY_G`, `IZ_G`, `IYZ_G`, principal axes, extreme fibers (`Y_MAX`, …, `R_MAX`) (`upstream/bibfor/utilitai/pecage.F90:73`). Feeds `CARA_POUTRE` and `AFFE_CARA_ELEM` for a beam model. Not in the Tier 1 workflow. |
 | `CARA_GEOM / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole section. |
 | `CARA_GEOM / GROUP_MA` | element group, optional, list | — | *element group*. These groups (`upstream/astest/ssll107b.comm:229`). |
-| `CARA_GEOM / SYME_X` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. `'OUI'`: the mesh is half of a section symmetric about the X axis; properties are given for the full section (`upstream/astest/ssll107b.comm:40`). TODO(verify) against U4.81.22. |
+| `CARA_GEOM / SYME_X` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. `'OUI'`: the mesh is half of a section symmetric about the X axis; properties are given for the full section; `SYME_X` and `SYME_Y` together mean a quarter (U4.81.22 §3.19.3.2; `upstream/astest/ssll107b.comm:40`). |
 | `CARA_GEOM / SYME_Y` | text, optional | `'NON'` | One of `'OUI'`, `'NON'`. Same, for symmetry about the Y axis. |
 | `CARA_GEOM / ORIG_INER` | real, optional, list of up to 2, at least 2 | — | A point (Y, Z) about which second moments are also given (`Y_P`, `Z_P`, `IY_P`, …). |
 | `CARA_POUTRE` | factor keyword, optional | — | Mechanical properties of a beam section: torsion constant, shear areas, warping (catalog help at `upstream/code_aster/Cata/Commands/post_elem.py:767`), from the `CARA_GEOM` table and thermal analogy solutions. Not in the Tier 1 workflow; the `MACR_CARA_POUTRE` macro wraps it. |
 | `CARA_POUTRE / TOUT` | text, optional | — | *all (entire mesh)*. One of `'OUI'`. The whole section. |
 | `CARA_POUTRE / GROUP_MA` | element group, optional, list | — | *element group*. These groups. |
-| `CARA_POUTRE / GROUP_MA_INTE` | element group, optional, list | — | Boundaries of internal holes of the section. TODO(verify) against U4.81.22. |
+| `CARA_POUTRE / GROUP_MA_INTE` | element group, optional, list | — | Boundaries of internal holes of the section. `CARA_POUTRE` is reserved for `MACR_CARA_POUTRE` and its operands are not documented (U4.81.22 §3.20). |
 | `CARA_POUTRE / CARA_GEOM` | `table_sdaster`, required | — | The table from a previous `POST_ELEM` `CARA_GEOM` call. |
-| `CARA_POUTRE / RT` | real, optional | — | Radius used for the torsional stress. TODO(verify) against U4.81.22. |
+| `CARA_POUTRE / RT` | real, optional | — | Torsion radius, used for the torsional stress; reserved for `MACR_CARA_POUTRE` (U4.81.22 §3.20). |
 | `CARA_POUTRE / LAPL_PHI` | `evol_ther`, optional | — | Thermal-analogy solution for the torsion function. |
 | `CARA_POUTRE / LAPL_PHI_Y` | `evol_ther`, optional | — | Thermal-analogy solution for shear along Y. |
 | `CARA_POUTRE / LAPL_PHI_Z` | `evol_ther`, optional | — | Thermal-analogy solution for shear along Z. |
@@ -400,7 +402,7 @@ TCARS = POST_ELEM(MODELE=MO, CHAM_MATER=CHMAT, CARA_GEOM=_F(TOUT="OUI", SYME_X="
 
 ## See also
 
-- French reference: U4.81.22 (French text: `en/docs/_src/U4.81.22.fr.md`; translation: `en/docs/U4.81.22.md` once task 5.2 lands)
+- French reference: U4.81.22 (French text: `en/docs/_src/U4.81.22.fr.md`; translation: `en/docs/U4.81.22.md`)
 - Catalog: `en/commands/POST_ELEM.json` (generated from `upstream/code_aster/Cata/Commands/post_elem.py:39`)
 - Implementation: `upstream/bibfor/op/op0107.F90`; options in `upstream/bibfor/utilitai/`
   (`pemain` mass, `peepot` potential energy, `peecin` kinetic energy, `peeint`/`peecal`
