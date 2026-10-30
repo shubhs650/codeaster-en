@@ -21,6 +21,7 @@
 | [U4.44.01](U4.44.01.fr.md) | Opérateurs AFFE_CHAR_MECA AFFE_CHAR_MECA_C AFFE_CHAR_MECA_F | 09/03/2024 | bc879b8f6f0e | 69 | 44 | 12 | 16 | https://code-aster.org/doc/v16/man_u/u4/u4.44.01.pdf |
 | [U4.44.02](U4.44.02.fr.md) | Opérateurs AFFE_CHAR_THER et AFFE_CHAR_THER_F | 04/11/2021 | ae947d46bac7 | 36 | 15 | 2 | 4 | https://code-aster.org/doc/v16/man_u/u4/u4.44.02.pdf |
 | [U4.44.03](U4.44.03.fr.md) | Opérateurs AFFE_CHAR_CINE et AFFE_CHAR_CINE_F | 04/11/2021 | 5cebe5bc8a69 | 11 | 6 | 2 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.44.03.pdf |
+| [U4.50.01](U4.50.01.fr.md) | Mot clé SOLVEUR | 11/01/2024 | 31c76d176452 | 28 | 14 | 21 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.50.01.pdf |
 | [U4.51.01](U4.51.01.fr.md) | Opérateur MECA_STATIQUE | 11/01/2024 | d418b40ced73 | 5 | 3 | 0 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.51.01.pdf |
 | [U4.52.02](U4.52.02.fr.md) | Opérateur CALC_MODES | 10/03/2024 | 7e9b60f2050f | 44 | 21 | 13 | 1 | https://code-aster.org/doc/v16/man_u/u4/u4.52.02.pdf |
 | [U4.52.11](U4.52.11.fr.md) | Opérateur NORM_MODE | 07/12/2017 | ff9f617dc9b5 | 9 | 5 | 1 | 0 | https://code-aster.org/doc/v16/man_u/u4/u4.52.11.pdf |
